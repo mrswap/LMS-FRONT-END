@@ -1,0 +1,91 @@
+{
+  "navbar": {
+    "searchPlaceholder": "ਐਨਾਲਿਟਿਕਸ, ਯੂਜ਼ਰ ਜਾਂ ਕੋਰਸ ਖੋਜੋ...",
+    "notifications": "ਸੂਚਨਾਵਾਂ",
+    "messages": "ਸੁਨੇਹੇ",
+    "profileName": "ਡਾ. ਸਾਰਾ ਚੈਨ",
+    "role": "ਸਿਸਟਮ ਐਡਮਿਨ"
+  },
+
+  "sidebar": {
+    "dashboard": "ਡੈਸ਼ਬੋਰਡ",
+
+    "userManagement": "ਯੂਜ਼ਰ ਮੈਨੇਜਮੈਂਟ",
+    "assignTrainingProgram": "ਟ੍ਰੇਨਿੰਗ ਪ੍ਰੋਗਰਾਮ ਅਸਾਈਨ ਕਰੋ",
+
+    "trainingPrograms": "ਟ੍ਰੇਨਿੰਗ ਪ੍ਰੋਗਰਾਮ",
+    "programList": "ਪ੍ਰੋਗਰਾਮ ਲਿਸਟ",
+    "createProgram": "ਪ੍ਰੋਗਰਾਮ ਬਣਾਓ",
+    "programAssignment": "ਪ੍ਰੋਗਰਾਮ ਅਸਾਈਨਮੈਂਟ",
+
+    "curriculumManagement": "ਕਰਿਕੁਲਮ ਮੈਨੇਜਮੈਂਟ",
+    "levels": "ਲੇਵਲ",
+    "modules": "ਮੋਡੀਊਲ",
+    "chapters": "ਚੈਪਟਰ",
+    "topics": "ਟਾਪਿਕਸ",
+    "bulkImport": "ਬਲਕ ਇੰਪੋਰਟ",
+
+    "contentManagement": "ਕੰਟੈਂਟ ਮੈਨੇਜਮੈਂਟ",
+    "learningUnitBuilder": "ਲਰਨਿੰਗ ਯੂਨਿਟ ਬਿਲਡਰ",
+    "interactiveContent": "ਇੰਟਰਐਕਟਿਵ ਕੰਟੈਂਟ",
+    "mediaLibrary": "ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ",
+
+    "assessmentManagement": "ਅਸੈਸਮੈਂਟ ਮੈਨੇਜਮੈਂਟ",
+    "quizForTopic": "ਟਾਪਿਕ ਲਈ ਕਵਿਜ਼",
+    "examForLevel": "ਲੇਵਲ ਲਈ ਇਮਤਿਹਾਨ",
+    "faq": "ਆਮ ਸਵਾਲ",
+
+    "trainingCertification": "ਟ੍ਰੇਨਿੰਗ ਅਤੇ ਸਰਟੀਫਿਕੇਸ਼ਨ",
+    "trainingAssignment": "ਟ੍ਰੇਨਿੰਗ ਅਸਾਈਨਮੈਂਟ",
+    "progressTracker": "ਪ੍ਰੋਗਰੈੱਸ ਟ੍ਰੈਕਰ",
+    "certification": "ਸਰਟੀਫਿਕੇਟ",
+
+    "reportsAdministration": "ਰਿਪੋਰਟਸ ਅਤੇ ਐਡਮਿਨਿਸਟ੍ਰੇਸ਼ਨ",
+    "topResult": "ਟਾਪ ਨਤੀਜੇ",
+    "reportsAnalytics": "ਰਿਪੋਰਟਸ ਅਤੇ ਐਨਾਲਿਟਿਕਸ",
+    "userAnalytics": "ਯੂਜ਼ਰ ਐਨਾਲਿਟਿਕਸ",
+    "trainingAnalytics": "ਟ੍ਰੇਨਿੰਗ ਐਨਾਲਿਟਿਕਸ",
+    "performanceReports": "ਪਰਫਾਰਮੈਂਸ ਰਿਪੋਰਟਸ",
+    "completionReports": "ਕੰਪਲੀਸ਼ਨ ਰਿਪੋਰਟਸ",
+    "rolesPermission": "ਰੋਲਸ ਅਤੇ ਪਰਮਿਸ਼ਨ",
+    "systemSettings": "ਸਿਸਟਮ ਸੈਟਿੰਗਸ",
+
+    "multiLanguage": "ਮਲਟੀ ਲੈਂਗਵੇਜ",
+
+    "logout": "ਲਾਗਆਉਟ"
+  },
+
+  "userManagement": "ਯੂਜ਼ਰ ਮੈਨੇਜਮੈਂਟ",
+  "userDesc": "ਸਾਰੇ ਖੇਤਰਾਂ ਵਿੱਚ ਮੈਡੀਕਲ ਪ੍ਰੋਫੈਸ਼ਨਲ ਖਾਤਿਆਂ ਦਾ ਪ੍ਰਬੰਧਨ, ਆਡਿਟ ਅਤੇ ਸਹਾਇਤਾ ਕਰੋ।",
+  "createUser": "ਯੂਜ਼ਰ ਬਣਾਓ",
+  "searchPlaceholder": "ਨਾਂ, ਈਮੇਲ, ਆਈਡੀ ਜਾਂ ਫੋਨ ਨਾਲ ਖੋਜੋ...",
+  "region": "ਖੇਤਰ",
+  "status": "ਸਟੇਟਸ",
+  "resetFilters": "ਫਿਲਟਰ ਰੀਸੈਟ ਕਰੋ",
+
+  "table": {
+    "userId": "ਯੂਜ਼ਰ ਆਈਡੀ",
+    "name": "ਨਾਂ",
+    "contact": "ਸੰਪਰਕ",
+    "region": "ਖੇਤਰ",
+    "programs": "ਪ੍ਰੋਗਰਾਮ",
+    "progress": "ਪ੍ਰੋਗਰੈੱਸ",
+    "status": "ਸਟੇਟਸ"
+  },
+
+  "language": {
+    "title": "ਲੈਂਗਵੇਜ ਮੈਨੇਜਮੈਂਟ",
+    "desc": "ਪਲੇਟਫਾਰਮ ਇੰਟਰਫੇਸ ਅਤੇ ਲਰਨਿੰਗ ਕੰਟੈਂਟ ਲਈ ਸਿਸਟਮ ਲੈਂਗਵੇਜ ਅਤੇ ਟ੍ਰਾਂਸਲੇਸ਼ਨ ਦਾ ਪ੍ਰਬੰਧ ਕਰੋ।",
+    "addLanguage": "ਲੈਂਗਵੇਜ ਸ਼ਾਮਲ ਕਰੋ",
+    "export": "ਟ੍ਰਾਂਸਲੇਸ਼ਨ ਐਕਸਪੋਰਟ ਕਰੋ",
+    "search": "ਲੈਂਗਵੇਜ ਖੋਜੋ",
+    "noData": "ਕੋਈ ਲੈਂਗਵੇਜ ਨਹੀਂ ਮਿਲੀ।",
+    "id": "ਲੈਂਗਵੇਜ ਆਈਡੀ",
+    "name": "ਲੈਂਗਵੇਜ ਨਾਮ",
+    "status": "ਸਟੇਟਸ",
+    "active": "ਐਕਟਿਵ",
+    "inactive": "ਇਨਐਕਟਿਵ",
+    "cancel": "ਰੱਦ ਕਰੋ",
+    "add": "ਲੈਂਗਵੇਜ ਸ਼ਾਮਲ ਕਰੋ"
+  }
+}

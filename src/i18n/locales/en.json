@@ -1,0 +1,92 @@
+{
+
+   "navbar": {
+      "searchPlaceholder": "Search analytics, users or courses...",
+      "notifications": "Notifications",
+      "messages": "Messages",
+      "profileName": "Dr. Sarah Chen",
+      "role": "System Admin"
+    },
+
+    "sidebar": {
+      "dashboard": "Dashboard",
+
+      "userManagement": "User Management",
+      "assignTrainingProgram": "Assign Training Program",
+
+      "trainingPrograms": "Training Programs",
+      "programList": "Program List",
+      "createProgram": "Create Program",
+      "programAssignment": "Program Assignment",
+
+      "curriculumManagement": "Curriculum Management",
+      "levels": "Levels",
+      "modules": "Modules",
+      "chapters": "Chapters",
+      "topics": "Topics",
+      "bulkImport": "Bulk Import",
+
+      "contentManagement": "Content Management",
+      "learningUnitBuilder": "Learning Unit Builder",
+      "interactiveContent": "Interactive Content",
+      "mediaLibrary": "Media Library",
+
+      "assessmentManagement": "Assessment Management",
+      "quizForTopic": "Quiz for Topic",
+      "examForLevel": "Exam for Level",
+      "faq": "FAQ",
+
+      "trainingCertification": "Training & Certification",
+      "trainingAssignment": "Training Assignment",
+      "progressTracker": "Progress Tracker",
+      "certification": "Certification",
+
+      "reportsAdministration": "Reports & Administration",
+      "topResult": "Top Result",
+      "reportsAnalytics": "Reports & Analytics",
+      "userAnalytics": "User Analytics",
+      "trainingAnalytics": "Training Analytics",
+      "performanceReports": "Performance Reports",
+      "completionReports": "Completion Reports",
+      "rolesPermission": "Roles & Permission",
+      "systemSettings": "System Settings",
+
+      "multiLanguage": "Multi Language",
+
+      "logout": "Logout"
+    },
+
+  "userManagement": "User Management",
+  "userDesc": "Manage, audit, and support medical professional accounts across all regions.",
+  "createUser": "Create User",
+  "searchPlaceholder": "Search by name, email, ID or phone...",
+  "region": "Region",
+  "status": "Status",
+  "resetFilters": "Reset Filters",
+
+  "table": {
+    "userId": "User ID",
+    "name": "Name",
+    "contact": "Contact",
+    "region": "Region", 
+    "programs": "Programs",
+    "progress": "Progress",
+    "status": "Status"
+  },
+
+  "language": {
+    "title": "Language Management",
+    "desc": "Manage system languages and translations for the platform interface and learning content.",
+    "addLanguage": "Add Language",
+    "export": "Export Translation",
+    "search": "Search Language",
+    "noData": "No languages found.",
+    "id": "Language ID",
+    "name": "Language Name",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "cancel": "Cancel",
+    "add": "Add Language"
+  }
+}

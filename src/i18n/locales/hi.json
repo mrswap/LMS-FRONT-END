@@ -1,0 +1,91 @@
+{
+  "navbar": {
+    "searchPlaceholder": "एनालिटिक्स, उपयोगकर्ता या कोर्स खोजें...",
+    "notifications": "सूचनाएं",
+    "messages": "संदेश",
+    "profileName": "डॉ. सारा चेन",
+    "role": "सिस्टम एडमिन"
+  },
+
+  "sidebar": {
+    "dashboard": "डैशबोर्ड",
+
+    "userManagement": "उपयोगकर्ता प्रबंधन",
+    "assignTrainingProgram": "ट्रेनिंग प्रोग्राम असाइन करें",
+
+    "trainingPrograms": "ट्रेनिंग प्रोग्राम",
+    "programList": "प्रोग्राम सूची",
+    "createProgram": "प्रोग्राम बनाएं",
+    "programAssignment": "प्रोग्राम असाइनमेंट",
+
+    "curriculumManagement": "पाठ्यक्रम प्रबंधन",
+    "levels": "स्तर",
+    "modules": "मॉड्यूल",
+    "chapters": "अध्याय",
+    "topics": "विषय",
+    "bulkImport": "बल्क इंपोर्ट",
+
+    "contentManagement": "कंटेंट प्रबंधन",
+    "learningUnitBuilder": "लर्निंग यूनिट बिल्डर",
+    "interactiveContent": "इंटरैक्टिव कंटेंट",
+    "mediaLibrary": "मीडिया लाइब्रेरी",
+
+    "assessmentManagement": "मूल्यांकन प्रबंधन",
+    "quizForTopic": "विषय के लिए क्विज़",
+    "examForLevel": "स्तर के लिए परीक्षा",
+    "faq": "सामान्य प्रश्न",
+
+    "trainingCertification": "ट्रेनिंग और प्रमाणन",
+    "trainingAssignment": "ट्रेनिंग असाइनमेंट",
+    "progressTracker": "प्रगति ट्रैकर",
+    "certification": "प्रमाणपत्र",
+
+    "reportsAdministration": "रिपोर्ट्स और प्रशासन",
+    "topResult": "शीर्ष परिणाम",
+    "reportsAnalytics": "रिपोर्ट्स और एनालिटिक्स",
+    "userAnalytics": "यूज़र एनालिटिक्स",
+    "trainingAnalytics": "ट्रेनिंग एनालिटिक्स",
+    "performanceReports": "परफॉर्मेंस रिपोर्ट्स",
+    "completionReports": "पूर्णता रिपोर्ट्स",
+    "rolesPermission": "भूमिकाएं और अनुमतियां",
+    "systemSettings": "सिस्टम सेटिंग्स",
+
+    "multiLanguage": "बहुभाषी",
+
+    "logout": "लॉगआउट"
+  },
+
+  "userManagement": "उपयोगकर्ता प्रबंधन",
+  "userDesc": "सभी क्षेत्रों में चिकित्सा पेशेवर खातों का प्रबंधन, ऑडिट और समर्थन करें।",
+  "createUser": "उपयोगकर्ता बनाएं",
+  "searchPlaceholder": "नाम, ईमेल, आईडी या फोन से खोजें...",
+  "region": "क्षेत्र",
+  "status": "स्थिति",
+  "resetFilters": "फिल्टर रीसेट करें",
+
+  "table": {
+    "userId": "यूज़र आईडी",
+    "name": "नाम",
+    "contact": "संपर्क",
+    "region": "क्षेत्र",
+    "programs": "प्रोग्राम",
+    "progress": "प्रगति",
+    "status": "स्थिति"
+  },
+
+  "language": {
+    "title": "भाषा प्रबंधन",
+    "desc": "प्लेटफॉर्म इंटरफेस और लर्निंग कंटेंट के लिए सिस्टम भाषाओं और अनुवादों का प्रबंधन करें।",
+    "addLanguage": "भाषा जोड़ें",
+    "export": "अनुवाद एक्सपोर्ट करें",
+    "search": "भाषा खोजें",
+    "noData": "कोई भाषा नहीं मिली।",
+    "id": "भाषा आईडी",
+    "name": "भाषा नाम",
+    "status": "स्थिति",
+    "active": "सक्रिय",
+    "inactive": "निष्क्रिय",
+    "cancel": "रद्द करें",
+    "add": "भाषा जोड़ें"
+  }
+}
