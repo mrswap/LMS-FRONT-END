@@ -132,7 +132,7 @@ const Users = () => {
       boxShadow: "none",
       cursor: "pointer",
       fontSize: "14px",
-      backgroundColor: "#f3f4f6",
+      backgroundColor: "#F8FAFC",
     }),
     option: (base, state) => ({
       ...base,
@@ -242,7 +242,7 @@ const Users = () => {
       </div>
 
       {/*  FILTER BAR */}
-      <div className="bobg-white rder border-gray-300 rounded-2xl p-3 flex items-center gap-3 border border-gray-300 ">
+      <div className=" border-gray-300 rounded-2xl p-3 flex items-center gap-3 border border-gray-300 ">
         {/* SEARCH */}
         <div className="flex items-center bg-[#F8FAFC]  border border-gray-300 hover:border-blue-500  focus:border-blue-500 rounded-xl px-3 py-2 w-[480px]">
           <FiSearch className="text-gray-400" />
@@ -262,6 +262,7 @@ const Users = () => {
             options={regionOptions}
             styles={customSelectStyles}
             isSearchable={false}
+            // className="bg-[#F8FAFC]"
           />
         </div>
 

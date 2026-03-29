@@ -6,8 +6,12 @@ import LanguageSettings from "../pages/language/LanguageSettings";
 import WorkInProgress from "./ModuleProgress";
 import CreateUser from "../pages/users/components/CreateUser";
 import UserDetails from "../pages/users/components/UserDetails";
-import Levels from "../pages/level/Levels";
-import CreateLevel from "../pages/level/components/CreateLevel";
+import Levels from "../pages/curriculum/level/Levels";
+import CreateLevel from "../pages/curriculum/level/components/CreateLevel";
+import LevelDetails from "../pages/curriculum/level/components/LevelDetails";
+import Module from "../pages/curriculum/module/Module";
+import CreateModule from "../pages/curriculum/module/components/CreateModule";
+import ModuleDetails from "../pages/curriculum/module/components/ModuleDetails";
 
 const AdminRoutes = (
   <Route path="/" element={<AdminLayout />}>
@@ -25,6 +29,12 @@ const AdminRoutes = (
     {/* levels */}
     <Route path="levels" element={<Levels />} />
     <Route path="levels/create-level" element={<CreateLevel />} />
+    <Route path="levels/level-details" element={<LevelDetails />} />
+
+    {/* module */}
+    <Route path="modules" element={<Module />} />
+    <Route path="modules/create-module" element={<CreateModule />} />
+    <Route path="modules/moduel-details" element={<ModuleDetails />} />
 
     <Route path="language" element={<LanguageSettings />} />
 

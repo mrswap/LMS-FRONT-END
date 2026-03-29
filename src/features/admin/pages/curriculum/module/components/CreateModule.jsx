@@ -2,14 +2,15 @@ import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
-import TextInput from "../../../common/form/TextInput";
-import Checkbox from "../../../common/form/Checkbox";
-import RadioGroup from "../../../common/form/RadioGroup";
-import SelectField from "../../../common/form/SelectField";
-import FormButton from "../../../common/form/FormButton";
+import TextInput from "../../../../common/form/TextInput";
+import Checkbox from "../../../../common/form/Checkbox";
+import RadioGroup from "../../../../common/form/RadioGroup";
+import SelectField from "../../../../common/form/SelectField";
+import FormButton from "../../../../common/form/FormButton";
 import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
-const CreateLevel = () => {
+
+const CreateModule = () => {
   const initialValues = {
     fullName: "",
     email: "",
@@ -33,7 +34,7 @@ const CreateLevel = () => {
     <>
       <div className="bg-white w-full max-w-4xl p-8 rounded-lg border border-gray-300">
         {/* 🔹 Heading */}
-        <h1 className="text-2xl font-[700] text-primary">Level Management</h1>
+        <h1 className="text-2xl font-[700] text-primary">Create New Module</h1>
         <p className="text-[#29324C] text-[16px] mb-6">
           Manage and organize training levels to structure the learning journey
           from foundational knowledge to advanced clinical expertise.
@@ -55,26 +56,43 @@ const CreateLevel = () => {
                   General Details
                 </h3>
 
-                {/* Full Name */}
-                <div className="mb-4">
-                  <label className="text-[14px] text-[#29324C] font-[600] mb-1 block">
-                    Level Name
-                  </label>
-                  <TextInput
-                    name="levelName"
-                    placeholder="Level 1 — Foundation: Device Introduction & Core Concepts"
-                  />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-[14px] text-[#29324C] font-[600] mb-1 block">
+                      Module Name
+                    </label>
+                    <TextInput
+                      name="prentProgram"
+                      placeholder="Modules name..."
+                    />
+                  </div>
+
+                  {/* Full Name */}
+                  <div className="mb-4">
+                    <label className="text-[14px] text-[#29324C] font-[600] mb-1 block">
+                      Parent Level
+                    </label>
+                    <TextInput
+                      name="levelName"
+                      placeholder="Level 1 — Foundation: Device Introduction & Core Concepts"
+                    />
+                  </div>
                 </div>
 
                 {/* parent Program + Duration */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Region */}
                   <div>
                     <label className="text-[14px] text-[#29324C] font-[600] mb-1 block">
                       Parent Program
                     </label>
-                    <TextInput
-                      name="prentProgram"
-                      placeholder="Pacemaker Training Curriculum -Interactive Self-Paced Modules"
+                    <SelectField
+                      name="region"
+                      placeholder="Select a region"
+                      options={[
+                        { label: "Pc", value: "india" },
+                        { label: "Ac", value: "usa" },
+                      ]}
                     />
                   </div>
 
@@ -203,4 +221,4 @@ const CreateLevel = () => {
   );
 };
 
-export default CreateLevel;
+export default CreateModule;

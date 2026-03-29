@@ -428,8 +428,8 @@ export default function DataAnalyticsDashboard() {
   const [period, setPeriod] = useState("Last 30 Days");
 
   return (
-    <div className="min-h-screen bg-[#f4f6fb] p-6 font-sans">
-      <div className="max-w-4xl mx-auto space-y-5">
+    <div className="">
+      <div className=" space-y-5">
         {/* Header */}
         <div>
           <h1 className="text-2xl font-bold text-gray-800">

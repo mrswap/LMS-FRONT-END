@@ -293,7 +293,7 @@ const TableRow = ({ row, normCols, isLast }) => {
       {normCols.map((col, i) => (
         <td
           key={i}
-          className={`px-5 py-3 text-[13px] font-medium text-gray-700 text-${col.align}`}
+          className={`px-5 py-3 text-[13px] font-medium text-gray-700 text-${col.align} text-left`}
         >
           {col.getCell(row)}
         </td>
@@ -400,7 +400,7 @@ const CustomeTable = ({
             {normCols.map((col, i) => (
               <th
                 key={i}
-                className="px-4 py-3 text-sm font-semibold text-gray-600"
+                className="px-4 py-3 text-sm font-semibold text-[#090F31] font-[700] text-left"
               >
                 {col.label}
               </th>
@@ -413,7 +413,7 @@ const CustomeTable = ({
             <tr>
               <td
                 colSpan={normCols.length}
-                className="text-center py-8 text-gray-500"
+                className="text-center py-8 text-gray-500 "
               >
                 {emptyText}
               </td>
