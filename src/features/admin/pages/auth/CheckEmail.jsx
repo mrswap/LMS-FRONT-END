@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 
 import logo from "../../../../assets/admin/AvanteMedicalLogoBlue.png";
 import success from "../../../../assets/admin/success-right.png";
+import { useTranslation } from "react-i18next";
 
 const CheckEmail = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#EEF2F6] px-4">
       {/* Logo */}
@@ -24,10 +27,10 @@ const CheckEmail = () => {
             <img src={success} alt="" />
           </div>
           <h2 className="text-2xl text-center font-bold text-primary">
-            Check Your Email
+            {t("checkEmail.title")}
           </h2>
           <p className="text-[#64748B] text-sm text-center mt-2">
-            We sent a password reset link to
+            {t("checkEmail.subtitle")}
           </p>
           <p className="text-primary text-sm text-center font-semibold">
             sarah@avante.com
@@ -38,12 +41,12 @@ const CheckEmail = () => {
           <button
             className={`w-full bg-[#22A699] hover:bg-[#1c8c82] font-bold text-white py-2 rounded-lg cursor-pointer`}
           >
-            Open Email App{" "}
+            {t("checkEmail.openApp")}{" "}
           </button>
           <button
             className={`mt-2 w-full  text-gray-800 hover:text-gray-900 border border-primary border-2 py-2 rounded-lg cursor-pointer`}
           >
-            Resend Link
+            {t("checkEmail.resend")}
           </button>
         </div>
 
@@ -55,7 +58,7 @@ const CheckEmail = () => {
             className="inline-flex items-center text-[#64748B] text-sm hover:text-[#1F3C88] transition-colors"
           >
             <FiArrowLeft className="mr-1" size={16} />
-            Back to sign in
+            {t("checkEmail.back")}
           </button>
         </div>
       </div>
