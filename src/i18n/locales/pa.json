@@ -1,91 +1,267 @@
 {
   "navbar": {
-    "searchPlaceholder": "ਐਨਾਲਿਟਿਕਸ, ਯੂਜ਼ਰ ਜਾਂ ਕੋਰਸ ਖੋਜੋ...",
+    "searchPlaceholder": "ਐਨਾਲਿਟਿਕਸ, ਉਪਭੋਗਤਾ ਜਾਂ ਕੋਰਸ ਖੋਜੋ...",
     "notifications": "ਸੂਚਨਾਵਾਂ",
-    "messages": "ਸੁਨੇਹੇ",
-    "profileName": "ਡਾ. ਸਾਰਾ ਚੈਨ",
+    "messages": "ਸੰਦੇਸ਼",
+    "profileName": "ਡਾ. ਸਾਰਾ ਚੇਨ",
     "role": "ਸਿਸਟਮ ਐਡਮਿਨ"
   },
-
   "sidebar": {
     "dashboard": "ਡੈਸ਼ਬੋਰਡ",
-
-    "userManagement": "ਯੂਜ਼ਰ ਮੈਨੇਜਮੈਂਟ",
-    "assignTrainingProgram": "ਟ੍ਰੇਨਿੰਗ ਪ੍ਰੋਗਰਾਮ ਅਸਾਈਨ ਕਰੋ",
-
-    "trainingPrograms": "ਟ੍ਰੇਨਿੰਗ ਪ੍ਰੋਗਰਾਮ",
-    "programList": "ਪ੍ਰੋਗਰਾਮ ਲਿਸਟ",
+    "userManagement": "ਉਪਭੋਗਤਾ ਪ੍ਰਬੰਧਨ",
+    "assignTrainingProgram": "ਸਿਖਲਾਈ ਪ੍ਰੋਗਰਾਮ ਨਿਰਧਾਰਤ ਕਰੋ",
+    "trainingPrograms": "ਸਿਖਲਾਈ ਪ੍ਰੋਗਰਾਮ",
+    "programList": "ਪ੍ਰੋਗਰਾਮ ਸੂਚੀ",
     "createProgram": "ਪ੍ਰੋਗਰਾਮ ਬਣਾਓ",
-    "programAssignment": "ਪ੍ਰੋਗਰਾਮ ਅਸਾਈਨਮੈਂਟ",
-
-    "curriculumManagement": "ਕਰਿਕੁਲਮ ਮੈਨੇਜਮੈਂਟ",
-    "levels": "ਲੇਵਲ",
+    "programAssignment": "ਪ੍ਰੋਗਰਾਮ ਨਿਰਧਾਰਨ",
+    "curriculumManagement": "ਪਾਠਕ੍ਰਮ ਪ੍ਰਬੰਧਨ",
+    "levels": "ਪੱਧਰ",
     "modules": "ਮੋਡੀਊਲ",
-    "chapters": "ਚੈਪਟਰ",
-    "topics": "ਟਾਪਿਕਸ",
+    "chapters": "ਅਧਿਆਏ",
+    "topics": "ਵਿਸ਼ੇ",
     "bulkImport": "ਬਲਕ ਇੰਪੋਰਟ",
-
-    "contentManagement": "ਕੰਟੈਂਟ ਮੈਨੇਜਮੈਂਟ",
+    "contentManagement": "ਸਮੱਗਰੀ ਪ੍ਰਬੰਧਨ",
     "learningUnitBuilder": "ਲਰਨਿੰਗ ਯੂਨਿਟ ਬਿਲਡਰ",
-    "interactiveContent": "ਇੰਟਰਐਕਟਿਵ ਕੰਟੈਂਟ",
+    "interactiveContent": "ਇੰਟਰਐਕਟਿਵ ਸਮੱਗਰੀ",
     "mediaLibrary": "ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ",
-
-    "assessmentManagement": "ਅਸੈਸਮੈਂਟ ਮੈਨੇਜਮੈਂਟ",
-    "quizForTopic": "ਟਾਪਿਕ ਲਈ ਕਵਿਜ਼",
-    "examForLevel": "ਲੇਵਲ ਲਈ ਇਮਤਿਹਾਨ",
-    "faq": "ਆਮ ਸਵਾਲ",
-
-    "trainingCertification": "ਟ੍ਰੇਨਿੰਗ ਅਤੇ ਸਰਟੀਫਿਕੇਸ਼ਨ",
-    "trainingAssignment": "ਟ੍ਰੇਨਿੰਗ ਅਸਾਈਨਮੈਂਟ",
-    "progressTracker": "ਪ੍ਰੋਗਰੈੱਸ ਟ੍ਰੈਕਰ",
-    "certification": "ਸਰਟੀਫਿਕੇਟ",
-
-    "reportsAdministration": "ਰਿਪੋਰਟਸ ਅਤੇ ਐਡਮਿਨਿਸਟ੍ਰੇਸ਼ਨ",
-    "topResult": "ਟਾਪ ਨਤੀਜੇ",
-    "reportsAnalytics": "ਰਿਪੋਰਟਸ ਅਤੇ ਐਨਾਲਿਟਿਕਸ",
-    "userAnalytics": "ਯੂਜ਼ਰ ਐਨਾਲਿਟਿਕਸ",
-    "trainingAnalytics": "ਟ੍ਰੇਨਿੰਗ ਐਨਾਲਿਟਿਕਸ",
-    "performanceReports": "ਪਰਫਾਰਮੈਂਸ ਰਿਪੋਰਟਸ",
-    "completionReports": "ਕੰਪਲੀਸ਼ਨ ਰਿਪੋਰਟਸ",
-    "rolesPermission": "ਰੋਲਸ ਅਤੇ ਪਰਮਿਸ਼ਨ",
-    "systemSettings": "ਸਿਸਟਮ ਸੈਟਿੰਗਸ",
-
-    "multiLanguage": "ਮਲਟੀ ਲੈਂਗਵੇਜ",
-
-    "logout": "ਲਾਗਆਉਟ"
+    "assessmentManagement": "ਮੁਲਾਂਕਣ ਪ੍ਰਬੰਧਨ",
+    "quizForTopic": "ਵਿਸ਼ੇ ਲਈ ਕੁਇਜ਼",
+    "examForLevel": "ਪੱਧਰ ਲਈ ਪ੍ਰੀਖਿਆ",
+    "faq": "ਅਕਸਰ ਪੁੱਛੇ ਜਾਂਦੇ ਸਵਾਲ",
+    "trainingCertification": "ਸਿਖਲਾਈ ਅਤੇ ਪ੍ਰਮਾਣੀਕਰਨ",
+    "trainingAssignment": "ਸਿਖਲਾਈ ਨਿਰਧਾਰਨ",
+    "progressTracker": "ਪ੍ਰਗਤੀ ਟਰੈਕਰ",
+    "certification": "ਪ੍ਰਮਾਣੀਕਰਨ",
+    "reportsAdministration": "ਰਿਪੋਰਟਾਂ ਅਤੇ ਪ੍ਰਸ਼ਾਸਨ",
+    "topResult": "ਚੋਟੀ ਦਾ ਨਤੀਜਾ",
+    "reportsAnalytics": "ਰਿਪੋਰਟਾਂ ਅਤੇ ਵਿਸ਼ਲੇਸ਼ਣ",
+    "userAnalytics": "ਉਪਭੋਗਤਾ ਵਿਸ਼ਲੇਸ਼ਣ",
+    "trainingAnalytics": "ਸਿਖਲਾਈ ਵਿਸ਼ਲੇਸ਼ਣ",
+    "performanceReports": "ਪ੍ਰਦਰਸ਼ਨ ਰਿਪੋਰਟਾਂ",
+    "completionReports": "ਸੰਪੂਰਨਤਾ ਰਿਪੋਰਟਾਂ",
+    "rolesPermission": "ਭੂਮਿਕਾਵਾਂ ਅਤੇ ਆਗਿਆ",
+    "systemSettings": "ਸਿਸਟਮ ਸੈਟਿੰਗਾਂ",
+    "multiLanguage": "ਬਹੁ-ਭਾਸ਼ਾਈ",
+    "logout": "ਲੌਗਆਉਟ"
   },
-
-  "userManagement": "ਯੂਜ਼ਰ ਮੈਨੇਜਮੈਂਟ",
-  "userDesc": "ਸਾਰੇ ਖੇਤਰਾਂ ਵਿੱਚ ਮੈਡੀਕਲ ਪ੍ਰੋਫੈਸ਼ਨਲ ਖਾਤਿਆਂ ਦਾ ਪ੍ਰਬੰਧਨ, ਆਡਿਟ ਅਤੇ ਸਹਾਇਤਾ ਕਰੋ।",
-  "createUser": "ਯੂਜ਼ਰ ਬਣਾਓ",
-  "searchPlaceholder": "ਨਾਂ, ਈਮੇਲ, ਆਈਡੀ ਜਾਂ ਫੋਨ ਨਾਲ ਖੋਜੋ...",
-  "region": "ਖੇਤਰ",
-  "status": "ਸਟੇਟਸ",
-  "resetFilters": "ਫਿਲਟਰ ਰੀਸੈਟ ਕਰੋ",
-
-  "table": {
-    "userId": "ਯੂਜ਼ਰ ਆਈਡੀ",
-    "name": "ਨਾਂ",
-    "contact": "ਸੰਪਰਕ",
-    "region": "ਖੇਤਰ",
-    "programs": "ਪ੍ਰੋਗਰਾਮ",
-    "progress": "ਪ੍ਰੋਗਰੈੱਸ",
-    "status": "ਸਟੇਟਸ"
+  "userManagement": {
+    "userList": {
+      "title": "ਉਪਭੋਗਤਾ ਪ੍ਰਬੰਧਨ",
+      "subtitle": "ਸਾਰੇ ਖੇਤਰਾਂ ਵਿੱਚ ਮੈਡੀਕਲ ਪੇਸ਼ੇਵਰ ਖਾਤਿਆਂ ਦਾ ਪ੍ਰਬੰਧਨ, ਆਡਿਟ ਅਤੇ ਸਹਾਇਤਾ ਕਰੋ।",
+      "createUser": "+ ਉਪਭੋਗਤਾ ਬਣਾਓ",
+      "searchPlaceholder": "ਨਾਮ, ਈਮੇਲ, ਆਈਡੀ ਜਾਂ ਫੋਨ ਦੁਆਰਾ ਖੋਜੋ...",
+      "filters": {
+        "region": {
+          "all": "ਖੇਤਰ: ਸਾਰੇ",
+          "asia": "ਏਸ਼ੀਆ",
+          "europe": "ਯੂਰਪ",
+          "africa": "ਅਫਰੀਕਾ",
+          "northAmerica": "ਉੱਤਰੀ ਅਮਰੀਕਾ",
+          "middleEast": "ਮੱਧ ਪੂਰਬ"
+        },
+        "status": {
+          "all": "ਸਥਿਤੀ: ਸਾਰੇ",
+          "active": "ਸਰਗਰਮ",
+          "inactive": "ਨਿੱਕਰਮਿਆ",
+          "onLeave": "ਛੁੱਟੀ 'ਤੇ"
+        },
+        "reset": "ਫਿਲਟਰ ਰੀਸੈਟ ਕਰੋ"
+      },
+      "table": {
+        "columns": {
+          "userId": "ਉਪਭੋਗਤਾ ਆਈਡੀ",
+          "name": "ਨਾਮ",
+          "contact": "ਸੰਪਰਕ",
+          "region": "ਖੇਤਰ",
+          "programs": "ਪ੍ਰੋਗਰਾਮ",
+          "progress": "ਪ੍ਰਗਤੀ",
+          "status": "ਸਥਿਤੀ"
+        },
+        "activePrograms": "{{count}} ਸਰਗਰਮ"
+      },
+      "statusBadge": {
+        "active": "ਸਰਗਰਮ",
+        "inactive": "ਨਿੱਕਰਮਿਆ",
+        "onLeave": "ਛੁੱਟੀ 'ਤੇ"
+      },
+      "cards": {
+        "totalActive": {
+          "title": "ਕੁੱਲ ਸਰਗਰਮ ਪੇਸ਼ੇਵਰ",
+          "growth": "ਇਸ ਮਹੀਨੇ 12% ਵਾਧਾ"
+        },
+        "avgProgress": {
+          "title": "ਔਸਤ ਪ੍ਰਗਤੀ",
+          "growth": "ਇਸ ਹਫ਼ਤੇ 5% ਵਾਧਾ"
+        },
+        "pending": {
+          "title": "ਲੰਬਿਤ ਪ੍ਰਵਾਨਗੀਆਂ",
+          "subtext": "8 ਬੇਨਤੀਆਂ ਉਡੀਕ ਵਿੱਚ ਹਨ"
+        }
+      }
+    },
+    "createUser": {
+      "breadcrumb": {
+        "users": "ਉਪਭੋਗਤਾ",
+        "create": "ਨਵਾਂ ਉਪਭੋਗਤਾ ਬਣਾਓ"
+      },
+      "title": "ਨਵਾਂ ਉਪਭੋਗਤਾ ਬਣਾਓ",
+      "subtitle": "ਪਲੇਟਫਾਰਮ 'ਤੇ ਇੱਕ ਨਵੇਂ ਮੈਡੀਕਲ ਪੇਸ਼ੇਵਰ ਜਾਂ ਸਟਾਫ ਮੈਂਬਰ ਨੂੰ ਸ਼ਾਮਲ ਕਰੋ।",
+      "sections": {
+        "personalInfo": "ਨਿੱਜੀ ਜਾਣਕਾਰੀ",
+        "password": "ਪਾਸਵਰਡ ਬਣਾਓ"
+      },
+      "fields": {
+        "fullName": "ਪੂਰਾ ਨਾਮ",
+        "email": "ਈਮੇਲ ਪਤਾ",
+        "phone": "ਫੋਨ ਨੰਬਰ",
+        "region": "ਖੇਤਰ",
+        "role": "ਭੂਮਿਕਾ",
+        "password": "ਪਾਸਵਰਡ",
+        "confirmPassword": "ਪਾਸਵਰਡ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ"
+      },
+      "placeholders": {
+        "fullName": "ਜੋਨਾਥਨ ਡੋ",
+        "email": "john.doe@company.com",
+        "phone": "+1 (555) 000-0000",
+        "region": "ਖੇਤਰ ਚੁਣੋ",
+        "role": "ਭੂਮਿਕਾ ਚੁਣੋ",
+        "password": "ਪਾਸਵਰਡ ਬਣਾਓ",
+        "confirmPassword": "ਪਾਸਵਰਡ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ"
+      },
+      "buttons": {
+        "cancel": "ਰੱਦ ਕਰੋ",
+        "submit": "ਉਪਭੋਗਤਾ ਬਣਾਓ"
+      },
+      "validation": {
+        "required": "ਲੋੜੀਂਦਾ",
+        "invalidEmail": "ਅਵੈਧ ਈਮੇਲ",
+        "passwordMin": "ਪਾਸਵਰਡ ਘੱਟੋ-ਘੱਟ 6 ਅੱਖਰਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+        "passwordMatch": "ਪਾਸਵਰਡ ਮੇਲ ਖਾਣੇ ਚਾਹੀਦੇ ਹਨ"
+      },
+      "footer": "ਸੁਰੱਖਿਅਤ ਰਜਿਸਟ੍ਰੇਸ਼ਨ • ਜੀਡੀਪੀਆਰ ਪਾਲਣਾ • ਐਚਆਈਪੀਏਏ ਤਿਆਰ"
+    },
+    "userDetails": {
+      "breadcrumb": {
+        "users": "ਉਪਭੋਗਤਾ",
+        "view": "ਉਪਭੋਗਤਾ ਪ੍ਰੋਫਾਈਲ ਦੇਖੋ"
+      },
+      "header": {
+        "id": "ਆਈਡੀ",
+        "role": "ਮੈਡੀਕਲ ਇੰਸਟ੍ਰਕਟਰ",
+        "accountStatus": "ਖਾਤਾ ਸਥਿਤੀ",
+        "active": "ਸਰਗਰਮ"
+      },
+      "sections": {
+        "personalInfo": "ਨਿੱਜੀ ਜਾਣਕਾਰੀ",
+        "professionalInfo": "ਪੇਸ਼ੇਵਰ ਵੇਰਵੇ"
+      },
+      "fields": {
+        "fullName": "ਪੂਰਾ ਨਾਮ",
+        "email": "ਈਮੇਲ ਪਤਾ",
+        "phone": "ਫੋਨ ਨੰਬਰ",
+        "region": "ਖੇਤਰ",
+        "role": "ਭੂਮਿਕਾ"
+      },
+      "buttons": {
+        "delete": "ਉਪਭੋਗਤਾ ਮਿਟਾਓ",
+        "edit": "ਉਪਭੋਗਤਾ ਸੰਪਾਦਿਤ ਕਰੋ"
+      },
+      "stats": {
+        "lastLogin": "ਆਖਰੀ ਲੌਗਇਨ",
+        "courses": "ਮੁਕੰਮਲ ਕੀਤੇ ਕੋਰਸ",
+        "completionRate": "ਸੰਪੂਰਨਤਾ ਦਰ",
+        "hoursAgo": "{{count}} ਘੰਟੇ ਪਹਿਲਾਂ",
+        "coursesCount": "{{count}} ਕੋਰਸ",
+        "perfect": "ਸੰਪੂਰਨ"
+      },
+      "training": {
+        "title": "ਮੌਜੂਦਾ ਸਿਖਲਾਈ ਪ੍ਰੋਗਰਾਮ",
+        "viewAll": "ਸਾਰੇ ਦੇਖੋ",
+        "progress": "ਪ੍ਰਗਤੀ: {{value}}%",
+        "modules": "{{completed}}/{{total}} ਮੋਡੀਊਲ",
+        "completed": "ਮੁਕੰਮਲ"
+      },
+      "certificates": {
+        "columns": {
+          "certificate": "ਸਰਟੀਫਿਕੇਟ",
+          "issueDate": "ਜਾਰੀ ਕਰਨ ਦੀ ਮਿਤੀ",
+          "status": "ਸਥਿਤੀ",
+          "actions": "ਕਾਰਵਾਈਆਂ"
+        },
+        "completed": "ਮੁਕੰਮਲ"
+      }
+    }
   },
-
+  "levels": {
+    "list": {
+      "title": "ਪੱਧਰ ਪ੍ਰਬੰਧਨ",
+      "subtitle": "ਸਿਖਲਾਈ ਪੱਧਰਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਅਤੇ ਆਯੋਜਨ ਕਰੋ ਤਾਂ ਜੋ ਸਿੱਖਣ ਦੀ ਯਾਤਰਾ ਨੂੰ ਬਣਤਰ ਦਿੱਤੀ ਜਾ ਸਕੇ...",
+      "filters": "ਫਿਲਟਰ",
+      "clearAll": "ਸਭ ਸਾਫ਼ ਕਰੋ",
+      "columns": {
+        "levelName": "ਪੱਧਰ ਦਾ ਨਾਮ",
+        "parentProgram": "ਮੂਲ ਪ੍ਰੋਗਰਾਮ",
+        "totalChapters": "ਕੁੱਲ ਅਧਿਆਏ",
+        "duration": "ਮਿਆਦ",
+        "status": "ਸਥਿਤੀ",
+        "actions": "ਕਾਰਵਾਈਆਂ"
+      },
+      "stats": {
+        "totalLevels": "ਕੁੱਲ ਪੱਧਰ",
+        "active": "ਸਰਗਰਮ",
+        "avgChapters": "ਔਸਤ ਅਧਿਆਏ/ਪੱਧਰ"
+      }
+    },
+    "details": {
+      "generalDetails": "ਆਮ ਵੇਰਵੇ",
+      "levelName": "ਪੱਧਰ ਦਾ ਨਾਮ",
+      "levelNamePlaceholder": "ਪੱਧਰ ਦਾ ਨਾਮ ਦਰਜ ਕਰੋ",
+      "parentProgram": "ਮੂਲ ਪ੍ਰੋਗਰਾਮ",
+      "perentProgramPlaceholder": "ਇੱਕ ਪ੍ਰੋਗਰਾਮ ਚੁਣੋ",
+      "description": "ਵੇਰਵਾ",
+      "descriptionPlaceholder": "ਪੱਧਰ ਦਾ ਵੇਰਵਾ ਲਿਖੋ...",
+      "thumbnail": "ਪੱਧਰ ਥੰਬਨੇਲ",
+      "uploadText": "ਥੰਬਨੇਲ ਅਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+      "uploadSubText": "PNG, JPG, JPEG ਅਧਿਕਤਮ 5MB",
+      "changeImage": "ਚਿੱਤਰ ਬਦਲੋ"
+    },
+    "create": {
+      "title": "ਪੱਧਰ ਪ੍ਰਬੰਧਨ",
+      "subtitle": "ਬੁਨਿਆਦੀ ਗਿਆਨ ਤੋਂ ਲੈ ਕੇ ਉੱਨਤ ਕਲੀਨਿਕਲ ਮੁਹਾਰਤ ਤੱਕ ਸਿੱਖਣ ਦੀ ਯਾਤਰਾ ਨੂੰ ਬਣਤਰ ਦੇਣ ਲਈ ਸਿਖਲਾਈ ਪੱਧਰਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਅਤੇ ਆਯੋਜਨ ਕਰੋ।"
+    },
+    "status": {
+      "active": "ਸਰਗਰਮ",
+      "draft": "ਡਰਾਫਟ",
+      "archived": "ਆਰਕਾਈਵ ਕੀਤਾ"
+    },
+    "actions": {
+      "addNew": "+ ਨਵਾਂ ਪੱਧਰ ਸ਼ਾਮਲ ਕਰੋ",
+      "save": "ਪੱਧਰ ਸੁਰੱਖਿਅਤ ਕਰੋ",
+      "saveasDraft": "ਡਰਾਫਟ ਵਜੋਂ ਸੁਰੱਖਿਅਤ ਕਰੋ",
+      "saveandContinue": "ਸੁਰੱਖਿਅਤ ਕਰੋ ਅਤੇ ਜਾਰੀ ਰੱਖੋ",
+      "saving": "ਸੁਰੱਖਿਅਤ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
+    },
+    "breadcrumb": {
+      "curriculum": "ਪਾਠਕ੍ਰਮ",
+      "view-level": "ਪੱਧਰ"
+    }
+  },
+  "common": {
+    "delete": "ਮਿਟਾਓ"
+  },
   "language": {
-    "title": "ਲੈਂਗਵੇਜ ਮੈਨੇਜਮੈਂਟ",
-    "desc": "ਪਲੇਟਫਾਰਮ ਇੰਟਰਫੇਸ ਅਤੇ ਲਰਨਿੰਗ ਕੰਟੈਂਟ ਲਈ ਸਿਸਟਮ ਲੈਂਗਵੇਜ ਅਤੇ ਟ੍ਰਾਂਸਲੇਸ਼ਨ ਦਾ ਪ੍ਰਬੰਧ ਕਰੋ।",
-    "addLanguage": "ਲੈਂਗਵੇਜ ਸ਼ਾਮਲ ਕਰੋ",
-    "export": "ਟ੍ਰਾਂਸਲੇਸ਼ਨ ਐਕਸਪੋਰਟ ਕਰੋ",
-    "search": "ਲੈਂਗਵੇਜ ਖੋਜੋ",
-    "noData": "ਕੋਈ ਲੈਂਗਵੇਜ ਨਹੀਂ ਮਿਲੀ।",
-    "id": "ਲੈਂਗਵੇਜ ਆਈਡੀ",
-    "name": "ਲੈਂਗਵੇਜ ਨਾਮ",
-    "status": "ਸਟੇਟਸ",
-    "active": "ਐਕਟਿਵ",
-    "inactive": "ਇਨਐਕਟਿਵ",
+    "title": "ਭਾਸ਼ਾ ਪ੍ਰਬੰਧਨ",
+    "desc": "ਪਲੇਟਫਾਰਮ ਇੰਟਰਫੇਸ ਅਤੇ ਸਿੱਖਣ ਦੀ ਸਮੱਗਰੀ ਲਈ ਸਿਸਟਮ ਭਾਸ਼ਾਵਾਂ ਅਤੇ ਅਨੁਵਾਦਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ।",
+    "addLanguage": "ਭਾਸ਼ਾ ਸ਼ਾਮਲ ਕਰੋ",
+    "export": "ਅਨੁਵਾਦ ਐਕਸਪੋਰਟ ਕਰੋ",
+    "search": "ਭਾਸ਼ਾ ਖੋਜੋ",
+    "noData": "ਕੋਈ ਭਾਸ਼ਾ ਨਹੀਂ ਮਿਲੀ।",
+    "id": "ਭਾਸ਼ਾ ਆਈਡੀ",
+    "name": "ਭਾਸ਼ਾ ਦਾ ਨਾਮ",
+    "status": "ਸਥਿਤੀ",
+    "active": "ਸਰਗਰਮ",
+    "inactive": "ਨਿੱਕਰਮਿਆ",
     "cancel": "ਰੱਦ ਕਰੋ",
-    "add": "ਲੈਂਗਵੇਜ ਸ਼ਾਮਲ ਕਰੋ"
+    "add": "ਭਾਸ਼ਾ ਸ਼ਾਮਲ ਕਰੋ"
   }
 }

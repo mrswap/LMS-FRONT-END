@@ -1,0 +1,170 @@
+{
+     "userManagement": {
+    "userList": {
+      "title": "User Management",
+      "subtitle": "Manage, audit, and support medical professional accounts across all regions.",
+      "createUser": "+ Create User",
+      "searchPlaceholder": "Search by name, email, ID or phone...",
+
+      "filters": {
+        "region": {
+          "all": "Region: All",
+          "asia": "Asia",
+          "europe": "Europe",
+          "africa": "Africa",
+          "northAmerica": "North America",
+          "middleEast": "Middle East"
+        },
+        "status": {
+          "all": "Status: All",
+          "active": "Active",
+          "inactive": "Inactive",
+          "onLeave": "On Leave"
+        },
+        "reset": "Reset Filters"
+      },
+
+      "table": {
+        "columns": {
+          "userId": "User ID",
+          "name": "Name",
+          "contact": "Contact",
+          "region": "Region",
+          "programs": "Programs",
+          "progress": "Progress",
+          "status": "Status"
+        },
+        "activePrograms": "{{count}} Active"
+      },
+
+      "statusBadge": {
+        "active": "Active",
+        "inactive": "Inactive",
+        "onLeave": "On Leave"
+      },
+
+      "cards": {
+        "totalActive": {
+          "title": "Total Active Professionals",
+          "growth": "12% from this month"
+        },
+        "avgProgress": {
+          "title": "Average Progress",
+          "growth": "5% increase this week"
+        },
+        "pending": {
+          "title": "Pending Approvals",
+          "subtext": "8 requests waiting"
+        }
+      }
+    },
+
+    "createUser": {
+      "breadcrumb": {
+        "users": "Users",
+        "create": "Create New User"
+      },
+
+      "title": "Create New User",
+      "subtitle": "Onboard a new medical professional or staff member to the platform.",
+
+      "sections": {
+        "personalInfo": "Personal Information",
+        "password": "Create Password"
+      },
+
+      "fields": {
+        "fullName": "Full Name",
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "region": "Region",
+        "role": "Role",
+        "password": "Password",
+        "confirmPassword": "Confirm Password"
+      },
+
+      "placeholders": {
+        "fullName": "Johnathan Doe",
+        "email": "john.doe@company.com",
+        "phone": "+1 (555) 000-0000",
+        "region": "Select a region",
+        "role": "Select role",
+        "password": "Create Password",
+        "confirmPassword": "Confirm Password"
+      },
+
+      "buttons": {
+        "cancel": "Cancel",
+        "submit": "Create User"
+      },
+
+      "validation": {
+        "required": "Required",
+        "invalidEmail": "Invalid email",
+        "passwordMin": "Password must be at least 6 characters",
+        "passwordMatch": "Passwords must match"
+      },
+
+      "footer": "SECURE REGISTRATION • GDPR COMPLIANT • HIPAA READY"
+    },
+
+    "userDetails": {
+      "breadcrumb": {
+        "users": "Users",
+        "view": "View User Profile"
+      },
+
+      "header": {
+        "id": "ID",
+        "role": "Medical Instructor",
+        "accountStatus": "Account Status",
+        "active": "Active"
+      },
+
+      "sections": {
+        "personalInfo": "Personal Information",
+        "professionalInfo": "Professional Details"
+      },
+
+      "fields": {
+        "fullName": "Full Name",
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "region": "Region",
+        "role": "Role"
+      },
+
+      "buttons": {
+        "delete": "Delete User",
+        "edit": "Edit User"
+      },
+
+      "stats": {
+        "lastLogin": "Last Login",
+        "courses": "Courses Completed",
+        "completionRate": "Completion Rate",
+        "hoursAgo": "{{count}} hours ago",
+        "coursesCount": "{{count}} Courses",
+        "perfect": "Perfect"
+      },
+
+      "training": {
+        "title": "Current Training Programs",
+        "viewAll": "View All",
+        "progress": "Progress: {{value}}%",
+        "modules": "{{completed}}/{{total}} Modules",
+        "completed": "Completed"
+      },
+
+      "certificates": {
+        "columns": {
+          "certificate": "Certificate",
+          "issueDate": "Issue Date",
+          "status": "Status",
+          "actions": "Actions"
+        },
+        "completed": "Completed"
+      }
+    }
+  }
+}

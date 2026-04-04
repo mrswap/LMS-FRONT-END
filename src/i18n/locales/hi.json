@@ -1,87 +1,263 @@
 {
   "navbar": {
-    "searchPlaceholder": "एनालिटिक्स, उपयोगकर्ता या कोर्स खोजें...",
+    "searchPlaceholder": "एनालिटिक्स, उपयोगकर्ता या पाठ्यक्रम खोजें...",
     "notifications": "सूचनाएं",
     "messages": "संदेश",
     "profileName": "डॉ. सारा चेन",
     "role": "सिस्टम एडमिन"
   },
-
   "sidebar": {
     "dashboard": "डैशबोर्ड",
-
     "userManagement": "उपयोगकर्ता प्रबंधन",
-    "assignTrainingProgram": "ट्रेनिंग प्रोग्राम असाइन करें",
-
-    "trainingPrograms": "ट्रेनिंग प्रोग्राम",
-    "programList": "प्रोग्राम सूची",
-    "createProgram": "प्रोग्राम बनाएं",
-    "programAssignment": "प्रोग्राम असाइनमेंट",
-
+    "assignTrainingProgram": "प्रशिक्षण कार्यक्रम असाइन करें",
+    "trainingPrograms": "प्रशिक्षण कार्यक्रम",
+    "programList": "कार्यक्रम सूची",
+    "createProgram": "कार्यक्रम बनाएं",
+    "programAssignment": "कार्यक्रम असाइनमेंट",
     "curriculumManagement": "पाठ्यक्रम प्रबंधन",
     "levels": "स्तर",
     "modules": "मॉड्यूल",
     "chapters": "अध्याय",
     "topics": "विषय",
-    "bulkImport": "बल्क इंपोर्ट",
-
-    "contentManagement": "कंटेंट प्रबंधन",
+    "bulkImport": "बल्क आयात",
+    "contentManagement": "सामग्री प्रबंधन",
     "learningUnitBuilder": "लर्निंग यूनिट बिल्डर",
-    "interactiveContent": "इंटरैक्टिव कंटेंट",
+    "interactiveContent": "इंटरैक्टिव सामग्री",
     "mediaLibrary": "मीडिया लाइब्रेरी",
-
     "assessmentManagement": "मूल्यांकन प्रबंधन",
-    "quizForTopic": "विषय के लिए क्विज़",
+    "quizForTopic": "विषय के लिए प्रश्नोत्तरी",
     "examForLevel": "स्तर के लिए परीक्षा",
-    "faq": "सामान्य प्रश्न",
-
-    "trainingCertification": "ट्रेनिंग और प्रमाणन",
-    "trainingAssignment": "ट्रेनिंग असाइनमेंट",
+    "faq": "अक्सर पूछे जाने वाले प्रश्न",
+    "trainingCertification": "प्रशिक्षण और प्रमाणन",
+    "trainingAssignment": "प्रशिक्षण असाइनमेंट",
     "progressTracker": "प्रगति ट्रैकर",
-    "certification": "प्रमाणपत्र",
-
-    "reportsAdministration": "रिपोर्ट्स और प्रशासन",
+    "certification": "प्रमाणन",
+    "reportsAdministration": "रिपोर्ट और प्रशासन",
     "topResult": "शीर्ष परिणाम",
-    "reportsAnalytics": "रिपोर्ट्स और एनालिटिक्स",
-    "userAnalytics": "यूज़र एनालिटिक्स",
-    "trainingAnalytics": "ट्रेनिंग एनालिटिक्स",
-    "performanceReports": "परफॉर्मेंस रिपोर्ट्स",
-    "completionReports": "पूर्णता रिपोर्ट्स",
-    "rolesPermission": "भूमिकाएं और अनुमतियां",
+    "reportsAnalytics": "रिपोर्ट और एनालिटिक्स",
+    "userAnalytics": "उपयोगकर्ता एनालिटिक्स",
+    "trainingAnalytics": "प्रशिक्षण एनालिटिक्स",
+    "performanceReports": "प्रदर्शन रिपोर्ट",
+    "completionReports": "पूर्णता रिपोर्ट",
+    "rolesPermission": "भूमिकाएँ और अनुमति",
     "systemSettings": "सिस्टम सेटिंग्स",
-
     "multiLanguage": "बहुभाषी",
-
     "logout": "लॉगआउट"
   },
-
-  "userManagement": "उपयोगकर्ता प्रबंधन",
-  "userDesc": "सभी क्षेत्रों में चिकित्सा पेशेवर खातों का प्रबंधन, ऑडिट और समर्थन करें।",
-  "createUser": "उपयोगकर्ता बनाएं",
-  "searchPlaceholder": "नाम, ईमेल, आईडी या फोन से खोजें...",
-  "region": "क्षेत्र",
-  "status": "स्थिति",
-  "resetFilters": "फिल्टर रीसेट करें",
-
-  "table": {
-    "userId": "यूज़र आईडी",
-    "name": "नाम",
-    "contact": "संपर्क",
-    "region": "क्षेत्र",
-    "programs": "प्रोग्राम",
-    "progress": "प्रगति",
-    "status": "स्थिति"
+  "userManagement": {
+    "userList": {
+      "title": "उपयोगकर्ता प्रबंधन",
+      "subtitle": "सभी क्षेत्रों में चिकित्सा पेशेवर खातों का प्रबंधन, ऑडिट और समर्थन करें।",
+      "createUser": "+ उपयोगकर्ता बनाएं",
+      "searchPlaceholder": "नाम, ईमेल, आईडी या फोन से खोजें...",
+      "filters": {
+        "region": {
+          "all": "क्षेत्र: सभी",
+          "asia": "एशिया",
+          "europe": "यूरोप",
+          "africa": "अफ्रीका",
+          "northAmerica": "उत्तरी अमेरिका",
+          "middleEast": "मध्य पूर्व"
+        },
+        "status": {
+          "all": "स्थिति: सभी",
+          "active": "सक्रिय",
+          "inactive": "निष्क्रिय",
+          "onLeave": "अवकाश पर"
+        },
+        "reset": "फ़िल्टर रीसेट करें"
+      },
+      "table": {
+        "columns": {
+          "userId": "उपयोगकर्ता आईडी",
+          "name": "नाम",
+          "contact": "संपर्क",
+          "region": "क्षेत्र",
+          "programs": "कार्यक्रम",
+          "progress": "प्रगति",
+          "status": "स्थिति"
+        },
+        "activePrograms": "{{count}} सक्रिय"
+      },
+      "statusBadge": {
+        "active": "सक्रिय",
+        "inactive": "निष्क्रिय",
+        "onLeave": "अवकाश पर"
+      },
+      "cards": {
+        "totalActive": {
+          "title": "कुल सक्रिय पेशेवर",
+          "growth": "इस महीने 12% की वृद्धि"
+        },
+        "avgProgress": {
+          "title": "औसत प्रगति",
+          "growth": "इस सप्ताह 5% की वृद्धि"
+        },
+        "pending": {
+          "title": "लंबित स्वीकृतियाँ",
+          "subtext": "8 अनुरोध प्रतीक्षारत हैं"
+        }
+      }
+    },
+    "createUser": {
+      "breadcrumb": {
+        "users": "उपयोगकर्ता",
+        "create": "नया उपयोगकर्ता बनाएं"
+      },
+      "title": "नया उपयोगकर्ता बनाएं",
+      "subtitle": "प्लेटफॉर्म पर एक नए चिकित्सा पेशेवर या स्टाफ सदस्य को शामिल करें।",
+      "sections": {
+        "personalInfo": "व्यक्तिगत जानकारी",
+        "password": "पासवर्ड बनाएं"
+      },
+      "fields": {
+        "fullName": "पूरा नाम",
+        "email": "ईमेल पता",
+        "phone": "फ़ोन नंबर",
+        "region": "क्षेत्र",
+        "role": "भूमिका",
+        "password": "पासवर्ड",
+        "confirmPassword": "पासवर्ड की पुष्टि करें"
+      },
+      "placeholders": {
+        "fullName": "जोनाथन डो",
+        "email": "john.doe@company.com",
+        "phone": "+1 (555) 000-0000",
+        "region": "क्षेत्र चुनें",
+        "role": "भूमिका चुनें",
+        "password": "पासवर्ड बनाएं",
+        "confirmPassword": "पासवर्ड की पुष्टि करें"
+      },
+      "buttons": {
+        "cancel": "रद्द करें",
+        "submit": "उपयोगकर्ता बनाएं"
+      },
+      "validation": {
+        "required": "आवश्यक",
+        "invalidEmail": "अमान्य ईमेल",
+        "passwordMin": "पासवर्ड कम से कम 6 वर्णों का होना चाहिए",
+        "passwordMatch": "पासवर्ड मेल खाने चाहिए"
+      },
+      "footer": "सुरक्षित पंजीकरण • जीडीपीआर अनुपालन • एचआईपीएए तैयार"
+    },
+    "userDetails": {
+      "breadcrumb": {
+        "users": "उपयोगकर्ता",
+        "view": "उपयोगकर्ता प्रोफ़ाइल देखें"
+      },
+      "header": {
+        "id": "आईडी",
+        "role": "चिकित्सा प्रशिक्षक",
+        "accountStatus": "खाता स्थिति",
+        "active": "सक्रिय"
+      },
+      "sections": {
+        "personalInfo": "व्यक्तिगत जानकारी",
+        "professionalInfo": "व्यावसायिक विवरण"
+      },
+      "fields": {
+        "fullName": "पूरा नाम",
+        "email": "ईमेल पता",
+        "phone": "फ़ोन नंबर",
+        "region": "क्षेत्र",
+        "role": "भूमिका"
+      },
+      "buttons": {
+        "delete": "उपयोगकर्ता हटाएं",
+        "edit": "उपयोगकर्ता संपादित करें"
+      },
+      "stats": {
+        "lastLogin": "अंतिम लॉगिन",
+        "courses": "पूर्ण किए गए पाठ्यक्रम",
+        "completionRate": "पूर्णता दर",
+        "hoursAgo": "{{count}} घंटे पहले",
+        "coursesCount": "{{count}} पाठ्यक्रम",
+        "perfect": "उत्कृष्ट"
+      },
+      "training": {
+        "title": "वर्तमान प्रशिक्षण कार्यक्रम",
+        "viewAll": "सभी देखें",
+        "progress": "प्रगति: {{value}}%",
+        "modules": "{{completed}}/{{total}} मॉड्यूल",
+        "completed": "पूर्ण"
+      },
+      "certificates": {
+        "columns": {
+          "certificate": "प्रमाणपत्र",
+          "issueDate": "जारी करने की तिथि",
+          "status": "स्थिति",
+          "actions": "कार्रवाई"
+        },
+        "completed": "पूर्ण"
+      }
+    }
   },
-
+  "levels": {
+    "list": {
+      "title": "स्तर प्रबंधन",
+      "subtitle": "सीखने की यात्रा को संरचित करने के लिए प्रशिक्षण स्तरों का प्रबंधन और आयोजन करें...",
+      "filters": "फ़िल्टर",
+      "clearAll": "सभी साफ़ करें",
+      "columns": {
+        "levelName": "स्तर का नाम",
+        "parentProgram": "मूल कार्यक्रम",
+        "totalChapters": "कुल अध्याय",
+        "duration": "अवधि",
+        "status": "स्थिति",
+        "actions": "कार्रवाई"
+      },
+      "stats": {
+        "totalLevels": "कुल स्तर",
+        "active": "सक्रिय",
+        "avgChapters": "औसत अध्याय/स्तर"
+      }
+    },
+    "details": {
+      "generalDetails": "सामान्य विवरण",
+      "levelName": "स्तर का नाम",
+      "levelNamePlaceholder": "स्तर का नाम दर्ज करें",
+      "parentProgram": "मूल कार्यक्रम",
+      "perentProgramPlaceholder": "एक कार्यक्रम चुनें",
+      "description": "विवरण",
+      "descriptionPlaceholder": "स्तर का विवरण लिखें...",
+      "thumbnail": "स्तर थंबनेल",
+      "uploadText": "थंबनेल अपलोड करने के लिए क्लिक करें",
+      "uploadSubText": "PNG, JPG, JPEG अधिकतम 5MB",
+      "changeImage": "छवि बदलें"
+    },
+    "create": {
+      "title": "स्तर प्रबंधन",
+      "subtitle": "बुनियादी ज्ञान से लेकर उन्नत नैदानिक विशेषज्ञता तक सीखने की यात्रा को संरचित करने के लिए प्रशिक्षण स्तरों का प्रबंधन और आयोजन करें।"
+    },
+    "status": {
+      "active": "सक्रिय",
+      "draft": "ड्राफ्ट",
+      "archived": "संग्रहीत"
+    },
+    "actions": {
+      "addNew": "+ नया स्तर जोड़ें",
+      "save": "स्तर सहेजें",
+      "saveasDraft": "ड्राफ्ट के रूप में सहेजें",
+      "saveandContinue": "सहेजें और जारी रखें",
+      "saving": "सहेजा जा रहा है..."
+    },
+    "breadcrumb": {
+      "curriculum": "पाठ्यक्रम",
+      "view-level": "स्तर"
+    }
+  },
+  "common": {
+    "delete": "हटाएं"
+  },
   "language": {
     "title": "भाषा प्रबंधन",
-    "desc": "प्लेटफॉर्म इंटरफेस और लर्निंग कंटेंट के लिए सिस्टम भाषाओं और अनुवादों का प्रबंधन करें।",
+    "desc": "प्लेटफ़ॉर्म इंटरफ़ेस और सीखने की सामग्री के लिए सिस्टम भाषाओं और अनुवादों का प्रबंधन करें।",
     "addLanguage": "भाषा जोड़ें",
-    "export": "अनुवाद एक्सपोर्ट करें",
+    "export": "अनुवाद निर्यात करें",
     "search": "भाषा खोजें",
     "noData": "कोई भाषा नहीं मिली।",
     "id": "भाषा आईडी",
-    "name": "भाषा नाम",
+    "name": "भाषा का नाम",
     "status": "स्थिति",
     "active": "सक्रिय",
     "inactive": "निष्क्रिय",

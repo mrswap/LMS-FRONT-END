@@ -1,442 +1,270 @@
-// import React from "react";
-// import { Formik, Form } from "formik";
-// import * as Yup from "yup";
-
-// import TextInput from "../../../../common/form/TextInput";
-// import Checkbox from "../../../../common/form/Checkbox";
-// import RadioGroup from "../../../../common/form/RadioGroup";
-// import SelectField from "../../../../common/form/SelectField";
-// import FormButton from "../../../../common/form/FormButton";
-// import { IoShieldCheckmarkOutline } from "react-icons/io5";
-// import { AiOutlineExclamationCircle } from "react-icons/ai";
-// const CreateLevel = () => {
-//   const initialValues = {
-//     fullName: "",
-//     email: "",
-//     role: "",
-//     duration: "",
-//     description: "",
-//     prerequisites: [],
-//   };
-
-//   const validationSchema = Yup.object({
-//     fullName: Yup.string().required("Required"),
-//     email: Yup.string().email("Invalid email").required("Required"),
-//     role: Yup.object().required("Required"),
-//   });
-
-//   const onSubmit = (values) => {
-//     console.log(values);
-//   };
-
-//   return (
-//     <>
-//       <div className="bg-white w-full max-w-4xl p-8 rounded-lg border border-gray-300">
-//         {/* 🔹 Heading */}
-//         <h1 className="text-2xl font-[700] text-primary">Level Management</h1>
-//         <p className="text-[#29324C] text-[16px] mb-6">
-//           Manage and organize training levels to structure the learning journey
-//           from foundational knowledge to advanced clinical expertise.
-//         </p>
-
-//         <Formik
-//           initialValues={initialValues}
-//           validationSchema={validationSchema}
-//           onSubmit={onSubmit}
-//         >
-//           {({ isSubmitting }) => (
-//             <Form className="space-y-8">
-//               {/* 🔹 General Details */}
-//               <div>
-//                 <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-//                   <span className="text-[18px] text-primary font-[700] ">
-//                     <AiOutlineExclamationCircle />
-//                   </span>{" "}
-//                   General Details
-//                 </h3>
-
-//                 {/* Region */}
-//                 {/* <div>
-//                   <label className="text-[14px] text-[#29324C] font-[600] mb-1 block">
-//                     Region
-//                   </label>
-//                   <SelectField
-//                     name="region"
-//                     placeholder="Select a region"
-//                     options={[
-//                       { label: "India", value: "india" },
-//                       { label: "USA", value: "usa" },
-//                     ]}
-//                   />
-//                 </div> */}
-
-//                 {/* Full Name */}
-//                 <div className="mb-4">
-//                   <label className="text-[14px] text-[#29324C] font-[600] mb-1 block">
-//                     Level Name
-//                   </label>
-//                   <TextInput
-//                     name="levelName"
-//                     placeholder="Level 1 — Foundation: Device Introduction & Core Concepts"
-//                   />
-//                 </div>
-
-//                 {/* parent Program + Duration */}
-//                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                   <div>
-//                     <label className="text-[14px] text-[#29324C] font-[600] mb-1 block">
-//                       Parent Program
-//                     </label>
-//                     <TextInput
-//                       name="prentProgram"
-//                       placeholder="Pacemaker Training Curriculum -Interactive Self-Paced Modules"
-//                     />
-//                   </div>
-
-//                   <div>
-//                     <label className="text-[14px] text-[#29324C] font-[600] mb-1 block">
-//                       Estimated Duration
-//                     </label>
-//                     <TextInput name="duration" placeholder="e.g. 12" />
-//                   </div>
-//                 </div>
-
-//                 {/* Description */}
-//                 <div className="mt-4">
-//                   <label className="text-[14px] text-[#29324C] font-[600] mb-1 block">
-//                     Description
-//                   </label>
-//                   <textarea
-//                     name="description"
-//                     rows="4"
-//                     placeholder="Write user description..."
-//                     className="w-full border border-gray-300 rounded-md p-3 text-sm focus:outline-none focus:border-none focus:ring-1 focus:ring-blue-500"
-//                   />
-//                 </div>
-//               </div>
-
-//               {/* 🔹 Requirements */}
-//               <div>
-//                 <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-//                   <span className="text-blue-600">
-//                     <IoShieldCheckmarkOutline />
-//                   </span>{" "}
-//                   Requirements & Prerequisites
-//                 </h3>
-
-//                 <p className="text-[14px] text-[#29324C] font-[600] mb-3">
-//                   Select prerequisites
-//                 </p>
-
-//                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                   <div className="border border-gray-300 bg-[#F8FAFC] rounded-lg p-3 flex items-start gap-2">
-//                     <Checkbox name="prerequisites" value="level1" />
-//                     <div>
-//                       <p className="text-[14px] text-[#29324C] font-[600]">
-//                         Basic Level
-//                       </p>
-//                       <p className="text-xs text-gray-400">
-//                         Introductory Level
-//                       </p>
-//                     </div>
-//                   </div>
-
-//                   <div className="border border-gray-300 bg-[#F8FAFC] rounded-lg p-3 flex items-start gap-2">
-//                     <Checkbox name="prerequisites" value="compliance" />
-//                     <div>
-//                       <p className="text-[14px] text-[#29324C] font-[600]">
-//                         Core Compliance
-//                       </p>
-//                       <p className="text-xs text-gray-400">Required basics</p>
-//                     </div>
-//                   </div>
-
-//                   <div className="border border-gray-300 bg-[#F8FAFC] rounded-lg p-3 flex items-start gap-2">
-//                     <Checkbox name="prerequisites" value="softskills" />
-//                     <div>
-//                       <p className="text-[14px] text-[#29324C] font-[600]">
-//                         Soft Skills
-//                       </p>
-//                       <p className="text-xs text-gray-400">Communication</p>
-//                     </div>
-//                   </div>
-
-//                   <div className="border border-gray-300 bg-[#F8FAFC] rounded-lg p-3 flex items-start gap-2">
-//                     <Checkbox name="prerequisites" value="ops" />
-//                     <div>
-//                       <p className="text-[14px] text-[#29324C] font-[600]">
-//                         Operational
-//                       </p>
-//                       <p className="text-xs text-gray-400">Field work</p>
-//                     </div>
-//                   </div>
-//                 </div>
-
-//                 <div className="flex justify-end">
-//                   <button type="button" className="text-blue-600 text-sm  mt-3">
-//                     + Add Custom Prerequisite
-//                   </button>
-//                 </div>
-//               </div>
-
-//               {/* 🔹 Preview Card */}
-//               <div className="border border-gray-300 bg-[#F8FAFC] p-4 rounded-lg flex items-center gap-4">
-//                 <div className="w-12 h-12 bg-blue-200 rounded-md"></div>
-//                 <div>
-//                   <p className="text-sm font-semibold">User Preview</p>
-//                   <p className="text-xs text-gray-500">
-//                     This user will be visible after creation.
-//                   </p>
-//                 </div>
-//               </div>
-
-//               {/* 🔹 Footer */}
-//               <div className="flex justify-end items-center pt-4">
-//                 {/* <p className="text-xs text-gray-400">Auto-saved at 2:45 PM</p> */}
-
-//                 <div className="flex gap-3">
-//                   <button
-//                     type="button"
-//                     className="px-4 py-2 border border-[#184994] rounded-md text-sm text-[#184994]"
-//                   >
-//                     Save as Draft
-//                   </button>
-
-//                   <button
-//                     type="button"
-//                     className="px-4 py-2  rounded-md text-sm text-white bg-accent"
-//                   >
-//                     Save & Continue
-//                   </button>
-//                 </div>
-//               </div>
-//             </Form>
-//           )}
-//         </Formik>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default CreateLevel;
-
-import React from "react";
+import { useState, useRef, useEffect } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-
-import TextInput from "../../../../common/form/TextInput";
-import Checkbox from "../../../../common/form/Checkbox";
-import RadioGroup from "../../../../common/form/RadioGroup";
-import SelectField from "../../../../common/form/SelectField";
-import FormButton from "../../../../common/form/FormButton";
-import { IoShieldCheckmarkOutline } from "react-icons/io5";
+import { TextInput, TextareaField, SelectField } from "../../../../common/form";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
+import { FiUpload, FiX, FiImage } from "react-icons/fi";
+import {
+  PageLayout,
+  PageHeader,
+  PageHeaderLeft,
+  PageTitle,
+  PageSubtitle,
+  PageBody,
+} from "../../../../common/layout";
+import { useTranslation } from "react-i18next";
+import { useToast } from "../../../../common/toast/ToastContext";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { createLevel } from "../../../../../../redux/slice/levelSlice";
+import { getAllPrograms } from "../../../../../../redux/slice/programSlice";
+
 const CreateLevel = () => {
+  const [thumbnail, setThumbnail] = useState(null);
+  const [thumbnailPreview, setThumbnailPreview] = useState(null);
+  const fileInputRef = useRef(null);
+  const { t } = useTranslation();
+  const toast = useToast();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { programs } = useSelector((state) => state.program);
+
+  useEffect(() => {
+    dispatch(getAllPrograms());
+  }, [dispatch]);
+
+  const programOptions =
+    programs?.data?.map((prog) => ({
+      label: prog.title,
+      value: prog.id,
+    })) || [];
+
   const initialValues = {
-    fullName: "",
-    email: "",
-    role: "",
-    duration: "",
+    levelName: "",
     description: "",
-    prerequisites: [],
+    programName: null,
+    thumbnail: null,
   };
 
   const validationSchema = Yup.object({
-    fullName: Yup.string().required("Required"),
-    email: Yup.string().email("Invalid email").required("Required"),
-    role: Yup.object().required("Required"),
+    levelName: Yup.string().required("Level name is required"),
+    programName: Yup.object().nullable().required("Parent program is required"),
+    description: Yup.string().required("Description is required"),
   });
 
-  const onSubmit = (values) => {
-    console.log(values);
+  const onSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
+    console.log("Form submitted!", values);
+
+    try {
+      const formData = new FormData();
+
+      formData.append("title", values.levelName);
+      formData.append("program_id", values.programName.value);
+      formData.append("description", values.description);
+
+      if (thumbnail) {
+        formData.append("thumbnail", thumbnail);
+      }
+      const res = await dispatch(createLevel(formData)).unwrap();
+      toast.success(res.message || "level created successfully ");
+      resetForm();
+      removeThumbnail();
+      navigate("/levels");
+    } catch (error) {
+      setErrors({ submit: error.message });
+      toast.error(error?.message || "Something went wrong ❌");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
+  const handleThumbnailUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      if (!file.type.startsWith("image/")) {
+        alert("Please upload an image file");
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        alert("File size should be less than 5MB");
+        return;
+      }
+
+      setThumbnail(file);
+      const reader = new FileReader();
+      reader.onloadend = () => setThumbnailPreview(reader.result);
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeThumbnail = () => {
+    setThumbnail(null);
+    setThumbnailPreview(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  const triggerFileUpload = () => fileInputRef.current.click();
+
   return (
-    <>
-      <div className="bg-white w-full max-w-4xl p-8 rounded-lg border border-gray-300">
-        {/* 🔹 Heading */}
-        <h1 className="text-2xl font-[700] text-primary">Level Management</h1>
-        <p className="text-[#29324C] text-[16px] mb-6">
-          Manage and organize training levels to structure the learning journey
-          from foundational knowledge to advanced clinical expertise.
-        </p>
+    <PageLayout>
+      <div className=" p-8 rounded-lg border border-gray-300">
+        <PageHeader>
+          <PageHeaderLeft>
+            <PageTitle>{t("levels.create.title")}</PageTitle>
+            <PageSubtitle>{t("levels.create.subtitle")}</PageSubtitle>
+          </PageHeaderLeft>
+        </PageHeader>
 
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={onSubmit}
-        >
-          {({ isSubmitting }) => (
-            <Form className="space-y-8">
-              {/* 🔹 General Details */}
-              <div>
-                <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-                  <span className="text-[18px] text-primary font-[700] ">
-                    <AiOutlineExclamationCircle />
-                  </span>{" "}
-                  General Details
-                </h3>
-
-                {/* Region */}
-                {/* <div>
-                  <label className="text-[14px] text-[#29324C] font-[600] mb-1 block">
-                    Region
-                  </label>
-                  <SelectField
-                    name="region"
-                    placeholder="Select a region"
-                    options={[
-                      { label: "India", value: "india" },
-                      { label: "USA", value: "usa" },
-                    ]}
-                  />
-                </div> */}
-
-                {/* Full Name */}
-                <div className="mb-4">
-                  <label className="text-[14px] text-[#29324C] font-[600] mb-1 block">
-                    Level Name
-                  </label>
-                  <TextInput
-                    name="levelName"
-                    placeholder="Level 1 — Foundation: Device Introduction & Core Concepts"
-                  />
-                </div>
-
-                {/* parent Program + Duration */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <PageBody className="mt-4">
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmit}
+            enableReinitialize={true}
+          >
+            {({ isSubmitting, values, setFieldValue, handleSubmit }) => {
+              return (
+                <Form onSubmit={handleSubmit} className="space-y-8">
+                  {/* General Details */}
                   <div>
-                    <label className="text-[14px] text-[#29324C] font-[600] mb-1 block">
-                      Parent Program
-                    </label>
-                    <TextInput
-                      name="prentProgram"
-                      placeholder="Pacemaker Training Curriculum -Interactive Self-Paced Modules"
-                    />
+                    <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
+                      <span className="text-[18px] text-primary font-[700]">
+                        <AiOutlineExclamationCircle />
+                      </span>
+                      {t("levels.details.generalDetails")}
+                    </h3>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
+                      <div>
+                        <TextInput
+                          name="levelName"
+                          label={t("levels.details.levelName")}
+                          placeholder={t("levels.details.levelNamePlaceholder")}
+                          required={true}
+                        />
+                      </div>
+                      <div>
+                        <SelectField
+                          name="programName"
+                          label={t("levels.details.parentProgram")}
+                          placeholder={t(
+                            "levels.details.perentProgramPlaceholder",
+                          )}
+                          required={true}
+                          options={programOptions || []}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="mt-2">
+                      <TextareaField
+                        name="description"
+                        label={t("levels.details.description")}
+                        placeholder={t("levels.details.descriptionPlaceholder")}
+                        rows={4}
+                        required={true}
+                      />
+                    </div>
                   </div>
 
+                  {/* Thumbnail */}
                   <div>
-                    <label className="text-[14px] text-[#29324C] font-[600] mb-1 block">
-                      Estimated Duration
-                    </label>
-                    <TextInput name="duration" placeholder="e.g. 12" />
-                  </div>
-                </div>
+                    <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
+                      <span className="text-blue-600">
+                        <FiImage />
+                      </span>
+                      {t("levels.details.thumbnail")}
+                    </h3>
 
-                {/* Description */}
-                <div className="mt-4">
-                  <label className="text-[14px] text-[#29324C] font-[600] mb-1 block">
-                    Description
-                  </label>
-                  <textarea
-                    name="description"
-                    rows="4"
-                    placeholder="Write user description..."
-                    className="w-full border border-gray-300 rounded-md p-3 text-sm focus:outline-none focus:border-none focus:ring-1 focus:ring-blue-500"
-                  />
-                </div>
-              </div>
+                    <div className="border border-gray-300 bg-[#F8FAFC] p-6 rounded-lg">
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/*"
+                        onChange={handleThumbnailUpload}
+                        className="hidden"
+                      />
 
-              {/* 🔹 Requirements */}
-              <div>
-                <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-                  <span className="text-blue-600">
-                    <IoShieldCheckmarkOutline />
-                  </span>{" "}
-                  Requirements & Prerequisites
-                </h3>
-
-                <p className="text-[14px] text-[#29324C] font-[600] mb-3">
-                  Select prerequisites
-                </p>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="border border-gray-300 bg-[#F8FAFC] rounded-lg p-3 flex items-start gap-2">
-                    <Checkbox name="prerequisites" value="level1" />
-                    <div>
-                      <p className="text-[14px] text-[#29324C] font-[600]">
-                        Basic Level
-                      </p>
-                      <p className="text-xs text-gray-400">
-                        Introductory Level
-                      </p>
+                      {!thumbnailPreview ? (
+                        <div
+                          onClick={triggerFileUpload}
+                          className="flex flex-col items-center justify-center cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 hover:border-blue-500 transition-colors"
+                        >
+                          <FiUpload className="text-4xl text-gray-400 mb-3" />
+                          <p className="text-sm text-gray-600 mb-1">
+                            {t("levels.details.uploadText")}
+                          </p>
+                          <p className="text-xs text-gray-400">
+                            {t("levels.details.uploadSubText")}
+                          </p>
+                        </div>
+                      ) : (
+                        <div className="relative">
+                          <div className="flex items-start gap-6">
+                            <div className="relative group">
+                              <img
+                                src={thumbnailPreview}
+                                alt="Thumbnail Preview"
+                                className="w-32 h-32 object-cover rounded-lg border border-gray-300 shadow-sm"
+                              />
+                              <button
+                                type="button"
+                                onClick={removeThumbnail}
+                                className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors shadow-md"
+                              >
+                                <FiX className="text-xs" />
+                              </button>
+                            </div>
+                            <div className="flex-1">
+                              <p className="text-sm font-semibold text-gray-700 mb-1">
+                                {thumbnail.name}
+                              </p>
+                              <p className="text-xs text-gray-500 mb-3">
+                                {(thumbnail.size / 1024).toFixed(2)} KB
+                              </p>
+                              <button
+                                type="button"
+                                onClick={triggerFileUpload}
+                                className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1"
+                              >
+                                <FiUpload className="text-sm" />
+                                {t("levels.details.changeImage")}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
 
-                  <div className="border border-gray-300 bg-[#F8FAFC] rounded-lg p-3 flex items-start gap-2">
-                    <Checkbox name="prerequisites" value="compliance" />
-                    <div>
-                      <p className="text-[14px] text-[#29324C] font-[600]">
-                        Core Compliance
-                      </p>
-                      <p className="text-xs text-gray-400">Required basics</p>
+                  {/* Footer */}
+                  <div className="flex justify-end items-center pt-4">
+                    <div className="flex gap-3">
+                      <button
+                        type="button"
+                        className="px-4 py-2 border border-[#184994] rounded-md text-sm text-[#184994] hover:bg-gray-50"
+                      >
+                        {t("levels.actions.saveasDraft")}
+                      </button>
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
+                      >
+                        {isSubmitting
+                          ? t("levels.actions.saving")
+                          : t("levels.actions.saveandContinue")}
+                      </button>
                     </div>
                   </div>
-
-                  <div className="border border-gray-300 bg-[#F8FAFC] rounded-lg p-3 flex items-start gap-2">
-                    <Checkbox name="prerequisites" value="softskills" />
-                    <div>
-                      <p className="text-[14px] text-[#29324C] font-[600]">
-                        Soft Skills
-                      </p>
-                      <p className="text-xs text-gray-400">Communication</p>
-                    </div>
-                  </div>
-
-                  <div className="border border-gray-300 bg-[#F8FAFC] rounded-lg p-3 flex items-start gap-2">
-                    <Checkbox name="prerequisites" value="ops" />
-                    <div>
-                      <p className="text-[14px] text-[#29324C] font-[600]">
-                        Operational
-                      </p>
-                      <p className="text-xs text-gray-400">Field work</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex justify-end">
-                  <button type="button" className="text-blue-600 text-sm  mt-3">
-                    + Add Custom Prerequisite
-                  </button>
-                </div>
-              </div>
-
-              {/* 🔹 Preview Card */}
-              <div className="border border-gray-300 bg-[#F8FAFC] p-4 rounded-lg flex items-center gap-4">
-                <div className="w-12 h-12 bg-blue-200 rounded-md"></div>
-                <div>
-                  <p className="text-sm font-semibold">User Preview</p>
-                  <p className="text-xs text-gray-500">
-                    This user will be visible after creation.
-                  </p>
-                </div>
-              </div>
-
-              {/* 🔹 Footer */}
-              <div className="flex justify-end items-center pt-4">
-                {/* <p className="text-xs text-gray-400">Auto-saved at 2:45 PM</p> */}
-
-                <div className="flex gap-3">
-                  <button
-                    type="button"
-                    className="px-4 py-2 border border-[#184994] rounded-md text-sm text-[#184994]"
-                  >
-                    Save as Draft
-                  </button>
-
-                  <button
-                    type="button"
-                    className="px-4 py-2  rounded-md text-sm text-white bg-accent"
-                  >
-                    Save & Continue
-                  </button>
-                </div>
-              </div>
-            </Form>
-          )}
-        </Formik>
+                </Form>
+              );
+            }}
+          </Formik>
+        </PageBody>
       </div>
-    </>
+    </PageLayout>
   );
 };
 

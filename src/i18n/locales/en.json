@@ -1,15 +1,68 @@
 {
 
+  "login": {
+    "title": "Welcome back",
+    "subtitle": "Sign in to your Avante admin account",
+    "emailLabel": "Email or Employee ID",
+    "emailPlaceholder": "Enter your email or employee ID",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "forgotPassword": "Forgot password?",
+    "button": "Sign In",
+    "signingIn": "Signing In...",
+    "trouble": "Having trouble signing in?",
+    "contactAdmin": "Contact your system administrator"
+  },
+
+  "forgotPassword": {
+    "title": "Forgot your password?",
+    "subtitle": "Enter your registered email address and we'll send you a link to reset your password.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "you@company.com",
+    "button": "Send Link",
+    "sending": "Sending...",
+    "back": "Back to sign in",
+    "spam": "Check your spam folder",
+    "notReceived": "Didn't receive the email?",
+    "rememberYourPassword": "Remember your password?",
+    "signIn": "Sign In"
+  },
+
+  "checkEmail": {
+    "title": "Check Your Email",
+    "subtitle": "We sent a password reset link to",
+    "openApp": "Open Email App",
+    "resend": "Resend Link",
+    "back": "Back to sign in"
+  },
+
+  "changePassword": {
+    "title": "Change Password",
+    "subtitle": "Update your password to keep your account secure.",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "placeholderNew": "Enter new password",
+    "placeholderConfirm": "Re-enter new password",
+    "update": "Update Password",
+    "updating": "Updating...",
+    "rules": {
+      "min": "Minimum 8 characters",
+      "uppercase": "At least 1 uppercase letter",
+      "number": "At least 1 number",
+      "special": "At least 1 special character"
+    }
+  },
+
    "navbar": {
       "searchPlaceholder": "Search analytics, users or courses...",
       "notifications": "Notifications",
       "messages": "Messages",
       "profileName": "Dr. Sarah Chen",
       "role": "System Admin"
-    },
+    }, 
 
     "sidebar": {
-      "dashboard": "Dashboard",
+      "dashboard": "Dashboard", 
 
       "userManagement": "User Management",
       "assignTrainingProgram": "Assign Training Program",
@@ -56,25 +109,414 @@
       "logout": "Logout"
     },
 
-  "userManagement": "User Management",
-  "userDesc": "Manage, audit, and support medical professional accounts across all regions.",
-  "createUser": "Create User",
-  "searchPlaceholder": "Search by name, email, ID or phone...",
-  "region": "Region",
-  "status": "Status",
-  "resetFilters": "Reset Filters",
+    "userManagement": {
+    "list": {
+      "title": "User Management",
+      "subtitle": "Manage, audit, and support medical professional accounts across all regions.",
+      "filters": "FILTERS",
+      "clearAll": "Clear All",
+      "searchPlaceholder": "Search by name, email, or region...",
+      "columns": {
+        "userId": "User ID",
+          "name": "Name",
+          "contact": "Contact",
+          "region": "Region",
+          "programs": "Programs",
+          "progress": "Progress",
+          "status": "Status",
+          "actions": "Actions"
+      },
+      "stats": {
+        "totalActive": {
+          "title": "Total Active Professionals",
+          "growth": "12% from this month"
+        },
+        "avgProgress": {
+          "title": "Average Progress",
+          "growth": "5% increase this week"
+        },
+        "pending": {
+          "title": "Pending Approvals",
+          "subtext": "8 requests waiting"
+        }
+      }
+    },
+    "details": {
+      "personalInfo": "Personal Information",
+      "createPassword": "Create Password",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Enter full name",
+      "email": "Email Address",
+      "emailPlaceholder": "Enter email address",
+      "phone": "Phone Number",
+      "phonePlaceholder": "Enter phone number",
+      "region": "Region",
+      "regionPlaceholder": "Select region",
+      "role": "Role",
+      "rolePlaceholder": "Select role",
+      "password": "Password",
+      "passwordPlaceholder": "Enter password",
+      "confirmPassword": "Confirm Password",
+      "confirmPasswordPlaceholder": "Re-enter password",
 
-  "table": {
-    "userId": "User ID",
-    "name": "Name",
-    "contact": "Contact",
-    "region": "Region", 
-    "programs": "Programs",
-    "progress": "Progress",
-    "status": "Status"
+      "header": {
+        "id": "ID",
+        "role": "Medical Instructor",
+        "accountStatus": "Account Status",
+        "active": "Active"
+      },
+      "stats": {
+        "lastLogin": "Last Login",
+        "courses": "Courses Completed",
+        "completionRate": "Completion Rate",
+        "hoursAgo": "{{count}} hours ago",
+        "coursesCount": "{{count}} Courses",
+        "perfect": "Perfect"
+      },
+      "training": {
+        "title": "Current Training Programs",
+        "viewAll": "View All",
+        "progress": "Progress: {{value}}%",
+        "modules": "{{completed}}/{{total}} Modules",
+        "completed": "Completed"
+      },
+      "certificates": {
+        "columns": {
+          "certificate": "Certificate",
+          "issueDate": "Issue Date",
+          "status": "Status",
+          "actions": "Actions"
+        },
+        "completed": "Completed"
+      }
+    },
+    "create" : {
+      "title": "Create New User",
+      "subtitle": "Onboard a new medical professional or staff member to the platform."
+    },
+    "status": {
+      "active": "Active",
+      "onLeave": "On Leave",
+      "inactive": "Inactive",
+      "all" : "All"
+    },
+    "actions": {
+      "addNewUser": "+ Add New User",
+      "saveUser": "Save User",
+      "deleteUser": "Delete User",
+      "saveasDraft": "Save as Draft",
+      "saveandContinue": "Save & Continue",
+      "saving" : "Saving...",
+      "cancle" : "Cancel",
+      "createUser": "Create User",
+      "creating" : "Creating...",
+      "udpateUser": "Update User",
+      "updateing" : "Updating..."
+    },
+    "breadcrumb": {
+      "users": "Users",
+      "viewUserProfile": "View User Profile"
+     }
   },
 
-  "language": {
+  "program": {
+    "list": {
+      "title": "Program Management",
+      "subtitle": "Configure your medical training curriculum, structure modules, and manage enrollment details seamlessly for an organized and scalable program.",
+      "filters": "FILTERS",
+      "clearAll": "Clear All",
+      "columns": {
+        "programName": "Program Name",
+        "totalLevels": "Total Levels",
+        "assignedUsers": "Assigned Users",
+        "complitionRate": "Completion Rate",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "details": {
+      "generalDetails": "General Details",
+      "programTitle": "Program Title",
+      "programTitlePlaceholder": "Enter program name",
+      "description": "Description",
+      "descriptionPlaceholder": "Write program description...",
+      "thumbnail": "Program Thumbnail",
+      "uploadText": "Click to upload thumbnail",
+      "uploadSubText": "PNG, JPG, JPEG up to 5MB",
+      "changeImage" : "Change Image"
+    },
+    "create" : {
+      "title": "Create Program",
+      "subtitle": "Configure your medical training curriculum, structure modules, and manage enrollment details seamlessly for an organized and scalable program."
+    },
+    "status": {
+      "active": "Active",
+      "draft": "Draft",
+      "archived": "Archived",
+      "all" : "All"
+    },
+    "actions": {
+      "addNewProgram": "+ Add New Program",
+      "save": "Save Program",
+      "saveasDraft": "Save as Draft",
+      "saveandContinue": "Save & Continue",
+      "saving" : "Saving...",
+      "deleteProgram": "Delete Program"
+    },
+    "breadcrumb": {
+      "trainingProgram": "Training Program",
+      "view-program": "View Program"
+     }
+  },
+
+  "levels": {
+    "list": {
+      "title": "Level Management",
+      "subtitle": "Manage and organize training levels to structure the learning journey...",
+      "filters": "FILTERS",
+      "clearAll": "Clear All",
+      "columns": {
+        "levelName": "Level Name",
+        "parentProgram": "Parent Program",
+        "totalChapters": "Total Chapters",
+        "duration": "Duration",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "stats": {
+        "totalLevels": "TOTAL LEVELS",
+        "active": "ACTIVE",
+        "avgChapters": "AVG CHAPTERS/LEVEL"
+      }
+    },
+    "details": {
+      "generalDetails": "General Details",
+      "levelName": "Level Name",
+      "levelNamePlaceholder": "Enter level name",
+      "parentProgram": "Parent Program",
+      "perentProgramPlaceholder": "Select a program",
+      "description": "Description",
+      "descriptionPlaceholder": "Write level description...",
+      "thumbnail": "Level Thumbnail",
+      "uploadText": "Click to upload thumbnail",
+      "uploadSubText": "PNG, JPG, JPEG up to 5MB",
+      "changeImage" : "Change Image"
+    },
+    "create" : {
+      "title": "Level Management",
+      "subtitle": "Manage and organize training levels to structure the learning journey from foundational knowledge to advanced clinical expertise."
+    },
+    "status": {
+      "active": "Active",
+      "draft": "Draft",
+      "archived": "Archived",
+      "all" : "All"
+    },
+    "actions": {
+      "addNew": "+ Add New Level",
+      "save": "Save Level",
+      "saveasDraft": "Save as Draft",
+      "saveandContinue": "Save & Continue",
+      "saving" : "Saving..."
+    },
+    "breadcrumb": {
+      "curriculum": "Curriculum",
+      "view-level": "Level"
+     }
+  },
+  "common": {
+    "delete": "Delete"
+  },
+
+
+  "module": {
+    "list": {
+      "title": "Module Management",
+      "subtitle": "Design, organize, and manage modules with structured content, assessments, and progress tracking for a seamless learning experience.",
+      "filters": "FILTERS",
+      "clearAll": "Clear All",
+      "columns": {
+        "moduleName": "Module Name",
+        "parentLevel": "Parent Level",
+        "totalChapters": "Total Chapters",
+        "duration": "Duration",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "stats": {
+        "totalLevels": "TOTAL LEVELS",
+        "active": "ACTIVE",
+        "avgChapters": "AVG CHAPTERS/LEVEL"
+      }
+    },
+    "details": {
+      "generalDetails": "General Details",
+       "moduleName": "Module Name",
+      "moduleNamePlaceholder": "Enter module name",
+      "levelName": "Level Name",
+      "levelNamePlaceholder": "Select a level",
+      "parentProgram": "Parent Program",
+      "perentProgramPlaceholder": "Select a program",
+      "description": "Description",
+      "descriptionPlaceholder": "Write module description...",
+      "thumbnail": "Level Thumbnail",
+      "uploadText": "Click to upload thumbnail",
+      "uploadSubText": "PNG, JPG, JPEG up to 5MB",
+      "changeImage" : "Change Image"
+    },
+    "create" : {
+      "title": "Module Management",
+      "subtitle": "Design, organize, and manage modules with structured content, assessments, and progress tracking for a seamless learning experience."
+    },
+    "status": {
+      "active": "Active",
+      "draft": "Draft",
+      "archived": "Archived",
+      "all" : "All"
+    },
+    "actions": {
+      "addNew": "+ Add New Module",
+      "saveModule": "Save Module",
+      "deleteModule": "Delete Module",
+      "saveasDraft": "Save as Draft",
+      "saveandContinue": "Save & Continue",
+      "saving" : "Saving..."
+    },
+    "breadcrumb": {
+      "curriculum": "Curriculum",
+      "view-module": "View Module"
+     }
+  },
+
+   "chapter": {
+    "list": {
+      "title": "Chapter Management",
+      "subtitle": "Define and structure chapter content to break modules into focused, easy-to-understand learning segments.",
+      "filters": "FILTERS",
+      "clearAll": "Clear All",
+      "columns": {
+        "chapterName": "Chapter Name",
+        "parentModule": "Parent Module",
+        "parentLevel": "Parent Level",
+        "totalChapters": "Total Chapters",
+        "duration": "Duration",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "stats": {
+        "totalLevels": "TOTAL LEVELS",
+        "active": "ACTIVE",
+        "avgChapters": "AVG CHAPTERS/LEVEL"
+      }
+    },
+    "details": {
+      "generalDetails": "General Details",
+      "chapterName": "Chapter Name",
+      "chapterNamePlaceholder": "Enter chapter name",
+      "moduleName": "Parent Module",
+      "moduleNamePlaceholder": "Select a module",
+      "levelName": "Level Name",
+      "levelNamePlaceholder": "Select a level",
+      "parentProgram": "Parent Program",
+      "perentProgramPlaceholder": "Select a program",
+      "description": "Description",
+      "descriptionPlaceholder": "Write module description...",
+      "thumbnail": "Level Thumbnail",
+      "uploadText": "Click to upload thumbnail",
+      "uploadSubText": "PNG, JPG, JPEG up to 5MB",
+      "changeImage" : "Change Image"
+    },
+    "create" : {
+      "title": "Create New Chapter",
+      "subtitle": "Define and structure chapter content to break modules into focused, easy-to-understand learning segments."
+    },
+    "status": {
+      "active": "Active",
+      "draft": "Draft",
+      "archived": "Archived",
+      "all" : "All"
+    },
+    "actions": {
+      "addNewChapter": "+ Add New Chapter",
+      "saveModule": "Save Chapter",
+      "deleteModule": "Delete Chapter",
+      "saveasDraft": "Save as Draft",
+      "saveandContinue": "Save & Continue",
+      "saving" : "Saving..."
+    },
+    "breadcrumb": {
+      "curriculum": "Curriculum",
+      "view-chapter": "View Chapter"
+     }
+  },
+
+    "topic": {
+    "list": {
+      "title": "Topic Management",
+      "subtitle": "Manage granular learning objectives, tracking student progress and content delivery across specialized medical departments.",
+      "filters": "FILTERS",
+      "clearAll": "Clear All",
+      "columns": {
+        "topicName": "Topic Name",
+        "parentChapter": "Parent Chapter",
+        "parentModule": "Parent Module",
+        "parentLevel": "Parent Level",
+        "totalChapters": "Total Chapters",
+        "duration": "Duration",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "stats": {
+        "totalLevels": "TOTAL LEVELS",
+        "active": "ACTIVE",
+        "avgChapters": "AVG CHAPTERS/LEVEL"
+      }
+    },
+    "details": {
+      "generalDetails": "General Details",
+      "topicName": "Topic Name",
+      "topicNamePlaceholder": "Enter topic name",
+      "chapterName": "Parent Chapter",
+      "chapterNamePlaceholder": "Select a chapter",
+      "moduleName": "Parent Module",
+      "moduleNamePlaceholder": "Select a module",
+      "levelName": "Level Name",
+      "levelNamePlaceholder": "Select a level",
+      "parentProgram": "Parent Program",
+      "perentProgramPlaceholder": "Select a program",
+      "description": "Description",
+      "descriptionPlaceholder": "Write module description...",
+      "thumbnail": "Level Thumbnail",
+      "uploadText": "Click to upload thumbnail",
+      "uploadSubText": "PNG, JPG, JPEG up to 5MB",
+      "changeImage" : "Change Image"
+    },
+    "create" : {
+      "title": "Create New Topic",
+      "subtitle": "Manage granular learning objectives, tracking student progress and content delivery across specialized medical departments."
+    },
+    "status": {
+      "active": "Active",
+      "draft": "Draft",
+      "archived": "Archived",
+      "all" : "All"
+    },
+    "actions": {
+      "addNewTopic": "+ Add New Topic",
+      "saveTopic": "Save Save Topic",
+      "deleteTopic": "Delete Topic",
+      "saveasDraft": "Save as Draft",
+      "saveandContinue": "Save & Continue",
+      "saving" : "Saving..."
+    },
+    "breadcrumb": {
+      "curriculum": "Curriculum",
+      "view-topic": "View Topic"
+     }
+  },
+  
+
+  "language": { 
     "title": "Language Management",
     "desc": "Manage system languages and translations for the platform interface and learning content.",
     "addLanguage": "Add Language",

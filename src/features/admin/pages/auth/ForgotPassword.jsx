@@ -8,8 +8,11 @@ import FormButton from "../../common/form/FormButton";
 
 import logo from "../../../../assets/admin/AvanteMedicalLogoBlue.png";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const ForgotPassword = () => {
+  const { t } = useTranslation();
+
   const initialValues = {
     email: "",
   };
@@ -46,7 +49,7 @@ const ForgotPassword = () => {
             className="inline-flex items-center text-[#64748B] text-sm hover:text-[#1F3C88] transition-colors"
           >
             <FiArrowLeft className="mr-1" size={16} />
-            Back to sign in
+            {t("forgotPassword.back")}
           </button>
         </div>
 
@@ -58,11 +61,10 @@ const ForgotPassword = () => {
             </span>
           </div>
           <h2 className="text-2xl text-center font-bold text-primary">
-            Forgot your password?
+            {t("forgotPassword.title")}
           </h2>
           <p className="text-[#64748B] text-sm text-center mt-2">
-            Enter your registered email address and we'll send you a link to
-            reset your password.
+            {t("forgotPassword.subtitle")}
           </p>
         </div>
 
@@ -76,7 +78,7 @@ const ForgotPassword = () => {
               {/* Email field */}
               <div>
                 <label className="block text-sm font-medium text-[#1E2A3E] mb-2">
-                  Email address
+                  {t("forgotPassword.emailLabel")}
                 </label>
                 <div className="relative">
                   <div className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8]">
@@ -85,7 +87,7 @@ const ForgotPassword = () => {
                   <TextInput
                     name="email"
                     type="email"
-                    placeholder="you@company.com"
+                    placeholder={t("forgotPassword.emailPlaceholder")}
                     className="w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1F3C88]/20 focus:border-[#1F3C88] text-sm"
                   />
                 </div>
@@ -93,7 +95,11 @@ const ForgotPassword = () => {
 
               {/* Send Link Button */}
               <FormButton
-                text={isSubmitting ? "Sending..." : "Send Link"}
+                text={
+                  isSubmitting
+                    ? t("forgotPassword.sending")
+                    : t("forgotPassword.button")
+                }
                 className="cursor-pointer"
                 loading={isSubmitting}
                 type="submit"
@@ -102,13 +108,13 @@ const ForgotPassword = () => {
               {/* Help text */}
               <div className="text-center text-sm text-[#64748B]">
                 <p>
-                  Didn't receive the email?{" "}
+                  {t("forgotPassword.notReceived")}{" "}
                   <Link
                     to="/check-email"
                     // type="button"
                     className="text-[#1F3C88] hover:underline font-medium"
                   >
-                    Check your spam folder
+                    {t("forgotPassword.spam")}
                   </Link>
                 </p>
               </div>
@@ -119,12 +125,12 @@ const ForgotPassword = () => {
         {/* Sign in link */}
         <div className="mt-6 text-center text-sm text-[#64748B]">
           <p>
-            Remember your password?{" "}
+            {t("forgotPassword.rememberYourPassword")}{" "}
             <a
               href="/signin"
               className="text-[#1F3C88] font-medium hover:underline"
             >
-              Sign in
+              {t("forgotPassword.signIn")}
             </a>
           </p>
         </div>
