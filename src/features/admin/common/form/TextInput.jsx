@@ -4,16 +4,41 @@ const TextInput = ({
   label,
   name,
   type = "text",
-  placeholder,
+  placeholder = "",
   className = "",
   isFormik = true,
   value,
   onChange,
+  required = false,
+  isDisabled = false,
 }) => {
+  // const baseInputClass = `${className} w-full px-2 sm:px-3 py-1.5 sm:py-2
+  //  border border-gray-300 focus:border-none
+  //  focus-within:outline-none focus:ring-1 focus:ring-blue-500
+  //   rounded-md text-xs sm:text-sm transition-all duration-200 `;
+
+  const baseInputClass = `
+    ${className} w-full px-2 sm:px-3 py-1.5 sm:py-2
+    border rounded-md text-xs sm:text-sm
+    transition-all duration-200
+    ${
+      isDisabled
+        ? "bg-gray-100 text-gray-500 cursor-not-allowed border-gray-200"
+        : "bg-white border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
+    }
+  `;
+
+  // const baseInputClass = `w-full py-2 pr-2 border border-gray-300 focus:outline-none
+  //  focus:ring-1 focus:ring-blue-500 rounded-md text-sm transition-all duration-200`;
+
   return (
-    <div className="mb-4">
+    <div className="mb-3 sm:mb-4">
       {label && (
-        <label className="block mb-1 text-[#29324C] font-medium">{label}</label>
+        <label className="block mb-1 sm:mb-1.5 text-[#29324C] font-medium text-xs sm:text-sm">
+          {label}
+          {required && <span className="text-red-500 ml-1">*</span>}{" "}
+          {/* 👈 same logic */}
+        </label>
       )}
 
       {isFormik ? (
@@ -22,12 +47,13 @@ const TextInput = ({
             name={name}
             type={type}
             placeholder={placeholder}
-            className={`w-full px-3 py-2 border border-gray-300 focus:border-none focus-within:outline-none focus:ring-1 focus:ring-blue-500 rounded-lg ${className}`}
+            className={`${baseInputClass}`}
+            disabled={isDisabled}
           />
           <ErrorMessage
             name={name}
             component="div"
-            className="text-red-500 text-sm"
+            className="text-red-500 text-xs sm:text-sm mt-0.5 sm:mt-1"
           />
         </>
       ) : (
@@ -37,7 +63,8 @@ const TextInput = ({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
-          className={`w-full px-3 py-2 border rounded-lg ${className}`}
+          className={baseInputClass}
+          disabled={isDisabled}
         />
       )}
     </div>

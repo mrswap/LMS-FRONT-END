@@ -12,33 +12,68 @@ import LevelDetails from "../pages/curriculum/level/components/LevelDetails";
 import Module from "../pages/curriculum/module/Module";
 import CreateModule from "../pages/curriculum/module/components/CreateModule";
 import ModuleDetails from "../pages/curriculum/module/components/ModuleDetails";
+import Chapter from "../pages/curriculum/chapter/Chapter";
+import CreateChapter from "../pages/curriculum/chapter/components/CreateChapter";
+import ChapterDetails from "../pages/curriculum/chapter/components/ChapterDetails";
+import CreateTopic from "../pages/curriculum/topic/components/CreateTopic";
+import Topics from "../pages/curriculum/topic/Topics";
+import TopicDetails from "../pages/curriculum/topic/components/TopicDetails";
+import Programs from "../pages/training-program/program/Programs";
+import CreateProgram from "../pages/training-program/program/components/CreateProgram";
+import ProgramDetails from "../pages/training-program/program/components/ProgramDetails";
+import ProtectedRoute from "./ProtectedRoute";
+import Profile from "../pages/auth/Profile";
 
 const AdminRoutes = (
-  <Route path="/" element={<AdminLayout />}>
-    {/*  Default redirect */}
-    <Route index element={<Navigate to="/dashboard" replace />} />
+  <Route element={<ProtectedRoute />}>
+    <Route path="/" element={<AdminLayout />}>
+      {/*  Default redirect */}
+      <Route index element={<Navigate to="/dashboard" replace />} />
 
-    {/* Routes */}
-    <Route path="dashboard" element={<Dashboard />} />
+      {/* Routes */}
+      <Route path="dashboard" element={<Dashboard />} />
 
-    {/* user */}
-    <Route path="assign-training" element={<Users />} />
-    <Route path="assign-training/create-user" element={<CreateUser />} />
-    <Route path="assign-training/user-details" element={<UserDetails />} />
+      {/* profile */}
+      <Route path="profile" element={<Profile />} />
 
-    {/* levels */}
-    <Route path="levels" element={<Levels />} />
-    <Route path="levels/create-level" element={<CreateLevel />} />
-    <Route path="levels/level-details" element={<LevelDetails />} />
+      {/* program */}
+      <Route path="programs" element={<Programs />} />
+      <Route path="programs/create-program" element={<CreateProgram />} />
+      <Route path="programs/program-details/:id" element={<ProgramDetails />} />
 
-    {/* module */}
-    <Route path="modules" element={<Module />} />
-    <Route path="modules/create-module" element={<CreateModule />} />
-    <Route path="modules/moduel-details" element={<ModuleDetails />} />
+      {/* user */}
+      <Route path="assign-training" element={<Users />} />
+      <Route path="assign-training/create-user" element={<CreateUser />} />
+      <Route
+        path="assign-training/user-details/:id"
+        element={<UserDetails />}
+      />
 
-    <Route path="language" element={<LanguageSettings />} />
+      {/* levels */}
+      <Route path="levels" element={<Levels />} />
+      <Route path="levels/create-level" element={<CreateLevel />} />
+      <Route path="levels/level-details/:id" element={<LevelDetails />} />
 
-    <Route path="*" element={<WorkInProgress />} />
+      {/* module */}
+      <Route path="modules" element={<Module />} />
+      <Route path="modules/create-module" element={<CreateModule />} />
+      <Route path="modules/module-details/:id" element={<ModuleDetails />} />
+
+      {/* chapter */}
+      <Route path="chapters" element={<Chapter />} />
+      <Route path="chapters/create-chapter" element={<CreateChapter />} />
+      <Route path="chapters/chapter-details/:id" element={<ChapterDetails />} />
+
+      {/* topics */}
+      <Route path="topics" element={<Topics />} />
+      <Route path="topics/create-topic" element={<CreateTopic />} />
+      <Route path="topics/topic-details/:id" element={<TopicDetails />} />
+
+      {/* language */}
+      <Route path="language" element={<LanguageSettings />} />
+
+      <Route path="*" element={<WorkInProgress />} />
+    </Route>
   </Route>
 );
 

@@ -8,13 +8,25 @@ import Checkbox from "../../common/form/Checkbox";
 import FormButton from "../../common/form/FormButton";
 
 import logo from "../../../../assets/admin/AvanteMedicalLogoBlue.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../../../redux/slice/authSlice";
+import { useTranslation } from "react-i18next";
+import { useToast } from "../../common/toast/ToastContext";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const toast = useToast();
+  const navigate = useNavigate();
+
+  const { isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth,
+  );
+
   const initialValues = {
-    email: "",
-    password: "",
-    remember: false,
+    email: "swapnil@netswaptech.com",
+    password: "12345678",
   };
 
   const validationSchema = Yup.object({
@@ -22,9 +34,16 @@ const Login = () => {
     password: Yup.string().required("Required"),
   });
 
-  const onSubmit = (values, { setSubmitting }) => {
-    console.log(values);
-    setTimeout(() => setSubmitting(false), 1000);
+  const onSubmit = async (values, { setSubmitting }) => {
+    try {
+      const res = await dispatch(loginUser(values)).unwrap();
+      toast.success(res?.message || "Login Successfully");
+      navigate("/");
+    } catch (err) {
+      toast.error(err?.message || "Login Failed");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -38,10 +57,10 @@ const Login = () => {
       <div className="w-full max-w-md bg-white rounded-xl shadow-sm p-6 border border-gray-200">
         {/* Heading */}
         <div className="mb-6">
-          <h2 className="text-2xl  text-primary font-bold">Welcome back</h2>
-          <p className="text-[#64748B] text-sm mt-1">
-            Sign in to your Avante admin account
-          </p>
+          <h2 className="text-2xl  text-primary font-bold">
+            {t("login.title")}
+          </h2>
+          <p className="text-[#64748B] text-sm mt-1">{t("login.subtitle")}</p>
         </div>
 
         <Formik
@@ -53,16 +72,13 @@ const Login = () => {
             <Form className="space-y-5">
               {/*  Email */}
               <div>
-                <label className="text-sm text-[#29324C] font-medium mb-1 block">
-                  Email or Employee ID
-                </label>
-
                 <div className="relative">
-                  <FiMail className="absolute top-3 left-3 text-primary" />
+                  <FiMail className="absolute top-9 left-3  text-primary" />
                   <TextInput
                     name="email"
-                    placeholder="Enter your email or employee ID"
-                    className="pl-10 h-11 border rounded-lg"
+                    label={t("login.emailLabel")}
+                    placeholder={t("login.emailPlaceholder")}
+                    className="!pl-10"
                   />
                 </div>
               </div>
@@ -71,15 +87,13 @@ const Login = () => {
               <div>
                 <div className="flex justify-between text-sm mb-1">
                   <label className="text-[#29324C] font-medium ">
-                    Password
+                    {t("login.passwordLabel")}
                   </label>
                   <Link
-                    // type="button"
-                    // onClick={}
                     to="/forgot-password"
                     className="text-primary font-semibold hover:underline"
                   >
-                    Forgot password?
+                    {t("login.forgotPassword")}
                   </Link>
                 </div>
 
@@ -87,35 +101,26 @@ const Login = () => {
                   <FiLock className="absolute top-3 left-3 text-primary" />
                   <TextInput
                     name="password"
-                    type="password"
-                    placeholder="Enter your password"
-                    className="pl-10 pr-10 h-11 border rounded-lg"
+                    type={t("login.passwordLabel")}
+                    placeholder={t("login.passwordPlaceholder")}
+                    className="!pl-10"
                   />
                   <FiEye className="absolute top-3 right-3 text-gray-400 cursor-pointer" />
                 </div>
               </div>
 
-              {/* Remember */}
-              <div className="flex items-center">
-                <Checkbox
-                  name="remember"
-                  className="text-[#64748B]"
-                  label="Remember me for 30 days"
-                />
-              </div>
-
               <FormButton
-                text={`${isSubmitting ? "Signing In..." : "Sign In"}`}
+                text={`${isLoading ? t("login.signingIn") : t("login.button")}`}
                 className="cursor-pointer"
-                loading={isSubmitting}
+                loading={isLoading}
                 type="submit"
               />
 
               {/* Footer */}
               <div className="text-center text-sm text-gray-500 mt-4">
-                <p>Having trouble signing in? </p>
+                <p>{t("login.trouble")} </p>
                 <span className="text-[#1F3C88] font-medium cursor-pointer hover:underline">
-                  Contact your system administrator
+                  {t("login.contactAdmin")}
                 </span>
               </div>
             </Form>

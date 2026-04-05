@@ -26,27 +26,16 @@
 
 // /* ================= ROW ================= */
 // const TableRow = ({ row, normCols, isLast }) => {
-//   const [hovered, setHovered] = useState(false);
-
 //   return (
 //     <tr
-//       onMouseEnter={() => setHovered(true)}
-//       onMouseLeave={() => setHovered(false)}
-//       style={{
-//         borderBottom: isLast ? "none" : "1px solid #f1f5f9",
-//         background: hovered ? "#f8fafc" : "transparent",
-//       }}
+//       className={`hover:bg-slate-50 ${
+//         !isLast ? "border-b border-slate-100" : ""
+//       }`}
 //     >
 //       {normCols.map((col, i) => (
 //         <td
 //           key={i}
-//           style={{
-//             padding: "14px 20px",
-//             textAlign: col.align,
-//             fontSize: 13,
-//             color: "#374151",
-//             fontWeight: 500,
-//           }}
+//           className={`px-5 py-3 text-[13px] font-medium text-gray-700 text-${col.align} text-left whitespace-nowrap`}
 //         >
 //           {col.getCell(row)}
 //         </td>
@@ -80,39 +69,21 @@
 
 // /* ================= BUTTON ================= */
 // const PageBtn = ({ children, onClick, isActive, isDisabled, title }) => {
-//   const [hovered, setHovered] = useState(false);
-
 //   return (
 //     <button
 //       title={title}
 //       onClick={onClick}
 //       disabled={isDisabled}
-//       onMouseEnter={() => setHovered(true)}
-//       onMouseLeave={() => setHovered(false)}
-//       style={{
-//         minWidth: 32,
-//         height: 32,
-//         borderRadius: 6,
-//         border: isActive
-//           ? "none"
-//           : `1.5px solid ${hovered && !isDisabled ? "#2563eb" : "#e2e8f0"}`,
-//         background: isActive ? "#2563eb" : isDisabled ? "#f1f5f9" : "#fff",
-//         color: isActive
-//           ? "#fff"
-//           : isDisabled
-//             ? "#cbd5e1"
-//             : hovered
-//               ? "#2563eb"
-//               : "#374151",
-//         fontSize: 13,
-//         fontWeight: isActive ? 700 : 500,
-//         cursor: isDisabled ? "not-allowed" : "pointer",
-//         display: "flex",
-//         alignItems: "center",
-//         justifyContent: "center",
-//         transition: "all 0.15s",
-//         boxShadow: isActive ? "0 2px 8px rgba(37,99,235,0.25)" : "none",
-//       }}
+//       className={`
+//         min-w-[32px] h-8 rounded-md flex items-center justify-center text-sm transition-all
+//         ${
+//           isActive
+//             ? "bg-[#184994] text-white font-bold shadow-md cursor-pointer"
+//             : isDisabled
+//               ? "bg-slate-100 text-slate-300 cursor-not-allowed"
+//               : "border border-slate-200 text-gray-700 hover:border-[#184994] hover:text-[#184994] cursor-pointer"
+//         }
+//       `}
 //     >
 //       {children}
 //     </button>
@@ -163,59 +134,58 @@
 //   };
 
 //   return (
-//     <div>
-//       {/* TABLE */}
-//       <table style={{ width: "100%", borderCollapse: "collapse" }}>
-//         <thead>
-//           <tr style={{ background: "#f8fafc" }}>
-//             {normCols.map((col, i) => (
-//               <th key={i} style={{ padding: "12px" }}>
-//                 {col.label}
-//               </th>
-//             ))}
-//           </tr>
-//         </thead>
-
-//         <tbody>
-//           {paginatedData.length === 0 ? (
+//     <div className="w-full bg-white shadow-xs border rounded-xl border-gray-300 overflow-hidden">
+//       {/* TABLE CONTAINER WITH HORIZONTAL SCROLL */}
+//       <div className="overflow-x-auto custom-scrollbar w-full">
+//         <table className="w-full border-collapse min-w-[600px]">
+//           <thead className="bg-slate-50">
 //             <tr>
-//               <td colSpan={normCols.length} style={{ padding: 30 }}>
-//                 {emptyText}
-//               </td>
+//               {normCols.map((col, i) => (
+//                 <th
+//                   key={i}
+//                   className="px-4 py-3 text-sm font-semibold text-[#090F31] font-[700] text-left whitespace-nowrap"
+//                 >
+//                   {col.label}
+//                 </th>
+//               ))}
 //             </tr>
-//           ) : (
-//             paginatedData.map((row, i) => (
-//               <TableRow
-//                 key={i}
-//                 row={row}
-//                 normCols={normCols}
-//                 isLast={i === paginatedData.length - 1}
-//               />
-//             ))
-//           )}
-//         </tbody>
-//       </table>
+//           </thead>
 
-//       {/* 🔥 SAME PAGINATION UI */}
+//           <tbody>
+//             {paginatedData.length === 0 ? (
+//               <tr>
+//                 <td
+//                   colSpan={normCols.length}
+//                   className="text-center py-8 text-gray-500"
+//                 >
+//                   {emptyText}
+//                 </td>
+//               </tr>
+//             ) : (
+//               paginatedData.map((row, i) => (
+//                 <TableRow
+//                   key={i}
+//                   row={row}
+//                   normCols={normCols}
+//                   isLast={i === paginatedData.length - 1}
+//                 />
+//               ))
+//             )}
+//           </tbody>
+//         </table>
+//       </div>
+
+//       {/* PAGINATION */}
 //       {totalPages > 1 && (
-//         <div
-//           style={{
-//             display: "flex",
-//             justifyContent: "space-between",
-//             padding: "14px 24px",
-//             borderTop: "1px solid #f1f5f9",
-//             flexWrap: "wrap",
-//             gap: 10,
-//           }}
-//         >
+//         <div className="flex flex-wrap items-center justify-between px-6 py-4 border-t border-slate-100 gap-3">
 //           {/* summary */}
-//           <span style={{ fontSize: 13, color: "#64748b" }}>
+//           <span className="text-sm text-slate-500">
 //             Showing <strong>{startItem}</strong> to <strong>{endItem}</strong>{" "}
 //             of <strong>{totalItems}</strong>
 //           </span>
 
 //           {/* buttons */}
-//           <div style={{ display: "flex", gap: 6 }}>
+//           <div className="flex gap-2">
 //             <PageBtn
 //               title="Prev"
 //               onClick={() => setCurrentPage(currentPage - 1)}
@@ -226,7 +196,7 @@
 
 //             {getPageNumbers().map((page, i) =>
 //               page === "left-dots" || page === "right-dots" ? (
-//                 <span key={i} style={{ padding: "6px 8px" }}>
+//                 <span key={i} className="px-2 py-1 text-gray-500">
 //                   ...
 //                 </span>
 //               ) : (
@@ -286,14 +256,14 @@ const normalise = (col) => {
 const TableRow = ({ row, normCols, isLast }) => {
   return (
     <tr
-      className={`hover:bg-slate-50 ${
+      className={`hover:bg-slate-50 transition-colors ${
         !isLast ? "border-b border-slate-100" : ""
       }`}
     >
       {normCols.map((col, i) => (
         <td
           key={i}
-          className={`px-5 py-3 text-[13px] font-medium text-gray-700 text-${col.align} text-left`}
+          className={`px-5 py-3 text-[13px] font-medium text-gray-700 text-left whitespace-nowrap`}
         >
           {col.getCell(row)}
         </td>
@@ -325,7 +295,7 @@ const ChevronRight = () => (
   </svg>
 );
 
-/* ================= BUTTON ================= */
+/* ================= PAGE BUTTON ================= */
 const PageBtn = ({ children, onClick, isActive, isDisabled, title }) => {
   return (
     <button
@@ -348,26 +318,66 @@ const PageBtn = ({ children, onClick, isActive, isDisabled, title }) => {
   );
 };
 
-/* ================= MAIN ================= */
+/* ================= MAIN TABLE ================= */
+/**
+ * CustomeTable — supports both client-side and server-side pagination.
+ *
+ * CLIENT-SIDE (default):
+ *   <CustomeTable columns={cols} data={allRows} itemsPerPage={10} />
+ *
+ * SERVER-SIDE:
+ *   <CustomeTable
+ *     columns={cols}
+ *     data={currentPageRows}
+ *     serverSide={true}
+ *     currentPage={1}
+ *     totalPages={5}
+ *     totalItems={48}
+ *     itemsPerPage={10}
+ *     onPageChange={(page) => fetchData(page)}
+ *   />
+ */
 const CustomeTable = ({
   columns = [],
   data = [],
-  itemsPerPage = 5,
+  // --- server-side props ---
+  serverSide = false,
+  currentPage: extCurrentPage = 1,
+  totalPages: extTotalPages = 1,
+  totalItems: extTotalItems = 0,
+  onPageChange,
+  // --- shared props ---
+  itemsPerPage = 10,
   emptyText = "No data found.",
 }) => {
   const normCols = columns.map(normalise);
-  const [currentPage, setCurrentPage] = useState(1);
 
-  const totalItems = data.length;
-  const totalPages = Math.max(1, Math.ceil(totalItems / itemsPerPage));
+  // local state only used when serverSide=false
+  const [localPage, setLocalPage] = useState(1);
 
-  const paginatedData = data.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage,
-  );
+  // resolve which values to use
+  const currentPage = serverSide ? extCurrentPage : localPage;
+  const totalItems = serverSide ? extTotalItems : data.length;
+  const totalPages = serverSide
+    ? extTotalPages
+    : Math.max(1, Math.ceil(totalItems / itemsPerPage));
+
+  // data slicing only for client-side
+  const paginatedData = serverSide
+    ? data
+    : data.slice((localPage - 1) * itemsPerPage, localPage * itemsPerPage);
 
   const startItem = totalItems === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1;
   const endItem = Math.min(currentPage * itemsPerPage, totalItems);
+
+  const handlePageChange = (page) => {
+    if (page < 1 || page > totalPages) return;
+    if (serverSide) {
+      onPageChange?.(page);
+    } else {
+      setLocalPage(page);
+    }
+  };
 
   const getPageNumbers = () => {
     if (totalPages <= 7) {
@@ -393,45 +403,47 @@ const CustomeTable = ({
 
   return (
     <div className="w-full bg-white shadow-xs border rounded-xl border-gray-300 overflow-hidden">
-      {/* TABLE */}
-      <table className="w-full border-collapse">
-        <thead className="bg-slate-50">
-          <tr>
-            {normCols.map((col, i) => (
-              <th
-                key={i}
-                className="px-4 py-3 text-sm font-semibold text-[#090F31] font-[700] text-left"
-              >
-                {col.label}
-              </th>
-            ))}
-          </tr>
-        </thead>
-
-        <tbody>
-          {paginatedData.length === 0 ? (
+      {/* TABLE CONTAINER WITH HORIZONTAL SCROLL */}
+      <div className="overflow-x-auto custom-scrollbar w-full">
+        <table className="w-full border-collapse min-w-[600px]">
+          <thead className="bg-slate-50">
             <tr>
-              <td
-                colSpan={normCols.length}
-                className="text-center py-8 text-gray-500 "
-              >
-                {emptyText}
-              </td>
+              {normCols.map((col, i) => (
+                <th
+                  key={i}
+                  className="px-4 py-3 text-sm font-bold text-[#090F31] text-left whitespace-nowrap border-b border-slate-100"
+                >
+                  {col.label}
+                </th>
+              ))}
             </tr>
-          ) : (
-            paginatedData.map((row, i) => (
-              <TableRow
-                key={i}
-                row={row}
-                normCols={normCols}
-                isLast={i === paginatedData.length - 1}
-              />
-            ))
-          )}
-        </tbody>
-      </table>
+          </thead>
 
-      {/* PAGINATION */}
+          <tbody>
+            {paginatedData.length === 0 ? (
+              <tr>
+                <td
+                  colSpan={normCols.length}
+                  className="text-center py-12 text-gray-400 text-sm"
+                >
+                  {emptyText}
+                </td>
+              </tr>
+            ) : (
+              paginatedData.map((row, i) => (
+                <TableRow
+                  key={row.id ?? i}
+                  row={row}
+                  normCols={normCols}
+                  isLast={i === paginatedData.length - 1}
+                />
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      {/* PAGINATION — show when totalPages > 1 */}
       {totalPages > 1 && (
         <div className="flex flex-wrap items-center justify-between px-6 py-4 border-t border-slate-100 gap-3">
           {/* summary */}
@@ -440,11 +452,11 @@ const CustomeTable = ({
             of <strong>{totalItems}</strong>
           </span>
 
-          {/* buttons */}
-          <div className="flex gap-2">
+          {/* page buttons */}
+          <div className="flex gap-2 flex-wrap">
             <PageBtn
-              title="Prev"
-              onClick={() => setCurrentPage(currentPage - 1)}
+              title="Previous"
+              onClick={() => handlePageChange(currentPage - 1)}
               isDisabled={currentPage === 1}
             >
               <ChevronLeft />
@@ -452,13 +464,16 @@ const CustomeTable = ({
 
             {getPageNumbers().map((page, i) =>
               page === "left-dots" || page === "right-dots" ? (
-                <span key={i} className="px-2 py-1 text-gray-500">
+                <span
+                  key={`dots-${i}`}
+                  className="px-2 py-1 text-gray-400 self-center"
+                >
                   ...
                 </span>
               ) : (
                 <PageBtn
-                  key={i}
-                  onClick={() => setCurrentPage(page)}
+                  key={`page-${page}`}
+                  onClick={() => handlePageChange(page)}
                   isActive={page === currentPage}
                 >
                   {page}
@@ -468,7 +483,7 @@ const CustomeTable = ({
 
             <PageBtn
               title="Next"
-              onClick={() => setCurrentPage(currentPage + 1)}
+              onClick={() => handlePageChange(currentPage + 1)}
               isDisabled={currentPage === totalPages}
             >
               <ChevronRight />

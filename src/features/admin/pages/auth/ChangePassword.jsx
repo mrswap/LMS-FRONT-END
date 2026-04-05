@@ -7,8 +7,11 @@ import { Link } from "react-router-dom";
 import TextInput from "../../common/form/TextInput";
 import FormButton from "../../common/form/FormButton";
 import logo from "../../../../assets/admin/AvanteMedicalLogoBlue.png";
+import { useTranslation } from "react-i18next";
 
 const ChangePassword = () => {
+  const { t } = useTranslation();
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
@@ -46,10 +49,10 @@ const ChangePassword = () => {
       <div className="w-full max-w-md bg-white rounded-2xl shadow-sm p-6 border border-gray-200">
         {/* Heading */}
         <h2 className="text-xl font-semibold text-center text-[#1F3C88]">
-          Change Password
+          {t("changePassword.title")}
         </h2>
         <p className="text-sm text-gray-500 text-center mt-2 mb-6">
-          Update your password to keep your account secure.
+          {t("changePassword.subtitle")}
         </p>
 
         <Formik
@@ -62,7 +65,7 @@ const ChangePassword = () => {
               {/* New Password */}
               <div>
                 <label className="text-sm font-medium text-gray-700">
-                  New Password
+                  {t("changePassword.newPassword")}
                 </label>
 
                 <div className="relative mt-1">
@@ -73,7 +76,7 @@ const ChangePassword = () => {
                   <TextInput
                     name="password"
                     type={showPassword ? "text" : "password"}
-                    placeholder="Enter new password"
+                    placeholder={t("changePassword.passwordPlaceholder")}
                     className="w-full pl-10 pr-10 py-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-[#1F3C88]/20 focus:border-[#1F3C88]"
                   />
 
@@ -89,7 +92,7 @@ const ChangePassword = () => {
               {/* Confirm Password */}
               <div>
                 <label className="text-sm font-medium text-gray-700">
-                  Confirm Password
+                  {t("changePassword.confirmPassword")}
                 </label>
 
                 <div className="relative mt-1">
@@ -100,7 +103,7 @@ const ChangePassword = () => {
                   <TextInput
                     name="confirmPassword"
                     type={showConfirm ? "text" : "password"}
-                    placeholder="Re-enter new password"
+                    placeholder={t("changePassword.placeholderConfirm")}
                     className="w-full pl-10 pr-10 py-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-[#1F3C88]/20 focus:border-[#1F3C88]"
                   />
 
@@ -115,15 +118,19 @@ const ChangePassword = () => {
 
               {/* Password Rules */}
               <ul className="text-xs text-gray-500 space-y-1 pl-4 list-disc">
-                <li>Minimum 8 characters</li>
-                <li>At least 1 uppercase letter</li>
-                <li>At least 1 number</li>
-                <li>At least 1 special character</li>
+                <li>{t("changePassword.rules.min")}</li>
+                <li>{t("changePassword.rules.uppercase")}</li>
+                <li>{t("changePassword.rules.number")}</li>
+                <li>{t("changePassword.rules.special")}</li>
               </ul>
 
               {/* Button */}
               <FormButton
-                text={isSubmitting ? "Updating..." : "Update Password"}
+                text={
+                  isSubmitting
+                    ? t("changePassword.updating")
+                    : t("changePassword.update")
+                }
                 loading={isSubmitting}
                 type="submit"
                 className="bg-[#22A699] hover:bg-[#1d8f85] text-white py-2.5 rounded-lg w-full"

@@ -5,7 +5,7 @@ const WorkInProgress = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
+    <div className=" flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8 max-w-2xl w-full">
         {/* Construction Image */}
         <div className="flex justify-center mb-8">
