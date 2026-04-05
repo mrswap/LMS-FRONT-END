@@ -364,6 +364,13 @@ import {
   getUserById,
   updateUserById,
 } from "../../../../../redux/slice/userSlice";
+import { showConfirm } from "../../../../../redux/slice/confirmSlice";
+import {
+  FaUserCircle,
+  FaUpload,
+  FaExchangeAlt,
+  FaTrashAlt,
+} from "react-icons/fa";
 
 const UserDetails = () => {
   const { t } = useTranslation();
@@ -464,7 +471,12 @@ const UserDetails = () => {
   };
 
   const handleDelete = async () => {
-    if (!window.confirm("Delete this user?")) return;
+    // if (!window.confirm("Delete this user?")) return;
+    const ok = await dispatch(
+      showConfirm({ message: "Are you sure you want to delete this user?" }),
+    );
+
+    if (!ok) return;
 
     await dispatch(deleteSingleUser(id));
     toast.success("User deleted ");
@@ -552,7 +564,7 @@ const UserDetails = () => {
                 </div>
 
                 {/* IMAGE */}
-                <div>
+                {/* <div>
                   <label>Profile Image</label>
 
                   {!preview ? (
@@ -593,6 +605,72 @@ const UserDetails = () => {
                       </button>
                     </div>
                   )}
+                </div> */}
+
+                <div className="mt-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Profile Image
+                  </label>
+
+                  {!preview ? (
+                    <div className="flex items-center gap-4">
+                      <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center border-2 border-dashed border-gray-300">
+                        <FaUserCircle className="w-10 h-10 text-gray-400" />
+                      </div>
+
+                      <label className="bg-accent  text-white px-4 py-2 rounded-md text-sm cursor-pointer transition flex items-center gap-2">
+                        <FaUpload className="w-3.5 h-3.5" />
+                        Upload Image
+                        <input
+                          type="file"
+                          accept="image/*"
+                          hidden
+                          onChange={(e) => {
+                            const file = e.target.files[0];
+                            setFieldValue("profile_image", file);
+                            if (file) {
+                              setPreview(URL.createObjectURL(file));
+                            }
+                          }}
+                        />
+                      </label>
+                    </div>
+                  ) : (
+                    <div>
+                      <img
+                        src={preview}
+                        className="w-24 h-24 block object-cover rounded-full border-2 border-blue-400"
+                      />
+
+                      <div className="flex justify-center gap-3 mt-2 w-24">
+                        <label>
+                          <FaExchangeAlt className="w-4 h-4 text-blue-500 cursor-pointer hover:scale-110 transition" />
+                          <input
+                            type="file"
+                            accept="image/*"
+                            hidden
+                            onChange={(e) => {
+                              const file = e.target.files[0];
+                              setFieldValue("profile_image", file);
+                              if (file) {
+                                setPreview(URL.createObjectURL(file));
+                              }
+                            }}
+                          />
+                        </label>
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setPreview(null);
+                            setFieldValue("profile_image", null);
+                          }}
+                        >
+                          <FaTrashAlt className="w-4 h-4 text-red-500 cursor-pointer hover:scale-110 transition" />
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* PASSWORD */}
@@ -614,7 +692,7 @@ const UserDetails = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="bg-blue-600 text-white px-4 py-2 rounded"
+                    className="bg-accent text-white px-4 py-2 rounded cursor-pointer"
                   >
                     {isSubmitting ? "Updating..." : "Update User"}
                   </button>

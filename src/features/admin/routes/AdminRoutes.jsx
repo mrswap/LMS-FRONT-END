@@ -22,6 +22,7 @@ import Programs from "../pages/training-program/program/Programs";
 import CreateProgram from "../pages/training-program/program/components/CreateProgram";
 import ProgramDetails from "../pages/training-program/program/components/ProgramDetails";
 import ProtectedRoute from "./ProtectedRoute";
+import Profile from "../pages/auth/Profile";
 
 const AdminRoutes = (
   <Route element={<ProtectedRoute />}>
@@ -31,6 +32,9 @@ const AdminRoutes = (
 
       {/* Routes */}
       <Route path="dashboard" element={<Dashboard />} />
+
+      {/* profile */}
+      <Route path="profile" element={<Profile />} />
 
       {/* program */}
       <Route path="programs" element={<Programs />} />

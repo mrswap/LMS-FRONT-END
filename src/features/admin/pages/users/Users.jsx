@@ -17,6 +17,8 @@ import { useTranslation } from "react-i18next";
 import { FiSearch } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../../../../redux/slice/userSlice";
+import Loader from "../../common/Loader";
+import Error from "../../common/Error";
 
 const ITEMS_PER_PAGE = 5;
 
@@ -26,88 +28,49 @@ const Users = () => {
     (state) => state.user,
   );
 
-  const programOptions = [
-    { value: "All", label: t("levels.status.all") },
-    { value: "Pacemaker", label: "Pacemaker" },
-  ];
-
   const statusOptions = [
-    { value: "All", label: t("levels.status.all") },
-    { value: "Active", label: t("levels.status.active") },
-    { value: "Draft", label: t("levels.status.draft") },
-    { value: "Archived", label: t("levels.status.archived") },
+    { value: "all", label: "All Status" },
+    { value: "1", label: "Active" },
+    { value: "0", label: "Inactive" },
   ];
 
-  const [program, setProgram] = useState(programOptions[0]);
+  const [page, setPage] = useState(1);
   const [status, setStatus] = useState(statusOptions[0]);
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // ================= API CALL =================
-  const fetchUsers = () => {
-    dispatch(getAllUsers());
+  const fetchUsers = (overridePage) => {
+    const params = {
+      search: search || "",
+      // status: status?.value === "all" ? "" : status?.value,
+      page: overridePage ?? page,
+      limit: ITEMS_PER_PAGE,
+    };
+    dispatch(getAllUsers(params));
   };
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  // ================= SEARCH DEBOUNCE =================
   useEffect(() => {
     const delay = setTimeout(() => {
-      fetchUsers();
+      setPage(1);
+      fetchUsers(1);
     }, 500);
-
     return () => clearTimeout(delay);
-  }, []);
+  }, [search, status]);
 
-  const resetFilters = () => {
-    // setProgram(programOptions[0]);
-    // setStatus(statusOptions[0]);
+  useEffect(() => {
+    fetchUsers(page);
+  }, [page]);
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
   };
 
-  // const levels = [
-  //   {
-  //     id: "AV-9042",
-  //     name: "Sarah Anderson",
-  //     email: "s.anderson@medmail.com",
-  //     phone: "+1 555 012",
-  //     region: "North America",
-  //     programs: 4,
-  //     progress: 82,
-  //     status: "Active",
-  //   },
-  //   {
-  //     id: "AV-8731",
-  //     name: "James Wilson",
-  //     email: "j.wilson@healthcare.org",
-  //     phone: "+44 20 7946",
-  //     region: "Europe",
-  //     programs: 2,
-  //     progress: 45,
-  //     status: "active",
-  //   },
-  //   {
-  //     id: "AV-7421",
-  //     name: "Priya Sharma",
-  //     email: "p.sharma@clinicnet.in",
-  //     phone: "+91 98001234",
-  //     region: "Asia",
-  //     programs: 3,
-  //     progress: 67,
-  //     status: "Active",
-  //   },
-  // ];
-
-  // const filtered = levels.filter((lvl) => {
-  //   const matchProgram =
-  //     program.value === "All" || lvl.program === program.value;
-
-  //   const matchStatus = status.value === "All" || lvl.status === status.value;
-
-  //   return matchProgram && matchStatus;
-  // });
+  const resetFilters = () => {
+    setStatus(statusOptions[0]);
+    setSearch("");
+    setPage(1);
+  };
 
   const customSelectStyles = {
     control: (base) => ({
@@ -134,12 +97,8 @@ const Users = () => {
     {
       header: t("userManagement.list.columns.name"),
       render: (row) => (
-        console.log(row),
-        (
-          <p className="font-semibold text-gray-800 cursor-pointer">
-            {row.name}
-          </p>
-        )
+        // console.log(row),
+        <p className="font-semibold text-gray-800 cursor-pointer">{row.name}</p>
       ),
     },
     {
@@ -163,66 +122,25 @@ const Users = () => {
       header: t("userManagement.list.columns.programs"),
       render: (row) => (
         <span className="px-2 py-1 bg-gray-100 rounded text-xs font-semibold">
-          {/* {row.programs} */}
+          4
         </span>
       ),
     },
-    {
-      header: t("userManagement.list.columns.progress"),
-      render: (row) => (
-        <div className="flex items-center gap-2">
-          {/* <div className="w-20 h-2 bg-gray-200 rounded-full">
-            <div
-              className="h-full bg-blue-500 rounded-full"
-              style={{ width: `${row.progress}%` }}
-            />
-          </div> */}
-          {/* <span className="text-xs font-semibold">{row.progress}%</span> */}
-        </div>
-      ),
-    },
     // {
-    //   header: t("userManagement.list.columns.status"),
-    //   render: (row) => {
-    //     const styles = {
-    //       Active: "bg-green-100 text-green-800",
-    //       "On Leave": "bg-yellow-100 text-yellow-800",
-    //       Inactive: "bg-red-100 text-red-800",
-    //     };
-
-    //     return (
-    //       <span
-    //         className={`px-3 py-1 rounded-full text-xs font-semibold ${styles[row.status]}`}
-    //       >
-    //         {t(
-    //           `userManagement.status.${row.status.replace(" ", "").toLowerCase()}`,
-    //         )}
-    //       </span>
-    //     );
-    //   },
-    // },
-    // {
-    //   header: t("userManagement.list.columns.actions"),
-    //   render: () => (
-    //     <button
-    //       onClick={() => navigate("user-details")}
-    //       className="text-gray-800 text-lg cursor-pointer"
-    //     >
-    //       <FaEye />
-    //     </button>
-    //   ),
+    //   header: t("userManagement.list.columns.progress"),
+    //   render: (row) => <div className="flex items-center gap-2"></div>,
     // },
     {
       header: t("userManagement.list.columns.status"),
       render: (row) => (
         <span
           className={`px-2 py-1 rounded text-xs font-medium ${
-            row.status
+            row.is_active
               ? "bg-green-100 text-green-700"
               : "bg-red-100 text-red-700"
           }`}
         >
-          {row.status ? "Active" : "Inactive"}
+          {row.is_active ? "Active" : "Inactive"}
         </span>
       ),
     },
@@ -238,6 +156,11 @@ const Users = () => {
       ),
     },
   ];
+
+  // console.log("users", users);
+
+  if (isLoading && !users?.data?.length) return <Loader />;
+  if (isError) return <Error message={message} />;
 
   return (
     <PageLayout>
@@ -257,24 +180,20 @@ const Users = () => {
       </PageHeader>
 
       <PageBody>
-        <div className="bg-white border border-gray-300 rounded-xl p-3 flex items-center gap-3">
-          <div className="flex items-center bg-[#F8FAFC] border border-gray-300 hover:border-blue-500 rounded-xl px-2 sm:px-3 py-1.5 sm:py-2 w-full md:w-[280px] lg:w-[380px] xl:w-[480px]">
-            <FiSearch className="text-gray-400 text-sm sm:text-base" />
+        <div className="bg-white border border-gray-300 rounded-xl p-3 flex flex-wrap items-center gap-3">
+          {/* <span className="text-gray-500 text-sm font-semibold">
+            {t("topic.list.filters")}
+          </span> */}
+          <div
+            className="flex items-center bg-[#F8FAFC] border border-gray-300 hover:border-blue-500
+           rounded-xl px-3 py-2 w-full md:w-[280px] lg:w-[330px] transition-colors"
+          >
+            <FiSearch className="text-gray-400 text-sm flex-shrink-0" />
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder={t("userManagement.list.searchPlaceholder")}
-              className="bg-transparent outline-none px-1.5 sm:px-2 text-xs sm:text-sm w-full"
-            />
-          </div>
-
-          <div className="w-[220px]">
-            <Select
-              value={program}
-              onChange={setProgram}
-              options={programOptions}
-              styles={customSelectStyles}
-              isSearchable={false}
+              placeholder="Search by name..."
+              className="bg-transparent outline-none px-2 text-sm w-full"
             />
           </div>
 
@@ -288,12 +207,15 @@ const Users = () => {
             />
           </div>
 
-          <div className="flex items-center gap-1 ml-auto cursor-pointer group">
-            <MdOutlineFilterAltOff className="text-gray-500" size={18} />
-            <button
-              onClick={resetFilters}
-              className="text-gray-600 text-sm font-semibold whitespace-nowrap"
-            >
+          <div
+            className="flex items-center gap-1 ml-auto cursor-pointer group"
+            onClick={resetFilters}
+          >
+            <MdOutlineFilterAltOff
+              className="text-gray-500 group-hover:text-red-500 transition-colors"
+              size={18}
+            />
+            <button className="text-gray-600 group-hover:text-red-500 text-sm font-semibold transition-colors cursor-pointer">
               {t("levels.list.clearAll")}
             </button>
           </div>
@@ -302,13 +224,18 @@ const Users = () => {
         <div className="mt-4">
           <CustomeTable
             columns={columns}
-            data={users || []}
+            data={users?.data || []}
+            serverSide={true}
+            currentPage={users?.current_page || 1}
+            totalPages={users?.last_page || 1}
+            totalItems={users?.total || 0}
             itemsPerPage={ITEMS_PER_PAGE}
+            onPageChange={handlePageChange}
           />
         </div>
 
         {/* CARDS */}
-        <div className="flex gap-4 w-full mt-4">
+        {/* <div className="flex gap-4 w-full mt-4">
           <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-sx transition">
             <h3 className="text-[#6B7280] text-[14px] text-sm font-medium">
               {t("userManagement.list.stats.totalActive.title")}
@@ -338,7 +265,7 @@ const Users = () => {
               {t("userManagement.list.stats.pending.subtext")}
             </p>
           </div>
-        </div>
+        </div> */}
       </PageBody>
     </PageLayout>
   );

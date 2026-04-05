@@ -3,9 +3,9 @@ import Select from "react-select";
 import CustomeTable from "../../../common/table/CustomeTable";
 import { MdOutlineFilterAltOff } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
-import { GiBookCover } from "react-icons/gi";
-import { IoIosCheckmarkCircleOutline } from "react-icons/io";
-import { HiOutlineSquare3Stack3D } from "react-icons/hi2";
+// import { GiBookCover } from "react-icons/gi";
+// import { IoIosCheckmarkCircleOutline } from "react-icons/io";
+// import { HiOutlineSquare3Stack3D } from "react-icons/hi2";
 import { FaEye } from "react-icons/fa";
 import {
   PageLayout,
@@ -19,6 +19,10 @@ import {
 import { useTranslation } from "react-i18next";
 import { getAllLevels } from "../../../../../redux/slice/levelSlice";
 import { useDispatch, useSelector } from "react-redux";
+import Loader from "../../../common/Loader";
+import Error from "../../../common/Error";
+import { FiSearch } from "react-icons/fi";
+import TruncateText from "../../../common/TruncateText";
 
 const ITEMS_PER_PAGE = 5;
 
@@ -30,46 +34,53 @@ const Levels = () => {
     (state) => state.level,
   );
 
-  const programOptions = [
-    { value: "All", label: t("levels.status.all") },
-    { value: "Pacemaker", label: "Pacemaker" },
-  ];
-
   const statusOptions = [
-    { value: "All", label: t("levels.status.all") },
-    { value: "Active", label: t("levels.status.active") },
-    { value: "Draft", label: t("levels.status.draft") },
-    { value: "Archived", label: t("levels.status.archived") },
+    { value: "all", label: "All Status" },
+    { value: "1", label: "Active" },
+    { value: "0", label: "Inactive" },
   ];
 
-  const [program, setProgram] = useState(programOptions[0]);
   const [status, setStatus] = useState(statusOptions[0]);
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
   const navigate = useNavigate();
 
-  // ================= API CALL =================
-  const fetchlevels = () => {
-    dispatch(getAllLevels());
+  const fetchLevels = (overridePage) => {
+    const params = {
+      search: search || "",
+      status: status?.value !== "All" ? status?.value : "",
+      page: overridePage ?? page,
+      limit: ITEMS_PER_PAGE,
+    };
+    dispatch(getAllLevels(params));
   };
 
-  useEffect(() => {
-    fetchlevels();
-  }, []);
+  // useEffect(() => {
+  //   fetchLevels(1);
+  // }, []);
 
-  // ================= SEARCH DEBOUNCE =================
   useEffect(() => {
     const delay = setTimeout(() => {
-      fetchlevels();
+      setPage(1);
+      fetchLevels(1);
     }, 500);
-
     return () => clearTimeout(delay);
-  }, []);
+  }, [search, status]);
 
-  const resetFilters = () => {
-    // setProgram(programOptions[0]);
-    // setStatus(statusOptions[0]);
+  useEffect(() => {
+    fetchLevels(page);
+  }, [page]);
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
   };
 
-  // SELECT STYLE (same as your old)
+  const resetFilters = () => {
+    setStatus(statusOptions[0]);
+    setSearch("");
+    setPage(1);
+  };
+
   const customSelectStyles = {
     control: (base) => ({
       ...base,
@@ -87,33 +98,33 @@ const Levels = () => {
     {
       header: t("levels.list.columns.levelName"),
       render: (row) => (
-        // console.log(row),
         <div>
-          <p className="font-semibold text-gray-800">{row.title}</p>
+          <p className="font-semibold text-gray-800">
+            <TruncateText text={row.title} maxLength={25} />
+          </p>
         </div>
       ),
     },
     {
       header: t("levels.list.columns.parentProgram"),
       render: (row) => (
-        // console.log(row),
         <div>
-          <p className="font-semibold text-gray-800">{row.program.title}</p>
+          <p className="font-semibold text-gray-800">
+            <TruncateText text={row.program.title} maxLength={25} />
+          </p>
         </div>
       ),
     },
     {
       header: t("levels.list.columns.totalChapters"),
       render: (row) => (
-        <span className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-semibold"></span>
+        <span className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-semibold">
+          5
+        </span>
       ),
     },
     {
-      header: t("levels.list.columns.duration"),
-      // accessor: "duration",
-    },
-    {
-      header: t("program.list.columns.status"),
+      header: t("levels.list.columns.status"),
       render: (row) => (
         <span
           className={`px-2 py-1 rounded text-xs font-medium ${
@@ -139,6 +150,9 @@ const Levels = () => {
     },
   ];
 
+  if (isLoading && !levels?.data?.length) return <Loader />;
+  if (isError) return <Error message={message} />;
+
   return (
     <PageLayout>
       <PageHeader>
@@ -157,18 +171,20 @@ const Levels = () => {
       </PageHeader>
 
       <PageBody>
-        <div className="bg-white border border-gray-300 rounded-xl p-3 flex items-center gap-3">
-          <span className="text-gray-500 text-sm font-semibold">
-            {t("levels.list.filters")}
-          </span>
-
-          <div className="w-[220px]">
-            <Select
-              value={program}
-              onChange={setProgram}
-              options={programOptions}
-              styles={customSelectStyles}
-              isSearchable={false}
+        <div className="bg-white border border-gray-300 rounded-xl p-3 flex flex-wrap items-center gap-3">
+          {/* <span className="text-gray-500 text-sm font-semibold">
+            {t("topic.list.filters")}
+          </span> */}
+          <div
+            className="flex items-center bg-[#F8FAFC] border border-gray-300 hover:border-blue-500
+           rounded-xl px-3 py-2 w-full md:w-[280px] lg:w-[330px] transition-colors"
+          >
+            <FiSearch className="text-gray-400 text-sm flex-shrink-0" />
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search levels..."
+              className="bg-transparent outline-none px-2 text-sm w-full"
             />
           </div>
 
@@ -182,26 +198,36 @@ const Levels = () => {
             />
           </div>
 
-          <div className="flex items-center gap-1 ml-auto cursor-pointer group">
-            <MdOutlineFilterAltOff className="text-gray-500" size={18} />
-            <button
-              onClick={resetFilters}
-              className="text-gray-600 text-sm font-semibold"
-            >
+          <div
+            className="flex items-center gap-1 ml-auto cursor-pointer group"
+            onClick={resetFilters}
+          >
+            <MdOutlineFilterAltOff
+              className="text-gray-500 group-hover:text-red-500 transition-colors"
+              size={18}
+            />
+            <button className="text-gray-600 group-hover:text-red-500 text-sm font-semibold transition-colors cursor-pointer">
               {t("levels.list.clearAll")}
             </button>
           </div>
         </div>
 
         <div className="mt-4">
-          <CustomeTable
-            columns={columns}
-            data={levels.data || []}
-            itemsPerPage={ITEMS_PER_PAGE}
-          />
+          <div className="mt-4">
+            <CustomeTable
+              columns={columns}
+              data={levels?.data || []}
+              serverSide={true}
+              currentPage={levels?.current_page || 1}
+              totalPages={levels?.last_page || 1}
+              totalItems={levels?.total || 0}
+              itemsPerPage={ITEMS_PER_PAGE}
+              onPageChange={handlePageChange}
+            />
+          </div>
         </div>
 
-        <div className="flex gap-4 w-full mt-4">
+        {/* <div className="flex gap-4 w-full mt-4">
           <div className="flex-1 border border-gray-200 rounded-xl p-4 bg-white shadow-sm">
             <div className="flex items-center gap-4">
               <div className="bg-gray-100 text-gray-600 p-3 rounded-lg">
@@ -243,7 +269,7 @@ const Levels = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </PageBody>
     </PageLayout>
   );

@@ -16,6 +16,7 @@ import {
   updateLevelById,
 } from "../../../../../../redux/slice/levelSlice";
 import { getAllPrograms } from "../../../../../../redux/slice/programSlice";
+import { showConfirm } from "../../../../../../redux/slice/confirmSlice";
 
 const LevelDetails = () => {
   const [thumbnail, setThumbnail] = useState(null);
@@ -147,20 +148,36 @@ const LevelDetails = () => {
     }
   };
 
+  // const handleDelete = async () => {
+  //   const confirmDelete = window.confirm(
+  //     "Are you sure you want to delete this level?",
+  //   );
+  //   if (!confirmDelete) return;
+
+  //   try {
+  //     await dispatch(deleteSingleLevel(id)).unwrap();
+  //     toast.success("level deleted successfully ");
+  //     setTimeout(() => {
+  //       navigate("/levels");
+  //     }, 1000);
+  //   } catch (error) {
+  //     toast.error(error?.message || "Delete failed ");
+  //   }
+  // };
+
   const handleDelete = async () => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this level?",
+    const ok = await dispatch(
+      showConfirm({ message: "Are you sure you want to delete this level?" }),
     );
-    if (!confirmDelete) return;
+
+    if (!ok) return;
 
     try {
       await dispatch(deleteSingleLevel(id)).unwrap();
-      toast.success("level deleted successfully ");
-      setTimeout(() => {
-        navigate("/levels");
-      }, 1000);
+      toast.success("level deleted successfully");
+      navigate("/levels");
     } catch (error) {
-      toast.error(error?.message || "Delete failed ");
+      toast.error(error?.message || "Delete failed");
     }
   };
 
@@ -348,7 +365,8 @@ const LevelDetails = () => {
                         onClick={handleDelete}
                         className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 cursor-pointer"
                       >
-                        {t("common.delete")}
+                        {/* {t("common.delete")} */}
+                        Delete Level
                       </button>
 
                       <button

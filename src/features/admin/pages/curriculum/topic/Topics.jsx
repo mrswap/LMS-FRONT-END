@@ -3,9 +3,6 @@ import Select from "react-select";
 import CustomeTable from "../../../common/table/CustomeTable";
 import { MdOutlineFilterAltOff } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
-// import { GiBookCover } from "react-icons/gi";
-// import { IoIosCheckmarkCircleOutline } from "react-icons/io";
-// import { HiOutlineSquare3Stack3D } from "react-icons/hi2";
 import { FaEye } from "react-icons/fa";
 import {
   PageLayout,
@@ -19,53 +16,111 @@ import {
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllTopics } from "../../../../../redux/slice/topicSlice";
+import { FiSearch } from "react-icons/fi";
+import Loader from "../../../common/Loader";
+import Error from "../../../common/Error";
+import TruncateText from "../../../common/TruncateText";
+import { getAllChapters } from "../../../../../redux/slice/chapterSlice";
+import { getAllModules } from "../../../../../redux/slice/moduleSlice";
+import { getAllLevels } from "../../../../../redux/slice/levelSlice";
 
 const ITEMS_PER_PAGE = 5;
 
 const Topics = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { topics, isLoading, isError, message } = useSelector(
     (state) => state.topic,
   );
 
-  const programOptions = [{ value: "All", label: t("topic.status.all") }];
+  const { chapters } = useSelector((state) => state.chapter);
+  const { modules } = useSelector((state) => state.module);
+  const { levels } = useSelector((state) => state.level);
 
-  const statusOptions = [
-    { value: "All", label: t("topic.status.all") },
-    { value: "Active", label: t("topic.status.active") },
-    { value: "Draft", label: t("topic.status.draft") },
-    { value: "Archived", label: t("topic.status.archived") },
+  const chapterOption = [
+    { value: "All", label: "All Chapter" },
+    ...(chapters?.data?.map((item) => ({
+      value: item.id,
+      label: item.title,
+    })) || []),
   ];
 
-  const [program, setProgram] = useState(programOptions[0]);
-  const [status, setStatus] = useState(statusOptions[0]);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const moduleOption = [
+    { value: "All", label: "All Module" },
+    ...(modules?.data?.map((item) => ({
+      value: item.id,
+      label: item.title,
+    })) || []),
+  ];
 
-  // ================= API CALL =================
-  const fetchTopics = () => {
-    dispatch(getAllTopics());
+  const levelOption = [
+    { value: "All", label: "All Level" },
+    ...(levels?.data?.map((item) => ({
+      value: item.id,
+      label: item.title,
+    })) || []),
+  ];
+
+  const statusOptions = [
+    { value: "all", label: "All Status" },
+    { value: "1", label: "Active" },
+    { value: "0", label: "Inactive" },
+  ];
+
+  const [chapter, setChapter] = useState(chapterOption[0]);
+  const [module, setModule] = useState(moduleOption[0]);
+  const [level, setLevel] = useState(levelOption[0]);
+  const [status, setStatus] = useState(statusOptions[0]);
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+
+  const fetchTopics = (overridePage) => {
+    const params = {
+      search: search || "",
+      chapter_id: chapter?.value !== "All" ? chapter?.value : "",
+      level_id: level?.value !== "All" ? level?.value : "",
+      module_id: module?.value !== "All" ? module?.value : "",
+      status: status?.value !== "All" ? status?.value : "",
+      page: overridePage ?? page,
+      limit: ITEMS_PER_PAGE,
+    };
+    dispatch(getAllTopics(params));
+    dispatch(getAllChapters());
+    dispatch(getAllModules());
+    dispatch(getAllLevels());
   };
 
-  useEffect(() => {
-    fetchTopics();
-  }, []);
+  // useEffect(() => {
+  //   fetchTopics(1);
+  // }, []);
 
-  // ================= SEARCH DEBOUNCE =================
   useEffect(() => {
     const delay = setTimeout(() => {
-      fetchTopics();
+      setPage(1);
+      fetchTopics(1);
     }, 500);
-
     return () => clearTimeout(delay);
-  }, []);
+  }, [search, chapter, status, module, level]);
 
-  const resetFilters = () => {
-    // setProgram(programOptions[0]);
-    // setStatus(statusOptions[0]);
+  useEffect(() => {
+    fetchTopics(page);
+  }, [page]);
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
   };
 
-  // SELECT STYLE (same as your old)
+  const resetFilters = () => {
+    setChapter(chapterOption[0]);
+    setModule(moduleOption[0]);
+    setLevel(levelOption[0]);
+    setStatus(statusOptions[0]);
+    setSearch("");
+    setPage(1);
+  };
+
   const customSelectStyles = {
     control: (base) => ({
       ...base,
@@ -83,19 +138,20 @@ const Topics = () => {
     {
       header: t("topic.list.columns.topicName"),
       render: (row) => (
-        console.log(row),
-        (
-          <div>
-            <p className="font-semibold text-gray-800">{row.title}</p>
-          </div>
-        )
+        <div>
+          <p className="font-semibold text-gray-800">
+            <TruncateText text={row.title} maxLength={25} />
+          </p>
+        </div>
       ),
     },
     {
       header: t("topic.list.columns.parentChapter"),
       render: (row) => (
         <div>
-          <p className="font-semibold text-gray-800">{row.chapter.title}</p>
+          <p className="font-semibold text-gray-800">
+            <TruncateText text={row.chapter?.title} maxLength={25} />
+          </p>
         </div>
       ),
     },
@@ -103,7 +159,9 @@ const Topics = () => {
       header: t("topic.list.columns.parentModule"),
       render: (row) => (
         <div>
-          <p className="font-semibold text-gray-800">{row.module.title}</p>
+          <p className="font-semibold text-gray-800">
+            <TruncateText text={row.module?.title} maxLength={25} />
+          </p>
         </div>
       ),
     },
@@ -111,21 +169,29 @@ const Topics = () => {
       header: t("topic.list.columns.parentLevel"),
       render: (row) => (
         <div>
-          <p className="font-semibold text-gray-800">{row.level.title}</p>
+          <p className="font-semibold text-gray-800">
+            <TruncateText text={row.level?.title} maxLength={25} />
+          </p>
         </div>
       ),
     },
     {
-      header: t("topic.list.columns.totalChapters"),
+      header: "Parent Program",
       render: (row) => (
-        <span className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-semibold">
-          {/* {row.chapters} Chapters */}
-        </span>
+        <div>
+          <p className="font-semibold text-gray-800">
+            <TruncateText text={row.program?.title} maxLength={25} />
+          </p>
+        </div>
       ),
     },
     {
       header: t("topic.list.columns.duration"),
-      // accessor: "duration",
+      render: (row) => (
+        <span className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-semibold">
+          {row.estimated_duration ?? 0} mins
+        </span>
+      ),
     },
     {
       header: t("topic.list.columns.status"),
@@ -146,13 +212,16 @@ const Topics = () => {
       render: (row) => (
         <button
           onClick={() => navigate(`topic-details/${row.id}`)}
-          className="text-gray-800 text-lg cursor-pointer"
+          className="text-gray-800 text-lg cursor-pointer hover:text-[#184994] transition-colors"
         >
           <FaEye />
         </button>
       ),
     },
   ];
+
+  if (isLoading && !topics?.data?.length) return <Loader />;
+  if (isError) return <Error message={message} />;
 
   return (
     <PageLayout>
@@ -172,16 +241,45 @@ const Topics = () => {
       </PageHeader>
 
       <PageBody>
-        <div className="bg-white border border-gray-300 rounded-xl p-3 flex items-center gap-3">
-          <span className="text-gray-500 text-sm font-semibold">
-            {t("topic.list.filters")}
-          </span>
+        <div className="bg-white border border-gray-300 rounded-xl p-3 flex flex-wrap items-center gap-3">
+          <div
+            className="flex items-center bg-[#F8FAFC] border border-gray-300 hover:border-blue-500
+           rounded-xl px-3 py-2 w-full md:w-[280px] lg:w-[330px] transition-colors"
+          >
+            <FiSearch className="text-gray-400 text-sm flex-shrink-0" />
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search topics..."
+              className="bg-transparent outline-none px-2 text-sm w-full"
+            />
+          </div>
 
           <div className="w-[220px]">
             <Select
-              value={program}
-              onChange={setProgram}
-              options={programOptions}
+              value={chapter}
+              onChange={setChapter}
+              options={chapterOption}
+              styles={customSelectStyles}
+              isSearchable={false}
+            />
+          </div>
+
+          <div className="w-[220px]">
+            <Select
+              value={module}
+              onChange={setModule}
+              options={moduleOption}
+              styles={customSelectStyles}
+              isSearchable={false}
+            />
+          </div>
+
+          <div className="w-[220px]">
+            <Select
+              value={level}
+              onChange={setLevel}
+              options={levelOption}
               styles={customSelectStyles}
               isSearchable={false}
             />
@@ -197,12 +295,15 @@ const Topics = () => {
             />
           </div>
 
-          <div className="flex items-center gap-1 ml-auto cursor-pointer group">
-            <MdOutlineFilterAltOff className="text-gray-500" size={18} />
-            <button
-              onClick={resetFilters}
-              className="text-gray-600 text-sm font-semibold"
-            >
+          <div
+            className="flex items-center gap-1 ml-auto cursor-pointer group"
+            onClick={resetFilters}
+          >
+            <MdOutlineFilterAltOff
+              className="text-gray-500 group-hover:text-red-500 transition-colors"
+              size={18}
+            />
+            <button className="text-gray-600 group-hover:text-red-500 text-sm font-semibold transition-colors cursor-pointer">
               {t("topic.list.clearAll")}
             </button>
           </div>
@@ -212,7 +313,12 @@ const Topics = () => {
           <CustomeTable
             columns={columns}
             data={topics?.data || []}
+            serverSide={true}
+            currentPage={topics?.current_page || 1}
+            totalPages={topics?.last_page || 1}
+            totalItems={topics?.total || 0}
             itemsPerPage={ITEMS_PER_PAGE}
+            onPageChange={handlePageChange}
           />
         </div>
       </PageBody>

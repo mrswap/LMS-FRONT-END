@@ -227,6 +227,12 @@ import {
 import { createUser } from "../../../../../redux/slice/userSlice";
 import { useToast } from "../../../common/toast/ToastContext";
 import { useNavigate } from "react-router-dom";
+import {
+  FaUserCircle,
+  FaUpload,
+  FaExchangeAlt,
+  FaTrashAlt,
+} from "react-icons/fa";
 
 const CreateUser = () => {
   const dispatch = useDispatch();
@@ -237,8 +243,13 @@ const CreateUser = () => {
   const [preview, setPreview] = useState(null);
 
   // 🔥 Auto Generate Employee ID
+  // const generateEmployeeId = () => {
+  //   return Math.floor(1000 + Math.random() * 9000).toString();
+  // };
+
   const generateEmployeeId = () => {
-    return Math.floor(1000 + Math.random() * 9000).toString();
+    const random = Math.floor(1000 + Math.random() * 9000);
+    return `EMP-${random}`;
   };
 
   const initialValues = {
@@ -256,7 +267,6 @@ const CreateUser = () => {
     profile_image: null,
   };
 
-  // 🔽 Dummy options (later API se laa sakta hai)
   const roleOptions = [
     { label: "Admin", value: "admin" },
     { label: "Sales", value: "sales" },
@@ -357,11 +367,10 @@ const CreateUser = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <TextInput name="mobile" label="Phone" required />
 
-                    {/* 🔒 Employee ID */}
                     <TextInput
                       name="employee_id"
                       label="Employee ID"
-                      disabled
+                      isDisabled={true}
                     />
                   </div>
 
@@ -400,7 +409,7 @@ const CreateUser = () => {
                   </div>
 
                   {/* IMAGE */}
-                  <div className="mt-4">
+                  {/* <div className="mt-4">
                     <label className="block mb-2">Profile Image</label>
 
                     {!preview ? (
@@ -449,6 +458,72 @@ const CreateUser = () => {
                         </button>
                       </div>
                     )}
+                  </div> */}
+
+                  <div className="mt-6">
+                    <label className="block text-sm font-medium text-gray-700 mb-3">
+                      Profile Image
+                    </label>
+
+                    {!preview ? (
+                      <div className="flex items-center gap-4">
+                        <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center border-2 border-dashed border-gray-300">
+                          <FaUserCircle className="w-10 h-10 text-gray-400" />
+                        </div>
+
+                        <label className="bg-accent  text-white px-4 py-2 rounded-md text-sm cursor-pointer transition flex items-center gap-2">
+                          <FaUpload className="w-3.5 h-3.5" />
+                          Upload Image
+                          <input
+                            type="file"
+                            accept="image/*"
+                            hidden
+                            onChange={(e) => {
+                              const file = e.target.files[0];
+                              setFieldValue("profile_image", file);
+                              if (file) {
+                                setPreview(URL.createObjectURL(file));
+                              }
+                            }}
+                          />
+                        </label>
+                      </div>
+                    ) : (
+                      <div>
+                        <img
+                          src={preview}
+                          className="w-24 h-24 block object-cover rounded-full border-2 border-blue-400"
+                        />
+
+                        <div className="flex justify-center gap-3 mt-2 w-24">
+                          <label>
+                            <FaExchangeAlt className="w-4 h-4 text-blue-500 cursor-pointer hover:scale-110 transition" />
+                            <input
+                              type="file"
+                              accept="image/*"
+                              hidden
+                              onChange={(e) => {
+                                const file = e.target.files[0];
+                                setFieldValue("profile_image", file);
+                                if (file) {
+                                  setPreview(URL.createObjectURL(file));
+                                }
+                              }}
+                            />
+                          </label>
+
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setPreview(null);
+                              setFieldValue("profile_image", null);
+                            }}
+                          >
+                            <FaTrashAlt className="w-4 h-4 text-red-500 cursor-pointer hover:scale-110 transition" />
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -480,7 +555,7 @@ const CreateUser = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-4 py-2 bg-accent text-white rounded"
+                    className="px-4 py-2 bg-accent text-white rounded cursor-pointer"
                   >
                     {isSubmitting ? "Creating..." : "Create User"}
                   </button>

@@ -15,6 +15,7 @@ import {
   updateProgramById,
 } from "../../../../../../redux/slice/programSlice";
 import { useToast } from "../../../../common/toast/ToastContext";
+import { showConfirm } from "../../../../../../redux/slice/confirmSlice";
 
 const ProgramDetails = () => {
   const [thumbnail, setThumbnail] = useState(null);
@@ -85,10 +86,16 @@ const ProgramDetails = () => {
   };
 
   const handleDelete = async () => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this program?",
+    // const confirmDelete = window.confirm(
+    //   "Are you sure you want to delete this program?",
+    // );
+    // if (!confirmDelete) return;
+
+    const ok = await dispatch(
+      showConfirm({ message: "Are you sure you want to delete this program?" }),
     );
-    if (!confirmDelete) return;
+
+    if (!ok) return;
 
     try {
       await dispatch(deleteSingleProgram(id)).unwrap();

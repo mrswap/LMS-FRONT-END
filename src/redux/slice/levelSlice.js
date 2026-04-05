@@ -31,9 +31,10 @@ export const createLevel = createAsyncThunk(
 // ======================= GET ALL =======================
 export const getAllLevels = createAsyncThunk(
     "level/getAll",
-    async (_, thunkAPI) => {
+    async (params, thunkAPI) => {
         try {
-            const res = await axiosInstance.get("/levels", getAuthConfig());
+            const query = new URLSearchParams(params).toString();
+            const res = await axiosInstance.get(`/levels?${query}`, getAuthConfig());
             return res.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(
