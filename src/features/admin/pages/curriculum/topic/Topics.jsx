@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Select from "react-select";
 import CustomeTable from "../../../common/table/CustomeTable";
 import { MdOutlineFilterAltOff } from "react-icons/md";
@@ -15,7 +15,10 @@ import {
 } from "../../../common/layout";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllTopics } from "../../../../../redux/slice/topicSlice";
+import {
+  getAllTopics,
+  updateSingleTopicStatus,
+} from "../../../../../redux/slice/topicSlice";
 import { FiSearch } from "react-icons/fi";
 import Loader from "../../../common/Loader";
 import Error from "../../../common/Error";
@@ -23,6 +26,8 @@ import TruncateText from "../../../common/TruncateText";
 import { getAllChapters } from "../../../../../redux/slice/chapterSlice";
 import { getAllModules } from "../../../../../redux/slice/moduleSlice";
 import { getAllLevels } from "../../../../../redux/slice/levelSlice";
+import StatusToggle from "../../../common/StatusToggle";
+import { LuFilterX } from "react-icons/lu";
 
 const ITEMS_PER_PAGE = 5;
 
@@ -160,7 +165,7 @@ const Topics = () => {
       render: (row) => (
         <div>
           <p className="font-semibold text-gray-800">
-            <TruncateText text={row.module?.title} maxLength={25} />
+            <TruncateText text={row?.module?.title} maxLength={25} />
           </p>
         </div>
       ),
@@ -176,16 +181,6 @@ const Topics = () => {
       ),
     },
     {
-      header: "Parent Program",
-      render: (row) => (
-        <div>
-          <p className="font-semibold text-gray-800">
-            <TruncateText text={row.program?.title} maxLength={25} />
-          </p>
-        </div>
-      ),
-    },
-    {
       header: t("topic.list.columns.duration"),
       render: (row) => (
         <span className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-semibold">
@@ -196,15 +191,15 @@ const Topics = () => {
     {
       header: t("topic.list.columns.status"),
       render: (row) => (
-        <span
-          className={`px-2 py-1 rounded text-xs font-medium ${
-            row.status
-              ? "bg-green-100 text-green-700"
-              : "bg-red-100 text-red-700"
-          }`}
-        >
-          {row.status ? "Active" : "Inactive"}
-        </span>
+        <StatusToggle
+          value={row.status}
+          onToggle={async (newStatus) => {
+            await dispatch(
+              updateSingleTopicStatus({ id: row.id, status: newStatus }),
+            ).unwrap();
+            await fetchTopics(1);
+          }}
+        />
       ),
     },
     {
@@ -241,7 +236,7 @@ const Topics = () => {
       </PageHeader>
 
       <PageBody>
-        <div className="bg-white border border-gray-300 rounded-xl p-3 flex flex-wrap items-center gap-3">
+        {/* <div className="bg-white border border-gray-300 rounded-xl p-3 flex flex-wrap items-center gap-3">
           <div
             className="flex items-center bg-[#F8FAFC] border border-gray-300 hover:border-blue-500
            rounded-xl px-3 py-2 w-full md:w-[280px] lg:w-[330px] transition-colors"
@@ -257,9 +252,9 @@ const Topics = () => {
 
           <div className="w-[220px]">
             <Select
-              value={chapter}
-              onChange={setChapter}
-              options={chapterOption}
+              value={level}
+              onChange={setLevel}
+              options={levelOption}
               styles={customSelectStyles}
               isSearchable={false}
             />
@@ -277,9 +272,9 @@ const Topics = () => {
 
           <div className="w-[220px]">
             <Select
-              value={level}
-              onChange={setLevel}
-              options={levelOption}
+              value={chapter}
+              onChange={setChapter}
+              options={chapterOption}
               styles={customSelectStyles}
               isSearchable={false}
             />
@@ -306,6 +301,102 @@ const Topics = () => {
             <button className="text-gray-600 group-hover:text-red-500 text-sm font-semibold transition-colors cursor-pointer">
               {t("topic.list.clearAll")}
             </button>
+          </div>
+        </div> */}
+
+        <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm space-y-4">
+          {/* 🔍 Search */}
+          <div className="w-full">
+            <div
+              className="flex items-center bg-gray-50 border border-gray-200 
+      hover:border-blue-500 focus-within:border-blue-500
+      rounded-xl px-4 py-2.5 transition-all"
+            >
+              <FiSearch className="text-gray-400 text-base" />
+
+              <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search topics..."
+                className="bg-transparent outline-none px-3 text-sm w-full placeholder:text-gray-400"
+              />
+
+              {search && (
+                <button
+                  onClick={() => setSearch("")}
+                  className="text-gray-400 hover:text-red-500 text-sm"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* 🎯 Filters */}
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="w-full sm:w-[48%] lg:w-[210px]">
+              <Select
+                value={level}
+                onChange={setLevel}
+                options={levelOption}
+                styles={customSelectStyles}
+                isSearchable={false}
+              />
+            </div>
+
+            <div className="w-full sm:w-[48%] lg:w-[210px]">
+              <Select
+                value={module}
+                onChange={setModule}
+                options={moduleOption}
+                styles={customSelectStyles}
+                isSearchable={false}
+              />
+            </div>
+
+            <div className="w-full sm:w-[48%] lg:w-[210px]">
+              <Select
+                value={chapter}
+                onChange={setChapter}
+                options={chapterOption}
+                styles={customSelectStyles}
+                isSearchable={false}
+              />
+            </div>
+
+            <div className="w-full sm:w-[48%] lg:w-[210px]">
+              <Select
+                value={status}
+                onChange={setStatus}
+                options={statusOptions}
+                styles={customSelectStyles}
+                isSearchable={false}
+              />
+            </div>
+
+            {/* ❌ Clear Button */}
+            <div className="ml-auto flex items-center h-[40px]">
+              <div className="relative group">
+                <button
+                  onClick={resetFilters}
+                  className="flex items-center justify-center w-9 h-9 rounded-lg cursor-pointer
+      text-gray-500 hover:text-white hover:bg-red-500
+      transition-all"
+                >
+                  <LuFilterX size={18} />
+                </button>
+
+                {/* Tooltip */}
+                <div
+                  className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2
+      px-2 py-1 text-xs rounded-md bg-gray-800 text-white
+      opacity-0 group-hover:opacity-100 transition-all duration-200
+      whitespace-nowrap pointer-events-none"
+                >
+                  Clear all
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

@@ -83,12 +83,13 @@ export const updateTopicById = createAsyncThunk(
 // ======================= UPDATE STATUS =======================
 export const updateSingleTopicStatus = createAsyncThunk(
     "topic/updateStatus",
-    async ({ id, status }, thunkAPI) => {
+    async ({ id }, thunkAPI) => {
         try {
-            const res = await axiosInstance.patch(
-                `/topics/${id}/status`,
-                { status },
+            const res = await axiosInstance.post(
+                `/topics/${id}/toggle-status`,
+                {},
                 getAuthConfig()
+
             );
             return res.data;
         } catch (error) {
@@ -205,6 +206,7 @@ const topicSlice = createSlice({
 
                 const updated = action.payload.data;
 
+
                 if (Array.isArray(state.topics)) {
                     const index = state.topics.findIndex(
                         (t) => t.id === updated.id
@@ -225,17 +227,21 @@ const topicSlice = createSlice({
             .addCase(updateSingleTopicStatus.pending, (state) => {
                 state.isLoading = true;
             })
+            // ===== UPDATE STATUS =====
             .addCase(updateSingleTopicStatus.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
                 state.message = action.payload.message;
 
                 const updated = action.payload.data;
-                const index = state.topics.findIndex(
-                    (t) => t.id === updated.id
-                );
-                if (index !== -1) {
-                    state.topics[index] = updated;
+
+                if (Array.isArray(state.topics?.data)) {
+                    const index = state.topics.data.findIndex(
+                        (t) => t.id === updated.id
+                    );
+                    if (index !== -1) {
+                        state.topics.data[index] = updated;
+                    }
                 }
             })
             .addCase(updateSingleTopicStatus.rejected, (state, action) => {

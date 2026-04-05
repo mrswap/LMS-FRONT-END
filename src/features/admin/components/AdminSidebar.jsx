@@ -40,7 +40,7 @@ const AdminSidebar = ({ isOpen, onClose }) => {
       children: [
         { label: t("sidebar.programList"), path: "/programs" },
         // { label: t("sidebar.createProgram"), path: "/create-program" },
-        { label: t("sidebar.programAssignment"), path: "/program-assignment" },
+        // { label: t("sidebar.programAssignment"), path: "/program-assignment" },
       ],
     },
 

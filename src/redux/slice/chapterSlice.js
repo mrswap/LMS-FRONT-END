@@ -81,11 +81,11 @@ export const updateChapterById = createAsyncThunk(
 // ======================= UPDATE STATUS =======================
 export const updateSingleChapterStatus = createAsyncThunk(
     "chapter/updateStatus",
-    async ({ id, status }, thunkAPI) => {
+    async ({ id }, thunkAPI) => {
         try {
-            const res = await axiosInstance.patch(
-                `/chapters/${id}/status`,
-                { status },
+            const res = await axiosInstance.post(
+                `/chapters/${id}/toggle-status`,
+                {},
                 getAuthConfig()
             );
             return res.data;
@@ -229,11 +229,14 @@ const chapterSlice = createSlice({
                 state.message = action.payload.message;
 
                 const updated = action.payload.data;
-                const index = state.chapters.findIndex(
-                    (c) => c.id === updated.id
-                );
-                if (index !== -1) {
-                    state.chapters[index] = updated;
+
+                if (Array.isArray(state.chapters?.data)) {
+                    const index = state.chapters.data.findIndex(
+                        (t) => t.id === updated.id
+                    );
+                    if (index !== -1) {
+                        state.chapters.data[index] = updated;
+                    }
                 }
             })
             .addCase(updateSingleChapterStatus.rejected, (state, action) => {

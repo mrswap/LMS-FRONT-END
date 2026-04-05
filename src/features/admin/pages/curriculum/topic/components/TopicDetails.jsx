@@ -180,11 +180,6 @@ const TopicDetails = () => {
   };
 
   const handleDelete = async () => {
-    // const confirmDelete = window.confirm(
-    //   "Are you sure you want to delete this topic?",
-    // );
-    // if (!confirmDelete) return;
-
     const ok = await dispatch(
       showConfirm({ message: "Are you sure you want to delete this topic?" }),
     );

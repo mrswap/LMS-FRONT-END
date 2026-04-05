@@ -486,7 +486,10 @@ const UserDetails = () => {
   return (
     <PageLayout>
       <Breadcrumb
-        items={[{ label: "Users", path: "/users" }, { label: "User Details" }]}
+        items={[
+          { label: "Users", path: "/assign-training" },
+          { label: "User Details" },
+        ]}
       />
 
       <div className="p-6 border border-gray-300 rounded-lg">
