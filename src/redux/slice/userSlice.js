@@ -31,9 +31,10 @@ export const createUser = createAsyncThunk(
 // ======================= GET ALL =======================
 export const getAllUsers = createAsyncThunk(
     "user/getAll",
-    async (_, thunkAPI) => {
+    async (params, thunkAPI) => {
         try {
-            const res = await axiosInstance.get("/users", getAuthConfig());
+            const query = new URLSearchParams(params).toString();
+            const res = await axiosInstance.get(`/users?${query}`, getAuthConfig());
             return res.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(

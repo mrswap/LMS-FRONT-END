@@ -18,6 +18,7 @@ import {
 import { getAllModules } from "../../../../../../redux/slice/moduleSlice";
 import { getAllPrograms } from "../../../../../../redux/slice/programSlice";
 import { getAllLevels } from "../../../../../../redux/slice/levelSlice";
+import { showConfirm } from "../../../../../../redux/slice/confirmSlice";
 
 const ChapterDetails = () => {
   const [thumbnail, setThumbnail] = useState(null);
@@ -142,10 +143,16 @@ const ChapterDetails = () => {
   };
 
   const handleDelete = async () => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this chapter?",
+    // const confirmDelete = window.confirm(
+    //   "Are you sure you want to delete this chapter?",
+    // );
+    // if (!confirmDelete) return;
+
+    const ok = await dispatch(
+      showConfirm({ message: "Are you sure you want to delete this chapter?" }),
     );
-    if (!confirmDelete) return;
+
+    if (!ok) return;
 
     try {
       await dispatch(deleteSingleChapter(id)).unwrap();
@@ -382,7 +389,7 @@ const ChapterDetails = () => {
                         className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-gray-50"
                       >
                         {/* {t("chapter.actions.saveasDraft")} */}
-                        Delete
+                        Delete Chapter
                       </button>
                       <button
                         type="submit"

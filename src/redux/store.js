@@ -6,6 +6,7 @@ import moduleReducer from "./slice/moduleSlice";
 import chapterReducer from "./slice/chapterSlice";
 import topicReducer from "./slice/topicSlice";
 import userReducer from "./slice/userSlice";
+import confirmReducer from "./slice/confirmSlice"
 
 export const store = configureStore({
     reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
         level: levelReducer,
         module: moduleReducer,
         chapter: chapterReducer,
-        topic: topicReducer
+        topic: topicReducer,
+        confirm: confirmReducer
     },
 });

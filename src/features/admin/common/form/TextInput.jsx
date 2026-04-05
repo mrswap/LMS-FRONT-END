@@ -10,11 +10,23 @@ const TextInput = ({
   value,
   onChange,
   required = false,
+  isDisabled = false,
 }) => {
-  const baseInputClass = `${className} w-full px-2 sm:px-3 py-1.5 sm:py-2
-   border border-gray-300 focus:border-none
-   focus-within:outline-none focus:ring-1 focus:ring-blue-500
-    rounded-md text-xs sm:text-sm transition-all duration-200 `;
+  // const baseInputClass = `${className} w-full px-2 sm:px-3 py-1.5 sm:py-2
+  //  border border-gray-300 focus:border-none
+  //  focus-within:outline-none focus:ring-1 focus:ring-blue-500
+  //   rounded-md text-xs sm:text-sm transition-all duration-200 `;
+
+  const baseInputClass = `
+    ${className} w-full px-2 sm:px-3 py-1.5 sm:py-2
+    border rounded-md text-xs sm:text-sm
+    transition-all duration-200
+    ${
+      isDisabled
+        ? "bg-gray-100 text-gray-500 cursor-not-allowed border-gray-200"
+        : "bg-white border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
+    }
+  `;
 
   // const baseInputClass = `w-full py-2 pr-2 border border-gray-300 focus:outline-none
   //  focus:ring-1 focus:ring-blue-500 rounded-md text-sm transition-all duration-200`;
@@ -36,6 +48,7 @@ const TextInput = ({
             type={type}
             placeholder={placeholder}
             className={`${baseInputClass}`}
+            disabled={isDisabled}
           />
           <ErrorMessage
             name={name}
@@ -51,6 +64,7 @@ const TextInput = ({
           value={value}
           onChange={onChange}
           className={baseInputClass}
+          disabled={isDisabled}
         />
       )}
     </div>

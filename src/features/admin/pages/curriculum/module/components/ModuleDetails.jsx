@@ -18,6 +18,7 @@ import {
 } from "../../../../../../redux/slice/moduleSlice";
 import { getAllLevels } from "../../../../../../redux/slice/levelSlice";
 import { getAllPrograms } from "../../../../../../redux/slice/programSlice";
+import { showConfirm } from "../../../../../../redux/slice/confirmSlice";
 
 const ModuleDetails = () => {
   const [thumbnail, setThumbnail] = useState(null);
@@ -121,10 +122,16 @@ const ModuleDetails = () => {
   };
 
   const handleDelete = async () => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this module?",
+    // const confirmDelete = window.confirm(
+    //   "Are you sure you want to delete this module?",
+    // );
+    // if (!confirmDelete) return;
+
+    const ok = await dispatch(
+      showConfirm({ message: "Are you sure you want to delete this module?" }),
     );
-    if (!confirmDelete) return;
+
+    if (!ok) return;
 
     try {
       await dispatch(deleteSingleModule(id)).unwrap();

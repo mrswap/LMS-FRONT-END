@@ -9,13 +9,13 @@ import { store } from "./redux/store.js";
 import { ToastProvider } from "./features/admin/common/toast/ToastContext.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <ToastProvider>
-          <App />
-        </ToastProvider>
-      </BrowserRouter>
-    </Provider>
-  </StrictMode>,
+  // <StrictMode>
+  <Provider store={store}>
+    <BrowserRouter>
+      <ToastProvider>
+        <App />
+      </ToastProvider>
+    </BrowserRouter>
+  </Provider>,
+  // {/* </StrictMode> */}
 );

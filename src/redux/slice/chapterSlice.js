@@ -31,9 +31,10 @@ export const createChapter = createAsyncThunk(
 // ======================= GET ALL =======================
 export const getAllChapters = createAsyncThunk(
     "chapter/getAll",
-    async (_, thunkAPI) => {
+    async (params, thunkAPI) => {
         try {
-            const res = await axiosInstance.get("/chapters", getAuthConfig());
+            const query = new URLSearchParams(params).toString();
+            const res = await axiosInstance.get(`/chapters?${query}`, getAuthConfig());
             return res.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(

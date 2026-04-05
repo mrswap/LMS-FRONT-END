@@ -31,9 +31,10 @@ export const createProgram = createAsyncThunk(
 // ======================= GET ALL =======================
 export const getAllPrograms = createAsyncThunk(
     "program/getAll",
-    async (_, thunkAPI) => {
+    async (params, thunkAPI) => {
         try {
-            const res = await axiosInstance.get("/programs", getAuthConfig());
+            const query = new URLSearchParams(params).toString();
+            const res = await axiosInstance.get(`/programs?${query}`, getAuthConfig());
             return res.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(

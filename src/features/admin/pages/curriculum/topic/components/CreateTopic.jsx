@@ -73,6 +73,7 @@ const CreateTopic = () => {
   const initialValues = {
     topicName: "",
     description: "",
+    duration: "",
     chapterName: null,
     moduleName: null,
     levelName: null,
@@ -82,6 +83,10 @@ const CreateTopic = () => {
 
   const validationSchema = Yup.object({
     topicName: Yup.string().required("Topic name is required"),
+    duration: Yup.number()
+      .typeError("Duration must be a number")
+      .positive("Duration must be positive")
+      .required("Duration is required"),
     chapterName: Yup.object().nullable().required("Chapter name is required"),
     moduleName: Yup.object().nullable().required("Module name is required"),
     levelName: Yup.object().nullable().required("Level name is required"),
@@ -101,6 +106,7 @@ const CreateTopic = () => {
       formData.append("level_id", values.levelName.value);
       formData.append("program_id", values.programName.value);
       formData.append("description", values.description);
+      formData.append("estimated_duration", values.duration);
 
       if (thumbnail) {
         formData.append("thumbnail", thumbnail);
@@ -254,6 +260,15 @@ const CreateTopic = () => {
                         options={programOptions || []}
                         disabled={true}
                       />
+                      <div>
+                        <TextInput
+                          name="duration"
+                          type="number"
+                          label="Duration (in minutes)"
+                          placeholder={"Enter duration in minutes"}
+                          required={true}
+                        />
+                      </div>
                     </div>
 
                     <div className="mt-2">
@@ -340,12 +355,12 @@ const CreateTopic = () => {
                   {/* Footer */}
                   <div className="flex justify-end items-center pt-4">
                     <div className="flex gap-3">
-                      <button
+                      {/* <button
                         type="button"
                         className="px-4 py-2 border border-[#184994] rounded-md text-sm text-[#184994] hover:bg-gray-50"
                       >
                         {t("topic.actions.saveasDraft")}
-                      </button>
+                      </button> */}
                       <button
                         type="submit"
                         disabled={isSubmitting}

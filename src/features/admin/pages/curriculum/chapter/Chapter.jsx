@@ -16,6 +16,12 @@ import {
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllChapters } from "../../../../../redux/slice/chapterSlice";
+import { getAllModules } from "../../../../../redux/slice/moduleSlice";
+import { getAllLevels } from "../../../../../redux/slice/levelSlice";
+import { FiSearch } from "react-icons/fi";
+import Loader from "../../../common/Loader";
+import Error from "../../../common/Error";
+import TruncateText from "../../../common/TruncateText";
 
 const ITEMS_PER_PAGE = 5;
 
@@ -24,42 +30,79 @@ const Chapters = () => {
   const { chapters, isLoading, isError, message } = useSelector(
     (state) => state.chapter,
   );
+  const { modules } = useSelector((state) => state.module);
+  const { levels } = useSelector((state) => state.level);
 
-  const programOptions = [{ value: "All", label: t("chapter.status.all") }];
-
-  const statusOptions = [
-    { value: "All", label: t("chapter.status.all") },
-    { value: "Active", label: t("chapter.status.active") },
-    { value: "Draft", label: t("chapter.status.draft") },
-    { value: "Archived", label: t("chapter.status.archived") },
+  const moduleOption = [
+    { value: "All", label: "All Module" },
+    ...(modules?.data?.map((item) => ({
+      value: item.id,
+      label: item.title,
+    })) || []),
   ];
 
-  const [program, setProgram] = useState(programOptions[0]);
+  const levelOption = [
+    { value: "All", label: "All Level" },
+    ...(levels?.data?.map((item) => ({
+      value: item.id,
+      label: item.title,
+    })) || []),
+  ];
+
+  const statusOptions = [
+    { value: "all", label: "All Status" },
+    { value: "1", label: "Active" },
+    { value: "0", label: "Inactive" },
+  ];
+
+  const [module, setModule] = useState(moduleOption[0]);
+  const [level, setLevel] = useState(levelOption[0]);
   const [status, setStatus] = useState(statusOptions[0]);
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // ================= API CALL =================
-  const fetchChapters = () => {
-    dispatch(getAllChapters());
+  const fetchChapters = (overridePage) => {
+    const params = {
+      search: search || "",
+      level_id: level?.value !== "All" ? level?.value : "",
+      module_id: module?.value !== "All" ? module?.value : "",
+      status: status?.value !== "All" ? status?.value : "",
+      page: overridePage ?? page,
+      limit: ITEMS_PER_PAGE,
+    };
+    dispatch(getAllChapters(params));
+    dispatch(getAllModules());
+    dispatch(getAllLevels());
   };
 
-  useEffect(() => {
-    fetchChapters();
-  }, []);
+  // useEffect(() => {
+  //   fetchChapters(1);
+  // }, []);
 
-  // ================= SEARCH DEBOUNCE =================
   useEffect(() => {
     const delay = setTimeout(() => {
-      fetchChapters();
+      setPage(1);
+      fetchChapters(1);
     }, 500);
-
     return () => clearTimeout(delay);
-  }, []);
+  }, [search, status, module, level]);
+
+  useEffect(() => {
+    fetchChapters(page);
+  }, [page]);
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+  };
 
   const resetFilters = () => {
-    // setProgram(programOptions[0]);
-    // setStatus(statusOptions[0]);
+    setModule(moduleOption[0]);
+    setLevel(levelOption[0]);
+    setStatus(statusOptions[0]);
+    setSearch("");
+    setPage(1);
   };
 
   const customSelectStyles = {
@@ -80,7 +123,9 @@ const Chapters = () => {
       header: t("chapter.list.columns.chapterName"),
       render: (row) => (
         <div>
-          <p className="font-semibold text-gray-800">{row.title}</p>
+          <p className="font-semibold text-gray-800">
+            <TruncateText text={row.title} maxLength={25} />
+          </p>
         </div>
       ),
     },
@@ -88,7 +133,10 @@ const Chapters = () => {
       header: t("chapter.list.columns.parentModule"),
       render: (row) => (
         <div>
-          <p className="font-semibold text-gray-800">{row.module.title}</p>
+          <p className="font-semibold text-gray-800">
+            {" "}
+            <TruncateText text={row.module.title} maxLength={25} />
+          </p>
         </div>
       ),
     },
@@ -96,7 +144,21 @@ const Chapters = () => {
       header: t("chapter.list.columns.parentLevel"),
       render: (row) => (
         <div>
-          <p className="font-semibold text-gray-800">{row.level.title}</p>
+          <p className="font-semibold text-gray-800">
+            {" "}
+            <TruncateText text={row.level.title} maxLength={25} />
+          </p>
+        </div>
+      ),
+    },
+    {
+      header: "Parent Program",
+      render: (row) => (
+        <div>
+          <p className="font-semibold text-gray-800">
+            {" "}
+            <TruncateText text={row.program.title} maxLength={25} />
+          </p>
         </div>
       ),
     },
@@ -104,13 +166,9 @@ const Chapters = () => {
       header: t("chapter.list.columns.totalChapters"),
       render: (row) => (
         <span className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-semibold">
-          {/* {row.chapters} Chapters */}
+          5
         </span>
       ),
-    },
-    {
-      header: t("chapter.list.columns.duration"),
-      // accessor: "duration",
     },
     {
       header: t("chapter.list.columns.status"),
@@ -139,6 +197,9 @@ const Chapters = () => {
     },
   ];
 
+  if (isLoading && !chapters?.data?.length) return <Loader />;
+  if (isError) return <Error message={message} />;
+
   return (
     <PageLayout>
       <PageHeader>
@@ -157,16 +218,35 @@ const Chapters = () => {
       </PageHeader>
 
       <PageBody>
-        <div className="bg-white border border-gray-300 rounded-xl p-3 flex items-center gap-3">
-          <span className="text-gray-500 text-sm font-semibold">
-            {t("chapter.list.filters")}
-          </span>
+        <div className="bg-white border border-gray-300 rounded-xl p-3 flex flex-wrap items-center gap-3">
+          <div
+            className="flex items-center bg-[#F8FAFC] border border-gray-300 hover:border-blue-500
+           rounded-xl px-3 py-2 w-full md:w-[280px] lg:w-[330px] transition-colors"
+          >
+            <FiSearch className="text-gray-400 text-sm flex-shrink-0" />
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search chapters..."
+              className="bg-transparent outline-none px-2 text-sm w-full"
+            />
+          </div>
 
           <div className="w-[220px]">
             <Select
-              value={program}
-              onChange={setProgram}
-              options={programOptions}
+              value={module}
+              onChange={setModule}
+              options={moduleOption}
+              styles={customSelectStyles}
+              isSearchable={false}
+            />
+          </div>
+
+          <div className="w-[220px]">
+            <Select
+              value={level}
+              onChange={setLevel}
+              options={levelOption}
               styles={customSelectStyles}
               isSearchable={false}
             />
@@ -182,12 +262,15 @@ const Chapters = () => {
             />
           </div>
 
-          <div className="flex items-center gap-1 ml-auto cursor-pointer group">
-            <MdOutlineFilterAltOff className="text-gray-500" size={18} />
-            <button
-              onClick={resetFilters}
-              className="text-gray-600 text-sm font-semibold"
-            >
+          <div
+            className="flex items-center gap-1 ml-auto cursor-pointer group"
+            onClick={resetFilters}
+          >
+            <MdOutlineFilterAltOff
+              className="text-gray-500 group-hover:text-red-500 transition-colors"
+              size={18}
+            />
+            <button className="text-gray-600 group-hover:text-red-500 text-sm font-semibold transition-colors cursor-pointer">
               {t("chapter.list.clearAll")}
             </button>
           </div>
@@ -197,7 +280,12 @@ const Chapters = () => {
           <CustomeTable
             columns={columns}
             data={chapters?.data || []}
+            serverSide={true}
+            currentPage={chapters?.current_page || 1}
+            totalPages={chapters?.last_page || 1}
+            totalItems={chapters?.total || 0}
             itemsPerPage={ITEMS_PER_PAGE}
+            onPageChange={handlePageChange}
           />
         </div>
       </PageBody>

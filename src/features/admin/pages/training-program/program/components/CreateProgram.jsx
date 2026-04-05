@@ -220,12 +220,12 @@ const CreateProgram = () => {
                   {/* Footer */}
                   <div className="flex justify-end items-center pt-4">
                     <div className="flex gap-3">
-                      <button
+                      {/* <button
                         type="button"
                         className="px-4 py-2 border border-[#184994] rounded-md text-sm text-[#184994] hover:bg-gray-50"
                       >
                         {t("program.actions.saveasDraft")}
-                      </button>
+                      </button> */}
                       <button
                         type="submit"
                         disabled={isSubmitting}

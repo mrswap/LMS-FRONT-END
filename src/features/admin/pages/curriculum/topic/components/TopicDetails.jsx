@@ -20,6 +20,7 @@ import { getAllPrograms } from "../../../../../../redux/slice/programSlice";
 import { getAllLevels } from "../../../../../../redux/slice/levelSlice";
 import { getAllModules } from "../../../../../../redux/slice/moduleSlice";
 import { getAllChapters } from "../../../../../../redux/slice/chapterSlice";
+import { showConfirm } from "../../../../../../redux/slice/confirmSlice";
 
 const TopicDetails = () => {
   const [thumbnail, setThumbnail] = useState(null);
@@ -121,10 +122,15 @@ const TopicDetails = () => {
 
     description: topic?.description || "",
     thumbnail: topic?.thumbnail || null,
+    duration: topic?.estimated_duration || "",
   };
 
   const validationSchema = Yup.object({
     topicName: Yup.string().required("Topic name is required"),
+    duration: Yup.number()
+      .typeError("Duration must be a number")
+      .positive("Duration must be positive")
+      .required("Duration is required"),
     chapterName: Yup.object().nullable().required("Parent chapter is required"),
     moduleName: Yup.object().nullable().required("Parent module is required"),
     levelName: Yup.object().nullable().required("Parent level is required"),
@@ -139,6 +145,7 @@ const TopicDetails = () => {
       const formData = new FormData();
 
       formData.append("title", values.topicName);
+      formData.append("estimated_duration", values.duration);
       formData.append("description", values.description);
       formData.append(
         "chapter_id",
@@ -173,10 +180,16 @@ const TopicDetails = () => {
   };
 
   const handleDelete = async () => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this topic?",
+    // const confirmDelete = window.confirm(
+    //   "Are you sure you want to delete this topic?",
+    // );
+    // if (!confirmDelete) return;
+
+    const ok = await dispatch(
+      showConfirm({ message: "Are you sure you want to delete this topic?" }),
     );
-    if (!confirmDelete) return;
+
+    if (!ok) return;
 
     try {
       await dispatch(deleteSingleTopic(id)).unwrap();
@@ -330,6 +343,15 @@ const TopicDetails = () => {
                         options={programOptions || []}
                         disabled={true}
                       />
+                      <div>
+                        <TextInput
+                          name="duration"
+                          type="number"
+                          label="Duration (in minutes)"
+                          placeholder={"Enter duration in minutes"}
+                          required={true}
+                        />
+                      </div>
                     </div>
 
                     <div className="mt-2">
@@ -424,7 +446,7 @@ const TopicDetails = () => {
                         className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-gray-50"
                       >
                         {/* {t("topic.actions.saveasDraft")} */}
-                        Delete
+                        Delete Topic
                       </button>
                       <button
                         type="submit"

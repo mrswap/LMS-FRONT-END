@@ -7,6 +7,7 @@ import ForgotPassword from "./features/admin/pages/auth/ForgotPassword";
 import CheckEmail from "./features/admin/pages/auth/CheckEmail";
 import ChangePassword from "./features/admin/pages/auth/ChangePassword";
 import ModuleProgress from "./features/admin/routes/ModuleProgress";
+import GlobalConfirmModal from "./features/admin/common/GlobalConfirmModal";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/change-password" element={<ChangePassword />} />
         {AdminRoutes}
       </Routes>
+      <GlobalConfirmModal />
     </>
   );
 };

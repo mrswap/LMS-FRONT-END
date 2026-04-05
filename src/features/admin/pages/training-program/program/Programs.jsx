@@ -19,71 +19,79 @@ import { getAllPrograms } from "../../../../../redux/slice/programSlice";
 import Loader from "../../../common/Loader";
 import Error from "../../../common/Error";
 import TruncateText from "../../../common/TruncateText";
+import { FiSearch } from "react-icons/fi";
 
 const ITEMS_PER_PAGE = 10;
 
 const Programs = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const { programs, isLoading, isError, message } = useSelector(
     (state) => state.program,
   );
 
-  // ================= STATE =================
-  const [search, setSearch] = useState("");
-  const [status, setStatus] = useState(null);
-  const [level, setLevel] = useState(null);
-
-  // ================= OPTIONS =================
   const statusOptions = [
-    { label: "Active", value: true },
-    { label: "Inactive", value: false },
+    { value: "all", label: "All Status" },
+    { value: "1", label: "Active" },
+    { value: "0", label: "Inactive" },
   ];
 
-  const levelOptions = [
-    { label: "Level 1", value: 1 },
-    { label: "Level 2", value: 2 },
-  ];
+  const [page, setPage] = useState(1);
+  const navigate = useNavigate();
+  const [search, setSearch] = useState("");
+  const [status, setStatus] = useState(statusOptions[0]);
 
-  // ================= API CALL =================
-  const fetchPrograms = () => {
+  const fetchPrograms = (overridePage) => {
     const params = {
       search: search || "",
-      status: status?.value ?? "",
-      level: level?.value ?? "",
+      status: status?.value === "all" ? "" : status?.value,
+      page: overridePage ?? page,
+      limit: ITEMS_PER_PAGE,
     };
-
-    dispatch(getAllPrograms());
+    dispatch(getAllPrograms(params));
   };
 
-  useEffect(() => {
-    fetchPrograms();
-  }, []);
-
-  // ================= SEARCH DEBOUNCE =================
   useEffect(() => {
     const delay = setTimeout(() => {
-      fetchPrograms();
+      setPage(1);
+      fetchPrograms(1);
     }, 500);
-
     return () => clearTimeout(delay);
-  }, [search, status, level]);
+  }, [search, status]);
 
-  // ================= CLEAR FILTER =================
-  const handleClear = () => {
-    setSearch("");
-    setStatus(null);
-    setLevel(null);
-    dispatch(getAllPrograms({}));
+  useEffect(() => {
+    fetchPrograms(page);
+  }, [page]);
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
   };
 
-  // ================= TABLE COLUMNS =================
+  const resetFilters = () => {
+    setStatus(statusOptions[0]);
+    setSearch("");
+    setPage(1);
+  };
+
+  const customSelectStyles = {
+    control: (base) => ({
+      ...base,
+      borderRadius: "8px",
+      borderColor: "#E5E7EB",
+      minHeight: "38px",
+      boxShadow: "none",
+      cursor: "pointer",
+      fontSize: "14px",
+      backgroundColor: "#F8FAFC",
+    }),
+  };
+
   const columns = [
     {
       header: t("program.list.columns.programName"),
       render: (row) => (
+        // console.log("row", row),
         <p className="font-semibold text-gray-800">
           <TruncateText text={row.title} maxLength={25} />
         </p>
@@ -97,7 +105,7 @@ const Programs = () => {
       header: t("program.list.columns.assignedUsers"),
       render: () => (
         <span className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-semibold">
-          Assigned
+          john
         </span>
       ),
     },
@@ -133,7 +141,9 @@ const Programs = () => {
     },
   ];
 
-  // ================= UI =================
+  if (isLoading && programs?.data?.length) return <Loader />;
+  if (isError) return <Error message={message} />;
+
   return (
     <PageLayout>
       <PageHeader>
@@ -153,58 +163,57 @@ const Programs = () => {
       </PageHeader>
 
       <PageBody>
-        {/* ================= FILTER BAR ================= */}
-        <div className="bg-white border border-gray-300 rounded-xl p-3 flex items-center gap-3 flex-wrap">
-          {/* 🔍 SEARCH */}
-          <input
-            type="text"
-            placeholder="Search program name..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="border border-gray-300 rounded-lg px-3 py-2 text-sm w-[220px]"
-          />
+        <div className="bg-white border border-gray-300 rounded-xl p-3 flex flex-wrap items-center gap-3">
+          {/* <span className="text-gray-500 text-sm font-semibold">
+            {t("topic.list.filters")}
+          </span> */}
+          <div
+            className="flex items-center bg-[#F8FAFC] border border-gray-300 hover:border-blue-500
+           rounded-xl px-3 py-2 w-full md:w-[280px] lg:w-[330px] transition-colors"
+          >
+            <FiSearch className="text-gray-400 text-sm flex-shrink-0" />
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search Programs..."
+              className="bg-transparent outline-none px-2 text-sm w-full"
+            />
+          </div>
 
-          {/* STATUS */}
-          <div className="w-[200px]">
+          <div className="w-[220px]">
             <Select
-              options={statusOptions}
               value={status}
               onChange={setStatus}
-              placeholder="Status"
+              options={statusOptions}
+              styles={customSelectStyles}
+              isSearchable={false}
             />
           </div>
 
-          {/* LEVEL */}
-          <div className="w-[200px]">
-            <Select
-              options={levelOptions}
-              value={level}
-              onChange={setLevel}
-              placeholder="Level"
+          <div
+            className="flex items-center gap-1 ml-auto cursor-pointer group"
+            onClick={resetFilters}
+          >
+            <MdOutlineFilterAltOff
+              className="text-gray-500 group-hover:text-red-500 transition-colors"
+              size={18}
             />
-          </div>
-
-          {/* CLEAR */}
-          <div className="flex items-center gap-1 ml-auto cursor-pointer group">
-            <MdOutlineFilterAltOff className="text-gray-500" size={18} />
-            <button
-              onClick={handleClear}
-              className="text-gray-600 text-sm font-semibold"
-            >
+            <button className="text-gray-600 group-hover:text-red-500 text-sm font-semibold transition-colors cursor-pointer">
               {t("levels.list.clearAll")}
             </button>
           </div>
         </div>
 
-        {/* ================= DATA ================= */}
         <div className="mt-4">
-          {isLoading && <Loader />}
-          {isError && <Error message={message} />}
-
           <CustomeTable
             columns={columns}
-            data={programs.data || []}
+            data={programs?.data || []}
+            serverSide={true}
+            currentPage={programs?.current_page || 1}
+            totalPages={programs?.last_page || 1}
+            totalItems={programs?.total || 0}
             itemsPerPage={ITEMS_PER_PAGE}
+            onPageChange={handlePageChange}
           />
         </div>
       </PageBody>
