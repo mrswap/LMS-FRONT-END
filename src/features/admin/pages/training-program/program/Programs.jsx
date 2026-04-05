@@ -91,28 +91,35 @@ const Programs = () => {
     {
       header: t("program.list.columns.programName"),
       render: (row) => (
-        // console.log("row", row),
         <p className="font-semibold text-gray-800">
-          <TruncateText text={row.title} maxLength={25} />
+          <TruncateText text={row.title} maxLength={55} />
         </p>
       ),
     },
     {
-      header: t("program.list.columns.totalLevels"),
-      accessor: "totalLevels",
-    },
-    {
-      header: t("program.list.columns.assignedUsers"),
-      render: () => (
-        <span className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-semibold">
-          john
-        </span>
+      header: "Description",
+      render: (row) => (
+        <p className="font-semibold text-gray-800">
+          <TruncateText text={row.description} maxLength={55} />
+        </p>
       ),
     },
-    {
-      header: t("program.list.columns.complitionRate"),
-      accessor: "complitionRate",
-    },
+    // {
+    //   header: t("program.list.columns.totalLevels"),
+    //   accessor: "totalLevels",
+    // },
+    // {
+    //   header: t("program.list.columns.assignedUsers"),
+    //   render: () => (
+    //     <span className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-semibold">
+    //       john
+    //     </span>
+    //   ),
+    // },
+    // {
+    //   header: t("program.list.columns.complitionRate"),
+    //   accessor: "complitionRate",
+    // },
     {
       header: t("program.list.columns.status"),
       render: (row) => (
@@ -127,18 +134,17 @@ const Programs = () => {
         </span>
       ),
     },
-    {
-      header: t("program.list.columns.actions"),
-      render: (row) => (
-        // console.log("Row Data:", row),
-        <button
-          onClick={() => navigate(`program-details/${row.id}`)}
-          className="text-gray-800 text-lg cursor-pointer"
-        >
-          <FaEye />
-        </button>
-      ),
-    },
+    // {
+    //   header: t("program.list.columns.actions"),
+    //   render: (row) => (
+    //     <button
+    //       onClick={() => navigate(`program-details/${row.id}`)}
+    //       className="text-gray-800 text-lg cursor-pointer"
+    //     >
+    //       <FaEye />
+    //     </button>
+    //   ),
+    // },
   ];
 
   if (isLoading && programs?.data?.length) return <Loader />;
@@ -153,20 +159,17 @@ const Programs = () => {
         </PageHeaderLeft>
 
         <PageHeaderRight>
-          <Link
+          {/* <Link
             to="create-program"
             className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap"
           >
             {t("program.actions.addNewProgram")}
-          </Link>
+          </Link> */}
         </PageHeaderRight>
       </PageHeader>
 
       <PageBody>
-        <div className="bg-white border border-gray-300 rounded-xl p-3 flex flex-wrap items-center gap-3">
-          {/* <span className="text-gray-500 text-sm font-semibold">
-            {t("topic.list.filters")}
-          </span> */}
+        {/* <div className="bg-white border border-gray-300 rounded-xl p-3 flex flex-wrap items-center gap-3">
           <div
             className="flex items-center bg-[#F8FAFC] border border-gray-300 hover:border-blue-500
            rounded-xl px-3 py-2 w-full md:w-[280px] lg:w-[330px] transition-colors"
@@ -202,7 +205,7 @@ const Programs = () => {
               {t("levels.list.clearAll")}
             </button>
           </div>
-        </div>
+        </div> */}
 
         <div className="mt-4">
           <CustomeTable

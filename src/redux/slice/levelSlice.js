@@ -81,11 +81,11 @@ export const updateLevelById = createAsyncThunk(
 // ======================= UPDATE STATUS =======================
 export const updateSingleLevelStatus = createAsyncThunk(
     "level/updateStatus",
-    async ({ id, status }, thunkAPI) => {
+    async ({ id }, thunkAPI) => {
         try {
-            const res = await axiosInstance.patch(
-                `/levels/${id}/status`,
-                { status },
+            const res = await axiosInstance.post(
+                `/levels/${id}/toggle-status`,
+                {},
                 getAuthConfig()
             );
             return res.data;
@@ -229,11 +229,14 @@ const levelSlice = createSlice({
                 state.message = action.payload.message;
 
                 const updated = action.payload.data;
-                const index = state.levels.findIndex(
-                    (l) => l.id === updated.id
-                );
-                if (index !== -1) {
-                    state.levels[index] = updated;
+
+                if (Array.isArray(state.levels?.data)) {
+                    const index = state.levels.data.findIndex(
+                        (t) => t.id === updated.id
+                    );
+                    if (index !== -1) {
+                        state.levels.data[index] = updated;
+                    }
                 }
             })
             .addCase(updateSingleLevelStatus.rejected, (state, action) => {

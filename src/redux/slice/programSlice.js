@@ -81,11 +81,11 @@ export const updateProgramById = createAsyncThunk(
 // ======================= UPDATE STATUS =======================
 export const updateSingleProgramStatus = createAsyncThunk(
     "program/updateStatus",
-    async ({ id, status }, thunkAPI) => {
+    async ({ id }, thunkAPI) => {
         try {
-            const res = await axiosInstance.patch(
-                `/programs/${id}/status`,
-                { status },
+            const res = await axiosInstance.post(
+                `/programs/${id}/toggle-status`,
+                {},
                 getAuthConfig()
             );
             return res.data;
@@ -229,11 +229,14 @@ const programSlice = createSlice({
                 state.message = action.payload.message;
 
                 const updated = action.payload.data;
-                const index = state.programs.findIndex(
-                    (p) => p.id === updated.id
-                );
-                if (index !== -1) {
-                    state.programs[index] = updated;
+
+                if (Array.isArray(state.programs?.data)) {
+                    const index = state.programs.data.findIndex(
+                        (t) => t.id === updated.id
+                    );
+                    if (index !== -1) {
+                        state.programs.data[index] = updated;
+                    }
                 }
             })
             .addCase(updateSingleProgramStatus.rejected, (state, action) => {
