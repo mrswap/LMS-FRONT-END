@@ -65,8 +65,6 @@ const ChapterDetails = () => {
     }
   }, [chapter]);
 
-  console.log("chapter", chapter);
-
   const initialValues = {
     chapterName: chapter?.title || "",
     moduleName: chapter?.module
@@ -105,33 +103,24 @@ const ChapterDetails = () => {
     try {
       const formData = new FormData();
 
-      formData.append("title", values.moduleName);
+      formData.append("title", values.chapterName);
       formData.append("description", values.description);
       formData.append(
         "module_id",
-        values.moduelName?.value || values.moduleName,
+        values.moduleName?.value || values.moduleName,
       );
       formData.append("level_id", values.levelName?.value || values.levelName);
       formData.append(
         "program_id",
         values.programName?.value || values.programName,
       );
-
       if (thumbnail) {
         formData.append("thumbnail", thumbnail);
       }
 
-      // console.log("Submitting with data:", {
-      //   title: values.title,
-      //   description: values.description,
-      //   program: values.programName.value,
-      //   thumbnail: thumbnail?.name,
-      // });
-
       const res = await dispatch(
         updateChapterById({ id, data: formData }),
       ).unwrap();
-
       toast.success(res.message || "Chpater updated successfully");
       navigate("/chapters");
     } catch (error) {

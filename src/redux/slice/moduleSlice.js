@@ -81,11 +81,11 @@ export const updateModuleById = createAsyncThunk(
 // ======================= UPDATE STATUS =======================
 export const updateSingleModuleStatus = createAsyncThunk(
     "module/updateStatus",
-    async ({ id, status }, thunkAPI) => {
+    async ({ id }, thunkAPI) => {
         try {
-            const res = await axiosInstance.patch(
-                `/modules/${id}/status`,
-                { status },
+            const res = await axiosInstance.post(
+                `/modules/${id}/toggle-status`,
+                {},
                 getAuthConfig()
             );
             return res.data;
@@ -229,11 +229,14 @@ const moduleSlice = createSlice({
                 state.message = action.payload.message;
 
                 const updated = action.payload.data;
-                const index = state.modules.findIndex(
-                    (m) => m.id === updated.id
-                );
-                if (index !== -1) {
-                    state.modules[index] = updated;
+
+                if (Array.isArray(state.modules?.data)) {
+                    const index = state.modules.data.findIndex(
+                        (t) => t.id === updated.id
+                    );
+                    if (index !== -1) {
+                        state.modules.data[index] = updated;
+                    }
                 }
             })
             .addCase(updateSingleModuleStatus.rejected, (state, action) => {
