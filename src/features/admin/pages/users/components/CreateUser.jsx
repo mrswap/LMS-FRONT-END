@@ -1,213 +1,3 @@
-// import { Formik, Form } from "formik";
-// import * as Yup from "yup";
-// import { TextInput, SelectField } from "../../../common/form";
-// import { AiOutlineExclamationCircle } from "react-icons/ai";
-
-// import {
-//   PageLayout,
-//   PageHeader,
-//   PageHeaderLeft,
-//   PageTitle,
-//   PageSubtitle,
-//   PageBody,
-// } from "../../../common/layout";
-// import { useTranslation } from "react-i18next";
-
-// const CreateUser = () => {
-//   const { t } = useTranslation();
-
-//   const initialValues = {
-//     levelName: "",
-//     program: null,
-//     description: "",
-//   };
-
-//   const validationSchema = Yup.object({
-//     levelName: Yup.string().required("Level name is required"),
-//     program: Yup.object().nullable().required("Parent program is required"),
-//     description: Yup.string().required("Description is required"),
-//   });
-
-//   const onSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
-//     console.log("Form submitted!", values);
-
-//     try {
-//       const formData = new FormData();
-
-//       console.log("Submitting with data:", {
-//         levelName: values.levelName,
-//         program: values.program,
-//         description: values.description,
-//         thumbnail: thumbnail?.name,
-//       });
-
-//       alert("Level created successfully!");
-//       resetForm();
-//       removeThumbnail();
-//     } catch (error) {
-//       console.error("Submission error:", error);
-//       setErrors({ submit: error.message });
-//       alert("Failed to create level");
-//     } finally {
-//       setSubmitting(false);
-//     }
-//   };
-
-//   return (
-//     <PageLayout>
-//       <div className=" p-8 rounded-lg border border-gray-300">
-//         <PageHeader>
-//           <PageHeaderLeft>
-//             <PageTitle>{t("userManagement.create.title")}</PageTitle>
-//             <PageSubtitle>{t("userManagement.create.subtitle")}</PageSubtitle>
-//           </PageHeaderLeft>
-//         </PageHeader>
-
-//         <PageBody className="mt-4">
-//           <Formik
-//             initialValues={initialValues}
-//             validationSchema={validationSchema}
-//             onSubmit={onSubmit}
-//             enableReinitialize={true}
-//           >
-//             {({ isSubmitting, values, setFieldValue, handleSubmit }) => {
-//               console.log("Formik values:", values);
-
-//               return (
-//                 <Form onSubmit={handleSubmit} className="space-y-8">
-//                   {/* General Details */}
-//                   <div>
-//                     <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-//                       <span className="text-[18px] text-primary font-[700]">
-//                         <AiOutlineExclamationCircle />
-//                       </span>
-//                       {t("userManagement.details.personalInfo")}
-//                     </h3>
-
-//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
-//                       <div>
-//                         <TextInput
-//                           name="levelName"
-//                           label={t("userManagement.details.fullName")}
-//                           placeholder={t(
-//                             "userManagement.details.fullNamePlaceholder",
-//                           )}
-//                           required={true}
-//                         />
-//                       </div>
-//                       <div>
-//                         <TextInput
-//                           name="email"
-//                           label={t("userManagement.details.email")}
-//                           placeholder={t(
-//                             "userManagement.details.emailPlaceholder",
-//                           )}
-//                           required={true}
-//                         />
-//                       </div>
-//                     </div>
-
-//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
-//                       <div>
-//                         <TextInput
-//                           name="levelName"
-//                           label={t("userManagement.details.phone")}
-//                           placeholder={t(
-//                             "userManagement.details.phonePlaceholder",
-//                           )}
-//                           required={true}
-//                         />
-//                       </div>
-//                       <div>
-//                         <SelectField
-//                           name="program"
-//                           label={t("userManagement.details.region")}
-//                           placeholder={t(
-//                             "userManagement.details.regionPlaceholder",
-//                           )}
-//                           required={true}
-//                           options={[]}
-//                         />
-//                       </div>
-//                     </div>
-
-//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
-//                       <div>
-//                         <SelectField
-//                           name="program"
-//                           label={t("userManagement.details.role")}
-//                           placeholder={t(
-//                             "userManagement.details.rolePlaceholder",
-//                           )}
-//                           required={true}
-//                           options={[]}
-//                         />
-//                       </div>
-//                     </div>
-//                   </div>
-
-//                   <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-//                     <span className="text-[18px] text-primary font-[700]">
-//                       <AiOutlineExclamationCircle />
-//                     </span>
-//                     {t("userManagement.details.password")}
-//                   </h3>
-
-//                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
-//                     <div>
-//                       <TextInput
-//                         name="levelName"
-//                         label={t("userManagement.details.password")}
-//                         placeholder={t(
-//                           "userManagement.details.passwordPlaceholder",
-//                         )}
-//                         required={true}
-//                       />
-//                     </div>
-//                     <div>
-//                       <TextInput
-//                         name="email"
-//                         label={t("userManagement.details.confirmPassword")}
-//                         placeholder={t(
-//                           "userManagement.details.confirmPasswordPlaceholder",
-//                         )}
-//                         required={true}
-//                       />
-//                     </div>
-//                   </div>
-
-//                   {/* Footer */}
-//                   <div className="flex justify-end items-center pt-4">
-//                     <div className="flex gap-3">
-//                       <button
-//                         type="button"
-//                         className="px-4 py-2 border border-[#184994] rounded-md text-sm text-[#184994] hover:bg-gray-50"
-//                       >
-//                         {t("userManagement.actions.cancle")}
-//                       </button>
-//                       <button
-//                         type="submit"
-//                         disabled={isSubmitting}
-//                         className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
-//                       >
-//                         {isSubmitting
-//                           ? t("userManagement.actions.creating")
-//                           : t("userManagement.actions.createUser")}
-//                       </button>
-//                     </div>
-//                   </div>
-//                 </Form>
-//               );
-//             }}
-//           </Formik>
-//         </PageBody>
-//       </div>
-//     </PageLayout>
-//   );
-// };
-
-// export default CreateUser;
-
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { TextInput, SelectField } from "../../../common/form";
@@ -239,13 +29,7 @@ const CreateUser = () => {
   const { t } = useTranslation();
   const toast = useToast();
   const navigate = useNavigate();
-
   const [preview, setPreview] = useState(null);
-
-  // 🔥 Auto Generate Employee ID
-  // const generateEmployeeId = () => {
-  //   return Math.floor(1000 + Math.random() * 9000).toString();
-  // };
 
   const generateEmployeeId = () => {
     const random = Math.floor(1000 + Math.random() * 9000);
@@ -360,16 +144,33 @@ const CreateUser = () => {
                   </h3>
 
                   <div className="grid md:grid-cols-2 gap-4">
-                    <TextInput name="name" label="Full Name" required />
-                    <TextInput name="email" label="Email" required />
+                    <TextInput
+                      name="name"
+                      label={t("userManagement.details.fullName")}
+                      placeholder={t(
+                        "userManagement.details.fullNamePlaceholder",
+                      )}
+                      required
+                    />
+                    <TextInput
+                      name="email"
+                      label={t("userManagement.details.email")}
+                      placeholder={t("userManagement.details.emailPlaceholder")}
+                      required
+                    />
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-4">
-                    <TextInput name="mobile" label="Phone" required />
+                    <TextInput
+                      name="mobile"
+                      label={t("userManagement.details.phone")}
+                      placeholder={t("userManagement.details.phonePlaceholder")}
+                      required
+                    />
 
                     <TextInput
                       name="employee_id"
-                      label="Employee ID"
+                      label={t("userManagement.details.employeeId")}
                       isDisabled={true}
                     />
                   </div>
@@ -377,13 +178,13 @@ const CreateUser = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <SelectField
                       name="department"
-                      label="Department"
+                      label={t("userManagement.details.department")}
                       options={departmentOptions}
                       required
                     />
                     <SelectField
                       name="designation"
-                      label="Designation"
+                      label={t("userManagement.details.designation")}
                       options={designationOptions}
                       required
                     />
@@ -392,11 +193,16 @@ const CreateUser = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <SelectField
                       name="region"
-                      label="Region"
+                      label={t("userManagement.details.region")}
                       options={regionOptions}
                       required
                     />
-                    <TextInput name="city" label="City" required />
+                    <TextInput
+                      name="city"
+                      label={t("userManagement.details.city")}
+                      placeholder={t("userManagement.details.cityPlaceholder")}
+                      required
+                    />
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-4">
@@ -408,61 +214,9 @@ const CreateUser = () => {
                     />
                   </div>
 
-                  {/* IMAGE */}
-                  {/* <div className="mt-4">
-                    <label className="block mb-2">Profile Image</label>
-
-                    {!preview ? (
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => {
-                          const file = e.target.files[0];
-                          setFieldValue("profile_image", file);
-                          if (file) {
-                            setPreview(URL.createObjectURL(file));
-                          }
-                        }}
-                      />
-                    ) : (
-                      <div className="flex gap-4 items-center">
-                        <img
-                          src={preview}
-                          className="w-20 h-20 object-cover rounded border"
-                        />
-
-                        <label className="bg-blue-500 text-white px-3 py-1 rounded cursor-pointer">
-                          Change
-                          <input
-                            type="file"
-                            hidden
-                            onChange={(e) => {
-                              const file = e.target.files[0];
-                              setFieldValue("profile_image", file);
-                              if (file) {
-                                setPreview(URL.createObjectURL(file));
-                              }
-                            }}
-                          />
-                        </label>
-
-                        <button
-                          type="button"
-                          className="bg-red-500 text-white px-3 py-1 rounded"
-                          onClick={() => {
-                            setPreview(null);
-                            setFieldValue("profile_image", null);
-                          }}
-                        >
-                          Remove
-                        </button>
-                      </div>
-                    )}
-                  </div> */}
-
                   <div className="mt-6">
                     <label className="block text-sm font-medium text-gray-700 mb-3">
-                      Profile Image
+                      {t("userManagement.details.profileImage")}
                     </label>
 
                     {!preview ? (
@@ -473,7 +227,7 @@ const CreateUser = () => {
 
                         <label className="bg-accent  text-white px-4 py-2 rounded-md text-sm cursor-pointer transition flex items-center gap-2">
                           <FaUpload className="w-3.5 h-3.5" />
-                          Upload Image
+                          {t("userManagement.details.uploadImage")}
                           <input
                             type="file"
                             accept="image/*"
@@ -537,13 +291,19 @@ const CreateUser = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <TextInput
                       name="password"
-                      label="Password"
+                      label={t("userManagement.details.password")}
+                      placeholder={t(
+                        "userManagement.details.passwordPlaceholder",
+                      )}
                       type="password"
                       required
                     />
                     <TextInput
                       name="confirmPassword"
-                      label="Confirm Password"
+                      label={t("userManagement.details.confirmPassword")}
+                      placeholder={t(
+                        "userManagement.details.confirmPasswordPlaceholder",
+                      )}
                       type="password"
                       required
                     />
@@ -557,7 +317,9 @@ const CreateUser = () => {
                     disabled={isSubmitting}
                     className="px-4 py-2 bg-accent text-white rounded cursor-pointer"
                   >
-                    {isSubmitting ? "Creating..." : "Create User"}
+                    {isSubmitting
+                      ? t("userManagement.actions.creatingUser")
+                      : t("userManagement.actions.createUser")}
                   </button>
                 </div>
               </Form>

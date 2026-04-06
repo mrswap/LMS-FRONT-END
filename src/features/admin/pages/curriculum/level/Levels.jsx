@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import CustomeTable from "../../../common/table/CustomeTable";
-import { MdOutlineFilterAltOff } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
-// import { GiBookCover } from "react-icons/gi";
-// import { IoIosCheckmarkCircleOutline } from "react-icons/io";
-// import { HiOutlineSquare3Stack3D } from "react-icons/hi2";
 import { FaEye } from "react-icons/fa";
 import {
   PageLayout,
@@ -59,10 +55,6 @@ const Levels = () => {
     };
     dispatch(getAllLevels(params));
   };
-
-  // useEffect(() => {
-  //   fetchLevels(1);
-  // }, []);
 
   useEffect(() => {
     const delay = setTimeout(() => {
@@ -124,25 +116,11 @@ const Levels = () => {
       header: t("levels.list.columns.totalChapters"),
     },
     {
-      header: "Total Topic",
+      header: t("levels.list.columns.totalTopics"),
     },
     {
-      header: "Total Module",
+      header: t("levels.list.columns.totalModules"),
     },
-    // {
-    //   header: t("levels.list.columns.status"),
-    //   render: (row) => (
-    //     <span
-    //       className={`px-2 py-1 rounded text-xs font-medium ${
-    //         row.status
-    //           ? "bg-green-100 text-green-700"
-    //           : "bg-red-100 text-red-700"
-    //       }`}
-    //     >
-    //       {row.status ? "Active" : "Inactive"}
-    //     </span>
-    //   ),
-    // },
     {
       header: t("levels.list.columns.status"),
       render: (row) => (
@@ -191,46 +169,7 @@ const Levels = () => {
       </PageHeader>
 
       <PageBody>
-        {/* <div className="bg-white border border-gray-300 rounded-xl p-3 flex flex-wrap items-center gap-3">
-          <div
-            className="flex items-center bg-[#F8FAFC] border border-gray-300 hover:border-blue-500
-           rounded-xl px-3 py-2 w-full md:w-[280px] lg:w-[330px] transition-colors"
-          >
-            <FiSearch className="text-gray-400 text-sm flex-shrink-0" />
-            <input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search levels..."
-              className="bg-transparent outline-none px-2 text-sm w-full"
-            />
-          </div>
-
-          <div className="w-[220px]">
-            <Select
-              value={status}
-              onChange={setStatus}
-              options={statusOptions}
-              styles={customSelectStyles}
-              isSearchable={false}
-            />
-          </div>
-
-          <div
-            className="flex items-center gap-1 ml-auto cursor-pointer group"
-            onClick={resetFilters}
-          >
-            <MdOutlineFilterAltOff
-              className="text-gray-500 group-hover:text-red-500 transition-colors"
-              size={18}
-            />
-            <button className="text-gray-600 group-hover:text-red-500 text-sm font-semibold transition-colors cursor-pointer">
-              {t("levels.list.clearAll")}
-            </button>
-          </div>
-        </div> */}
-
         <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm space-y-4">
-          {/* 🔍 Search */}
           <div className="w-full">
             <div
               className="flex items-center bg-gray-50 border border-gray-200 
@@ -242,7 +181,7 @@ const Levels = () => {
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search topics..."
+                placeholder={t("levels.list.searchPlaceholder")}
                 className="bg-transparent outline-none px-3 text-sm w-full placeholder:text-gray-400"
               />
 
@@ -257,7 +196,6 @@ const Levels = () => {
             </div>
           </div>
 
-          {/* 🎯 Filters */}
           <div className="flex flex-wrap items-center gap-3">
             <div className="w-full sm:w-[48%] lg:w-[210px]">
               <Select
@@ -269,7 +207,6 @@ const Levels = () => {
               />
             </div>
 
-            {/* ❌ Clear Button */}
             <div className="ml-auto flex items-center h-[40px]">
               <div className="relative group">
                 <button
@@ -288,7 +225,7 @@ const Levels = () => {
       opacity-0 group-hover:opacity-100 transition-all duration-200
       whitespace-nowrap pointer-events-none"
                 >
-                  Clear all
+                  {t("levels.list.clearAll")}
                 </div>
               </div>
             </div>
@@ -309,50 +246,6 @@ const Levels = () => {
             />
           </div>
         </div>
-
-        {/* <div className="flex gap-4 w-full mt-4">
-          <div className="flex-1 border border-gray-200 rounded-xl p-4 bg-white shadow-sm">
-            <div className="flex items-center gap-4">
-              <div className="bg-gray-100 text-gray-600 p-3 rounded-lg">
-                <HiOutlineSquare3Stack3D className="text-xl" />
-              </div>
-              <div>
-                <h3 className="text-[12px] text-[#29324C] font-[700]">
-                  {t("levels.list.stats.totalLevels")}
-                </h3>
-                <p className="text-2xl font-bold text-gray-800 ">42</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex-1 border border-gray-200 rounded-xl p-4 bg-white shadow-sm">
-            <div className="flex items-center gap-4">
-              <div className="bg-green-100 text-green-600 p-3 rounded-lg">
-                <IoIosCheckmarkCircleOutline className="text-xl" />
-              </div>
-              <div>
-                <h3 className="text-[12px] text-[#29324C] font-[700]">
-                  {t("levels.list.stats.active")}
-                </h3>
-                <p className="text-2xl font-bold text-gray-800">35</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex-1 border border-gray-200 rounded-xl p-4 bg-white shadow-sm">
-            <div className="flex items-center gap-4">
-              <div className="bg-blue-100 text-blue-600 p-3 rounded-lg">
-                <GiBookCover className="text-xl" />
-              </div>
-              <div>
-                <h3 className="text-[12px] text-[#29324C] font-[700]">
-                  {t("levels.list.stats.avgChapters")}
-                </h3>
-                <p className="text-2xl font-bold text-gray-800">14.2</p>
-              </div>
-            </div>
-          </div>
-        </div> */}
       </PageBody>
     </PageLayout>
   );

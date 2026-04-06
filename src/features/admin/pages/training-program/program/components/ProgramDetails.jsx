@@ -32,10 +32,6 @@ const ProgramDetails = () => {
     (state) => state.program,
   );
 
-  // useEffect(() => {
-  //   dispatch(getProgramById(id));
-  // }, [dispatch]);
-
   useEffect(() => {
     if (id) {
       dispatch(getProgramById(id));
@@ -143,15 +139,14 @@ const ProgramDetails = () => {
   return (
     <PageLayout>
       <div className=" p-8 rounded-lg border border-gray-300">
-        {/* 🔹 Breadcrumb */}
         <Breadcrumb
           items={[
             {
               label: t("program.breadcrumb.trainingProgram"),
-              path: "/programs", // optional (agar clickable chahiye)
+              path: "/programs",
             },
             {
-              label: t("program.breadcrumb.view-program"), // last item (no path)
+              label: t("program.breadcrumb.view-program"),
             },
           ]}
         />
@@ -289,8 +284,8 @@ const ProgramDetails = () => {
                         className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
                       >
                         {isSubmitting
-                          ? t("program.actions.saving")
-                          : t("program.actions.saveandContinue")}
+                          ? t("program.actions.updating")
+                          : t("program.actions.updateProgram")}
                       </button>
                     </div>
                   </div>

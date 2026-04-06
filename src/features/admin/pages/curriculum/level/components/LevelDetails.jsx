@@ -69,47 +69,6 @@ const LevelDetails = () => {
     description: Yup.string().required("Description is required"),
   });
 
-  // const onSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
-  //   console.log("Form submitted!", values);
-
-  //   try {
-  //     const formData = new FormData();
-
-  //     formData.append("levelName", values.levelName);
-  //     formData.append("program", values.program?.value || values.program);
-  //     formData.append("description", values.description);
-
-  //     if (thumbnail) {
-  //       formData.append("thumbnail", thumbnail);
-  //     }
-
-  //     console.log("Submitting with data:", {
-  //       levelName: values.levelName,
-  //       program: values.program,
-  //       description: values.description,
-  //       thumbnail: thumbnail?.name,
-  //     });
-
-  //     // API call ke liye
-  //     // const response = await fetch("/api/levels", {
-  //     //   method: "POST",
-  //     //   body: formData,
-  //     // });
-
-  //     // if (!response.ok) throw new Error("Submission failed");
-
-  //     alert("Level created successfully!");
-  //     resetForm();
-  //     removeThumbnail();
-  //   } catch (error) {
-  //     console.error("Submission error:", error);
-  //     setErrors({ submit: error.message });
-  //     alert("Failed to create level");
-  //   } finally {
-  //     setSubmitting(false);
-  //   }
-  // };
-
   const onSubmit = async (values, { setSubmitting, setErrors }) => {
     console.log("values", values);
 
@@ -147,23 +106,6 @@ const LevelDetails = () => {
       setSubmitting(false);
     }
   };
-
-  // const handleDelete = async () => {
-  //   const confirmDelete = window.confirm(
-  //     "Are you sure you want to delete this level?",
-  //   );
-  //   if (!confirmDelete) return;
-
-  //   try {
-  //     await dispatch(deleteSingleLevel(id)).unwrap();
-  //     toast.success("level deleted successfully ");
-  //     setTimeout(() => {
-  //       navigate("/levels");
-  //     }, 1000);
-  //   } catch (error) {
-  //     toast.error(error?.message || "Delete failed ");
-  //   }
-  // };
 
   const handleDelete = async () => {
     const ok = await dispatch(
@@ -219,7 +161,6 @@ const LevelDetails = () => {
   return (
     <PageLayout>
       <div className=" p-8 rounded-lg border border-gray-300">
-        {/* 🔹 Breadcrumb */}
         <Breadcrumb
           items={[
             {
@@ -247,7 +188,6 @@ const LevelDetails = () => {
                       <span className="text-[18px] text-primary font-[700]">
                         <AiOutlineExclamationCircle />
                       </span>
-                      {/* General Details */}
                       {t("levels.details.generalDetails")}
                     </h3>
 
@@ -290,7 +230,6 @@ const LevelDetails = () => {
                       <span className="text-blue-600">
                         <FiImage />
                       </span>
-                      {/* Level Thumbnail */}
                       {t("levels.details.thumbnail")}
                     </h3>
 
@@ -365,8 +304,7 @@ const LevelDetails = () => {
                         onClick={handleDelete}
                         className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 cursor-pointer"
                       >
-                        {/* {t("common.delete")} */}
-                        Delete Level
+                        {t("levels.actions.deleteLevel")}
                       </button>
 
                       <button
@@ -374,7 +312,9 @@ const LevelDetails = () => {
                         disabled={isSubmitting}
                         className="px-4 py-2 rounded-md text-sm text-white bg-accent cursor-pointer"
                       >
-                        {t("levels.actions.save")}
+                        {isSubmitting
+                          ? t("levels.actions.updating")
+                          : t("levels.actions.updateLevel")}
                       </button>
                     </div>
                   </div>

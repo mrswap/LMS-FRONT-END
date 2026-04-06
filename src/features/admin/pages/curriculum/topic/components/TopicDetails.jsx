@@ -73,38 +73,6 @@ const TopicDetails = () => {
     }
   }, [topic]);
 
-  console.log("topic", topic);
-
-  // const initialValues = {
-  //   topicName: topic?.title || "",
-  //   chapterName: topic?.chapter
-  //     ? {
-  //         label: topic.chapter.title,
-  //         value: topic.chapter.id,
-  //       }
-  //     : null,
-  //   moduleName: topic?.module
-  //     ? {
-  //         label: topic.module.title,
-  //         value: topic.module.id,
-  //       }
-  //     : null,
-  //   levelName: topic?.level
-  //     ? {
-  //         label: topic.level.title,
-  //         value: topic.level.id,
-  //       }
-  //     : null,
-  //   programName: topic?.program
-  //     ? {
-  //         label: topic.program.title,
-  //         value: topic.program.id,
-  //       }
-  //     : null,
-  //   description: topic?.description || "",
-  //   thumbnail: topic?.thumbnail || null,
-  // };
-
   const initialValues = {
     topicName: topic?.title || "",
 
@@ -227,7 +195,6 @@ const TopicDetails = () => {
   return (
     <PageLayout>
       <div className=" p-8 rounded-lg border border-gray-300">
-        {/* 🔹 Breadcrumb */}
         <Breadcrumb
           items={[
             {
@@ -270,9 +237,9 @@ const TopicDetails = () => {
                       <div>
                         <SelectField
                           name="chapterName"
-                          label={t("topic.details.chapterName")}
+                          label={t("topic.details.parentChapter")}
                           placeholder={t(
-                            "topic.details.chapterNamePlaceholder",
+                            "topic.details.parentChapterPlaceholder",
                           )}
                           required={true}
                           options={chaptersOptions || []}
@@ -308,8 +275,10 @@ const TopicDetails = () => {
                       <div>
                         <SelectField
                           name="moduleName"
-                          label={t("topic.details.moduleName")}
-                          placeholder={t("topic.details.moduleNamePlaceholder")}
+                          label={t("topic.details.parentModule")}
+                          placeholder={t(
+                            "topic.details.parentModulePlaceholder",
+                          )}
                           required={true}
                           options={modulesOptions || []}
                           disabled={true}
@@ -318,8 +287,10 @@ const TopicDetails = () => {
                       <div>
                         <SelectField
                           name="levelName"
-                          label={t("topic.details.levelName")}
-                          placeholder={t("topic.details.levelNamePlaceholder")}
+                          label={t("topic.details.parentLevel")}
+                          placeholder={t(
+                            "topic.details.parentLevelPlaceholder",
+                          )}
                           required={true}
                           options={levelOptions || []}
                           disabled={true}
@@ -342,8 +313,8 @@ const TopicDetails = () => {
                         <TextInput
                           name="duration"
                           type="number"
-                          label="Duration (in minutes)"
-                          placeholder={"Enter duration in minutes"}
+                          label={t("topic.details.duration")}
+                          placeholder={t("topic.details.durationPlaceholder")}
                           required={true}
                         />
                       </div>
@@ -440,8 +411,7 @@ const TopicDetails = () => {
                         onClick={handleDelete}
                         className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-gray-50"
                       >
-                        {/* {t("topic.actions.saveasDraft")} */}
-                        Delete Topic
+                        {t("topic.actions.deleteTopic")}
                       </button>
                       <button
                         type="submit"
@@ -449,8 +419,8 @@ const TopicDetails = () => {
                         className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
                       >
                         {isSubmitting
-                          ? t("topic.actions.saving")
-                          : t("topic.actions.saveandContinue")}
+                          ? t("topic.actions.updating")
+                          : t("topic.actions.updateTopic")}
                       </button>
                     </div>
                   </div>
