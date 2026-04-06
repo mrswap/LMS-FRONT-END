@@ -102,7 +102,6 @@ const Users = () => {
     {
       header: t("userManagement.list.columns.name"),
       render: (row) => (
-        // console.log(row),
         <p className="font-semibold text-gray-800 cursor-pointer">{row.name}</p>
       ),
     },
@@ -157,8 +156,6 @@ const Users = () => {
       ),
     },
   ];
-
-  // console.log("users", users);
 
   if (isLoading && !users?.data?.length) return <Loader />;
   if (isError) return <Error message={message} />;
@@ -232,7 +229,7 @@ const Users = () => {
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search topics..."
+                placeholder={t("userManagement.list.searchPlaceholder")}
                 className="bg-transparent outline-none px-3 text-sm w-full placeholder:text-gray-400"
               />
 
@@ -278,7 +275,7 @@ const Users = () => {
       opacity-0 group-hover:opacity-100 transition-all duration-200
       whitespace-nowrap pointer-events-none"
                 >
-                  Clear all
+                  {t("userManagement.list.clearAll")}
                 </div>
               </div>
             </div>

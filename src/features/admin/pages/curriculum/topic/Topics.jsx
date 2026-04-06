@@ -97,10 +97,6 @@ const Topics = () => {
     dispatch(getAllLevels());
   };
 
-  // useEffect(() => {
-  //   fetchTopics(1);
-  // }, []);
-
   useEffect(() => {
     const delay = setTimeout(() => {
       setPage(1);
@@ -236,76 +232,7 @@ const Topics = () => {
       </PageHeader>
 
       <PageBody>
-        {/* <div className="bg-white border border-gray-300 rounded-xl p-3 flex flex-wrap items-center gap-3">
-          <div
-            className="flex items-center bg-[#F8FAFC] border border-gray-300 hover:border-blue-500
-           rounded-xl px-3 py-2 w-full md:w-[280px] lg:w-[330px] transition-colors"
-          >
-            <FiSearch className="text-gray-400 text-sm flex-shrink-0" />
-            <input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search topics..."
-              className="bg-transparent outline-none px-2 text-sm w-full"
-            />
-          </div>
-
-          <div className="w-[220px]">
-            <Select
-              value={level}
-              onChange={setLevel}
-              options={levelOption}
-              styles={customSelectStyles}
-              isSearchable={false}
-            />
-          </div>
-
-          <div className="w-[220px]">
-            <Select
-              value={module}
-              onChange={setModule}
-              options={moduleOption}
-              styles={customSelectStyles}
-              isSearchable={false}
-            />
-          </div>
-
-          <div className="w-[220px]">
-            <Select
-              value={chapter}
-              onChange={setChapter}
-              options={chapterOption}
-              styles={customSelectStyles}
-              isSearchable={false}
-            />
-          </div>
-
-          <div className="w-[220px]">
-            <Select
-              value={status}
-              onChange={setStatus}
-              options={statusOptions}
-              styles={customSelectStyles}
-              isSearchable={false}
-            />
-          </div>
-
-          <div
-            className="flex items-center gap-1 ml-auto cursor-pointer group"
-            onClick={resetFilters}
-          >
-            <MdOutlineFilterAltOff
-              className="text-gray-500 group-hover:text-red-500 transition-colors"
-              size={18}
-            />
-            <button className="text-gray-600 group-hover:text-red-500 text-sm font-semibold transition-colors cursor-pointer">
-              {t("topic.list.clearAll")}
-            </button>
-          </div>
-        </div> */}
-
         <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm space-y-4">
-          {/* 🔍 Search */}
           <div className="w-full">
             <div
               className="flex items-center bg-gray-50 border border-gray-200 
@@ -317,7 +244,7 @@ const Topics = () => {
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search topics..."
+                placeholder={t("topic.list.searchPlaceholder")}
                 className="bg-transparent outline-none px-3 text-sm w-full placeholder:text-gray-400"
               />
 
@@ -332,7 +259,6 @@ const Topics = () => {
             </div>
           </div>
 
-          {/* 🎯 Filters */}
           <div className="flex flex-wrap items-center gap-3">
             <div className="w-full sm:w-[48%] lg:w-[210px]">
               <Select
@@ -374,7 +300,6 @@ const Topics = () => {
               />
             </div>
 
-            {/* ❌ Clear Button */}
             <div className="ml-auto flex items-center h-[40px]">
               <div className="relative group">
                 <button
@@ -393,7 +318,7 @@ const Topics = () => {
       opacity-0 group-hover:opacity-100 transition-all duration-200
       whitespace-nowrap pointer-events-none"
                 >
-                  Clear all
+                  {t("topic.list.clearAll")}
                 </div>
               </div>
             </div>

@@ -122,11 +122,6 @@ const ModuleDetails = () => {
   };
 
   const handleDelete = async () => {
-    // const confirmDelete = window.confirm(
-    //   "Are you sure you want to delete this module?",
-    // );
-    // if (!confirmDelete) return;
-
     const ok = await dispatch(
       showConfirm({ message: "Are you sure you want to delete this module?" }),
     );
@@ -174,7 +169,6 @@ const ModuleDetails = () => {
   return (
     <PageLayout>
       <div className=" p-8 rounded-lg border border-gray-300">
-        {/* 🔹 Breadcrumb */}
         <Breadcrumb
           items={[
             {
@@ -202,7 +196,6 @@ const ModuleDetails = () => {
                       <span className="text-[18px] text-primary font-[700]">
                         <AiOutlineExclamationCircle />
                       </span>
-                      {/* General Details */}
                       {t("module.details.generalDetails")}
                     </h3>
 
@@ -220,8 +213,10 @@ const ModuleDetails = () => {
                       <div>
                         <SelectField
                           name="levelName"
-                          label={t("module.details.levelName")}
-                          placeholder={t("module.details.levelNamePlaceholder")}
+                          label={t("module.details.parentLevel")}
+                          placeholder={t(
+                            "module.details.parentLevelPlaceholder",
+                          )}
                           required={true}
                           options={levelOptions || []}
                           onChange={(option) => {
@@ -354,7 +349,9 @@ const ModuleDetails = () => {
                         disabled={isSubmitting}
                         className="px-4 py-2 rounded-md text-sm text-white bg-accent cursor-pointer"
                       >
-                        {t("module.actions.saveModule")}
+                        {isSubmitting
+                          ? t("module.actions.updating")
+                          : t("module.actions.updateModule")}
                       </button>
                     </div>
                   </div>

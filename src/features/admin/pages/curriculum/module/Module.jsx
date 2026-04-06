@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import CustomeTable from "../../../common/table/CustomeTable";
-import { MdOutlineFilterAltOff } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import {
@@ -69,10 +68,6 @@ const Module = () => {
     dispatch(getAllLevels());
   };
 
-  // useEffect(() => {
-  //   fetchModules(1);
-  // }, []);
-
   useEffect(() => {
     const delay = setTimeout(() => {
       setPage(1);
@@ -134,22 +129,8 @@ const Module = () => {
       header: t("module.list.columns.totalChapters"),
     },
     {
-      header: "Total Topics",
+      header: t("module.list.columns.totalTopics"),
     },
-    // {
-    //   header: t("module.list.columns.status"),
-    //   render: (row) => (
-    //     <span
-    //       className={`px-2 py-1 rounded text-xs font-medium ${
-    //         row.status
-    //           ? "bg-green-100 text-green-700"
-    //           : "bg-red-100 text-red-700"
-    //       }`}
-    //     >
-    //       {row.status ? "Active" : "Inactive"}
-    //     </span>
-    //   ),
-    // },
     {
       header: t("module.list.columns.status"),
       render: (row) => (
@@ -192,64 +173,13 @@ const Module = () => {
             to="create-module"
             className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap"
           >
-            {t("module.actions.addNew")}
+            {t("module.actions.addNewModule")}
           </Link>
         </PageHeaderRight>
       </PageHeader>
 
       <PageBody>
-        {/* <div className="bg-white border border-gray-300 rounded-xl p-3 flex flex-wrap items-center gap-3">
-         
-
-          <div
-            className="flex items-center bg-[#F8FAFC] border border-gray-300 hover:border-blue-500
-           rounded-xl px-3 py-2 w-full md:w-[280px] lg:w-[330px] transition-colors"
-          >
-            <FiSearch className="text-gray-400 text-sm flex-shrink-0" />
-            <input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search modules..."
-              className="bg-transparent outline-none px-2 text-sm w-full"
-            />
-          </div>
-
-          <div className="w-[220px]">
-            <Select
-              value={level}
-              onChange={setLevel}
-              options={levelOption}
-              styles={customSelectStyles}
-              isSearchable={false}
-            />
-          </div>
-
-          <div className="w-[220px]">
-            <Select
-              value={status}
-              onChange={setStatus}
-              options={statusOptions}
-              styles={customSelectStyles}
-              isSearchable={false}
-            />
-          </div>
-
-          <div
-            className="flex items-center gap-1 ml-auto cursor-pointer group"
-            onClick={resetFilters}
-          >
-            <MdOutlineFilterAltOff
-              className="text-gray-500 group-hover:text-red-500 transition-colors"
-              size={18}
-            />
-            <button className="text-gray-600 group-hover:text-red-500 text-sm font-semibold transition-colors cursor-pointer">
-              {t("module.list.clearAll")}
-            </button>
-          </div>
-        </div> */}
-
         <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm space-y-4">
-          {/* 🔍 Search */}
           <div className="w-full">
             <div
               className="flex items-center bg-gray-50 border border-gray-200 
@@ -261,7 +191,7 @@ const Module = () => {
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search topics..."
+                placeholder={t("module.list.searchPlaceholder")}
                 className="bg-transparent outline-none px-3 text-sm w-full placeholder:text-gray-400"
               />
 
@@ -276,7 +206,6 @@ const Module = () => {
             </div>
           </div>
 
-          {/* 🎯 Filters */}
           <div className="flex flex-wrap items-center gap-3">
             <div className="w-full sm:w-[48%] lg:w-[210px]">
               <Select
@@ -298,7 +227,6 @@ const Module = () => {
               />
             </div>
 
-            {/* ❌ Clear Button */}
             <div className="ml-auto flex items-center h-[40px]">
               <div className="relative group">
                 <button
@@ -317,7 +245,7 @@ const Module = () => {
       opacity-0 group-hover:opacity-100 transition-all duration-200
       whitespace-nowrap pointer-events-none"
                 >
-                  Clear all
+                  {t("module.list.clearAll")}
                 </div>
               </div>
             </div>

@@ -162,8 +162,10 @@ const CreateModule = () => {
                       <div>
                         <SelectField
                           name="levelName"
-                          label={t("module.details.levelName")}
-                          placeholder={t("module.details.levelNamePlaceholder")}
+                          label={t("module.details.parentLevel")}
+                          placeholder={t(
+                            "module.details.parentLevelPlaceholder",
+                          )}
                           required={true}
                           options={levelOptions}
                           onChange={(option) => {
@@ -281,20 +283,14 @@ const CreateModule = () => {
                   {/* Footer */}
                   <div className="flex justify-end items-center pt-4">
                     <div className="flex gap-3">
-                      {/* <button
-                        type="button"
-                        className="px-4 py-2 border border-[#184994] rounded-md text-sm text-[#184994] hover:bg-gray-50"
-                      >
-                        {t("module.actions.saveasDraft")}
-                      </button> */}
                       <button
                         type="submit"
                         disabled={isSubmitting}
                         className="px-4 cursor-pointer py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
                       >
                         {isSubmitting
-                          ? t("module.actions.saving")
-                          : t("module.actions.saveandContinue")}
+                          ? t("module.actions.creating")
+                          : t("module.actions.createModule")}
                       </button>
                     </div>
                   </div>
