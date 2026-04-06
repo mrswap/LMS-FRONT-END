@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import CustomeTable from "../../common/table/CustomeTable";
 import { FiSearch } from "react-icons/fi";
 import i18n from "../../../../i18n/index";
+import { useTranslation } from "react-i18next";
 
 const initialLanguages = [
   { id: "LANG001", name: "ENGLISH", status: "Active" },
@@ -47,6 +48,8 @@ const CheckIcon = () => (
 );
 
 export default function LanguageManagement() {
+  const { t } = useTranslation();
+
   // ✅ Load from localStorage
   const [languages, setLanguages] = useState(() => {
     const saved = localStorage.getItem("languages");
@@ -55,12 +58,6 @@ export default function LanguageManagement() {
 
   const [search, setSearch] = useState("");
   const [showModal, setShowModal] = useState(false);
-
-  const [newLang, setNewLang] = useState({
-    id: "",
-    name: "",
-    status: "Active",
-  });
 
   //  Save to localStorage whenever changes
   useEffect(() => {
@@ -126,7 +123,6 @@ export default function LanguageManagement() {
       return [...updated, { ...newLang, name: newLang.name.toUpperCase() }];
     });
 
-    setNewLang({ id: "", name: "", status: "Active" });
     setShowModal(false);
   };
   return (
@@ -135,24 +131,20 @@ export default function LanguageManagement() {
       <div className="flex justify-between items-start mb-6">
         <div>
           <h1 className="text-xl font-bold text-primary">
-            Language Management
+            {t("language.title")}
           </h1>
           <p className="text-sm text-[#29324C] font-[500] mt-1 max-w-md">
-            Manage system languages and translations for the platform interface
-            and learning content.
+            {t("language.desc")}
           </p>
         </div>
 
         <div className="flex gap-3">
           <button className="flex items-center gap-2 px-4 py-2 shadow-sm rounded-lg bg-white text-sm font-semibold text-gray-700">
-            Export Translation
+            {t("language.exportTranslation")}
           </button>
 
-          <button
-            onClick={() => setShowModal(true)}
-            className="px-4 py-2 bg-accent text-white rounded-[8px] text-sm font-semibold"
-          >
-            + Add Language
+          <button className="px-4 py-2 bg-accent text-white rounded-[8px] text-sm font-semibold">
+            {t("language.addLanguage")}
           </button>
         </div>
       </div>
@@ -165,7 +157,7 @@ export default function LanguageManagement() {
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search Language"
+            placeholder={t("language.searchPlaceholder")}
             className="bg-transparent outline-none px-2 text-sm w-full"
           />
         </div>
@@ -174,16 +166,16 @@ export default function LanguageManagement() {
       {/* Table */}
       <CustomeTable
         columns={[
-          { key: "id", label: "LANGUAGE ID" },
-          { key: "name", label: "LANGUAGE NAME" },
+          { key: "id", label: t("language.colums.langId") },
+          { key: "name", label: t("language.colums.langName") },
           {
             key: "status",
-            label: "STATUS",
+            label: t("language.colums.status"),
             render: (val) => <StatusBadge status={val} />,
           },
           {
             key: "actions",
-            label: "ACTIONS",
+            label: t("language.colums.actions"),
             render: (_, row) => (
               <div className="flex gap-2 justify-center">
                 <button className="w-8 h-8 flex items-center justify-center rounded-md bg-slate-800">
@@ -203,66 +195,6 @@ export default function LanguageManagement() {
         data={filtered}
         emptyText="No languages found."
       />
-
-      {/* Modal */}
-      {showModal && (
-        <div
-          onClick={() => setShowModal(false)}
-          className="fixed inset-0 bg-black/40 flex items-center justify-center"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="bg-white p-6 rounded-xl w-96"
-          >
-            <h2 className="text-lg font-bold mb-4">Add Language</h2>
-
-            <input
-              placeholder="Language ID"
-              value={newLang.id}
-              onChange={(e) =>
-                setNewLang((p) => ({ ...p, id: e.target.value }))
-              }
-              className="w-full border rounded-lg px-3 py-2 mb-3"
-            />
-
-            <input
-              placeholder="Language Name"
-              value={newLang.name}
-              onChange={(e) =>
-                setNewLang((p) => ({ ...p, name: e.target.value }))
-              }
-              className="w-full border rounded-lg px-3 py-2 mb-3"
-            />
-
-            <select
-              value={newLang.status}
-              onChange={(e) =>
-                setNewLang((p) => ({ ...p, status: e.target.value }))
-              }
-              className="w-full border rounded-lg px-3 py-2 mb-4"
-            >
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
-            </select>
-
-            <div className="flex gap-3">
-              <button
-                onClick={() => setShowModal(false)}
-                className="flex-1 border rounded-lg py-2"
-              >
-                Cancel
-              </button>
-
-              <button
-                onClick={handleAdd}
-                className="flex-1 bg-green-500 text-white rounded-lg py-2"
-              >
-                Add
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

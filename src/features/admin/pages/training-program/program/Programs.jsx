@@ -178,7 +178,7 @@ const Programs = () => {
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search Programs..."
+              placeholder={t("program.list.searchPlaceholder")} 
               className="bg-transparent outline-none px-2 text-sm w-full"
             />
           </div>

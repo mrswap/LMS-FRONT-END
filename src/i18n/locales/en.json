@@ -113,32 +113,16 @@
     "list": {
       "title": "User Management",
       "subtitle": "Manage, audit, and support medical professional accounts across all regions.",
-      "filters": "FILTERS",
-      "clearAll": "Clear All",
-      "searchPlaceholder": "Search by name, email, or region...",
+      "searchPlaceholder": "Search by topic name...",
+      "clearAll" : "Clear All",
       "columns": {
         "userId": "User ID",
           "name": "Name",
           "contact": "Contact",
           "region": "Region",
           "programs": "Programs",
-          "progress": "Progress",
           "status": "Status",
           "actions": "Actions"
-      },
-      "stats": {
-        "totalActive": {
-          "title": "Total Active Professionals",
-          "growth": "12% from this month"
-        },
-        "avgProgress": {
-          "title": "Average Progress",
-          "growth": "5% increase this week"
-        },
-        "pending": {
-          "title": "Pending Approvals",
-          "subtext": "8 requests waiting"
-        }
       }
     },
     "details": {
@@ -150,68 +134,39 @@
       "emailPlaceholder": "Enter email address",
       "phone": "Phone Number",
       "phonePlaceholder": "Enter phone number",
+      "employeeId" : "Employee ID",
+      "employeeIdPlaceholder" : "Select EmployeeId",
+      "department" : "Department",
+      "departmentPlaceholder" : "Select Department",
+      "designation" : "Designation",
+      "designationPlaceholder" : "Select Designation",
       "region": "Region",
       "regionPlaceholder": "Select region",
+      "city" : "City",
+      "cityPlaceholder" : "Enter city",
       "role": "Role",
       "rolePlaceholder": "Select role",
       "password": "Password",
       "passwordPlaceholder": "Enter password",
+      "newPassword" : "New Password",
+      "newPasswordPlaceholder" : "Enter new password",
       "confirmPassword": "Confirm Password",
       "confirmPasswordPlaceholder": "Re-enter password",
-
-      "header": {
-        "id": "ID",
-        "role": "Medical Instructor",
-        "accountStatus": "Account Status",
-        "active": "Active"
-      },
-      "stats": {
-        "lastLogin": "Last Login",
-        "courses": "Courses Completed",
-        "completionRate": "Completion Rate",
-        "hoursAgo": "{{count}} hours ago",
-        "coursesCount": "{{count}} Courses",
-        "perfect": "Perfect"
-      },
-      "training": {
-        "title": "Current Training Programs",
-        "viewAll": "View All",
-        "progress": "Progress: {{value}}%",
-        "modules": "{{completed}}/{{total}} Modules",
-        "completed": "Completed"
-      },
-      "certificates": {
-        "columns": {
-          "certificate": "Certificate",
-          "issueDate": "Issue Date",
-          "status": "Status",
-          "actions": "Actions"
-        },
-        "completed": "Completed"
-      }
+      "profileImage" : "Profile Image",
+      "uploadImage" : "Upload Image"
     },
     "create" : {
       "title": "Create New User",
       "subtitle": "Onboard a new medical professional or staff member to the platform."
     },
-    "status": {
-      "active": "Active",
-      "onLeave": "On Leave",
-      "inactive": "Inactive",
-      "all" : "All"
-    },
     "actions": {
       "addNewUser": "+ Add New User",
-      "saveUser": "Save User",
       "deleteUser": "Delete User",
-      "saveasDraft": "Save as Draft",
-      "saveandContinue": "Save & Continue",
-      "saving" : "Saving...",
       "cancle" : "Cancel",
       "createUser": "Create User",
-      "creating" : "Creating...",
-      "udpateUser": "Update User",
-      "updateing" : "Updating..."
+      "creatingUser" : "Creating...", 
+      "updateUser": "Update User",
+      "updateingUser" : "Updating..."
     },
     "breadcrumb": {
       "users": "Users",
@@ -223,7 +178,7 @@
     "list": {
       "title": "Program Management",
       "subtitle": "Configure your medical training curriculum, structure modules, and manage enrollment details seamlessly for an organized and scalable program.",
-      "filters": "FILTERS",
+      "searchPlaceholder" :"Search by program name...",
       "clearAll": "Clear All",
       "columns": {
         "programName": "Program Name",
@@ -249,19 +204,13 @@
       "title": "Create Program",
       "subtitle": "Configure your medical training curriculum, structure modules, and manage enrollment details seamlessly for an organized and scalable program."
     },
-    "status": {
-      "active": "Active",
-      "draft": "Draft",
-      "archived": "Archived",
-      "all" : "All"
-    },
     "actions": {
       "addNewProgram": "+ Add New Program",
-      "save": "Save Program",
-      "saveasDraft": "Save as Draft",
-      "saveandContinue": "Save & Continue",
-      "saving" : "Saving...",
-      "deleteProgram": "Delete Program"
+      "deleteProgram": "Delete Program",
+      "createProgram" : "Create Program",
+      "creating" : "Creating...",
+      "updateProgram" : "Update Program",
+      "updating" : "Updating..."
     },
     "breadcrumb": {
       "trainingProgram": "Training Program",
@@ -273,20 +222,16 @@
     "list": {
       "title": "Level Management",
       "subtitle": "Manage and organize training levels to structure the learning journey...",
-      "filters": "FILTERS",
+      "searchPlaceholder": "Search by level name...",
       "clearAll": "Clear All",
       "columns": {
         "levelName": "Level Name",
         "parentProgram": "Parent Program",
         "totalChapters": "Total Chapters",
-        "duration": "Duration",
+        "totalTopics":"Total Topics",
+        "totalModules" : "Total Modules",
         "status": "Status",
         "actions": "Actions"
-      },
-      "stats": {
-        "totalLevels": "TOTAL LEVELS",
-        "active": "ACTIVE",
-        "avgChapters": "AVG CHAPTERS/LEVEL"
       }
     },
     "details": {
@@ -306,55 +251,42 @@
       "title": "Level Management",
       "subtitle": "Manage and organize training levels to structure the learning journey from foundational knowledge to advanced clinical expertise."
     },
-    "status": {
-      "active": "Active",
-      "draft": "Draft",
-      "archived": "Archived",
-      "all" : "All"
-    },
     "actions": {
       "addNew": "+ Add New Level",
-      "save": "Save Level",
-      "saveasDraft": "Save as Draft",
-      "saveandContinue": "Save & Continue",
-      "saving" : "Saving..."
+      "createLevel" : "Create Level",
+      "creating" : "Creating...",
+      "updateLevel" : "Update Level",
+      "updating" : "Updating...",
+      "deleteLevel" : "Delete Level"
     },
     "breadcrumb": {
       "curriculum": "Curriculum",
-      "view-level": "Level"
+      "view-level": "View Level"
      }
   },
-  "common": {
-    "delete": "Delete"
-  },
-
 
   "module": {
     "list": {
       "title": "Module Management",
       "subtitle": "Design, organize, and manage modules with structured content, assessments, and progress tracking for a seamless learning experience.",
-      "filters": "FILTERS",
+      "searchPlaceholder" :"Search by module name...",
       "clearAll": "Clear All",
       "columns": {
         "moduleName": "Module Name",
         "parentLevel": "Parent Level",
         "totalChapters": "Total Chapters",
+        "totalTopics" :"Total Topics",
         "duration": "Duration",
         "status": "Status",
         "actions": "Actions"
-      },
-      "stats": {
-        "totalLevels": "TOTAL LEVELS",
-        "active": "ACTIVE",
-        "avgChapters": "AVG CHAPTERS/LEVEL"
       }
     },
     "details": {
       "generalDetails": "General Details",
-       "moduleName": "Module Name",
+      "moduleName": "Module Name",
       "moduleNamePlaceholder": "Enter module name",
-      "levelName": "Level Name",
-      "levelNamePlaceholder": "Select a level",
+      "parentLevel": "Parent Level",
+      "parentLevelPlaceholder": "Select a level",
       "parentProgram": "Parent Program",
       "perentProgramPlaceholder": "Select a program",
       "description": "Description",
@@ -375,12 +307,12 @@
       "all" : "All"
     },
     "actions": {
-      "addNew": "+ Add New Module",
-      "saveModule": "Save Module",
+      "addNewModule": "+ Add New Module",
+      "createModule": "Create Module",
+      "creating" : "Creating...",
       "deleteModule": "Delete Module",
-      "saveasDraft": "Save as Draft",
-      "saveandContinue": "Save & Continue",
-      "saving" : "Saving..."
+      "updateModule": "Update Module",
+      "updating": "Updating..."
     },
     "breadcrumb": {
       "curriculum": "Curriculum",
@@ -392,31 +324,27 @@
     "list": {
       "title": "Chapter Management",
       "subtitle": "Define and structure chapter content to break modules into focused, easy-to-understand learning segments.",
-      "filters": "FILTERS",
+      "searchPlaceholder": "Search by chapter name...",
       "clearAll": "Clear All",
       "columns": {
         "chapterName": "Chapter Name",
         "parentModule": "Parent Module",
         "parentLevel": "Parent Level",
         "totalChapters": "Total Chapters",
+        "totalTopics" :"Total Topics",
         "duration": "Duration",
         "status": "Status",
         "actions": "Actions"
-      },
-      "stats": {
-        "totalLevels": "TOTAL LEVELS",
-        "active": "ACTIVE",
-        "avgChapters": "AVG CHAPTERS/LEVEL"
       }
     },
     "details": {
       "generalDetails": "General Details",
       "chapterName": "Chapter Name",
       "chapterNamePlaceholder": "Enter chapter name",
-      "moduleName": "Parent Module",
-      "moduleNamePlaceholder": "Select a module",
-      "levelName": "Level Name",
-      "levelNamePlaceholder": "Select a level",
+      "parentModule": "Parent Module",
+      "parentModulePlaceholder": "Select a module",
+      "parentLevel": "Parent Level",
+      "parentLevelPlaceholder": "Select a level",
       "parentProgram": "Parent Program",
       "perentProgramPlaceholder": "Select a program",
       "description": "Description",
@@ -430,19 +358,13 @@
       "title": "Create New Chapter",
       "subtitle": "Define and structure chapter content to break modules into focused, easy-to-understand learning segments."
     },
-    "status": {
-      "active": "Active",
-      "draft": "Draft",
-      "archived": "Archived",
-      "all" : "All"
-    },
     "actions": {
       "addNewChapter": "+ Add New Chapter",
-      "saveModule": "Save Chapter",
-      "deleteModule": "Delete Chapter",
-      "saveasDraft": "Save as Draft",
-      "saveandContinue": "Save & Continue",
-      "saving" : "Saving..."
+      "createChapter": "Create Chapter",
+      "creating" : "Creating...",
+      "deleteChapter": "Delete Chapter",
+      "updateChapter" : "Update Chapter",
+      "updating" : "Updating..."
     },
     "breadcrumb": {
       "curriculum": "Curriculum",
@@ -454,36 +376,32 @@
     "list": {
       "title": "Topic Management",
       "subtitle": "Manage granular learning objectives, tracking student progress and content delivery across specialized medical departments.",
-      "filters": "FILTERS",
+      "searchPlaceholder": "Search by level name...",
       "clearAll": "Clear All",
       "columns": {
         "topicName": "Topic Name",
         "parentChapter": "Parent Chapter",
         "parentModule": "Parent Module",
         "parentLevel": "Parent Level",
-        "totalChapters": "Total Chapters",
         "duration": "Duration",
         "status": "Status",
         "actions": "Actions"
-      },
-      "stats": {
-        "totalLevels": "TOTAL LEVELS",
-        "active": "ACTIVE",
-        "avgChapters": "AVG CHAPTERS/LEVEL"
       }
     },
     "details": {
       "generalDetails": "General Details",
       "topicName": "Topic Name",
       "topicNamePlaceholder": "Enter topic name",
-      "chapterName": "Parent Chapter",
-      "chapterNamePlaceholder": "Select a chapter",
-      "moduleName": "Parent Module",
-      "moduleNamePlaceholder": "Select a module",
-      "levelName": "Level Name",
-      "levelNamePlaceholder": "Select a level",
+      "parentChapter": "Parent Chapter",
+      "parentChapterPlaceholder": "Select a chapter",
+      "parentModule": "Parent Module",
+      "parentModulePlaceholder": "Select a module",
+      "parentLevel": "Level Name",
+      "parentLevelPlaceholder": "Select a level",
       "parentProgram": "Parent Program",
       "perentProgramPlaceholder": "Select a program",
+      "duration" : "Duration (in minutes)",
+      "durationPlaceholder" : "Enter duration in minutes",
       "description": "Description",
       "descriptionPlaceholder": "Write module description...",
       "thumbnail": "Level Thumbnail",
@@ -495,19 +413,13 @@
       "title": "Create New Topic",
       "subtitle": "Manage granular learning objectives, tracking student progress and content delivery across specialized medical departments."
     },
-    "status": {
-      "active": "Active",
-      "draft": "Draft",
-      "archived": "Archived",
-      "all" : "All"
-    },
     "actions": {
       "addNewTopic": "+ Add New Topic",
-      "saveTopic": "Save Save Topic",
+      "createTopic": "Create Topic",
+      "creating" : "Creating...",
       "deleteTopic": "Delete Topic",
-      "saveasDraft": "Save as Draft",
-      "saveandContinue": "Save & Continue",
-      "saving" : "Saving..."
+      "updateTopic" : "Update topic",
+      "updating" : "Updating..."
     },
     "breadcrumb": {
       "curriculum": "Curriculum",
@@ -515,20 +427,18 @@
      }
   },
   
-
   "language": { 
     "title": "Language Management",
     "desc": "Manage system languages and translations for the platform interface and learning content.",
-    "addLanguage": "Add Language",
-    "export": "Export Translation",
-    "search": "Search Language",
-    "noData": "No languages found.",
-    "id": "Language ID",
-    "name": "Language Name",
-    "status": "Status",
-    "active": "Active",
-    "inactive": "Inactive",
-    "cancel": "Cancel",
-    "add": "Add Language"
+    "addLanguage": "+ Add Language",
+    "exportTranslation": "Export Translation",
+    "searchPlaceholder": "Search Language",
+     "colums" : {
+       "noData": "No languages found.",
+       "langId": "Language ID",
+       "langName": "Language Name",
+       "status": "Status",
+       "actions" : "Actions"
+     }
   }
 }

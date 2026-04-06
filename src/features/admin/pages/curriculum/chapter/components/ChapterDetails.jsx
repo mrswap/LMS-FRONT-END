@@ -132,11 +132,6 @@ const ChapterDetails = () => {
   };
 
   const handleDelete = async () => {
-    // const confirmDelete = window.confirm(
-    //   "Are you sure you want to delete this chapter?",
-    // );
-    // if (!confirmDelete) return;
-
     const ok = await dispatch(
       showConfirm({ message: "Are you sure you want to delete this chapter?" }),
     );
@@ -184,7 +179,6 @@ const ChapterDetails = () => {
   return (
     <PageLayout>
       <div className=" p-8 rounded-lg border border-gray-300">
-        {/* 🔹 Breadcrumb */}
         <Breadcrumb
           items={[
             {
@@ -230,9 +224,9 @@ const ChapterDetails = () => {
                       <div>
                         <SelectField
                           name="moduleName"
-                          label={t("chapter.details.moduleName")}
+                          label={t("chapter.details.parentModule")}
                           placeholder={t(
-                            "chapter.details.moduleNamePlaceholder",
+                            "chapter.details.parentModulePlaceholder",
                           )}
                           required={true}
                           options={modulesOptions || []}
@@ -263,9 +257,9 @@ const ChapterDetails = () => {
                       <div>
                         <SelectField
                           name="levelName"
-                          label={t("chapter.details.levelName")}
+                          label={t("chapter.details.parentLevel")}
                           placeholder={t(
-                            "chapter.details.levelNamePlaceholder",
+                            "chapter.details.parentLevelPlaceholder",
                           )}
                           required={true}
                           options={levelOptions || []}
@@ -377,8 +371,7 @@ const ChapterDetails = () => {
                         onClick={handleDelete}
                         className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-gray-50"
                       >
-                        {/* {t("chapter.actions.saveasDraft")} */}
-                        Delete Chapter
+                        {t("chapter.actions.deleteChapter")}
                       </button>
                       <button
                         type="submit"
@@ -386,8 +379,8 @@ const ChapterDetails = () => {
                         className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
                       >
                         {isSubmitting
-                          ? t("chapter.actions.saving")
-                          : t("chapter.actions.saveandContinue")}
+                          ? t("chapter.actions.updating")
+                          : t("chapter.actions.updateChapter")}
                       </button>
                     </div>
                   </div>

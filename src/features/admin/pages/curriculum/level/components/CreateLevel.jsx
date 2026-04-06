@@ -241,20 +241,14 @@ const CreateLevel = () => {
                   {/* Footer */}
                   <div className="flex justify-end items-center pt-4">
                     <div className="flex gap-3">
-                      {/* <button
-                        type="button"
-                        className="px-4 py-2 border border-[#184994] rounded-md text-sm text-[#184994] hover:bg-gray-50"
-                      >
-                        {t("levels.actions.saveasDraft")}
-                      </button> */}
                       <button
                         type="submit"
                         disabled={isSubmitting}
                         className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
                       >
                         {isSubmitting
-                          ? t("levels.actions.saving")
-                          : t("levels.actions.saveandContinue")}
+                          ? t("levels.actions.creating")
+                          : t("levels.actions.createLevel")}
                       </button>
                     </div>
                   </div>
