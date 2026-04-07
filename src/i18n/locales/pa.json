@@ -9,26 +9,35 @@
     "forgotPassword": "ਪਾਸਵਰਡ ਭੁੱਲ ਗਏ?",
     "button": "ਸਾਈਨ ਇਨ ਕਰੋ",
     "signingIn": "ਸਾਈਨ ਇਨ ਹੋ ਰਿਹਾ ਹੈ...",
-    "trouble": "ਸਾਈਨ ਇਨ ਕਰਨ ਵਿੱਚ ਸਮੱਸਿਆ?",
-    "contactAdmin": "ਆਪਣੇ ਸਿਸਟਮ ਐਡਮਿਨਿਸਟ੍ਰੇਟਰ ਨਾਲ ਸੰਪਰਕ ਕਰੋ"
+    "trouble": "ਸਾਈਨ ਇਨ ਕਰਨ ਵਿੱਚ ਸਮੱਸਿਆ ਆ ਰਹੀ ਹੈ?",
+    "contactAdmin": "ਆਪਣੇ ਸਿਸਟਮ ਐਡਮਿਨਿਸਟ੍ਰੇਟਰ ਨਾਲ ਸੰਪਰਕ ਕਰੋ",
+    "validation": {
+      "emailRequired": "ਈਮੇਲ ਲਾਜ਼ਮੀ ਹੈ",
+      "emailInvalid": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਵੈਧ ਈਮੇਲ ਪਤਾ ਦਰਜ ਕਰੋ",
+      "passwordRequired": "ਪਾਸਵਰਡ ਲਾਜ਼ਮੀ ਹੈ"
+    }
   },
 
   "forgotPassword": {
     "title": "ਪਾਸਵਰਡ ਭੁੱਲ ਗਏ?",
     "subtitle": "ਆਪਣਾ ਰਜਿਸਟਰਡ ਈਮੇਲ ਪਤਾ ਦਰਜ ਕਰੋ ਅਤੇ ਅਸੀਂ ਤੁਹਾਨੂੰ ਪਾਸਵਰਡ ਰੀਸੈਟ ਕਰਨ ਲਈ ਇੱਕ ਲਿੰਕ ਭੇਜਾਂਗੇ।",
     "emailLabel": "ਈਮੇਲ ਪਤਾ",
-    "emailPlaceholder": "you@company.com",
+    "emailPlaceholder": "ਤੁਸੀਂ@ਕੰਪਨੀ.ਕਾਮ",
     "button": "ਲਿੰਕ ਭੇਜੋ",
     "sending": "ਭੇਜਿਆ ਜਾ ਰਿਹਾ ਹੈ...",
     "back": "ਸਾਈਨ ਇਨ 'ਤੇ ਵਾਪਸ ਜਾਓ",
-    "spam": "ਆਪਣਾ ਸਪੈਮ ਫੋਲਡਰ ਚੈਕ ਕਰੋ",
+    "spam": "ਆਪਣਾ ਸਪੈਮ ਫੋਲਡਰ ਚੈੱਕ ਕਰੋ",
     "notReceived": "ਈਮੇਲ ਨਹੀਂ ਮਿਲੀ?",
     "rememberYourPassword": "ਆਪਣਾ ਪਾਸਵਰਡ ਯਾਦ ਹੈ?",
-    "signIn": "ਸਾਈਨ ਇਨ ਕਰੋ"
+    "signIn": "ਸਾਈਨ ਇਨ ਕਰੋ",
+    "validation": {
+      "emailRequired": "ਈਮੇਲ ਲਾਜ਼ਮੀ ਹੈ",
+      "emailInvalid": "ਅਵੈਧ ਈਮੇਲ ਪਤਾ"
+    }
   },
 
   "checkEmail": {
-    "title": "ਆਪਣੀ ਈਮੇਲ ਚੈਕ ਕਰੋ",
+    "title": "ਆਪਣੀ ਈਮੇਲ ਚੈੱਕ ਕਰੋ",
     "subtitle": "ਅਸੀਂ ਇੱਕ ਪਾਸਵਰਡ ਰੀਸੈਟ ਲਿੰਕ ਭੇਜਿਆ ਹੈ",
     "openApp": "ਈਮੇਲ ਐਪ ਖੋਲ੍ਹੋ",
     "resend": "ਲਿੰਕ ਦੁਬਾਰਾ ਭੇਜੋ",
@@ -47,8 +56,52 @@
     "rules": {
       "min": "ਘੱਟੋ-ਘੱਟ 8 ਅੱਖਰ",
       "uppercase": "ਘੱਟੋ-ਘੱਟ 1 ਵੱਡਾ ਅੱਖਰ",
-      "number": "ਘੱਟੋ-ਘੱਟ 1 ਅੰਕ",
+      "number": "ਘੱਟੋ-ਘੱਟ 1 ਨੰਬਰ",
       "special": "ਘੱਟੋ-ਘੱਟ 1 ਵਿਸ਼ੇਸ਼ ਅੱਖਰ"
+    },
+    "validation": {
+      "passwordRequired": "ਪਾਸਵਰਡ ਲਾਜ਼ਮੀ ਹੈ",
+      "passwordMin": "ਘੱਟੋ-ਘੱਟ 8 ਅੱਖਰ ਹੋਣੇ ਚਾਹੀਦੇ ਹਨ",
+      "passwordUppercase": "ਘੱਟੋ-ਘੱਟ 1 ਵੱਡਾ ਅੱਖਰ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "passwordNumber": "ਘੱਟੋ-ਘੱਟ 1 ਨੰਬਰ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "passwordSpecial": "ਘੱਟੋ-ਘੱਟ 1 ਖਾਸ ਅੱਖਰ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "confirmPasswordRequired": "ਪਾਸਵਰਡ ਦੀ ਪੁਸ਼ਟੀ ਲਾਜ਼ਮੀ ਹੈ",
+      "passwordMatch": "ਪਾਸਵਰਡ ਮੇਲ ਖਾਣੇ ਚਾਹੀਦੇ ਹਨ"
+    }
+  },
+
+  "profile": {
+    "title": "ਪ੍ਰੋਫਾਈਲ ਸੈਟਿੰਗਜ਼",
+    "subtitle": "ਆਪਣੀ ਨਿੱਜੀ ਜਾਣਕਾਰੀ ਅਤੇ ਖਾਤੇ ਦੇ ਵੇਰਵੇ ਸੰਭਾਲੋ",
+
+    "details": {
+      "name": "ਪੂਰਾ ਨਾਮ",
+      "namePlaceholder": "ਆਪਣਾ ਪੂਰਾ ਨਾਮ ਦਰਜ ਕਰੋ",
+      "email": "ਈਮੇਲ",
+      "emailPlaceholder": "ਈਮੇਲ ਪਤਾ ਦਰਜ ਕਰੋ",
+      "mobile": "ਮੋਬਾਈਲ ਨੰਬਰ",
+      "mobilePlaceholder": "10 ਅੰਕਾਂ ਵਾਲਾ ਮੋਬਾਈਲ ਨੰਬਰ ਦਰਜ ਕਰੋ",
+      "city": "ਸ਼ਹਿਰ",
+      "cityPlaceholder": "ਸ਼ਹਿਰ ਦਰਜ ਕਰੋ",
+      "country": "ਦੇਸ਼",
+      "countryPlaceholder": "ਦੇਸ਼ ਚੁਣੋ",
+      "upload": "ਅਪਲੋਡ ਕਰੋ"
+    },
+
+    "actions": {
+      "updateProfile": "ਪ੍ਰੋਫਾਈਲ ਅਪਡੇਟ ਕਰੋ",
+      "updating": "ਅਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
+    },
+
+    "validation": {
+      "nameRequired": "ਨਾਮ ਲਾਜ਼ਮੀ ਹੈ",
+      "emailRequired": "ਈਮੇਲ ਲਾਜ਼ਮੀ ਹੈ",
+      "emailInvalid": "ਗਲਤ ਈਮੇਲ",
+      "mobileRequired": "ਮੋਬਾਈਲ ਨੰਬਰ ਲਾਜ਼ਮੀ ਹੈ",
+      "mobileInvalid": "ਵੈਧ 10 ਅੰਕਾਂ ਵਾਲਾ ਮੋਬਾਈਲ ਨੰਬਰ ਦਰਜ ਕਰੋ",
+      "cityRequired": "ਸ਼ਹਿਰ ਲਾਜ਼ਮੀ ਹੈ",
+      "cityMin": "ਸ਼ਹਿਰ ਘੱਟੋ-ਘੱਟ 2 ਅੱਖਰਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "countryRequired": "ਦੇਸ਼ ਲਾਜ਼ਮੀ ਹੈ"
     }
   },
 
@@ -56,36 +109,43 @@
     "searchPlaceholder": "ਐਨਾਲਿਟਿਕਸ, ਉਪਭੋਗਤਾ ਜਾਂ ਕੋਰਸ ਖੋਜੋ...",
     "notifications": "ਸੂਚਨਾਵਾਂ",
     "messages": "ਸੰਦੇਸ਼",
-    "profileName": "ਡਾ. ਸਾਰਾ ਚੇਨ",
+    "profileName": "ਡਾ. ਸਾਰਾ ਚੈਨ",
     "role": "ਸਿਸਟਮ ਐਡਮਿਨ"
   },
 
   "sidebar": {
     "dashboard": "ਡੈਸ਼ਬੋਰਡ",
+
     "userManagement": "ਉਪਭੋਗਤਾ ਪ੍ਰਬੰਧਨ",
     "assignTrainingProgram": "ਸਿਖਲਾਈ ਪ੍ਰੋਗਰਾਮ ਅਸਾਈਨ ਕਰੋ",
+
     "trainingPrograms": "ਸਿਖਲਾਈ ਪ੍ਰੋਗਰਾਮ",
     "programList": "ਪ੍ਰੋਗਰਾਮਾਂ ਦੀ ਸੂਚੀ",
     "createProgram": "ਪ੍ਰੋਗਰਾਮ ਬਣਾਓ",
     "programAssignment": "ਪ੍ਰੋਗਰਾਮ ਅਸਾਈਨਮੈਂਟ",
+
     "curriculumManagement": "ਪਾਠਕ੍ਰਮ ਪ੍ਰਬੰਧਨ",
     "levels": "ਪੱਧਰ",
     "modules": "ਮੋਡੀਊਲ",
     "chapters": "ਅਧਿਆਏ",
     "topics": "ਵਿਸ਼ੇ",
-    "bulkImport": "ਬਲਕ ਇੰਪੋਰਟ",
+    "bulkImport": "ਬਲਕ ਆਯਾਤ",
+
     "contentManagement": "ਸਮੱਗਰੀ ਪ੍ਰਬੰਧਨ",
     "learningUnitBuilder": "ਲਰਨਿੰਗ ਯੂਨਿਟ ਬਿਲਡਰ",
     "interactiveContent": "ਇੰਟਰਐਕਟਿਵ ਸਮੱਗਰੀ",
     "mediaLibrary": "ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ",
+
     "assessmentManagement": "ਮੁਲਾਂਕਣ ਪ੍ਰਬੰਧਨ",
-    "quizForTopic": "ਵਿਸ਼ੇ ਲਈ ਕੁਇਜ਼",
+    "quizForTopic": "ਵਿਸ਼ੇ ਲਈ ਕਵਿਜ਼",
     "examForLevel": "ਪੱਧਰ ਲਈ ਪ੍ਰੀਖਿਆ",
-    "faq": "ਅਕਸਰ ਪੁੱਛੇ ਜਾਣ ਵਾਲੇ ਸਵਾਲ",
+    "faq": "ਆਮ ਸਵਾਲ",
+
     "trainingCertification": "ਸਿਖਲਾਈ ਅਤੇ ਪ੍ਰਮਾਣੀਕਰਣ",
     "trainingAssignment": "ਸਿਖਲਾਈ ਅਸਾਈਨਮੈਂਟ",
     "progressTracker": "ਪ੍ਰਗਤੀ ਟਰੈਕਰ",
     "certification": "ਪ੍ਰਮਾਣੀਕਰਣ",
+
     "reportsAdministration": "ਰਿਪੋਰਟਾਂ ਅਤੇ ਪ੍ਰਸ਼ਾਸਨ",
     "topResult": "ਚੋਟੀ ਦਾ ਨਤੀਜਾ",
     "reportsAnalytics": "ਰਿਪੋਰਟਾਂ ਅਤੇ ਐਨਾਲਿਟਿਕਸ",
@@ -95,14 +155,16 @@
     "completionReports": "ਪੂਰਤੀ ਰਿਪੋਰਟਾਂ",
     "rolesPermission": "ਭੂਮਿਕਾਵਾਂ ਅਤੇ ਇਜਾਜ਼ਤਾਂ",
     "systemSettings": "ਸਿਸਟਮ ਸੈਟਿੰਗਾਂ",
-    "multiLanguage": "ਬਹੁਭਾਸ਼ਾ",
+
+    "multiLanguage": "ਬਹੁ-ਭਾਸ਼ਾਈ",
+
     "logout": "ਲੌਗਆਉਟ"
   },
 
   "userManagement": {
     "list": {
       "title": "ਉਪਭੋਗਤਾ ਪ੍ਰਬੰਧਨ",
-      "subtitle": "ਸਾਰੇ ਖੇਤਰਾਂ ਵਿੱਚ ਮੈਡੀਕਲ ਪੇਸ਼ੇਵਰ ਖਾਤਿਆਂ ਦਾ ਪ੍ਰਬੰਧਨ, ਆਡਿਟ ਅਤੇ ਸਹਾਇਤਾ ਕਰੋ।",
+      "subtitle": "ਸਾਰੇ ਖੇਤਰਾਂ ਵਿੱਚ ਮੈਡੀਕਲ ਪੇਸ਼ੇਵਰ ਖਾਤਿਆਂ ਦਾ ਪ੍ਰਬੰਧਨ, ਆਡਿਟ ਅਤੇ ਸਮਰਥਨ ਕਰੋ।",
       "searchPlaceholder": "ਵਿਸ਼ੇ ਦੇ ਨਾਮ ਨਾਲ ਖੋਜੋ...",
       "clearAll": "ਸਭ ਸਾਫ਼ ਕਰੋ",
       "columns": {
@@ -112,7 +174,7 @@
         "region": "ਖੇਤਰ",
         "programs": "ਪ੍ਰੋਗਰਾਮ",
         "status": "ਸਥਿਤੀ",
-        "actions": "ਕਾਰਵਾਈ"
+        "actions": "ਕਾਰਵਾਈਆਂ"
       }
     },
     "details": {
@@ -143,7 +205,8 @@
       "confirmPassword": "ਪਾਸਵਰਡ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ",
       "confirmPasswordPlaceholder": "ਪਾਸਵਰਡ ਦੁਬਾਰਾ ਦਰਜ ਕਰੋ",
       "profileImage": "ਪ੍ਰੋਫਾਈਲ ਤਸਵੀਰ",
-      "uploadImage": "ਤਸਵੀਰ ਅਪਲੋਡ ਕਰੋ"
+      "uploadImage": "ਤਸਵੀਰ ਅਪਲੋਡ ਕਰੋ",
+      "deleteText": "ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਇਸ ਉਪਭੋਗਤਾ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
     },
     "create": {
       "title": "ਨਵਾਂ ਉਪਭੋਗਤਾ ਬਣਾਓ",
@@ -154,21 +217,36 @@
       "deleteUser": "ਉਪਭੋਗਤਾ ਹਟਾਓ",
       "cancle": "ਰੱਦ ਕਰੋ",
       "createUser": "ਉਪਭੋਗਤਾ ਬਣਾਓ",
-      "creatingUser": "ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...",
+      "creating": "ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...",
       "updateUser": "ਉਪਭੋਗਤਾ ਅੱਪਡੇਟ ਕਰੋ",
-      "updateingUser": "ਅੱਪਡੇਟ ਹੋ ਰਿਹਾ ਹੈ..."
+      "updating": "ਅੱਪਡੇਟ ਹੋ ਰਿਹਾ ਹੈ..."
     },
     "breadcrumb": {
       "users": "ਉਪਭੋਗਤਾ",
       "viewUserProfile": "ਉਪਭੋਗਤਾ ਪ੍ਰੋਫਾਈਲ ਵੇਖੋ"
+    },
+    "validation": {
+      "nameRequired": "ਨਾਮ ਦੀ ਲੋੜ ਹੈ",
+      "emailRequired": "ਈਮੇਲ ਦੀ ਲੋੜ ਹੈ",
+      "emailInvalid": "ਅਵੈਧ ਈਮੇਲ ਪਤਾ",
+      "roleRequired": "ਭੂਮਿਕਾ ਦੀ ਲੋੜ ਹੈ",
+      "departmentRequired": "ਵਿਭਾਗ ਦੀ ਲੋੜ ਹੈ",
+      "designationRequired": "ਅਹੁਦੇ ਦੀ ਲੋੜ ਹੈ",
+      "regionRequired": "ਖੇਤਰ ਦੀ ਲੋੜ ਹੈ",
+      "cityRequired": "ਸ਼ਹਿਰ ਦੀ ਲੋੜ ਹੈ",
+      "mobileRequired": "ਮੋਬਾਈਲ ਨੰਬਰ ਦੀ ਲੋੜ ਹੈ",
+      "passwordRequired": "ਪਾਸਵਰਡ ਦੀ ਲੋੜ ਹੈ",
+      "passwordMin": "ਪਾਸਵਰਡ ਘੱਟੋ-ਘੱਟ 6 ਅੱਖਰਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "confirmPasswordRequired": "ਪਾਸਵਰਡ ਦੀ ਪੁਸ਼ਟੀ ਦੀ ਲੋੜ ਹੈ",
+      "passwordMatch": "ਪਾਸਵਰਡ ਮੇਲ ਖਾਣੇ ਚਾਹੀਦੇ ਹਨ"
     }
   },
 
   "program": {
     "list": {
       "title": "ਪ੍ਰੋਗਰਾਮ ਪ੍ਰਬੰਧਨ",
-      "subtitle": "ਆਪਣੇ ਮੈਡੀਕਲ ਸਿਖਲਾਈ ਪਾਠਕ੍ਰਮ ਨੂੰ ਕੌਂਫਿਗਰ ਕਰੋ, ਮੋਡੀਊਲ ਬਣਤਰ ਕਰੋ, ਅਤੇ ਇੱਕ ਸੰਗਠਿਤ ਅਤੇ ਸਕੇਲੇਬਲ ਪ੍ਰੋਗਰਾਮ ਲਈ ਦਾਖਲਾ ਵੇਰਵਿਆਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ।",
-      "searchPlaceholder": "ਪ੍ਰੋਗਰਾਮ ਨਾਮ ਨਾਲ ਖੋਜੋ...",
+      "subtitle": "ਆਪਣੇ ਮੈਡੀਕਲ ਸਿਖਲਾਈ ਪਾਠਕ੍ਰਮ ਨੂੰ ਕੌਂਫਿਗਰ ਕਰੋ, ਮੋਡੀਊਲ ਬਣਤਰ ਕਰੋ, ਅਤੇ ਇੱਕ ਸੰਗਠਿਤ ਅਤੇ ਸਕੇਲੇਬਲ ਪ੍ਰੋਗਰਾਮ ਲਈ ਨਾਮਾਂਕਣ ਵੇਰਵਿਆਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ।",
+      "searchPlaceholder": "ਪ੍ਰੋਗਰਾਮ ਦੇ ਨਾਮ ਨਾਲ ਖੋਜੋ...",
       "clearAll": "ਸਭ ਸਾਫ਼ ਕਰੋ",
       "columns": {
         "programName": "ਪ੍ਰੋਗਰਾਮ ਦਾ ਨਾਮ",
@@ -176,7 +254,7 @@
         "assignedUsers": "ਅਸਾਈਨ ਕੀਤੇ ਉਪਭੋਗਤਾ",
         "complitionRate": "ਪੂਰਤੀ ਦਰ",
         "status": "ਸਥਿਤੀ",
-        "actions": "ਕਾਰਵਾਈ"
+        "actions": "ਕਾਰਵਾਈਆਂ"
       }
     },
     "details": {
@@ -188,11 +266,12 @@
       "thumbnail": "ਪ੍ਰੋਗਰਾਮ ਥੰਬਨੇਲ",
       "uploadText": "ਥੰਬਨੇਲ ਅਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
       "uploadSubText": "PNG, JPG, JPEG ਵੱਧ ਤੋਂ ਵੱਧ 5MB",
-      "changeImage": "ਤਸਵੀਰ ਬਦਲੋ"
+      "changeImage": "ਤਸਵੀਰ ਬਦਲੋ",
+      "deleteText": "ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਇਸ ਪ੍ਰੋਗਰਾਮ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
     },
     "create": {
       "title": "ਪ੍ਰੋਗਰਾਮ ਬਣਾਓ",
-      "subtitle": "ਆਪਣੇ ਮੈਡੀਕਲ ਸਿਖਲਾਈ ਪਾਠਕ੍ਰਮ ਨੂੰ ਕੌਂਫਿਗਰ ਕਰੋ, ਮੋਡੀਊਲ ਬਣਤਰ ਕਰੋ, ਅਤੇ ਇੱਕ ਸੰਗਠਿਤ ਅਤੇ ਸਕੇਲੇਬਲ ਪ੍ਰੋਗਰਾਮ ਲਈ ਦਾਖਲਾ ਵੇਰਵਿਆਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ।"
+      "subtitle": "ਆਪਣੇ ਮੈਡੀਕਲ ਸਿਖਲਾਈ ਪਾਠਕ੍ਰਮ ਨੂੰ ਕੌਂਫਿਗਰ ਕਰੋ, ਮੋਡੀਊਲ ਬਣਤਰ ਕਰੋ, ਅਤੇ ਇੱਕ ਸੰਗਠਿਤ ਅਤੇ ਸਕੇਲੇਬਲ ਪ੍ਰੋਗਰਾਮ ਲਈ ਨਾਮਾਂਕਣ ਵੇਰਵਿਆਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ।"
     },
     "actions": {
       "addNewProgram": "+ ਨਵਾਂ ਪ੍ਰੋਗਰਾਮ ਜੋੜੋ",
@@ -205,13 +284,17 @@
     "breadcrumb": {
       "trainingProgram": "ਸਿਖਲਾਈ ਪ੍ਰੋਗਰਾਮ",
       "view-program": "ਪ੍ਰੋਗਰਾਮ ਵੇਖੋ"
+    },
+    "validation": {
+      "titleRequired": "ਸਿਰਲੇਖ ਦੀ ਲੋੜ ਹੈ",
+      "descriptionRequired": "ਵੇਰਵੇ ਦੀ ਲੋੜ ਹੈ"
     }
   },
 
   "levels": {
     "list": {
       "title": "ਪੱਧਰ ਪ੍ਰਬੰਧਨ",
-      "subtitle": "ਸਿਖਲਾਈ ਦੇ ਪੱਧਰਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਅਤੇ ਆਯੋਜਨ ਕਰੋ ਤਾਂ ਜੋ ਸਿਖਲਾਈ ਯਾਤਰਾ ਨੂੰ ਬਣਤਰ ਦਿੱਤੀ ਜਾ ਸਕੇ...",
+      "subtitle": "ਸਿੱਖਣ ਦੀ ਯਾਤਰਾ ਨੂੰ ਬਣਤਰ ਦੇਣ ਲਈ ਸਿਖਲਾਈ ਪੱਧਰਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਅਤੇ ਆਯੋਜਨ ਕਰੋ...",
       "searchPlaceholder": "ਪੱਧਰ ਦੇ ਨਾਮ ਨਾਲ ਖੋਜੋ...",
       "clearAll": "ਸਭ ਸਾਫ਼ ਕਰੋ",
       "columns": {
@@ -221,7 +304,7 @@
         "totalTopics": "ਕੁੱਲ ਵਿਸ਼ੇ",
         "totalModules": "ਕੁੱਲ ਮੋਡੀਊਲ",
         "status": "ਸਥਿਤੀ",
-        "actions": "ਕਾਰਵਾਈ"
+        "actions": "ਕਾਰਵਾਈਆਂ"
       }
     },
     "details": {
@@ -235,11 +318,12 @@
       "thumbnail": "ਪੱਧਰ ਥੰਬਨੇਲ",
       "uploadText": "ਥੰਬਨੇਲ ਅਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
       "uploadSubText": "PNG, JPG, JPEG ਵੱਧ ਤੋਂ ਵੱਧ 5MB",
-      "changeImage": "ਤਸਵੀਰ ਬਦਲੋ"
+      "changeImage": "ਤਸਵੀਰ ਬਦਲੋ",
+      "deleteText": "ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਇਸ ਪੱਧਰ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
     },
     "create": {
       "title": "ਪੱਧਰ ਪ੍ਰਬੰਧਨ",
-      "subtitle": "ਬੁਨਿਆਦੀ ਗਿਆਨ ਤੋਂ ਲੈ ਕੇ ਉੱਨਤ ਕਲੀਨਿਕਲ ਮੁਹਾਰਤ ਤੱਕ ਸਿਖਲਾਈ ਯਾਤਰਾ ਨੂੰ ਬਣਤਰ ਦੇਣ ਲਈ ਸਿਖਲਾਈ ਪੱਧਰਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਅਤੇ ਆਯੋਜਨ ਕਰੋ।"
+      "subtitle": "ਬੁਨਿਆਦੀ ਗਿਆਨ ਤੋਂ ਲੈ ਕੇ ਉੱਨਤ ਕਲੀਨਿਕਲ ਮੁਹਾਰਤ ਤੱਕ ਸਿੱਖਣ ਦੀ ਯਾਤਰਾ ਨੂੰ ਬਣਤਰ ਦੇਣ ਲਈ ਸਿਖਲਾਈ ਪੱਧਰਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਅਤੇ ਆਯੋਜਨ ਕਰੋ।"
     },
     "actions": {
       "addNew": "+ ਨਵਾਂ ਪੱਧਰ ਜੋੜੋ",
@@ -252,14 +336,19 @@
     "breadcrumb": {
       "curriculum": "ਪਾਠਕ੍ਰਮ",
       "view-level": "ਪੱਧਰ ਵੇਖੋ"
+    },
+    "validation": {
+      "levelNameRequired": "ਪੱਧਰ ਦੇ ਨਾਮ ਦੀ ਲੋੜ ਹੈ",
+      "programRequired": "ਮੂਲ ਪ੍ਰੋਗਰਾਮ ਦੀ ਲੋੜ ਹੈ",
+      "descriptionRequired": "ਵੇਰਵੇ ਦੀ ਲੋੜ ਹੈ"
     }
   },
 
   "module": {
     "list": {
       "title": "ਮੋਡੀਊਲ ਪ੍ਰਬੰਧਨ",
-      "subtitle": "ਇੱਕ ਸਹਿਜ ਸਿਖਲਾਈ ਅਨੁਭਵ ਲਈ ਬਣਤਰ ਵਾਲੀ ਸਮੱਗਰੀ, ਮੁਲਾਂਕਣ ਅਤੇ ਪ੍ਰਗਤੀ ਟਰੈਕਿੰਗ ਦੇ ਨਾਲ ਮੋਡੀਊਲ ਡਿਜ਼ਾਈਨ, ਵਿਵਸਥਿਤ ਅਤੇ ਪ੍ਰਬੰਧਨ ਕਰੋ।",
-      "searchPlaceholder": "ਮੋਡੀਊਲ ਨਾਮ ਨਾਲ ਖੋਜੋ...",
+      "subtitle": "ਬਣਤਰ ਵਾਲੀ ਸਮੱਗਰੀ, ਮੁਲਾਂਕਣ ਅਤੇ ਪ੍ਰਗਤੀ ਟਰੈਕਿੰਗ ਦੇ ਨਾਲ ਮੋਡੀਊਲ ਡਿਜ਼ਾਈਨ, ਵਿਵਸਥਿਤ ਅਤੇ ਪ੍ਰਬੰਧਿਤ ਕਰੋ।",
+      "searchPlaceholder": "ਮੋਡੀਊਲ ਦੇ ਨਾਮ ਨਾਲ ਖੋਜੋ...",
       "clearAll": "ਸਭ ਸਾਫ਼ ਕਰੋ",
       "columns": {
         "moduleName": "ਮੋਡੀਊਲ ਦਾ ਨਾਮ",
@@ -268,7 +357,7 @@
         "totalTopics": "ਕੁੱਲ ਵਿਸ਼ੇ",
         "duration": "ਮਿਆਦ",
         "status": "ਸਥਿਤੀ",
-        "actions": "ਕਾਰਵਾਈ"
+        "actions": "ਕਾਰਵਾਈਆਂ"
       }
     },
     "details": {
@@ -284,16 +373,17 @@
       "thumbnail": "ਪੱਧਰ ਥੰਬਨੇਲ",
       "uploadText": "ਥੰਬਨੇਲ ਅਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
       "uploadSubText": "PNG, JPG, JPEG ਵੱਧ ਤੋਂ ਵੱਧ 5MB",
-      "changeImage": "ਤਸਵੀਰ ਬਦਲੋ"
+      "changeImage": "ਤਸਵੀਰ ਬਦਲੋ",
+      "deleteText": "ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਇਸ ਮੋਡੀਊਲ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
     },
     "create": {
       "title": "ਮੋਡੀਊਲ ਪ੍ਰਬੰਧਨ",
-      "subtitle": "ਇੱਕ ਸਹਿਜ ਸਿਖਲਾਈ ਅਨੁਭਵ ਲਈ ਬਣਤਰ ਵਾਲੀ ਸਮੱਗਰੀ, ਮੁਲਾਂਕਣ ਅਤੇ ਪ੍ਰਗਤੀ ਟਰੈਕਿੰਗ ਦੇ ਨਾਲ ਮੋਡੀਊਲ ਡਿਜ਼ਾਈਨ, ਵਿਵਸਥਿਤ ਅਤੇ ਪ੍ਰਬੰਧਨ ਕਰੋ।"
+      "subtitle": "ਬਣਤਰ ਵਾਲੀ ਸਮੱਗਰੀ, ਮੁਲਾਂਕਣ ਅਤੇ ਪ੍ਰਗਤੀ ਟਰੈਕਿੰਗ ਦੇ ਨਾਲ ਮੋਡੀਊਲ ਡਿਜ਼ਾਈਨ, ਵਿਵਸਥਿਤ ਅਤੇ ਪ੍ਰਬੰਧਿਤ ਕਰੋ।"
     },
     "status": {
       "active": "ਸਰਗਰਮ",
       "draft": "ਡਰਾਫਟ",
-      "archived": "ਪੁਰਾਲੇਖ",
+      "archived": "ਆਰਕਾਈਵ ਕੀਤਾ",
       "all": "ਸਭ"
     },
     "actions": {
@@ -307,13 +397,19 @@
     "breadcrumb": {
       "curriculum": "ਪਾਠਕ੍ਰਮ",
       "view-module": "ਮੋਡੀਊਲ ਵੇਖੋ"
+    },
+    "validation": {
+      "moduleNameRequired": "ਮੋਡੀਊਲ ਦੇ ਨਾਮ ਦੀ ਲੋੜ ਹੈ",
+      "levelRequired": "ਪੱਧਰ ਦੇ ਨਾਮ ਦੀ ਲੋੜ ਹੈ",
+      "programRequired": "ਮੂਲ ਪ੍ਰੋਗਰਾਮ ਦੀ ਲੋੜ ਹੈ",
+      "descriptionRequired": "ਵੇਰਵੇ ਦੀ ਲੋੜ ਹੈ"
     }
   },
 
   "chapter": {
     "list": {
       "title": "ਅਧਿਆਏ ਪ੍ਰਬੰਧਨ",
-      "subtitle": "ਮੋਡੀਊਲ ਨੂੰ ਕੇਂਦ੍ਰਿਤ, ਆਸਾਨੀ ਨਾਲ ਸਮਝ ਆਉਣ ਵਾਲੇ ਸਿਖਲਾਈ ਭਾਗਾਂ ਵਿੱਚ ਵੰਡਣ ਲਈ ਅਧਿਆਏ ਸਮੱਗਰੀ ਨੂੰ ਪਰਿਭਾਸ਼ਿਤ ਅਤੇ ਬਣਤਰ ਕਰੋ।",
+      "subtitle": "ਮੋਡੀਊਲ ਨੂੰ ਕੇਂਦ੍ਰਿਤ, ਆਸਾਨੀ ਨਾਲ ਸਮਝ ਆਉਣ ਵਾਲੇ ਸਿੱਖਣ ਭਾਗਾਂ ਵਿੱਚ ਵੰਡਣ ਲਈ ਅਧਿਆਏ ਸਮੱਗਰੀ ਨੂੰ ਪਰਿਭਾਸ਼ਿਤ ਅਤੇ ਬਣਤਰ ਕਰੋ।",
       "searchPlaceholder": "ਅਧਿਆਏ ਦੇ ਨਾਮ ਨਾਲ ਖੋਜੋ...",
       "clearAll": "ਸਭ ਸਾਫ਼ ਕਰੋ",
       "columns": {
@@ -324,7 +420,7 @@
         "totalTopics": "ਕੁੱਲ ਵਿਸ਼ੇ",
         "duration": "ਮਿਆਦ",
         "status": "ਸਥਿਤੀ",
-        "actions": "ਕਾਰਵਾਈ"
+        "actions": "ਕਾਰਵਾਈਆਂ"
       }
     },
     "details": {
@@ -342,11 +438,12 @@
       "thumbnail": "ਪੱਧਰ ਥੰਬਨੇਲ",
       "uploadText": "ਥੰਬਨੇਲ ਅਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
       "uploadSubText": "PNG, JPG, JPEG ਵੱਧ ਤੋਂ ਵੱਧ 5MB",
-      "changeImage": "ਤਸਵੀਰ ਬਦਲੋ"
+      "changeImage": "ਤਸਵੀਰ ਬਦਲੋ",
+      "deleteText": "ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਇਸ ਅਧਿਆਏ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
     },
     "create": {
       "title": "ਨਵਾਂ ਅਧਿਆਏ ਬਣਾਓ",
-      "subtitle": "ਮੋਡੀਊਲ ਨੂੰ ਕੇਂਦ੍ਰਿਤ, ਆਸਾਨੀ ਨਾਲ ਸਮਝ ਆਉਣ ਵਾਲੇ ਸਿਖਲਾਈ ਭਾਗਾਂ ਵਿੱਚ ਵੰਡਣ ਲਈ ਅਧਿਆਏ ਸਮੱਗਰੀ ਨੂੰ ਪਰਿਭਾਸ਼ਿਤ ਅਤੇ ਬਣਤਰ ਕਰੋ।"
+      "subtitle": "ਮੋਡੀਊਲ ਨੂੰ ਕੇਂਦ੍ਰਿਤ, ਆਸਾਨੀ ਨਾਲ ਸਮਝ ਆਉਣ ਵਾਲੇ ਸਿੱਖਣ ਭਾਗਾਂ ਵਿੱਚ ਵੰਡਣ ਲਈ ਅਧਿਆਏ ਸਮੱਗਰੀ ਨੂੰ ਪਰਿਭਾਸ਼ਿਤ ਅਤੇ ਬਣਤਰ ਕਰੋ।"
     },
     "actions": {
       "addNewChapter": "+ ਨਵਾਂ ਅਧਿਆਏ ਜੋੜੋ",
@@ -359,13 +456,20 @@
     "breadcrumb": {
       "curriculum": "ਪਾਠਕ੍ਰਮ",
       "view-chapter": "ਅਧਿਆਏ ਵੇਖੋ"
+    },
+    "validation": {
+      "chapterNameRequired": "ਅਧਿਆਏ ਦੇ ਨਾਮ ਦੀ ਲੋੜ ਹੈ",
+      "moduleRequired": "ਮੋਡੀਊਲ ਦੇ ਨਾਮ ਦੀ ਲੋੜ ਹੈ",
+      "levelRequired": "ਪੱਧਰ ਦੇ ਨਾਮ ਦੀ ਲੋੜ ਹੈ",
+      "programRequired": "ਮੂਲ ਪ੍ਰੋਗਰਾਮ ਦੀ ਲੋੜ ਹੈ",
+      "descriptionRequired": "ਵੇਰਵੇ ਦੀ ਲੋੜ ਹੈ"
     }
   },
 
   "topic": {
     "list": {
       "title": "ਵਿਸ਼ਾ ਪ੍ਰਬੰਧਨ",
-      "subtitle": "ਵਿਸ਼ੇਸ਼ ਮੈਡੀਕਲ ਵਿਭਾਗਾਂ ਵਿੱਚ ਵਿਦਿਆਰਥੀ ਪ੍ਰਗਤੀ ਅਤੇ ਸਮੱਗਰੀ ਵੰਡ ਨੂੰ ਟਰੈਕ ਕਰਦੇ ਹੋਏ, ਵਿਸਤ੍ਰਿਤ ਸਿਖਲਾਈ ਉਦੇਸ਼ਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ।",
+      "subtitle": "ਵਿਸ਼ੇਸ਼ ਮੈਡੀਕਲ ਵਿਭਾਗਾਂ ਵਿੱਚ ਵਿਦਿਆਰਥੀ ਪ੍ਰਗਤੀ ਅਤੇ ਸਮੱਗਰੀ ਡਿਲੀਵਰੀ ਨੂੰ ਟਰੈਕ ਕਰਦੇ ਹੋਏ ਵਿਸਤ੍ਰਿਤ ਸਿੱਖਣ ਦੇ ਉਦੇਸ਼ਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ।",
       "searchPlaceholder": "ਪੱਧਰ ਦੇ ਨਾਮ ਨਾਲ ਖੋਜੋ...",
       "clearAll": "ਸਭ ਸਾਫ਼ ਕਰੋ",
       "columns": {
@@ -375,7 +479,7 @@
         "parentLevel": "ਮੂਲ ਪੱਧਰ",
         "duration": "ਮਿਆਦ",
         "status": "ਸਥਿਤੀ",
-        "actions": "ਕਾਰਵਾਈ"
+        "actions": "ਕਾਰਵਾਈਆਂ"
       }
     },
     "details": {
@@ -397,11 +501,12 @@
       "thumbnail": "ਪੱਧਰ ਥੰਬਨੇਲ",
       "uploadText": "ਥੰਬਨੇਲ ਅਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
       "uploadSubText": "PNG, JPG, JPEG ਵੱਧ ਤੋਂ ਵੱਧ 5MB",
-      "changeImage": "ਤਸਵੀਰ ਬਦਲੋ"
+      "changeImage": "ਤਸਵੀਰ ਬਦਲੋ",
+      "deleteText": "ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਇਸ ਵਿਸ਼ੇ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
     },
     "create": {
       "title": "ਨਵਾਂ ਵਿਸ਼ਾ ਬਣਾਓ",
-      "subtitle": "ਵਿਸ਼ੇਸ਼ ਮੈਡੀਕਲ ਵਿਭਾਗਾਂ ਵਿੱਚ ਵਿਦਿਆਰਥੀ ਪ੍ਰਗਤੀ ਅਤੇ ਸਮੱਗਰੀ ਵੰਡ ਨੂੰ ਟਰੈਕ ਕਰਦੇ ਹੋਏ, ਵਿਸਤ੍ਰਿਤ ਸਿਖਲਾਈ ਉਦੇਸ਼ਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ।"
+      "subtitle": "ਵਿਸ਼ੇਸ਼ ਮੈਡੀਕਲ ਵਿਭਾਗਾਂ ਵਿੱਚ ਵਿਦਿਆਰਥੀ ਪ੍ਰਗਤੀ ਅਤੇ ਸਮੱਗਰੀ ਡਿਲੀਵਰੀ ਨੂੰ ਟਰੈਕ ਕਰਦੇ ਹੋਏ ਵਿਸਤ੍ਰਿਤ ਸਿੱਖਣ ਦੇ ਉਦੇਸ਼ਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ।"
     },
     "actions": {
       "addNewTopic": "+ ਨਵਾਂ ਵਿਸ਼ਾ ਜੋੜੋ",
@@ -414,12 +519,23 @@
     "breadcrumb": {
       "curriculum": "ਪਾਠਕ੍ਰਮ",
       "view-topic": "ਵਿਸ਼ਾ ਵੇਖੋ"
+    },
+    "validation": {
+      "topicNameRequired": "ਵਿਸ਼ੇ ਦੇ ਨਾਮ ਦੀ ਲੋੜ ਹੈ",
+      "durationRequired": "ਮਿਆਦ ਦੀ ਲੋੜ ਹੈ",
+      "durationNumber": "ਮਿਆਦ ਇੱਕ ਨੰਬਰ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ",
+      "durationPositive": "ਮਿਆਦ ਸਕਾਰਾਤਮਕ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ",
+      "chapterRequired": "ਅਧਿਆਏ ਦੇ ਨਾਮ ਦੀ ਲੋੜ ਹੈ",
+      "moduleRequired": "ਮੋਡੀਊਲ ਦੇ ਨਾਮ ਦੀ ਲੋੜ ਹੈ",
+      "levelRequired": "ਪੱਧਰ ਦੇ ਨਾਮ ਦੀ ਲੋੜ ਹੈ",
+      "programRequired": "ਮੂਲ ਪ੍ਰੋਗਰਾਮ ਦੀ ਲੋੜ ਹੈ",
+      "descriptionRequired": "ਵੇਰਵੇ ਦੀ ਲੋੜ ਹੈ"
     }
   },
 
   "language": {
     "title": "ਭਾਸ਼ਾ ਪ੍ਰਬੰਧਨ",
-    "desc": "ਪਲੇਟਫਾਰਮ ਇੰਟਰਫੇਸ ਅਤੇ ਸਿਖਲਾਈ ਸਮੱਗਰੀ ਲਈ ਸਿਸਟਮ ਭਾਸ਼ਾਵਾਂ ਅਤੇ ਅਨੁਵਾਦਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ।",
+    "desc": "ਪਲੇਟਫਾਰਮ ਇੰਟਰਫੇਸ ਅਤੇ ਸਿੱਖਣ ਸਮੱਗਰੀ ਲਈ ਸਿਸਟਮ ਭਾਸ਼ਾਵਾਂ ਅਤੇ ਅਨੁਵਾਦਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ।",
     "addLanguage": "+ ਭਾਸ਼ਾ ਜੋੜੋ",
     "exportTranslation": "ਅਨੁਵਾਦ ਨਿਰਯਾਤ ਕਰੋ",
     "searchPlaceholder": "ਭਾਸ਼ਾ ਖੋਜੋ",
@@ -428,7 +544,22 @@
       "langId": "ਭਾਸ਼ਾ ID",
       "langName": "ਭਾਸ਼ਾ ਦਾ ਨਾਮ",
       "status": "ਸਥਿਤੀ",
-      "actions": "ਕਾਰਵਾਈ"
+      "actions": "ਕਾਰਵਾਈਆਂ"
     }
+  },
+
+  "globalConfirmationModal": {
+    "confirmDeletion": "ਹਟਾਉਣ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ",
+    "cancle": "ਰੱਦ ਕਰੋ",
+    "confirm": "ਪੁਸ਼ਟੀ ਕਰੋ"
+  },
+
+  "loaderText": "ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕ ਕਰੋ ਜਦੋਂ ਅਸੀਂ ਤੁਹਾਡੀ ਬੇਨਤੀ ਨੂੰ ਪ੍ਰੋਸੈਸ ਕਰ ਰਹੇ ਹਾਂ",
+
+  "sessionModal": {
+    "title": "ਸੈਸ਼ਨ ਖਤਮ ਹੋ ਰਿਹਾ ਹੈ",
+    "description": "ਤੁਸੀਂ ਅਕਿਰਿਆਸ਼ੀਲ ਸੀ। ਤੁਸੀਂ ਜਲਦੀ ਹੀ ਲੌਗ ਆਉਟ ਹੋ ਜਾਓਗੇ।",
+    "continue": "ਜਾਰੀ ਰੱਖੋ",
+    "logout": "ਲੌਗਆਉਟ"
   }
 }

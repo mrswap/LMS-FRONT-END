@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const SessionModal = ({ open, onContinue, onLogout }) => {
+  const { t } = useTranslation();
+
   if (!open) return null;
 
   return (
@@ -22,12 +25,14 @@ const SessionModal = ({ open, onContinue, onLogout }) => {
 
         {/* Title */}
         <h2 className="text-lg font-semibold text-gray-800">
-          Session Expiring
+          {/* Session Expiring */}
+          {t("sessionModal.title")}
         </h2>
 
         {/* Desc */}
         <p className="text-sm text-gray-500 mt-2">
-          You’ve been inactive. You’ll be logged out soon.
+          {/* You’ve been inactive. You’ll be logged out soon. */}
+          {t("sessionModal.description")}
         </p>
 
         {/* Buttons */}
@@ -36,14 +41,16 @@ const SessionModal = ({ open, onContinue, onLogout }) => {
             onClick={onContinue}
             className="flex-1 py-2 rounded-lg bg-accent text-white cursor-pointer transition"
           >
-            Continue
+            {/* Continue */}
+            {t("sessionModal.continue")}
           </button>
 
           <button
             onClick={onLogout}
             className="flex-1 py-2 rounded-lg bg-red-500 text-white cursor-pointer transition"
           >
-            Logout
+            {/* Logout */}
+            {t("sessionModal.logout")}
           </button>
         </div>
       </motion.div>

@@ -1,5 +1,4 @@
 {
-
   "login": {
     "title": "Welcome back",
     "subtitle": "Sign in to your Avante admin account",
@@ -11,7 +10,12 @@
     "button": "Sign In",
     "signingIn": "Signing In...",
     "trouble": "Having trouble signing in?",
-    "contactAdmin": "Contact your system administrator"
+    "contactAdmin": "Contact your system administrator",
+    "validation": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email address",
+      "passwordRequired": "Password is required"
+    }
   },
 
   "forgotPassword": {
@@ -25,7 +29,11 @@
     "spam": "Check your spam folder",
     "notReceived": "Didn't receive the email?",
     "rememberYourPassword": "Remember your password?",
-    "signIn": "Sign In"
+    "signIn": "Sign In",
+    "validation": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email address"
+    }
   },
 
   "checkEmail": {
@@ -36,9 +44,37 @@
     "back": "Back to sign in"
   },
 
+  "resetPassword": {
+    "title": "Reset Password",
+    "subtitle": "Set a new password to regain access to your account.",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "placeholderNew": "Enter new password",
+    "placeholderConfirm": "Re-enter new password",
+    "update": "Reset Password",
+    "updating": "Resetting...",
+    "rules": {
+      "min": "Minimum 8 characters",
+      "uppercase": "At least 1 uppercase letter",
+      "number": "At least 1 number",
+      "special": "At least 1 special character"
+    },
+    "validation": {
+      "passwordRequired": "Password is required",
+      "passwordMin": "Minimum 8 characters",
+      "passwordUppercase": "At least 1 uppercase letter",
+      "passwordNumber": "At least 1 number",
+      "passwordSpecial": "At least 1 special character",
+      "confirmPasswordRequired": "Confirm password is required",
+      "passwordMatch": "Passwords must match"
+    }
+  },
+
   "changePassword": {
     "title": "Change Password",
     "subtitle": "Update your password to keep your account secure.",
+    "oldPassword": "Old Password",
+    "oldPasswordPlaceholder": "Enter Old Password",
     "newPassword": "New Password",
     "confirmPassword": "Confirm Password",
     "placeholderNew": "Enter new password",
@@ -50,79 +86,123 @@
       "uppercase": "At least 1 uppercase letter",
       "number": "At least 1 number",
       "special": "At least 1 special character"
+    },
+    "validation": {
+      "passwordRequired": "Password is required",
+      "passwordMin": "Minimum 8 characters",
+      "passwordUppercase": "At least 1 uppercase letter",
+      "passwordNumber": "At least 1 number",
+      "passwordSpecial": "At least 1 special character",
+      "confirmPasswordRequired": "Confirm password is required",
+      "passwordMatch": "Passwords must match"
     }
   },
 
-   "navbar": {
-      "searchPlaceholder": "Search analytics, users or courses...",
-      "notifications": "Notifications",
-      "messages": "Messages",
-      "profileName": "Dr. Sarah Chen",
-      "role": "System Admin"
-    }, 
+  "profile": {
+    "title": "Profile Settings",
+    "subtitle": "Manage your personal information and account details",
 
-    "sidebar": {
-      "dashboard": "Dashboard", 
-
-      "userManagement": "User Management",
-      "assignTrainingProgram": "Assign Training Program",
-
-      "trainingPrograms": "Training Programs",
-      "programList": "Program List",
-      "createProgram": "Create Program",
-      "programAssignment": "Program Assignment",
-
-      "curriculumManagement": "Curriculum Management",
-      "levels": "Levels",
-      "modules": "Modules",
-      "chapters": "Chapters",
-      "topics": "Topics",
-      "bulkImport": "Bulk Import",
-
-      "contentManagement": "Content Management",
-      "learningUnitBuilder": "Learning Unit Builder",
-      "interactiveContent": "Interactive Content",
-      "mediaLibrary": "Media Library",
-
-      "assessmentManagement": "Assessment Management",
-      "quizForTopic": "Quiz for Topic",
-      "examForLevel": "Exam for Level",
-      "faq": "FAQ",
-
-      "trainingCertification": "Training & Certification",
-      "trainingAssignment": "Training Assignment",
-      "progressTracker": "Progress Tracker",
-      "certification": "Certification",
-
-      "reportsAdministration": "Reports & Administration",
-      "topResult": "Top Result",
-      "reportsAnalytics": "Reports & Analytics",
-      "userAnalytics": "User Analytics",
-      "trainingAnalytics": "Training Analytics",
-      "performanceReports": "Performance Reports",
-      "completionReports": "Completion Reports",
-      "rolesPermission": "Roles & Permission",
-      "systemSettings": "System Settings",
-
-      "multiLanguage": "Multi Language",
-
-      "logout": "Logout"
+    "details": {
+      "name": "Full Name",
+      "namePlaceholder": "Enter your full name",
+      "email": "Email",
+      "emailPlaceholder": "Enter email address",
+      "mobile": "Mobile Number",
+      "mobilePlaceholder": "Enter 10 digit mobile number",
+      "city": "City",
+      "cityPlaceholder": "Enter city",
+      "country": "Country",
+      "countryPlaceholder": "Select country",
+      "upload": "Upload"
     },
 
-    "userManagement": {
+    "actions": {
+      "updateProfile": "Update Profile",
+      "updating": "Updating..."
+    },
+
+    "validation": {
+      "nameRequired": "Name is required",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email",
+      "mobileRequired": "Mobile number is required",
+      "mobileInvalid": "Enter valid 10-digit mobile number",
+      "cityRequired": "City is required",
+      "cityMin": "City must be at least 2 characters",
+      "countryRequired": "Country is required"
+    }
+  },
+
+  "navbar": {
+    "searchPlaceholder": "Search analytics, users or courses...",
+    "notifications": "Notifications",
+    "messages": "Messages",
+    "profileName": "Dr. Sarah Chen",
+    "role": "System Admin"
+  },
+
+  "sidebar": {
+    "dashboard": "Dashboard",
+
+    "userManagement": "User Management",
+    "assignTrainingProgram": "Assign Training Program",
+
+    "trainingPrograms": "Training Programs",
+    "programList": "Program List",
+    "createProgram": "Create Program",
+    "programAssignment": "Program Assignment",
+
+    "curriculumManagement": "Curriculum Management",
+    "levels": "Levels",
+    "modules": "Modules",
+    "chapters": "Chapters",
+    "topics": "Topics",
+    "bulkImport": "Bulk Import",
+
+    "contentManagement": "Content Management",
+    "learningUnitBuilder": "Learning Unit Builder",
+    "interactiveContent": "Interactive Content",
+    "mediaLibrary": "Media Library",
+
+    "assessmentManagement": "Assessment Management",
+    "quizForTopic": "Quiz for Topic",
+    "examForLevel": "Exam for Level",
+    "faq": "FAQ",
+
+    "trainingCertification": "Training & Certification",
+    "trainingAssignment": "Training Assignment",
+    "progressTracker": "Progress Tracker",
+    "certification": "Certification",
+
+    "reportsAdministration": "Reports & Administration",
+    "topResult": "Top Result",
+    "reportsAnalytics": "Reports & Analytics",
+    "userAnalytics": "User Analytics",
+    "trainingAnalytics": "Training Analytics",
+    "performanceReports": "Performance Reports",
+    "completionReports": "Completion Reports",
+    "rolesPermission": "Roles & Permission",
+    "systemSettings": "System Settings",
+
+    "multiLanguage": "Multi Language",
+
+    "logout": "Logout"
+  },
+
+  "userManagement": {
     "list": {
       "title": "User Management",
       "subtitle": "Manage, audit, and support medical professional accounts across all regions.",
       "searchPlaceholder": "Search by topic name...",
-      "clearAll" : "Clear All",
+      "clearAll": "Clear All",
       "columns": {
         "userId": "User ID",
-          "name": "Name",
-          "contact": "Contact",
-          "region": "Region",
-          "programs": "Programs",
-          "status": "Status",
-          "actions": "Actions"
+        "name": "Name",
+        "contact": "Contact",
+        "region": "Region",
+        "programs": "Programs",
+        "status": "Status",
+        "actions": "Actions"
       }
     },
     "details": {
@@ -134,51 +214,67 @@
       "emailPlaceholder": "Enter email address",
       "phone": "Phone Number",
       "phonePlaceholder": "Enter phone number",
-      "employeeId" : "Employee ID",
-      "employeeIdPlaceholder" : "Select EmployeeId",
-      "department" : "Department",
-      "departmentPlaceholder" : "Select Department",
-      "designation" : "Designation",
-      "designationPlaceholder" : "Select Designation",
+      "employeeId": "Employee ID",
+      "employeeIdPlaceholder": "Enter Employee ID",
+      "department": "Department",
+      "departmentPlaceholder": "Select Department",
+      "designation": "Designation",
+      "designationPlaceholder": "Select Designation",
       "region": "Region",
       "regionPlaceholder": "Select region",
-      "city" : "City",
-      "cityPlaceholder" : "Enter city",
+      "city": "City",
+      "cityPlaceholder": "Enter city",
       "role": "Role",
       "rolePlaceholder": "Select role",
       "password": "Password",
       "passwordPlaceholder": "Enter password",
-      "newPassword" : "New Password",
-      "newPasswordPlaceholder" : "Enter new password",
+      "newPassword": "New Password",
+      "newPasswordPlaceholder": "Enter new password",
       "confirmPassword": "Confirm Password",
       "confirmPasswordPlaceholder": "Re-enter password",
-      "profileImage" : "Profile Image",
-      "uploadImage" : "Upload Image"
+      "profileImage": "Profile Image",
+      "uploadImage": "Upload Image",
+      "deleteText": "Are you sure you want to delete this user?"
     },
-    "create" : {
+    "create": {
       "title": "Create New User",
       "subtitle": "Onboard a new medical professional or staff member to the platform."
     },
     "actions": {
       "addNewUser": "+ Add New User",
       "deleteUser": "Delete User",
-      "cancle" : "Cancel",
+      "cancle": "Cancel",
       "createUser": "Create User",
-      "creatingUser" : "Creating...", 
+      "creating": "Creating...",
       "updateUser": "Update User",
-      "updateingUser" : "Updating..."
+      "updating": "Updating..."
     },
     "breadcrumb": {
       "users": "Users",
       "viewUserProfile": "View User Profile"
-     }
+    },
+    "validation": {
+      "nameRequired": "Name is required",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email address",
+      "roleRequired": "Role is required",
+      "departmentRequired": "Department is required",
+      "designationRequired": "Designation is required",
+      "regionRequired": "Region is required",
+      "cityRequired": "City is required",
+      "mobileRequired": "Mobile number is required",
+      "passwordRequired": "Password is required",
+      "passwordMin": "Password must be at least 6 characters",
+      "confirmPasswordRequired": "Confirm password is required",
+      "passwordMatch": "Passwords must match"
+    }
   },
 
   "program": {
     "list": {
       "title": "Program Management",
       "subtitle": "Configure your medical training curriculum, structure modules, and manage enrollment details seamlessly for an organized and scalable program.",
-      "searchPlaceholder" :"Search by program name...",
+      "searchPlaceholder": "Search by program name...",
       "clearAll": "Clear All",
       "columns": {
         "programName": "Program Name",
@@ -198,24 +294,29 @@
       "thumbnail": "Program Thumbnail",
       "uploadText": "Click to upload thumbnail",
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
-      "changeImage" : "Change Image"
+      "changeImage": "Change Image",
+      "deleteText": "Are you sure you want to delete this program?"
     },
-    "create" : {
+    "create": {
       "title": "Create Program",
       "subtitle": "Configure your medical training curriculum, structure modules, and manage enrollment details seamlessly for an organized and scalable program."
     },
     "actions": {
       "addNewProgram": "+ Add New Program",
       "deleteProgram": "Delete Program",
-      "createProgram" : "Create Program",
-      "creating" : "Creating...",
-      "updateProgram" : "Update Program",
-      "updating" : "Updating..."
+      "createProgram": "Create Program",
+      "creating": "Creating...",
+      "updateProgram": "Update Program",
+      "updating": "Updating..."
     },
     "breadcrumb": {
       "trainingProgram": "Training Program",
       "view-program": "View Program"
-     }
+    },
+    "validation": {
+      "titleRequired": "Title is required",
+      "descriptionRequired": "Description is required"
+    }
   },
 
   "levels": {
@@ -228,8 +329,8 @@
         "levelName": "Level Name",
         "parentProgram": "Parent Program",
         "totalChapters": "Total Chapters",
-        "totalTopics":"Total Topics",
-        "totalModules" : "Total Modules",
+        "totalTopics": "Total Topics",
+        "totalModules": "Total Modules",
         "status": "Status",
         "actions": "Actions"
       }
@@ -245,37 +346,43 @@
       "thumbnail": "Level Thumbnail",
       "uploadText": "Click to upload thumbnail",
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
-      "changeImage" : "Change Image"
+      "changeImage": "Change Image",
+      "deleteText": "Are you sure you want to delete this level?"
     },
-    "create" : {
+    "create": {
       "title": "Level Management",
       "subtitle": "Manage and organize training levels to structure the learning journey from foundational knowledge to advanced clinical expertise."
     },
     "actions": {
       "addNew": "+ Add New Level",
-      "createLevel" : "Create Level",
-      "creating" : "Creating...",
-      "updateLevel" : "Update Level",
-      "updating" : "Updating...",
-      "deleteLevel" : "Delete Level"
+      "createLevel": "Create Level",
+      "creating": "Creating...",
+      "updateLevel": "Update Level",
+      "updating": "Updating...",
+      "deleteLevel": "Delete Level"
     },
     "breadcrumb": {
       "curriculum": "Curriculum",
       "view-level": "View Level"
-     }
+    },
+    "validation": {
+      "levelNameRequired": "Level name is required",
+      "programRequired": "Parent program is required",
+      "descriptionRequired": "Description is required"
+    }
   },
 
   "module": {
     "list": {
       "title": "Module Management",
       "subtitle": "Design, organize, and manage modules with structured content, assessments, and progress tracking for a seamless learning experience.",
-      "searchPlaceholder" :"Search by module name...",
+      "searchPlaceholder": "Search by module name...",
       "clearAll": "Clear All",
       "columns": {
         "moduleName": "Module Name",
         "parentLevel": "Parent Level",
         "totalChapters": "Total Chapters",
-        "totalTopics" :"Total Topics",
+        "totalTopics": "Total Topics",
         "duration": "Duration",
         "status": "Status",
         "actions": "Actions"
@@ -294,9 +401,10 @@
       "thumbnail": "Level Thumbnail",
       "uploadText": "Click to upload thumbnail",
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
-      "changeImage" : "Change Image"
+      "changeImage": "Change Image",
+      "deleteText": "Are you sure you want to delete this module?"
     },
-    "create" : {
+    "create": {
       "title": "Module Management",
       "subtitle": "Design, organize, and manage modules with structured content, assessments, and progress tracking for a seamless learning experience."
     },
@@ -304,12 +412,12 @@
       "active": "Active",
       "draft": "Draft",
       "archived": "Archived",
-      "all" : "All"
+      "all": "All"
     },
     "actions": {
       "addNewModule": "+ Add New Module",
       "createModule": "Create Module",
-      "creating" : "Creating...",
+      "creating": "Creating...",
       "deleteModule": "Delete Module",
       "updateModule": "Update Module",
       "updating": "Updating..."
@@ -317,10 +425,16 @@
     "breadcrumb": {
       "curriculum": "Curriculum",
       "view-module": "View Module"
-     }
+    },
+    "validation": {
+      "moduleNameRequired": "Module name is required",
+      "levelRequired": "Level name is required",
+      "programRequired": "Parent program is required",
+      "descriptionRequired": "Description is required"
+    }
   },
 
-   "chapter": {
+  "chapter": {
     "list": {
       "title": "Chapter Management",
       "subtitle": "Define and structure chapter content to break modules into focused, easy-to-understand learning segments.",
@@ -331,7 +445,7 @@
         "parentModule": "Parent Module",
         "parentLevel": "Parent Level",
         "totalChapters": "Total Chapters",
-        "totalTopics" :"Total Topics",
+        "totalTopics": "Total Topics",
         "duration": "Duration",
         "status": "Status",
         "actions": "Actions"
@@ -352,27 +466,35 @@
       "thumbnail": "Level Thumbnail",
       "uploadText": "Click to upload thumbnail",
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
-      "changeImage" : "Change Image"
+      "changeImage": "Change Image",
+      "deleteText": "Are you sure you want to delete this chapter?"
     },
-    "create" : {
+    "create": {
       "title": "Create New Chapter",
       "subtitle": "Define and structure chapter content to break modules into focused, easy-to-understand learning segments."
     },
     "actions": {
       "addNewChapter": "+ Add New Chapter",
       "createChapter": "Create Chapter",
-      "creating" : "Creating...",
+      "creating": "Creating...",
       "deleteChapter": "Delete Chapter",
-      "updateChapter" : "Update Chapter",
-      "updating" : "Updating..."
+      "updateChapter": "Update Chapter",
+      "updating": "Updating..."
     },
     "breadcrumb": {
       "curriculum": "Curriculum",
       "view-chapter": "View Chapter"
-     }
+    },
+    "validation": {
+      "chapterNameRequired": "Chapter name is required",
+      "moduleRequired": "Module name is required",
+      "levelRequired": "Level name is required",
+      "programRequired": "Parent program is required",
+      "descriptionRequired": "Description is required"
+    }
   },
 
-    "topic": {
+  "topic": {
     "list": {
       "title": "Topic Management",
       "subtitle": "Manage granular learning objectives, tracking student progress and content delivery across specialized medical departments.",
@@ -400,45 +522,72 @@
       "parentLevelPlaceholder": "Select a level",
       "parentProgram": "Parent Program",
       "perentProgramPlaceholder": "Select a program",
-      "duration" : "Duration (in minutes)",
-      "durationPlaceholder" : "Enter duration in minutes",
+      "duration": "Duration (in minutes)",
+      "durationPlaceholder": "Enter duration in minutes",
       "description": "Description",
       "descriptionPlaceholder": "Write module description...",
       "thumbnail": "Level Thumbnail",
       "uploadText": "Click to upload thumbnail",
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
-      "changeImage" : "Change Image"
+      "changeImage": "Change Image",
+      "deleteText": "Are you sure you want to delete this topic?"
     },
-    "create" : {
+    "create": {
       "title": "Create New Topic",
       "subtitle": "Manage granular learning objectives, tracking student progress and content delivery across specialized medical departments."
     },
     "actions": {
       "addNewTopic": "+ Add New Topic",
       "createTopic": "Create Topic",
-      "creating" : "Creating...",
+      "creating": "Creating...",
       "deleteTopic": "Delete Topic",
-      "updateTopic" : "Update topic",
-      "updating" : "Updating..."
+      "updateTopic": "Update topic",
+      "updating": "Updating..."
     },
     "breadcrumb": {
       "curriculum": "Curriculum",
       "view-topic": "View Topic"
-     }
+    },
+    "validation": {
+      "topicNameRequired": "Topic name is required",
+      "durationRequired": "Duration is required",
+      "durationNumber": "Duration must be a number",
+      "durationPositive": "Duration must be positive",
+      "chapterRequired": "Chapter name is required",
+      "moduleRequired": "Module name is required",
+      "levelRequired": "Level name is required",
+      "programRequired": "Parent program is required",
+      "descriptionRequired": "Description is required"
+    }
   },
-  
-  "language": { 
+
+  "language": {
     "title": "Language Management",
     "desc": "Manage system languages and translations for the platform interface and learning content.",
     "addLanguage": "+ Add Language",
     "exportTranslation": "Export Translation",
     "searchPlaceholder": "Search Language",
-     "colums" : {
-       "noData": "No languages found.",
-       "langId": "Language ID",
-       "langName": "Language Name",
-       "status": "Status",
-       "actions" : "Actions"
-     }
+    "colums": {
+      "noData": "No languages found.",
+      "langId": "Language ID",
+      "langName": "Language Name",
+      "status": "Status",
+      "actions": "Actions"
+    }
+  },
+
+  "globalConfirmationModal": {
+    "confirmDeletion": "Confirm Deletion",
+    "cancle": "Cancle",
+    "confirm": "Confirm"
+  },
+
+  "loaderText": "Please wait while we process your request",
+
+  "sessionModal": {
+    "title": "Session Expiring",
+    "description": "You’ve been inactive. You’ll be logged out soon.",
+    "continue": "Continue",
+    "logout": "Logout"
   }
 }

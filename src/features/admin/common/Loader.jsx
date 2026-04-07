@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const Loader = ({
   size = "md",
@@ -6,6 +7,8 @@ const Loader = ({
   fullScreen = false,
   variant = "primary",
 }) => {
+  const { t } = useTranslation();
+
   const sizeClasses = {
     sm: "w-6 h-6",
     md: "w-10 h-10",
@@ -84,7 +87,7 @@ const Loader = ({
               {text}
             </p>
             <p className="text-xs text-gray-400 animate-pulse">
-              Please wait while we process your request
+              {t("loaderText")}
             </p>
           </div>
         )}

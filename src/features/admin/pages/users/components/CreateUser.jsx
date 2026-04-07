@@ -39,10 +39,10 @@ const CreateUser = () => {
   const initialValues = {
     name: "",
     email: "",
-    employee_id: generateEmployeeId(),
+    employee_id: "",
     role: null,
-    department: null,
-    designation: null,
+    // department: null,
+    // designation: null,
     region: null,
     city: "",
     mobile: "",
@@ -51,10 +51,7 @@ const CreateUser = () => {
     profile_image: null,
   };
 
-  const roleOptions = [
-    { label: "Admin", value: "admin" },
-    { label: "Sales", value: "sales" },
-  ];
+  const roleOptions = [{ label: "Sales", value: "sales" }];
 
   const departmentOptions = [
     { label: "Sales", value: "sales" },
@@ -72,18 +69,33 @@ const CreateUser = () => {
   ];
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("Name is required"),
-    email: Yup.string().email().required("Email is required"),
-    role: Yup.object().required("Role required"),
-    department: Yup.object().required("Department required"),
-    designation: Yup.object().required("Designation required"),
-    region: Yup.object().required("Region required"),
-    city: Yup.string().required("City required"),
-    mobile: Yup.string().required("Mobile required"),
-    password: Yup.string().min(6).required("Password required"),
+    name: Yup.string().required(t("userManagement.validation.nameRequired")),
+    email: Yup.string()
+      .email(t("userManagement.validation.emailInvalid"))
+      .required(t("userManagement.validation.emailRequired")),
+    role: Yup.object().required(t("userManagement.validation.roleRequired")),
+    // department: Yup.object().required(
+    //   t("userManagement.validation.departmentRequired"),
+    // ),
+    // designation: Yup.object().required(
+    //   t("userManagement.validation.designationRequired"),
+    // ),
+    region: Yup.object().required(
+      t("userManagement.validation.regionRequired"),
+    ),
+    city: Yup.string().required(t("userManagement.validation.cityRequired")),
+    mobile: Yup.string().required(
+      t("userManagement.validation.mobileRequired"),
+    ),
+    password: Yup.string()
+      .min(6, t("userManagement.validation.passwordMin"))
+      .required(t("userManagement.validation.passwordRequired")),
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password")], "Passwords must match")
-      .required("Confirm password required"),
+      .oneOf(
+        [Yup.ref("password")],
+        t("userManagement.validation.passwordMatch"),
+      )
+      .required(t("userManagement.validation.confirmPasswordRequired")),
   });
 
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
@@ -94,16 +106,21 @@ const CreateUser = () => {
       formData.append("email", values.email);
       formData.append("employee_id", values.employee_id);
       formData.append("role", values.role?.value);
-      formData.append("department", values.department?.value);
-      formData.append("designation", values.designation?.value);
+      // formData.append("department", values.department?.value);
+      // formData.append("designation", values.designation?.value);
       formData.append("region", values.region?.value);
       formData.append("city", values.city);
       formData.append("mobile", values.mobile);
       formData.append("password", values.password);
+      formData.append("designation", "executive");
 
       if (values.profile_image) {
         formData.append("profile_image", values.profile_image);
       }
+
+      // for (let [key, value] of formData.entries()) {
+      //   console.log(key, value);
+      // }
 
       await dispatch(createUser(formData)).unwrap();
 
@@ -112,7 +129,7 @@ const CreateUser = () => {
       setPreview(null);
       navigate("/assign-training");
     } catch (error) {
-      alert(error?.message || "Error creating user");
+      toast.error(error?.message || "Error creating user");
     } finally {
       setSubmitting(false);
     }
@@ -171,11 +188,14 @@ const CreateUser = () => {
                     <TextInput
                       name="employee_id"
                       label={t("userManagement.details.employeeId")}
-                      isDisabled={true}
+                      placeholder={t(
+                        "userManagement.details.employeeIdPlaceholder",
+                      )}
+                      // isDisabled={true}
                     />
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-4">
+                  {/* <div className="grid md:grid-cols-2 gap-4">
                     <SelectField
                       name="department"
                       label={t("userManagement.details.department")}
@@ -188,7 +208,7 @@ const CreateUser = () => {
                       options={designationOptions}
                       required
                     />
-                  </div>
+                  </div> */}
 
                   <div className="grid md:grid-cols-2 gap-4">
                     <SelectField
@@ -318,7 +338,7 @@ const CreateUser = () => {
                     className="px-4 py-2 bg-accent text-white rounded cursor-pointer"
                   >
                     {isSubmitting
-                      ? t("userManagement.actions.creatingUser")
+                      ? t("userManagement.actions.creating")
                       : t("userManagement.actions.createUser")}
                   </button>
                 </div>

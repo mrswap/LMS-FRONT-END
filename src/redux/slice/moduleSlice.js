@@ -1,17 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../app/axios";
+import { getAuthConfig } from "../../utils/authConfig";
 
 // 🔹 Common Header Function
-const getAuthConfig = () => {
-    const token = localStorage.getItem("token");
+// const getAuthConfig = () => {
+//     const token = localStorage.getItem("token");
 
-    return {
-        headers: {
-            Authorization: `Bearer ${token}`,
-            "Accept-Language": "en",
-        },
-    };
-};
+//     return {
+//         headers: {
+//             Authorization: `Bearer ${token}`,
+//             "Accept-Language": "en",
+//         },
+//     };
+// };
 
 // ======================= CREATE =======================
 export const createModule = createAsyncThunk(
