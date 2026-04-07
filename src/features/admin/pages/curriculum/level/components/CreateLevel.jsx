@@ -47,10 +47,20 @@ const CreateLevel = () => {
     thumbnail: null,
   };
 
+  // const validationSchema = Yup.object({
+  //   levelName: Yup.string().required("Level name is required"),
+  //   programName: Yup.object().nullable().required("Parent program is required"),
+  //   description: Yup.string().required("Description is required"),
+  // });
+
   const validationSchema = Yup.object({
-    levelName: Yup.string().required("Level name is required"),
-    programName: Yup.object().nullable().required("Parent program is required"),
-    description: Yup.string().required("Description is required"),
+    levelName: Yup.string().required(t("levels.validation.levelNameRequired")),
+    programName: Yup.object()
+      .nullable()
+      .required(t("levels.validation.programRequired")),
+    description: Yup.string().required(
+      t("levels.validation.descriptionRequired"),
+    ),
   });
 
   const onSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {

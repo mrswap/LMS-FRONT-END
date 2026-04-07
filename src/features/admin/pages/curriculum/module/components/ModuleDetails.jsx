@@ -77,11 +77,25 @@ const ModuleDetails = () => {
     thumbnail: module?.thumbnail || null,
   };
 
+  // const validationSchema = Yup.object({
+  //   moduleName: Yup.string().required("Module name is required"),
+  //   levelName: Yup.object().nullable().required("Parent level is required"),
+  //   programName: Yup.object().nullable().required("Parent program is required"),
+  //   description: Yup.string().required("Description is required"),
+  // });
   const validationSchema = Yup.object({
-    moduleName: Yup.string().required("Module name is required"),
-    levelName: Yup.object().nullable().required("Parent level is required"),
-    programName: Yup.object().nullable().required("Parent program is required"),
-    description: Yup.string().required("Description is required"),
+    moduleName: Yup.string().required(
+      t("module.validation.moduleNameRequired"),
+    ),
+    levelName: Yup.object()
+      .nullable()
+      .required(t("module.validation.levelRequired")),
+    programName: Yup.object()
+      .nullable()
+      .required(t("module.validation.programRequired")),
+    description: Yup.string().required(
+      t("module.validation.descriptionRequired"),
+    ),
   });
 
   const onSubmit = async (values, { setSubmitting, setErrors }) => {
@@ -123,7 +137,7 @@ const ModuleDetails = () => {
 
   const handleDelete = async () => {
     const ok = await dispatch(
-      showConfirm({ message: "Are you sure you want to delete this module?" }),
+      showConfirm({ message: t("module.details.deleteText") }),
     );
 
     if (!ok) return;

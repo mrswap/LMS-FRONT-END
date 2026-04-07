@@ -93,17 +93,40 @@ const TopicDetails = () => {
     duration: topic?.estimated_duration || "",
   };
 
+  // const validationSchema = Yup.object({
+  //   topicName: Yup.string().required("Topic name is required"),
+  //   duration: Yup.number()
+  //     .typeError("Duration must be a number")
+  //     .positive("Duration must be positive")
+  //     .required("Duration is required"),
+  //   chapterName: Yup.object().nullable().required("Parent chapter is required"),
+  //   moduleName: Yup.object().nullable().required("Parent module is required"),
+  //   levelName: Yup.object().nullable().required("Parent level is required"),
+  //   programName: Yup.object().nullable().required("Parent program is required"),
+  //   description: Yup.string().required("Description is required"),
+  // });
+
   const validationSchema = Yup.object({
-    topicName: Yup.string().required("Topic name is required"),
+    topicName: Yup.string().required(t("topic.validation.topicNameRequired")),
     duration: Yup.number()
-      .typeError("Duration must be a number")
-      .positive("Duration must be positive")
-      .required("Duration is required"),
-    chapterName: Yup.object().nullable().required("Parent chapter is required"),
-    moduleName: Yup.object().nullable().required("Parent module is required"),
-    levelName: Yup.object().nullable().required("Parent level is required"),
-    programName: Yup.object().nullable().required("Parent program is required"),
-    description: Yup.string().required("Description is required"),
+      .typeError(t("topic.validation.durationNumber"))
+      .positive(t("topic.validation.durationPositive"))
+      .required(t("topic.validation.durationRequired")),
+    chapterName: Yup.object()
+      .nullable()
+      .required(t("topic.validation.chapterRequired")),
+    moduleName: Yup.object()
+      .nullable()
+      .required(t("topic.validation.moduleRequired")),
+    levelName: Yup.object()
+      .nullable()
+      .required(t("topic.validation.levelRequired")),
+    programName: Yup.object()
+      .nullable()
+      .required(t("topic.validation.programRequired")),
+    description: Yup.string().required(
+      t("topic.validation.descriptionRequired"),
+    ),
   });
 
   const onSubmit = async (values, { setSubmitting, setErrors }) => {
@@ -149,7 +172,7 @@ const TopicDetails = () => {
 
   const handleDelete = async () => {
     const ok = await dispatch(
-      showConfirm({ message: "Are you sure you want to delete this topic?" }),
+      showConfirm({ message: t("topic.details.deleteText") }),
     );
 
     if (!ok) return;

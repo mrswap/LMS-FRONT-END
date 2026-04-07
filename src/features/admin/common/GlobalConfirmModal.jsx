@@ -1,61 +1,15 @@
-// import { useDispatch, useSelector } from "react-redux";
-// import {
-//   closeConfirm,
-//   resolveConfirm,
-// } from "../../../redux/slice/confirmSlice";
-
-// const GlobalConfirmModal = () => {
-//   const dispatch = useDispatch();
-//   const { isOpen, message } = useSelector((state) => state.confirm);
-
-//   if (!isOpen) return null;
-
-//   const handleCancel = () => {
-//     resolveConfirm(false);
-//     dispatch(closeConfirm());
-//   };
-
-//   const handleConfirm = () => {
-//     resolveConfirm(true);
-//     dispatch(closeConfirm());
-//   };
-
-//   return (
-//     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-//       <div className="bg-white p-5 rounded-lg w-[300px]">
-//         <p className="mb-4">{message}</p>
-
-//         <div className="flex justify-end gap-3">
-//           <button
-//             onClick={handleCancel}
-//             className="px-4 py-2 bg-gray-200 rounded"
-//           >
-//             Cancel
-//           </button>
-
-//           <button
-//             onClick={handleConfirm}
-//             className="px-4 py-2 bg-red-500 text-white rounded"
-//           >
-//             Delete
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default GlobalConfirmModal;
-
 import { useDispatch, useSelector } from "react-redux";
 import {
   closeConfirm,
   resolveConfirm,
 } from "../../../redux/slice/confirmSlice";
+import { useTranslation } from "react-i18next";
 
 const GlobalConfirmModal = () => {
   const dispatch = useDispatch();
   const { isOpen, message } = useSelector((state) => state.confirm);
+
+  const { t } = useTranslation();
 
   if (!isOpen) return null;
 
@@ -88,7 +42,7 @@ const GlobalConfirmModal = () => {
               />
             </svg>
             <h3 className="text-gray-800 font-semibold text-base tracking-wide">
-              Confirm Deletion
+              {t("globalConfirmationModal.confirmDeletion")}
             </h3>
           </div>
         </div>
@@ -117,14 +71,14 @@ const GlobalConfirmModal = () => {
             onClick={handleCancel}
             className="px-4 py-2 bg-white border border-gray-300 rounded-md text-gray-700 text-sm cursor-pointer transition-all duration-200"
           >
-            Cancel
+            {t("globalConfirmationModal.cancle")}
           </button>
 
           <button
             onClick={handleConfirm}
             className="px-4 py-2 bg-accent rounded-md text-white text-sm cursor-pointer transition-all duration-200 shadow-sm"
           >
-            Confirm
+            {t("globalConfirmationModal.confirm")}
           </button>
         </div>
       </div>

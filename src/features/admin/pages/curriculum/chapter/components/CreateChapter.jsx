@@ -68,12 +68,29 @@ const CreateChapter = () => {
     thumbnail: null,
   };
 
+  // const validationSchema = Yup.object({
+  //   chapterName: Yup.string().required("Chapter name is required"),
+  //   moduleName: Yup.object().nullable().required("Module name is required"),
+  //   levelName: Yup.object().nullable().required("Level name is required"),
+  //   programName: Yup.object().nullable().required("Parent program is required"),
+  //   description: Yup.string().required("Description is required"),
+  // });
   const validationSchema = Yup.object({
-    chapterName: Yup.string().required("Chapter name is required"),
-    moduleName: Yup.object().nullable().required("Module name is required"),
-    levelName: Yup.object().nullable().required("Level name is required"),
-    programName: Yup.object().nullable().required("Parent program is required"),
-    description: Yup.string().required("Description is required"),
+    chapterName: Yup.string().required(
+      t("chapter.validation.chapterNameRequired"),
+    ),
+    moduleName: Yup.object()
+      .nullable()
+      .required(t("chapter.validation.moduleRequired")),
+    levelName: Yup.object()
+      .nullable()
+      .required(t("chapter.validation.levelRequired")),
+    programName: Yup.object()
+      .nullable()
+      .required(t("chapter.validation.programRequired")),
+    description: Yup.string().required(
+      t("chapter.validation.descriptionRequired"),
+    ),
   });
 
   const onSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {

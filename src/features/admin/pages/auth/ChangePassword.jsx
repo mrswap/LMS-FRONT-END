@@ -2,55 +2,94 @@ import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { FiLock, FiEye, FiEyeOff, FiArrowLeft } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import TextInput from "../../common/form/TextInput";
 import FormButton from "../../common/form/FormButton";
 import logo from "../../../../assets/admin/AvanteMedicalLogoBlue.png";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { useToast } from "../../common/toast/ToastContext";
+import { changePassword } from "../../../../redux/slice/authSlice";
 
 const ChangePassword = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const toast = useToast();
 
-  const [showPassword, setShowPassword] = useState(false);
+  const [showOld, setShowOld] = useState(false);
+  const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
   const initialValues = {
-    password: "",
-    confirmPassword: "",
+    old_password: "",
+    new_password: "",
+    confirm_new_password: "",
   };
 
   const validationSchema = Yup.object({
-    password: Yup.string()
-      .min(8, "Minimum 8 characters")
-      .matches(/[A-Z]/, "At least 1 uppercase letter")
-      .matches(/[0-9]/, "At least 1 number")
-      .matches(/[!@#$%^&*]/, "At least 1 special character")
-      .required("Password is required"),
+    old_password: Yup.string().required("Old password is required"),
 
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password")], "Passwords must match")
-      .required("Confirm password is required"),
+    new_password: Yup.string()
+      .min(8, t("changePassword.validation.passwordMin"))
+      .matches(/[A-Z]/, t("changePassword.validation.passwordUppercase"))
+      .matches(/[0-9]/, t("changePassword.validation.passwordNumber"))
+      .matches(/[!@#$%^&*]/, t("changePassword.validation.passwordSpecial"))
+      .required(t("changePassword.validation.passwordRequired")),
+
+    confirm_new_password: Yup.string()
+      .oneOf(
+        [Yup.ref("new_password")],
+        t("changePassword.validation.passwordMatch"),
+      )
+      .required(t("changePassword.validation.confirmPasswordRequired")),
   });
 
-  const onSubmit = (values, { setSubmitting }) => {
-    console.log(values);
-    setTimeout(() => setSubmitting(false), 1000);
+  const onSubmit = async (values, { setSubmitting }) => {
+    const payload = {
+      old_password: values.old_password,
+      new_password: values.new_password,
+      new_password_confirmation: values.confirm_new_password,
+    };
+
+    try {
+      const res = await dispatch(changePassword(payload)).unwrap();
+      toast.success(res?.message || "Password updated successfully");
+      navigate("/");
+    } catch (err) {
+      toast.error(err?.message || "Failed to update password");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#EEF2F6] px-4">
       {/* Logo */}
       <div className="mb-6">
-        <img src={logo} alt="logo" className="w-[200px] object-contain" />
+        <img src={logo} alt="logo" className="w-[200px]" />
       </div>
 
       {/* Card */}
       <div className="w-full max-w-md bg-white rounded-2xl shadow-sm p-6 border border-gray-200">
+        {/* Back to sign in */}
+        <div className="w-full max-w-md mb-4">
+          <Link
+            to="/"
+            className="inline-flex items-center cursor-pointer text-[#64748B] text-sm hover:text-[#1F3C88] transition-colors"
+          >
+            <FiArrowLeft className="mr-1" size={16} />
+            {/* {t("forgotPassword.back")} */}
+            Back to home
+          </Link>
+        </div>
+
         {/* Heading */}
         <h2 className="text-xl font-semibold text-center text-[#1F3C88]">
           {t("changePassword.title")}
         </h2>
+
         <p className="text-sm text-gray-500 text-center mt-2 mb-6">
           {t("changePassword.subtitle")}
         </p>
@@ -62,61 +101,67 @@ const ChangePassword = () => {
         >
           {({ isSubmitting }) => (
             <Form className="space-y-4">
+              {/* Old Password */}
+              <div className="relative">
+                <FiLock className="absolute top-9 left-3 text-primary" />
+
+                <TextInput
+                  name="old_password"
+                  label={t("changePassword.oldPassword")}
+                  type={showOld ? "text" : "password"}
+                  placeholder={t("changePassword.oldPasswordPlaceholder")}
+                  className="!pl-10"
+                />
+
+                <div
+                  onClick={() => setShowOld(!showOld)}
+                  className="absolute right-3 top-9 cursor-pointer text-gray-400"
+                >
+                  {showOld ? <FiEyeOff /> : <FiEye />}
+                </div>
+              </div>
+
               {/* New Password */}
-              <div>
-                <label className="text-sm font-medium text-gray-700">
-                  {t("changePassword.newPassword")}
-                </label>
+              <div className="relative">
+                <FiLock className="absolute top-9 left-3 text-primary" />
 
-                <div className="relative mt-1">
-                  <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                    <FiLock />
-                  </div>
+                <TextInput
+                  name="new_password"
+                  label={t("changePassword.newPassword")}
+                  type={showNew ? "text" : "password"}
+                  placeholder={t("changePassword.placeholderNew")}
+                  className="!pl-10"
+                />
 
-                  <TextInput
-                    name="password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder={t("changePassword.passwordPlaceholder")}
-                    className="w-full pl-10 pr-10 py-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-[#1F3C88]/20 focus:border-[#1F3C88]"
-                  />
-
-                  <div
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400"
-                  >
-                    {showPassword ? <FiEyeOff /> : <FiEye />}
-                  </div>
+                <div
+                  onClick={() => setShowNew(!showNew)}
+                  className="absolute right-3 top-9 cursor-pointer text-gray-400"
+                >
+                  {showNew ? <FiEyeOff /> : <FiEye />}
                 </div>
               </div>
 
               {/* Confirm Password */}
-              <div>
-                <label className="text-sm font-medium text-gray-700">
-                  {t("changePassword.confirmPassword")}
-                </label>
+              <div className="relative">
+                <FiLock className="absolute top-9 left-3 text-primary" />
 
-                <div className="relative mt-1">
-                  <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                    <FiLock />
-                  </div>
+                <TextInput
+                  name="confirm_new_password"
+                  label={t("changePassword.confirmPassword")}
+                  type={showConfirm ? "text" : "password"}
+                  placeholder={t("changePassword.placeholderConfirm")}
+                  className="!pl-10"
+                />
 
-                  <TextInput
-                    name="confirmPassword"
-                    type={showConfirm ? "text" : "password"}
-                    placeholder={t("changePassword.placeholderConfirm")}
-                    className="w-full pl-10 pr-10 py-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-[#1F3C88]/20 focus:border-[#1F3C88]"
-                  />
-
-                  <div
-                    onClick={() => setShowConfirm(!showConfirm)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400"
-                  >
-                    {showConfirm ? <FiEyeOff /> : <FiEye />}
-                  </div>
+                <div
+                  onClick={() => setShowConfirm(!showConfirm)}
+                  className="absolute right-3 top-9 cursor-pointer text-gray-400"
+                >
+                  {showConfirm ? <FiEyeOff /> : <FiEye />}
                 </div>
               </div>
 
-              {/* Password Rules */}
+              {/* Rules */}
               <ul className="text-xs text-gray-500 space-y-1 pl-4 list-disc">
                 <li>{t("changePassword.rules.min")}</li>
                 <li>{t("changePassword.rules.uppercase")}</li>
@@ -139,6 +184,7 @@ const ChangePassword = () => {
           )}
         </Formik>
       </div>
+
       {/* Footer */}
       <p className="text-xs text-gray-400 my-4">
         © 2025 Avante Medical LMS · v2.1.0
