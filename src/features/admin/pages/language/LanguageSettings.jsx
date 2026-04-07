@@ -138,7 +138,7 @@ export default function LanguageManagement() {
           </p>
         </div>
 
-        <div className="flex gap-3">
+        {/* <div className="flex gap-3">
           <button className="flex items-center gap-2 px-4 py-2 shadow-sm rounded-lg bg-white text-sm font-semibold text-gray-700">
             {t("language.exportTranslation")}
           </button>
@@ -146,7 +146,7 @@ export default function LanguageManagement() {
           <button className="px-4 py-2 bg-accent text-white rounded-[8px] text-sm font-semibold">
             {t("language.addLanguage")}
           </button>
-        </div>
+        </div> */}
       </div>
 
       {/* Search */}

@@ -33,9 +33,16 @@ const CreateProgram = () => {
     thumbnail: null,
   };
 
+  // const validationSchema = Yup.object({
+  //   title: Yup.string().required("Title is required"),
+  //   description: Yup.string().required("Description is required"),
+  // });
   const validationSchema = Yup.object({
-    title: Yup.string().required("Title is required"),
-    description: Yup.string().required("Description is required"),
+    title: Yup.string().required(t("program.validation.titleRequired")),
+
+    description: Yup.string().required(
+      t("program.validation.descriptionRequired"),
+    ),
   });
 
   const onSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {

@@ -43,20 +43,17 @@ const UserDetails = () => {
     }
   }, [user]);
 
-  const roleOptions = [
-    { label: "Admin", value: "admin" },
-    { label: "Sales", value: "sales" },
-  ];
+  const roleOptions = [{ label: "Sales", value: "sales" }];
 
-  const departmentOptions = [
-    { label: "Sales", value: "sales" },
-    { label: "HR", value: "hr" },
-  ];
+  // const departmentOptions = [
+  //   { label: "Sales", value: "sales" },
+  //   { label: "HR", value: "hr" },
+  // ];
 
-  const designationOptions = [
-    { label: "Executive", value: "executive" },
-    { label: "Manager", value: "manager" },
-  ];
+  // const designationOptions = [
+  //   { label: "Executive", value: "executive" },
+  //   { label: "Manager", value: "manager" },
+  // ];
 
   const regionOptions = [
     { label: "India", value: "india" },
@@ -68,10 +65,10 @@ const UserDetails = () => {
     email: user?.email || "",
     employee_id: user?.employee_id || "",
     role: roleOptions.find((r) => r.value === user?.role) || null,
-    department:
-      departmentOptions.find((d) => d.value === user?.department) || null,
-    designation:
-      designationOptions.find((d) => d.value === user?.designation) || null,
+    // department:
+    //   departmentOptions.find((d) => d.value === user?.department) || null,
+    // designation:
+    //   designationOptions.find((d) => d.value === user?.designation) || null,
     region: regionOptions.find((r) => r.value === user?.region) || null,
     city: user?.city || "",
     mobile: user?.mobile || "",
@@ -80,9 +77,39 @@ const UserDetails = () => {
     profile_image: null,
   };
 
+  // const validationSchema = Yup.object({
+  //   name: Yup.string().required(),
+  //   email: Yup.string().email().required(),
+  // });
+
   const validationSchema = Yup.object({
-    name: Yup.string().required(),
-    email: Yup.string().email().required(),
+    name: Yup.string().required(t("userManagement.validation.nameRequired")),
+    email: Yup.string()
+      .email(t("userManagement.validation.emailInvalid"))
+      .required(t("userManagement.validation.emailRequired")),
+    role: Yup.object().required(t("userManagement.validation.roleRequired")),
+    // department: Yup.object().required(
+    //   t("userManagement.validation.departmentRequired"),
+    // ),
+    // designation: Yup.object().required(
+    //   t("userManagement.validation.designationRequired"),
+    // ),
+    region: Yup.object().required(
+      t("userManagement.validation.regionRequired"),
+    ),
+    city: Yup.string().required(t("userManagement.validation.cityRequired")),
+    mobile: Yup.string().required(
+      t("userManagement.validation.mobileRequired"),
+    ),
+    // password: Yup.string()
+    //   .min(6, t("userManagement.validation.passwordMin"))
+    //   .required(t("userManagement.validation.passwordRequired")),
+    // confirmPassword: Yup.string()
+    //   .oneOf(
+    //     [Yup.ref("password")],
+    //     t("userManagement.validation.passwordMatch"),
+    //   )
+    //   .required(t("userManagement.validation.confirmPasswordRequired")),
   });
 
   const onSubmit = async (values, { setSubmitting }) => {
@@ -98,6 +125,7 @@ const UserDetails = () => {
       formData.append("region", values.region?.value);
       formData.append("city", values.city);
       formData.append("mobile", values.mobile);
+      formData.append("designation", "executive");
 
       if (values.password) {
         formData.append("password", values.password);
@@ -121,7 +149,7 @@ const UserDetails = () => {
   const handleDelete = async () => {
     // if (!window.confirm("Delete this user?")) return;
     const ok = await dispatch(
-      showConfirm({ message: "Are you sure you want to delete this user?" }),
+      showConfirm({ message: t("userManagement.details.deleteText") }),
     );
 
     if (!ok) return;
@@ -213,7 +241,7 @@ const UserDetails = () => {
                   />
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-4">
+                {/* <div className="grid md:grid-cols-2 gap-4">
                   <SelectField
                     name="department"
                     label={t("userManagement.details.department")}
@@ -230,7 +258,7 @@ const UserDetails = () => {
                     )}
                     options={designationOptions}
                   />
-                </div>
+                </div> */}
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <SelectField
@@ -349,7 +377,7 @@ const UserDetails = () => {
                     className="bg-accent text-white px-4 py-2 rounded cursor-pointer"
                   >
                     {isSubmitting
-                      ? t("userManagement.actions.updatingUser")
+                      ? t("userManagement.actions.updating")
                       : t("userManagement.actions.updateUser")}
                   </button>
                 </div>

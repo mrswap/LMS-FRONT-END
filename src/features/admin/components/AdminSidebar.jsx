@@ -52,7 +52,7 @@ const AdminSidebar = ({ isOpen, onClose }) => {
         { label: t("sidebar.modules"), path: "/modules" },
         { label: t("sidebar.chapters"), path: "/chapters" },
         { label: t("sidebar.topics"), path: "/topics" },
-        { label: t("sidebar.bulkImport"), path: "/bulk-import" },
+        // { label: t("sidebar.bulkImport"), path: "/bulk-import" },
       ],
     },
 

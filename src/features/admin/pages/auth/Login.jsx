@@ -1,10 +1,149 @@
-import React from "react";
+// import React from "react";
+// import { Formik, Form } from "formik";
+// import * as Yup from "yup";
+// import { FiMail, FiLock, FiEye } from "react-icons/fi";
+
+// import TextInput from "../../common/form/TextInput";
+// import Checkbox from "../../common/form/Checkbox";
+// import FormButton from "../../common/form/FormButton";
+
+// import logo from "../../../../assets/admin/AvanteMedicalLogoBlue.png";
+// import { Link, useNavigate } from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+// import { loginUser } from "../../../../redux/slice/authSlice";
+// import { useTranslation } from "react-i18next";
+// import { useToast } from "../../common/toast/ToastContext";
+
+// const Login = () => {
+//   const dispatch = useDispatch();
+//   const { t } = useTranslation();
+//   const toast = useToast();
+//   const navigate = useNavigate();
+
+//   const { isLoading, isError, isSuccess, message } = useSelector(
+//     (state) => state.auth,
+//   );
+
+//   const initialValues = {
+//     email: "swapnil@netswaptech.com",
+//     password: "12345678",
+//   };
+
+//   const validationSchema = Yup.object({
+//     email: Yup.string().required("Required"),
+//     password: Yup.string().required("Required"),
+//   });
+
+//   const onSubmit = async (values, { setSubmitting }) => {
+//     try {
+//       const res = await dispatch(loginUser(values)).unwrap();
+//       toast.success(res?.message || "Login Successfully");
+//       navigate("/");
+//     } catch (err) {
+//       toast.error(err?.message || "Login Failed");
+//     } finally {
+//       setSubmitting(false);
+//     }
+//   };
+
+//   return (
+//     <div className="min-h-screen flex flex-col items-center justify-center bg-[#EEF2F6] px-4">
+//       {/*  Logo */}
+//       <div className="text-center">
+//         <img src={logo} alt="" className="w-[190px] h-[110px]" />
+//       </div>
+
+//       {/*  Card */}
+//       <div className="w-full max-w-md bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+//         {/* Heading */}
+//         <div className="mb-6">
+//           <h2 className="text-2xl  text-primary font-bold">
+//             {t("login.title")}
+//           </h2>
+//           <p className="text-[#64748B] text-sm mt-1">{t("login.subtitle")}</p>
+//         </div>
+
+//         <Formik
+//           initialValues={initialValues}
+//           validationSchema={validationSchema}
+//           onSubmit={onSubmit}
+//         >
+//           {({ isSubmitting }) => (
+//             <Form className="space-y-5">
+//               {/*  Email */}
+//               <div>
+//                 <div className="relative">
+//                   <FiMail className="absolute top-9 left-3  text-primary" />
+//                   <TextInput
+//                     name="email"
+//                     label={t("login.emailLabel")}
+//                     placeholder={t("login.emailPlaceholder")}
+//                     className="!pl-10"
+//                   />
+//                 </div>
+//               </div>
+
+//               {/* Password */}
+//               <div>
+//                 <div className="flex justify-between text-sm mb-1">
+//                   <label className="text-[#29324C] font-medium ">
+//                     {t("login.passwordLabel")}
+//                   </label>
+//                   <Link
+//                     to="/forgot-password"
+//                     className="text-primary font-semibold hover:underline"
+//                   >
+//                     {t("login.forgotPassword")}
+//                   </Link>
+//                 </div>
+
+//                 <div className="relative">
+//                   <FiLock className="absolute top-3 left-3 text-primary" />
+//                   <TextInput
+//                     name="password"
+//                     type="password"
+//                     placeholder={t("login.passwordPlaceholder")}
+//                     className="!pl-10"
+//                   />
+//                   <FiEye className="absolute top-3 right-3 text-gray-400 cursor-pointer" />
+//                 </div>
+//               </div>
+
+//               <FormButton
+//                 text={`${isLoading ? t("login.signingIn") : t("login.button")}`}
+//                 className="cursor-pointer"
+//                 loading={isLoading}
+//                 type="submit"
+//               />
+
+//               {/* Footer */}
+//               <div className="text-center text-sm text-gray-500 mt-4">
+//                 <p>{t("login.trouble")} </p>
+//                 <span className="text-[#1F3C88] font-medium cursor-pointer hover:underline">
+//                   {t("login.contactAdmin")}
+//                 </span>
+//               </div>
+//             </Form>
+//           )}
+//         </Formik>
+//       </div>
+
+//       {/* Bottom text */}
+//       <p className="text-xs text-gray-400 my-4 ">
+//         © 2025 Avante Medical LMS - v2.1.0
+//       </p>
+//     </div>
+//   );
+// };
+
+// export default Login;
+
+import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { FiMail, FiLock, FiEye } from "react-icons/fi";
+import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 
 import TextInput from "../../common/form/TextInput";
-import Checkbox from "../../common/form/Checkbox";
 import FormButton from "../../common/form/FormButton";
 
 import logo from "../../../../assets/admin/AvanteMedicalLogoBlue.png";
@@ -20,27 +159,29 @@ const Login = () => {
   const toast = useToast();
   const navigate = useNavigate();
 
-  const { isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth,
-  );
+  const [showPassword, setShowPassword] = useState(false);
+
+  const { isLoading } = useSelector((state) => state.auth);
 
   const initialValues = {
-    email: "swapnil@netswaptech.com",
-    password: "12345678",
+    email: "ajaycharve109@gmail.com",
+    password: "A123456@",
   };
 
   const validationSchema = Yup.object({
-    email: Yup.string().required("Required"),
-    password: Yup.string().required("Required"),
+    email: Yup.string()
+      .email(t("login.validation.emailRequired"))
+      .required(t("login.validation.emailInvalid")),
+    password: Yup.string().required(t("login.validation.passwordRequired")),
   });
 
   const onSubmit = async (values, { setSubmitting }) => {
     try {
       const res = await dispatch(loginUser(values)).unwrap();
-      toast.success(res?.message || "Login Successfully");
+      toast.success(res?.message || t("login.success"));
       navigate("/");
     } catch (err) {
-      toast.error(err?.message || "Login Failed");
+      toast.error(err?.message || t("login.error"));
     } finally {
       setSubmitting(false);
     }
@@ -48,16 +189,16 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#EEF2F6] px-4">
-      {/*  Logo */}
-      <div className="text-center">
-        <img src={logo} alt="" className="w-[190px] h-[110px]" />
+      {/* Logo */}
+      <div className="text-center mb-4">
+        <img src={logo} alt="logo" className="w-[190px] h-[110px]" />
       </div>
 
-      {/*  Card */}
+      {/* Card */}
       <div className="w-full max-w-md bg-white rounded-xl shadow-sm p-6 border border-gray-200">
         {/* Heading */}
         <div className="mb-6">
-          <h2 className="text-2xl  text-primary font-bold">
+          <h2 className="text-2xl text-primary font-bold">
             {t("login.title")}
           </h2>
           <p className="text-[#64748B] text-sm mt-1">{t("login.subtitle")}</p>
@@ -68,25 +209,23 @@ const Login = () => {
           validationSchema={validationSchema}
           onSubmit={onSubmit}
         >
-          {({ isSubmitting }) => (
+          {() => (
             <Form className="space-y-5">
-              {/*  Email */}
-              <div>
-                <div className="relative">
-                  <FiMail className="absolute top-9 left-3  text-primary" />
-                  <TextInput
-                    name="email"
-                    label={t("login.emailLabel")}
-                    placeholder={t("login.emailPlaceholder")}
-                    className="!pl-10"
-                  />
-                </div>
+              {/* Email */}
+              <div className="relative">
+                <FiMail className="absolute top-9 left-3 text-primary" />
+                <TextInput
+                  name="email"
+                  label={t("login.emailLabel")}
+                  placeholder={t("login.emailPlaceholder")}
+                  className="!pl-10"
+                />
               </div>
 
               {/* Password */}
               <div>
                 <div className="flex justify-between text-sm mb-1">
-                  <label className="text-[#29324C] font-medium ">
+                  <label className="text-[#29324C] font-medium">
                     {t("login.passwordLabel")}
                   </label>
                   <Link
@@ -99,18 +238,32 @@ const Login = () => {
 
                 <div className="relative">
                   <FiLock className="absolute top-3 left-3 text-primary" />
+
                   <TextInput
                     name="password"
-                    type={t("login.passwordLabel")}
+                    type={showPassword ? "text" : "password"}
                     placeholder={t("login.passwordPlaceholder")}
-                    className="!pl-10"
+                    className="!pl-10 !pr-10"
                   />
-                  <FiEye className="absolute top-3 right-3 text-gray-400 cursor-pointer" />
+
+                  {/* Eye Toggle */}
+                  {showPassword ? (
+                    <FiEyeOff
+                      onClick={() => setShowPassword(false)}
+                      className="absolute top-3 right-3 text-gray-400 cursor-pointer"
+                    />
+                  ) : (
+                    <FiEye
+                      onClick={() => setShowPassword(true)}
+                      className="absolute top-3 right-3 text-gray-400 cursor-pointer"
+                    />
+                  )}
                 </div>
               </div>
 
+              {/* Button */}
               <FormButton
-                text={`${isLoading ? t("login.signingIn") : t("login.button")}`}
+                text={isLoading ? t("login.signingIn") : t("login.button")}
                 className="cursor-pointer"
                 loading={isLoading}
                 type="submit"
@@ -118,7 +271,7 @@ const Login = () => {
 
               {/* Footer */}
               <div className="text-center text-sm text-gray-500 mt-4">
-                <p>{t("login.trouble")} </p>
+                <p>{t("login.trouble")}</p>
                 <span className="text-[#1F3C88] font-medium cursor-pointer hover:underline">
                   {t("login.contactAdmin")}
                 </span>
@@ -128,8 +281,8 @@ const Login = () => {
         </Formik>
       </div>
 
-      {/* Bottom text */}
-      <p className="text-xs text-gray-400 my-4 ">
+      {/* Bottom */}
+      <p className="text-xs text-gray-400 my-4">
         © 2025 Avante Medical LMS - v2.1.0
       </p>
     </div>

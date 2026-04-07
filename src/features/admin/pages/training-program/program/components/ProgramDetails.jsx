@@ -50,9 +50,16 @@ const ProgramDetails = () => {
     thumbnail: null,
   };
 
+  // const validationSchema = Yup.object({
+  //   title: Yup.string().required("Program name is required"),
+  //   description: Yup.string().required("Description is required"),
+  // });
+
   const validationSchema = Yup.object({
-    title: Yup.string().required("Program name is required"),
-    description: Yup.string().required("Description is required"),
+    title: Yup.string().required(t("program.validation.titleRequired")),
+    description: Yup.string().required(
+      t("program.validation.descriptionRequired"),
+    ),
   });
 
   const onSubmit = async (values, { setSubmitting, setErrors }) => {
@@ -83,7 +90,7 @@ const ProgramDetails = () => {
 
   const handleDelete = async () => {
     const ok = await dispatch(
-      showConfirm({ message: "Are you sure you want to delete this program?" }),
+      showConfirm({ message: t("program.details.deleteText") }),
     );
 
     if (!ok) return;

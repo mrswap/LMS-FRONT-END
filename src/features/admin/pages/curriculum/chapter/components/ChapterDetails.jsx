@@ -89,12 +89,30 @@ const ChapterDetails = () => {
     thumbnail: chapter?.thumbnail || null,
   };
 
+  // const validationSchema = Yup.object({
+  //   chapterName: Yup.string().required("Chapter name is required"),
+  //   moduleName: Yup.object().nullable().required("Parent module is required"),
+  //   levelName: Yup.object().nullable().required("Parent level is required"),
+  //   programName: Yup.object().nullable().required("Parent program is required"),
+  //   description: Yup.string().required("Description is required"),
+  // });
+
   const validationSchema = Yup.object({
-    chapterName: Yup.string().required("Chapter name is required"),
-    moduleName: Yup.object().nullable().required("Parent module is required"),
-    levelName: Yup.object().nullable().required("Parent level is required"),
-    programName: Yup.object().nullable().required("Parent program is required"),
-    description: Yup.string().required("Description is required"),
+    chapterName: Yup.string().required(
+      t("chapter.validation.chapterNameRequired"),
+    ),
+    moduleName: Yup.object()
+      .nullable()
+      .required(t("chapter.validation.moduleRequired")),
+    levelName: Yup.object()
+      .nullable()
+      .required(t("chapter.validation.levelRequired")),
+    programName: Yup.object()
+      .nullable()
+      .required(t("chapter.validation.programRequired")),
+    description: Yup.string().required(
+      t("chapter.validation.descriptionRequired"),
+    ),
   });
 
   const onSubmit = async (values, { setSubmitting, setErrors }) => {
@@ -133,7 +151,7 @@ const ChapterDetails = () => {
 
   const handleDelete = async () => {
     const ok = await dispatch(
-      showConfirm({ message: "Are you sure you want to delete this chapter?" }),
+      showConfirm({ message: t("chapter.details.deleteText") }),
     );
 
     if (!ok) return;
