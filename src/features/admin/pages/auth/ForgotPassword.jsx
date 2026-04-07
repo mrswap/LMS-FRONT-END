@@ -39,7 +39,7 @@ const ForgotPassword = () => {
     try {
       const res = await dispatch(forgotPassword(values)).unwrap();
       toast.success(res?.message || "Login Successfully");
-      navigate("/reset-password");
+      // navigate("/reset-password");
     } catch (err) {
       toast.error(err?.message || "Login Failed");
     } finally {
