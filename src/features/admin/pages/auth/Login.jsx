@@ -165,7 +165,7 @@ const Login = () => {
 
   const initialValues = {
     email: "ajaycharve109@gmail.com",
-    password: "A123456@",
+    password: "A1234567@",
   };
 
   const validationSchema = Yup.object({
@@ -213,7 +213,7 @@ const Login = () => {
             <Form className="space-y-5">
               {/* Email */}
               <div className="relative">
-                <FiMail className="absolute top-9 left-3 text-primary" />
+                <FiMail className="absolute top-7 sm:top-9 left-3 text-primary" />
                 <TextInput
                   name="email"
                   label={t("login.emailLabel")}
@@ -237,7 +237,7 @@ const Login = () => {
                 </div>
 
                 <div className="relative">
-                  <FiLock className="absolute top-3 left-3 text-primary" />
+                  <FiLock className="absolute top-1.5 sm:top-3 left-3 text-primary" />
 
                   <TextInput
                     name="password"
@@ -250,12 +250,12 @@ const Login = () => {
                   {showPassword ? (
                     <FiEyeOff
                       onClick={() => setShowPassword(false)}
-                      className="absolute top-3 right-3 text-gray-400 cursor-pointer"
+                      className="absolute top-1.5 sm:top-3 right-3 text-gray-400 cursor-pointer"
                     />
                   ) : (
                     <FiEye
                       onClick={() => setShowPassword(true)}
-                      className="absolute top-3 right-3 text-gray-400 cursor-pointer"
+                      className="absolute top-1.5 sm:top-3 right-3 text-gray-400 cursor-pointer"
                     />
                   )}
                 </div>

@@ -23,6 +23,7 @@ import CreateProgram from "../pages/training-program/program/components/CreatePr
 import ProgramDetails from "../pages/training-program/program/components/ProgramDetails";
 import ProtectedRoute from "./ProtectedRoute";
 import Profile from "../pages/auth/Profile";
+import ChangePassword from "../pages/auth/ChangePassword";
 
 const AdminRoutes = (
   <Route element={<ProtectedRoute />}>
@@ -32,6 +33,7 @@ const AdminRoutes = (
 
       {/* Routes */}
       <Route path="dashboard" element={<Dashboard />} />
+      <Route path="change-password" element={<ChangePassword />} />
 
       {/* profile */}
       <Route path="profile" element={<Profile />} />

@@ -110,13 +110,6 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
             onClick={() => setProfileOpen((prev) => !prev)}
           >
             <div className="hidden sm:block text-right text-sm leading-tight">
-              {/* <p className="font-medium text-white text-xs sm:text-sm">
-                {t("navbar.profileName") || "Admin User"}
-              </p>
-              <p className="text-[10px] sm:text-xs text-blue-200">
-                {t("navbar.role") || "Administrator"}
-              </p> */}
-
               <p className="font-medium text-white text-xs sm:text-sm">
                 {profile?.name || "User"}
               </p>
@@ -152,10 +145,8 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
                 }}
                 className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
               >
-                Profile
+                {t("navbar.profile")}
               </div>
-
-              <div className="border-t my-1"></div>
 
               <div
                 onClick={() => {
@@ -164,7 +155,7 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
                 }}
                 className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
               >
-                Change Password
+                {t("navbar.changePassword")}
               </div>
 
               {/* Logout */}
@@ -175,7 +166,7 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
                 }}
                 className="px-4 py-2 text-sm text-red-500 hover:bg-gray-100 cursor-pointer"
               >
-                Logout
+                {t("navbar.logout")}
               </div>
             </div>
           )}
