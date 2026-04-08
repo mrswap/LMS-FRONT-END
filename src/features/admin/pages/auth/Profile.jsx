@@ -110,15 +110,6 @@ const Profile = () => {
             <PageTitle>{t("profile.title")}</PageTitle>
             <PageSubtitle>{t("profile.subtitle")}</PageSubtitle>
           </PageHeaderLeft>
-
-          <PageHeaderRight>
-            <Link
-              to="/change-password"
-              className=" border border-blue-500 text-blue-500 hover:text-blue-700 cursor-pointer  py-2 px-3 rounded-lg font-[400] text-sm"
-            >
-              {t("changePassword.title")}
-            </Link>
-          </PageHeaderRight>
         </PageHeader>
 
         <Formik

@@ -99,7 +99,7 @@ const ForgotPassword = () => {
                 <div className="relative">
                   <FiMail
                     size={18}
-                    className="absolute top-9 left-3  text-primary"
+                    className="absolute top-7 sm:top-9 left-3  text-primary"
                   />
                   <TextInput
                     label={t("forgotPassword.emailLabel")}

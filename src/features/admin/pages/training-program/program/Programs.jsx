@@ -134,17 +134,17 @@ const Programs = () => {
         </span>
       ),
     },
-    {
-      header: t("program.list.columns.actions"),
-      render: (row) => (
-        <button
-          onClick={() => navigate(`program-details/${row.id}`)}
-          className="text-gray-800 text-lg cursor-pointer"
-        >
-          <FaEye />
-        </button>
-      ),
-    },
+    // {
+    //   header: t("program.list.columns.actions"),
+    //   render: (row) => (
+    //     <button
+    //       onClick={() => navigate(`program-details/${row.id}`)}
+    //       className="text-gray-800 text-lg cursor-pointer"
+    //     >
+    //       <FaEye />
+    //     </button>
+    //   ),
+    // },
   ];
 
   if (isLoading && programs?.data?.length) return <Loader />;
@@ -158,14 +158,14 @@ const Programs = () => {
           <PageSubtitle>{t("program.list.subtitle")}</PageSubtitle>
         </PageHeaderLeft>
 
-        <PageHeaderRight>
+        {/* <PageHeaderRight>
           <Link
             to="create-program"
             className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap"
           >
             {t("program.actions.addNewProgram")}
           </Link>
-        </PageHeaderRight>
+        </PageHeaderRight> */}
       </PageHeader>
 
       <PageBody>
