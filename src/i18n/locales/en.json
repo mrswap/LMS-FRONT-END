@@ -88,6 +88,7 @@
       "special": "At least 1 special character"
     },
     "validation": {
+      "oldPassword": "Old password is required",
       "passwordRequired": "Password is required",
       "passwordMin": "Minimum 8 characters",
       "passwordUppercase": "At least 1 uppercase letter",
@@ -137,8 +138,9 @@
     "searchPlaceholder": "Search analytics, users or courses...",
     "notifications": "Notifications",
     "messages": "Messages",
-    "profileName": "Dr. Sarah Chen",
-    "role": "System Admin"
+    "profile": "Profile",
+    "changePassword": "Change Password",
+    "logout": "Logout"
   },
 
   "sidebar": {
