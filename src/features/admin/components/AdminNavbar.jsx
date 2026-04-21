@@ -21,7 +21,7 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
 
   const { profile } = useSelector((state) => state.auth);
 
-  console.log("profile", profile);
+  // console.log("Profile in Navbar:", profile);
 
   useEffect(() => {
     dispatch(getProfile());
@@ -39,7 +39,7 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
     navigate("/login");
   };
 
-  // ✅ Outside click close
+  //  Outside click close
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -115,7 +115,7 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
               </p>
 
               <p className="text-[10px] sm:text-xs text-blue-200">
-                {profile?.role || "Role"}
+                {profile?.role?.name || "Role"}
               </p>
             </div>
 

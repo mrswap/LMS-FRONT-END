@@ -75,36 +75,18 @@ const TopicDetails = () => {
 
   const initialValues = {
     topicName: topic?.title || "",
-
     chapterName:
       chaptersOptions?.find((opt) => opt.value === topic?.chapter_id) || null,
-
     moduleName:
       modulesOptions?.find((opt) => opt.value === topic?.module_id) || null,
-
     levelName:
       levelOptions?.find((opt) => opt.value === topic?.level_id) || null,
-
     programName:
       programOptions?.find((opt) => opt.value === topic?.program_id) || null,
-
     description: topic?.description || "",
     thumbnail: topic?.thumbnail || null,
     duration: topic?.estimated_duration || "",
   };
-
-  // const validationSchema = Yup.object({
-  //   topicName: Yup.string().required("Topic name is required"),
-  //   duration: Yup.number()
-  //     .typeError("Duration must be a number")
-  //     .positive("Duration must be positive")
-  //     .required("Duration is required"),
-  //   chapterName: Yup.object().nullable().required("Parent chapter is required"),
-  //   moduleName: Yup.object().nullable().required("Parent module is required"),
-  //   levelName: Yup.object().nullable().required("Parent level is required"),
-  //   programName: Yup.object().nullable().required("Parent program is required"),
-  //   description: Yup.string().required("Description is required"),
-  // });
 
   const validationSchema = Yup.object({
     topicName: Yup.string().required(t("topic.validation.topicNameRequired")),

@@ -25,13 +25,11 @@ const SessionModal = ({ open, onContinue, onLogout }) => {
 
         {/* Title */}
         <h2 className="text-lg font-semibold text-gray-800">
-          {/* Session Expiring */}
           {t("sessionModal.title")}
         </h2>
 
         {/* Desc */}
         <p className="text-sm text-gray-500 mt-2">
-          {/* You’ve been inactive. You’ll be logged out soon. */}
           {t("sessionModal.description")}
         </p>
 
@@ -41,7 +39,6 @@ const SessionModal = ({ open, onContinue, onLogout }) => {
             onClick={onContinue}
             className="flex-1 py-2 rounded-lg bg-accent text-white cursor-pointer transition"
           >
-            {/* Continue */}
             {t("sessionModal.continue")}
           </button>
 
@@ -49,7 +46,6 @@ const SessionModal = ({ open, onContinue, onLogout }) => {
             onClick={onLogout}
             className="flex-1 py-2 rounded-lg bg-red-500 text-white cursor-pointer transition"
           >
-            {/* Logout */}
             {t("sessionModal.logout")}
           </button>
         </div>

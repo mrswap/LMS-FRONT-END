@@ -5,8 +5,6 @@ import Login from "./features/admin/pages/auth/Login";
 import LoginTest from "./features/admin/pages/auth/TestAllField";
 import ForgotPassword from "./features/admin/pages/auth/ForgotPassword";
 import CheckEmail from "./features/admin/pages/auth/CheckEmail";
-// import ChangePassword from "./features/admin/pages/auth/ChangePassword";
-// import ModuleProgress from "./features/admin/routes/ModuleProgress";
 import GlobalConfirmModal from "./features/admin/common/GlobalConfirmModal";
 import ResetPassword from "./features/admin/pages/auth/ResetPassword";
 
@@ -19,7 +17,6 @@ const App = () => {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/check-email" element={<CheckEmail />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        {/* <Route path="/change-password" element={<ChangePassword />} /> */}
         {AdminRoutes}
       </Routes>
       <GlobalConfirmModal />

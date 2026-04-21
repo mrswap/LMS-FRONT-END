@@ -1,6 +1,4 @@
 import { FiMail, FiArrowLeft } from "react-icons/fi";
-import { Link } from "react-router-dom";
-
 import logo from "../../../../assets/admin/AvanteMedicalLogoBlue.png";
 import success from "../../../../assets/admin/success-right.png";
 import { useTranslation } from "react-i18next";

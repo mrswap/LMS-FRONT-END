@@ -178,46 +178,8 @@ const Users = () => {
       </PageHeader>
 
       <PageBody>
-        {/* <div className="bg-white border border-gray-300 rounded-xl p-3 flex flex-wrap items-center gap-3">
-          <div
-            className="flex items-center bg-[#F8FAFC] border border-gray-300 hover:border-blue-500
-           rounded-xl px-3 py-2 w-full md:w-[280px] lg:w-[330px] transition-colors"
-          >
-            <FiSearch className="text-gray-400 text-sm flex-shrink-0" />
-            <input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search by name..."
-              className="bg-transparent outline-none px-2 text-sm w-full"
-            />
-          </div>
-
-          <div className="w-[220px]">
-            <Select
-              value={status}
-              onChange={setStatus}
-              options={statusOptions}
-              styles={customSelectStyles}
-              isSearchable={false}
-            />
-          </div>
-
-          <div
-            className="flex items-center gap-1 ml-auto cursor-pointer group"
-            onClick={resetFilters}
-          >
-            <MdOutlineFilterAltOff
-              className="text-gray-500 group-hover:text-red-500 transition-colors"
-              size={18}
-            />
-            <button className="text-gray-600 group-hover:text-red-500 text-sm font-semibold transition-colors cursor-pointer">
-              {t("levels.list.clearAll")}
-            </button>
-          </div>
-        </div> */}
-
         <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm space-y-4">
-          {/* 🔍 Search */}
+          {/*  Search */}
           <div className="w-full">
             <div
               className="flex items-center bg-gray-50 border border-gray-200 
@@ -225,7 +187,6 @@ const Users = () => {
       rounded-xl px-4 py-2.5 transition-all"
             >
               <FiSearch className="text-gray-400 text-base" />
-
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -244,7 +205,7 @@ const Users = () => {
             </div>
           </div>
 
-          {/* 🎯 Filters */}
+          {/*  Filters */}
           <div className="flex flex-wrap items-center gap-3">
             <div className="w-full sm:w-[48%] lg:w-[210px]">
               <Select
@@ -256,7 +217,7 @@ const Users = () => {
               />
             </div>
 
-            {/* ❌ Clear Button */}
+            {/*  Clear Button */}
             <div className="ml-auto flex items-center h-[40px]">
               <div className="relative group">
                 <button

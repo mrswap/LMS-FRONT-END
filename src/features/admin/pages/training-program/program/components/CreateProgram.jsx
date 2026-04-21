@@ -33,13 +33,8 @@ const CreateProgram = () => {
     thumbnail: null,
   };
 
-  // const validationSchema = Yup.object({
-  //   title: Yup.string().required("Title is required"),
-  //   description: Yup.string().required("Description is required"),
-  // });
   const validationSchema = Yup.object({
     title: Yup.string().required(t("program.validation.titleRequired")),
-
     description: Yup.string().required(
       t("program.validation.descriptionRequired"),
     ),
@@ -51,18 +46,14 @@ const CreateProgram = () => {
 
       formData.append("title", values.title);
       formData.append("description", values.description);
-
       if (thumbnail) {
         formData.append("thumbnail", thumbnail);
       }
 
       const res = await dispatch(createProgram(formData)).unwrap();
-
       toast.success(res.message || "Program created successfully ");
-
       resetForm();
       removeThumbnail();
-
       navigate("/programs");
     } catch (error) {
       setErrors({ submit: error.message });

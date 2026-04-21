@@ -79,19 +79,6 @@ const CreateTopic = () => {
     thumbnail: null,
   };
 
-  // const validationSchema = Yup.object({
-  //   topicName: Yup.string().required("Topic name is required"),
-  //   duration: Yup.number()
-  //     .typeError("Duration must be a number")
-  //     .positive("Duration must be positive")
-  //     .required("Duration is required"),
-  //   chapterName: Yup.object().nullable().required("Chapter name is required"),
-  //   moduleName: Yup.object().nullable().required("Module name is required"),
-  //   levelName: Yup.object().nullable().required("Level name is required"),
-  //   programName: Yup.object().nullable().required("Parent program is required"),
-  //   description: Yup.string().required("Description is required"),
-  // });
-
   const validationSchema = Yup.object({
     topicName: Yup.string().required(t("topic.validation.topicNameRequired")),
     duration: Yup.number()
