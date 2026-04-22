@@ -1,4 +1,3 @@
-// store/slices/confirmSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 let resolveCallback;
@@ -38,8 +37,6 @@ export const resolveConfirm = (result) => {
         resolveCallback(result);
     }
 };
-
-// 👇 ye add kar confirmSlice.js ke end me
 
 export const showConfirm = (data) => async (dispatch) => {
     dispatch(setConfirmData(data));

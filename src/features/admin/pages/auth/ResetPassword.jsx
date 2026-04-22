@@ -21,7 +21,7 @@ const ResetPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
-  // ✅ Get token from URL
+  //  Get token from URL
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const token = queryParams.get("token");
@@ -31,7 +31,7 @@ const ResetPassword = () => {
     confirmPassword: "",
   };
 
-  // ✅ Validation Schema (resetPassword keys)
+  //  Validation Schema (resetPassword keys)
   const validationSchema = Yup.object({
     password: Yup.string()
       .min(8, t("resetPassword.validation.passwordMin"))

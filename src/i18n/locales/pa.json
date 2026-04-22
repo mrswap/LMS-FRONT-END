@@ -563,6 +563,192 @@
     }
   },
 
+  "learningUnitBuilder": {
+    "list": {
+      "title": "ਲਰਨਿੰਗ ਯੂਨਿਟ ਪ੍ਰਬੰਧਨ",
+      "subtitle": "ਕੋਰਸ ਦੀਆਂ ਲਰਨਿੰਗ ਯੂਨਿਟਾਂ ਅਤੇ ਇੰਟਰਐਕਟਿਵ ਸਮੱਗਰੀ ਨੂੰ ਠੀਕ ਤਰ੍ਹਾਂ ਸੰਭਾਲੋ ਅਤੇ ਮੈਨੇਜ ਕਰੋ।",
+      "searchPlaceholder": "ਟਾਈਟਲ ਨਾਮ ਨਾਲ ਖੋਜੋ...",
+      "clearAll": "ਸਾਰਾ ਸਾਫ ਕਰੋ",
+      "columns": {
+        "title": "ਟਾਈਟਲ",
+        "type": "ਕਿਸਮ",
+        "parentTopic": "ਮੁੱਖ ਵਿਸ਼ਾ",
+        "parentChapter": "ਮੁੱਖ ਚੈਪਟਰ",
+        "parentModule": "ਮੁੱਖ ਮੋਡੀਊਲ",
+        "parentLevel": "ਮੁੱਖ ਲੈਵਲ",
+        "duration": "ਅਵਧੀ",
+        "status": "ਸਟੇਟਸ",
+        "actions": "ਐਕਸ਼ਨ"
+      }
+    },
+    "details": {
+      "generalDetails": "ਸਧਾਰਣ ਵੇਰਵਾ",
+      "parentTopic": "ਮੁੱਖ ਵਿਸ਼ਾ",
+      "parentTopicPlaceholder": "ਵਿਸ਼ੇ ਦਾ ਨਾਮ ਦਰਜ ਕਰੋ",
+      "parentChapter": "ਮੁੱਖ ਚੈਪਟਰ",
+      "parentChapterPlaceholder": "ਇੱਕ ਚੈਪਟਰ ਚੁਣੋ",
+      "parentModule": "ਮੁੱਖ ਮੋਡੀਊਲ",
+      "parentModulePlaceholder": "ਇੱਕ ਮੋਡੀਊਲ ਚੁਣੋ",
+      "parentLevel": "ਲੈਵਲ ਨਾਮ",
+      "parentLevelPlaceholder": "ਇੱਕ ਲੈਵਲ ਚੁਣੋ",
+      "parentProgram": "ਮੁੱਖ ਪ੍ਰੋਗਰਾਮ",
+      "perentProgramPlaceholder": "ਇੱਕ ਪ੍ਰੋਗਰਾਮ ਚੁਣੋ",
+      "duration": "ਅਵਧੀ (ਮਿੰਟ ਵਿੱਚ)",
+      "durationPlaceholder": "ਮਿੰਟ ਵਿੱਚ ਅਵਧੀ ਦਰਜ ਕਰੋ",
+      "description": "ਵੇਰਵਾ",
+      "descriptionPlaceholder": "ਮੋਡੀਊਲ ਦਾ ਵੇਰਵਾ ਲਿਖੋ...",
+      "deleteText": "ਕੀ ਤੁਸੀਂ ਇਹ ਸਮੱਗਰੀ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
+      "content": {
+        "contentSection": "ਕੰਟੈਂਟ ਸੈਕਸ਼ਨ",
+        "sectionTitle": "ਸੈਕਸ਼ਨ ਟਾਈਟਲ",
+        "content": "ਕੰਟੈਂਟ",
+        "mediaShortcut": "ਮੀਡੀਆ ਸ਼ਾਰਟਕੱਟ",
+        "mediaUrlShortcut": "ਮੀਡੀਆ URL/ਸ਼ਾਰਟਕੱਟ",
+        "addButtonSection": "ਨਵਾਂ ਸੈਕਸ਼ਨ ਜੋੜੋ",
+        "removeSection": "ਸੈਕਸ਼ਨ ਹਟਾਓ",
+        "order": "ਕ੍ਰਮ",
+        "type": "ਕਿਸਮ",
+        "text": "ਟੈਕਸਟ",
+        "media": "ਮੀਡੀਆ",
+        "description": "ਵੇਰਵਾ (ਚੋਣਵਾਂ)",
+        "editorPlaceholder": "ਇੱਥੇ ਆਪਣਾ ਕੰਟੈਂਟ ਲਿਖੋ...",
+        "preview": "ਝਲਕ"
+      }
+    },
+    "create": {
+      "title": "ਲਰਨਿੰਗ ਯੂਨਿਟ ਬਣਾਓ",
+      "subtitle": "ਟ੍ਰੇਨਿੰਗ ਪ੍ਰੋਗਰਾਮ ਲਈ ਲੈਸਨ ਵੇਰਵਾ, ਮੀਡੀਆ ਰਿਸੋਰਸ ਅਤੇ ਇੰਟਰਐਕਟਿਵ H5P ਕੰਟੈਂਟ ਨਾਲ ਨਵੀਂ ਲਰਨਿੰਗ ਯੂਨਿਟ ਬਣਾਓ।"
+    },
+    "actions": {
+      "addNewContent": "+ ਨਵਾਂ ਕੰਟੈਂਟ ਜੋੜੋ",
+      "createContent": "ਕੰਟੈਂਟ ਬਣਾਓ",
+      "creating": "ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...",
+      "deleteContent": "ਕੰਟੈਂਟ ਮਿਟਾਓ",
+      "updateContent": "ਕੰਟੈਂਟ ਅੱਪਡੇਟ ਕਰੋ",
+      "updating": "ਅੱਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
+    },
+    "breadcrumb": {
+      "contentManagement": "ਕੰਟੈਂਟ ਮੈਨੇਜਮੈਂਟ",
+      "view-content": "ਕੰਟੈਂਟ ਵੇਖੋ"
+    },
+    "validation": {
+      "programRequired": "ਮੁੱਖ ਪ੍ਰੋਗਰਾਮ ਲਾਜ਼ਮੀ ਹੈ",
+      "levelRequired": "ਲੈਵਲ ਨਾਮ ਲਾਜ਼ਮੀ ਹੈ",
+      "moduleRequired": "ਮੋਡੀਊਲ ਨਾਮ ਲਾਜ਼ਮੀ ਹੈ",
+      "topicRequired": "ਵਿਸ਼ਾ ਨਾਮ ਲਾਜ਼ਮੀ ਹੈ"
+    }
+  },
+
+  "mediaLibrary": {
+    "list": {
+      "title": "ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ",
+      "subtitle": "ਆਪਣੇ ਮੈਡੀਕਲ ਵਿਦਿਆਰਥੀਆਂ ਲਈ ਸਰਜੀਕਲ ਵੀਡੀਓ, ਕਲੀਨਿਕਲ ਡਾਇਗ੍ਰਾਮ ਅਤੇ ਕੋਰਸ ਡੌਕੂਮੈਂਟ ਮੈਨੇਜ ਕਰੋ।",
+      "searchPlaceholder": "ਨਾਂ, ਟੈਗ ਜਾਂ ਮੈਟਾਡਾਟਾ ਨਾਲ ਫਾਈਲ ਖੋਜੋ...",
+      "noDataFound": "ਕੋਈ ਡਾਟਾ ਨਹੀਂ ਮਿਲਿਆ",
+      "tabs": {
+        "all": "ਸਾਰੀਆਂ ਫਾਈਲਾਂ",
+        "videos": "ਵੀਡੀਓ",
+        "images": "ਤਸਵੀਰਾਂ",
+        "documents": "ਡੌਕੂਮੈਂਟ",
+        "audio": "ਆਡੀਓ"
+      }
+    },
+    "details": {
+      "generalDetails": "ਸਧਾਰਣ ਵੇਰਵਾ",
+      "mediaName": "ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ ਨਾਂ",
+      "mediaNamePlaceholder": "ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ ਦਾ ਨਾਂ ਦਰਜ ਕਰੋ",
+      "type": "ਕਿਸਮ",
+      "typePlaceholder": "ਇਮੇਜ ਕਿਸਮ ਚੁਣੋ",
+      "description": "ਵੇਰਵਾ",
+      "descriptionPlaceholder": "ਮੀਡੀਆ ਦਾ ਵੇਰਵਾ ਲਿਖੋ...",
+      "externalUrl": "ਬਾਹਰੀ URL",
+      "externalUrlPlaceholder": "https://example.com/file",
+      "uploadFile": "ਫਾਈਲ ਅਪਲੋਡ ਕਰੋ",
+      "uploadText": "ਫਾਈਲ ਅਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+      "uploadSubText": "PNG, JPG, JPEG ਵੱਧ ਤੋਂ ਵੱਧ 5MB",
+      "changeImage": "ਤਸਵੀਰ ਬਦਲੋ",
+      "deleteText": "ਕੀ ਤੁਸੀਂ ਯਕੀਨਨ ਇਸ ਮੀਡੀਆ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+    },
+    "create": {
+      "title": "ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ ਬਣਾਓ",
+      "subtitle": "ਆਪਣੇ ਮੈਡੀਕਲ ਵਿਦਿਆਰਥੀਆਂ ਲਈ ਸਰਜੀਕਲ ਵੀਡੀਓ, ਕਲੀਨਿਕਲ ਡਾਇਗ੍ਰਾਮ ਅਤੇ ਕੋਰਸ ਡੌਕੂਮੈਂਟ ਮੈਨੇਜ ਕਰੋ।"
+    },
+    "actions": {
+      "uploadMedia": "ਮੀਡੀਆ ਅਪਲੋਡ ਕਰੋ",
+      "creating": "ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...",
+      "createMedia": "ਮੀਡੀਆ ਬਣਾਓ",
+      "updating": "ਅੱਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+      "updateMedia": "ਮੀਡੀਆ ਅੱਪਡੇਟ ਕਰੋ"
+    },
+    "validation": {
+      "titleRequired": "ਸਿਰਲੇਖ ਲਾਜ਼ਮੀ ਹੈ",
+      "typeRequired": "ਕਿਸਮ ਲਾਜ਼ਮੀ ਹੈ",
+      "descriptionRequired": "ਵੇਰਵਾ ਲਾਜ਼ਮੀ ਹੈ",
+      "invalidUrl": "ਗਲਤ URL",
+      "fileOrUrlRequired": "ਫਾਈਲ ਜਾਂ ਬਾਹਰੀ URL ਵਿੱਚੋਂ ਇੱਕ ਲਾਜ਼ਮੀ ਹੈ"
+    },
+    "breadcrumb": {
+      "contentManagement": "ਕੰਟੈਂਟ ਮੈਨੇਜਮੈਂਟ",
+      "view-media": "ਮੀਡੀਆ ਵੇਖੋ"
+    }
+  },
+
+  "faq": {
+    "list": {
+      "title": "ਐਫਏਕਿਊ",
+      "subtitle": "ਆਪਣੇ ਨੋਲੇਜ ਬੇਸ ਨੂੰ ਠੀਕ ਤਰ੍ਹਾਂ ਸੰਜੋ ਅਤੇ ਸੰਭਾਲੋ",
+      "searchPlaceholder": "FAQ ਨਾਂ ਨਾਲ ਖੋਜੋ...",
+      "clearAll": "ਸਭ ਸਾਫ ਕਰੋ",
+      "columns": {
+        "id": "ਆਈਡੀ",
+        "question": "ਸਵਾਲ",
+        "type": "ਕਿਸਮ",
+        "status": "ਸਟੇਟਸ",
+        "actions": "ਐਕਸ਼ਨ"
+      }
+    },
+    "details": {
+      "type": "ਕਿਸਮ",
+      "typePlaceholder": "ਕਿਸਮ ਚੁਣੋ",
+      "typeId": "ਕਿਸਮ ਆਈਡੀ",
+      "typeIdPlaceholder": "ਕਿਸਮ ਆਈਡੀ ਚੁਣੋ",
+      "question": "ਸਵਾਲ",
+      "questionPlaceholder": "ਇੱਥੇ ਸਵਾਲ ਲਿਖੋ...",
+      "answer": "ਜਵਾਬ",
+      "image": "ਥੰਬਨੇਲ",
+      "uploadText": "ਥੰਬਨੇਲ ਅਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+      "uploadSubText": "PNG, JPG, JPEG ਵੱਧ ਤੋਂ ਵੱਧ 5MB",
+      "changeImage": "ਤਸਵੀਰ ਬਦਲੋ",
+      "deleteText": "ਕੀ ਤੁਸੀਂ ਯਕੀਨਨ ਇਸ FAQ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+    },
+    "create": {
+      "title": "ਨਵਾਂ FAQ ਬਣਾਓ",
+      "subtitle": "ਆਪਣੇ ਨੋਲੇਜ ਬੇਸ ਨੂੰ ਠੀਕ ਤਰ੍ਹਾਂ ਸੰਜੋ ਅਤੇ ਸੰਭਾਲੋ"
+    },
+    "actions": {
+      "addNewFaq": "+ ਨਵਾਂ FAQ ਸ਼ਾਮਲ ਕਰੋ",
+      "createFaq": "FAQ ਬਣਾਓ",
+      "creating": "ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...",
+      "deleteFaq": "FAQ ਹਟਾਓ",
+      "updateFaq": "FAQ ਅੱਪਡੇਟ ਕਰੋ",
+      "updating": "ਅੱਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
+    },
+    "breadcrumb": {
+      "contentManagement": "ਕੰਟੈਂਟ ਮੈਨੇਜਮੈਂਟ",
+      "view-faq": "FAQ ਵੇਖੋ"
+    },
+    "validation": {
+      "questionRequired": "ਸਵਾਲ ਲਾਜ਼ਮੀ ਹੈ",
+      "questionMin": "ਸਵਾਲ ਘੱਟੋ-ਘੱਟ 5 ਅੱਖਰਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "answerRequired": "ਜਵਾਬ ਲਾਜ਼ਮੀ ਹੈ",
+      "answerMin": "ਜਵਾਬ ਘੱਟੋ-ਘੱਟ 10 ਅੱਖਰਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "typeRequired": "ਕਿਸਮ ਲਾਜ਼ਮੀ ਹੈ",
+      "selectOption": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਵਿਕਲਪ ਚੁਣੋ",
+      "imageType": "ਸਿਰਫ ਇਮੇਜ ਫਾਈਲਾਂ ਹੀ ਮਨਜ਼ੂਰ ਹਨ",
+      "imageSize": "ਫਾਈਲ ਦਾ ਆਕਾਰ 5MB ਤੋਂ ਘੱਟ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ"
+    }
+  },
+
   "language": {
     "title": "ਭਾਸ਼ਾ ਪ੍ਰਬੰਧਨ",
     "desc": "ਪਲੇਟਫਾਰਮ ਇੰਟਰਫੇਸ ਅਤੇ ਸਿੱਖਣ ਸਮੱਗਰੀ ਲਈ ਸਿਸਟਮ ਭਾਸ਼ਾਵਾਂ ਅਤੇ ਅਨੁਵਾਦ ਪ੍ਰਬੰਧਿਤ ਕਰੋ।",
@@ -575,6 +761,128 @@
       "langName": "ਭਾਸ਼ਾ ਦਾ ਨਾਮ",
       "status": "ਸਥਿਤੀ",
       "actions": "ਕਾਰਵਾਈਆਂ"
+    }
+  },
+
+  "role": {
+    "list": {
+      "title": "ਭੂਮਿਕਾਵਾਂ ਅਤੇ ਅਨੁਮਤੀਆਂ",
+      "subtitle": "ਸਟਾਫ ਅਤੇ ਸਿੱਖਣ ਵਾਲਿਆਂ ਲਈ ਐਕਸੈਸ ਲੈਵਲ ਅਤੇ ਫੰਕਸ਼ਨਲ ਅਨੁਮਤੀਆਂ ਨਿਰਧਾਰਤ ਕਰੋ।",
+      "searchPlaceholder": "ਭੂਮਿਕਾ ਨਾਮ ਨਾਲ ਖੋਜੋ...",
+      "clearAll": "ਸਭ ਸਾਫ ਕਰੋ",
+      "columns": {
+        "id": "ਆਈਡੀ",
+        "name": "ਨਾਮ",
+        "status": "ਸਥਿਤੀ",
+        "actions": "ਕਾਰਵਾਈਆਂ"
+      }
+    },
+    "details": {
+      "name": "ਨਾਮ",
+      "namePlaceholder": "ਭੂਮਿਕਾ ਦਾ ਨਾਮ ਦਰਜ ਕਰੋ",
+      "label": "ਲੇਬਲ",
+      "labelPlaceholder": "ਲੇਬਲ ਨਾਮ ਦਰਜ ਕਰੋ",
+      "email": "ਈਮੇਲ ਪਤਾ",
+      "deleteText": "ਕੀ ਤੁਸੀਂ ਇਸ ਭੂਮਿਕਾ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+    },
+    "create": {
+      "title": "ਨਵੀਂ ਭੂਮਿਕਾ ਬਣਾਓ",
+      "subtitle": "ਭੂਮਿਕਾ ਬਣਾਓ"
+    },
+    "actions": {
+      "addNewRole": "+ ਨਵੀਂ ਭੂਮਿਕਾ ਸ਼ਾਮਲ ਕਰੋ",
+      "deleteRole": "ਭੂਮਿਕਾ ਮਿਟਾਓ",
+      "cancle": "ਰੱਦ ਕਰੋ",
+      "createRole": "ਭੂਮਿਕਾ ਬਣਾਓ",
+      "creating": "ਬਣਾਈ ਜਾ ਰਹੀ ਹੈ...",
+      "updateRole": "ਭੂਮਿਕਾ ਅਪਡੇਟ ਕਰੋ",
+      "updating": "ਅਪਡੇਟ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ..."
+    },
+    "breadcrumb": {
+      "role": "ਭੂਮਿਕਾਵਾਂ ਅਤੇ ਅਨੁਮਤੀਆਂ",
+      "viewRole": "ਭੂਮਿਕਾ ਵੇਖੋ"
+    },
+    "validation": {
+      "nameRequired": "ਨਾਮ ਲਾਜ਼ਮੀ ਹੈ",
+      "labelRequired": "ਲੇਬਲ ਲਾਜ਼ਮੀ ਹੈ"
+    }
+  },
+
+  "designation": {
+    "list": {
+      "title": "ਡਿਜ਼ਿਗਨੇਸ਼ਨ ਮੈਨੇਜਮੈਂਟ",
+      "subtitle": "ਸਟਾਫ ਅਤੇ ਸਿੱਖਣ ਵਾਲਿਆਂ ਲਈ ਐਕਸੈਸ ਲੈਵਲ ਅਤੇ ਫੰਕਸ਼ਨਲ ਅਨੁਮਤੀਆਂ ਨਿਰਧਾਰਤ ਕਰੋ।",
+      "searchPlaceholder": "ਡਿਜ਼ਿਗਨੇਸ਼ਨ ਨਾਮ ਨਾਲ ਖੋਜੋ...",
+      "clearAll": "ਸਭ ਸਾਫ ਕਰੋ",
+      "columns": {
+        "id": "ਆਈਡੀ",
+        "name": "ਨਾਮ",
+        "status": "ਸਥਿਤੀ",
+        "actions": "ਕਾਰਵਾਈਆਂ"
+      }
+    },
+    "details": {
+      "name": "ਨਾਮ",
+      "namePlaceholder": "ਡਿਜ਼ਿਗਨੇਸ਼ਨ ਦਾ ਨਾਮ ਦਰਜ ਕਰੋ",
+      "label": "ਲੇਬਲ",
+      "labelPlaceholder": "ਲੇਬਲ ਨਾਮ ਦਰਜ ਕਰੋ",
+      "email": "ਈਮੇਲ ਪਤਾ",
+      "deleteText": "ਕੀ ਤੁਸੀਂ ਇਸ ਡਿਜ਼ਿਗਨੇਸ਼ਨ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+    },
+    "create": {
+      "title": "ਨਵਾਂ ਡਿਜ਼ਿਗਨੇਸ਼ਨ ਬਣਾਓ",
+      "subtitle": "ਡਿਜ਼ਿਗਨੇਸ਼ਨ ਬਣਾਓ"
+    },
+    "actions": {
+      "addNewDesignation": "+ ਨਵਾਂ ਡਿਜ਼ਿਗਨੇਸ਼ਨ ਸ਼ਾਮਲ ਕਰੋ",
+      "deleteDesignation": "ਡਿਜ਼ਿਗਨੇਸ਼ਨ ਮਿਟਾਓ",
+      "cancle": "ਰੱਦ ਕਰੋ",
+      "createDesignation": "ਡਿਜ਼ਿਗਨੇਸ਼ਨ ਬਣਾਓ",
+      "creating": "ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...",
+      "updateDesignation": "ਡਿਜ਼ਿਗਨੇਸ਼ਨ ਅਪਡੇਟ ਕਰੋ",
+      "updating": "ਅਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
+    },
+    "breadcrumb": {
+      "designation": "ਡਿਜ਼ਿਗਨੇਸ਼ਨ ਮੈਨੇਜਮੈਂਟ",
+      "viewDesignation": "ਡਿਜ਼ਿਗਨੇਸ਼ਨ ਵੇਖੋ"
+    },
+    "validation": {
+      "nameRequired": "ਨਾਮ ਲਾਜ਼ਮੀ ਹੈ",
+      "labelRequired": "ਲੇਬਲ ਲਾਜ਼ਮੀ ਹੈ"
+    }
+  },
+
+  "smtp": {
+    "list": {
+      "title": "SMTP ਸੈਟਿੰਗਜ਼",
+      "subtitle": "ਨੋਟੀਫਿਕੇਸ਼ਨ, ਪਾਸਵਰਡ ਰੀਸੈਟ ਅਤੇ ਹੋਰ ਈਮੇਲ ਸੰਚਾਰ ਲਈ ਆਪਣੀਆਂ ਈਮੇਲ ਸਰਵਰ ਸੈਟਿੰਗਜ਼ ਕਨਫਿਗਰ ਕਰੋ।"
+    },
+    "details": {
+      "mailer": "ਮੇਲਰ",
+      "mailerPlaceholder": "ਮੇਲਰ ਕਿਸਮ ਚੁਣੋ",
+      "host": "ਹੋਸਟ",
+      "hostPlaceholder": "SMTP ਹੋਸਟ ਦਰਜ ਕਰੋ",
+      "port": "ਪੋਰਟ",
+      "portPlaceholder": "SMTP ਪੋਰਟ ਦਰਜ ਕਰੋ",
+      "username": "ਯੂਜ਼ਰਨੇਮ",
+      "usernamePlaceholder": "SMTP ਯੂਜ਼ਰਨੇਮ ਦਰਜ ਕਰੋ",
+      "password": "ਪਾਸਵਰਡ",
+      "passwordPlaceholder": "SMTP ਪਾਸਵਰਡ ਦਰਜ ਕਰੋ",
+      "encryption": "ਐਨਕ੍ਰਿਪਸ਼ਨ",
+      "encryptionPlaceholder": "ਐਨਕ੍ਰਿਪਸ਼ਨ ਕਿਸਮ ਚੁਣੋ",
+      "fromAddress": "ਫ੍ਰੌਮ ਐਡਰੈੱਸ",
+      "fromAddressPlaceholder": "ਈਮੇਲ ਪਤਾ ਦਰਜ ਕਰੋ",
+      "fromName": "ਫ੍ਰੌਮ ਨਾਮ",
+      "fromNamePlaceholder": "ਨਾਮ ਦਰਜ ਕਰੋ",
+      "emailPlaceholder": "ਈਮੇਲ ਪਤਾ ਦਰਜ ਕਰੋ"
+    },
+    "actions": {
+      "updateSMTP": "SMTP ਅਪਡੇਟ ਕਰੋ",
+      "updating": "ਅਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+      "sendTestMail": "ਟੈਸਟ ਮੇਲ ਭੇਜੋ",
+      "sendingTestMail": "ਟੈਸਟ ਮੇਲ ਭੇਜੀ ਜਾ ਰਹੀ ਹੈ...",
+      "send": "ਭੇਜੋ",
+      "cancel": "ਰੱਦ ਕਰੋ"
     }
   },
 

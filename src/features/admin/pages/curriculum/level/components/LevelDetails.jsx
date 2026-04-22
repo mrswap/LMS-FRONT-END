@@ -63,11 +63,6 @@ const LevelDetails = () => {
     thumbnail: level?.thumbnail || null,
   };
 
-  // const validationSchema = Yup.object({
-  //   levelName: Yup.string().required("Level name is required"),
-  //   programName: Yup.object().nullable().required("Parent program is required"),
-  //   description: Yup.string().required("Description is required"),
-  // });
   const validationSchema = Yup.object({
     levelName: Yup.string().required(t("levels.validation.levelNameRequired")),
     programName: Yup.object()

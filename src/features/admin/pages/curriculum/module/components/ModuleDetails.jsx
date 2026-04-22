@@ -77,12 +77,6 @@ const ModuleDetails = () => {
     thumbnail: module?.thumbnail || null,
   };
 
-  // const validationSchema = Yup.object({
-  //   moduleName: Yup.string().required("Module name is required"),
-  //   levelName: Yup.object().nullable().required("Parent level is required"),
-  //   programName: Yup.object().nullable().required("Parent program is required"),
-  //   description: Yup.string().required("Description is required"),
-  // });
   const validationSchema = Yup.object({
     moduleName: Yup.string().required(
       t("module.validation.moduleNameRequired"),

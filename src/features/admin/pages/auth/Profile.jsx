@@ -9,7 +9,6 @@ import {
   PageHeaderLeft,
   PageTitle,
   PageSubtitle,
-  PageHeaderRight,
 } from "../../common/layout/index";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -22,7 +21,7 @@ import {
   FaTrashAlt,
 } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const dispatch = useDispatch();

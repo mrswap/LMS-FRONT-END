@@ -563,6 +563,192 @@
     }
   },
 
+  "learningUnitBuilder": {
+    "list": {
+      "title": "लर्निंग यूनिट प्रबंधन",
+      "subtitle": "कोर्स की लर्निंग यूनिट्स और इंटरएक्टिव कंटेंट को व्यवस्थित और प्रबंधित करें।",
+      "searchPlaceholder": "शीर्षक नाम से खोजें...",
+      "clearAll": "सभी साफ करें",
+      "columns": {
+        "title": "शीर्षक",
+        "type": "प्रकार",
+        "parentTopic": "मुख्य विषय",
+        "parentChapter": "मुख्य अध्याय",
+        "parentModule": "मुख्य मॉड्यूल",
+        "parentLevel": "मुख्य स्तर",
+        "duration": "अवधि",
+        "status": "स्थिति",
+        "actions": "कार्य"
+      }
+    },
+    "details": {
+      "generalDetails": "सामान्य विवरण",
+      "parentTopic": "मुख्य विषय",
+      "parentTopicPlaceholder": "विषय का नाम दर्ज करें",
+      "parentChapter": "मुख्य अध्याय",
+      "parentChapterPlaceholder": "एक अध्याय चुनें",
+      "parentModule": "मुख्य मॉड्यूल",
+      "parentModulePlaceholder": "एक मॉड्यूल चुनें",
+      "parentLevel": "स्तर का नाम",
+      "parentLevelPlaceholder": "एक स्तर चुनें",
+      "parentProgram": "मुख्य प्रोग्राम",
+      "perentProgramPlaceholder": "एक प्रोग्राम चुनें",
+      "duration": "अवधि (मिनट में)",
+      "durationPlaceholder": "मिनट में अवधि दर्ज करें",
+      "description": "विवरण",
+      "descriptionPlaceholder": "मॉड्यूल का विवरण लिखें...",
+      "deleteText": "क्या आप वाकई इस कंटेंट को हटाना चाहते हैं?",
+      "content": {
+        "contentSection": "कंटेंट सेक्शन",
+        "sectionTitle": "सेक्शन शीर्षक",
+        "content": "कंटेंट",
+        "mediaShortcut": "मीडिया शॉर्टकट",
+        "mediaUrlShortcut": "मीडिया URL/शॉर्टकट",
+        "addButtonSection": "नया सेक्शन जोड़ें",
+        "removeSection": "सेक्शन हटाएं",
+        "order": "क्रम",
+        "type": "प्रकार",
+        "text": "टेक्स्ट",
+        "media": "मीडिया",
+        "description": "विवरण (वैकल्पिक)",
+        "editorPlaceholder": "यहाँ अपना कंटेंट लिखें...",
+        "preview": "पूर्वावलोकन"
+      }
+    },
+    "create": {
+      "title": "लर्निंग यूनिट बनाएं",
+      "subtitle": "ट्रेनिंग प्रोग्राम के लिए लेसन विवरण, मीडिया संसाधन और इंटरएक्टिव H5P कंटेंट जोड़कर नई लर्निंग यूनिट बनाएं।"
+    },
+    "actions": {
+      "addNewContent": "+ नया कंटेंट जोड़ें",
+      "createContent": "कंटेंट बनाएं",
+      "creating": "बनाया जा रहा है...",
+      "deleteContent": "कंटेंट हटाएं",
+      "updateContent": "कंटेंट अपडेट करें",
+      "updating": "अपडेट हो रहा है..."
+    },
+    "breadcrumb": {
+      "contentManagement": "कंटेंट प्रबंधन",
+      "view-content": "कंटेंट देखें"
+    },
+    "validation": {
+      "programRequired": "मुख्य प्रोग्राम आवश्यक है",
+      "levelRequired": "स्तर का नाम आवश्यक है",
+      "moduleRequired": "मॉड्यूल का नाम आवश्यक है",
+      "topicRequired": "विषय का नाम आवश्यक है"
+    }
+  },
+
+  "mediaLibrary": {
+    "list": {
+      "title": "मीडिया लाइब्रेरी",
+      "subtitle": "अपने मेडिकल स्टूडेंट्स के लिए सर्जिकल वीडियो, क्लिनिकल डायग्राम और कोर्स डॉक्यूमेंट्स मैनेज करें।",
+      "searchPlaceholder": "नाम, टैग या मेटाडेटा से फाइल खोजें...",
+      "noDataFound": "कोई डेटा नहीं मिला",
+      "tabs": {
+        "all": "सभी फाइलें",
+        "videos": "वीडियो",
+        "images": "इमेज",
+        "documents": "डॉक्यूमेंट्स",
+        "audio": "ऑडियो"
+      }
+    },
+    "details": {
+      "generalDetails": "सामान्य विवरण",
+      "mediaName": "मीडिया लाइब्रेरी नाम",
+      "mediaNamePlaceholder": "मीडिया लाइब्रेरी का नाम दर्ज करें",
+      "type": "प्रकार",
+      "typePlaceholder": "इमेज प्रकार चुनें",
+      "description": "विवरण",
+      "descriptionPlaceholder": "मीडिया का विवरण लिखें...",
+      "externalUrl": "बाहरी URL",
+      "externalUrlPlaceholder": "https://example.com/file",
+      "uploadFile": "फाइल अपलोड करें",
+      "uploadText": "फाइल अपलोड करने के लिए क्लिक करें",
+      "uploadSubText": "PNG, JPG, JPEG अधिकतम 5MB",
+      "changeImage": "इमेज बदलें",
+      "deleteText": "क्या आप वाकई इस मीडिया को डिलीट करना चाहते हैं?"
+    },
+    "create": {
+      "title": "मीडिया लाइब्रेरी बनाएं",
+      "subtitle": "अपने मेडिकल स्टूडेंट्स के लिए सर्जिकल वीडियो, क्लिनिकल डायग्राम और कोर्स डॉक्यूमेंट्स मैनेज करें।"
+    },
+    "actions": {
+      "uploadMedia": "मीडिया अपलोड करें",
+      "creating": "बनाया जा रहा है...",
+      "createMedia": "मीडिया बनाएं",
+      "updating": "अपडेट किया जा रहा है...",
+      "updateMedia": "मीडिया अपडेट करें"
+    },
+    "validation": {
+      "titleRequired": "शीर्षक आवश्यक है",
+      "typeRequired": "प्रकार आवश्यक है",
+      "descriptionRequired": "विवरण आवश्यक है",
+      "invalidUrl": "अमान्य URL",
+      "fileOrUrlRequired": "फाइल या बाहरी URL में से एक आवश्यक है"
+    },
+    "breadcrumb": {
+      "contentManagement": "कंटेंट मैनेजमेंट",
+      "view-media": "मीडिया देखें"
+    }
+  },
+
+  "faq": {
+    "list": {
+      "title": "एफएक्यू",
+      "subtitle": "अपने नॉलेज बेस को व्यवस्थित और बनाए रखें",
+      "searchPlaceholder": "FAQ नाम से खोजें...",
+      "clearAll": "सभी साफ करें",
+      "columns": {
+        "id": "आईडी",
+        "question": "प्रश्न",
+        "type": "प्रकार",
+        "status": "स्थिति",
+        "actions": "एक्शन"
+      }
+    },
+    "details": {
+      "type": "प्रकार",
+      "typePlaceholder": "प्रकार चुनें",
+      "typeId": "प्रकार आईडी",
+      "typeIdPlaceholder": "प्रकार आईडी चुनें",
+      "question": "प्रश्न",
+      "questionPlaceholder": "यहाँ प्रश्न लिखें...",
+      "answer": "उत्तर",
+      "image": "थंबनेल",
+      "uploadText": "थंबनेल अपलोड करने के लिए क्लिक करें",
+      "uploadSubText": "PNG, JPG, JPEG अधिकतम 5MB",
+      "changeImage": "इमेज बदलें",
+      "deleteText": "क्या आप वाकई इस FAQ को डिलीट करना चाहते हैं?"
+    },
+    "create": {
+      "title": "नया FAQ बनाएं",
+      "subtitle": "अपने नॉलेज बेस को व्यवस्थित और बनाए रखें"
+    },
+    "actions": {
+      "addNewFaq": "+ नया FAQ जोड़ें",
+      "createFaq": "FAQ बनाएं",
+      "creating": "बनाया जा रहा है...",
+      "deleteFaq": "FAQ हटाएं",
+      "updateFaq": "FAQ अपडेट करें",
+      "updating": "अपडेट किया जा रहा है..."
+    },
+    "breadcrumb": {
+      "contentManagement": "कंटेंट मैनेजमेंट",
+      "view-faq": "FAQ देखें"
+    },
+    "validation": {
+      "questionRequired": "प्रश्न आवश्यक है",
+      "questionMin": "प्रश्न कम से कम 5 अक्षरों का होना चाहिए",
+      "answerRequired": "उत्तर आवश्यक है",
+      "answerMin": "उत्तर कम से कम 10 अक्षरों का होना चाहिए",
+      "typeRequired": "प्रकार आवश्यक है",
+      "selectOption": "कृपया एक विकल्प चुनें",
+      "imageType": "केवल इमेज फाइल ही मान्य हैं",
+      "imageSize": "फाइल साइज 5MB से कम होना चाहिए"
+    }
+  },
+
   "language": {
     "title": "भाषा प्रबंधन",
     "desc": "प्लेटफ़ॉर्म इंटरफ़ेस और शिक्षण सामग्री के लिए सिस्टम भाषाएं और अनुवाद प्रबंधित करें।",
@@ -575,6 +761,128 @@
       "langName": "भाषा का नाम",
       "status": "स्थिति",
       "actions": "क्रियाएं"
+    }
+  },
+
+  "role": {
+    "list": {
+      "title": "भूमिकाएँ और अनुमतियाँ",
+      "subtitle": "स्टाफ और शिक्षार्थियों के लिए एक्सेस लेवल और फंक्शनल परमिशन निर्धारित करें।",
+      "searchPlaceholder": "भूमिका नाम से खोजें...",
+      "clearAll": "सभी साफ करें",
+      "columns": {
+        "id": "आईडी",
+        "name": "नाम",
+        "status": "स्थिति",
+        "actions": "क्रियाएँ"
+      }
+    },
+    "details": {
+      "name": "नाम",
+      "namePlaceholder": "भूमिका का नाम दर्ज करें",
+      "label": "लेबल",
+      "labelPlaceholder": "लेबल नाम दर्ज करें",
+      "email": "ईमेल पता",
+      "deleteText": "क्या आप इस भूमिका को हटाना चाहते हैं?"
+    },
+    "create": {
+      "title": "नई भूमिका बनाएं",
+      "subtitle": "भूमिका बनाएं"
+    },
+    "actions": {
+      "addNewRole": "+ नई भूमिका जोड़ें",
+      "deleteRole": "भूमिका हटाएं",
+      "cancle": "रद्द करें",
+      "createRole": "भूमिका बनाएं",
+      "creating": "बनाया जा रहा है...",
+      "updateRole": "भूमिका अपडेट करें",
+      "updating": "अपडेट किया जा रहा है..."
+    },
+    "breadcrumb": {
+      "role": "भूमिकाएँ और अनुमतियाँ",
+      "viewRole": "भूमिका देखें"
+    },
+    "validation": {
+      "nameRequired": "नाम आवश्यक है",
+      "labelRequired": "लेबल आवश्यक है"
+    }
+  },
+
+  "designation": {
+    "list": {
+      "title": "पद प्रबंधन",
+      "subtitle": "स्टाफ और शिक्षार्थियों के लिए एक्सेस लेवल और फंक्शनल परमिशन निर्धारित करें।",
+      "searchPlaceholder": "पद नाम से खोजें...",
+      "clearAll": "सभी साफ करें",
+      "columns": {
+        "id": "आईडी",
+        "name": "नाम",
+        "status": "स्थिति",
+        "actions": "क्रियाएँ"
+      }
+    },
+    "details": {
+      "name": "नाम",
+      "namePlaceholder": "पद का नाम दर्ज करें",
+      "label": "लेबल",
+      "labelPlaceholder": "लेबल नाम दर्ज करें",
+      "email": "ईमेल पता",
+      "deleteText": "क्या आप इस पद को हटाना चाहते हैं?"
+    },
+    "create": {
+      "title": "नया पद बनाएं",
+      "subtitle": "पद बनाएं"
+    },
+    "actions": {
+      "addNewDesignation": "+ नया पद जोड़ें",
+      "deleteDesignation": "पद हटाएं",
+      "cancle": "रद्द करें",
+      "createDesignation": "पद बनाएं",
+      "creating": "बनाया जा रहा है...",
+      "updateDesignation": "पद अपडेट करें",
+      "updating": "अपडेट किया जा रहा है..."
+    },
+    "breadcrumb": {
+      "designation": "पद प्रबंधन",
+      "viewDesignation": "पद देखें"
+    },
+    "validation": {
+      "nameRequired": "नाम आवश्यक है",
+      "labelRequired": "लेबल आवश्यक है"
+    }
+  },
+
+  "smtp": {
+    "list": {
+      "title": "SMTP सेटिंग्स",
+      "subtitle": "नोटिफिकेशन, पासवर्ड रीसेट और अन्य ईमेल संचार सक्षम करने के लिए अपनी ईमेल सर्वर सेटिंग्स कॉन्फ़िगर करें।"
+    },
+    "details": {
+      "mailer": "मेलर",
+      "mailerPlaceholder": "मेलर प्रकार चुनें",
+      "host": "होस्ट",
+      "hostPlaceholder": "SMTP होस्ट दर्ज करें",
+      "port": "पोर्ट",
+      "portPlaceholder": "SMTP पोर्ट दर्ज करें",
+      "username": "यूज़रनेम",
+      "usernamePlaceholder": "SMTP यूज़रनेम दर्ज करें",
+      "password": "पासवर्ड",
+      "passwordPlaceholder": "SMTP पासवर्ड दर्ज करें",
+      "encryption": "एन्क्रिप्शन",
+      "encryptionPlaceholder": "एन्क्रिप्शन प्रकार चुनें",
+      "fromAddress": "फ्रॉम एड्रेस",
+      "fromAddressPlaceholder": "ईमेल पता दर्ज करें",
+      "fromName": "फ्रॉम नाम",
+      "fromNamePlaceholder": "नाम दर्ज करें",
+      "emailPlaceholder": "ईमेल पता दर्ज करें"
+    },
+    "actions": {
+      "updateSMTP": "SMTP अपडेट करें",
+      "updating": "अपडेट किया जा रहा है...",
+      "sendTestMail": "टेस्ट मेल भेजें",
+      "sendingTestMail": "टेस्ट मेल भेजा जा रहा है...",
+      "send": "भेजें",
+      "cancel": "रद्द करें"
     }
   },
 

@@ -563,6 +563,192 @@
     }
   },
 
+  "learningUnitBuilder": {
+    "list": {
+      "title": "Learning Unit Management",
+      "subtitle": "Organize and manage course learning units and interactive content.",
+      "searchPlaceholder": "Search by title name...",
+      "clearAll": "Clear All",
+      "columns": {
+        "title": "Title",
+        "type": "Type",
+        "parentTopic": "Parent Topic",
+        "parentChapter": "Parent Chapter",
+        "parentModule": "Parent Module",
+        "parentLevel": "Parent Level",
+        "duration": "Duration",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "details": {
+      "generalDetails": "General Details",
+      "parentTopic": "Parent Topic",
+      "parentTopicPlaceholder": "Enter topic name",
+      "parentChapter": "Parent Chapter",
+      "parentChapterPlaceholder": "Select a chapter",
+      "parentModule": "Parent Module",
+      "parentModulePlaceholder": "Select a module",
+      "parentLevel": "Level Name",
+      "parentLevelPlaceholder": "Select a level",
+      "parentProgram": "Parent Program",
+      "perentProgramPlaceholder": "Select a program",
+      "duration": "Duration (in minutes)",
+      "durationPlaceholder": "Enter duration in minutes",
+      "description": "Description",
+      "descriptionPlaceholder": "Write module description...",
+      "deleteText": "Are you sure you want to delete this content?",
+      "content": {
+        "contentSection": "Content Sections",
+        "sectionTitle": "Section Title",
+        "content": "Content",
+        "mediaShortcut": "Media Shortcut",
+        "mediaUrlShortcut": "Media URL/Shortcut",
+        "addButtonSection": "Add New Section",
+        "removeSection": "Remove Section",
+        "order": "Order",
+        "type": "Type",
+        "text": "Text",
+        "media": "Media",
+        "description": "Description (Optional)",
+        "editorPlaceholder": "Write your content here...",
+        "preview": "Preview"
+      }
+    },
+    "create": {
+      "title": "Create Learning Unit",
+      "subtitle": "Add a new learning unit by providing lesson details, media resources, and interactive H5P content for the training program."
+    },
+    "actions": {
+      "addNewContent": "+ Add New Content",
+      "createContent": "Create Content",
+      "creating": "Creating...",
+      "deleteContent": "Delete content",
+      "updateContent": "Update content",
+      "updating": "Updating..."
+    },
+    "breadcrumb": {
+      "contentManagement": "Content Management",
+      "view-content": "View content"
+    },
+    "validation": {
+      "programRequired": "Parent program is required",
+      "levelRequired": "Level name is required",
+      "moduleRequired": "Module name is required",
+      "topicRequired": "Topic name is required"
+    }
+  },
+
+  "mediaLibrary": {
+    "list": {
+      "title": "Media Library",
+      "subtitle": "Manage surgical videos, clinical diagrams, and course documentation for your medical students.",
+      "searchPlaceholder": "Search files by name, tags, or metadata...",
+      "noDataFound": "No Data Found",
+      "tabs": {
+        "all": "All Files",
+        "videos": "Videos",
+        "images": "Images",
+        "documents": "Documents",
+        "audio": "Audio"
+      }
+    },
+    "details": {
+      "generalDetails": "General Details",
+      "mediaName": "Midea Library Name",
+      "mediaNamePlaceholder": "Enter media libraray name",
+      "type": "Type",
+      "typePlaceholder": "Select image type",
+      "description": "Description",
+      "descriptionPlaceholder": "Write media description...",
+      "externalUrl": "External URL",
+      "externalUrlPlaceholder": "https://example.com/file",
+      "uploadFile": "Upload file",
+      "uploadText": "Click to upload file",
+      "uploadSubText": "PNG, JPG, JPEG up to 5MB",
+      "changeImage": "Change Image",
+      "deleteText": "Are you sure you want to delete this media?"
+    },
+    "create": {
+      "title": "Create Media Library",
+      "subtitle": "Manage surgical videos, clinical diagrams, and course documentation for your medical students."
+    },
+    "actions": {
+      "uploadMedia": "Upload Media",
+      "creating": "Creating...",
+      "createMedia": "Create Media",
+      "updating": "Updating...",
+      "updateMedia": "Update Media"
+    },
+    "validation": {
+      "titleRequired": "Title is required",
+      "typeRequired": "Type is required",
+      "descriptionRequired": "Description is required",
+      "invalidUrl": "Invalid URL",
+      "fileOrUrlRequired": "Either file or external URL is required"
+    },
+    "breadcrumb": {
+      "contentManagement": "Content Management",
+      "view-media": "View Media"
+    }
+  },
+
+  "faq": {
+    "list": {
+      "title": "Faqs",
+      "subtitle": "Organize and maintain your knowledge base",
+      "searchPlaceholder": "Search by faq name...",
+      "clearAll": "Clear All",
+      "columns": {
+        "id": "ID",
+        "question": "Question",
+        "type": "Type",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "details": {
+      "type": "Type",
+      "typePlaceholder": "Select type",
+      "typeId": "Type Id",
+      "typeIdPlaceholder": "Select type id",
+      "question": "Question",
+      "questionPlaceholder": "write question here...",
+      "answer": "Answer",
+      "image": "Thumbnail",
+      "uploadText": "Click to upload thumbnail",
+      "uploadSubText": "PNG, JPG, JPEG up to 5MB",
+      "changeImage": "Change Image",
+      "deleteText": "Are you sure you want to delete this faq?"
+    },
+    "create": {
+      "title": "Create New Faq",
+      "subtitle": "Organize and maintain your knowledge base"
+    },
+    "actions": {
+      "addNewFaq": "+ Add New Faq",
+      "createFaq": "Create Faq",
+      "creating": "Creating...",
+      "deleteFaq": "Delete faq",
+      "updateFaq": "Update faq",
+      "updating": "Updating..."
+    },
+    "breadcrumb": {
+      "contentManagement": "Content Management",
+      "view-faq": "View faq"
+    },
+    "validation": {
+      "questionRequired": "Question is required",
+      "questionMin": "Question must be at least 5 characters",
+      "answerRequired": "Answer is required",
+      "answerMin": "Answer must be at least 10 characters",
+      "typeRequired": "Type is required",
+      "selectOption": "Please select an option",
+      "imageType": "Only image files are allowed",
+      "imageSize": "File size should be less than 5MB"
+    }
+  },
+
   "language": {
     "title": "Language Management",
     "desc": "Manage system languages and translations for the platform interface and learning content.",
@@ -575,6 +761,128 @@
       "langName": "Language Name",
       "status": "Status",
       "actions": "Actions"
+    }
+  },
+
+  "role": {
+    "list": {
+      "title": "Roles & Permissions",
+      "subtitle": "Define access levels and functional permissions for staff and learners.",
+      "searchPlaceholder": "Search by role name...",
+      "clearAll": "Clear All",
+      "columns": {
+        "id": "ID",
+        "name": "Name",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "details": {
+      "name": "Name",
+      "namePlaceholder": "Enter role name",
+      "label": "Label",
+      "labelPlaceholder": "Enter label name",
+      "email": "Email Address",
+      "deleteText": "Are you sure you want to delete this role?"
+    },
+    "create": {
+      "title": "Create New Role",
+      "subtitle": "create role"
+    },
+    "actions": {
+      "addNewRole": "+ Add New Role",
+      "deleteRole": "Delete Role",
+      "cancle": "Cancel",
+      "createRole": "Create Role",
+      "creating": "Creating...",
+      "updateRole": "Update Role",
+      "updating": "Updating..."
+    },
+    "breadcrumb": {
+      "role": "Roles & Permission",
+      "viewRole": "View Role"
+    },
+    "validation": {
+      "nameRequired": "Name is required",
+      "labelRequired": "Label is required"
+    }
+  },
+
+  "designation": {
+    "list": {
+      "title": "Designation Management",
+      "subtitle": "Define access levels and functional permissions for staff and learners.",
+      "searchPlaceholder": "Search by designation name...",
+      "clearAll": "Clear All",
+      "columns": {
+        "id": "ID",
+        "name": "Name",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "details": {
+      "name": "Name",
+      "namePlaceholder": "Enter designation name",
+      "label": "Label",
+      "labelPlaceholder": "Enter label name",
+      "email": "Email Address",
+      "deleteText": "Are you sure you want to delete this designation?"
+    },
+    "create": {
+      "title": "Create New Designation",
+      "subtitle": "create designation"
+    },
+    "actions": {
+      "addNewDesignation": "+ Add New Designation",
+      "deleteDesignation": "Delete Designation",
+      "cancle": "Cancel",
+      "createDesignation": "Create Designation",
+      "creating": "Creating...",
+      "updateDesignation": "Update Designation",
+      "updating": "Updating..."
+    },
+    "breadcrumb": {
+      "designation": "Designation Management",
+      "viewDesignation": "View Designation"
+    },
+    "validation": {
+      "nameRequired": "Name is required",
+      "labelRequired": "Label is required"
+    }
+  },
+
+  "smtp": {
+    "list": {
+      "title": "SMTP Settings",
+      "subtitle": "Configure your email server settings to enable notifications, password resets, and other email communications for your medical training platform."
+    },
+    "details": {
+      "mailer": "Mailer",
+      "mailerPlaceholder": "Select mailer type",
+      "host": "Host",
+      "hostPlaceholder": "Enter SMTP host",
+      "port": "Port",
+      "portPlaceholder": "Enter SMTP port",
+      "username": "Username",
+      "usernamePlaceholder": "Enter SMTP username",
+      "password": "Password",
+      "passwordPlaceholder": "Enter SMTP password",
+      "encryption": "Encryption",
+      "encryptionPlaceholder": "Select encryption type",
+      "fromAddress": "From Address",
+      "fromAddressPlaceholder": "Enter from email address",
+      "fromName": "From Name",
+      "fromNamePlaceholder": "Enter from name",
+      "emailPlaceholder": "Enter email address"
+    },
+    "actions": {
+      "updateSMTP": "Update SMTP",
+      "updating": "Updating...",
+      "sendTestMail": "Send Test Mail",
+      "sendingTestMail": "Sending test mail...",
+      "send": "Send",
+      "cancel": "Cancel"
     }
   },
 

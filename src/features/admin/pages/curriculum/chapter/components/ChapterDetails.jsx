@@ -89,14 +89,6 @@ const ChapterDetails = () => {
     thumbnail: chapter?.thumbnail || null,
   };
 
-  // const validationSchema = Yup.object({
-  //   chapterName: Yup.string().required("Chapter name is required"),
-  //   moduleName: Yup.object().nullable().required("Parent module is required"),
-  //   levelName: Yup.object().nullable().required("Parent level is required"),
-  //   programName: Yup.object().nullable().required("Parent program is required"),
-  //   description: Yup.string().required("Description is required"),
-  // });
-
   const validationSchema = Yup.object({
     chapterName: Yup.string().required(
       t("chapter.validation.chapterNameRequired"),

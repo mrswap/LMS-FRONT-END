@@ -50,11 +50,6 @@ const ProgramDetails = () => {
     thumbnail: null,
   };
 
-  // const validationSchema = Yup.object({
-  //   title: Yup.string().required("Program name is required"),
-  //   description: Yup.string().required("Description is required"),
-  // });
-
   const validationSchema = Yup.object({
     title: Yup.string().required(t("program.validation.titleRequired")),
     description: Yup.string().required(

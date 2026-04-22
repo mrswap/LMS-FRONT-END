@@ -2,10 +2,8 @@ import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { FiMail, FiArrowLeft } from "react-icons/fi";
-
 import TextInput from "../../common/form/TextInput";
 import FormButton from "../../common/form/FormButton";
-
 import logo from "../../../../assets/admin/AvanteMedicalLogoBlue.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -22,12 +20,6 @@ const ForgotPassword = () => {
   const initialValues = {
     email: "",
   };
-
-  // const validationSchema = Yup.object({
-  //   email: Yup.string()
-  //     .email("Invalid email address")
-  //     .required("Email is required"),
-  // });
 
   const validationSchema = Yup.object({
     email: Yup.string()

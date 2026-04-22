@@ -5,7 +5,7 @@ const useIdleTimeout = (onLogout, idleTime = 15 * 60 * 1000) => {
 
     const timerRef = useRef(null);
     const warningTimerRef = useRef(null);
-    const showModalRef = useRef(false); // 🔥 important
+    const showModalRef = useRef(false);
 
     // const WARNING_TIME = idleTime - 60 * 1000; // 1 min before logout
     const WARNING_TIME = Math.max(idleTime - 5 * 1000, 0);
@@ -31,7 +31,7 @@ const useIdleTimeout = (onLogout, idleTime = 15 * 60 * 1000) => {
     };
 
     useEffect(() => {
-        // 🎯 user activity listeners
+        //  user activity listeners
         window.addEventListener("mousemove", resetTimer);
         window.addEventListener("keydown", resetTimer);
         window.addEventListener("click", resetTimer);
