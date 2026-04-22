@@ -267,7 +267,6 @@ const Faqs = () => {
 
       <PageBody>
         <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm space-y-4">
-          {/*  Search */}
           <div className="w-full">
             <div
               className="flex items-center bg-gray-50 border border-gray-200 
