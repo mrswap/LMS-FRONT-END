@@ -41,6 +41,24 @@ import LearningUnitBuilder from "../pages/content-management/learning-unit-build
 import CreateLearningUnitBuilder from "../pages/content-management/learning-unit-builder/components/CreateLearningUnitBuilder";
 import LearningUnitBuilderDetails from "../pages/content-management/learning-unit-builder/components/LearningUnitBuilderDetails";
 import SingleLearningUnitBuilderDetails from "../pages/content-management/learning-unit-builder/components/SingleLearningUnitBuilderDetails";
+import Assissment from "../pages/assessment-management/quiz-topic/assessment/Assissment";
+import CreateAssessment from "../pages/assessment-management/quiz-topic/assessment/components/CreateAssessment";
+import AssissmentDetails from "../pages/assessment-management/quiz-topic/assessment/components/AssissmentDetails";
+import Question from "../pages/assessment-management/quiz-topic/question/Question";
+import CreateQuestion from "../pages/assessment-management/quiz-topic/question/components/CreateQuestion";
+import QuestionDetails from "../pages/assessment-management/quiz-topic/question/components/QuestionDetails";
+import Option from "../pages/assessment-management/quiz-topic/option/Option";
+import CreateOption from "../pages/assessment-management/quiz-topic/option/components/CreateOption";
+import OptionDetails from "../pages/assessment-management/quiz-topic/option/components/OptionDetails";
+// import AssissmentTopic from "../pages/assessment-management/quiz-topic/assessment/AssissmentTopic";
+// import CreateAssessmentTopic from "../pages/assessment-management/quiz-topic/assessment/components/CreateAssessmentTopic";
+// import AssissmentTopicDetails from "../pages/assessment-management/quiz-topic/assessment/components/AssissmentTopicDetails";
+// import AssissmentQuestionTopic from "../pages/assessment-management/quiz-topic/assessment-question/AssissmentQuestionTopic";
+// import CreateAssissmentQuestionTopic from "../pages/assessment-management/quiz-topic/assessment-question/components/CreateAssissmentQuestionTopic";
+// import AssissmentQuestionTopicDetails from "../pages/assessment-management/quiz-topic/assessment-question/components/AssissmentQuestionTopicDetails";
+// import AssissmentQuestionOption from "../pages/assessment-management/quiz-topic/assessment-question-option/AssissmentQuestionOption";
+// import CreateAssissmentQuestionOptionTopic from "../pages/assessment-management/quiz-topic/assessment-question-option/components/CreateAssissmentQuestionOptionTopic";
+// import AssissmentQuestionOptionTopicDetails from "../pages/assessment-management/quiz-topic/assessment-question-option/components/AssissmentQuestionOptionTopicDetails";
 
 const AdminRoutes = (
   <Route element={<ProtectedRoute />}>
@@ -125,6 +143,36 @@ const AdminRoutes = (
       <Route
         path="roles-permission/role-details/:id"
         element={<RoleDetails />}
+      />
+
+      {/* assessment-quize-topic */}
+      <Route path="assessment" element={<Assissment />} />
+      <Route path="assessment/create" element={<CreateAssessment />} />
+      <Route path="assessment/:assessmentId" element={<AssissmentDetails />} />
+
+      {/* assesment-quize-question */}
+      <Route path="assessment-question/:assessmentId" element={<Question />} />
+      <Route
+        path="assessment-question/:assessmentId/create"
+        element={<CreateQuestion />}
+      />
+      <Route
+        path="assessment-question/:assessmentId/create/:questionId"
+        element={<QuestionDetails />}
+      />
+
+      {/* assesment-quize-question-answer */}
+      {/* <Route
+        path="assessment-question-option/:questionId"
+        element={<Option />}
+      /> */}
+      <Route
+        path="assessment-question-option/:assessmentId/create/:questionId"
+        element={<CreateOption />}
+      />
+      <Route
+        path="assessment-question-option/:id"
+        element={<OptionDetails />}
       />
 
       {/* designation */}

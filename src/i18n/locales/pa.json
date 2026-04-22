@@ -749,6 +749,100 @@
     }
   },
 
+  "assessment": {
+    "list": {
+      "title": "ਅਸੈਸਮੈਂਟ ਪ੍ਰਬੰਧਨ",
+      "subtitle": "ਚੈਪਟਰ ਸਮੱਗਰੀ ਨੂੰ ਇਸ ਤਰ੍ਹਾਂ ਪਰਿਭਾਸ਼ਿਤ ਅਤੇ ਸੰਰਚਿਤ ਕਰੋ ਕਿ ਮੋਡੀਊਲ ਨੂੰ ਆਸਾਨ ਅਤੇ ਸਮਝਣਯੋਗ ਹਿੱਸਿਆਂ ਵਿੱਚ ਵੰਡਿਆ ਜਾ ਸਕੇ।",
+      "searchPlaceholder": "ਸਿਰਲੇਖ ਨਾਲ ਖੋਜੋ...",
+      "clearAll": "ਸਭ ਸਾਫ ਕਰੋ",
+      "columns": {
+        "title": "ਸਿਰਲੇਖ",
+        "type": "ਕਿਸਮ",
+        "questionCount": "ਪ੍ਰਸ਼ਨ ਗਿਣਤੀ",
+        "totalMark": "ਕੁੱਲ ਅੰਕ",
+        "passingScore": "ਪਾਸਿੰਗ ਅੰਕ",
+        "duration": "ਅਵਧੀ",
+        "status": "ਸਥਿਤੀ",
+        "actions": "ਕਾਰਵਾਈ"
+      }
+    },
+    "details": {
+      "generalDetails": "ਸਧਾਰਣ ਵੇਰਵਾ",
+      "assessmentConfiguration": "ਅਸੈਸਮੈਂਟ ਸੰਰਚਨਾ",
+      "assessmentFor": "ਅਸੈਸਮੈਂਟ ਲਈ",
+      "assessmentForPlaceholder": "ਟਾਪਿਕ ਜਾਂ ਲੈਵਲ ਚੁਣੋ",
+      "topicName": "ਟਾਪਿਕ ਨਾਮ",
+      "topicNamePlaceholder": "ਟਾਪਿਕ ਚੁਣੋ",
+      "parentChapter": "ਮੂਲ ਚੈਪਟਰ",
+      "parentChapterPlaceholder": "ਚੈਪਟਰ ਚੁਣੋ",
+      "parentModule": "ਮੂਲ ਮੋਡੀਊਲ",
+      "parentModulePlaceholder": "ਮੋਡੀਊਲ ਚੁਣੋ",
+      "parentLevel": "ਲੈਵਲ ਨਾਮ",
+      "parentLevelPlaceholder": "ਲੈਵਲ ਚੁਣੋ",
+      "parentProgram": "ਮੂਲ ਪ੍ਰੋਗਰਾਮ",
+      "parentProgramPlaceholder": "ਪ੍ਰੋਗਰਾਮ ਚੁਣੋ",
+      "title": "ਸਿਰਲੇਖ",
+      "titlePlaceholder": "ਅਸੈਸਮੈਂਟ ਸਿਰਲੇਖ ਦਰਜ ਕਰੋ",
+      "duration": "ਅਵਧੀ (ਮਿੰਟ ਵਿੱਚ)",
+      "durationPlaceholder": "ਮਿੰਟ ਵਿੱਚ ਅਵਧੀ ਦਰਜ ਕਰੋ",
+      "levelAssessmentDetails": "ਲੈਵਲ ਅਸੈਸਮੈਂਟ ਵੇਰਵਾ",
+      "description": "ਵੇਰਵਾ",
+      "descriptionPlaceholder": "ਮੋਡੀਊਲ ਵੇਰਵਾ ਲਿਖੋ...",
+      "thumbnail": "ਲੈਵਲ ਥੰਬਨੇਲ",
+      "uploadText": "ਥੰਬਨੇਲ ਅਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+      "uploadSubText": "PNG, JPG, JPEG (5MB ਤੱਕ)",
+      "changeImage": "ਤਸਵੀਰ ਬਦਲੋ",
+      "deleteText": "ਕੀ ਤੁਸੀਂ ਯਕੀਨਨ ਇਸ ਅਸੈਸਮੈਂਟ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
+      "assessmentDetails": "ਅਸੈਸਮੈਂਟ ਵੇਰਵਾ",
+      "assessmentTitle": "ਅਸੈਸਮੈਂਟ ਸਿਰਲੇਖ",
+      "assessmentTitlePlaceholder": "ਸਿਰਲੇਖ ਦਰਜ ਕਰੋ",
+      "assessmentDescription": "ਅਸੈਸਮੈਂਟ ਵੇਰਵਾ",
+      "assessmentDescriptionPlaceholder": "ਵੇਰਵਾ ਦਰਜ ਕਰੋ",
+      "passingScore": "ਪਾਸਿੰਗ ਅੰਕ",
+      "passingScorePlaceholder": "ਪਾਸਿੰਗ ਅੰਕ ਦਰਜ ਕਰੋ",
+      "totalMarks": "ਕੁੱਲ ਅੰਕ",
+      "totalMarksPlaceholder": "ਕੁੱਲ ਅੰਕ ਦਰਜ ਕਰੋ",
+      "selectTopic": "ਟਾਪਿਕ ਚੁਣੋ",
+      "selectTopicPlaceholder": "ਟਾਪਿਕ ਚੁਣੋ",
+      "selectLevel": "ਲੈਵਲ ਚੁਣੋ",
+      "selectLevelPlaceholder": "ਲੈਵਲ ਚੁਣੋ",
+      "topicOption": "ਟਾਪਿਕ",
+      "levelOption": "ਲੈਵਲ"
+    },
+    "create": {
+      "title": "ਨਵਾਂ ਅਸੈਸਮੈਂਟ ਬਣਾਓ",
+      "subtitle": "ਆਪਣੇ ਮੈਡੀਕਲ ਅਸੈਸਮੈਂਟ ਲਈ ਮੁੱਖ ਪੈਰਾਮੀਟਰ ਅਤੇ ਗ੍ਰੇਡਿੰਗ ਮਾਪਦੰਡ ਤਿਆਰ ਕਰੋ।"
+    },
+    "actions": {
+      "addNewAssessment": "+ ਨਵਾਂ ਅਸੈਸਮੈਂਟ ਜੋੜੋ",
+      "createAssessment": "ਅਸੈਸਮੈਂਟ ਬਣਾਓ",
+      "creating": "ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...",
+      "deleteAssessment": "ਅਸੈਸਮੈਂਟ ਮਿਟਾਓ",
+      "updateAssessment": "ਅਸੈਸਮੈਂਟ ਅੱਪਡੇਟ ਕਰੋ",
+      "updating": "ਅੱਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
+    },
+    "breadcrumb": {
+      "assessment": "ਅਸੈਸਮੈਂਟ",
+      "view-assessment": "ਅਸੈਸਮੈਂਟ ਵੇਖੋ"
+    },
+    "validation": {
+      "assessment_type_required": "ਅਸੈਸਮੈਂਟ ਕਿਸਮ ਲਾਜ਼ਮੀ ਹੈ",
+      "program_required": "ਪ੍ਰੋਗਰਾਮ ਲਾਜ਼ਮੀ ਹੈ",
+      "level_required": "ਲੈਵਲ ਲਾਜ਼ਮੀ ਹੈ",
+      "module_required": "ਮੋਡੀਊਲ ਲਾਜ਼ਮੀ ਹੈ",
+      "chapter_required": "ਚੈਪਟਰ ਲਾਜ਼ਮੀ ਹੈ",
+      "topic_required": "ਟਾਪਿਕ ਲਾਜ਼ਮੀ ਹੈ",
+      "title_required": "ਸਿਰਲੇਖ ਲਾਜ਼ਮੀ ਹੈ",
+      "description_required": "ਵੇਰਵਾ ਲਾਜ਼ਮੀ ਹੈ",
+      "passing_score_required": "ਪਾਸਿੰਗ ਅੰਕ ਲਾਜ਼ਮੀ ਹੈ",
+      "passing_score_positive": "ਪਾਸਿੰਗ ਅੰਕ ਸਕਾਰਾਤਮਕ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "total_marks_required": "ਕੁੱਲ ਅੰਕ ਲਾਜ਼ਮੀ ਹੈ",
+      "total_marks_positive": "ਕੁੱਲ ਅੰਕ ਸਕਾਰਾਤਮਕ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "duration_required": "ਅਵਧੀ ਲਾਜ਼ਮੀ ਹੈ",
+      "duration_positive": "ਅਵਧੀ ਸਕਾਰਾਤਮਕ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ"
+    }
+  },
+
   "language": {
     "title": "ਭਾਸ਼ਾ ਪ੍ਰਬੰਧਨ",
     "desc": "ਪਲੇਟਫਾਰਮ ਇੰਟਰਫੇਸ ਅਤੇ ਸਿੱਖਣ ਸਮੱਗਰੀ ਲਈ ਸਿਸਟਮ ਭਾਸ਼ਾਵਾਂ ਅਤੇ ਅਨੁਵਾਦ ਪ੍ਰਬੰਧਿਤ ਕਰੋ।",

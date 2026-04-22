@@ -749,6 +749,100 @@
     }
   },
 
+  "assessment": {
+    "list": {
+      "title": "मूल्यांकन प्रबंधन",
+      "subtitle": "अध्याय सामग्री को इस तरह परिभाषित और संरचित करें कि मॉड्यूल को आसान और समझने योग्य हिस्सों में विभाजित किया जा सके।",
+      "searchPlaceholder": "शीर्षक नाम से खोजें...",
+      "clearAll": "सभी साफ करें",
+      "columns": {
+        "title": "शीर्षक",
+        "type": "प्रकार",
+        "questionCount": "प्रश्न संख्या",
+        "totalMark": "कुल अंक",
+        "passingScore": "उत्तीर्ण अंक",
+        "duration": "अवधि",
+        "status": "स्थिति",
+        "actions": "कार्रवाई"
+      }
+    },
+    "details": {
+      "generalDetails": "सामान्य विवरण",
+      "assessmentConfiguration": "मूल्यांकन कॉन्फ़िगरेशन",
+      "assessmentFor": "मूल्यांकन के लिए",
+      "assessmentForPlaceholder": "विषय या स्तर चुनें",
+      "topicName": "विषय नाम",
+      "topicNamePlaceholder": "विषय चुनें",
+      "parentChapter": "मूल अध्याय",
+      "parentChapterPlaceholder": "अध्याय चुनें",
+      "parentModule": "मूल मॉड्यूल",
+      "parentModulePlaceholder": "मॉड्यूल चुनें",
+      "parentLevel": "स्तर नाम",
+      "parentLevelPlaceholder": "स्तर चुनें",
+      "parentProgram": "मूल प्रोग्राम",
+      "parentProgramPlaceholder": "प्रोग्राम चुनें",
+      "title": "शीर्षक",
+      "titlePlaceholder": "मूल्यांकन शीर्षक दर्ज करें",
+      "duration": "अवधि (मिनट में)",
+      "durationPlaceholder": "मिनट में अवधि दर्ज करें",
+      "levelAssessmentDetails": "स्तर मूल्यांकन विवरण",
+      "description": "विवरण",
+      "descriptionPlaceholder": "मॉड्यूल विवरण लिखें...",
+      "thumbnail": "स्तर थंबनेल",
+      "uploadText": "थंबनेल अपलोड करने के लिए क्लिक करें",
+      "uploadSubText": "PNG, JPG, JPEG (5MB तक)",
+      "changeImage": "इमेज बदलें",
+      "deleteText": "क्या आप वाकई इस मूल्यांकन को हटाना चाहते हैं?",
+      "assessmentDetails": "मूल्यांकन विवरण",
+      "assessmentTitle": "मूल्यांकन शीर्षक",
+      "assessmentTitlePlaceholder": "शीर्षक दर्ज करें",
+      "assessmentDescription": "मूल्यांकन विवरण",
+      "assessmentDescriptionPlaceholder": "विवरण दर्ज करें",
+      "passingScore": "उत्तीर्ण अंक",
+      "passingScorePlaceholder": "उत्तीर्ण अंक दर्ज करें",
+      "totalMarks": "कुल अंक",
+      "totalMarksPlaceholder": "कुल अंक दर्ज करें",
+      "selectTopic": "विषय चुनें",
+      "selectTopicPlaceholder": "विषय चुनें",
+      "selectLevel": "स्तर चुनें",
+      "selectLevelPlaceholder": "स्तर चुनें",
+      "topicOption": "विषय",
+      "levelOption": "स्तर"
+    },
+    "create": {
+      "title": "नया मूल्यांकन बनाएं",
+      "subtitle": "अपने मेडिकल मूल्यांकन के मुख्य पैरामीटर और ग्रेडिंग मानदंड निर्धारित करें।"
+    },
+    "actions": {
+      "addNewAssessment": "+ नया मूल्यांकन जोड़ें",
+      "createAssessment": "मूल्यांकन बनाएं",
+      "creating": "बनाया जा रहा है...",
+      "deleteAssessment": "मूल्यांकन हटाएं",
+      "updateAssessment": "मूल्यांकन अपडेट करें",
+      "updating": "अपडेट किया जा रहा है..."
+    },
+    "breadcrumb": {
+      "assessment": "मूल्यांकन",
+      "view-assessment": "मूल्यांकन देखें"
+    },
+    "validation": {
+      "assessment_type_required": "मूल्यांकन प्रकार आवश्यक है",
+      "program_required": "प्रोग्राम आवश्यक है",
+      "level_required": "स्तर आवश्यक है",
+      "module_required": "मॉड्यूल आवश्यक है",
+      "chapter_required": "अध्याय आवश्यक है",
+      "topic_required": "विषय आवश्यक है",
+      "title_required": "शीर्षक आवश्यक है",
+      "description_required": "विवरण आवश्यक है",
+      "passing_score_required": "उत्तीर्ण अंक आवश्यक है",
+      "passing_score_positive": "उत्तीर्ण अंक सकारात्मक होना चाहिए",
+      "total_marks_required": "कुल अंक आवश्यक है",
+      "total_marks_positive": "कुल अंक सकारात्मक होना चाहिए",
+      "duration_required": "अवधि आवश्यक है",
+      "duration_positive": "अवधि सकारात्मक होनी चाहिए"
+    }
+  },
+
   "language": {
     "title": "भाषा प्रबंधन",
     "desc": "प्लेटफ़ॉर्म इंटरफ़ेस और शिक्षण सामग्री के लिए सिस्टम भाषाएं और अनुवाद प्रबंधित करें।",
