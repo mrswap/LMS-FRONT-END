@@ -13,6 +13,9 @@ import designationReducer from "./slice/designationSlice"
 import smtpReducer from "./slice/smtpSlice"
 import faqReducer from "./slice/faqSlice"
 import unitBuilderReducer from "./slice/unitBuilderSlice"
+import assissmentReducer from "./slice/assissmentSlice"
+import assessmentQuestionReducer from "./slice/assessmentQuestionSlice"
+import assessmentOptionReducer from "./slice/assessmentOptionSlice"
 
 export const store = configureStore({
     reducer: {
@@ -29,6 +32,9 @@ export const store = configureStore({
         designation: designationReducer,
         smtp: smtpReducer,
         faq: faqReducer,
-        content: unitBuilderReducer
+        content: unitBuilderReducer,
+        assessment: assissmentReducer,
+        question: assessmentQuestionReducer,
+        option: assessmentOptionReducer
     },
 }); 

@@ -93,7 +93,21 @@ const AdminSidebar = ({ isOpen, onClose }) => {
       icon: FiClipboard,
       label: t("sidebar.assessmentManagement"),
       children: [
-        { label: t("sidebar.quizForTopic"), path: "/quiz-topic" },
+        // { label: t("sidebar.quizForTopic"), path: "/quiz-topic" },
+        {
+          label: t("sidebar.quizForTopic"),
+          children: [
+            { label: "Assessment", path: "/assessment" },
+            // {
+            //   label: "Assissment Qustions",
+            //   path: "/assissment-question-topic",
+            // },
+            // {
+            //   label: "Qestion Options",
+            //   path: "/assissment-question-option-topic",
+            // },
+          ],
+        },
         { label: t("sidebar.examForLevel"), path: "/exam-level" },
       ],
     },
