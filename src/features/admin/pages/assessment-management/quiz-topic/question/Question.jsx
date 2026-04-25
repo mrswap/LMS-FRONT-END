@@ -29,13 +29,11 @@ const Question = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { assessmentId } = useParams(); // Get assessment ID from URL
+  const { assessmentId } = useParams();
 
   const { questions, isLoading, isError, message } = useSelector(
     (state) => state.question,
   );
-
-  // console.log("question", questions);
 
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
@@ -68,35 +66,10 @@ const Question = () => {
     setPage(1);
   };
 
-  // Handle delete
-  const handleDelete = async (questionId) => {
-    if (window.confirm(t("question.confirmDelete"))) {
-      try {
-        await dispatch(deleteQuestion({ assessmentId, questionId })).unwrap();
-        await fetchQuestions(1);
-      } catch (err) {
-        console.error("Delete failed:", err);
-      }
-    }
-  };
-
-  // Handle status toggle
-  const handleStatusToggle = async (questionId, newStatus) => {
-    try {
-      await dispatch(
-        updateQuestionStatus({ assessmentId, questionId, status: newStatus }),
-      ).unwrap();
-      await fetchQuestions(page);
-    } catch (err) {
-      console.error("Status toggle failed:", err);
-    }
-  };
-
   const columns = [
     {
       header: t("question.columns.id"),
       render: (row, index) => (
-        // console.log("row", row),
         <p className="font-semibold text-gray-800">{row?.id}</p>
       ),
     },
@@ -157,27 +130,31 @@ const Question = () => {
     {
       header: t("question.columns.actions"),
       render: (row) => (
-        <div className="flex gap-4">
-          <button
-            onClick={() =>
-              navigate(`/assessment-question/${assessmentId}/create/${row.id}`)
-            }
-            className="text-gray-800 text-lg cursor-pointer hover:text-[#184994]"
-          >
-            <FaEye />
-          </button>
-          <button
-            onClick={() =>
-              // navigate(`/assessment-question-option/${row.id}`)
-              navigate(
-                `/assessment-question-option/${assessmentId}/create/${row.id}`,
-              )
-            }
-            className="text-sm text-blue-500 hover:text-blue-600 hover:underline cursor-pointer"
-          >
-            Options
-          </button>
-        </div>
+        console.log("row", row),
+        (
+          <div className="flex gap-4">
+            <button
+              onClick={() =>
+                navigate(
+                  `/assessment-question/${assessmentId}/create/${row.id}`,
+                )
+              }
+              className="text-gray-800 text-lg cursor-pointer hover:text-[#184994]"
+            >
+              <FaEye />
+            </button>
+            <button
+              onClick={() =>
+                navigate(
+                  `/assessment-question-option/${assessmentId}/${row.id}`,
+                )
+              }
+              className="text-sm text-blue-500 hover:text-blue-600 hover:underline cursor-pointer"
+            >
+              {t("question.options")}
+            </button>
+          </div>
+        )
       ),
     },
   ];

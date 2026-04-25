@@ -33,11 +33,11 @@ const CreateQuestion = () => {
     const file = event.target.files[0];
     if (file) {
       if (!file.type.startsWith("image/")) {
-        toast.error(t("assessment.validation.invalidImage"));
+        toast.error(t("question.validation.invalidImage"));
         return;
       }
       if (file.size > 5 * 1024 * 1024) {
-        toast.error(t("assessment.validation.fileSizeExceeded"));
+        toast.error(t("question.validation.fileSizeExceeded"));
         return;
       }
 
@@ -66,12 +66,10 @@ const CreateQuestion = () => {
     question_text: Yup.string().required(
       t("question.validation.questionTextRequired"),
     ),
-
     marks: Yup.number()
       .required(t("question.validation.marksRequired"))
       .positive(t("question.validation.marksPositive"))
       .integer(t("question.validation.marksInteger")),
-
     order: Yup.number()
       .required(t("question.validation.orderRequired"))
       .positive(t("question.validation.orderPositive"))
@@ -80,14 +78,9 @@ const CreateQuestion = () => {
 
   const onSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
     try {
-      // Create FormData for file upload
       const formData = new FormData();
-
-      // IMPORTANT: Send assessment_id separately, not inside FormData if the API expects it in the URL
-      // The createQuestion thunk already adds assessmentId to the URL
-      // So we only send the question data in FormData
       formData.append("question_text", values.question_text);
-      formData.append("marks", values.marks); // Changed from 'mark' to 'marks'
+      formData.append("marks", values.marks);
       formData.append("order", values.order);
 
       if (thumbnail) {
@@ -230,10 +223,10 @@ const CreateQuestion = () => {
                             </div>
                             <div className="flex-1">
                               <p className="text-sm font-semibold text-gray-700 mb-1">
-                                {thumbnail.name}
+                                {thumbnail?.name}
                               </p>
                               <p className="text-xs text-gray-500 mb-3">
-                                {(thumbnail.size / 1024).toFixed(2)} KB
+                                {(thumbnail?.size / 1024).toFixed(2)} KB
                               </p>
                               <button
                                 type="button"

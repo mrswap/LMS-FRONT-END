@@ -21,6 +21,7 @@ import { showConfirm } from "../../../../../../../redux/slice/confirmSlice";
 import {
   deleteQuestion,
   getQuestionById,
+  updateQuestionById,
 } from "../../../../../../../redux/slice/assessmentQuestionSlice";
 
 const QuestionDetails = () => {
@@ -39,13 +40,13 @@ const QuestionDetails = () => {
 
   useEffect(() => {
     if (questionId) {
-      dispatch(getQuestionById(questionId));
+      dispatch(getQuestionById(1));
     }
   }, [dispatch, questionId]);
 
   useEffect(() => {
-    if (question?.thumbnail) {
-      setThumbnailPreview(question.thumbnail);
+    if (question?.question?.file) {
+      setThumbnailPreview(question?.question?.file);
     }
   }, [question]);
 
@@ -53,11 +54,11 @@ const QuestionDetails = () => {
     const file = event.target.files[0];
     if (file) {
       if (!file.type.startsWith("image/")) {
-        toast.error(t("assessment.validation.invalidImage"));
+        toast.error(t("question.validation.invalidImage"));
         return;
       }
       if (file.size > 5 * 1024 * 1024) {
-        toast.error(t("assessment.validation.fileSizeExceeded"));
+        toast.error(t("question.validation.fileSizeExceeded"));
         return;
       }
 
@@ -77,9 +78,9 @@ const QuestionDetails = () => {
   const triggerFileUpload = () => fileInputRef.current.click();
 
   const initialValues = {
-    question_text: "",
-    marks: "",
-    order: "",
+    question_text: question?.question?.question_text || "",
+    marks: question?.question?.marks || "",
+    order: question?.question?.order || "",
   };
 
   const validationSchema = Yup.object({
@@ -100,14 +101,10 @@ const QuestionDetails = () => {
 
   const onSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
     try {
-      // Create FormData for file upload
       const formData = new FormData();
 
-      // IMPORTANT: Send assessment_id separately, not inside FormData if the API expects it in the URL
-      // The createQuestion thunk already adds assessmentId to the URL
-      // So we only send the question data in FormData
       formData.append("question_text", values.question_text);
-      formData.append("marks", values.marks); // Changed from 'mark' to 'marks'
+      formData.append("marks", values.marks);
       formData.append("order", values.order);
 
       if (thumbnail) {
@@ -117,18 +114,19 @@ const QuestionDetails = () => {
       console.log("Assessment ID:", assessmentId);
       console.log("Payload being sent:", Object.fromEntries(formData));
 
-      // const res = await dispatch(
-      //   createQuestion({
-      //     assessmentId: assessmentId,
-      //     data: formData,
-      //   }),
-      // ).unwrap();
-      // toast.success(res.message || "Question updated successfully");
+      const res = await dispatch(
+        updateQuestionById({
+          questionId: 1,
+          assessmentId: assessmentId,
+          data: formData,
+        }),
+      ).unwrap();
+      toast.success(res.message || "Question updated successfully");
 
-      // // Reset form after successful submission
-      // resetForm();
-      // removeThumbnail();
-      // navigate(`/assessment-question/${assessmentId}`);
+      // Reset form after successful submission
+      resetForm();
+      removeThumbnail();
+      navigate(`/assessment-question/${assessmentId}`);
     } catch (error) {
       console.error("Error details:", error);
       setErrors({ submit: error.message });
@@ -145,15 +143,15 @@ const QuestionDetails = () => {
 
     if (!ok) return;
 
-    // try {
-    //   await dispatch(deleteQuestion(id)).unwrap();
-    //   toast.success("question deleted successfully ");
-    //   setTimeout(() => {
-    //     navigate("/assessment/questionId");
-    //   }, 1000);
-    // } catch (error) {
-    //   toast.error(error?.message || "Delete failed ");
-    // }
+    try {
+      await dispatch(deleteQuestion(1)).unwrap();
+      toast.success("question deleted successfully ");
+      setTimeout(() => {
+        navigate(`/assessment-question/${assessmentId}`);
+      }, 1000);
+    } catch (error) {
+      toast.error(error?.message || "Delete failed ");
+    }
   };
 
   return (
@@ -273,10 +271,10 @@ const QuestionDetails = () => {
                             </div>
                             <div className="flex-1">
                               <p className="text-sm font-semibold text-gray-700 mb-1">
-                                {thumbnail.name}
+                                {thumbnail?.name}
                               </p>
                               <p className="text-xs text-gray-500 mb-3">
-                                {(thumbnail.size / 1024).toFixed(2)} KB
+                                {(thumbnail?.size / 1024).toFixed(2)} KB
                               </p>
                               <button
                                 type="button"

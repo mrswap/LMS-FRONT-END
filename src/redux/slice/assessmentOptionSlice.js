@@ -42,10 +42,10 @@ export const getAllOptions = createAsyncThunk(
 // ======================= GET OPTION BY ID =======================
 export const getOptionById = createAsyncThunk(
     "assessmentOption/getById",
-    async ({ questionId, optionId }, thunkAPI) => {
+    async (optionId, thunkAPI) => {
         try {
             const res = await axiosInstance.get(
-                `/assessments/questions/${questionId}/options/${optionId}`,
+                `/assessments/options/${optionId}`,
                 getAuthConfig()
             );
             return res.data;
@@ -63,7 +63,7 @@ export const updateOption = createAsyncThunk(
     async ({ questionId, optionId, data }, thunkAPI) => {
         try {
             const res = await axiosInstance.post(
-                `/assessments/questions/${questionId}/options/${optionId}`,
+                `/assessments/options/${optionId}`,
                 data,
                 getAuthConfig()
             );
@@ -79,10 +79,10 @@ export const updateOption = createAsyncThunk(
 // ======================= DELETE OPTION =======================
 export const deleteOption = createAsyncThunk(
     "assessmentOption/delete",
-    async ({ questionId, optionId }, thunkAPI) => {
+    async (optionId, thunkAPI) => {
         try {
             const res = await axiosInstance.delete(
-                `/assessments/questions/${questionId}/options/${optionId}`,
+                `/assessments/options/${optionId}`,
                 getAuthConfig()
             );
             return res.data;

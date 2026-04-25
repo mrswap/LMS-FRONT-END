@@ -751,8 +751,10 @@
 
   "assessment": {
     "list": {
-      "title": "Assessment Management",
-      "subtitle": "Define and structure chapter content to break modules into focused, easy-to-understand learning segments.",
+      "quizTitle": "Quiz Management",
+      "quizSubtitle": "Create and manage topic-based quizzes to reinforce learning with focused questions.",
+      "examTitle": "Exam Management",
+      "examSubtitle": "Organize level-based exams to evaluate overall understanding and performance.",
       "searchPlaceholder": "Search by title name...",
       "clearAll": "Clear All",
       "columns": {
@@ -768,6 +770,8 @@
     },
     "details": {
       "generalDetails": "General Details",
+      "topicDetails": "Topic Details",
+      "levelDetails": "Level Details",
       "assessmentConfiguration": "Assessment Configuration",
       "assessmentFor": "Assessment For",
       "assessmentForPlaceholder": "Select topic or level",
@@ -792,7 +796,8 @@
       "uploadText": "Click to upload thumbnail",
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
       "changeImage": "Change Image",
-      "deleteText": "Are you sure you want to delete this assessment?",
+      "deleteTextQuiz": "Are you sure you want to delete this quiz?",
+      "deleteTextExam": "Are you sure you want to delete this exam?",
       "assessmentDetails": "Assessment Details",
       "assessmentTitle": "Assessment Title",
       "assessmentTitlePlaceholder": "Enter assessment title",
@@ -810,20 +815,28 @@
       "levelOption": "Level"
     },
     "create": {
-      "title": "Create New Assessment",
-      "subtitle": "Define the core parameters and grading criteria for your medical assessment."
+      "quizTitle": "Create Quiz",
+      "quizSubtitle": "Design a quick knowledge check to evaluate understanding of a specific topic.",
+      "examTitle": "Create  Exam",
+      "examSubtitle": "Build a comprehensive assessment to evaluate overall performance at this level."
     },
     "actions": {
-      "addNewAssessment": "+ Add New Assessment",
-      "createAssessment": "Create Assessment",
+      "addNewQuiz": "Add New Quiz",
+      "createQuiz": "Create Quiz",
+      "deleteQuiz": "Delete Quiz",
+      "updateQuiz": "Update Quiz",
+      "addNewExam": "Add New Exam",
+      "createExam": "Create Exam",
+      "deleteExam": "Delete Exam",
+      "updateExam": "Update Exam",
       "creating": "Creating...",
-      "deleteAssessment": "Delete Assessment",
-      "updateAssessment": "Update Assessment",
       "updating": "Updating..."
     },
     "breadcrumb": {
-      "assessment": "Assessment",
-      "view-assessment": "View Assessment"
+      "quizManagement": "Quiz Management",
+      "view-quiz": "View Quiz",
+      "examManagement": "Exam Management",
+      "view-exam": "View Exam"
     },
     "validation": {
       "assessment_type_required": "Assessment type is required",
@@ -844,11 +857,9 @@
   },
 
   "question": {
-    "title": "Assessment Questions",
-    "subtitle": "Manage questions for this assessment",
-    "searchPlaceholder": "Search by question...",
-    "confirmDelete": "Are you sure you want to delete this question?",
-    "clearAll": "Clear search",
+    "title": "Manage Question",
+    "subtitle": "Centralized space to manage all your assessment questions.",
+    "options": "Options",
     "columns": {
       "id": "Question Id",
       "question": "Question",
@@ -867,18 +878,16 @@
       "marksPlaceholder": "Enter marks for this question",
       "order": "Order",
       "orderPlaceholder": "Enter order number",
-      "thumbnail": "Level Thumbnail",
-      "uploadText": "Click to upload thumbnail",
+      "thumbnail": "Question file",
+      "uploadText": "Click to upload file",
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
       "changeImage": "Change Image",
       "deleteText": "Are you sure you want to delete this question?"
     },
-
     "breadcrumb": {
       "assessmentQuestion": "Assessment Questions",
-      "view-question": "View Qustion"
+      "view-question": "View Question"
     },
-
     "create": {
       "title": "Create Question",
       "subtitle": "Add and manage questions for your assessment."
@@ -898,42 +907,41 @@
       "marksInteger": "Marks must be an integer",
       "orderRequired": "Order is required",
       "orderPositive": "Order must be positive",
-      "orderInteger": "Order must be an integer"
+      "orderInteger": "Order must be an integer",
+      "invalidImage": "Only image files are allowed (JPG, PNG, etc.)",
+      "fileSizeExceeded": "Image size must be less than 5 MB"
     }
   },
 
   "option": {
-    "title": "Assessment Question Options",
-    "subtitle": "View and manage answer options for each question",
-    "searchPlaceholder": "Search by option text...",
-    "confirmDelete": "Are you sure you want to delete this option?",
-    "clearAll": "Clear search",
-
+    "title": "Question Options",
+    "subtitle": "Manage answer choices for each question",
     "columns": {
       "id": "Option Id",
-      "optionText": "Option Text",
+      "question": "Question",
+      "option": "Option",
       "isCorrect": "Correct Answer",
       "actions": "Actions"
     },
-
     "details": {
       "optionDetails": "Option Details",
       "optionText": "Option Text",
       "optionTextPlaceholder": "Enter the option text",
       "isCorrect": "Is Correct",
+      "thumbnail": "Option file",
+      "uploadText": "Click to upload file",
+      "uploadSubText": "PNG, JPG, JPEG up to 5MB",
+      "changeImage": "Change Image",
       "deleteText": "Are you sure you want to delete this option?"
     },
-
     "breadcrumb": {
-      "assessmentQuestion": "Assessment Questions",
+      "questionOption": "Question Options",
       "view-option": "View Option"
     },
-
     "create": {
       "title": "Create Option",
       "subtitle": "Add and manage options for this question."
     },
-
     "actions": {
       "addOption": "Add Option",
       "createOption": "Create option",
@@ -942,10 +950,11 @@
       "updating": "Updating...",
       "deleteOption": "Delete option"
     },
-
     "validation": {
       "optionTextRequired": "Option text is required",
-      "isCorrectRequired": "Please select correct option"
+      "isCorrectRequired": "Please select correct option",
+      "invalidImage": "Only image files are allowed (JPG, PNG, etc.)",
+      "fileSizeExceeded": "Image size must be less than 5 MB"
     }
   },
 

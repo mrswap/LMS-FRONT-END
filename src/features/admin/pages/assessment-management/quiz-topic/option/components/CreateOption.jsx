@@ -19,8 +19,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { createOption } from "../../../../../../../redux/slice/assessmentOptionSlice";
 
 const CreateOption = () => {
-  const [file, setFile] = useState(null);
-  const [preview, setPreview] = useState(null);
+  const [thumbnail, setThumbnail] = useState(null);
+  const [thumbnailPreview, setThumbnailPreview] = useState(null);
   const fileInputRef = useRef(null);
 
   const { t } = useTranslation();
@@ -31,32 +31,32 @@ const CreateOption = () => {
 
   // console.log("assessmentId", assessmentId);
 
-  const handleFileUpload = (event) => {
-    const selectedFile = event.target.files[0];
-    if (selectedFile) {
-      if (!selectedFile.type.startsWith("image/")) {
-        toast.error("Invalid file type");
+  const handleThumbnailUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      if (!file.type.startsWith("image/")) {
+        toast.error(t("option.validation.invalidImage"));
         return;
       }
-      if (selectedFile.size > 5 * 1024 * 1024) {
-        toast.error("File size exceeded (5MB max)");
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error(t("option.validation.fileSizeExceeded"));
         return;
       }
 
-      setFile(selectedFile);
+      setThumbnail(file);
       const reader = new FileReader();
-      reader.onloadend = () => setPreview(reader.result);
-      reader.readAsDataURL(selectedFile);
+      reader.onloadend = () => setThumbnailPreview(reader.result);
+      reader.readAsDataURL(file);
     }
   };
 
-  const removeFile = () => {
-    setFile(null);
-    setPreview(null);
+  const removeThumbnail = () => {
+    setThumbnail(null);
+    setThumbnailPreview(null);
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
-  const triggerUpload = () => fileInputRef.current.click();
+  const triggerFileUpload = () => fileInputRef.current.click();
 
   const initialValues = {
     option_text: "",
@@ -75,8 +75,8 @@ const CreateOption = () => {
       formData.append("option_text", values.option_text);
       formData.append("is_correct", values.is_correct ? 1 : 0);
 
-      if (file) {
-        formData.append("file", file);
+      if (thumbnail) {
+        formData.append("file", thumbnail);
       }
 
       const res = await dispatch(
@@ -89,8 +89,8 @@ const CreateOption = () => {
       toast.success(res.message || "Option created successfully");
 
       resetForm();
-      removeFile();
-      navigate(`/assessment-question/${assessmentId}`);
+      removeThumbnail();
+      navigate(`/assessment-question-option/${assessmentId}/${questionId}`);
     } catch (error) {
       toast.error(error?.message || "Something went wrong");
     } finally {
@@ -120,7 +120,7 @@ const CreateOption = () => {
                 <div>
                   <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
                     <AiOutlineExclamationCircle className="text-primary" />
-                    Option Details
+                    {t("option.details.optionDetails")}
                   </h3>
 
                   <TextInput
@@ -145,44 +145,71 @@ const CreateOption = () => {
                   </label>
                 </div>
 
-                {/* File Upload */}
+                {/* File Upload Section */}
                 <div>
                   <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-                    <FiImage className="text-blue-600" />
-                    Upload Image
+                    <span className="text-blue-600">
+                      <FiImage />
+                    </span>
+                    {t("option.details.thumbnail")}
                   </h3>
 
-                  <div className="border p-4 rounded-lg">
+                  <div className="border border-gray-300 bg-[#F8FAFC] p-6 rounded-lg">
                     <input
                       ref={fileInputRef}
                       type="file"
                       accept="image/*"
-                      onChange={handleFileUpload}
+                      onChange={handleThumbnailUpload}
                       className="hidden"
                     />
 
-                    {!preview ? (
+                    {!thumbnailPreview ? (
                       <div
-                        onClick={triggerUpload}
-                        className="cursor-pointer border-dashed border-2 p-6 text-center"
+                        onClick={triggerFileUpload}
+                        className="flex flex-col items-center justify-center cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 hover:border-blue-500 transition-colors"
                       >
-                        <FiUpload className="text-2xl mx-auto mb-2" />
-                        <p>Click to upload</p>
+                        <FiUpload className="text-4xl text-gray-400 mb-3" />
+                        <p className="text-sm text-gray-600 mb-1">
+                          {t("option.details.uploadText")}
+                        </p>
+                        <p className="text-xs text-gray-400">
+                          {t("option.details.uploadSubText")}
+                        </p>
                       </div>
                     ) : (
                       <div className="relative">
-                        <img
-                          src={preview}
-                          alt="preview"
-                          className="w-32 h-32 object-cover"
-                        />
-                        <button
-                          type="button"
-                          onClick={removeFile}
-                          className="absolute top-0 right-0 bg-red-500 text-white p-1"
-                        >
-                          <FiX />
-                        </button>
+                        <div className="flex items-start gap-6">
+                          <div className="relative group">
+                            <img
+                              src={thumbnailPreview}
+                              alt="Preview"
+                              className="w-32 h-32 object-cover rounded-lg border border-gray-300 shadow-sm"
+                            />
+                            <button
+                              type="button"
+                              onClick={removeThumbnail}
+                              className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors shadow-md"
+                            >
+                              <FiX className="text-xs" />
+                            </button>
+                          </div>
+                          <div className="flex-1">
+                            <p className="text-sm font-semibold text-gray-700 mb-1">
+                              {thumbnail?.name}
+                            </p>
+                            <p className="text-xs text-gray-500 mb-3">
+                              {(thumbnail?.size / 1024).toFixed(2)} KB
+                            </p>
+                            <button
+                              type="button"
+                              onClick={triggerFileUpload}
+                              className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1"
+                            >
+                              <FiUpload className="text-sm" />
+                              {t("option.details.changeImage")}
+                            </button>
+                          </div>
+                        </div>
                       </div>
                     )}
                   </div>

@@ -38,7 +38,7 @@ export const getQuestionById = createAsyncThunk(
     "assessmentQuestion/getById",
     async (questionId, thunkAPI) => {
         try {
-            const res = await axiosInstance.get(`/assessments/${questionId}`, getAuthConfig());
+            const res = await axiosInstance.get(`/assessments/questions/${questionId}`, getAuthConfig());
             return res.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(
@@ -54,7 +54,7 @@ export const updateQuestionById = createAsyncThunk(
     async ({ assessmentId, questionId, data }, thunkAPI) => {
         try {
             const res = await axiosInstance.post(
-                `/assessments/${assessmentId}/questions/${questionId}`,
+                `/assessments/questions/${questionId}`,
                 data,
                 getAuthConfig()
             );
@@ -72,7 +72,7 @@ export const updateQuestionById = createAsyncThunk(
 // ======================= DELETE QUESTION =======================
 export const deleteQuestion = createAsyncThunk(
     "assessmentQuestion/delete",
-    async ({ assessmentId, questionId }, thunkAPI) => {
+    async (questionId, thunkAPI) => {
         try {
             const res = await axiosInstance.delete(
                 `/assessments/questions/${questionId}`,
