@@ -16,6 +16,7 @@ import unitBuilderReducer from "./slice/unitBuilderSlice"
 import assissmentReducer from "./slice/assissmentSlice"
 import assessmentQuestionReducer from "./slice/assessmentQuestionSlice"
 import assessmentOptionReducer from "./slice/assessmentOptionSlice"
+import systemSettingReducer from "./slice/systemSettingSlice"
 
 export const store = configureStore({
     reducer: {
@@ -35,6 +36,7 @@ export const store = configureStore({
         content: unitBuilderReducer,
         assessment: assissmentReducer,
         question: assessmentQuestionReducer,
-        option: assessmentOptionReducer
+        option: assessmentOptionReducer,
+        systemSetting: systemSettingReducer
     },
 }); 

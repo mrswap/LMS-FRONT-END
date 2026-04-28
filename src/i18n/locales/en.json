@@ -1081,6 +1081,10 @@
       "columns": {
         "title": "Title",
         "type": "Type",
+        "level": "Level",
+        "module": "Module",
+        "chapter": "Chapter",
+        "topic": "Topic",
         "questionCount": "Question Count",
         "totalMark": "Total Mark",
         "passingScore": "Passing Score",
@@ -1499,6 +1503,75 @@
     "error": {
       "update": "Failed to update SMTP settings. Please try again.",
       "testMail": "Failed to send test email. Please check your settings."
+    }
+  },
+
+  "systemSettings": {
+    "title": "System Settings",
+    "subtitle": "Manage your application settings",
+    "sections": {
+      "companyInfo": "Company Information",
+      "appLinks": "App Links",
+      "contactInfo": "Contact Information",
+      "socialLinks": "Social Media Links",
+      "footer": "Footer",
+      "contentPages": "Content Pages"
+    },
+    "fields": {
+      "companyLogo": "Company Logo",
+      "companyBio": "Company Bio",
+      "iosStore": "iOS Store URL",
+      "iosDownload": "iOS Download URL",
+      "androidStore": "Android Store URL",
+      "androidDownload": "Android Download URL",
+      "contactHeading": "Contact Heading",
+      "contactText": "Contact Text",
+      "contactPhone": "Contact Phone",
+      "contactEmail": "Contact Email",
+      "facebook": "Facebook URL",
+      "linkedin": "LinkedIn URL",
+      "instagram": "Instagram URL",
+      "twitter": "Twitter URL",
+      "footerText": "Footer Text",
+      "aboutUs": "About Us",
+      "privacyPolicy": "Privacy Policy",
+      "termsConditions": "Terms & Conditions"
+    },
+    "placeholders": {
+      "companyBio": "Enter company bio (max 500 characters)",
+      "iosStore": "https://apps.apple.com/app/id...",
+      "iosDownload": "https://yourdomain.com/ios-app.apk",
+      "androidStore": "https://play.google.com/store/apps/details?id=...",
+      "androidDownload": "https://yourdomain.com/app.apk",
+      "contactHeading": "e.g., Reach out to us",
+      "contactText": "e.g., Get your questions answered",
+      "contactPhone": "+91 9876543210",
+      "contactEmail": "support@company.com",
+      "facebook": "https://facebook.com/company",
+      "linkedin": "https://linkedin.com/company/company",
+      "instagram": "https://instagram.com/company",
+      "twitter": "https://x.com/company",
+      "footerText": "© 2026 Company Name"
+    },
+    "actions": {
+      "uploadLogo": "Upload Logo",
+      "changeLogo": "Change Logo",
+      "saveSettings": "Save Settings",
+      "saving": "Saving..."
+    },
+    "validation": {
+      "bioMax": "Company bio must not exceed 500 characters",
+      "phoneInvalid": "Please enter a valid phone number",
+      "emailInvalid": "Please enter a valid email address",
+      "urlInvalid": "Please enter a valid URL",
+      "imageType": "Please upload a valid image file",
+      "imageSize": "Image size should be less than 2MB"
+    },
+    "success": {
+      "update": "Settings updated successfully"
+    },
+    "error": {
+      "update": "Failed to update settings"
     }
   },
 
