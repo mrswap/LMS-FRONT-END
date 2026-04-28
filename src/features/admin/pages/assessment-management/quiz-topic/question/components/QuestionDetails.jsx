@@ -40,7 +40,7 @@ const QuestionDetails = () => {
 
   useEffect(() => {
     if (questionId) {
-      dispatch(getQuestionById(1));
+      dispatch(getQuestionById(questionId));
     }
   }, [dispatch, questionId]);
 
@@ -121,7 +121,7 @@ const QuestionDetails = () => {
           data: formData,
         }),
       ).unwrap();
-      toast.success(res.message || "Question updated successfully");
+      toast.success(res?.message || t("question.success.update"));
 
       // Reset form after successful submission
       resetForm();
@@ -130,7 +130,7 @@ const QuestionDetails = () => {
     } catch (error) {
       console.error("Error details:", error);
       setErrors({ submit: error.message });
-      toast.error(error?.message || error || "Something went wrong");
+      toast.error(error?.message || t("question.error.update"));
     } finally {
       setSubmitting(false);
     }
@@ -144,8 +144,8 @@ const QuestionDetails = () => {
     if (!ok) return;
 
     try {
-      await dispatch(deleteQuestion(1)).unwrap();
-      toast.success("question deleted successfully ");
+      await dispatch(deleteQuestion(questionId)).unwrap();
+      toast.success(t("question.success.delete"));
       setTimeout(() => {
         navigate(`/assessment-question/${assessmentId}`);
       }, 1000);
@@ -161,11 +161,9 @@ const QuestionDetails = () => {
           items={[
             {
               label: t("question.breadcrumb.assessmentQuestion"),
-              path: "/assessment-question/19",
+              path: `/assessment-question/${assessmentId}`,
             },
-            {
-              label: t("question.breadcrumb.view-question"),
-            },
+            { label: t("question.breadcrumb.viewQuestion") },
           ]}
         />
 

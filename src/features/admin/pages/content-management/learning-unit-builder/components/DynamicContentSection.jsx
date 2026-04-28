@@ -74,8 +74,8 @@ const TextEditor = memo(({ value, onChange, id, isActive }) => {
   if (!isActive) return null;
 
   return (
-    <div className="quill-wrapper" style={{ minHeight: "250px" }}>
-      <div ref={quillRef} style={{ height: "200px" }} />
+    <div className="quill-wrapper" style={{ minHeight: "350px" }}>
+      <div ref={quillRef} style={{ height: "350px" }} />
     </div>
   );
 });

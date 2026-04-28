@@ -191,7 +191,7 @@ const assessmentSlice = createSlice({
                 state.isSuccess = true;
                 state.message = action.payload.message;
 
-                const updated = action.payload.data;
+                const updated = action.payload;
 
                 if (Array.isArray(state.assessments)) {
                     const index = state.assessments.findIndex(

@@ -150,11 +150,11 @@ const AdminSidebar = ({ isOpen, onClose }) => {
 
     {
       icon: IoSettingsOutline,
-      label: "Settings",
+      label: t("sidebar.settings"),
       children: [
         { label: t("sidebar.rolesPermission"), path: "/roles-permission" },
-        { label: "Designation", path: "/designation" },
-        { label: "SMTP Setting", path: "/smtp-setting" },
+        { label: t("sidebar.designation"), path: "/designation" },
+        { label: t("sidebar.smtpSetting"), path: "/smtp-setting" },
         { label: t("sidebar.systemSettings"), path: "/system-settings" },
       ],
     },

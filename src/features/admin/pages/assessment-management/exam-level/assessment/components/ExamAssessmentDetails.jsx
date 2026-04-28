@@ -1588,6 +1588,7 @@ import { getAllLevels } from "../../../../../../../redux/slice/levelSlice";
 import {
   deleteSingleAssessment,
   getAssessmentById,
+  updateAssessmentById,
 } from "../../../../../../../redux/slice/assissmentSlice";
 import { showConfirm } from "../../../../../../../redux/slice/confirmSlice";
 import Breadcrumb from "../../../../../common/layout/Breadcrumb";
@@ -1766,8 +1767,8 @@ const AssessmentDetails = () => {
   const onSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
       const formData = new FormData();
-      formData.append("_method", "PUT");
-      formData.append("type", "submit");
+      // formData.append("_method", "PUT");
+      formData.append("type", "level");
       formData.append("title", values.title);
       formData.append("description", values.description);
       formData.append("passing_score", values.passing_score);
@@ -1783,6 +1784,9 @@ const AssessmentDetails = () => {
       // await dispatch(updateAssessment({ id, data: formData })).unwrap();
       // toast.success(t("assessment.messages.updateSuccess"));
       // navigate("/assessment");
+      await dispatch(updateAssessmentById({ id, data: formData })).unwrap();
+      toast.success("Updated Exam");
+      navigate("/exam-level");
     } catch (error) {
       setErrors({ submit: error.message });
       toast.error(error?.message || t("assessment.messages.updateError"));

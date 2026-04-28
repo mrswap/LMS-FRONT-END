@@ -2681,6 +2681,7 @@ import { getAllTopics } from "../../../../../../../redux/slice/topicSlice";
 import {
   deleteSingleAssessment,
   getAssessmentById,
+  updateAssessmentById,
   // updateAssessment,
 } from "../../../../../../../redux/slice/assissmentSlice";
 import { showConfirm } from "../../../../../../../redux/slice/confirmSlice";
@@ -3001,7 +3002,7 @@ const AssessmentDetails = () => {
   const onSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
       const formData = new FormData();
-      formData.append("_method", "PUT");
+      // formData.append("_method", "PUT");
       formData.append("type", "topic");
       formData.append("title", values.title);
       formData.append("description", values.description);
@@ -3015,9 +3016,9 @@ const AssessmentDetails = () => {
         formData.append("file", thumbnail);
       }
 
-      // await dispatch(updateAssessment({ id, data: formData })).unwrap();
-      // toast.success(t("assessment.messages.updateSuccess"));
-      // navigate("/assessment");
+      await dispatch(updateAssessmentById({ id, data: formData })).unwrap();
+      toast.success(t("Updated Quiz"));
+      navigate("/assessment");
     } catch (error) {
       setErrors({ submit: error.message });
       toast.error(error?.message || t("assessment.messages.updateError"));
