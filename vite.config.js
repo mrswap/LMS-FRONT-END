@@ -10,5 +10,13 @@ export default defineConfig({
   ],
   server: {
     port: 5000
-  }
+  },
+  optimizeDeps: {
+    include: ["quill", "react-quilljs"],
+  },
+  build: {
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
+  },
 })
