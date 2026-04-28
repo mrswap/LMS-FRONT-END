@@ -42,10 +42,10 @@ export const getAllOptions = createAsyncThunk(
 // ======================= GET OPTION BY ID =======================
 export const getOptionById = createAsyncThunk(
     "assessmentOption/getById",
-    async ({ questionId, optionId }, thunkAPI) => {
+    async (optionId, thunkAPI) => {
         try {
             const res = await axiosInstance.get(
-                `/assessments/questions/${questionId}/options/${optionId}`,
+                `/assessments/options/${optionId}`,
                 getAuthConfig()
             );
             return res.data;
@@ -63,7 +63,7 @@ export const updateOption = createAsyncThunk(
     async ({ questionId, optionId, data }, thunkAPI) => {
         try {
             const res = await axiosInstance.post(
-                `/assessments/questions/${questionId}/options/${optionId}`,
+                `/assessments/options/${optionId}`,
                 data,
                 getAuthConfig()
             );
@@ -79,10 +79,10 @@ export const updateOption = createAsyncThunk(
 // ======================= DELETE OPTION =======================
 export const deleteOption = createAsyncThunk(
     "assessmentOption/delete",
-    async ({ questionId, optionId }, thunkAPI) => {
+    async (optionId, thunkAPI) => {
         try {
             const res = await axiosInstance.delete(
-                `/assessments/questions/${questionId}/options/${optionId}`,
+                `/assessments/options/${optionId}`,
                 getAuthConfig()
             );
             return res.data;
@@ -184,14 +184,14 @@ const optionSlice = createSlice({
 
                 const updated = action.payload;
 
-                const index = state.options.findIndex(
-                    (opt) => opt.id === updated.id
-                );
-                if (index !== -1) {
-                    state.options[index] = updated;
-                }
+                // const index = state.options.findIndex(
+                //     (opt) => opt.id === updated.id
+                // );
+                // if (index !== -1) {
+                //     state.options[index] = updated;
+                // }
 
-                state.option = updated;
+                // state.option = updated;
             })
             .addCase(updateOption.rejected, (state, action) => {
                 state.isLoading = false;
@@ -207,9 +207,9 @@ const optionSlice = createSlice({
                 state.isLoading = false;
                 state.isSuccess = true;
 
-                state.options = state.options.filter(
-                    (opt) => opt.id !== action.meta.arg.optionId
-                );
+                // state.options = state.options.filter(
+                //     (opt) => opt.id !== action.meta.arg.optionId
+                // );
 
                 state.message = action.payload.message;
             })

@@ -50,6 +50,9 @@ import QuestionDetails from "../pages/assessment-management/quiz-topic/question/
 import Option from "../pages/assessment-management/quiz-topic/option/Option";
 import CreateOption from "../pages/assessment-management/quiz-topic/option/components/CreateOption";
 import OptionDetails from "../pages/assessment-management/quiz-topic/option/components/OptionDetails";
+import ExamAssessment from "../pages/assessment-management/exam-level/assessment/ExamAssessment";
+import CreateExamAssessment from "../pages/assessment-management/exam-level/assessment/components/CreateExamAssessment";
+import ExamAssessmentDetails from "../pages/assessment-management/exam-level/assessment/components/ExamAssessmentDetails";
 // import AssissmentTopic from "../pages/assessment-management/quiz-topic/assessment/AssissmentTopic";
 // import CreateAssessmentTopic from "../pages/assessment-management/quiz-topic/assessment/components/CreateAssessmentTopic";
 // import AssissmentTopicDetails from "../pages/assessment-management/quiz-topic/assessment/components/AssissmentTopicDetails";
@@ -145,6 +148,14 @@ const AdminRoutes = (
         element={<RoleDetails />}
       />
 
+      {/* assessment-exam-level */}
+      <Route path="exam-level" element={<ExamAssessment />} />
+      <Route path="exam-level/create-exam" element={<CreateExamAssessment />} />
+      <Route
+        path="exam-level/exam-details/:assessmentId"
+        element={<ExamAssessmentDetails />}
+      />
+
       {/* assessment-quize-topic */}
       <Route path="assessment" element={<Assissment />} />
       <Route path="assessment/create" element={<CreateAssessment />} />
@@ -162,16 +173,16 @@ const AdminRoutes = (
       />
 
       {/* assesment-quize-question-answer */}
-      {/* <Route
-        path="assessment-question-option/:questionId"
-        element={<Option />}
-      /> */}
       <Route
-        path="assessment-question-option/:assessmentId/create/:questionId"
+        path="assessment-question-option/:assessmentId/:questionId"
+        element={<Option />}
+      />
+      <Route
+        path="assessment-question-option/:assessmentId/:questionId/create"
         element={<CreateOption />}
       />
       <Route
-        path="assessment-question-option/:id"
+        path="assessment-question-option/:assessmentId/:questionId/option-details/:optionId"
         element={<OptionDetails />}
       />
 

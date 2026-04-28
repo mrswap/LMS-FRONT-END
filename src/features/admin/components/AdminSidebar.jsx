@@ -93,21 +93,21 @@ const AdminSidebar = ({ isOpen, onClose }) => {
       icon: FiClipboard,
       label: t("sidebar.assessmentManagement"),
       children: [
-        // { label: t("sidebar.quizForTopic"), path: "/quiz-topic" },
-        {
-          label: t("sidebar.quizForTopic"),
-          children: [
-            { label: "Assessment", path: "/assessment" },
-            // {
-            //   label: "Assissment Qustions",
-            //   path: "/assissment-question-topic",
-            // },
-            // {
-            //   label: "Qestion Options",
-            //   path: "/assissment-question-option-topic",
-            // },
-          ],
-        },
+        { label: t("sidebar.quizForTopic"), path: "/assessment" },
+        // {
+        //   label: t("sidebar.quizForTopic"),
+        //   children: [
+        //     { label: "Assessment", path: "/assessment" },
+        //     // {
+        //     //   label: "Assissment Qustions",
+        //     //   path: "/assissment-question-topic",
+        //     // },
+        //     // {
+        //     //   label: "Qestion Options",
+        //     //   path: "/assissment-question-option-topic",
+        //     // },
+        //   ],
+        // },
         { label: t("sidebar.examForLevel"), path: "/exam-level" },
       ],
     },
@@ -150,11 +150,11 @@ const AdminSidebar = ({ isOpen, onClose }) => {
 
     {
       icon: IoSettingsOutline,
-      label: "Settings",
+      label: t("sidebar.settings"),
       children: [
         { label: t("sidebar.rolesPermission"), path: "/roles-permission" },
-        { label: "Designation", path: "/designation" },
-        { label: "SMTP Setting", path: "/smtp-setting" },
+        { label: t("sidebar.designation"), path: "/designation" },
+        { label: t("sidebar.smtpSetting"), path: "/smtp-setting" },
         { label: t("sidebar.systemSettings"), path: "/system-settings" },
       ],
     },

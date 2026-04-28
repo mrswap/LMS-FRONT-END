@@ -11,8 +11,6 @@
     "signingIn": "Signing In...",
     "trouble": "Having trouble signing in?",
     "contactAdmin": "Contact your system administrator",
-    "success": "Login successful! Redirecting...",
-    "error": "Login failed. Please check your credentials",
     "validation": {
       "emailRequired": "Email is required",
       "emailInvalid": "Please enter a valid email address",
@@ -32,8 +30,6 @@
     "notReceived": "Didn't receive the email?",
     "rememberYourPassword": "Remember your password?",
     "signIn": "Sign In",
-    "success": "Password reset link sent to your email!",
-    "error": "Failed to send reset link. Please try again.",
     "validation": {
       "emailRequired": "Email is required",
       "emailInvalid": "Invalid email address"
@@ -57,8 +53,6 @@
     "placeholderConfirm": "Re-enter new password",
     "update": "Reset Password",
     "updating": "Resetting...",
-    "success": "Password reset successful! Please login with your new password.",
-    "error": "Password reset failed. Please try again or request a new link.",
     "rules": {
       "min": "Minimum 8 characters",
       "uppercase": "At least 1 uppercase letter",
@@ -87,8 +81,6 @@
     "placeholderConfirm": "Re-enter new password",
     "update": "Update Password",
     "updating": "Updating...",
-    "success": "Password updated successfully!",
-    "error": "Failed to update password. Please check your old password and try again.",
     "rules": {
       "min": "Minimum 8 characters",
       "uppercase": "At least 1 uppercase letter",
@@ -110,9 +102,6 @@
   "profile": {
     "title": "Profile Settings",
     "subtitle": "Manage your personal information and account details",
-    "success": "Profile updated successfully!",
-    "error": "Failed to update profile. Please try again.",
-    "disabledNote": "Name and Email cannot be changed. Contact administrator for changes.",
 
     "details": {
       "name": "Full Name",
@@ -125,21 +114,12 @@
       "cityPlaceholder": "Enter city",
       "country": "Country",
       "countryPlaceholder": "Select country",
-      "upload": "Upload",
-      "profileImageAlt": "Profile picture"
+      "upload": "Upload"
     },
 
     "actions": {
       "updateProfile": "Update Profile",
-      "updating": "Updating...",
-      "change": "Change",
-      "remove": "Remove"
-    },
-
-    "countries": {
-      "india": "India 🇮🇳",
-      "usa": "United States 🇺🇸",
-      "uk": "United Kingdom 🇬🇧"
+      "updating": "Updating..."
     },
 
     "validation": {
@@ -160,39 +140,42 @@
     "messages": "Messages",
     "profile": "Profile",
     "changePassword": "Change Password",
-    "logout": "Logout",
-    "logoutSuccess": "Logout Successfully",
-    "user": "User",
-    "role": "Role",
-    "profileAlt": "Profile picture"
+    "logout": "Logout"
   },
 
   "sidebar": {
     "dashboard": "Dashboard",
+
     "userManagement": "User Management",
     "assignTrainingProgram": "Assign Training Program",
+
     "trainingPrograms": "Training Programs",
     "programList": "Program List",
     "createProgram": "Create Program",
     "programAssignment": "Program Assignment",
+
     "curriculumManagement": "Curriculum Management",
     "levels": "Levels",
     "modules": "Modules",
     "chapters": "Chapters",
     "topics": "Topics",
     "bulkImport": "Bulk Import",
+
     "contentManagement": "Content Management",
     "learningUnitBuilder": "Learning Unit Builder",
     "interactiveContent": "Interactive Content",
     "mediaLibrary": "Media Library",
+
     "assessmentManagement": "Assessment Management",
     "quizForTopic": "Quiz for Topic",
     "examForLevel": "Exam for Level",
     "faq": "FAQ",
+
     "trainingCertification": "Training & Certification",
     "trainingAssignment": "Training Assignment",
     "progressTracker": "Progress Tracker",
     "certification": "Certification",
+
     "reportsAdministration": "Reports & Administration",
     "topResult": "Top Result",
     "reportsAnalytics": "Reports & Analytics",
@@ -202,10 +185,9 @@
     "completionReports": "Completion Reports",
     "rolesPermission": "Roles & Permission",
     "systemSettings": "System Settings",
-    "settings": "Settings",
-    "designation": "Designation Management",
-    "smtpSetting": "SMTP Setting",
+
     "multiLanguage": "Multi Language",
+
     "logout": "Logout"
   },
 
@@ -213,7 +195,7 @@
     "list": {
       "title": "User Management",
       "subtitle": "Manage, audit, and support medical professional accounts across all regions.",
-      "searchPlaceholder": "Search by name, email or ID...",
+      "searchPlaceholder": "Search by topic name...",
       "clearAll": "Clear All",
       "columns": {
         "userId": "User ID",
@@ -237,7 +219,7 @@
       "employeeId": "Employee ID",
       "employeeIdPlaceholder": "Enter Employee ID",
       "department": "Department",
-      "departmentPlaceholder": "Enter department",
+      "departmentPlaceholder": "Select Department",
       "designation": "Designation",
       "designationPlaceholder": "Select Designation",
       "region": "Region",
@@ -253,10 +235,8 @@
       "confirmPassword": "Confirm Password",
       "confirmPasswordPlaceholder": "Re-enter password",
       "profileImage": "Profile Image",
-      "profileImageAlt": "Profile picture",
       "uploadImage": "Upload Image",
-      "deleteText": "Are you sure you want to delete this user?",
-      "id": "ID"
+      "deleteText": "Are you sure you want to delete this user?"
     },
     "create": {
       "title": "Create New User",
@@ -289,31 +269,6 @@
       "passwordMin": "Password must be at least 6 characters",
       "confirmPasswordRequired": "Confirm password is required",
       "passwordMatch": "Passwords must match"
-    },
-    "roles": {
-      "sales": "Sales",
-      "admin": "Admin",
-      "manager": "Manager"
-    },
-    "regions": {
-      "india": "India 🇮🇳",
-      "usa": "United States 🇺🇸",
-      "uk": "United Kingdom 🇬🇧"
-    },
-    "filters": {
-      "allStatus": "All Status",
-      "active": "Active",
-      "inactive": "Inactive"
-    },
-    "success": {
-      "create": "User created successfully!",
-      "update": "User updated successfully!",
-      "delete": "User deleted successfully!"
-    },
-    "error": {
-      "create": "Failed to create user. Please try again.",
-      "update": "Failed to update user. Please try again.",
-      "delete": "Failed to delete user. Please try again."
     }
   },
 
@@ -325,10 +280,9 @@
       "clearAll": "Clear All",
       "columns": {
         "programName": "Program Name",
-        "description": "Description",
         "totalLevels": "Total Levels",
         "assignedUsers": "Assigned Users",
-        "completionRate": "Completion Rate",
+        "complitionRate": "Completion Rate",
         "status": "Status",
         "actions": "Actions"
       }
@@ -343,16 +297,7 @@
       "uploadText": "Click to upload thumbnail",
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
       "changeImage": "Change Image",
-      "thumbnailAlt": "Program thumbnail preview",
-      "deleteText": "Are you sure you want to delete this program?",
-      "duration": "Duration",
-      "durationPlaceholder": "Enter program duration",
-      "level": "Level",
-      "levelPlaceholder": "Select level",
-      "category": "Category",
-      "categoryPlaceholder": "Select category",
-      "status": "Status",
-      "statusPlaceholder": "Select status"
+      "deleteText": "Are you sure you want to delete this program?"
     },
     "create": {
       "title": "Create Program",
@@ -364,49 +309,16 @@
       "createProgram": "Create Program",
       "creating": "Creating...",
       "updateProgram": "Update Program",
-      "updating": "Updating...",
-      "cancel": "Cancel"
+      "updating": "Updating..."
     },
     "breadcrumb": {
       "trainingProgram": "Training Program",
-      "viewProgram": "View Program"
+      "view-program": "View Program"
     },
     "validation": {
       "titleRequired": "Title is required",
-      "descriptionRequired": "Description is required",
-      "imageRequired": "Please upload an image file",
-      "fileSize": "File size should be less than 5MB"
-    },
-    "filters": {
-      "allStatus": "All Status",
-      "active": "Active",
-      "inactive": "Inactive"
-    },
-    "stats": {
-      "totalPrograms": {
-        "title": "Total Programs",
-        "subtext": "Total programs created"
-      },
-      "activePrograms": {
-        "title": "Active Programs",
-        "subtext": "Currently active programs"
-      },
-      "avgCompletion": {
-        "title": "Average Completion",
-        "subtext": "Across all programs"
-      }
-    },
-    "success": {
-      "create": "Program created successfully!",
-      "update": "Program updated successfully!",
-      "delete": "Program deleted successfully!"
-    },
-    "error": {
-      "create": "Failed to create program. Please try again.",
-      "update": "Failed to update program. Please try again.",
-      "delete": "Failed to delete program. Please try again."
-    },
-    "loading": "Loading program details..."
+      "descriptionRequired": "Description is required"
+    }
   },
 
   "levels": {
@@ -437,15 +349,10 @@
       "uploadText": "Click to upload thumbnail",
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
       "changeImage": "Change Image",
-      "thumbnailAlt": "Level thumbnail preview",
-      "deleteText": "Are you sure you want to delete this level?",
-      "order": "Order",
-      "orderPlaceholder": "Enter display order",
-      "duration": "Duration",
-      "durationPlaceholder": "Enter level duration"
+      "deleteText": "Are you sure you want to delete this level?"
     },
     "create": {
-      "title": "Create Level",
+      "title": "Level Management",
       "subtitle": "Manage and organize training levels to structure the learning journey from foundational knowledge to advanced clinical expertise."
     },
     "actions": {
@@ -454,8 +361,7 @@
       "creating": "Creating...",
       "updateLevel": "Update Level",
       "updating": "Updating...",
-      "deleteLevel": "Delete Level",
-      "cancel": "Cancel"
+      "deleteLevel": "Delete Level"
     },
     "breadcrumb": {
       "curriculum": "Curriculum",
@@ -464,38 +370,7 @@
     "validation": {
       "levelNameRequired": "Level name is required",
       "programRequired": "Parent program is required",
-      "descriptionRequired": "Description is required",
-      "imageRequired": "Please upload an image file",
-      "fileSize": "File size should be less than 5MB"
-    },
-    "filters": {
-      "allStatus": "All Status",
-      "active": "Active",
-      "inactive": "Inactive"
-    },
-    "stats": {
-      "totalLevels": {
-        "title": "Total Levels",
-        "subtext": "Total levels created"
-      },
-      "activeLevels": {
-        "title": "Active Levels",
-        "subtext": "Currently active levels"
-      },
-      "totalChapters": {
-        "title": "Total Chapters",
-        "subtext": "Across all levels"
-      }
-    },
-    "success": {
-      "create": "Level created successfully!",
-      "update": "Level updated successfully!",
-      "delete": "Level deleted successfully!"
-    },
-    "error": {
-      "create": "Failed to create level. Please try again.",
-      "update": "Failed to update level. Please try again.",
-      "delete": "Failed to delete level. Please try again."
+      "descriptionRequired": "Description is required"
     }
   },
 
@@ -505,7 +380,6 @@
       "subtitle": "Design, organize, and manage modules with structured content, assessments, and progress tracking for a seamless learning experience.",
       "searchPlaceholder": "Search by module name...",
       "clearAll": "Clear All",
-      "notSpecified": "Not specified",
       "columns": {
         "moduleName": "Module Name",
         "parentLevel": "Parent Level",
@@ -526,19 +400,14 @@
       "perentProgramPlaceholder": "Select a program",
       "description": "Description",
       "descriptionPlaceholder": "Write module description...",
-      "thumbnail": "Module Thumbnail",
+      "thumbnail": "Level Thumbnail",
       "uploadText": "Click to upload thumbnail",
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
       "changeImage": "Change Image",
-      "thumbnailAlt": "Module thumbnail preview",
-      "deleteText": "Are you sure you want to delete this module?",
-      "duration": "Duration",
-      "durationPlaceholder": "Enter module duration (e.g., 2 hours)",
-      "order": "Display Order",
-      "orderPlaceholder": "Enter display order"
+      "deleteText": "Are you sure you want to delete this module?"
     },
     "create": {
-      "title": "Create Module",
+      "title": "Module Management",
       "subtitle": "Design, organize, and manage modules with structured content, assessments, and progress tracking for a seamless learning experience."
     },
     "status": {
@@ -553,8 +422,7 @@
       "creating": "Creating...",
       "deleteModule": "Delete Module",
       "updateModule": "Update Module",
-      "updating": "Updating...",
-      "cancel": "Cancel"
+      "updating": "Updating..."
     },
     "breadcrumb": {
       "curriculum": "Curriculum",
@@ -562,41 +430,9 @@
     },
     "validation": {
       "moduleNameRequired": "Module name is required",
-      "levelRequired": "Parent level is required",
+      "levelRequired": "Level name is required",
       "programRequired": "Parent program is required",
-      "descriptionRequired": "Description is required",
-      "imageRequired": "Please upload an image file",
-      "fileSize": "File size should be less than 5MB"
-    },
-    "filters": {
-      "allStatus": "All Status",
-      "allLevels": "All Levels",
-      "active": "Active",
-      "inactive": "Inactive"
-    },
-    "stats": {
-      "totalModules": {
-        "title": "Total Modules",
-        "subtext": "Total modules created"
-      },
-      "activeModules": {
-        "title": "Active Modules",
-        "subtext": "Currently active modules"
-      },
-      "avgCompletion": {
-        "title": "Average Completion",
-        "subtext": "Across all modules"
-      }
-    },
-    "success": {
-      "create": "Module created successfully!",
-      "update": "Module updated successfully!",
-      "delete": "Module deleted successfully!"
-    },
-    "error": {
-      "create": "Failed to create module. Please try again.",
-      "update": "Failed to update module. Please try again.",
-      "delete": "Failed to delete module. Please try again."
+      "descriptionRequired": "Description is required"
     }
   },
 
@@ -606,11 +442,11 @@
       "subtitle": "Define and structure chapter content to break modules into focused, easy-to-understand learning segments.",
       "searchPlaceholder": "Search by chapter name...",
       "clearAll": "Clear All",
-      "notSpecified": "Not specified",
       "columns": {
         "chapterName": "Chapter Name",
         "parentModule": "Parent Module",
         "parentLevel": "Parent Level",
+        "totalChapters": "Total Chapters",
         "totalTopics": "Total Topics",
         "duration": "Duration",
         "status": "Status",
@@ -628,17 +464,12 @@
       "parentProgram": "Parent Program",
       "perentProgramPlaceholder": "Select a program",
       "description": "Description",
-      "descriptionPlaceholder": "Write chapter description...",
-      "thumbnail": "Chapter Thumbnail",
+      "descriptionPlaceholder": "Write module description...",
+      "thumbnail": "Level Thumbnail",
       "uploadText": "Click to upload thumbnail",
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
       "changeImage": "Change Image",
-      "thumbnailAlt": "Chapter thumbnail preview",
-      "deleteText": "Are you sure you want to delete this chapter?",
-      "duration": "Duration",
-      "durationPlaceholder": "Enter chapter duration (e.g., 30 minutes)",
-      "order": "Display Order",
-      "orderPlaceholder": "Enter display order"
+      "deleteText": "Are you sure you want to delete this chapter?"
     },
     "create": {
       "title": "Create New Chapter",
@@ -650,8 +481,7 @@
       "creating": "Creating...",
       "deleteChapter": "Delete Chapter",
       "updateChapter": "Update Chapter",
-      "updating": "Updating...",
-      "cancel": "Cancel"
+      "updating": "Updating..."
     },
     "breadcrumb": {
       "curriculum": "Curriculum",
@@ -659,45 +489,10 @@
     },
     "validation": {
       "chapterNameRequired": "Chapter name is required",
-      "moduleRequired": "Parent module is required",
-      "levelRequired": "Parent level is required",
+      "moduleRequired": "Module name is required",
+      "levelRequired": "Level name is required",
       "programRequired": "Parent program is required",
-      "descriptionRequired": "Description is required",
-      "imageRequired": "Please upload an image file",
-      "fileSize": "File size should be less than 5MB"
-    },
-    "filters": {
-      "allStatus": "All Status",
-      "allLevels": "All Levels",
-      "allModules": "All Modules",
-      "active": "Active",
-      "inactive": "Inactive",
-      "selectLevelFirst": "Select level first",
-      "selectModule": "Select module"
-    },
-    "stats": {
-      "totalChapters": {
-        "title": "Total Chapters",
-        "subtext": "Total chapters created"
-      },
-      "activeChapters": {
-        "title": "Active Chapters",
-        "subtext": "Currently active chapters"
-      },
-      "totalTopics": {
-        "title": "Total Topics",
-        "subtext": "Across all chapters"
-      }
-    },
-    "success": {
-      "create": "Chapter created successfully!",
-      "update": "Chapter updated successfully!",
-      "delete": "Chapter deleted successfully!"
-    },
-    "error": {
-      "create": "Failed to create chapter. Please try again.",
-      "update": "Failed to update chapter. Please try again.",
-      "delete": "Failed to delete chapter. Please try again."
+      "descriptionRequired": "Description is required"
     }
   },
 
@@ -705,9 +500,8 @@
     "list": {
       "title": "Topic Management",
       "subtitle": "Manage granular learning objectives, tracking student progress and content delivery across specialized medical departments.",
-      "searchPlaceholder": "Search by topic name...",
+      "searchPlaceholder": "Search by level name...",
       "clearAll": "Clear All",
-      "minutes": "mins",
       "columns": {
         "topicName": "Topic Name",
         "parentChapter": "Parent Chapter",
@@ -733,17 +527,12 @@
       "duration": "Duration (in minutes)",
       "durationPlaceholder": "Enter duration in minutes",
       "description": "Description",
-      "descriptionPlaceholder": "Write topic description...",
-      "thumbnail": "Topic Thumbnail",
+      "descriptionPlaceholder": "Write module description...",
+      "thumbnail": "Level Thumbnail",
       "uploadText": "Click to upload thumbnail",
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
       "changeImage": "Change Image",
-      "thumbnailAlt": "Topic thumbnail preview",
-      "deleteText": "Are you sure you want to delete this topic?",
-      "videoUrl": "Video URL",
-      "videoUrlPlaceholder": "Enter video URL (YouTube, Vimeo, etc.)",
-      "attachment": "Attachment",
-      "attachmentPlaceholder": "Upload additional material"
+      "deleteText": "Are you sure you want to delete this topic?"
     },
     "create": {
       "title": "Create New Topic",
@@ -754,9 +543,8 @@
       "createTopic": "Create Topic",
       "creating": "Creating...",
       "deleteTopic": "Delete Topic",
-      "updateTopic": "Update Topic",
-      "updating": "Updating...",
-      "cancel": "Cancel"
+      "updateTopic": "Update topic",
+      "updating": "Updating..."
     },
     "breadcrumb": {
       "curriculum": "Curriculum",
@@ -766,48 +554,12 @@
       "topicNameRequired": "Topic name is required",
       "durationRequired": "Duration is required",
       "durationNumber": "Duration must be a number",
-      "durationPositive": "Duration must be greater than 0",
-      "chapterRequired": "Parent chapter is required",
-      "moduleRequired": "Parent module is required",
-      "levelRequired": "Parent level is required",
+      "durationPositive": "Duration must be positive",
+      "chapterRequired": "Chapter name is required",
+      "moduleRequired": "Module name is required",
+      "levelRequired": "Level name is required",
       "programRequired": "Parent program is required",
-      "descriptionRequired": "Description is required",
-      "imageRequired": "Please upload an image file",
-      "fileSize": "File size should be less than 5MB"
-    },
-    "filters": {
-      "allStatus": "All Status",
-      "allLevels": "All Levels",
-      "active": "Active",
-      "inactive": "Inactive",
-      "selectLevelFirst": "Select level first",
-      "selectModule": "Select module",
-      "selectModuleFirst": "Select module first",
-      "selectChapter": "Select chapter"
-    },
-    "stats": {
-      "totalTopics": {
-        "title": "Total Topics",
-        "subtext": "Total topics created"
-      },
-      "activeTopics": {
-        "title": "Active Topics",
-        "subtext": "Currently active topics"
-      },
-      "avgDuration": {
-        "title": "Average Duration",
-        "subtext": "Per topic"
-      }
-    },
-    "success": {
-      "create": "Topic created successfully!",
-      "update": "Topic updated successfully!",
-      "delete": "Topic deleted successfully!"
-    },
-    "error": {
-      "create": "Failed to create topic. Please try again.",
-      "update": "Failed to update topic. Please try again.",
-      "delete": "Failed to delete topic. Please try again."
+      "descriptionRequired": "Description is required"
     }
   },
 
@@ -893,8 +645,6 @@
       "subtitle": "Manage surgical videos, clinical diagrams, and course documentation for your medical students.",
       "searchPlaceholder": "Search files by name, tags, or metadata...",
       "noDataFound": "No Data Found",
-      "unknownCreator": "Unknown",
-      "shortcode": "Shortcode",
       "tabs": {
         "all": "All Files",
         "videos": "Videos",
@@ -905,21 +655,19 @@
     },
     "details": {
       "generalDetails": "General Details",
-      "mediaName": "Media Library Name",
-      "mediaNamePlaceholder": "Enter media library name",
+      "mediaName": "Midea Library Name",
+      "mediaNamePlaceholder": "Enter media libraray name",
       "type": "Type",
-      "typePlaceholder": "Select media type",
+      "typePlaceholder": "Select image type",
       "description": "Description",
       "descriptionPlaceholder": "Write media description...",
       "externalUrl": "External URL",
       "externalUrlPlaceholder": "https://example.com/file",
-      "uploadFile": "Upload File",
+      "uploadFile": "Upload file",
       "uploadText": "Click to upload file",
-      "uploadSubText": "PNG, JPG, JPEG, MP4, PDF up to 10MB",
+      "uploadSubText": "PNG, JPG, JPEG up to 5MB",
       "changeImage": "Change Image",
-      "deleteText": "Are you sure you want to delete this media?",
-      "previewAlt": "Media preview",
-      "currentFile": "Current file"
+      "deleteText": "Are you sure you want to delete this media?"
     },
     "create": {
       "title": "Create Media Library",
@@ -930,46 +678,26 @@
       "creating": "Creating...",
       "createMedia": "Create Media",
       "updating": "Updating...",
-      "updateMedia": "Update Media",
-      "deleteMedia": "Delete Media",
-      "cancel": "Cancel"
-    },
-    "types": {
-      "image": "Image",
-      "video": "Video",
-      "audio": "Audio",
-      "document": "Document"
+      "updateMedia": "Update Media"
     },
     "validation": {
       "titleRequired": "Title is required",
       "typeRequired": "Type is required",
       "descriptionRequired": "Description is required",
-      "invalidUrl": "Please enter a valid URL",
-      "fileOrUrlRequired": "Either file or external URL is required",
-      "invalidFileType": "Invalid file type. Please upload a valid file",
-      "fileSize": "File size should be less than 10MB"
+      "invalidUrl": "Invalid URL",
+      "fileOrUrlRequired": "Either file or external URL is required"
     },
     "breadcrumb": {
       "contentManagement": "Content Management",
       "view-media": "View Media"
-    },
-    "success": {
-      "create": "Media created successfully!",
-      "update": "Media updated successfully!",
-      "delete": "Media deleted successfully!"
-    },
-    "error": {
-      "create": "Failed to create media. Please try again.",
-      "update": "Failed to update media. Please try again.",
-      "delete": "Failed to delete media. Please try again."
     }
   },
 
   "faq": {
     "list": {
-      "title": "FAQs",
+      "title": "Faqs",
       "subtitle": "Organize and maintain your knowledge base",
-      "searchPlaceholder": "Search by question...",
+      "searchPlaceholder": "Search by faq name...",
       "clearAll": "Clear All",
       "columns": {
         "id": "ID",
@@ -982,35 +710,32 @@
     "details": {
       "type": "Type",
       "typePlaceholder": "Select type",
-      "typeId": "Related Item",
-      "typeIdPlaceholder": "Select related item",
+      "typeId": "Type Id",
+      "typeIdPlaceholder": "Select type id",
       "question": "Question",
-      "questionPlaceholder": "Write your question here...",
+      "questionPlaceholder": "write question here...",
       "answer": "Answer",
-      "image": "Image / Thumbnail",
-      "uploadText": "Click to upload image",
+      "image": "Thumbnail",
+      "uploadText": "Click to upload thumbnail",
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
       "changeImage": "Change Image",
-      "imageAlt": "FAQ image preview",
-      "deleteText": "Are you sure you want to delete this FAQ?",
-      "currentImage": "Current image"
+      "deleteText": "Are you sure you want to delete this faq?"
     },
     "create": {
-      "title": "Create New FAQ",
+      "title": "Create New Faq",
       "subtitle": "Organize and maintain your knowledge base"
     },
     "actions": {
-      "addNewFaq": "+ Add New FAQ",
-      "createFaq": "Create FAQ",
+      "addNewFaq": "+ Add New Faq",
+      "createFaq": "Create Faq",
       "creating": "Creating...",
-      "deleteFaq": "Delete FAQ",
-      "updateFaq": "Update FAQ",
-      "updating": "Updating...",
-      "cancel": "Cancel"
+      "deleteFaq": "Delete faq",
+      "updateFaq": "Update faq",
+      "updating": "Updating..."
     },
     "breadcrumb": {
       "contentManagement": "Content Management",
-      "view-faq": "View FAQ"
+      "view-faq": "View faq"
     },
     "validation": {
       "questionRequired": "Question is required",
@@ -1019,54 +744,8 @@
       "answerMin": "Answer must be at least 10 characters",
       "typeRequired": "Type is required",
       "selectOption": "Please select an option",
-      "imageType": "Only image files are allowed (PNG, JPG, JPEG)",
+      "imageType": "Only image files are allowed",
       "imageSize": "File size should be less than 5MB"
-    },
-    "types": {
-      "all": "All Types",
-      "level": "Level",
-      "module": "Module",
-      "chapter": "Chapter",
-      "topic": "Topic"
-    },
-    "filters": {
-      "allStatus": "All Status",
-      "allTypes": "All Types",
-      "allLevels": "All Levels",
-      "allModules": "All Modules",
-      "allChapters": "All Chapters",
-      "allTopics": "All Topics",
-      "active": "Active",
-      "inactive": "Inactive",
-      "selectLevel": "Select Level",
-      "selectModule": "Select Module",
-      "selectChapter": "Select Chapter",
-      "selectTopic": "Select Topic",
-      "selectOption": "Select an option"
-    },
-    "stats": {
-      "totalFaqs": {
-        "title": "Total FAQs",
-        "subtext": "FAQs in knowledge base"
-      },
-      "activeFaqs": {
-        "title": "Active FAQs",
-        "subtext": "Currently active"
-      },
-      "byType": {
-        "title": "FAQs by Type",
-        "subtext": "Distribution across types"
-      }
-    },
-    "success": {
-      "create": "FAQ created successfully!",
-      "update": "FAQ updated successfully!",
-      "delete": "FAQ deleted successfully!"
-    },
-    "error": {
-      "create": "Failed to create FAQ. Please try again.",
-      "update": "Failed to update FAQ. Please try again.",
-      "delete": "Failed to delete FAQ. Please try again."
     }
   },
 
@@ -1207,14 +886,11 @@
     },
     "breadcrumb": {
       "assessmentQuestion": "Assessment Questions",
-      "viewQuestion": "View Question"
+      "view-question": "View Question"
     },
     "create": {
       "title": "Create Question",
       "subtitle": "Add and manage questions for your assessment."
-    },
-    "list": {
-      "searchPlaceholder": "Search by question..."
     },
     "actions": {
       "addQuestion": "Add Question",
@@ -1234,24 +910,12 @@
       "orderInteger": "Order must be an integer",
       "invalidImage": "Only image files are allowed (JPG, PNG, etc.)",
       "fileSizeExceeded": "Image size must be less than 5 MB"
-    },
-    "success": {
-      "create": "Question created successfully!",
-      "update": "Question updated successfully!",
-      "delete": "Question deleted successfully!"
-    },
-    "error": {
-      "create": "Failed to create question. Please try again.",
-      "update": "Failed to update question. Please try again.",
-      "delete": "Failed to delete question. Please try again."
     }
   },
 
   "option": {
     "title": "Question Options",
     "subtitle": "Manage answer choices for each question",
-    "correct": "Correct",
-    "wrong": "Wrong",
     "columns": {
       "id": "Option Id",
       "question": "Question",
@@ -1268,8 +932,7 @@
       "uploadText": "Click to upload file",
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
       "changeImage": "Change Image",
-      "deleteText": "Are you sure you want to delete this option?",
-      "currentFile": "Current file"
+      "deleteText": "Are you sure you want to delete this option?"
     },
     "breadcrumb": {
       "questionOption": "Question Options",
@@ -1292,16 +955,6 @@
       "isCorrectRequired": "Please select correct option",
       "invalidImage": "Only image files are allowed (JPG, PNG, etc.)",
       "fileSizeExceeded": "Image size must be less than 5 MB"
-    },
-    "success": {
-      "create": "Option created successfully!",
-      "update": "Option updated successfully!",
-      "delete": "Option deleted successfully!"
-    },
-    "error": {
-      "create": "Failed to create option. Please try again.",
-      "update": "Failed to update option. Please try again.",
-      "delete": "Failed to delete option. Please try again."
     }
   },
 
@@ -1311,12 +964,6 @@
     "addLanguage": "+ Add Language",
     "exportTranslation": "Export Translation",
     "searchPlaceholder": "Search Language",
-    "active": "Active",
-    "inactive": "Inactive",
-    "add": "Add",
-    "cancel": "Cancel",
-    "langIdPlaceholder": "Enter Language ID",
-    "langNamePlaceholder": "Enter Language Name",
     "colums": {
       "noData": "No languages found.",
       "langId": "Language ID",
@@ -1349,7 +996,7 @@
     },
     "create": {
       "title": "Create New Role",
-      "subtitle": "Create role"
+      "subtitle": "create role"
     },
     "actions": {
       "addNewRole": "+ Add New Role",
@@ -1367,21 +1014,6 @@
     "validation": {
       "nameRequired": "Name is required",
       "labelRequired": "Label is required"
-    },
-    "filters": {
-      "allStatus": "All Status",
-      "active": "Active",
-      "inactive": "Inactive"
-    },
-    "success": {
-      "create": "Role created successfully!",
-      "update": "Role updated successfully!",
-      "delete": "Role deleted successfully!"
-    },
-    "error": {
-      "create": "Failed to create role. Please try again.",
-      "update": "Failed to update role. Please try again.",
-      "delete": "Failed to delete role. Please try again."
     }
   },
 
@@ -1408,7 +1040,7 @@
     },
     "create": {
       "title": "Create New Designation",
-      "subtitle": "Create designation"
+      "subtitle": "create designation"
     },
     "actions": {
       "addNewDesignation": "+ Add New Designation",
@@ -1426,21 +1058,6 @@
     "validation": {
       "nameRequired": "Name is required",
       "labelRequired": "Label is required"
-    },
-    "filters": {
-      "allStatus": "All Status",
-      "active": "Active",
-      "inactive": "Inactive"
-    },
-    "success": {
-      "create": "Designation created successfully!",
-      "update": "Designation updated successfully!",
-      "delete": "Designation deleted successfully!"
-    },
-    "error": {
-      "create": "Failed to create designation. Please try again.",
-      "update": "Failed to update designation. Please try again.",
-      "delete": "Failed to delete designation. Please try again."
     }
   },
 
@@ -1466,7 +1083,6 @@
       "fromAddressPlaceholder": "Enter from email address",
       "fromName": "From Name",
       "fromNamePlaceholder": "Enter from name",
-      "emailAddress": "Email Address",
       "emailPlaceholder": "Enter email address"
     },
     "actions": {
@@ -1476,29 +1092,6 @@
       "sendingTestMail": "Sending test mail...",
       "send": "Send",
       "cancel": "Cancel"
-    },
-    "encryption": {
-      "ssl": "SSL",
-      "tls": "TLS"
-    },
-    "validation": {
-      "mailerRequired": "Mailer is required",
-      "hostRequired": "Host is required",
-      "portRequired": "Port is required",
-      "usernameRequired": "Username is required",
-      "passwordRequired": "Password is required",
-      "encryptionRequired": "Encryption is required",
-      "fromAddressRequired": "From address is required",
-      "fromNameRequired": "From name is required",
-      "invalidEmail": "Invalid email address"
-    },
-    "success": {
-      "update": "SMTP settings updated successfully!",
-      "testMail": "Test email sent successfully!"
-    },
-    "error": {
-      "update": "Failed to update SMTP settings. Please try again.",
-      "testMail": "Failed to send test email. Please check your settings."
     }
   },
 

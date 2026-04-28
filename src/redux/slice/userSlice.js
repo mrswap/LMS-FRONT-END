@@ -138,7 +138,7 @@ const userSlice = createSlice({
                 state.isSuccess = true;
                 state.message = action.payload.message;
 
-                const newUser = action.payload.data;
+                const newUser = action.payload;
 
                 if (!Array.isArray(state.users)) {
                     state.users = [];
@@ -190,7 +190,7 @@ const userSlice = createSlice({
                 state.isSuccess = true;
                 state.message = action.payload.message;
 
-                const updated = action.payload.data;
+                const updated = action.payload;
 
                 if (Array.isArray(state.users)) {
                     const index = state.users.findIndex(
