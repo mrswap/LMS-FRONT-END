@@ -758,10 +758,14 @@
       "columns": {
         "title": "शीर्षक",
         "type": "प्रकार",
-        "questionCount": "प्रश्न संख्या",
+        "level": "स्तर",
+        "module": "मॉड्यूल",
+        "chapter": "अध्याय",
+        "topic": "विषय",
+        "questionCount": "प्रश्नों की संख्या",
         "totalMark": "कुल अंक",
         "passingScore": "उत्तीर्ण अंक",
-        "duration": "अवधि",
+        "duration": "समय अवधि",
         "status": "स्थिति",
         "actions": "कार्रवाई"
       }
@@ -977,6 +981,75 @@
       "sendingTestMail": "टेस्ट मेल भेजा जा रहा है...",
       "send": "भेजें",
       "cancel": "रद्द करें"
+    }
+  },
+
+  "systemSettings": {
+    "title": "सिस्टम सेटिंग्स",
+    "subtitle": "अपने एप्लिकेशन की सेटिंग्स मैनेज करें",
+    "sections": {
+      "companyInfo": "कंपनी जानकारी",
+      "appLinks": "ऐप लिंक",
+      "contactInfo": "संपर्क जानकारी",
+      "socialLinks": "सोशल मीडिया लिंक",
+      "footer": "फूटर",
+      "contentPages": "कंटेंट पेज"
+    },
+    "fields": {
+      "companyLogo": "कंपनी लोगो",
+      "companyBio": "कंपनी विवरण",
+      "iosStore": "iOS स्टोर URL",
+      "iosDownload": "iOS डाउनलोड URL",
+      "androidStore": "Android स्टोर URL",
+      "androidDownload": "Android डाउनलोड URL",
+      "contactHeading": "संपर्क हेडिंग",
+      "contactText": "संपर्क टेक्स्ट",
+      "contactPhone": "संपर्क फोन",
+      "contactEmail": "संपर्क ईमेल",
+      "facebook": "Facebook URL",
+      "linkedin": "LinkedIn URL",
+      "instagram": "Instagram URL",
+      "twitter": "Twitter URL",
+      "footerText": "फूटर टेक्स्ट",
+      "aboutUs": "हमारे बारे में",
+      "privacyPolicy": "गोपनीयता नीति",
+      "termsConditions": "नियम और शर्तें"
+    },
+    "placeholders": {
+      "companyBio": "कंपनी विवरण दर्ज करें (अधिकतम 500 अक्षर)",
+      "iosStore": "https://apps.apple.com/app/id...",
+      "iosDownload": "https://yourdomain.com/ios-app.apk",
+      "androidStore": "https://play.google.com/store/apps/details?id=...",
+      "androidDownload": "https://yourdomain.com/app.apk",
+      "contactHeading": "जैसे: हमसे संपर्क करें",
+      "contactText": "जैसे: अपने सवालों के जवाब पाएं",
+      "contactPhone": "+91 9876543210",
+      "contactEmail": "support@company.com",
+      "facebook": "https://facebook.com/company",
+      "linkedin": "https://linkedin.com/company/company",
+      "instagram": "https://instagram.com/company",
+      "twitter": "https://x.com/company",
+      "footerText": "© 2026 कंपनी नाम"
+    },
+    "actions": {
+      "uploadLogo": "लोगो अपलोड करें",
+      "changeLogo": "लोगो बदलें",
+      "saveSettings": "सेटिंग्स सेव करें",
+      "saving": "सेव हो रहा है..."
+    },
+    "validation": {
+      "bioMax": "कंपनी विवरण 500 अक्षरों से अधिक नहीं होना चाहिए",
+      "phoneInvalid": "कृपया सही फोन नंबर दर्ज करें",
+      "emailInvalid": "कृपया सही ईमेल दर्ज करें",
+      "urlInvalid": "कृपया सही URL दर्ज करें",
+      "imageType": "कृपया सही इमेज फाइल अपलोड करें",
+      "imageSize": "इमेज का साइज 2MB से कम होना चाहिए"
+    },
+    "success": {
+      "update": "सेटिंग्स सफलतापूर्वक अपडेट हो गई हैं"
+    },
+    "error": {
+      "update": "सेटिंग्स अपडेट करने में विफल"
     }
   },
 

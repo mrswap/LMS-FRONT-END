@@ -758,12 +758,16 @@
       "columns": {
         "title": "ਸਿਰਲੇਖ",
         "type": "ਕਿਸਮ",
-        "questionCount": "ਪ੍ਰਸ਼ਨ ਗਿਣਤੀ",
+        "level": "ਪੱਧਰ",
+        "module": "ਮੋਡੀਊਲ",
+        "chapter": "ਅਧਿਆਇ",
+        "topic": "ਵਿਸ਼ਾ",
+        "questionCount": "ਸਵਾਲਾਂ ਦੀ ਗਿਣਤੀ",
         "totalMark": "ਕੁੱਲ ਅੰਕ",
         "passingScore": "ਪਾਸਿੰਗ ਅੰਕ",
-        "duration": "ਅਵਧੀ",
+        "duration": "ਸਮਾਂ",
         "status": "ਸਥਿਤੀ",
-        "actions": "ਕਾਰਵਾਈ"
+        "actions": "ਕਾਰਵਾਈਆਂ"
       }
     },
     "details": {
@@ -977,6 +981,75 @@
       "sendingTestMail": "ਟੈਸਟ ਮੇਲ ਭੇਜੀ ਜਾ ਰਹੀ ਹੈ...",
       "send": "ਭੇਜੋ",
       "cancel": "ਰੱਦ ਕਰੋ"
+    }
+  },
+
+  "systemSettings": {
+    "title": "ਸਿਸਟਮ ਸੈਟਿੰਗਜ਼",
+    "subtitle": "ਆਪਣੀ ਐਪਲੀਕੇਸ਼ਨ ਦੀਆਂ ਸੈਟਿੰਗਜ਼ ਮੈਨੇਜ ਕਰੋ",
+    "sections": {
+      "companyInfo": "ਕੰਪਨੀ ਜਾਣਕਾਰੀ",
+      "appLinks": "ਐਪ ਲਿੰਕ",
+      "contactInfo": "ਸੰਪਰਕ ਜਾਣਕਾਰੀ",
+      "socialLinks": "ਸੋਸ਼ਲ ਮੀਡੀਆ ਲਿੰਕ",
+      "footer": "ਫੁੱਟਰ",
+      "contentPages": "ਕੰਟੈਂਟ ਪੇਜ"
+    },
+    "fields": {
+      "companyLogo": "ਕੰਪਨੀ ਲੋਗੋ",
+      "companyBio": "ਕੰਪਨੀ ਵੇਰਵਾ",
+      "iosStore": "iOS ਸਟੋਰ URL",
+      "iosDownload": "iOS ਡਾਊਨਲੋਡ URL",
+      "androidStore": "Android ਸਟੋਰ URL",
+      "androidDownload": "Android ਡਾਊਨਲੋਡ URL",
+      "contactHeading": "ਸੰਪਰਕ ਹੈਡਿੰਗ",
+      "contactText": "ਸੰਪਰਕ ਟੈਕਸਟ",
+      "contactPhone": "ਸੰਪਰਕ ਫੋਨ",
+      "contactEmail": "ਸੰਪਰਕ ਈਮੇਲ",
+      "facebook": "Facebook URL",
+      "linkedin": "LinkedIn URL",
+      "instagram": "Instagram URL",
+      "twitter": "Twitter URL",
+      "footerText": "ਫੁੱਟਰ ਟੈਕਸਟ",
+      "aboutUs": "ਸਾਡੇ ਬਾਰੇ",
+      "privacyPolicy": "ਪਰਾਈਵੇਸੀ ਪਾਲਿਸੀ",
+      "termsConditions": "ਨਿਯਮ ਅਤੇ ਸ਼ਰਤਾਂ"
+    },
+    "placeholders": {
+      "companyBio": "ਕੰਪਨੀ ਵੇਰਵਾ ਦਰਜ ਕਰੋ (ਵੱਧ ਤੋਂ ਵੱਧ 500 ਅੱਖਰ)",
+      "iosStore": "https://apps.apple.com/app/id...",
+      "iosDownload": "https://yourdomain.com/ios-app.apk",
+      "androidStore": "https://play.google.com/store/apps/details?id=...",
+      "androidDownload": "https://yourdomain.com/app.apk",
+      "contactHeading": "ਜਿਵੇਂ: ਸਾਡੇ ਨਾਲ ਸੰਪਰਕ ਕਰੋ",
+      "contactText": "ਜਿਵੇਂ: ਆਪਣੇ ਸਵਾਲਾਂ ਦੇ ਜਵਾਬ ਲਵੋ",
+      "contactPhone": "+91 9876543210",
+      "contactEmail": "support@company.com",
+      "facebook": "https://facebook.com/company",
+      "linkedin": "https://linkedin.com/company/company",
+      "instagram": "https://instagram.com/company",
+      "twitter": "https://x.com/company",
+      "footerText": "© 2026 ਕੰਪਨੀ ਨਾਮ"
+    },
+    "actions": {
+      "uploadLogo": "ਲੋਗੋ ਅਪਲੋਡ ਕਰੋ",
+      "changeLogo": "ਲੋਗੋ ਬਦਲੋ",
+      "saveSettings": "ਸੈਟਿੰਗਜ਼ ਸੇਵ ਕਰੋ",
+      "saving": "ਸੇਵ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
+    },
+    "validation": {
+      "bioMax": "ਕੰਪਨੀ ਵੇਰਵਾ 500 ਅੱਖਰਾਂ ਤੋਂ ਵੱਧ ਨਹੀਂ ਹੋਣਾ ਚਾਹੀਦਾ",
+      "phoneInvalid": "ਕਿਰਪਾ ਕਰਕੇ ਸਹੀ ਫੋਨ ਨੰਬਰ ਦਰਜ ਕਰੋ",
+      "emailInvalid": "ਕਿਰਪਾ ਕਰਕੇ ਸਹੀ ਈਮੇਲ ਦਰਜ ਕਰੋ",
+      "urlInvalid": "ਕਿਰਪਾ ਕਰਕੇ ਸਹੀ URL ਦਰਜ ਕਰੋ",
+      "imageType": "ਕਿਰਪਾ ਕਰਕੇ ਸਹੀ ਇਮੇਜ ਫਾਈਲ ਅਪਲੋਡ ਕਰੋ",
+      "imageSize": "ਇਮੇਜ ਦਾ ਸਾਈਜ਼ 2MB ਤੋਂ ਘੱਟ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ"
+    },
+    "success": {
+      "update": "ਸੈਟਿੰਗਜ਼ ਸਫਲਤਾਪੂਰਵਕ ਅਪਡੇਟ ਹੋ ਗਈਆਂ"
+    },
+    "error": {
+      "update": "ਸੈਟਿੰਗਜ਼ ਅਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ"
     }
   },
 

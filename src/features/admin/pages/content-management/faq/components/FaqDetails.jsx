@@ -591,12 +591,27 @@ const FaqDetails = () => {
       const typeObj = typeOptions.find((opt) => opt.value === faq.type);
       setType(typeObj || typeOptions[0]);
 
-      if (faq.type && faq.type_id) {
+      // if (faq.type && faq.type_id) {
+      //   const dynamicOptions = getDynamicOptionsByType(faq.type);
+      //   const selected = dynamicOptions.find(
+      //     (opt) => opt.value === faq.type_id,
+      //   );
+      //   setSelectedOption(selected || null);
+      // }
+
+      if (faq?.type && faq?.reference?.id) {
         const dynamicOptions = getDynamicOptionsByType(faq.type);
+
         const selected = dynamicOptions.find(
-          (opt) => opt.value === faq.type_id,
+          (opt) => opt.value === faq.reference.id,
         );
-        setSelectedOption(selected || null);
+
+        setSelectedOption(
+          selected || {
+            value: faq.reference.id,
+            label: faq.reference.title,
+          },
+        );
       }
     }
   }, [faq]);

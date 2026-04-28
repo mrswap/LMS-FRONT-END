@@ -29,9 +29,9 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
     (state) => state.auth,
   );
 
-  // useEffect(() => {
-  //   dispatch(getProfile());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
 
   const dropdownRef = useRef();
 

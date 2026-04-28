@@ -293,6 +293,9 @@ const DesignationDetails = lazy(
 );
 
 const SmtpSettings = lazy(() => import("../pages/settings/smtp/SMTP"));
+const SystemSetting = lazy(
+  () => import("../pages/settings/system-settings/SystemSetting"),
+);
 
 const Faqs = lazy(() => import("../pages/content-management/faq/Faqs"));
 const CreateFaq = lazy(
@@ -498,6 +501,7 @@ const AdminRoutes = (
       {/* Settings */}
       <Route path="smtp-setting" element={<SmtpSettings />} />
       <Route path="language" element={<LanguageSettings />} />
+      <Route path="system-settings" element={<SystemSetting />} />
 
       {/* Fallback */}
       <Route path="*" element={<WorkInProgress />} />

@@ -103,15 +103,15 @@ const UserDetails = () => {
     mobile: Yup.string().required(
       t("userManagement.validation.mobileRequired"),
     ),
-    password: Yup.string()
-      .min(6, t("userManagement.validation.passwordMin"))
-      .required(t("userManagement.validation.passwordRequired")),
-    confirmPassword: Yup.string()
-      .oneOf(
-        [Yup.ref("password")],
-        t("userManagement.validation.passwordMatch"),
-      )
-      .required(t("userManagement.validation.confirmPasswordRequired")),
+    // password: Yup.string()
+    //   .min(6, t("userManagement.validation.passwordMin"))
+    //   .required(t("userManagement.validation.passwordRequired")),
+    // confirmPassword: Yup.string()
+    //   .oneOf(
+    //     [Yup.ref("password")],
+    //     t("userManagement.validation.passwordMatch"),
+    //   )
+    //   .required(t("userManagement.validation.confirmPasswordRequired")),
   });
 
   const onSubmit = async (values, { setSubmitting }) => {

@@ -645,9 +645,9 @@ const Assissment = () => {
   const fetchAssissments = (overridePage) => {
     const params = {
       search: search || "",
+      level_id: level?.value !== "All" ? level?.value : "",
       chapter_id: chapter?.value || "",
       topic_id: topic?.value || "",
-      level_id: level?.value !== "All" ? level?.value : "",
       module_id: module?.value || "",
       status: status?.value !== "All" ? status?.value : "",
       type: "topic",
@@ -723,6 +723,38 @@ const Assissment = () => {
             <TruncateText text={row?.type} maxLength={25} />
           </p>
         </div>
+      ),
+    },
+    {
+      header: t("assessment.list.columns.level"),
+      render: (row) => (
+        <p className="text-gray-800 text-sm">
+          {row?.hierarchy?.level?.title || "-"}
+        </p>
+      ),
+    },
+    {
+      header: t("assessment.list.columns.module"),
+      render: (row) => (
+        <p className="text-gray-800 text-sm">
+          {row?.hierarchy?.module?.title || "-"}
+        </p>
+      ),
+    },
+    {
+      header: t("assessment.list.columns.chapter"),
+      render: (row) => (
+        <p className="text-gray-800 text-sm">
+          {row?.hierarchy?.chapter?.title || "-"}
+        </p>
+      ),
+    },
+    {
+      header: t("assessment.list.columns.topic"),
+      render: (row) => (
+        <p className="text-gray-800 text-sm">
+          {row?.hierarchy?.topic?.title || "-"}
+        </p>
       ),
     },
     {
