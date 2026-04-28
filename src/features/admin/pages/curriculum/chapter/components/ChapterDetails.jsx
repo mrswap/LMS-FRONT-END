@@ -19,6 +19,8 @@
 // import { getAllPrograms } from "../../../../../../redux/slice/programSlice";
 // import { getAllLevels } from "../../../../../../redux/slice/levelSlice";
 // import { showConfirm } from "../../../../../../redux/slice/confirmSlice";
+// import Loader from "../../../../common/Loader";
+// import Error from "../../../../common/Error";
 
 // const ChapterDetails = () => {
 //   const [thumbnail, setThumbnail] = useState(null);
@@ -35,20 +37,25 @@
 //   );
 
 //   const { programs } = useSelector((state) => state.program);
-//   const programOptions = programs?.data?.map((prog) => ({
-//     label: prog.title,
-//     value: prog.id,
-//   }));
+//   const programOptions =
+//     programs?.data?.map((prog) => ({
+//       label: prog.title,
+//       value: prog.id,
+//     })) || [];
+
 //   const { levels } = useSelector((state) => state.level);
-//   const levelOptions = levels?.data?.map((lev) => ({
-//     label: lev.title,
-//     value: lev.id,
-//   }));
+//   const levelOptions =
+//     levels?.data?.map((lev) => ({
+//       label: lev.title,
+//       value: lev.id,
+//     })) || [];
+
 //   const { modules } = useSelector((state) => state.module);
-//   const modulesOptions = modules?.data?.map((mod) => ({
-//     label: mod.title,
-//     value: mod.id,
-//   }));
+//   const modulesOptions =
+//     modules?.data?.map((mod) => ({
+//       label: mod.title,
+//       value: mod.id,
+//     })) || [];
 
 //   useEffect(() => {
 //     if (id) {
@@ -108,8 +115,6 @@
 //   });
 
 //   const onSubmit = async (values, { setSubmitting, setErrors }) => {
-//     console.log("valus", values);
-
 //     try {
 //       const formData = new FormData();
 
@@ -124,18 +129,25 @@
 //         "program_id",
 //         values.programName?.value || values.programName,
 //       );
+
 //       if (thumbnail) {
 //         formData.append("thumbnail", thumbnail);
 //       }
 
+//       // ========== FUTURE: Add more fields if needed ==========
+//       // if (values.duration) formData.append("duration", values.duration);
+//       // if (values.order) formData.append("order", values.order);
+//       // ========== END FUTURE FIELDS ==========
+
 //       const res = await dispatch(
 //         updateChapterById({ id, data: formData }),
 //       ).unwrap();
-//       toast.success(res.message || "Chpater updated successfully");
+
+//       toast.success(res?.message || t("chapter.success.update"));
 //       navigate("/chapters");
 //     } catch (error) {
 //       setErrors({ submit: error.message });
-//       toast.error(error?.message || "Update failed ");
+//       toast.error(error?.message || t("chapter.error.update"));
 //     } finally {
 //       setSubmitting(false);
 //     }
@@ -150,27 +162,28 @@
 
 //     try {
 //       await dispatch(deleteSingleChapter(id)).unwrap();
-//       toast.success("chapter deleted successfully ");
+//       toast.success(t("chapter.success.delete"));
 //       setTimeout(() => {
 //         navigate("/chapters");
 //       }, 1000);
 //     } catch (error) {
-//       toast.error(error?.message || "Delete failed ");
+//       toast.error(error?.message || t("chapter.error.delete"));
 //     }
 //   };
 
-//   const handleThumbnailUpload = (event) => {
+//   const handleThumbnailUpload = (event, setFieldValue) => {
 //     const file = event.target.files[0];
 //     if (file) {
 //       if (!file.type.startsWith("image/")) {
-//         alert("Please upload an image file");
+//         toast.error(t("chapter.validation.imageRequired"));
 //         return;
 //       }
 //       if (file.size > 5 * 1024 * 1024) {
-//         alert("File size should be less than 5MB");
+//         toast.error(t("chapter.validation.fileSize"));
 //         return;
 //       }
 
+//       setFieldValue("thumbnail", file);
 //       setThumbnail(file);
 //       const reader = new FileReader();
 //       reader.onloadend = () => setThumbnailPreview(reader.result);
@@ -178,17 +191,21 @@
 //     }
 //   };
 
-//   const removeThumbnail = () => {
+//   const removeThumbnail = (setFieldValue) => {
 //     setThumbnail(null);
 //     setThumbnailPreview(null);
+//     setFieldValue("thumbnail", null);
 //     if (fileInputRef.current) fileInputRef.current.value = "";
 //   };
 
 //   const triggerFileUpload = () => fileInputRef.current.click();
 
+//   if (isLoading) return <Loader />;
+//   if (isError) return <Error message={message} />;
+
 //   return (
 //     <PageLayout>
-//       <div className=" p-8 rounded-lg border border-gray-300">
+//       <div className="p-8 rounded-lg border border-gray-300">
 //         <Breadcrumb
 //           items={[
 //             {
@@ -208,7 +225,7 @@
 //             onSubmit={onSubmit}
 //             enableReinitialize={true}
 //           >
-//             {({ isSubmitting, values, setFieldValue, handleSubmit }) => {
+//             {({ isSubmitting, setFieldValue, handleSubmit }) => {
 //               return (
 //                 <Form onSubmit={handleSubmit} className="space-y-8">
 //                   {/* General Details */}
@@ -229,6 +246,7 @@
 //                             "chapter.details.chapterNamePlaceholder",
 //                           )}
 //                           required={true}
+//                           maxLength={150}
 //                         />
 //                       </div>
 //                       <div>
@@ -239,23 +257,20 @@
 //                             "chapter.details.parentModulePlaceholder",
 //                           )}
 //                           required={true}
-//                           options={modulesOptions || []}
+//                           options={modulesOptions}
 //                           onChange={(option) => {
 //                             setFieldValue("moduleName", option);
-
-//                             const selectedModule = modules.data.find(
-//                               (chap) => chap.id === option.value,
+//                             const selectedModule = modules?.data?.find(
+//                               (mod) => mod.id === option.value,
 //                             );
-
 //                             if (selectedModule) {
 //                               setFieldValue("levelName", {
-//                                 label: selectedModule.level.title,
-//                                 value: selectedModule.level.id,
+//                                 label: selectedModule.level?.title,
+//                                 value: selectedModule.level?.id,
 //                               });
-
 //                               setFieldValue("programName", {
-//                                 label: selectedModule.program.title,
-//                                 value: selectedModule.program.id,
+//                                 label: selectedModule.program?.title,
+//                                 value: selectedModule.program?.id,
 //                               });
 //                             }
 //                           }}
@@ -272,7 +287,7 @@
 //                             "chapter.details.parentLevelPlaceholder",
 //                           )}
 //                           required={true}
-//                           options={levelOptions || []}
+//                           options={levelOptions}
 //                           disabled={true}
 //                         />
 //                       </div>
@@ -283,10 +298,26 @@
 //                           "chapter.details.perentProgramPlaceholder",
 //                         )}
 //                         required={true}
-//                         options={programOptions || []}
+//                         options={programOptions}
 //                         disabled={true}
 //                       />
 //                     </div>
+
+//                     {/* ========== COMMENTED CODE - FUTURE FIELDS ==========
+//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mt-2">
+//                       <TextInput
+//                         name="duration"
+//                         label={t("chapter.details.duration")}
+//                         placeholder={t("chapter.details.durationPlaceholder")}
+//                       />
+//                       <TextInput
+//                         name="order"
+//                         label={t("chapter.details.order")}
+//                         placeholder={t("chapter.details.orderPlaceholder")}
+//                         type="number"
+//                       />
+//                     </div>
+//                     ========== END COMMENTED CODE ========== */}
 
 //                     <div className="mt-2">
 //                       <TextareaField
@@ -297,6 +328,7 @@
 //                         )}
 //                         rows={4}
 //                         required={true}
+//                         maxLength={500}
 //                       />
 //                     </div>
 //                   </div>
@@ -315,7 +347,9 @@
 //                         ref={fileInputRef}
 //                         type="file"
 //                         accept="image/*"
-//                         onChange={handleThumbnailUpload}
+//                         onChange={(e) =>
+//                           handleThumbnailUpload(e, setFieldValue)
+//                         }
 //                         className="hidden"
 //                       />
 
@@ -338,12 +372,12 @@
 //                             <div className="relative group">
 //                               <img
 //                                 src={thumbnailPreview}
-//                                 alt="Thumbnail Preview"
+//                                 alt={t("chapter.details.thumbnailAlt")}
 //                                 className="w-32 h-32 object-cover rounded-lg border border-gray-300 shadow-sm"
 //                               />
 //                               <button
 //                                 type="button"
-//                                 onClick={removeThumbnail}
+//                                 onClick={() => removeThumbnail(setFieldValue)}
 //                                 className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors shadow-md"
 //                               >
 //                                 <FiX className="text-xs" />
@@ -351,12 +385,12 @@
 //                             </div>
 //                             <div className="flex-1">
 //                               <p className="text-sm font-semibold text-gray-700 mb-1">
-//                                 {/* {thumbnail.name} */}
-//                                 name
+//                                 {thumbnail?.name ||
+//                                   chapter?.thumbnail?.split("/").pop()}
 //                               </p>
 //                               <p className="text-xs text-gray-500 mb-3">
-//                                 {/* {(thumbnail.size / 1024).toFixed(2)} KB */}
-//                                 size
+//                                 {thumbnail &&
+//                                   `${(thumbnail.size / 1024).toFixed(2)} KB`}
 //                               </p>
 //                               <button
 //                                 type="button"
@@ -376,17 +410,26 @@
 //                   {/* Footer */}
 //                   <div className="flex justify-end items-center pt-4">
 //                     <div className="flex gap-3">
+//                       {/* ========== COMMENTED CODE - CANCEL BUTTON ==========
+//                       <button
+//                         type="button"
+//                         onClick={() => navigate("/chapters")}
+//                         className="px-4 py-2 rounded-md text-sm text-gray-600 border border-gray-300 hover:bg-gray-50 cursor-pointer"
+//                       >
+//                         {t("chapter.actions.cancel")}
+//                       </button>
+//                       ========== END COMMENTED CODE ========== */}
 //                       <button
 //                         type="button"
 //                         onClick={handleDelete}
-//                         className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-gray-50"
+//                         className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-red-50 cursor-pointer transition-colors"
 //                       >
 //                         {t("chapter.actions.deleteChapter")}
 //                       </button>
 //                       <button
 //                         type="submit"
 //                         disabled={isSubmitting}
-//                         className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
+//                         className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 cursor-pointer"
 //                       >
 //                         {isSubmitting
 //                           ? t("chapter.actions.updating")
@@ -406,7 +449,7 @@
 
 // export default ChapterDetails;
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { TextInput, TextareaField, SelectField } from "../../../../common/form";
@@ -433,6 +476,7 @@ import Error from "../../../../common/Error";
 const ChapterDetails = () => {
   const [thumbnail, setThumbnail] = useState(null);
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
   const fileInputRef = useRef(null);
   const { t } = useTranslation();
   const { id } = useParams();
@@ -444,35 +488,65 @@ const ChapterDetails = () => {
     (state) => state.chapter,
   );
 
-  const { programs } = useSelector((state) => state.program);
+  const { programs, isLoading: programsLoading } = useSelector(
+    (state) => state.program,
+  );
+  const { levels, isLoading: levelsLoading } = useSelector(
+    (state) => state.level,
+  );
+  const { modules, isLoading: modulesLoading } = useSelector(
+    (state) => state.module,
+  );
+
   const programOptions =
     programs?.data?.map((prog) => ({
       label: prog.title,
       value: prog.id,
     })) || [];
 
-  const { levels } = useSelector((state) => state.level);
   const levelOptions =
     levels?.data?.map((lev) => ({
       label: lev.title,
       value: lev.id,
     })) || [];
 
-  const { modules } = useSelector((state) => state.module);
   const modulesOptions =
     modules?.data?.map((mod) => ({
       label: mod.title,
       value: mod.id,
     })) || [];
 
+  // Fetch chapter data first
   useEffect(() => {
     if (id) {
       dispatch(getChapterById(id));
-      dispatch(getAllPrograms());
-      dispatch(getAllLevels());
-      dispatch(getAllModules());
     }
   }, [dispatch, id]);
+
+  // When chapter data is loaded, fetch all related data (modules, levels, programs) sequentially with loading
+  useEffect(() => {
+    const fetchAllData = async () => {
+      if (chapter?.id && !isDataLoaded) {
+        try {
+          // First fetch modules
+          await dispatch(getAllModules()).unwrap();
+
+          // Then fetch levels
+          await dispatch(getAllLevels()).unwrap();
+
+          // Then fetch programs
+          await dispatch(getAllPrograms()).unwrap();
+
+          setIsDataLoaded(true);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          toast.error(t("chapter.error.fetchData"));
+        }
+      }
+    };
+
+    fetchAllData();
+  }, [dispatch, chapter?.id, isDataLoaded, toast, t]);
 
   useEffect(() => {
     if (chapter?.thumbnail) {
@@ -541,11 +615,6 @@ const ChapterDetails = () => {
       if (thumbnail) {
         formData.append("thumbnail", thumbnail);
       }
-
-      // ========== FUTURE: Add more fields if needed ==========
-      // if (values.duration) formData.append("duration", values.duration);
-      // if (values.order) formData.append("order", values.order);
-      // ========== END FUTURE FIELDS ==========
 
       const res = await dispatch(
         updateChapterById({ id, data: formData }),
@@ -633,7 +702,7 @@ const ChapterDetails = () => {
             onSubmit={onSubmit}
             enableReinitialize={true}
           >
-            {({ isSubmitting, setFieldValue, handleSubmit }) => {
+            {({ isSubmitting, setFieldValue, values, handleSubmit }) => {
               return (
                 <Form onSubmit={handleSubmit} className="space-y-8">
                   {/* General Details */}
@@ -654,6 +723,7 @@ const ChapterDetails = () => {
                             "chapter.details.chapterNamePlaceholder",
                           )}
                           required={true}
+                          maxLength={150}
                         />
                       </div>
                       <div>
@@ -665,6 +735,7 @@ const ChapterDetails = () => {
                           )}
                           required={true}
                           options={modulesOptions}
+                          isLoading={modulesLoading}
                           onChange={(option) => {
                             setFieldValue("moduleName", option);
                             const selectedModule = modules?.data?.find(
@@ -695,7 +766,8 @@ const ChapterDetails = () => {
                           )}
                           required={true}
                           options={levelOptions}
-                          disabled={true}
+                          isLoading={levelsLoading}
+                          disabled={!values.moduleName}
                         />
                       </div>
                       <SelectField
@@ -706,25 +778,10 @@ const ChapterDetails = () => {
                         )}
                         required={true}
                         options={programOptions}
-                        disabled={true}
+                        isLoading={programsLoading}
+                        disabled={!values.moduleName}
                       />
                     </div>
-
-                    {/* ========== COMMENTED CODE - FUTURE FIELDS ==========
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mt-2">
-                      <TextInput
-                        name="duration"
-                        label={t("chapter.details.duration")}
-                        placeholder={t("chapter.details.durationPlaceholder")}
-                      />
-                      <TextInput
-                        name="order"
-                        label={t("chapter.details.order")}
-                        placeholder={t("chapter.details.orderPlaceholder")}
-                        type="number"
-                      />
-                    </div>
-                    ========== END COMMENTED CODE ========== */}
 
                     <div className="mt-2">
                       <TextareaField
@@ -735,6 +792,7 @@ const ChapterDetails = () => {
                         )}
                         rows={4}
                         required={true}
+                        maxLength={500}
                       />
                     </div>
                   </div>
@@ -816,15 +874,6 @@ const ChapterDetails = () => {
                   {/* Footer */}
                   <div className="flex justify-end items-center pt-4">
                     <div className="flex gap-3">
-                      {/* ========== COMMENTED CODE - CANCEL BUTTON ==========
-                      <button
-                        type="button"
-                        onClick={() => navigate("/chapters")}
-                        className="px-4 py-2 rounded-md text-sm text-gray-600 border border-gray-300 hover:bg-gray-50 cursor-pointer"
-                      >
-                        {t("chapter.actions.cancel")}
-                      </button>
-                      ========== END COMMENTED CODE ========== */}
                       <button
                         type="button"
                         onClick={handleDelete}

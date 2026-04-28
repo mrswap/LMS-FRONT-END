@@ -41,10 +41,6 @@
   background: rgba(37, 99, 235, 0.6);
 }
 
-/* .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #2563EB;
-  border-radius: 10px;
-} */
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #1E3A8A;

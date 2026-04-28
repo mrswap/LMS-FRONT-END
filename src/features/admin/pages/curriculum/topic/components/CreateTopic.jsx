@@ -103,8 +103,6 @@
 //   });
 
 //   const onSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
-//     console.log("Form submitted!", values);
-
 //     try {
 //       const formData = new FormData();
 
@@ -119,14 +117,20 @@
 //       if (thumbnail) {
 //         formData.append("thumbnail", thumbnail);
 //       }
+
+//       // ========== FUTURE: Add more fields if needed ==========
+//       // formData.append("video_url", values.video_url);
+//       // formData.append("attachment", values.attachment);
+//       // ========== END FUTURE FIELDS ==========
+
 //       const res = await dispatch(createTopic(formData)).unwrap();
-//       toast.success(res.message || "Topic created successfully ");
+//       toast.success(res?.message || t("topic.success.create"));
 //       resetForm();
 //       removeThumbnail();
 //       navigate("/topics");
 //     } catch (error) {
 //       setErrors({ submit: error.message });
-//       toast.error(error?.message || "Something went wrong ❌");
+//       toast.error(error?.message || t("topic.error.create"));
 //     } finally {
 //       setSubmitting(false);
 //     }
@@ -136,11 +140,11 @@
 //     const file = event.target.files[0];
 //     if (file) {
 //       if (!file.type.startsWith("image/")) {
-//         alert("Please upload an image file");
+//         toast.error(t("topic.validation.imageRequired"));
 //         return;
 //       }
 //       if (file.size > 5 * 1024 * 1024) {
-//         alert("File size should be less than 5MB");
+//         toast.error(t("topic.validation.fileSize"));
 //         return;
 //       }
 
@@ -161,7 +165,7 @@
 
 //   return (
 //     <PageLayout>
-//       <div className=" p-8 rounded-lg border border-gray-300">
+//       <div className="p-8 rounded-lg border border-gray-300">
 //         <PageHeader>
 //           <PageHeaderLeft>
 //             <PageTitle>{t("topic.create.title")}</PageTitle>
@@ -176,7 +180,7 @@
 //             onSubmit={onSubmit}
 //             enableReinitialize={true}
 //           >
-//             {({ isSubmitting, values, setFieldValue, handleSubmit }) => {
+//             {({ isSubmitting, setFieldValue, handleSubmit }) => {
 //               return (
 //                 <Form onSubmit={handleSubmit} className="space-y-8">
 //                   {/* General Details */}
@@ -195,6 +199,7 @@
 //                           label={t("topic.details.topicName")}
 //                           placeholder={t("topic.details.topicNamePlaceholder")}
 //                           required={true}
+//                           maxLength={150}
 //                         />
 //                       </div>
 //                       <div>
@@ -205,28 +210,24 @@
 //                             "topic.details.parentChapterPlaceholder",
 //                           )}
 //                           required={true}
-//                           options={chapterOptions || []}
+//                           options={chapterOptions}
 //                           onChange={(option) => {
 //                             setFieldValue("chapterName", option);
-
-//                             const selectedChapter = chapters.data.find(
+//                             const selectedChapter = chapters?.data?.find(
 //                               (chap) => chap.id === option.value,
 //                             );
-
 //                             if (selectedChapter) {
 //                               setFieldValue("moduleName", {
-//                                 label: selectedChapter.module.title,
-//                                 value: selectedChapter.module.id,
+//                                 label: selectedChapter.module?.title,
+//                                 value: selectedChapter.module?.id,
 //                               });
-
 //                               setFieldValue("levelName", {
-//                                 label: selectedChapter.level.title,
-//                                 value: selectedChapter.level.id,
+//                                 label: selectedChapter.level?.title,
+//                                 value: selectedChapter.level?.id,
 //                               });
-
 //                               setFieldValue("programName", {
-//                                 label: selectedChapter.program.title,
-//                                 value: selectedChapter.program.id,
+//                                 label: selectedChapter.program?.title,
+//                                 value: selectedChapter.program?.id,
 //                               });
 //                             }
 //                           }}
@@ -243,7 +244,7 @@
 //                             "topic.details.parentModulePlaceholder",
 //                           )}
 //                           required={true}
-//                           options={moduleOptions || []}
+//                           options={moduleOptions}
 //                           disabled={true}
 //                         />
 //                       </div>
@@ -255,7 +256,7 @@
 //                             "topic.details.parentLevelPlaceholder",
 //                           )}
 //                           required={true}
-//                           options={levelOptions || []}
+//                           options={levelOptions}
 //                           disabled={true}
 //                         />
 //                       </div>
@@ -269,7 +270,7 @@
 //                           "topic.details.perentProgramPlaceholder",
 //                         )}
 //                         required={true}
-//                         options={programOptions || []}
+//                         options={programOptions}
 //                         disabled={true}
 //                       />
 //                       <div>
@@ -279,9 +280,26 @@
 //                           label={t("topic.details.duration")}
 //                           placeholder={t("topic.details.durationPlaceholder")}
 //                           required={true}
+//                           maxLength={500}
 //                         />
 //                       </div>
 //                     </div>
+
+//                     {/* ========== COMMENTED CODE - FUTURE FIELDS ==========
+//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mt-2">
+//                       <TextInput
+//                         name="video_url"
+//                         label={t("topic.details.videoUrl")}
+//                         placeholder={t("topic.details.videoUrlPlaceholder")}
+//                       />
+//                       <TextInput
+//                         name="attachment"
+//                         label={t("topic.details.attachment")}
+//                         placeholder={t("topic.details.attachmentPlaceholder")}
+//                         type="file"
+//                       />
+//                     </div>
+//                     ========== END COMMENTED CODE ========== */}
 
 //                     <div className="mt-2">
 //                       <TextareaField
@@ -331,7 +349,7 @@
 //                             <div className="relative group">
 //                               <img
 //                                 src={thumbnailPreview}
-//                                 alt="Thumbnail Preview"
+//                                 alt={t("topic.details.thumbnailAlt")}
 //                                 className="w-32 h-32 object-cover rounded-lg border border-gray-300 shadow-sm"
 //                               />
 //                               <button
@@ -367,10 +385,19 @@
 //                   {/* Footer */}
 //                   <div className="flex justify-end items-center pt-4">
 //                     <div className="flex gap-3">
+//                       {/* ========== COMMENTED CODE - CANCEL BUTTON ==========
+//                       <button
+//                         type="button"
+//                         onClick={() => navigate("/topics")}
+//                         className="px-4 py-2 rounded-md text-sm text-gray-600 border border-gray-300 hover:bg-gray-50 cursor-pointer"
+//                       >
+//                         {t("topic.actions.cancel")}
+//                       </button>
+//                       ========== END COMMENTED CODE ========== */}
 //                       <button
 //                         type="submit"
 //                         disabled={isSubmitting}
-//                         className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
+//                         className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 cursor-pointer"
 //                       >
 //                         {isSubmitting
 //                           ? t("topic.actions.creating")
@@ -390,7 +417,7 @@
 
 // export default CreateTopic;
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { TextInput, TextareaField, SelectField } from "../../../../common/form";
@@ -418,23 +445,51 @@ import { createTopic } from "../../../../../../redux/slice/topicSlice";
 const CreateTopic = () => {
   const [thumbnail, setThumbnail] = useState(null);
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
   const fileInputRef = useRef(null);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const toast = useToast();
   const navigate = useNavigate();
 
-  const { programs } = useSelector((state) => state.program);
-  const { levels } = useSelector((state) => state.level);
-  const { modules } = useSelector((state) => state.module);
-  const { chapters } = useSelector((state) => state.chapter);
+  const { programs, isLoading: programsLoading } = useSelector(
+    (state) => state.program,
+  );
+  const { levels, isLoading: levelsLoading } = useSelector(
+    (state) => state.level,
+  );
+  const { modules, isLoading: modulesLoading } = useSelector(
+    (state) => state.module,
+  );
+  const { chapters, isLoading: chaptersLoading } = useSelector(
+    (state) => state.chapter,
+  );
 
+  // Sequential API calls on component mount
   useEffect(() => {
-    dispatch(getAllPrograms());
-    dispatch(getAllLevels());
-    dispatch(getAllModules());
-    dispatch(getAllChapters());
-  }, [dispatch]);
+    const fetchSequentialData = async () => {
+      try {
+        // First fetch chapters
+        await dispatch(getAllChapters()).unwrap();
+
+        // Then fetch modules
+        await dispatch(getAllModules()).unwrap();
+
+        // Then fetch levels
+        await dispatch(getAllLevels()).unwrap();
+
+        // Then fetch programs
+        await dispatch(getAllPrograms()).unwrap();
+
+        setIsDataLoaded(true);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        toast.error(t("topic.error.fetchData"));
+      }
+    };
+
+    fetchSequentialData();
+  }, [dispatch, toast, t]);
 
   const programOptions =
     programs?.data?.map((prog) => ({
@@ -510,11 +565,6 @@ const CreateTopic = () => {
         formData.append("thumbnail", thumbnail);
       }
 
-      // ========== FUTURE: Add more fields if needed ==========
-      // formData.append("video_url", values.video_url);
-      // formData.append("attachment", values.attachment);
-      // ========== END FUTURE FIELDS ==========
-
       const res = await dispatch(createTopic(formData)).unwrap();
       toast.success(res?.message || t("topic.success.create"));
       resetForm();
@@ -572,7 +622,7 @@ const CreateTopic = () => {
             onSubmit={onSubmit}
             enableReinitialize={true}
           >
-            {({ isSubmitting, setFieldValue, handleSubmit }) => {
+            {({ isSubmitting, setFieldValue, values, handleSubmit }) => {
               return (
                 <Form onSubmit={handleSubmit} className="space-y-8">
                   {/* General Details */}
@@ -591,6 +641,7 @@ const CreateTopic = () => {
                           label={t("topic.details.topicName")}
                           placeholder={t("topic.details.topicNamePlaceholder")}
                           required={true}
+                          maxLength={150}
                         />
                       </div>
                       <div>
@@ -602,6 +653,7 @@ const CreateTopic = () => {
                           )}
                           required={true}
                           options={chapterOptions}
+                          isLoading={chaptersLoading}
                           onChange={(option) => {
                             setFieldValue("chapterName", option);
                             const selectedChapter = chapters?.data?.find(
@@ -636,7 +688,8 @@ const CreateTopic = () => {
                           )}
                           required={true}
                           options={moduleOptions}
-                          disabled={true}
+                          isLoading={modulesLoading}
+                          disabled={!values.chapterName}
                         />
                       </div>
                       <div>
@@ -648,7 +701,8 @@ const CreateTopic = () => {
                           )}
                           required={true}
                           options={levelOptions}
-                          disabled={true}
+                          isLoading={levelsLoading}
+                          disabled={!values.chapterName}
                         />
                       </div>
                     </div>
@@ -662,7 +716,8 @@ const CreateTopic = () => {
                         )}
                         required={true}
                         options={programOptions}
-                        disabled={true}
+                        isLoading={programsLoading}
+                        disabled={!values.chapterName}
                       />
                       <div>
                         <TextInput
@@ -671,25 +726,10 @@ const CreateTopic = () => {
                           label={t("topic.details.duration")}
                           placeholder={t("topic.details.durationPlaceholder")}
                           required={true}
+                          maxLength={500}
                         />
                       </div>
                     </div>
-
-                    {/* ========== COMMENTED CODE - FUTURE FIELDS ==========
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mt-2">
-                      <TextInput
-                        name="video_url"
-                        label={t("topic.details.videoUrl")}
-                        placeholder={t("topic.details.videoUrlPlaceholder")}
-                      />
-                      <TextInput
-                        name="attachment"
-                        label={t("topic.details.attachment")}
-                        placeholder={t("topic.details.attachmentPlaceholder")}
-                        type="file"
-                      />
-                    </div>
-                    ========== END COMMENTED CODE ========== */}
 
                     <div className="mt-2">
                       <TextareaField
@@ -775,15 +815,6 @@ const CreateTopic = () => {
                   {/* Footer */}
                   <div className="flex justify-end items-center pt-4">
                     <div className="flex gap-3">
-                      {/* ========== COMMENTED CODE - CANCEL BUTTON ==========
-                      <button
-                        type="button"
-                        onClick={() => navigate("/topics")}
-                        className="px-4 py-2 rounded-md text-sm text-gray-600 border border-gray-300 hover:bg-gray-50 cursor-pointer"
-                      >
-                        {t("topic.actions.cancel")}
-                      </button>
-                      ========== END COMMENTED CODE ========== */}
                       <button
                         type="submit"
                         disabled={isSubmitting}

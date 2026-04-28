@@ -19,6 +19,8 @@
 // import { getAllLevels } from "../../../../../../redux/slice/levelSlice";
 // import { getAllPrograms } from "../../../../../../redux/slice/programSlice";
 // import { showConfirm } from "../../../../../../redux/slice/confirmSlice";
+// import Loader from "../../../../common/Loader";
+// import Error from "../../../../common/Error";
 
 // const ModuleDetails = () => {
 //   const [thumbnail, setThumbnail] = useState(null);
@@ -35,15 +37,18 @@
 //   );
 
 //   const { programs } = useSelector((state) => state.program);
-//   const programOptions = programs?.data?.map((prog) => ({
-//     label: prog.title,
-//     value: prog.id,
-//   }));
+//   const programOptions =
+//     programs?.data?.map((prog) => ({
+//       label: prog.title,
+//       value: prog.id,
+//     })) || [];
+
 //   const { levels } = useSelector((state) => state.level);
-//   const levelOptions = levels?.data?.map((lev) => ({
-//     label: lev.title,
-//     value: lev.id,
-//   }));
+//   const levelOptions =
+//     levels?.data?.map((lev) => ({
+//       label: lev.title,
+//       value: lev.id,
+//     })) || [];
 
 //   useEffect(() => {
 //     if (id) {
@@ -108,22 +113,20 @@
 //         formData.append("thumbnail", thumbnail);
 //       }
 
-//       console.log("Submitting with data:", {
-//         title: values.title,
-//         description: values.description,
-//         program: values.programName.value,
-//         thumbnail: thumbnail?.name,
-//       });
+//       // ========== FUTURE: Add more fields if needed ==========
+//       // if (values.duration) formData.append("duration", values.duration);
+//       // if (values.order) formData.append("order", values.order);
+//       // ========== END FUTURE FIELDS ==========
 
 //       const res = await dispatch(
 //         updateModuleById({ id, data: formData }),
 //       ).unwrap();
 
-//       toast.success(res.message || "Module updated successfully");
+//       toast.success(res?.message || t("module.success.update"));
 //       navigate("/modules");
 //     } catch (error) {
 //       setErrors({ submit: error.message });
-//       toast.error(error?.message || "Update failed ");
+//       toast.error(error?.message || t("module.error.update"));
 //     } finally {
 //       setSubmitting(false);
 //     }
@@ -138,27 +141,28 @@
 
 //     try {
 //       await dispatch(deleteSingleModule(id)).unwrap();
-//       toast.success("module deleted successfully ");
+//       toast.success(t("module.success.delete"));
 //       setTimeout(() => {
 //         navigate("/modules");
 //       }, 1000);
 //     } catch (error) {
-//       toast.error(error?.message || "Delete failed ");
+//       toast.error(error?.message || t("module.error.delete"));
 //     }
 //   };
 
-//   const handleThumbnailUpload = (event) => {
+//   const handleThumbnailUpload = (event, setFieldValue) => {
 //     const file = event.target.files[0];
 //     if (file) {
 //       if (!file.type.startsWith("image/")) {
-//         alert("Please upload an image file");
+//         toast.error(t("module.validation.imageRequired"));
 //         return;
 //       }
 //       if (file.size > 5 * 1024 * 1024) {
-//         alert("File size should be less than 5MB");
+//         toast.error(t("module.validation.fileSize"));
 //         return;
 //       }
 
+//       setFieldValue("thumbnail", file);
 //       setThumbnail(file);
 //       const reader = new FileReader();
 //       reader.onloadend = () => setThumbnailPreview(reader.result);
@@ -166,17 +170,21 @@
 //     }
 //   };
 
-//   const removeThumbnail = () => {
+//   const removeThumbnail = (setFieldValue) => {
 //     setThumbnail(null);
 //     setThumbnailPreview(null);
+//     setFieldValue("thumbnail", null);
 //     if (fileInputRef.current) fileInputRef.current.value = "";
 //   };
 
 //   const triggerFileUpload = () => fileInputRef.current.click();
 
+//   if (isLoading) return <Loader />;
+//   if (isError) return <Error message={message} />;
+
 //   return (
 //     <PageLayout>
-//       <div className=" p-8 rounded-lg border border-gray-300">
+//       <div className="p-8 rounded-lg border border-gray-300">
 //         <Breadcrumb
 //           items={[
 //             {
@@ -195,7 +203,7 @@
 //             onSubmit={onSubmit}
 //             enableReinitialize={true}
 //           >
-//             {({ isSubmitting, values, setFieldValue, handleSubmit }) => {
+//             {({ isSubmitting, setFieldValue, handleSubmit }) => {
 //               return (
 //                 <Form onSubmit={handleSubmit} className="space-y-8">
 //                   {/* General Details */}
@@ -216,6 +224,7 @@
 //                             "module.details.moduleNamePlaceholder",
 //                           )}
 //                           required={true}
+//                           maxLength={150}
 //                         />
 //                       </div>
 //                       <div>
@@ -226,18 +235,16 @@
 //                             "module.details.parentLevelPlaceholder",
 //                           )}
 //                           required={true}
-//                           options={levelOptions || []}
+//                           options={levelOptions}
 //                           onChange={(option) => {
 //                             setFieldValue("levelName", option);
-
-//                             const selectedLevel = levels.data.find(
+//                             const selectedLevel = levels?.data?.find(
 //                               (lev) => lev.id === option.value,
 //                             );
-
 //                             if (selectedLevel) {
 //                               setFieldValue("programName", {
-//                                 label: selectedLevel.program.title,
-//                                 value: selectedLevel.program.id,
+//                                 label: selectedLevel.program?.title,
+//                                 value: selectedLevel.program?.id,
 //                               });
 //                             }
 //                           }}
@@ -253,9 +260,16 @@
 //                           "module.details.perentProgramPlaceholder",
 //                         )}
 //                         required={true}
-//                         options={programOptions || []}
+//                         options={programOptions}
 //                         disabled={true}
 //                       />
+//                       {/* ========== COMMENTED CODE - FUTURE FIELDS ==========
+//                       <TextInput
+//                         name="duration"
+//                         label={t("module.details.duration")}
+//                         placeholder={t("module.details.durationPlaceholder")}
+//                       />
+//                       ========== END COMMENTED CODE ========== */}
 //                     </div>
 
 //                     <div className="mt-2">
@@ -265,6 +279,7 @@
 //                         placeholder={t("module.details.descriptionPlaceholder")}
 //                         rows={4}
 //                         required={true}
+//                         maxLength={500}
 //                       />
 //                     </div>
 //                   </div>
@@ -283,7 +298,9 @@
 //                         ref={fileInputRef}
 //                         type="file"
 //                         accept="image/*"
-//                         onChange={handleThumbnailUpload}
+//                         onChange={(e) =>
+//                           handleThumbnailUpload(e, setFieldValue)
+//                         }
 //                         className="hidden"
 //                       />
 
@@ -294,7 +311,7 @@
 //                         >
 //                           <FiUpload className="text-4xl text-gray-400 mb-3" />
 //                           <p className="text-sm text-gray-600 mb-1">
-//                             {t("module.details.clickToUpload")}
+//                             {t("module.details.uploadText")}
 //                           </p>
 //                           <p className="text-xs text-gray-400">
 //                             {t("module.details.uploadSubText")}
@@ -306,12 +323,12 @@
 //                             <div className="relative group">
 //                               <img
 //                                 src={thumbnailPreview}
-//                                 alt="Thumbnail Preview"
+//                                 alt={t("module.details.thumbnailAlt")}
 //                                 className="w-32 h-32 object-cover rounded-lg border border-gray-300 shadow-sm"
 //                               />
 //                               <button
 //                                 type="button"
-//                                 onClick={removeThumbnail}
+//                                 onClick={() => removeThumbnail(setFieldValue)}
 //                                 className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors shadow-md"
 //                               >
 //                                 <FiX className="text-xs" />
@@ -319,12 +336,12 @@
 //                             </div>
 //                             <div className="flex-1">
 //                               <p className="text-sm font-semibold text-gray-700 mb-1">
-//                                 {/* {thumbnail.name} */}
-//                                 name
+//                                 {thumbnail?.name ||
+//                                   module?.thumbnail?.split("/").pop()}
 //                               </p>
 //                               <p className="text-xs text-gray-500 mb-3">
-//                                 {/* {(thumbnail.size / 1024).toFixed(2)} KB */}
-//                                 size
+//                                 {thumbnail &&
+//                                   `${(thumbnail.size / 1024).toFixed(2)} KB`}
 //                               </p>
 //                               <button
 //                                 type="button"
@@ -341,21 +358,29 @@
 //                     </div>
 //                   </div>
 
-//                   {/* 🔹 Footer */}
+//                   {/* Footer */}
 //                   <div className="flex justify-end items-center pt-4">
 //                     <div className="flex gap-3">
+//                       {/* ========== COMMENTED CODE - CANCEL BUTTON ==========
+//                       <button
+//                         type="button"
+//                         onClick={() => navigate("/modules")}
+//                         className="px-4 py-2 rounded-md text-sm text-gray-600 border border-gray-300 hover:bg-gray-50 cursor-pointer"
+//                       >
+//                         {t("module.actions.cancel")}
+//                       </button>
+//                       ========== END COMMENTED CODE ========== */}
 //                       <button
 //                         type="button"
 //                         onClick={handleDelete}
-//                         className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 cursor-pointer"
+//                         className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-red-50 cursor-pointer transition-colors"
 //                       >
 //                         {t("module.actions.deleteModule")}
 //                       </button>
-
 //                       <button
 //                         type="submit"
 //                         disabled={isSubmitting}
-//                         className="px-4 py-2 rounded-md text-sm text-white bg-accent cursor-pointer"
+//                         className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 cursor-pointer"
 //                       >
 //                         {isSubmitting
 //                           ? t("module.actions.updating")
@@ -375,7 +400,7 @@
 
 // export default ModuleDetails;
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { TextInput, TextareaField, SelectField } from "../../../../common/form";
@@ -402,6 +427,7 @@ import Error from "../../../../common/Error";
 const ModuleDetails = () => {
   const [thumbnail, setThumbnail] = useState(null);
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
   const fileInputRef = useRef(null);
   const { t } = useTranslation();
   const { id } = useParams();
@@ -413,27 +439,53 @@ const ModuleDetails = () => {
     (state) => state.module,
   );
 
-  const { programs } = useSelector((state) => state.program);
+  const { programs, isLoading: programsLoading } = useSelector(
+    (state) => state.program,
+  );
+  const { levels, isLoading: levelsLoading } = useSelector(
+    (state) => state.level,
+  );
+
   const programOptions =
     programs?.data?.map((prog) => ({
       label: prog.title,
       value: prog.id,
     })) || [];
 
-  const { levels } = useSelector((state) => state.level);
   const levelOptions =
     levels?.data?.map((lev) => ({
       label: lev.title,
       value: lev.id,
     })) || [];
 
+  // Fetch module data first
   useEffect(() => {
     if (id) {
       dispatch(getModuleById(id));
-      dispatch(getAllPrograms());
-      dispatch(getAllLevels());
     }
   }, [dispatch, id]);
+
+  // When module data is loaded, fetch all related data sequentially with loading
+  useEffect(() => {
+    const fetchAllData = async () => {
+      if (module?.id && !isDataLoaded) {
+        try {
+          // First fetch programs
+          await dispatch(getAllPrograms()).unwrap();
+
+          // Then fetch levels
+          await dispatch(getAllLevels()).unwrap();
+
+          setIsDataLoaded(true);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          toast.error(t("module.error.fetchData"));
+        }
+      }
+    };
+
+    fetchAllData();
+  }, [dispatch, module?.id, isDataLoaded, toast, t]);
 
   useEffect(() => {
     if (module?.thumbnail) {
@@ -489,11 +541,6 @@ const ModuleDetails = () => {
       if (thumbnail) {
         formData.append("thumbnail", thumbnail);
       }
-
-      // ========== FUTURE: Add more fields if needed ==========
-      // if (values.duration) formData.append("duration", values.duration);
-      // if (values.order) formData.append("order", values.order);
-      // ========== END FUTURE FIELDS ==========
 
       const res = await dispatch(
         updateModuleById({ id, data: formData }),
@@ -580,7 +627,7 @@ const ModuleDetails = () => {
             onSubmit={onSubmit}
             enableReinitialize={true}
           >
-            {({ isSubmitting, setFieldValue, handleSubmit }) => {
+            {({ isSubmitting, setFieldValue, values, handleSubmit }) => {
               return (
                 <Form onSubmit={handleSubmit} className="space-y-8">
                   {/* General Details */}
@@ -601,6 +648,7 @@ const ModuleDetails = () => {
                             "module.details.moduleNamePlaceholder",
                           )}
                           required={true}
+                          maxLength={150}
                         />
                       </div>
                       <div>
@@ -612,6 +660,7 @@ const ModuleDetails = () => {
                           )}
                           required={true}
                           options={levelOptions}
+                          isLoading={levelsLoading}
                           onChange={(option) => {
                             setFieldValue("levelName", option);
                             const selectedLevel = levels?.data?.find(
@@ -637,7 +686,8 @@ const ModuleDetails = () => {
                         )}
                         required={true}
                         options={programOptions}
-                        disabled={true}
+                        isLoading={programsLoading}
+                        disabled={!values.levelName}
                       />
                       {/* ========== COMMENTED CODE - FUTURE FIELDS ==========
                       <TextInput
@@ -655,6 +705,7 @@ const ModuleDetails = () => {
                         placeholder={t("module.details.descriptionPlaceholder")}
                         rows={4}
                         required={true}
+                        maxLength={500}
                       />
                     </div>
                   </div>
@@ -736,15 +787,6 @@ const ModuleDetails = () => {
                   {/* Footer */}
                   <div className="flex justify-end items-center pt-4">
                     <div className="flex gap-3">
-                      {/* ========== COMMENTED CODE - CANCEL BUTTON ==========
-                      <button
-                        type="button"
-                        onClick={() => navigate("/modules")}
-                        className="px-4 py-2 rounded-md text-sm text-gray-600 border border-gray-300 hover:bg-gray-50 cursor-pointer"
-                      >
-                        {t("module.actions.cancel")}
-                      </button>
-                      ========== END COMMENTED CODE ========== */}
                       <button
                         type="button"
                         onClick={handleDelete}

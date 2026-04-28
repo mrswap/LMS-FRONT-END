@@ -36,43 +36,10 @@
 //   );
 //   const { modules } = useSelector((state) => state.module);
 //   const { levels } = useSelector((state) => state.level);
-
-//   // 🔥 FIX: Level ke according modules filter kar (ab sahi se kaam karega)
-//   const getFilteredModuleOptions = () => {
-//     // Agar "All Level" select hai to saare modules dikhao
-//     if (level?.value === "All") {
-//       return [
-//         { value: "All", label: "All Module" },
-//         ...(modules?.data?.map((item) => ({
-//           value: item.id,
-//           label: item.title,
-//           levelId: item.level?.id, // 🔥 API response mein level object hai jisme id hai
-//         })) || []),
-//       ];
-//     }
-
-//     // Nahi to sirf selected level ke modules dikhao
-//     const filteredModules =
-//       modules?.data?.filter(
-//         (item) => item.level?.id === level?.value, // 🔥 Yahan level.id use kiya
-//       ) || [];
-
-//     console.log("Selected Level:", level?.value); // Debug ke liye
-//     console.log("All Modules:", modules?.data); // Debug ke liye
-//     console.log("Filtered Modules:", filteredModules); // Debug ke liye
-
-//     return [
-//       { value: "All", label: "All Module" },
-//       ...filteredModules.map((item) => ({
-//         value: item.id,
-//         label: item.title,
-//         levelId: item.level?.id,
-//       })),
-//     ];
-//   };
+//   const dispatch = useDispatch();
 
 //   const levelOption = [
-//     { value: "All", label: "All Level" },
+//     { value: "all", label: t("chapter.filters.allLevels") },
 //     ...(levels?.data?.map((item) => ({
 //       value: item.id,
 //       label: item.title,
@@ -80,31 +47,55 @@
 //   ];
 
 //   const statusOptions = [
-//     { value: "all", label: "All Status" },
-//     { value: "1", label: "Active" },
-//     { value: "0", label: "Inactive" },
+//     { value: "all", label: t("chapter.filters.allStatus") },
+//     { value: "1", label: t("chapter.filters.active") },
+//     { value: "0", label: t("chapter.filters.inactive") },
 //   ];
 
-//   const [module, setModule] = useState({ value: "All", label: "All Module" });
+//   const getFilteredModuleOptions = () => {
+//     if (level?.value === "all") {
+//       return [
+//         { value: "all", label: t("chapter.filters.allModules") },
+//         ...(modules?.data?.map((item) => ({
+//           value: item.id,
+//           label: item.title,
+//         })) || []),
+//       ];
+//     }
+
+//     const filteredModules =
+//       modules?.data?.filter((item) => item.level?.id === level?.value) || [];
+
+//     return [
+//       { value: "all", label: t("chapter.filters.allModules") },
+//       ...filteredModules.map((item) => ({
+//         value: item.id,
+//         label: item.title,
+//       })),
+//     ];
+//   };
+
+//   const [moduleFilter, setModuleFilter] = useState({
+//     value: "all",
+//     label: t("chapter.filters.allModules"),
+//   });
 //   const [level, setLevel] = useState(levelOption[0]);
 //   const [status, setStatus] = useState(statusOptions[0]);
 //   const [search, setSearch] = useState("");
 //   const [page, setPage] = useState(1);
 //   const navigate = useNavigate();
-//   const dispatch = useDispatch();
 
-//   // 🔥 FIX: Level change hone par module reset kar
+//   // Reset module filter when level changes
 //   useEffect(() => {
-//     // Level change hua to module ko "All Module" pe reset kar do
-//     setModule({ value: "All", label: "All Module" });
+//     setModuleFilter({ value: "all", label: t("chapter.filters.allModules") });
 //   }, [level]);
 
 //   const fetchChapters = (overridePage) => {
 //     const params = {
 //       search: search || "",
-//       level_id: level?.value !== "All" ? level?.value : "",
-//       module_id: module?.value !== "All" ? module?.value : "",
-//       status: status?.value !== "All" ? status?.value : "",
+//       level_id: level?.value !== "all" ? level?.value : "",
+//       module_id: moduleFilter?.value !== "all" ? moduleFilter?.value : "",
+//       status: status?.value !== "all" ? status?.value : "all",
 //       page: overridePage ?? page,
 //       limit: ITEMS_PER_PAGE,
 //     };
@@ -119,7 +110,7 @@
 //       fetchChapters(1);
 //     }, 500);
 //     return () => clearTimeout(delay);
-//   }, [search, status, module, level]);
+//   }, [search, status, moduleFilter, level]);
 
 //   useEffect(() => {
 //     fetchChapters(page);
@@ -131,7 +122,7 @@
 
 //   const resetFilters = () => {
 //     setLevel(levelOption[0]);
-//     setModule({ value: "All", label: "All Module" });
+//     setModuleFilter({ value: "all", label: t("chapter.filters.allModules") });
 //     setStatus(statusOptions[0]);
 //     setSearch("");
 //     setPage(1);
@@ -150,6 +141,8 @@
 //       opacity: state.isDisabled ? 0.6 : 1,
 //     }),
 //   };
+
+//   const isModuleDisabled = level?.value === "all";
 
 //   const columns = [
 //     {
@@ -183,13 +176,23 @@
 //       ),
 //     },
 //     {
-//       header: t("chapter.list.columns.totalChapters"),
-//     },
-//     {
 //       header: t("chapter.list.columns.totalTopics"),
+//       render: (row) => (
+//         <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">
+//           {row.topics_count || 0}
+//         </span>
+//       ),
 //     },
 //     {
-//       header: t("topic.list.columns.status"),
+//       header: t("chapter.list.columns.duration"),
+//       render: (row) => (
+//         <span className="text-gray-600">
+//           {row.duration || t("chapter.list.notSpecified")}
+//         </span>
+//       ),
+//     },
+//     {
+//       header: t("chapter.list.columns.status"),
 //       render: (row) => (
 //         <StatusToggle
 //           value={row.status}
@@ -207,16 +210,13 @@
 //       render: (row) => (
 //         <button
 //           onClick={() => navigate(`chapter-details/${row.id}`)}
-//           className="text-gray-800 text-lg cursor-pointer"
+//           className="text-gray-800 text-lg cursor-pointer hover:text-blue-600 transition-colors"
 //         >
 //           <FaEye />
 //         </button>
 //       ),
 //     },
 //   ];
-
-//   // 🔥 FIX: Check karo ki module dropdown enable honi chahiye ya nahi
-//   const isModuleDisabled = level?.value === "All";
 
 //   if (isLoading && !chapters?.data?.length) return <Loader />;
 //   if (isError) return <Error message={message} />;
@@ -231,7 +231,7 @@
 //         <PageHeaderRight>
 //           <Link
 //             to="create-chapter"
-//             className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap"
+//             className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap hover:bg-opacity-90 transition"
 //           >
 //             {t("chapter.actions.addNewChapter")}
 //           </Link>
@@ -243,8 +243,8 @@
 //           <div className="w-full">
 //             <div
 //               className="flex items-center bg-gray-50 border border-gray-200
-//       hover:border-blue-500 focus-within:border-blue-500
-//       rounded-xl px-4 py-2.5 transition-all"
+//               hover:border-blue-500 focus-within:border-blue-500
+//               rounded-xl px-4 py-2.5 transition-all"
 //             >
 //               <FiSearch className="text-gray-400 text-base" />
 //               <input
@@ -277,14 +277,16 @@
 
 //             <div className="w-full sm:w-[48%] lg:w-[210px]">
 //               <Select
-//                 value={module}
-//                 onChange={setModule}
-//                 options={getFilteredModuleOptions()} // 🔥 FIX: Filtered options use kar
+//                 value={moduleFilter}
+//                 onChange={setModuleFilter}
+//                 options={getFilteredModuleOptions()}
 //                 styles={customSelectStyles}
 //                 isSearchable={false}
-//                 isDisabled={isModuleDisabled} // 🔥 FIX: Disabled jab "All Level" select ho
+//                 isDisabled={isModuleDisabled}
 //                 placeholder={
-//                   isModuleDisabled ? "Select level first" : "Select module"
+//                   isModuleDisabled
+//                     ? t("chapter.filters.selectLevelFirst")
+//                     : t("chapter.filters.selectModule")
 //                 }
 //               />
 //             </div>
@@ -304,16 +306,15 @@
 //                 <button
 //                   onClick={resetFilters}
 //                   className="flex items-center justify-center w-9 h-9 rounded-lg cursor-pointer
-//       text-gray-500 hover:text-white hover:bg-red-500
-//       transition-all"
+//                   text-gray-500 hover:text-white hover:bg-red-500 transition-all"
 //                 >
 //                   <LuFilterX size={18} />
 //                 </button>
 //                 <div
 //                   className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2
-//       px-2 py-1 text-xs rounded-md bg-gray-800 text-white
-//       opacity-0 group-hover:opacity-100 transition-all duration-200
-//       whitespace-nowrap pointer-events-none"
+//                   px-2 py-1 text-xs rounded-md bg-gray-800 text-white
+//                   opacity-0 group-hover:opacity-100 transition-all duration-200
+//                   whitespace-nowrap pointer-events-none"
 //                 >
 //                   {t("chapter.list.clearAll")}
 //                 </div>
@@ -334,6 +335,46 @@
 //             onPageChange={handlePageChange}
 //           />
 //         </div>
+
+//         {/* ========== COMMENTED CODE - STATS CARDS (FUTURE USE) ==========
+//         <div className="flex gap-4 w-full mt-4">
+//           <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-sm transition">
+//             <h3 className="text-[#6B7280] text-sm font-medium">
+//               {t("chapter.stats.totalChapters.title")}
+//             </h3>
+//             <p className="text-2xl font-bold text-gray-800 mt-2">
+//               {chapters?.total || 0}
+//             </p>
+//             <p className="text-sm text-[#6B7280] mt-1">
+//               {t("chapter.stats.totalChapters.subtext")}
+//             </p>
+//           </div>
+
+//           <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-sm transition">
+//             <h3 className="text-[#6B7280] text-sm font-medium">
+//               {t("chapter.stats.activeChapters.title")}
+//             </h3>
+//             <p className="text-2xl font-bold text-gray-800 mt-2">
+//               {chapters?.data?.filter(c => c.status)?.length || 0}
+//             </p>
+//             <p className="text-sm text-[#6B7280] mt-1">
+//               {t("chapter.stats.activeChapters.subtext")}
+//             </p>
+//           </div>
+
+//           <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-sm transition">
+//             <h3 className="text-[#6B7280] text-sm font-medium">
+//               {t("chapter.stats.totalTopics.title")}
+//             </h3>
+//             <p className="text-2xl font-bold text-gray-800 mt-2">
+//               {chapters?.data?.reduce((sum, c) => sum + (c.topics_count || 0), 0) || 0}
+//             </p>
+//             <p className="text-sm text-[#6B7280] mt-1">
+//               {t("chapter.stats.totalTopics.subtext")}
+//             </p>
+//           </div>
+//         </div>
+//         ========== END COMMENTED CODE ========== */}
 //       </PageBody>
 //     </PageLayout>
 //   );
@@ -381,7 +422,6 @@ const Chapters = () => {
   const { levels } = useSelector((state) => state.level);
   const dispatch = useDispatch();
 
-  // ✅ Fixed: Dynamic level options with i18n
   const levelOption = [
     { value: "all", label: t("chapter.filters.allLevels") },
     ...(levels?.data?.map((item) => ({
@@ -390,14 +430,12 @@ const Chapters = () => {
     })) || []),
   ];
 
-  // ✅ Fixed: Dynamic status options with i18n
   const statusOptions = [
     { value: "all", label: t("chapter.filters.allStatus") },
     { value: "1", label: t("chapter.filters.active") },
     { value: "0", label: t("chapter.filters.inactive") },
   ];
 
-  // ✅ Fixed: Dynamic module options based on selected level
   const getFilteredModuleOptions = () => {
     if (level?.value === "all") {
       return [
@@ -429,12 +467,29 @@ const Chapters = () => {
   const [status, setStatus] = useState(statusOptions[0]);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
+  const [isLevelsLoaded, setIsLevelsLoaded] = useState(false);
   const navigate = useNavigate();
 
   // Reset module filter when level changes
   useEffect(() => {
     setModuleFilter({ value: "all", label: t("chapter.filters.allModules") });
   }, [level]);
+
+  // Load levels on component mount
+  useEffect(() => {
+    const loadLevels = async () => {
+      await dispatch(getAllLevels());
+      setIsLevelsLoaded(true);
+    };
+    loadLevels();
+  }, [dispatch]);
+
+  // Load modules only when level is selected (not "all")
+  useEffect(() => {
+    if (isLevelsLoaded && level?.value !== "all") {
+      dispatch(getAllModules());
+    }
+  }, [level, isLevelsLoaded, dispatch]);
 
   const fetchChapters = (overridePage) => {
     const params = {
@@ -446,21 +501,25 @@ const Chapters = () => {
       limit: ITEMS_PER_PAGE,
     };
     dispatch(getAllChapters(params));
-    dispatch(getAllModules());
-    dispatch(getAllLevels());
   };
 
+  // Fetch chapters when filters change
   useEffect(() => {
+    if (!isLevelsLoaded) return;
+
     const delay = setTimeout(() => {
       setPage(1);
       fetchChapters(1);
     }, 500);
     return () => clearTimeout(delay);
-  }, [search, status, moduleFilter, level]);
+  }, [search, status, moduleFilter, level, isLevelsLoaded]);
 
+  // Fetch chapters on page change
   useEffect(() => {
-    fetchChapters(page);
-  }, [page]);
+    if (isLevelsLoaded) {
+      fetchChapters(page);
+    }
+  }, [page, isLevelsLoaded]);
 
   const handlePageChange = (newPage) => {
     setPage(newPage);
@@ -564,7 +623,8 @@ const Chapters = () => {
     },
   ];
 
-  if (isLoading && !chapters?.data?.length) return <Loader />;
+  if (isLoading && !chapters?.data?.length && !isLevelsLoaded)
+    return <Loader />;
   if (isError) return <Error message={message} />;
 
   return (
@@ -618,6 +678,7 @@ const Chapters = () => {
                 options={levelOption}
                 styles={customSelectStyles}
                 isSearchable={false}
+                isLoading={!isLevelsLoaded}
               />
             </div>
 
@@ -629,6 +690,9 @@ const Chapters = () => {
                 styles={customSelectStyles}
                 isSearchable={false}
                 isDisabled={isModuleDisabled}
+                isLoading={
+                  !isModuleDisabled && !modules?.data && level?.value !== "all"
+                }
                 placeholder={
                   isModuleDisabled
                     ? t("chapter.filters.selectLevelFirst")
@@ -681,46 +745,6 @@ const Chapters = () => {
             onPageChange={handlePageChange}
           />
         </div>
-
-        {/* ========== COMMENTED CODE - STATS CARDS (FUTURE USE) ==========
-        <div className="flex gap-4 w-full mt-4">
-          <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-sm transition">
-            <h3 className="text-[#6B7280] text-sm font-medium">
-              {t("chapter.stats.totalChapters.title")}
-            </h3>
-            <p className="text-2xl font-bold text-gray-800 mt-2">
-              {chapters?.total || 0}
-            </p>
-            <p className="text-sm text-[#6B7280] mt-1">
-              {t("chapter.stats.totalChapters.subtext")}
-            </p>
-          </div>
-
-          <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-sm transition">
-            <h3 className="text-[#6B7280] text-sm font-medium">
-              {t("chapter.stats.activeChapters.title")}
-            </h3>
-            <p className="text-2xl font-bold text-gray-800 mt-2">
-              {chapters?.data?.filter(c => c.status)?.length || 0}
-            </p>
-            <p className="text-sm text-[#6B7280] mt-1">
-              {t("chapter.stats.activeChapters.subtext")}
-            </p>
-          </div>
-
-          <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-sm transition">
-            <h3 className="text-[#6B7280] text-sm font-medium">
-              {t("chapter.stats.totalTopics.title")}
-            </h3>
-            <p className="text-2xl font-bold text-gray-800 mt-2">
-              {chapters?.data?.reduce((sum, c) => sum + (c.topics_count || 0), 0) || 0}
-            </p>
-            <p className="text-sm text-[#6B7280] mt-1">
-              {t("chapter.stats.totalTopics.subtext")}
-            </p>
-          </div>
-        </div>
-        ========== END COMMENTED CODE ========== */}
       </PageBody>
     </PageLayout>
   );

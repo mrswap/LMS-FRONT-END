@@ -183,15 +183,6 @@ const optionSlice = createSlice({
                 state.message = action.payload.message;
 
                 const updated = action.payload;
-
-                // const index = state.options.findIndex(
-                //     (opt) => opt.id === updated.id
-                // );
-                // if (index !== -1) {
-                //     state.options[index] = updated;
-                // }
-
-                // state.option = updated;
             })
             .addCase(updateOption.rejected, (state, action) => {
                 state.isLoading = false;
@@ -206,11 +197,6 @@ const optionSlice = createSlice({
             .addCase(deleteOption.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
-
-                // state.options = state.options.filter(
-                //     (opt) => opt.id !== action.meta.arg.optionId
-                // );
-
                 state.message = action.payload.message;
             })
             .addCase(deleteOption.rejected, (state, action) => {

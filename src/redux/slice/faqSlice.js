@@ -199,15 +199,6 @@ const faqSlice = createSlice({
                 state.message = action.payload.message;
 
                 const updated = action.payload.data;
-
-                // if (Array.isArray(state.faqs?.data)) {
-                //     const index = state.faqs.data.findIndex(
-                //         (t) => t.id === updated.id
-                //     );
-                //     if (index !== -1) {
-                //         state.faqs.data[index] = updated;
-                //     }
-                // }
             })
             .addCase(updateSingleFaqStatus.rejected, (state, action) => {
                 state.isLoading = false;
@@ -219,11 +210,6 @@ const faqSlice = createSlice({
             .addCase(deleteSingleFaq.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
-
-                // state.faqs = state.faqs.filter(
-                //     (f) => f.id !== action.meta.arg
-                // );
-
                 if (Array.isArray(state.faqs)) {
                     state.faqs = state.faqs.filter(
                         (t) => t.id !== action.meta.arg

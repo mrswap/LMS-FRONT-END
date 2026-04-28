@@ -63,18 +63,12 @@
 //   ];
 
 //   // 🔥 New filter options - Type filter (Topic or Level)
-//   const typeOptions = [
-//     { value: "all", label: "All Types" },
-//     { value: "topic", label: "Topic" },
-//     { value: "level", label: "Level" },
-//   ];
 
 //   const [level, setLevel] = useState(levelOption[0]);
 //   const [module, setModule] = useState(null);
 //   const [chapter, setChapter] = useState(null);
 //   const [topic, setTopic] = useState(null);
 //   const [status, setStatus] = useState(statusOptions[0]);
-//   const [type, setType] = useState(typeOptions[0]); // 🔥 New type filter state
 //   const [search, setSearch] = useState("");
 //   const [page, setPage] = useState(1);
 
@@ -149,7 +143,7 @@
 //       level_id: level?.value !== "All" ? level?.value : "",
 //       module_id: module?.value || "",
 //       status: status?.value !== "All" ? status?.value : "",
-//       type: type?.value !== "all" ? type?.value : "", // 🔥 Add type filter to params
+//       type: "topic",
 //       page: overridePage ?? page,
 //       limit: ITEMS_PER_PAGE,
 //     };
@@ -166,7 +160,7 @@
 //       fetchAssissments(1);
 //     }, 500);
 //     return () => clearTimeout(delay);
-//   }, [search, level, module, chapter, topic, status, type]); // 🔥 Add type to dependencies
+//   }, [search, level, module, chapter, topic, status]); // 🔥 Add type to dependencies
 
 //   useEffect(() => {
 //     fetchAssissments(page);
@@ -182,7 +176,6 @@
 //     setChapter(null);
 //     setTopic(null);
 //     setStatus(statusOptions[0]);
-//     setType(typeOptions[0]); // 🔥 Reset type filter
 //     setSearch("");
 //     setPage(1);
 //   };
@@ -316,15 +309,15 @@
 //     <PageLayout>
 //       <PageHeader>
 //         <PageHeaderLeft>
-//           <PageTitle>{t("assessment.list.topicTitle")}</PageTitle>
-//           <PageSubtitle>{t("assessment.list.topicSubtitle")}</PageSubtitle>
+//           <PageTitle>{t("assessment.list.quizTitle")}</PageTitle>
+//           <PageSubtitle>{t("assessment.list.quizSubtitle")}</PageSubtitle>
 //         </PageHeaderLeft>
 //         <PageHeaderRight>
 //           <Link
 //             to="create"
 //             className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap"
 //           >
-//             {t("assessment.actions.addNewAssessment")}
+//             {t("assessment.actions.addNewQuiz")}
 //           </Link>
 //         </PageHeaderRight>
 //       </PageHeader>
@@ -405,17 +398,6 @@
 //                 placeholder={
 //                   isTopicDisabled ? "Select chapter first" : "Select topic"
 //                 }
-//               />
-//             </div>
-
-//             {/* 🔥 New Type Filter - Topic or Level */}
-//             <div className="w-full sm:w-[48%] lg:w-[210px]">
-//               <Select
-//                 value={type}
-//                 onChange={setType}
-//                 options={typeOptions}
-//                 styles={customSelectStyles}
-//                 isSearchable={false}
 //               />
 //             </div>
 
@@ -521,6 +503,12 @@ const Assissment = () => {
   const { levels } = useSelector((state) => state.level);
   const { topics } = useSelector((state) => state.topic);
 
+  // States for sequential loading
+  const [isLevelsLoaded, setIsLevelsLoaded] = useState(false);
+  const [isModulesLoaded, setIsModulesLoaded] = useState(false);
+  const [isChaptersLoaded, setIsChaptersLoaded] = useState(false);
+  const [isTopicsLoaded, setIsTopicsLoaded] = useState(false);
+
   const levelOption = [
     { value: "All", label: "All Level" },
     ...(levels?.data?.map((item) => ({
@@ -534,8 +522,6 @@ const Assissment = () => {
     { value: "1", label: "Active" },
     { value: "0", label: "Inactive" },
   ];
-
-  // 🔥 New filter options - Type filter (Topic or Level)
 
   const [level, setLevel] = useState(levelOption[0]);
   const [module, setModule] = useState(null);
@@ -595,18 +581,66 @@ const Assissment = () => {
     setModule(null);
     setChapter(null);
     setTopic(null);
+    setIsModulesLoaded(false);
+    setIsChaptersLoaded(false);
+    setIsTopicsLoaded(false);
   }, [level]);
 
   // 🔥 Module change hone par chapter aur topic reset
   useEffect(() => {
     setChapter(null);
     setTopic(null);
+    setIsChaptersLoaded(false);
+    setIsTopicsLoaded(false);
   }, [module]);
 
   // 🔥 Chapter change hone par topic reset
   useEffect(() => {
     setTopic(null);
+    setIsTopicsLoaded(false);
   }, [chapter]);
+
+  // STEP 1: Load levels on component mount
+  useEffect(() => {
+    const loadLevels = async () => {
+      await dispatch(getAllLevels());
+      setIsLevelsLoaded(true);
+    };
+    loadLevels();
+  }, [dispatch]);
+
+  // STEP 2: Load modules only when level is selected (not "All")
+  useEffect(() => {
+    if (isLevelsLoaded && level?.value !== "All" && level?.value) {
+      const loadModules = async () => {
+        await dispatch(getAllModules());
+        setIsModulesLoaded(true);
+      };
+      loadModules();
+    }
+  }, [level, isLevelsLoaded, dispatch]);
+
+  // STEP 3: Load chapters only when module is selected
+  useEffect(() => {
+    if (isModulesLoaded && module?.value) {
+      const loadChapters = async () => {
+        await dispatch(getAllChapters());
+        setIsChaptersLoaded(true);
+      };
+      loadChapters();
+    }
+  }, [module, isModulesLoaded, dispatch]);
+
+  // STEP 4: Load topics only when chapter is selected
+  useEffect(() => {
+    if (isChaptersLoaded && chapter?.value) {
+      const loadTopics = async () => {
+        await dispatch(getAllTopics());
+        setIsTopicsLoaded(true);
+      };
+      loadTopics();
+    }
+  }, [chapter, isChaptersLoaded, dispatch]);
 
   const fetchAssissments = (overridePage) => {
     const params = {
@@ -621,23 +655,23 @@ const Assissment = () => {
       limit: ITEMS_PER_PAGE,
     };
     dispatch(getAllAssessments(params));
-    dispatch(getAllChapters());
-    dispatch(getAllModules());
-    dispatch(getAllLevels());
-    dispatch(getAllTopics());
   };
 
   useEffect(() => {
+    if (!isLevelsLoaded) return;
+
     const delay = setTimeout(() => {
       setPage(1);
       fetchAssissments(1);
     }, 500);
     return () => clearTimeout(delay);
-  }, [search, level, module, chapter, topic, status]); // 🔥 Add type to dependencies
+  }, [search, level, module, chapter, topic, status, isLevelsLoaded]);
 
   useEffect(() => {
-    fetchAssissments(page);
-  }, [page]);
+    if (isLevelsLoaded) {
+      fetchAssissments(page);
+    }
+  }, [page, isLevelsLoaded]);
 
   const handlePageChange = (newPage) => {
     setPage(newPage);
@@ -651,6 +685,9 @@ const Assissment = () => {
     setStatus(statusOptions[0]);
     setSearch("");
     setPage(1);
+    setIsModulesLoaded(false);
+    setIsChaptersLoaded(false);
+    setIsTopicsLoaded(false);
   };
 
   const customSelectStyles = {
@@ -671,7 +708,6 @@ const Assissment = () => {
     {
       header: t("assessment.list.columns.title"),
       render: (row) => (
-        // console.log("row", row),
         <div>
           <p className="font-semibold text-gray-800">
             <TruncateText text={row.title} maxLength={25} />
@@ -748,7 +784,6 @@ const Assissment = () => {
     {
       header: t("assessment.list.columns.actions"),
       render: (row) => (
-        // console.log("row", row),
         <div className="flex gap-4">
           <button
             onClick={() => navigate(`${row.id}`)}
@@ -829,6 +864,7 @@ const Assissment = () => {
                 options={levelOption}
                 styles={customSelectStyles}
                 isSearchable={false}
+                isLoading={!isLevelsLoaded}
               />
             </div>
 
@@ -840,6 +876,11 @@ const Assissment = () => {
                 styles={customSelectStyles}
                 isSearchable={false}
                 isDisabled={isModuleDisabled}
+                isLoading={
+                  !isModuleDisabled &&
+                  !isModulesLoaded &&
+                  level?.value !== "All"
+                }
                 placeholder={
                   isModuleDisabled ? "Select level first" : "Select module"
                 }
@@ -854,6 +895,9 @@ const Assissment = () => {
                 styles={customSelectStyles}
                 isSearchable={false}
                 isDisabled={isChapterDisabled}
+                isLoading={
+                  !isChapterDisabled && !isChaptersLoaded && module?.value
+                }
                 placeholder={
                   isChapterDisabled ? "Select module first" : "Select chapter"
                 }
@@ -868,6 +912,9 @@ const Assissment = () => {
                 styles={customSelectStyles}
                 isSearchable={false}
                 isDisabled={isTopicDisabled}
+                isLoading={
+                  !isTopicDisabled && !isTopicsLoaded && chapter?.value
+                }
                 placeholder={
                   isTopicDisabled ? "Select chapter first" : "Select topic"
                 }

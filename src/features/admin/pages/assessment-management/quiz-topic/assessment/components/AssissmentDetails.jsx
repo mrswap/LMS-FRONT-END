@@ -1,1847 +1,3 @@
-// import { useState, useRef, useEffect, useMemo } from "react";
-// import { Formik, Form } from "formik";
-// import * as Yup from "yup";
-// import {
-//   SelectField,
-//   TextInput,
-//   TextareaField,
-// } from "../../../../../common/form";
-// import { AiOutlineExclamationCircle } from "react-icons/ai";
-// import { FiUpload, FiX, FiImage } from "react-icons/fi";
-// import {
-//   PageLayout,
-//   PageHeader,
-//   PageHeaderLeft,
-//   PageTitle,
-//   PageSubtitle,
-//   PageBody,
-// } from "../../../../../common/layout";
-// import { useTranslation } from "react-i18next";
-// import { useDispatch, useSelector } from "react-redux";
-// import { useToast } from "../../../../../common/toast/ToastContext";
-// import { useNavigate, useParams } from "react-router-dom";
-// import { getAllPrograms } from "../../../../../../../redux/slice/programSlice";
-// import { getAllLevels } from "../../../../../../../redux/slice/levelSlice";
-// import { getAllModules } from "../../../../../../../redux/slice/moduleSlice";
-// import { getAllChapters } from "../../../../../../../redux/slice/chapterSlice";
-// import { getAllTopics } from "../../../../../../../redux/slice/topicSlice";
-// import {
-//   deleteSingleAssessment,
-//   getAssessmentById,
-// } from "../../../../../../../redux/slice/assissmentSlice";
-// import { showConfirm } from "../../../../../../../redux/slice/confirmSlice";
-// import Breadcrumb from "../../../../../common/layout/Breadcrumb";
-// import Loader from "../../../../../common/Loader";
-
-// // Defined outside component to keep stable reference
-// const ASSESSMENT_TYPE_OPTIONS = [
-//   { label: "Topic", value: "topic" },
-//   { label: "Level", value: "level" },
-// ];
-
-// const AssissmentDetails = () => {
-//   const [thumbnail, setThumbnail] = useState(null);
-//   const [thumbnailPreview, setThumbnailPreview] = useState(null);
-//   const fileInputRef = useRef(null);
-
-//   const { assessment, isLoading } = useSelector((state) => state.assessment);
-
-//   const { t } = useTranslation();
-//   const dispatch = useDispatch();
-//   const toast = useToast();
-//   const navigate = useNavigate();
-//   const { assessmentId: id } = useParams();
-
-//   const { programs } = useSelector((state) => state.program);
-//   const { levels } = useSelector((state) => state.level);
-//   const { modules } = useSelector((state) => state.module);
-//   const { chapters } = useSelector((state) => state.chapter);
-//   const { topics } = useSelector((state) => state.topic);
-
-//   // ─── Selected state for cascading dropdowns ───────────────────────────────
-//   const [selectedProgram, setSelectedProgram] = useState(null);
-//   const [selectedLevel, setSelectedLevel] = useState(null);
-//   const [selectedModule, setSelectedModule] = useState(null);
-//   const [selectedChapter, setSelectedChapter] = useState(null);
-//   const [selectedAssessmentType, setSelectedAssessmentType] = useState(null);
-
-//   // ─── Load tracking ────────────────────────────────────────────────────────
-//   const [programsLoaded, setProgramsLoaded] = useState(false);
-//   const [levelsLoaded, setLevelsLoaded] = useState(false);
-//   const [modulesLoaded, setModulesLoaded] = useState(false);
-//   const [chaptersLoaded, setChaptersLoaded] = useState(false);
-//   const [topicsLoaded, setTopicsLoaded] = useState(false);
-
-//   const [loadingLevels, setLoadingLevels] = useState(false);
-//   const [loadingModules, setLoadingModules] = useState(false);
-//   const [loadingChapters, setLoadingChapters] = useState(false);
-//   const [loadingTopics, setLoadingTopics] = useState(false);
-
-//   // ─── Filtered dropdown data ───────────────────────────────────────────────
-//   const [filteredLevels, setFilteredLevels] = useState([]);
-//   const [filteredModules, setFilteredModules] = useState([]);
-//   const [filteredChapters, setFilteredChapters] = useState([]);
-//   const [filteredTopics, setFilteredTopics] = useState([]);
-//   const [filteredProgramsForLevel, setFilteredProgramsForLevel] = useState([]);
-
-//   // ─── Fetch assessment on mount ────────────────────────────────────────────
-//   useEffect(() => {
-//     if (id) {
-//       dispatch(getAssessmentById(id));
-//     }
-//   }, [dispatch, id]);
-
-//   // ─── Set assessment type from API response ────────────────────────────────
-//   useEffect(() => {
-//     if (assessment?.type) {
-//       const typeOption = ASSESSMENT_TYPE_OPTIONS.find(
-//         (opt) => opt.value === assessment.type,
-//       );
-//       if (typeOption) {
-//         setSelectedAssessmentType(typeOption);
-//       }
-//     }
-//   }, [assessment]);
-
-//   // ─── Set thumbnail preview if assessment has a file ───────────────────────
-//   useEffect(() => {
-//     if (assessment?.file) {
-//       setThumbnailPreview(assessment.file);
-//     }
-//   }, [assessment]);
-
-//   // ─── Load programs initially ──────────────────────────────────────────────
-//   useEffect(() => {
-//     if (!programsLoaded) {
-//       dispatch(getAllPrograms()).then(() => setProgramsLoaded(true));
-//     }
-//   }, [dispatch, programsLoaded]);
-
-//   // ─── Load levels when program selected (Topic type) ──────────────────────
-//   useEffect(() => {
-//     if (
-//       selectedProgram &&
-//       selectedAssessmentType?.value === "topic" &&
-//       !levelsLoaded &&
-//       !loadingLevels
-//     ) {
-//       setLoadingLevels(true);
-//       dispatch(getAllLevels()).then(() => {
-//         setLevelsLoaded(true);
-//         setLoadingLevels(false);
-//       });
-//     }
-//   }, [
-//     selectedProgram,
-//     selectedAssessmentType,
-//     dispatch,
-//     levelsLoaded,
-//     loadingLevels,
-//   ]);
-
-//   // ─── Filter levels by program ─────────────────────────────────────────────
-//   useEffect(() => {
-//     if (
-//       selectedProgram &&
-//       levels?.data &&
-//       selectedAssessmentType?.value === "topic"
-//     ) {
-//       const programLevels = levels.data.filter(
-//         (level) =>
-//           level.program_id === selectedProgram.value ||
-//           level.programId === selectedProgram.value ||
-//           level.program?.id === selectedProgram.value,
-//       );
-//       setFilteredLevels(programLevels);
-//     } else {
-//       setFilteredLevels([]);
-//     }
-//   }, [selectedProgram, levels, selectedAssessmentType]);
-
-//   // ─── Load modules when level selected ────────────────────────────────────
-//   useEffect(() => {
-//     if (
-//       selectedLevel &&
-//       selectedAssessmentType?.value === "topic" &&
-//       !modulesLoaded &&
-//       !loadingModules
-//     ) {
-//       setLoadingModules(true);
-//       dispatch(getAllModules()).then(() => {
-//         setModulesLoaded(true);
-//         setLoadingModules(false);
-//       });
-//     }
-//   }, [
-//     selectedLevel,
-//     selectedAssessmentType,
-//     dispatch,
-//     modulesLoaded,
-//     loadingModules,
-//   ]);
-
-//   // ─── Filter modules by level ──────────────────────────────────────────────
-//   useEffect(() => {
-//     if (
-//       selectedLevel &&
-//       modules?.data &&
-//       selectedAssessmentType?.value === "topic"
-//     ) {
-//       const levelModules = modules.data.filter(
-//         (module) =>
-//           module.level_id === selectedLevel.value ||
-//           module.levelId === selectedLevel.value ||
-//           module.level?.id === selectedLevel.value,
-//       );
-//       setFilteredModules(levelModules);
-//     } else {
-//       setFilteredModules([]);
-//     }
-//   }, [selectedLevel, modules, selectedAssessmentType]);
-
-//   // ─── Load chapters when module selected ──────────────────────────────────
-//   useEffect(() => {
-//     if (
-//       selectedModule &&
-//       selectedAssessmentType?.value === "topic" &&
-//       !chaptersLoaded &&
-//       !loadingChapters
-//     ) {
-//       setLoadingChapters(true);
-//       dispatch(getAllChapters()).then(() => {
-//         setChaptersLoaded(true);
-//         setLoadingChapters(false);
-//       });
-//     }
-//   }, [
-//     selectedModule,
-//     selectedAssessmentType,
-//     dispatch,
-//     chaptersLoaded,
-//     loadingChapters,
-//   ]);
-
-//   // ─── Filter chapters by module ────────────────────────────────────────────
-//   useEffect(() => {
-//     if (
-//       selectedModule &&
-//       chapters?.data &&
-//       selectedAssessmentType?.value === "topic"
-//     ) {
-//       const moduleChapters = chapters.data.filter(
-//         (chapter) =>
-//           chapter.module_id === selectedModule.value ||
-//           chapter.moduleId === selectedModule.value ||
-//           chapter.module?.id === selectedModule.value,
-//       );
-//       setFilteredChapters(moduleChapters);
-//     } else {
-//       setFilteredChapters([]);
-//     }
-//   }, [selectedModule, chapters, selectedAssessmentType]);
-
-//   // ─── Load topics when chapter selected ───────────────────────────────────
-//   useEffect(() => {
-//     if (
-//       selectedChapter &&
-//       selectedAssessmentType?.value === "topic" &&
-//       !topicsLoaded &&
-//       !loadingTopics
-//     ) {
-//       setLoadingTopics(true);
-//       dispatch(getAllTopics()).then(() => {
-//         setTopicsLoaded(true);
-//         setLoadingTopics(false);
-//       });
-//     }
-//   }, [
-//     selectedChapter,
-//     selectedAssessmentType,
-//     dispatch,
-//     topicsLoaded,
-//     loadingTopics,
-//   ]);
-
-//   // ─── Filter topics by chapter ─────────────────────────────────────────────
-//   useEffect(() => {
-//     if (
-//       selectedChapter &&
-//       topics?.data &&
-//       selectedAssessmentType?.value === "topic"
-//     ) {
-//       const chapterTopics = topics.data.filter(
-//         (topic) =>
-//           topic.chapter_id === selectedChapter.value ||
-//           topic.chapterId === selectedChapter.value ||
-//           topic.chapter?.id === selectedChapter.value,
-//       );
-//       setFilteredTopics(chapterTopics);
-//     } else {
-//       setFilteredTopics([]);
-//     }
-//   }, [selectedChapter, topics, selectedAssessmentType]);
-
-//   // ─── Level type: load levels when program selected ────────────────────────
-//   useEffect(() => {
-//     if (
-//       selectedAssessmentType?.value === "level" &&
-//       selectedProgram &&
-//       !levelsLoaded &&
-//       !loadingLevels
-//     ) {
-//       setLoadingLevels(true);
-//       dispatch(getAllLevels()).then(() => {
-//         setLevelsLoaded(true);
-//         setLoadingLevels(false);
-//       });
-//     }
-//   }, [
-//     selectedAssessmentType,
-//     selectedProgram,
-//     dispatch,
-//     levelsLoaded,
-//     loadingLevels,
-//   ]);
-
-//   // ─── Level type: filter programs ─────────────────────────────────────────
-//   useEffect(() => {
-//     if (selectedAssessmentType?.value === "level" && programs?.data) {
-//       setFilteredProgramsForLevel(programs.data);
-//     } else {
-//       setFilteredProgramsForLevel([]);
-//     }
-//   }, [selectedAssessmentType, programs]);
-
-//   // ─── Handlers ─────────────────────────────────────────────────────────────
-//   const handleThumbnailUpload = (event) => {
-//     const file = event.target.files[0];
-//     if (!file) return;
-
-//     if (!file.type.startsWith("image/")) {
-//       toast.error(t("assessment.validation.invalidImage"));
-//       return;
-//     }
-//     if (file.size > 5 * 1024 * 1024) {
-//       toast.error(t("assessment.validation.fileSizeExceeded"));
-//       return;
-//     }
-
-//     setThumbnail(file);
-//     const reader = new FileReader();
-//     reader.onloadend = () => setThumbnailPreview(reader.result);
-//     reader.readAsDataURL(file);
-//   };
-
-//   const removeThumbnail = () => {
-//     setThumbnail(null);
-//     setThumbnailPreview(null);
-//     if (fileInputRef.current) fileInputRef.current.value = "";
-//   };
-
-//   const triggerFileUpload = () => fileInputRef.current?.click();
-
-//   // ─── Dropdown options ─────────────────────────────────────────────────────
-//   const programOptions =
-//     programs?.data?.map((prog) => ({ label: prog.title, value: prog.id })) ||
-//     [];
-
-//   const levelOptions = filteredLevels.map((lev) => ({
-//     label: lev.title,
-//     value: lev.id,
-//   }));
-
-//   const moduleOptions = filteredModules.map((mod) => ({
-//     label: mod.title,
-//     value: mod.id,
-//   }));
-
-//   const chapterOptions = filteredChapters.map((chapter) => ({
-//     label: chapter.title,
-//     value: chapter.id,
-//   }));
-
-//   const topicOptions = filteredTopics.map((topic) => ({
-//     label: topic.title,
-//     value: topic.id,
-//   }));
-
-//   const programOptionsForLevel = filteredProgramsForLevel.map((prog) => ({
-//     label: prog.title,
-//     value: prog.id,
-//   }));
-
-//   const getLevelsForProgram = () => {
-//     if (selectedProgram && levels?.data) {
-//       return levels.data
-//         .filter(
-//           (level) =>
-//             level.program_id === selectedProgram.value ||
-//             level.programId === selectedProgram.value ||
-//             level.program?.id === selectedProgram.value,
-//         )
-//         .map((level) => ({ label: level.title, value: level.id }));
-//     }
-//     return [];
-//   };
-
-//   // ─── Initial values — pre-filled from API response ────────────────────────
-//   // enableReinitialize={true} ensures these update once `assessment` arrives
-//   const initialValues = useMemo(() => {
-//     const typeOption = assessment?.type
-//       ? (ASSESSMENT_TYPE_OPTIONS.find((opt) => opt.value === assessment.type) ??
-//         null)
-//       : null;
-
-//     return {
-//       assessmentType: typeOption,
-//       // Topic type cascade — these need full chain data to resolve;
-//       // they stay null until user re-selects (or you add reverse-lookup logic later)
-//       programName: null,
-//       levelName: null,
-//       moduleName: null,
-//       chapterName: null,
-//       topicId: null,
-//       // Level type
-//       programForLevel: null,
-//       levelForAssessment: null,
-//       // Common fields — directly from API
-//       title: assessment?.title ?? "",
-//       description: assessment?.description ?? "",
-//       passing_score: assessment?.passing_score ?? "",
-//       total_marks: assessment?.total_marks ?? "",
-//       duration: assessment?.duration ?? "",
-//     };
-//   }, [assessment]);
-
-//   // ─── Validation ───────────────────────────────────────────────────────────
-//   // const validationSchema = Yup.object({
-//   //   assessmentType: Yup.object()
-//   //     .nullable()
-//   //     .required("Assessment type is required"),
-//   //   programName: Yup.object()
-//   //     .nullable()
-//   //     .when("assessmentType", {
-//   //       is: (val) => val?.value === "topic",
-//   //       then: (schema) => schema.required("Program is required"),
-//   //       otherwise: (schema) => schema.nullable(),
-//   //     }),
-//   //   levelName: Yup.object()
-//   //     .nullable()
-//   //     .when("assessmentType", {
-//   //       is: (val) => val?.value === "topic",
-//   //       then: (schema) => schema.required("Level is required"),
-//   //       otherwise: (schema) => schema.nullable(),
-//   //     }),
-//   //   moduleName: Yup.object()
-//   //     .nullable()
-//   //     .when("assessmentType", {
-//   //       is: (val) => val?.value === "topic",
-//   //       then: (schema) => schema.required("Module is required"),
-//   //       otherwise: (schema) => schema.nullable(),
-//   //     }),
-//   //   chapterName: Yup.object()
-//   //     .nullable()
-//   //     .when("assessmentType", {
-//   //       is: (val) => val?.value === "topic",
-//   //       then: (schema) => schema.required("Chapter is required"),
-//   //       otherwise: (schema) => schema.nullable(),
-//   //     }),
-//   //   topicId: Yup.object()
-//   //     .nullable()
-//   //     .when("assessmentType", {
-//   //       is: (val) => val?.value === "topic",
-//   //       then: (schema) => schema.required("Topic is required"),
-//   //       otherwise: (schema) => schema.nullable(),
-//   //     }),
-//   //   programForLevel: Yup.object()
-//   //     .nullable()
-//   //     .when("assessmentType", {
-//   //       is: (val) => val?.value === "level",
-//   //       then: (schema) => schema.required("Program is required"),
-//   //       otherwise: (schema) => schema.nullable(),
-//   //     }),
-//   //   levelForAssessment: Yup.object()
-//   //     .nullable()
-//   //     .when("assessmentType", {
-//   //       is: (val) => val?.value === "level",
-//   //       then: (schema) => schema.required("Level is required"),
-//   //       otherwise: (schema) => schema.nullable(),
-//   //     }),
-//   //   title: Yup.string().required("Title is required"),
-//   //   description: Yup.string().nullable(),
-//   //   passing_score: Yup.number()
-//   //     .required("Passing score is required")
-//   //     .positive("Passing score must be positive"),
-//   //   total_marks: Yup.number()
-//   //     .required("Total marks is required")
-//   //     .positive("Total marks must be positive"),
-//   //   duration: Yup.number()
-//   //     .nullable()
-//   //     .transform((value, originalValue) =>
-//   //       originalValue === "" ? null : value,
-//   //     ),
-//   // });
-
-//   const validationSchema = Yup.object({
-//     assessmentType: Yup.object()
-//       .nullable()
-//       .required(t("assessment.validation.assessment_type_required")),
-
-//     programName: Yup.object()
-//       .nullable()
-//       .when("assessmentType", {
-//         is: (val) => val?.value === "topic",
-//         then: (schema) =>
-//           schema.required(t("assessment.validation.program_required")),
-//       }),
-
-//     levelName: Yup.object()
-//       .nullable()
-//       .when("assessmentType", {
-//         is: (val) => val?.value === "topic",
-//         then: (schema) =>
-//           schema.required(t("assessment.validation.level_required")),
-//       }),
-
-//     moduleName: Yup.object()
-//       .nullable()
-//       .when("assessmentType", {
-//         is: (val) => val?.value === "topic",
-//         then: (schema) =>
-//           schema.required(t("assessment.validation.module_required")),
-//       }),
-
-//     chapterName: Yup.object()
-//       .nullable()
-//       .when("assessmentType", {
-//         is: (val) => val?.value === "topic",
-//         then: (schema) =>
-//           schema.required(t("assessment.validation.chapter_required")),
-//       }),
-
-//     topicId: Yup.object()
-//       .nullable()
-//       .when("assessmentType", {
-//         is: (val) => val?.value === "topic",
-//         then: (schema) =>
-//           schema.required(t("assessment.validation.topic_required")),
-//       }),
-
-//     programForLevel: Yup.object()
-//       .nullable()
-//       .when("assessmentType", {
-//         is: (val) => val?.value === "level",
-//         then: (schema) =>
-//           schema.required(t("assessment.validation.program_required")),
-//       }),
-
-//     levelForAssessment: Yup.object()
-//       .nullable()
-//       .when("assessmentType", {
-//         is: (val) => val?.value === "level",
-//         then: (schema) =>
-//           schema.required(t("assessment.validation.level_required")),
-//       }),
-
-//     title: Yup.string().required(t("assessment.validation.title_required")),
-
-//     description: Yup.string().required(
-//       t("assessment.validation.description_required"),
-//     ),
-
-//     passing_score: Yup.number()
-//       .required(t("assessment.validation.passing_score_required"))
-//       .positive(t("assessment.validation.passing_score_positive")),
-
-//     total_marks: Yup.number()
-//       .required(t("assessment.validation.total_marks_required"))
-//       .positive(t("assessment.validation.total_marks_positive")),
-
-//     duration: Yup.number()
-//       .required(t("assessment.validation.duration_required"))
-//       .positive(t("assessment.validation.duration_positive")),
-//   });
-
-//   // ─── Submit ───────────────────────────────────────────────────────────────
-//   const onSubmit = async (values, { setSubmitting, setErrors }) => {
-//     try {
-//       const formData = new FormData();
-
-//       formData.append("type", values.assessmentType.value);
-//       formData.append("title", values.title);
-//       if (values.description)
-//         formData.append("description", values.description);
-//       formData.append("passing_score", values.passing_score);
-//       formData.append("total_marks", values.total_marks);
-//       if (values.duration) formData.append("duration", values.duration);
-
-//       if (values.assessmentType?.value === "topic") {
-//         formData.append("assessmentable_id", values.topicId.value);
-//         formData.append("assessmentable_type", "App\\Models\\Topic");
-//       } else {
-//         formData.append("assessmentable_id", values.levelForAssessment.value);
-//         formData.append("assessmentable_type", "App\\Models\\Level");
-//       }
-
-//       if (thumbnail) {
-//         formData.append("file", thumbnail);
-//       }
-
-//       console.log("Update payload:", Object.fromEntries(formData));
-
-//       // TODO: dispatch update action here
-//       // await dispatch(updateAssessment({ id, formData })).unwrap();
-//       // toast.success("Assessment updated successfully");
-//       // navigate("/assissment");
-//     } catch (error) {
-//       setErrors({ submit: error.message });
-//       toast.error(error?.message || "Something went wrong");
-//     } finally {
-//       setSubmitting(false);
-//     }
-//   };
-
-//   const handleDelete = async () => {
-//     const ok = await dispatch(
-//       showConfirm({ message: t("assessment.details.deleteText") }),
-//     );
-
-//     if (!ok) return;
-
-//     try {
-//       await dispatch(deleteSingleAssessment(id)).unwrap();
-//       toast.success("assessment deleted successfully ");
-//       setTimeout(() => {
-//         navigate("/assessment");
-//       }, 1000);
-//     } catch (error) {
-//       toast.error(error?.message || "Delete failed ");
-//     }
-//   };
-
-//   // ─── Render ───────────────────────────────────────────────────────────────
-//   if (isLoading) {
-//     return <Loader />;
-//   }
-
-//   return (
-//     <PageLayout>
-//       <div className="p-8 rounded-lg border border-gray-300">
-//         <Breadcrumb
-//           items={[
-//             {
-//               label: t("assessment.breadcrumb.assessment"),
-//               path: "/assessment",
-//             },
-//             {
-//               label: t("assessment.breadcrumb.view-assessment"),
-//             },
-//           ]}
-//         />
-
-//         <PageBody className="mt-6">
-//           <Formik
-//             initialValues={initialValues}
-//             validationSchema={validationSchema}
-//             onSubmit={onSubmit}
-//             enableReinitialize={true}
-//           >
-//             {({ isSubmitting, values, setFieldValue, handleSubmit }) => {
-//               return (
-//                 <Form onSubmit={handleSubmit} className="space-y-8">
-//                   {/* ── Assessment Type ── */}
-//                   <div>
-//                     <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-//                       <span className="text-[18px] text-primary font-[700]">
-//                         <AiOutlineExclamationCircle />
-//                       </span>
-//                       {t("assessment.details.assessmentConfiguration")}
-//                     </h3>
-
-//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                       <SelectField
-//                         name="assessmentType"
-//                         label={t("assessment.details.assessmentFor")}
-//                         placeholder={t(
-//                           "assessment.details.assessmentForPlaceholder",
-//                         )}
-//                         required={true}
-//                         options={ASSESSMENT_TYPE_OPTIONS}
-//                         onChange={(option) => {
-//                           setFieldValue("assessmentType", option);
-//                           setFieldValue("programName", null);
-//                           setFieldValue("levelName", null);
-//                           setFieldValue("moduleName", null);
-//                           setFieldValue("chapterName", null);
-//                           setFieldValue("topicId", null);
-//                           setFieldValue("programForLevel", null);
-//                           setFieldValue("levelForAssessment", null);
-//                           setSelectedAssessmentType(option);
-//                           setSelectedProgram(null);
-//                           setSelectedLevel(null);
-//                           setSelectedModule(null);
-//                           setSelectedChapter(null);
-//                         }}
-//                       />
-//                     </div>
-//                   </div>
-
-//                   {/* ── Topic type cascade fields ── */}
-//                   {values.assessmentType?.value === "topic" && (
-//                     <div>
-//                       <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-//                         <span className="text-[18px] text-primary font-[700]">
-//                           <AiOutlineExclamationCircle />
-//                         </span>
-//                         {t("assessment.details.generalDetails")}
-//                       </h3>
-
-//                       <div className="space-y-4">
-//                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                           <SelectField
-//                             name="programName"
-//                             label={t("assessment.details.parentProgram")}
-//                             placeholder={t(
-//                               "assessment.details.perentProgramPlaceholder",
-//                             )}
-//                             required={true}
-//                             options={programOptions}
-//                             isLoading={!programsLoaded}
-//                             onChange={(option) => {
-//                               setFieldValue("programName", option);
-//                               setFieldValue("levelName", null);
-//                               setFieldValue("moduleName", null);
-//                               setFieldValue("chapterName", null);
-//                               setFieldValue("topicId", null);
-//                               setSelectedProgram(option);
-//                               setSelectedLevel(null);
-//                               setSelectedModule(null);
-//                               setSelectedChapter(null);
-//                             }}
-//                           />
-
-//                           <SelectField
-//                             name="levelName"
-//                             label={t("assessment.details.parentLevel")}
-//                             placeholder={t(
-//                               "assessment.details.parentLevelPlaceholder",
-//                             )}
-//                             required={true}
-//                             options={levelOptions}
-//                             disabled={!values.programName}
-//                             isLoading={loadingLevels}
-//                             onChange={(option) => {
-//                               setFieldValue("levelName", option);
-//                               setFieldValue("moduleName", null);
-//                               setFieldValue("chapterName", null);
-//                               setFieldValue("topicId", null);
-//                               setSelectedLevel(option);
-//                               setSelectedModule(null);
-//                               setSelectedChapter(null);
-//                             }}
-//                           />
-//                         </div>
-
-//                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                           <SelectField
-//                             name="moduleName"
-//                             label={t("assessment.details.parentModule")}
-//                             placeholder={t(
-//                               "assessment.details.parentModulePlaceholder",
-//                             )}
-//                             required={true}
-//                             options={moduleOptions}
-//                             disabled={!values.levelName}
-//                             isLoading={loadingModules}
-//                             onChange={(option) => {
-//                               setFieldValue("moduleName", option);
-//                               setFieldValue("chapterName", null);
-//                               setFieldValue("topicId", null);
-//                               setSelectedModule(option);
-//                               setSelectedChapter(null);
-//                             }}
-//                           />
-
-//                           <SelectField
-//                             name="chapterName"
-//                             label={t("assessment.details.parentChapter")}
-//                             placeholder={t(
-//                               "assessment.details.parentChapterPlaceholder",
-//                             )}
-//                             required={true}
-//                             options={chapterOptions}
-//                             disabled={!values.moduleName}
-//                             isLoading={loadingChapters}
-//                             onChange={(option) => {
-//                               setFieldValue("chapterName", option);
-//                               setFieldValue("topicId", null);
-//                               setSelectedChapter(option);
-//                             }}
-//                           />
-//                         </div>
-
-//                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                           <SelectField
-//                             name="topicId"
-//                             label={t("assessment.details.topicName")}
-//                             placeholder={t(
-//                               "assessment.details.topicNamePlaceholder",
-//                             )}
-//                             required={true}
-//                             options={topicOptions}
-//                             disabled={!values.chapterName}
-//                             isLoading={loadingTopics}
-//                             onChange={(option) => {
-//                               setFieldValue("topicId", option);
-//                             }}
-//                           />
-//                         </div>
-//                       </div>
-//                     </div>
-//                   )}
-
-//                   {/* ── Level type fields ── */}
-//                   {values.assessmentType?.value === "level" && (
-//                     <div>
-//                       <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-//                         <span className="text-[18px] text-primary font-[700]">
-//                           <AiOutlineExclamationCircle />
-//                         </span>
-//                         {t("assessment.details.levelAssessmentDetails")}
-//                       </h3>
-
-//                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                         <SelectField
-//                           name="programForLevel"
-//                           label={t("assessment.details.parentProgram")}
-//                           placeholder={t(
-//                             "assessment.details.parentProgramPlaceholder",
-//                           )}
-//                           required={true}
-//                           options={programOptionsForLevel}
-//                           isLoading={!programsLoaded}
-//                           onChange={(option) => {
-//                             setFieldValue("programForLevel", option);
-//                             setFieldValue("levelForAssessment", null);
-//                             setSelectedProgram(option);
-//                           }}
-//                         />
-
-//                         <SelectField
-//                           name="levelForAssessment"
-//                           label={t("assessment.details.selectLevel")}
-//                           placeholder={t(
-//                             "assessment.details.selectLevelPlaceholder",
-//                           )}
-//                           required={true}
-//                           options={getLevelsForProgram()}
-//                           disabled={!values.programForLevel}
-//                           isLoading={loadingLevels}
-//                           onChange={(option) => {
-//                             setFieldValue("levelForAssessment", option);
-//                           }}
-//                         />
-//                       </div>
-//                     </div>
-//                   )}
-
-//                   {/* ── Common details (shown when type is selected) ── */}
-//                   {(values.assessmentType?.value === "topic" ||
-//                     values.assessmentType?.value === "level") && (
-//                     <>
-//                       <div>
-//                         <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-//                           {t("assessment.details.assessmentDetails")}
-//                         </h3>
-
-//                         <div className="space-y-4">
-//                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                             <TextInput
-//                               name="title"
-//                               label={t("assessment.details.title")}
-//                               placeholder={t(
-//                                 "assessment.details.titlePlaceholder",
-//                               )}
-//                               required={true}
-//                             />
-
-//                             <TextInput
-//                               name="duration"
-//                               label={t("assessment.details.duration")}
-//                               placeholder={t(
-//                                 "assessment.details.durationPlaceholder",
-//                               )}
-//                               type="number"
-//                             />
-//                           </div>
-
-//                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                             <TextInput
-//                               name="total_marks"
-//                               label={t("assessment.details.totalMarks")}
-//                               placeholder={t(
-//                                 "assessment.details.totalMarksPlaceholder",
-//                               )}
-//                               type="number"
-//                               required={true}
-//                             />
-
-//                             <TextInput
-//                               name="passing_score"
-//                               label={t("assessment.details.passingScore")}
-//                               placeholder={t(
-//                                 "assessment.details.passingScorePlaceholder",
-//                               )}
-//                               type="number"
-//                               required={true}
-//                             />
-//                           </div>
-
-//                           <div className="grid grid-cols-1 gap-4">
-//                             <TextareaField
-//                               name="description"
-//                               label={t("assessment.details.description")}
-//                               placeholder={t(
-//                                 "assessment.details.descriptionPlaceholder",
-//                               )}
-//                               rows={4}
-//                             />
-//                           </div>
-//                         </div>
-//                       </div>
-
-//                       {/* ── Thumbnail ── */}
-//                       <div>
-//                         <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-//                           <span className="text-blue-600">
-//                             <FiImage />
-//                           </span>
-//                           {t("assessment.details.thumbnail")}
-//                         </h3>
-
-//                         <div className="border border-gray-300 bg-[#F8FAFC] p-6 rounded-lg">
-//                           <input
-//                             ref={fileInputRef}
-//                             type="file"
-//                             accept="image/*"
-//                             onChange={handleThumbnailUpload}
-//                             className="hidden"
-//                           />
-
-//                           {!thumbnailPreview ? (
-//                             <div
-//                               onClick={triggerFileUpload}
-//                               className="flex flex-col items-center justify-center cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 hover:border-blue-500 transition-colors"
-//                             >
-//                               <FiUpload className="text-4xl text-gray-400 mb-3" />
-//                               <p className="text-sm text-gray-600 mb-1">
-//                                 {t("assessment.details.uploadText")}
-//                               </p>
-//                               <p className="text-xs text-gray-400">
-//                                 {t("assessment.details.uploadSubText")}
-//                               </p>
-//                             </div>
-//                           ) : (
-//                             <div className="relative">
-//                               <div className="flex items-start gap-6">
-//                                 <div className="relative group">
-//                                   <img
-//                                     src={thumbnailPreview}
-//                                     alt="Thumbnail Preview"
-//                                     className="w-32 h-32 object-cover rounded-lg border border-gray-300 shadow-sm"
-//                                   />
-//                                   <button
-//                                     type="button"
-//                                     onClick={removeThumbnail}
-//                                     className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors shadow-md"
-//                                   >
-//                                     <FiX className="text-xs" />
-//                                   </button>
-//                                 </div>
-//                                 <div className="flex-1">
-//                                   {thumbnail ? (
-//                                     <>
-//                                       <p className="text-sm font-semibold text-gray-700 mb-1">
-//                                         {thumbnail.name}
-//                                       </p>
-//                                       <p className="text-xs text-gray-500 mb-3">
-//                                         {(thumbnail.size / 1024).toFixed(2)} KB
-//                                       </p>
-//                                     </>
-//                                   ) : (
-//                                     <p className="text-sm font-semibold text-gray-700 mb-3">
-//                                       Current thumbnail
-//                                     </p>
-//                                   )}
-//                                   <button
-//                                     type="button"
-//                                     onClick={triggerFileUpload}
-//                                     className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1"
-//                                   >
-//                                     <FiUpload className="text-sm" />
-//                                     {t("assessment.details.changeImage")}
-//                                   </button>
-//                                 </div>
-//                               </div>
-//                             </div>
-//                           )}
-//                         </div>
-//                       </div>
-
-//                       {/* ── Footer ── */}
-//                       <div className="flex justify-end items-center pt-4">
-//                         <div className="flex gap-3">
-//                           <button
-//                             type="button"
-//                             onClick={handleDelete}
-//                             className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-gray-50"
-//                           >
-//                             {t("assessment.actions.deleteAssessment")}
-//                           </button>
-//                           <button
-//                             type="submit"
-//                             disabled={isSubmitting}
-//                             className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
-//                           >
-//                             {isSubmitting
-//                               ? t("assessment.actions.updating")
-//                               : t("assessment.actions.updateAssessment")}
-//                           </button>
-//                         </div>
-//                       </div>
-//                     </>
-//                   )}
-//                 </Form>
-//               );
-//             }}
-//           </Formik>
-//         </PageBody>
-//       </div>
-//     </PageLayout>
-//   );
-// };
-
-// export default AssissmentDetails;
-
-// import { useState, useRef, useEffect, useMemo } from "react";
-// import { Formik, Form } from "formik";
-// import * as Yup from "yup";
-// import {
-//   SelectField,
-//   TextInput,
-//   TextareaField,
-// } from "../../../../../common/form";
-// import { AiOutlineExclamationCircle } from "react-icons/ai";
-// import { FiUpload, FiX, FiImage } from "react-icons/fi";
-// import {
-//   PageLayout,
-//   PageHeader,
-//   PageHeaderLeft,
-//   PageTitle,
-//   PageSubtitle,
-//   PageBody,
-// } from "../../../../../common/layout";
-// import { useTranslation } from "react-i18next";
-// import { useDispatch, useSelector } from "react-redux";
-// import { useToast } from "../../../../../common/toast/ToastContext";
-// import { useNavigate, useParams } from "react-router-dom";
-// import { getAllPrograms } from "../../../../../../../redux/slice/programSlice";
-// import { getAllLevels } from "../../../../../../../redux/slice/levelSlice";
-// import { getAllModules } from "../../../../../../../redux/slice/moduleSlice";
-// import { getAllChapters } from "../../../../../../../redux/slice/chapterSlice";
-// import { getAllTopics } from "../../../../../../../redux/slice/topicSlice";
-// import {
-//   deleteSingleAssessment,
-//   getAssessmentById,
-//   // updateAssessment,
-// } from "../../../../../../../redux/slice/assissmentSlice";
-// import { showConfirm } from "../../../../../../../redux/slice/confirmSlice";
-// import Breadcrumb from "../../../../../common/layout/Breadcrumb";
-// import Loader from "../../../../../common/Loader";
-
-// const AssissmentDetails = () => {
-//   const [thumbnail, setThumbnail] = useState(null);
-//   const [thumbnailPreview, setThumbnailPreview] = useState(null);
-//   const fileInputRef = useRef(null);
-
-//   const { assessment, isLoading } = useSelector((state) => state.assessment);
-//   console.log("assessment", assessment);
-
-//   const { t } = useTranslation();
-//   const dispatch = useDispatch();
-//   const toast = useToast();
-//   const navigate = useNavigate();
-//   const { assessmentId: id } = useParams();
-
-//   const { programs } = useSelector((state) => state.program);
-//   const { levels } = useSelector((state) => state.level);
-//   const { modules } = useSelector((state) => state.module);
-//   const { chapters } = useSelector((state) => state.chapter);
-//   const { topics } = useSelector((state) => state.topic);
-
-//   // Selected state for cascading dropdowns
-//   const [selectedProgram, setSelectedProgram] = useState(null);
-//   const [selectedLevel, setSelectedLevel] = useState(null);
-//   const [selectedModule, setSelectedModule] = useState(null);
-//   const [selectedChapter, setSelectedChapter] = useState(null);
-
-//   // Load tracking
-//   const [programsLoaded, setProgramsLoaded] = useState(false);
-//   const [levelsLoaded, setLevelsLoaded] = useState(false);
-//   const [modulesLoaded, setModulesLoaded] = useState(false);
-//   const [chaptersLoaded, setChaptersLoaded] = useState(false);
-//   const [topicsLoaded, setTopicsLoaded] = useState(false);
-
-//   const [loadingLevels, setLoadingLevels] = useState(false);
-//   const [loadingModules, setLoadingModules] = useState(false);
-//   const [loadingChapters, setLoadingChapters] = useState(false);
-//   const [loadingTopics, setLoadingTopics] = useState(false);
-
-//   // Filtered dropdown data
-//   const [filteredLevels, setFilteredLevels] = useState([]);
-//   const [filteredModules, setFilteredModules] = useState([]);
-//   const [filteredChapters, setFilteredChapters] = useState([]);
-//   const [filteredTopics, setFilteredTopics] = useState([]);
-
-//   // Fetch assessment on mount
-//   useEffect(() => {
-//     if (id) {
-//       dispatch(getAssessmentById(id));
-//     }
-//   }, [dispatch, id]);
-
-//   // Set thumbnail preview if assessment has a file
-//   useEffect(() => {
-//     if (assessment?.file) {
-//       setThumbnailPreview(assessment.file);
-//     }
-//   }, [assessment]);
-
-//   // Load programs initially
-//   useEffect(() => {
-//     if (!programsLoaded) {
-//       dispatch(getAllPrograms()).then(() => setProgramsLoaded(true));
-//     }
-//   }, [dispatch, programsLoaded]);
-
-//   // Load data and set selected values from assessment
-//   useEffect(() => {
-//     if (assessment?.assessmentable && assessment.type === "topic") {
-//       const topic = assessment.assessmentable;
-
-//       // Fetch all required data if not loaded
-//       if (!levelsLoaded && !loadingLevels) {
-//         setLoadingLevels(true);
-//         dispatch(getAllLevels()).then(() => {
-//           setLevelsLoaded(true);
-//           setLoadingLevels(false);
-//         });
-//       }
-
-//       if (!modulesLoaded && !loadingModules) {
-//         setLoadingModules(true);
-//         dispatch(getAllModules()).then(() => {
-//           setModulesLoaded(true);
-//           setLoadingModules(false);
-//         });
-//       }
-
-//       if (!chaptersLoaded && !loadingChapters) {
-//         setLoadingChapters(true);
-//         dispatch(getAllChapters()).then(() => {
-//           setChaptersLoaded(true);
-//           setLoadingChapters(false);
-//         });
-//       }
-
-//       if (!topicsLoaded && !loadingTopics) {
-//         setLoadingTopics(true);
-//         dispatch(getAllTopics()).then(() => {
-//           setTopicsLoaded(true);
-//           setLoadingTopics(false);
-//         });
-//       }
-//     }
-//   }, [
-//     assessment,
-//     dispatch,
-//     levelsLoaded,
-//     modulesLoaded,
-//     chaptersLoaded,
-//     topicsLoaded,
-//     loadingLevels,
-//     loadingModules,
-//     loadingChapters,
-//     loadingTopics,
-//   ]);
-
-//   // Set selected values once data is loaded
-//   useEffect(() => {
-//     if (
-//       assessment?.assessmentable &&
-//       topics?.data &&
-//       chapters?.data &&
-//       modules?.data &&
-//       levels?.data &&
-//       programs?.data
-//     ) {
-//       const topic = assessment.assessmentable;
-
-//       // Find chapter
-//       const chapter = chapters.data.find(
-//         (c) => c.id === topic.chapter_id || c.id === topic.chapterId,
-//       );
-//       if (chapter) {
-//         setSelectedChapter({ label: chapter.title, value: chapter.id });
-
-//         // Find module
-//         const module = modules.data.find(
-//           (m) => m.id === chapter.module_id || m.id === chapter.moduleId,
-//         );
-//         if (module) {
-//           setSelectedModule({ label: module.title, value: module.id });
-
-//           // Find level
-//           const level = levels.data.find(
-//             (l) => l.id === module.level_id || l.id === module.levelId,
-//           );
-//           if (level) {
-//             setSelectedLevel({ label: level.title, value: level.id });
-
-//             // Find program
-//             const program = programs.data.find(
-//               (p) => p.id === level.program_id || p.id === level.programId,
-//             );
-//             if (program) {
-//               setSelectedProgram({ label: program.title, value: program.id });
-
-//               // Filter levels for this program
-//               const programLevels = levels.data.filter(
-//                 (l) =>
-//                   l.program_id === program.id || l.programId === program.id,
-//               );
-//               setFilteredLevels(programLevels);
-
-//               // Filter modules for this level
-//               const levelModules = modules.data.filter(
-//                 (m) => m.level_id === level.id || m.levelId === level.id,
-//               );
-//               setFilteredModules(levelModules);
-
-//               // Filter chapters for this module
-//               const moduleChapters = chapters.data.filter(
-//                 (c) => c.module_id === module.id || c.moduleId === module.id,
-//               );
-//               setFilteredChapters(moduleChapters);
-
-//               // Filter topics for this chapter
-//               const chapterTopics = topics.data.filter(
-//                 (t) =>
-//                   t.chapter_id === chapter.id || t.chapterId === chapter.id,
-//               );
-//               setFilteredTopics(chapterTopics);
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }, [assessment, programs, levels, modules, chapters, topics]);
-
-//   // Load levels when program is selected
-//   useEffect(() => {
-//     if (selectedProgram && !levelsLoaded && !loadingLevels) {
-//       setLoadingLevels(true);
-//       dispatch(getAllLevels()).then(() => {
-//         setLevelsLoaded(true);
-//         setLoadingLevels(false);
-//       });
-//     }
-//   }, [selectedProgram, dispatch, levelsLoaded, loadingLevels]);
-
-//   // Filter levels based on selected program
-//   useEffect(() => {
-//     if (selectedProgram && levels?.data) {
-//       const programLevels = levels.data.filter((level) => {
-//         return (
-//           level.program_id === selectedProgram.value ||
-//           level.programId === selectedProgram.value ||
-//           level.program?.id === selectedProgram.value
-//         );
-//       });
-//       setFilteredLevels(programLevels);
-//     } else {
-//       setFilteredLevels([]);
-//     }
-//   }, [selectedProgram, levels]);
-
-//   // Load modules when level is selected
-//   useEffect(() => {
-//     if (selectedLevel && !modulesLoaded && !loadingModules) {
-//       setLoadingModules(true);
-//       dispatch(getAllModules()).then(() => {
-//         setModulesLoaded(true);
-//         setLoadingModules(false);
-//       });
-//     }
-//   }, [selectedLevel, dispatch, modulesLoaded, loadingModules]);
-
-//   // Filter modules based on selected level
-//   useEffect(() => {
-//     if (selectedLevel && modules?.data) {
-//       const levelModules = modules.data.filter((module) => {
-//         return (
-//           module.level_id === selectedLevel.value ||
-//           module.levelId === selectedLevel.value ||
-//           module.level?.id === selectedLevel.value
-//         );
-//       });
-//       setFilteredModules(levelModules);
-//     } else {
-//       setFilteredModules([]);
-//     }
-//   }, [selectedLevel, modules]);
-
-//   // Load chapters when module is selected
-//   useEffect(() => {
-//     if (selectedModule && !chaptersLoaded && !loadingChapters) {
-//       setLoadingChapters(true);
-//       dispatch(getAllChapters()).then(() => {
-//         setChaptersLoaded(true);
-//         setLoadingChapters(false);
-//       });
-//     }
-//   }, [selectedModule, dispatch, chaptersLoaded, loadingChapters]);
-
-//   // Filter chapters based on selected module
-//   useEffect(() => {
-//     if (selectedModule && chapters?.data) {
-//       const moduleChapters = chapters.data.filter((chapter) => {
-//         return (
-//           chapter.module_id === selectedModule.value ||
-//           chapter.moduleId === selectedModule.value ||
-//           chapter.module?.id === selectedModule.value
-//         );
-//       });
-//       setFilteredChapters(moduleChapters);
-//     } else {
-//       setFilteredChapters([]);
-//     }
-//   }, [selectedModule, chapters]);
-
-//   // Load topics when chapter is selected
-//   useEffect(() => {
-//     if (selectedChapter && !topicsLoaded && !loadingTopics) {
-//       setLoadingTopics(true);
-//       dispatch(getAllTopics()).then(() => {
-//         setTopicsLoaded(true);
-//         setLoadingTopics(false);
-//       });
-//     }
-//   }, [selectedChapter, dispatch, topicsLoaded, loadingTopics]);
-
-//   // Filter topics based on selected chapter
-//   useEffect(() => {
-//     if (selectedChapter && topics?.data) {
-//       const chapterTopics = topics.data.filter((topic) => {
-//         return (
-//           topic.chapter_id === selectedChapter.value ||
-//           topic.chapterId === selectedChapter.value ||
-//           topic.chapter?.id === selectedChapter.value
-//         );
-//       });
-//       setFilteredTopics(chapterTopics);
-//     } else {
-//       setFilteredTopics([]);
-//     }
-//   }, [selectedChapter, topics]);
-
-//   // Handlers
-//   const handleThumbnailUpload = (event) => {
-//     const file = event.target.files[0];
-//     if (!file) return;
-
-//     if (!file.type.startsWith("image/")) {
-//       toast.error(t("assessment.validation.invalidImage"));
-//       return;
-//     }
-//     if (file.size > 5 * 1024 * 1024) {
-//       toast.error(t("assessment.validation.fileSizeExceeded"));
-//       return;
-//     }
-
-//     setThumbnail(file);
-//     const reader = new FileReader();
-//     reader.onloadend = () => setThumbnailPreview(reader.result);
-//     reader.readAsDataURL(file);
-//   };
-
-//   const removeThumbnail = () => {
-//     setThumbnail(null);
-//     setThumbnailPreview(assessment?.file || null);
-//     if (fileInputRef.current) fileInputRef.current.value = "";
-//   };
-
-//   const triggerFileUpload = () => fileInputRef.current?.click();
-
-//   // Dropdown options
-//   const programOptions =
-//     programs?.data?.map((prog) => ({ label: prog.title, value: prog.id })) ||
-//     [];
-
-//   const levelOptions = filteredLevels.map((lev) => ({
-//     label: lev.title,
-//     value: lev.id,
-//   }));
-
-//   const moduleOptions = filteredModules.map((mod) => ({
-//     label: mod.title,
-//     value: mod.id,
-//   }));
-
-//   const chapterOptions = filteredChapters.map((chapter) => ({
-//     label: chapter.title,
-//     value: chapter.id,
-//   }));
-
-//   const topicOptions = filteredTopics.map((topic) => ({
-//     label: topic.title,
-//     value: topic.id,
-//   }));
-
-//   // Initial values from API response
-//   const initialValues = useMemo(() => {
-//     return {
-//       programId: selectedProgram,
-//       levelId: selectedLevel,
-//       moduleId: selectedModule,
-//       chapterId: selectedChapter,
-//       topicId: assessment?.assessmentable?.id
-//         ? {
-//             label: assessment.assessmentable.title,
-//             value: assessment.assessmentable.id,
-//           }
-//         : null,
-//       title: assessment?.title ?? "",
-//       description: assessment?.description ?? "",
-//       passing_score: assessment?.passing_score ?? "",
-//       total_marks: assessment?.total_marks ?? "",
-//       duration: assessment?.duration ?? "",
-//     };
-//   }, [
-//     assessment,
-//     selectedProgram,
-//     selectedLevel,
-//     selectedModule,
-//     selectedChapter,
-//   ]);
-
-//   // Validation schema
-//   const validationSchema = Yup.object({
-//     programId: Yup.object()
-//       .nullable()
-//       .required(t("assessment.validation.program_required")),
-//     levelId: Yup.object()
-//       .nullable()
-//       .required(t("assessment.validation.level_required")),
-//     moduleId: Yup.object()
-//       .nullable()
-//       .required(t("assessment.validation.module_required")),
-//     chapterId: Yup.object()
-//       .nullable()
-//       .required(t("assessment.validation.chapter_required")),
-//     topicId: Yup.object()
-//       .nullable()
-//       .required(t("assessment.validation.topic_required")),
-//     title: Yup.string().required(t("assessment.validation.title_required")),
-//     description: Yup.string().required(
-//       t("assessment.validation.description_required"),
-//     ),
-//     passing_score: Yup.number()
-//       .required(t("assessment.validation.passing_score_required"))
-//       .positive(t("assessment.validation.passing_score_positive")),
-//     total_marks: Yup.number()
-//       .required(t("assessment.validation.total_marks_required"))
-//       .positive(t("assessment.validation.total_marks_positive")),
-//     duration: Yup.number()
-//       .required(t("assessment.validation.duration_required"))
-//       .positive(t("assessment.validation.duration_positive")),
-//   });
-
-//   // Submit handler
-//   const onSubmit = async (values, { setSubmitting, setErrors }) => {
-//     try {
-//       const formData = new FormData();
-
-//       formData.append("_method", "PUT");
-//       formData.append("type", "topic");
-//       formData.append("title", values.title);
-//       formData.append("description", values.description);
-//       formData.append("passing_score", values.passing_score);
-//       formData.append("total_marks", values.total_marks);
-//       formData.append("duration", values.duration);
-//       formData.append("assessmentable_id", values.topicId.value);
-//       formData.append("assessmentable_type", "App\\Models\\Topic");
-
-//       if (thumbnail) {
-//         formData.append("file", thumbnail);
-//       }
-
-//       console.log("Update payload:", Object.fromEntries(formData));
-
-//       // await dispatch(updateAssessment({ id, data: formData })).unwrap();
-//       // toast.success("Assessment updated successfully");
-//       // navigate("/assissment");
-//     } catch (error) {
-//       setErrors({ submit: error.message });
-//       toast.error(error?.message || "Something went wrong");
-//     } finally {
-//       setSubmitting(false);
-//     }
-//   };
-
-//   const handleDelete = async () => {
-//     const ok = await dispatch(
-//       showConfirm({ message: t("assessment.details.deleteText") }),
-//     );
-
-//     if (!ok) return;
-
-//     try {
-//       await dispatch(deleteSingleAssessment(id)).unwrap();
-//       toast.success("assessment deleted successfully");
-//       setTimeout(() => {
-//         navigate("/assessment");
-//       }, 1000);
-//     } catch (error) {
-//       toast.error(error?.message || "Delete failed");
-//     }
-//   };
-
-//   // Render
-//   if (isLoading) {
-//     return <Loader />;
-//   }
-
-//   return (
-//     <PageLayout>
-//       <div className="p-8 rounded-lg border border-gray-300">
-//         <Breadcrumb
-//           items={[
-//             {
-//               label: t("assessment.breadcrumb.quizManagement"),
-//               path: "/assessment",
-//             },
-//             {
-//               label: t("assessment.breadcrumb.view-quiz"),
-//             },
-//           ]}
-//         />
-
-//         <PageBody className="mt-6">
-//           <Formik
-//             initialValues={initialValues}
-//             validationSchema={validationSchema}
-//             onSubmit={onSubmit}
-//             enableReinitialize={true}
-//           >
-//             {({ isSubmitting, values, setFieldValue, handleSubmit }) => {
-//               return (
-//                 <Form onSubmit={handleSubmit} className="space-y-8">
-//                   {/* Topic Selection Fields */}
-//                   <div>
-//                     <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-//                       <span className="text-[18px] text-primary font-[700]">
-//                         <AiOutlineExclamationCircle />
-//                       </span>
-//                       {t("assessment.details.topicDetails")}
-//                     </h3>
-
-//                     <div className="space-y-4">
-//                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                         {/* Program Selection */}
-//                         <SelectField
-//                           name="programId"
-//                           label={t("assessment.details.parentProgram")}
-//                           placeholder={t(
-//                             "assessment.details.perentProgramPlaceholder",
-//                           )}
-//                           required={true}
-//                           options={programOptions}
-//                           isLoading={!programsLoaded}
-//                           value={values.programId}
-//                           onChange={(option) => {
-//                             setFieldValue("programId", option);
-//                             setFieldValue("levelId", null);
-//                             setFieldValue("moduleId", null);
-//                             setFieldValue("chapterId", null);
-//                             setFieldValue("topicId", null);
-//                             setSelectedProgram(option);
-//                             setSelectedLevel(null);
-//                             setSelectedModule(null);
-//                             setSelectedChapter(null);
-//                           }}
-//                         />
-
-//                         {/* Level Selection */}
-//                         <SelectField
-//                           name="levelId"
-//                           label={t("assessment.details.parentLevel")}
-//                           placeholder={t(
-//                             "assessment.details.parentLevelPlaceholder",
-//                           )}
-//                           required={true}
-//                           options={levelOptions}
-//                           disabled={!values.programId}
-//                           isLoading={loadingLevels}
-//                           value={values.levelId}
-//                           onChange={(option) => {
-//                             setFieldValue("levelId", option);
-//                             setFieldValue("moduleId", null);
-//                             setFieldValue("chapterId", null);
-//                             setFieldValue("topicId", null);
-//                             setSelectedLevel(option);
-//                             setSelectedModule(null);
-//                             setSelectedChapter(null);
-//                           }}
-//                         />
-//                       </div>
-
-//                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                         {/* Module Selection */}
-//                         <SelectField
-//                           name="moduleId"
-//                           label={t("assessment.details.parentModule")}
-//                           placeholder={t(
-//                             "assessment.details.parentModulePlaceholder",
-//                           )}
-//                           required={true}
-//                           options={moduleOptions}
-//                           disabled={!values.levelId}
-//                           isLoading={loadingModules}
-//                           value={values.moduleId}
-//                           onChange={(option) => {
-//                             setFieldValue("moduleId", option);
-//                             setFieldValue("chapterId", null);
-//                             setFieldValue("topicId", null);
-//                             setSelectedModule(option);
-//                             setSelectedChapter(null);
-//                           }}
-//                         />
-
-//                         {/* Chapter Selection */}
-//                         <SelectField
-//                           name="chapterId"
-//                           label={t("assessment.details.parentChapter")}
-//                           placeholder={t(
-//                             "assessment.details.parentChapterPlaceholder",
-//                           )}
-//                           required={true}
-//                           options={chapterOptions}
-//                           disabled={!values.moduleId}
-//                           isLoading={loadingChapters}
-//                           value={values.chapterId}
-//                           onChange={(option) => {
-//                             setFieldValue("chapterId", option);
-//                             setFieldValue("topicId", null);
-//                             setSelectedChapter(option);
-//                           }}
-//                         />
-//                       </div>
-
-//                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                         {/* Topic Selection */}
-//                         <SelectField
-//                           name="topicId"
-//                           label={t("assessment.details.topicName")}
-//                           placeholder={t(
-//                             "assessment.details.topicNamePlaceholder",
-//                           )}
-//                           required={true}
-//                           options={topicOptions}
-//                           disabled={!values.chapterId}
-//                           isLoading={loadingTopics}
-//                           value={values.topicId}
-//                           onChange={(option) => {
-//                             setFieldValue("topicId", option);
-//                           }}
-//                         />
-//                       </div>
-//                     </div>
-//                   </div>
-
-//                   {/* Assessment Details */}
-//                   <div>
-//                     <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-//                       {t("assessment.details.assessmentDetails")}
-//                     </h3>
-
-//                     <div className="space-y-4">
-//                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                         <TextInput
-//                           name="title"
-//                           label={t("assessment.details.title")}
-//                           placeholder={t("assessment.details.titlePlaceholder")}
-//                           required={true}
-//                         />
-
-//                         <TextInput
-//                           name="duration"
-//                           label={t("assessment.details.duration")}
-//                           placeholder={t(
-//                             "assessment.details.durationPlaceholder",
-//                           )}
-//                           type="number"
-//                           required={true}
-//                         />
-//                       </div>
-
-//                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                         <TextInput
-//                           name="total_marks"
-//                           label={t("assessment.details.totalMarks")}
-//                           placeholder={t(
-//                             "assessment.details.totalMarksPlaceholder",
-//                           )}
-//                           type="number"
-//                           required={true}
-//                         />
-
-//                         <TextInput
-//                           name="passing_score"
-//                           label={t("assessment.details.passingScore")}
-//                           placeholder={t(
-//                             "assessment.details.passingScorePlaceholder",
-//                           )}
-//                           type="number"
-//                           required={true}
-//                         />
-//                       </div>
-
-//                       <div className="grid grid-cols-1 gap-4">
-//                         <TextareaField
-//                           name="description"
-//                           label={t("assessment.details.description")}
-//                           placeholder={t(
-//                             "assessment.details.descriptionPlaceholder",
-//                           )}
-//                           rows={4}
-//                           required={true}
-//                         />
-//                       </div>
-//                     </div>
-//                   </div>
-
-//                   {/* Thumbnail Section */}
-//                   <div>
-//                     <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-//                       <span className="text-blue-600">
-//                         <FiImage />
-//                       </span>
-//                       {t("assessment.details.thumbnail")}
-//                     </h3>
-
-//                     <div className="border border-gray-300 bg-[#F8FAFC] p-6 rounded-lg">
-//                       <input
-//                         ref={fileInputRef}
-//                         type="file"
-//                         accept="image/*"
-//                         onChange={handleThumbnailUpload}
-//                         className="hidden"
-//                       />
-
-//                       {!thumbnailPreview ? (
-//                         <div
-//                           onClick={triggerFileUpload}
-//                           className="flex flex-col items-center justify-center cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 hover:border-blue-500 transition-colors"
-//                         >
-//                           <FiUpload className="text-4xl text-gray-400 mb-3" />
-//                           <p className="text-sm text-gray-600 mb-1">
-//                             {t("assessment.details.uploadText")}
-//                           </p>
-//                           <p className="text-xs text-gray-400">
-//                             {t("assessment.details.uploadSubText")}
-//                           </p>
-//                         </div>
-//                       ) : (
-//                         <div className="relative">
-//                           <div className="flex items-start gap-6">
-//                             <div className="relative group">
-//                               <img
-//                                 src={thumbnailPreview}
-//                                 alt="Thumbnail Preview"
-//                                 className="w-32 h-32 object-cover rounded-lg border border-gray-300 shadow-sm"
-//                               />
-//                               <button
-//                                 type="button"
-//                                 onClick={removeThumbnail}
-//                                 className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors shadow-md"
-//                               >
-//                                 <FiX className="text-xs" />
-//                               </button>
-//                             </div>
-//                             <div className="flex-1">
-//                               {thumbnail ? (
-//                                 <>
-//                                   <p className="text-sm font-semibold text-gray-700 mb-1">
-//                                     {thumbnail.name}
-//                                   </p>
-//                                   <p className="text-xs text-gray-500 mb-3">
-//                                     {(thumbnail.size / 1024).toFixed(2)} KB
-//                                   </p>
-//                                 </>
-//                               ) : (
-//                                 <p className="text-sm font-semibold text-gray-700 mb-3">
-//                                   Current thumbnail
-//                                 </p>
-//                               )}
-//                               <button
-//                                 type="button"
-//                                 onClick={triggerFileUpload}
-//                                 className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1"
-//                               >
-//                                 <FiUpload className="text-sm" />
-//                                 {t("assessment.details.changeImage")}
-//                               </button>
-//                             </div>
-//                           </div>
-//                         </div>
-//                       )}
-//                     </div>
-//                   </div>
-
-//                   {/* Footer */}
-//                   <div className="flex justify-end items-center pt-4">
-//                     <div className="flex gap-3">
-//                       <button
-//                         type="button"
-//                         onClick={handleDelete}
-//                         className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-gray-50"
-//                       >
-//                         {t("assessment.actions.deleteQuiz")}
-//                       </button>
-//                       <button
-//                         type="submit"
-//                         disabled={isSubmitting}
-//                         className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
-//                       >
-//                         {isSubmitting
-//                           ? t("assessment.actions.updating")
-//                           : t("assessment.actions.updateQuiz")}
-//                       </button>
-//                     </div>
-//                   </div>
-//                 </Form>
-//               );
-//             }}
-//           </Formik>
-//         </PageBody>
-//       </div>
-//     </PageLayout>
-//   );
-// };
-
-// export default AssissmentDetails;
-
 // import { useState, useRef, useEffect } from "react";
 // import { Formik, Form } from "formik";
 // import * as Yup from "yup";
@@ -1852,7 +8,7 @@
 // } from "../../../../../common/form";
 // import { AiOutlineExclamationCircle } from "react-icons/ai";
 // import { FiUpload, FiX, FiImage } from "react-icons/fi";
-// import { PageLayout, PageBody } from "../../../../../common/layout";
+// import { PageLayout } from "../../../../../common/layout";
 // import { useTranslation } from "react-i18next";
 // import { useDispatch, useSelector } from "react-redux";
 // import { useToast } from "../../../../../common/toast/ToastContext";
@@ -1865,19 +21,19 @@
 // import {
 //   deleteSingleAssessment,
 //   getAssessmentById,
+//   updateAssessmentById,
 //   // updateAssessment,
 // } from "../../../../../../../redux/slice/assissmentSlice";
 // import { showConfirm } from "../../../../../../../redux/slice/confirmSlice";
 // import Breadcrumb from "../../../../../common/layout/Breadcrumb";
 // import Loader from "../../../../../common/Loader";
 
-// const AssissmentDetails = () => {
+// const AssessmentDetails = () => {
 //   const [thumbnail, setThumbnail] = useState(null);
 //   const [thumbnailPreview, setThumbnailPreview] = useState(null);
 //   const fileInputRef = useRef(null);
 
 //   const { assessment, isLoading } = useSelector((state) => state.assessment);
-//   console.log("assessment", assessment);
 
 //   const { t } = useTranslation();
 //   const dispatch = useDispatch();
@@ -1897,13 +53,8 @@
 //   const [selectedModule, setSelectedModule] = useState(null);
 //   const [selectedChapter, setSelectedChapter] = useState(null);
 
-//   // Load tracking
-//   const [programsLoaded, setProgramsLoaded] = useState(false);
-//   const [levelsLoaded, setLevelsLoaded] = useState(false);
-//   const [modulesLoaded, setModulesLoaded] = useState(false);
-//   const [chaptersLoaded, setChaptersLoaded] = useState(false);
-//   const [topicsLoaded, setTopicsLoaded] = useState(false);
-
+//   // Loading flags for API calls
+//   const [loadingPrograms, setLoadingPrograms] = useState(false);
 //   const [loadingLevels, setLoadingLevels] = useState(false);
 //   const [loadingModules, setLoadingModules] = useState(false);
 //   const [loadingChapters, setLoadingChapters] = useState(false);
@@ -1915,235 +66,195 @@
 //   const [filteredChapters, setFilteredChapters] = useState([]);
 //   const [filteredTopics, setFilteredTopics] = useState([]);
 
-//   // Flag to check if data is loaded
+//   // Flag: hierarchy selections have been set
 //   const [isDataLoaded, setIsDataLoaded] = useState(false);
 
-//   // Fetch assessment on mount
+//   // ─── 1. Fetch assessment on mount ───────────────────────────────────────────
 //   useEffect(() => {
 //     if (id) {
 //       dispatch(getAssessmentById(id));
 //     }
 //   }, [dispatch, id]);
 
-//   // Set thumbnail preview if assessment has a file
+//   // ─── 2. Set thumbnail preview ────────────────────────────────────────────────
 //   useEffect(() => {
 //     if (assessment?.assessment?.file) {
 //       setThumbnailPreview(assessment.assessment.file);
 //     }
 //   }, [assessment]);
 
-//   // Load programs initially
+//   // ─── 3. Load all required master data (programs, levels, modules, chapters, topics)
+//   //        Triggers once assessment is available. Uses existing Redux data if present.
 //   useEffect(() => {
-//     if (!programsLoaded && !programs?.data) {
-//       dispatch(getAllPrograms()).then(() => setProgramsLoaded(true));
-//     }
-//   }, [dispatch, programsLoaded, programs]);
+//     if (!assessment) return;
 
-//   // Load all required data when assessment loads
-//   useEffect(() => {
-//     if (assessment?.hierarchy && assessment.type === "topic") {
-//       // Load levels if not loaded
-//       if (!levelsLoaded && !levels?.data && !loadingLevels) {
+//     // Load Programs
+//     if (!programs?.data && !loadingPrograms) {
+//       setLoadingPrograms(true);
+//       dispatch(getAllPrograms()).finally(() => setLoadingPrograms(false));
+//     }
+
+//     // For topic-type assessments load the full hierarchy master data
+//     if (assessment.type === "topic" || assessment?.hierarchy?.level) {
+//       if (!levels?.data && !loadingLevels) {
 //         setLoadingLevels(true);
-//         dispatch(getAllLevels()).then(() => {
-//           setLevelsLoaded(true);
-//           setLoadingLevels(false);
-//         });
+//         dispatch(getAllLevels()).finally(() => setLoadingLevels(false));
 //       }
-
-//       // Load modules if not loaded
-//       if (!modulesLoaded && !modules?.data && !loadingModules) {
+//       if (!modules?.data && !loadingModules) {
 //         setLoadingModules(true);
-//         dispatch(getAllModules()).then(() => {
-//           setModulesLoaded(true);
-//           setLoadingModules(false);
-//         });
+//         dispatch(getAllModules()).finally(() => setLoadingModules(false));
 //       }
-
-//       // Load chapters if not loaded
-//       if (!chaptersLoaded && !chapters?.data && !loadingChapters) {
+//       if (!chapters?.data && !loadingChapters) {
 //         setLoadingChapters(true);
-//         dispatch(getAllChapters()).then(() => {
-//           setChaptersLoaded(true);
-//           setLoadingChapters(false);
-//         });
+//         dispatch(getAllChapters()).finally(() => setLoadingChapters(false));
 //       }
-
-//       // Load topics if not loaded
-//       if (!topicsLoaded && !topics?.data && !loadingTopics) {
+//       if (!topics?.data && !loadingTopics) {
 //         setLoadingTopics(true);
-//         dispatch(getAllTopics()).then(() => {
-//           setTopicsLoaded(true);
-//           setLoadingTopics(false);
-//         });
+//         dispatch(getAllTopics()).finally(() => setLoadingTopics(false));
 //       }
 //     }
-//   }, [
-//     assessment,
-//     dispatch,
-//     levelsLoaded,
-//     modulesLoaded,
-//     chaptersLoaded,
-//     topicsLoaded,
-//     levels,
-//     modules,
-//     chapters,
-//     topics,
-//   ]);
+//     // eslint-disable-next-line react-hooks/exhaustive-deps
+//   }, [assessment]);
 
-//   // Set selected values from hierarchy once all data is loaded
+//   // ─── 4. Once master data is available, derive selected values & filtered lists
 //   useEffect(() => {
-//     if (
-//       assessment?.hierarchy &&
-//       programs?.data &&
-//       levels?.data &&
-//       modules?.data &&
-//       chapters?.data &&
-//       topics?.data
-//     ) {
-//       const { hierarchy } = assessment;
+//     if (!assessment?.hierarchy || !programs?.data) return;
 
-//       // Set Program
-//       if (hierarchy.program) {
-//         setSelectedProgram({
-//           label: hierarchy.program.title,
-//           value: hierarchy.program.id,
-//         });
-//       }
+//     const isTopicType =
+//       assessment.type === "topic" || assessment?.hierarchy?.level;
 
-//       // Set Level
-//       if (hierarchy.level) {
-//         setSelectedLevel({
-//           label: hierarchy.level.title,
-//           value: hierarchy.level.id,
-//         });
-//       }
-
-//       // Set Module
-//       if (hierarchy.module) {
-//         setSelectedModule({
-//           label: hierarchy.module.title,
-//           value: hierarchy.module.id,
-//         });
-//       }
-
-//       // Set Chapter
-//       if (hierarchy.chapter) {
-//         setSelectedChapter({
-//           label: hierarchy.chapter.title,
-//           value: hierarchy.chapter.id,
-//         });
-//       }
-
-//       // Filter levels for selected program
-//       if (hierarchy.program && levels?.data) {
-//         const programLevels = levels.data.filter((level) => {
-//           return (
-//             level.program_id === hierarchy.program.id ||
-//             level.programId === hierarchy.program.id ||
-//             level.program?.id === hierarchy.program.id
-//           );
-//         });
-//         setFilteredLevels(programLevels);
-//       }
-
-//       // Filter modules for selected level
-//       if (hierarchy.level && modules?.data) {
-//         const levelModules = modules.data.filter((module) => {
-//           return (
-//             module.level_id === hierarchy.level.id ||
-//             module.levelId === hierarchy.level.id ||
-//             module.level?.id === hierarchy.level.id
-//           );
-//         });
-//         setFilteredModules(levelModules);
-//       }
-
-//       // Filter chapters for selected module
-//       if (hierarchy.module && chapters?.data) {
-//         const moduleChapters = chapters.data.filter((chapter) => {
-//           return (
-//             chapter.module_id === hierarchy.module.id ||
-//             chapter.moduleId === hierarchy.module.id ||
-//             chapter.module?.id === hierarchy.module.id
-//           );
-//         });
-//         setFilteredChapters(moduleChapters);
-//       }
-
-//       // Filter topics for selected chapter
-//       if (hierarchy.chapter && topics?.data) {
-//         const chapterTopics = topics.data.filter((topic) => {
-//           return (
-//             topic.chapter_id === hierarchy.chapter.id ||
-//             topic.chapterId === hierarchy.chapter.id ||
-//             topic.chapter?.id === hierarchy.chapter.id
-//           );
-//         });
-//         setFilteredTopics(chapterTopics);
-//       }
-
-//       setIsDataLoaded(true);
+//     // For topic-type, wait until all master data is loaded
+//     if (isTopicType) {
+//       if (!levels?.data || !modules?.data || !chapters?.data || !topics?.data)
+//         return;
 //     }
+
+//     const { hierarchy } = assessment;
+
+//     // ── Set selected dropdown values ──────────────────────────────────────────
+//     const prog = hierarchy.program
+//       ? { label: hierarchy.program.title, value: hierarchy.program.id }
+//       : null;
+
+//     const lev = hierarchy.level
+//       ? { label: hierarchy.level.title, value: hierarchy.level.id }
+//       : null;
+
+//     const mod = hierarchy.module
+//       ? { label: hierarchy.module.title, value: hierarchy.module.id }
+//       : null;
+
+//     const chap = hierarchy.chapter
+//       ? { label: hierarchy.chapter.title, value: hierarchy.chapter.id }
+//       : null;
+
+//     setSelectedProgram(prog);
+//     setSelectedLevel(lev);
+//     setSelectedModule(mod);
+//     setSelectedChapter(chap);
+
+//     // ── Filter cascaded lists ─────────────────────────────────────────────────
+//     if (prog && levels?.data) {
+//       setFilteredLevels(
+//         levels.data.filter(
+//           (l) =>
+//             l.program_id === prog.value ||
+//             l.programId === prog.value ||
+//             l.program?.id === prog.value,
+//         ),
+//       );
+//     }
+
+//     if (lev && modules?.data) {
+//       setFilteredModules(
+//         modules.data.filter(
+//           (m) =>
+//             m.level_id === lev.value ||
+//             m.levelId === lev.value ||
+//             m.level?.id === lev.value,
+//         ),
+//       );
+//     }
+
+//     if (mod && chapters?.data) {
+//       setFilteredChapters(
+//         chapters.data.filter(
+//           (c) =>
+//             c.module_id === mod.value ||
+//             c.moduleId === mod.value ||
+//             c.module?.id === mod.value,
+//         ),
+//       );
+//     }
+
+//     if (chap && topics?.data) {
+//       setFilteredTopics(
+//         topics.data.filter(
+//           (tp) =>
+//             tp.chapter_id === chap.value ||
+//             tp.chapterId === chap.value ||
+//             tp.chapter?.id === chap.value,
+//         ),
+//       );
+//     }
+
+//     setIsDataLoaded(true);
 //   }, [assessment, programs, levels, modules, chapters, topics]);
 
-//   // Filter levels based on selected program
+//   // ─── 5. Re-filter on manual dropdown changes ──────────────────────────────
 //   useEffect(() => {
 //     if (selectedProgram && levels?.data) {
-//       const programLevels = levels.data.filter((level) => {
-//         return (
-//           level.program_id === selectedProgram.value ||
-//           level.programId === selectedProgram.value ||
-//           level.program?.id === selectedProgram.value
-//         );
-//       });
-//       setFilteredLevels(programLevels);
+//       setFilteredLevels(
+//         levels.data.filter(
+//           (l) =>
+//             l.program_id === selectedProgram.value ||
+//             l.programId === selectedProgram.value ||
+//             l.program?.id === selectedProgram.value,
+//         ),
+//       );
 //     }
 //   }, [selectedProgram, levels]);
 
-//   // Filter modules based on selected level
 //   useEffect(() => {
 //     if (selectedLevel && modules?.data) {
-//       const levelModules = modules.data.filter((module) => {
-//         return (
-//           module.level_id === selectedLevel.value ||
-//           module.levelId === selectedLevel.value ||
-//           module.level?.id === selectedLevel.value
-//         );
-//       });
-//       setFilteredModules(levelModules);
+//       setFilteredModules(
+//         modules.data.filter(
+//           (m) =>
+//             m.level_id === selectedLevel.value ||
+//             m.levelId === selectedLevel.value ||
+//             m.level?.id === selectedLevel.value,
+//         ),
+//       );
 //     }
 //   }, [selectedLevel, modules]);
 
-//   // Filter chapters based on selected module
 //   useEffect(() => {
 //     if (selectedModule && chapters?.data) {
-//       const moduleChapters = chapters.data.filter((chapter) => {
-//         return (
-//           chapter.module_id === selectedModule.value ||
-//           chapter.moduleId === selectedModule.value ||
-//           chapter.module?.id === selectedModule.value
-//         );
-//       });
-//       setFilteredChapters(moduleChapters);
+//       setFilteredChapters(
+//         chapters.data.filter(
+//           (c) =>
+//             c.module_id === selectedModule.value ||
+//             c.moduleId === selectedModule.value ||
+//             c.module?.id === selectedModule.value,
+//         ),
+//       );
 //     }
 //   }, [selectedModule, chapters]);
 
-//   // Filter topics based on selected chapter
 //   useEffect(() => {
 //     if (selectedChapter && topics?.data) {
-//       const chapterTopics = topics.data.filter((topic) => {
-//         return (
-//           topic.chapter_id === selectedChapter.value ||
-//           topic.chapterId === selectedChapter.value ||
-//           topic.chapter?.id === selectedChapter.value
-//         );
-//       });
-//       setFilteredTopics(chapterTopics);
+//       setFilteredTopics(
+//         topics.data.filter(
+//           (tp) =>
+//             tp.chapter_id === selectedChapter.value ||
+//             tp.chapterId === selectedChapter.value ||
+//             tp.chapter?.id === selectedChapter.value,
+//         ),
+//       );
 //     }
 //   }, [selectedChapter, topics]);
 
-//   // Handlers
+//   // ─── Thumbnail handlers ───────────────────────────────────────────────────
 //   const handleThumbnailUpload = (event) => {
 //     const file = event.target.files[0];
 //     if (!file) return;
@@ -2165,38 +276,37 @@
 
 //   const removeThumbnail = () => {
 //     setThumbnail(null);
-//     setThumbnailPreview(assessment?.file || null);
+//     setThumbnailPreview(assessment?.assessment?.file || null);
 //     if (fileInputRef.current) fileInputRef.current.value = "";
 //   };
 
 //   const triggerFileUpload = () => fileInputRef.current?.click();
 
-//   // Dropdown options
+//   // ─── Dropdown options ─────────────────────────────────────────────────────
 //   const programOptions =
-//     programs?.data?.map((prog) => ({ label: prog.title, value: prog.id })) ||
-//     [];
+//     programs?.data?.map((p) => ({ label: p.title, value: p.id })) || [];
 
-//   const levelOptions = filteredLevels.map((lev) => ({
-//     label: lev.title,
-//     value: lev.id,
+//   const levelOptions = filteredLevels.map((l) => ({
+//     label: l.title,
+//     value: l.id,
 //   }));
 
-//   const moduleOptions = filteredModules.map((mod) => ({
-//     label: mod.title,
-//     value: mod.id,
+//   const moduleOptions = filteredModules.map((m) => ({
+//     label: m.title,
+//     value: m.id,
 //   }));
 
-//   const chapterOptions = filteredChapters.map((chapter) => ({
-//     label: chapter.title,
-//     value: chapter.id,
+//   const chapterOptions = filteredChapters.map((c) => ({
+//     label: c.title,
+//     value: c.id,
 //   }));
 
-//   const topicOptions = filteredTopics.map((topic) => ({
-//     label: topic.title,
-//     value: topic.id,
+//   const topicOptions = filteredTopics.map((tp) => ({
+//     label: tp.title,
+//     value: tp.id,
 //   }));
 
-//   // Validation schema
+//   // ─── Validation schema ────────────────────────────────────────────────────
 //   const validationSchema = Yup.object({
 //     programId: Yup.object()
 //       .nullable()
@@ -2228,12 +338,11 @@
 //       .positive(t("assessment.validation.duration_positive")),
 //   });
 
-//   // Submit handler
+//   // ─── Submit handler ───────────────────────────────────────────────────────
 //   const onSubmit = async (values, { setSubmitting, setErrors }) => {
 //     try {
 //       const formData = new FormData();
-
-//       formData.append("_method", "PUT");
+//       // formData.append("_method", "PUT");
 //       formData.append("type", "topic");
 //       formData.append("title", values.title);
 //       formData.append("description", values.description);
@@ -2247,11 +356,9 @@
 //         formData.append("file", thumbnail);
 //       }
 
-//       console.log("Update payload:", Object.fromEntries(formData));
-
-//       // await dispatch(updateAssessment({ id, data: formData })).unwrap();
-//       // toast.success(t("assessment.messages.updateSuccess"));
-//       // navigate("/assessment");
+//       await dispatch(updateAssessmentById({ id, data: formData })).unwrap();
+//       toast.success(t("Updated Quiz"));
+//       navigate("/assessment");
 //     } catch (error) {
 //       setErrors({ submit: error.message });
 //       toast.error(error?.message || t("assessment.messages.updateError"));
@@ -2260,29 +367,47 @@
 //     }
 //   };
 
+//   // ─── Delete handler ───────────────────────────────────────────────────────
 //   const handleDelete = async () => {
 //     const ok = await dispatch(
-//       showConfirm({ message: t("assessment.details.deleteText") }),
+//       showConfirm({ message: t("assessment.details.deleteTextQuiz") }),
 //     );
-
 //     if (!ok) return;
 
 //     try {
 //       await dispatch(deleteSingleAssessment(id)).unwrap();
 //       toast.success(t("assessment.messages.deleteSuccess"));
-//       setTimeout(() => {
-//         navigate("/assessment");
-//       }, 1000);
+//       setTimeout(() => navigate("/assessment"), 1000);
 //     } catch (error) {
 //       toast.error(error?.message || t("assessment.messages.deleteError"));
 //     }
 //   };
 
-//   // Render
+//   // ─── Guard: show loader until everything is ready ─────────────────────────
 //   if (isLoading || !isDataLoaded) {
 //     return <Loader />;
 //   }
 
+//   // ─── Derived initial values (computed once isDataLoaded = true) ───────────
+//   const initialFormValues = {
+//     programId: selectedProgram,
+//     levelId: selectedLevel,
+//     moduleId: selectedModule,
+//     chapterId: selectedChapter,
+//     topicId: assessment?.hierarchy?.topic
+//       ? {
+//           label: assessment.hierarchy.topic.title,
+//           value: assessment.hierarchy.topic.id,
+//         }
+//       : null,
+//     title: assessment?.assessment?.title ?? "",
+//     description: assessment?.assessment?.description ?? "",
+//     passing_score: assessment?.assessment?.passing_score ?? "",
+//     total_marks: assessment?.assessment?.total_marks ?? "",
+//     duration: assessment?.assessment?.duration ?? "",
+//   };
+
+//   // ─── Render ───────────────────────────────────────────────────────────────
 //   return (
 //     <PageLayout>
 //       <div className="p-8 rounded-lg border border-gray-300">
@@ -2292,363 +417,315 @@
 //               label: t("assessment.breadcrumb.quizManagement"),
 //               path: "/assessment",
 //             },
-//             {
-//               label: t("assessment.breadcrumb.view-quiz"),
-//             },
+//             { label: t("assessment.breadcrumb.view-quiz") },
 //           ]}
 //         />
 
 //         <div className="mt-6">
 //           <Formik
 //             enableReinitialize={true}
-//             initialValues={{
-//               programId: selectedProgram,
-//               levelId: selectedLevel,
-//               moduleId: selectedModule,
-//               chapterId: selectedChapter,
-//               topicId: assessment?.hierarchy?.topic
-//                 ? {
-//                     label: assessment.hierarchy.topic.title,
-//                     value: assessment.hierarchy.topic.id,
-//                   }
-//                 : null,
-//               title: assessment?.assessment?.title ?? "",
-//               description: assessment?.assessment?.description ?? "",
-//               passing_score: assessment?.assessment?.passing_score ?? "",
-//               total_marks: assessment?.assessment?.total_marks ?? "",
-//               duration: assessment?.assessment?.duration ?? "",
-//             }}
+//             initialValues={initialFormValues}
 //             validationSchema={validationSchema}
 //             onSubmit={onSubmit}
 //           >
-//             {({
-//               isSubmitting,
-//               values,
-//               setFieldValue,
-//               handleSubmit,
-//               resetForm,
-//             }) => {
-//               // Reset form when assessment data changes
-//               useEffect(() => {
-//                 if (assessment && isDataLoaded) {
-//                   resetForm({
-//                     values: {
-//                       programId: selectedProgram,
-//                       levelId: selectedLevel,
-//                       moduleId: selectedModule,
-//                       chapterId: selectedChapter,
-//                       topicId: assessment?.hierarchy?.topic
-//                         ? {
-//                             label: assessment.hierarchy.topic.title,
-//                             value: assessment.hierarchy.topic.id,
-//                           }
-//                         : null,
-//                       title: assessment?.title || "",
-//                       description: assessment?.description || "",
-//                       passing_score: assessment?.passing_score || "",
-//                       total_marks: assessment?.total_marks || "",
-//                       duration: assessment?.duration || "",
-//                     },
-//                   });
-//                 }
-//               }, [
-//                 assessment,
-//                 selectedProgram,
-//                 selectedLevel,
-//                 selectedModule,
-//                 selectedChapter,
-//                 isDataLoaded,
-//                 resetForm,
-//               ]);
+//             {({ isSubmitting, values, setFieldValue, handleSubmit }) => (
+//               <Form onSubmit={handleSubmit} className="space-y-8">
+//                 {/* ── Topic Selection ─────────────────────────────────────── */}
+//                 <div>
+//                   <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
+//                     <span className="text-[18px] text-primary font-[700]">
+//                       <AiOutlineExclamationCircle />
+//                     </span>
+//                     {t("assessment.details.topicDetails")}
+//                   </h3>
 
-//               return (
-//                 <Form onSubmit={handleSubmit} className="space-y-8">
-//                   {/* Topic Selection Fields */}
-//                   <div>
-//                     <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-//                       <span className="text-[18px] text-primary font-[700]">
-//                         <AiOutlineExclamationCircle />
-//                       </span>
-//                       {t("assessment.details.topicDetails")}
-//                     </h3>
-
-//                     <div className="space-y-4">
-//                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                         {/* Program Selection */}
-//                         <SelectField
-//                           name="programId"
-//                           label={t("assessment.details.parentProgram")}
-//                           placeholder={t(
-//                             "assessment.details.perentProgramPlaceholder",
-//                           )}
-//                           required={true}
-//                           options={programOptions}
-//                           isLoading={!programsLoaded}
-//                           value={values.programId}
-//                           onChange={(option) => {
-//                             setFieldValue("programId", option);
-//                             setFieldValue("levelId", null);
-//                             setFieldValue("moduleId", null);
-//                             setFieldValue("chapterId", null);
-//                             setFieldValue("topicId", null);
-//                             setSelectedProgram(option);
-//                             setSelectedLevel(null);
-//                             setSelectedModule(null);
-//                             setSelectedChapter(null);
-//                           }}
-//                         />
-
-//                         {/* Level Selection */}
-//                         <SelectField
-//                           name="levelId"
-//                           label={t("assessment.details.parentLevel")}
-//                           placeholder={t(
-//                             "assessment.details.parentLevelPlaceholder",
-//                           )}
-//                           required={true}
-//                           options={levelOptions}
-//                           disabled={!values.programId}
-//                           isLoading={loadingLevels}
-//                           value={values.levelId}
-//                           onChange={(option) => {
-//                             setFieldValue("levelId", option);
-//                             setFieldValue("moduleId", null);
-//                             setFieldValue("chapterId", null);
-//                             setFieldValue("topicId", null);
-//                             setSelectedLevel(option);
-//                             setSelectedModule(null);
-//                             setSelectedChapter(null);
-//                           }}
-//                         />
-//                       </div>
-
-//                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                         {/* Module Selection */}
-//                         <SelectField
-//                           name="moduleId"
-//                           label={t("assessment.details.parentModule")}
-//                           placeholder={t(
-//                             "assessment.details.parentModulePlaceholder",
-//                           )}
-//                           required={true}
-//                           options={moduleOptions}
-//                           disabled={!values.levelId}
-//                           isLoading={loadingModules}
-//                           value={values.moduleId}
-//                           onChange={(option) => {
-//                             setFieldValue("moduleId", option);
-//                             setFieldValue("chapterId", null);
-//                             setFieldValue("topicId", null);
-//                             setSelectedModule(option);
-//                             setSelectedChapter(null);
-//                           }}
-//                         />
-
-//                         {/* Chapter Selection */}
-//                         <SelectField
-//                           name="chapterId"
-//                           label={t("assessment.details.parentChapter")}
-//                           placeholder={t(
-//                             "assessment.details.parentChapterPlaceholder",
-//                           )}
-//                           required={true}
-//                           options={chapterOptions}
-//                           disabled={!values.moduleId}
-//                           isLoading={loadingChapters}
-//                           value={values.chapterId}
-//                           onChange={(option) => {
-//                             setFieldValue("chapterId", option);
-//                             setFieldValue("topicId", null);
-//                             setSelectedChapter(option);
-//                           }}
-//                         />
-//                       </div>
-
-//                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                         {/* Topic Selection */}
-//                         <SelectField
-//                           name="topicId"
-//                           label={t("assessment.details.topicName")}
-//                           placeholder={t(
-//                             "assessment.details.topicNamePlaceholder",
-//                           )}
-//                           required={true}
-//                           options={topicOptions}
-//                           disabled={!values.chapterId}
-//                           isLoading={loadingTopics}
-//                           value={values.topicId}
-//                           onChange={(option) => {
-//                             setFieldValue("topicId", option);
-//                           }}
-//                         />
-//                       </div>
-//                     </div>
-//                   </div>
-
-//                   {/* Assessment Details */}
-//                   <div>
-//                     <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-//                       {t("assessment.details.assessmentDetails")}
-//                     </h3>
-
-//                     <div className="space-y-4">
-//                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                         <TextInput
-//                           name="title"
-//                           label={t("assessment.details.title")}
-//                           placeholder={t("assessment.details.titlePlaceholder")}
-//                           required={true}
-//                         />
-
-//                         <TextInput
-//                           name="duration"
-//                           label={t("assessment.details.duration")}
-//                           placeholder={t(
-//                             "assessment.details.durationPlaceholder",
-//                           )}
-//                           type="number"
-//                           required={true}
-//                         />
-//                       </div>
-
-//                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                         <TextInput
-//                           name="total_marks"
-//                           label={t("assessment.details.totalMarks")}
-//                           placeholder={t(
-//                             "assessment.details.totalMarksPlaceholder",
-//                           )}
-//                           type="number"
-//                           required={true}
-//                         />
-
-//                         <TextInput
-//                           name="passing_score"
-//                           label={t("assessment.details.passingScore")}
-//                           placeholder={t(
-//                             "assessment.details.passingScorePlaceholder",
-//                           )}
-//                           type="number"
-//                           required={true}
-//                         />
-//                       </div>
-
-//                       <div className="grid grid-cols-1 gap-4">
-//                         <TextareaField
-//                           name="description"
-//                           label={t("assessment.details.description")}
-//                           placeholder={t(
-//                             "assessment.details.descriptionPlaceholder",
-//                           )}
-//                           rows={4}
-//                           required={true}
-//                         />
-//                       </div>
-//                     </div>
-//                   </div>
-
-//                   {/* Thumbnail Section */}
-//                   <div>
-//                     <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-//                       <span className="text-blue-600">
-//                         <FiImage />
-//                       </span>
-//                       {t("assessment.details.thumbnail")}
-//                     </h3>
-
-//                     <div className="border border-gray-300 bg-[#F8FAFC] p-6 rounded-lg">
-//                       <input
-//                         ref={fileInputRef}
-//                         type="file"
-//                         accept="image/*"
-//                         onChange={handleThumbnailUpload}
-//                         className="hidden"
+//                   <div className="space-y-4">
+//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//                       {/* Program */}
+//                       <SelectField
+//                         name="programId"
+//                         label={t("assessment.details.parentProgram")}
+//                         placeholder={t(
+//                           "assessment.details.perentProgramPlaceholder",
+//                         )}
+//                         required
+//                         options={programOptions}
+//                         isLoading={loadingPrograms}
+//                         value={values.programId}
+//                         onChange={(option) => {
+//                           setFieldValue("programId", option);
+//                           setFieldValue("levelId", null);
+//                           setFieldValue("moduleId", null);
+//                           setFieldValue("chapterId", null);
+//                           setFieldValue("topicId", null);
+//                           setSelectedProgram(option);
+//                           setSelectedLevel(null);
+//                           setSelectedModule(null);
+//                           setSelectedChapter(null);
+//                           setFilteredLevels([]);
+//                           setFilteredModules([]);
+//                           setFilteredChapters([]);
+//                           setFilteredTopics([]);
+//                         }}
 //                       />
 
-//                       {!thumbnailPreview ? (
-//                         <div
-//                           onClick={triggerFileUpload}
-//                           className="flex flex-col items-center justify-center cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 hover:border-blue-500 transition-colors"
-//                         >
-//                           <FiUpload className="text-4xl text-gray-400 mb-3" />
-//                           <p className="text-sm text-gray-600 mb-1">
-//                             {t("assessment.details.uploadText")}
-//                           </p>
-//                           <p className="text-xs text-gray-400">
-//                             {t("assessment.details.uploadSubText")}
-//                           </p>
-//                         </div>
-//                       ) : (
-//                         <div className="relative">
-//                           <div className="flex items-start gap-6">
-//                             <div className="relative group">
-//                               <img
-//                                 src={thumbnailPreview}
-//                                 alt="Thumbnail Preview"
-//                                 className="w-32 h-32 object-cover rounded-lg border border-gray-300 shadow-sm"
-//                               />
-//                               <button
-//                                 type="button"
-//                                 onClick={removeThumbnail}
-//                                 className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors shadow-md"
-//                               >
-//                                 <FiX className="text-xs" />
-//                               </button>
-//                             </div>
-//                             <div className="flex-1">
-//                               {thumbnail ? (
-//                                 <>
-//                                   <p className="text-sm font-semibold text-gray-700 mb-1">
-//                                     {thumbnail.name}
-//                                   </p>
-//                                   <p className="text-xs text-gray-500 mb-3">
-//                                     {(thumbnail.size / 1024).toFixed(2)} KB
-//                                   </p>
-//                                 </>
-//                               ) : (
-//                                 <p className="text-sm font-semibold text-gray-700 mb-3">
-//                                   {t("assessment.details.currentThumbnail")}
+//                       {/* Level */}
+//                       <SelectField
+//                         name="levelId"
+//                         label={t("assessment.details.parentLevel")}
+//                         placeholder={t(
+//                           "assessment.details.parentLevelPlaceholder",
+//                         )}
+//                         required
+//                         options={levelOptions}
+//                         disabled={!values.programId}
+//                         isLoading={loadingLevels}
+//                         value={values.levelId}
+//                         onChange={(option) => {
+//                           setFieldValue("levelId", option);
+//                           setFieldValue("moduleId", null);
+//                           setFieldValue("chapterId", null);
+//                           setFieldValue("topicId", null);
+//                           setSelectedLevel(option);
+//                           setSelectedModule(null);
+//                           setSelectedChapter(null);
+//                           setFilteredModules([]);
+//                           setFilteredChapters([]);
+//                           setFilteredTopics([]);
+//                         }}
+//                       />
+//                     </div>
+
+//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//                       {/* Module */}
+//                       <SelectField
+//                         name="moduleId"
+//                         label={t("assessment.details.parentModule")}
+//                         placeholder={t(
+//                           "assessment.details.parentModulePlaceholder",
+//                         )}
+//                         required
+//                         options={moduleOptions}
+//                         disabled={!values.levelId}
+//                         isLoading={loadingModules}
+//                         value={values.moduleId}
+//                         onChange={(option) => {
+//                           setFieldValue("moduleId", option);
+//                           setFieldValue("chapterId", null);
+//                           setFieldValue("topicId", null);
+//                           setSelectedModule(option);
+//                           setSelectedChapter(null);
+//                           setFilteredChapters([]);
+//                           setFilteredTopics([]);
+//                         }}
+//                       />
+
+//                       {/* Chapter */}
+//                       <SelectField
+//                         name="chapterId"
+//                         label={t("assessment.details.parentChapter")}
+//                         placeholder={t(
+//                           "assessment.details.parentChapterPlaceholder",
+//                         )}
+//                         required
+//                         options={chapterOptions}
+//                         disabled={!values.moduleId}
+//                         isLoading={loadingChapters}
+//                         value={values.chapterId}
+//                         onChange={(option) => {
+//                           setFieldValue("chapterId", option);
+//                           setFieldValue("topicId", null);
+//                           setSelectedChapter(option);
+//                           setFilteredTopics([]);
+//                         }}
+//                       />
+//                     </div>
+
+//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//                       {/* Topic */}
+//                       <SelectField
+//                         name="topicId"
+//                         label={t("assessment.details.topicName")}
+//                         placeholder={t(
+//                           "assessment.details.topicNamePlaceholder",
+//                         )}
+//                         required
+//                         options={topicOptions}
+//                         disabled={!values.chapterId}
+//                         isLoading={loadingTopics}
+//                         value={values.topicId}
+//                         onChange={(option) => setFieldValue("topicId", option)}
+//                       />
+//                     </div>
+//                   </div>
+//                 </div>
+
+//                 {/* ── Assessment Details ──────────────────────────────────── */}
+//                 <div>
+//                   <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
+//                     {t("assessment.details.assessmentDetails")}
+//                   </h3>
+
+//                   <div className="space-y-4">
+//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//                       <TextInput
+//                         name="title"
+//                         label={t("assessment.details.title")}
+//                         placeholder={t("assessment.details.titlePlaceholder")}
+//                         required
+//                         maxLength={150}
+//                       />
+//                       <TextInput
+//                         name="duration"
+//                         label={t("assessment.details.duration")}
+//                         placeholder={t(
+//                           "assessment.details.durationPlaceholder",
+//                         )}
+//                         type="number"
+//                         required
+//                         maxLength={3}
+//                       />
+//                     </div>
+
+//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//                       <TextInput
+//                         name="total_marks"
+//                         label={t("assessment.details.totalMarks")}
+//                         placeholder={t(
+//                           "assessment.details.totalMarksPlaceholder",
+//                         )}
+//                         type="number"
+//                         required
+//                         maxLength={3}
+//                       />
+//                       <TextInput
+//                         name="passing_score"
+//                         label={t("assessment.details.passingScore")}
+//                         placeholder={t(
+//                           "assessment.details.passingScorePlaceholder",
+//                         )}
+//                         type="number"
+//                         required
+//                         maxLength={3}
+//                       />
+//                     </div>
+
+//                     <div className="grid grid-cols-1 gap-4">
+//                       <TextareaField
+//                         name="description"
+//                         label={t("assessment.details.description")}
+//                         placeholder={t(
+//                           "assessment.details.descriptionPlaceholder",
+//                         )}
+//                         rows={4}
+//                         required
+//                         maxLength={500}
+//                       />
+//                     </div>
+//                   </div>
+//                 </div>
+
+//                 {/* ── Thumbnail ───────────────────────────────────────────── */}
+//                 <div>
+//                   <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
+//                     <span className="text-blue-600">
+//                       <FiImage />
+//                     </span>
+//                     {t("assessment.details.thumbnail")}
+//                   </h3>
+
+//                   <div className="border border-gray-300 bg-[#F8FAFC] p-6 rounded-lg">
+//                     <input
+//                       ref={fileInputRef}
+//                       type="file"
+//                       accept="image/*"
+//                       onChange={handleThumbnailUpload}
+//                       className="hidden"
+//                     />
+
+//                     {!thumbnailPreview ? (
+//                       <div
+//                         onClick={triggerFileUpload}
+//                         className="flex flex-col items-center justify-center cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 hover:border-blue-500 transition-colors"
+//                       >
+//                         <FiUpload className="text-4xl text-gray-400 mb-3" />
+//                         <p className="text-sm text-gray-600 mb-1">
+//                           {t("assessment.details.uploadText")}
+//                         </p>
+//                         <p className="text-xs text-gray-400">
+//                           {t("assessment.details.uploadSubText")}
+//                         </p>
+//                       </div>
+//                     ) : (
+//                       <div className="relative">
+//                         <div className="flex items-start gap-6">
+//                           <div className="relative group">
+//                             <img
+//                               src={thumbnailPreview}
+//                               alt="Thumbnail Preview"
+//                               className="w-32 h-32 object-cover rounded-lg border border-gray-300 shadow-sm"
+//                             />
+//                             <button
+//                               type="button"
+//                               onClick={removeThumbnail}
+//                               className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors shadow-md"
+//                             >
+//                               <FiX className="text-xs" />
+//                             </button>
+//                           </div>
+//                           <div className="flex-1">
+//                             {thumbnail ? (
+//                               <>
+//                                 <p className="text-sm font-semibold text-gray-700 mb-1">
+//                                   {thumbnail.name}
 //                                 </p>
-//                               )}
-//                               <button
-//                                 type="button"
-//                                 onClick={triggerFileUpload}
-//                                 className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1"
-//                               >
-//                                 <FiUpload className="text-sm" />
-//                                 {t("assessment.details.changeImage")}
-//                               </button>
-//                             </div>
+//                                 <p className="text-xs text-gray-500 mb-3">
+//                                   {(thumbnail.size / 1024).toFixed(2)} KB
+//                                 </p>
+//                               </>
+//                             ) : (
+//                               <p className="text-sm font-semibold text-gray-700 mb-3">
+//                                 {t("assessment.details.currentThumbnail")}
+//                               </p>
+//                             )}
+//                             <button
+//                               type="button"
+//                               onClick={triggerFileUpload}
+//                               className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1"
+//                             >
+//                               <FiUpload className="text-sm" />
+//                               {t("assessment.details.changeImage")}
+//                             </button>
 //                           </div>
 //                         </div>
-//                       )}
-//                     </div>
+//                       </div>
+//                     )}
 //                   </div>
+//                 </div>
 
-//                   {/* Footer */}
-//                   <div className="flex justify-end items-center pt-4">
-//                     <div className="flex gap-3">
-//                       <button
-//                         type="button"
-//                         onClick={handleDelete}
-//                         className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-gray-50"
-//                       >
-//                         {t("assessment.actions.deleteQuiz")}
-//                       </button>
-//                       <button
-//                         type="submit"
-//                         disabled={isSubmitting}
-//                         className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
-//                       >
-//                         {isSubmitting
-//                           ? t("assessment.actions.updating")
-//                           : t("assessment.actions.updateQuiz")}
-//                       </button>
-//                     </div>
+//                 {/* ── Footer ──────────────────────────────────────────────── */}
+//                 <div className="flex justify-end items-center pt-4">
+//                   <div className="flex gap-3">
+//                     <button
+//                       type="button"
+//                       onClick={handleDelete}
+//                       className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-gray-50"
+//                     >
+//                       {t("assessment.actions.deleteQuiz")}
+//                     </button>
+//                     <button
+//                       type="submit"
+//                       disabled={isSubmitting}
+//                       className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
+//                     >
+//                       {isSubmitting
+//                         ? t("assessment.actions.updating")
+//                         : t("assessment.actions.updateQuiz")}
+//                     </button>
 //                   </div>
-//                 </Form>
-//               );
-//             }}
+//                 </div>
+//               </Form>
+//             )}
 //           </Formik>
 //         </div>
 //       </div>
@@ -2656,7 +733,7 @@
 //   );
 // };
 
-// export default AssissmentDetails;
+// export default AssessmentDetails;
 
 import { useState, useRef, useEffect } from "react";
 import { Formik, Form } from "formik";
@@ -2682,7 +759,6 @@ import {
   deleteSingleAssessment,
   getAssessmentById,
   updateAssessmentById,
-  // updateAssessment,
 } from "../../../../../../../redux/slice/assissmentSlice";
 import { showConfirm } from "../../../../../../../redux/slice/confirmSlice";
 import Breadcrumb from "../../../../../common/layout/Breadcrumb";
@@ -2707,18 +783,18 @@ const AssessmentDetails = () => {
   const { chapters } = useSelector((state) => state.chapter);
   const { topics } = useSelector((state) => state.topic);
 
+  // States for sequential loading
+  const [isProgramsLoaded, setIsProgramsLoaded] = useState(false);
+  const [isLevelsLoaded, setIsLevelsLoaded] = useState(false);
+  const [isModulesLoaded, setIsModulesLoaded] = useState(false);
+  const [isChaptersLoaded, setIsChaptersLoaded] = useState(false);
+  const [isTopicsLoaded, setIsTopicsLoaded] = useState(false);
+
   // Selected state for cascading dropdowns
   const [selectedProgram, setSelectedProgram] = useState(null);
   const [selectedLevel, setSelectedLevel] = useState(null);
   const [selectedModule, setSelectedModule] = useState(null);
   const [selectedChapter, setSelectedChapter] = useState(null);
-
-  // Loading flags for API calls
-  const [loadingPrograms, setLoadingPrograms] = useState(false);
-  const [loadingLevels, setLoadingLevels] = useState(false);
-  const [loadingModules, setLoadingModules] = useState(false);
-  const [loadingChapters, setLoadingChapters] = useState(false);
-  const [loadingTopics, setLoadingTopics] = useState(false);
 
   // Filtered dropdown data
   const [filteredLevels, setFilteredLevels] = useState([]);
@@ -2743,51 +819,54 @@ const AssessmentDetails = () => {
     }
   }, [assessment]);
 
-  // ─── 3. Load all required master data (programs, levels, modules, chapters, topics)
-  //        Triggers once assessment is available. Uses existing Redux data if present.
+  // ─── 3. STEP 1: Load programs after assessment is available ─────────────────
   useEffect(() => {
-    if (!assessment) return;
-
-    // Load Programs
-    if (!programs?.data && !loadingPrograms) {
-      setLoadingPrograms(true);
-      dispatch(getAllPrograms()).finally(() => setLoadingPrograms(false));
+    if (assessment && !isProgramsLoaded) {
+      dispatch(getAllPrograms()).then(() => {
+        setIsProgramsLoaded(true);
+      });
     }
+  }, [assessment, isProgramsLoaded, dispatch]);
 
-    // For topic-type assessments load the full hierarchy master data
-    if (assessment.type === "topic" || assessment?.hierarchy?.level) {
-      if (!levels?.data && !loadingLevels) {
-        setLoadingLevels(true);
-        dispatch(getAllLevels()).finally(() => setLoadingLevels(false));
-      }
-      if (!modules?.data && !loadingModules) {
-        setLoadingModules(true);
-        dispatch(getAllModules()).finally(() => setLoadingModules(false));
-      }
-      if (!chapters?.data && !loadingChapters) {
-        setLoadingChapters(true);
-        dispatch(getAllChapters()).finally(() => setLoadingChapters(false));
-      }
-      if (!topics?.data && !loadingTopics) {
-        setLoadingTopics(true);
-        dispatch(getAllTopics()).finally(() => setLoadingTopics(false));
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [assessment]);
-
-  // ─── 4. Once master data is available, derive selected values & filtered lists
+  // ─── 4. STEP 2: Load levels when program is selected ────────────────────────
   useEffect(() => {
-    if (!assessment?.hierarchy || !programs?.data) return;
-
-    const isTopicType =
-      assessment.type === "topic" || assessment?.hierarchy?.level;
-
-    // For topic-type, wait until all master data is loaded
-    if (isTopicType) {
-      if (!levels?.data || !modules?.data || !chapters?.data || !topics?.data)
-        return;
+    if (isProgramsLoaded && selectedProgram && !isLevelsLoaded) {
+      dispatch(getAllLevels()).then(() => {
+        setIsLevelsLoaded(true);
+      });
     }
+  }, [selectedProgram, isProgramsLoaded, isLevelsLoaded, dispatch]);
+
+  // ─── 5. STEP 3: Load modules when level is selected ─────────────────────────
+  useEffect(() => {
+    if (isLevelsLoaded && selectedLevel && !isModulesLoaded) {
+      dispatch(getAllModules()).then(() => {
+        setIsModulesLoaded(true);
+      });
+    }
+  }, [selectedLevel, isLevelsLoaded, isModulesLoaded, dispatch]);
+
+  // ─── 6. STEP 4: Load chapters when module is selected ───────────────────────
+  useEffect(() => {
+    if (isModulesLoaded && selectedModule && !isChaptersLoaded) {
+      dispatch(getAllChapters()).then(() => {
+        setIsChaptersLoaded(true);
+      });
+    }
+  }, [selectedModule, isModulesLoaded, isChaptersLoaded, dispatch]);
+
+  // ─── 7. STEP 5: Load topics when chapter is selected ────────────────────────
+  useEffect(() => {
+    if (isChaptersLoaded && selectedChapter && !isTopicsLoaded) {
+      dispatch(getAllTopics()).then(() => {
+        setIsTopicsLoaded(true);
+      });
+    }
+  }, [selectedChapter, isChaptersLoaded, isTopicsLoaded, dispatch]);
+
+  // ─── 8. Once master data is available, derive selected values & filtered lists
+  useEffect(() => {
+    if (!assessment?.hierarchy || !isProgramsLoaded) return;
 
     const { hierarchy } = assessment;
 
@@ -2809,12 +888,13 @@ const AssessmentDetails = () => {
       : null;
 
     setSelectedProgram(prog);
-    setSelectedLevel(lev);
-    setSelectedModule(mod);
-    setSelectedChapter(chap);
+
+    if (lev) setSelectedLevel(lev);
+    if (mod) setSelectedModule(mod);
+    if (chap) setSelectedChapter(chap);
 
     // ── Filter cascaded lists ─────────────────────────────────────────────────
-    if (prog && levels?.data) {
+    if (prog && levels?.data && isLevelsLoaded) {
       setFilteredLevels(
         levels.data.filter(
           (l) =>
@@ -2825,7 +905,7 @@ const AssessmentDetails = () => {
       );
     }
 
-    if (lev && modules?.data) {
+    if (lev && modules?.data && isModulesLoaded) {
       setFilteredModules(
         modules.data.filter(
           (m) =>
@@ -2836,7 +916,7 @@ const AssessmentDetails = () => {
       );
     }
 
-    if (mod && chapters?.data) {
+    if (mod && chapters?.data && isChaptersLoaded) {
       setFilteredChapters(
         chapters.data.filter(
           (c) =>
@@ -2847,7 +927,7 @@ const AssessmentDetails = () => {
       );
     }
 
-    if (chap && topics?.data) {
+    if (chap && topics?.data && isTopicsLoaded) {
       setFilteredTopics(
         topics.data.filter(
           (tp) =>
@@ -2859,11 +939,22 @@ const AssessmentDetails = () => {
     }
 
     setIsDataLoaded(true);
-  }, [assessment, programs, levels, modules, chapters, topics]);
+  }, [
+    assessment,
+    isProgramsLoaded,
+    isLevelsLoaded,
+    isModulesLoaded,
+    isChaptersLoaded,
+    isTopicsLoaded,
+    levels,
+    modules,
+    chapters,
+    topics,
+  ]);
 
-  // ─── 5. Re-filter on manual dropdown changes ──────────────────────────────
+  // ─── 9. Re-filter on manual dropdown changes ──────────────────────────────
   useEffect(() => {
-    if (selectedProgram && levels?.data) {
+    if (selectedProgram && levels?.data && isLevelsLoaded) {
       setFilteredLevels(
         levels.data.filter(
           (l) =>
@@ -2873,10 +964,10 @@ const AssessmentDetails = () => {
         ),
       );
     }
-  }, [selectedProgram, levels]);
+  }, [selectedProgram, levels, isLevelsLoaded]);
 
   useEffect(() => {
-    if (selectedLevel && modules?.data) {
+    if (selectedLevel && modules?.data && isModulesLoaded) {
       setFilteredModules(
         modules.data.filter(
           (m) =>
@@ -2886,10 +977,10 @@ const AssessmentDetails = () => {
         ),
       );
     }
-  }, [selectedLevel, modules]);
+  }, [selectedLevel, modules, isModulesLoaded]);
 
   useEffect(() => {
-    if (selectedModule && chapters?.data) {
+    if (selectedModule && chapters?.data && isChaptersLoaded) {
       setFilteredChapters(
         chapters.data.filter(
           (c) =>
@@ -2899,10 +990,10 @@ const AssessmentDetails = () => {
         ),
       );
     }
-  }, [selectedModule, chapters]);
+  }, [selectedModule, chapters, isChaptersLoaded]);
 
   useEffect(() => {
-    if (selectedChapter && topics?.data) {
+    if (selectedChapter && topics?.data && isTopicsLoaded) {
       setFilteredTopics(
         topics.data.filter(
           (tp) =>
@@ -2912,7 +1003,7 @@ const AssessmentDetails = () => {
         ),
       );
     }
-  }, [selectedChapter, topics]);
+  }, [selectedChapter, topics, isTopicsLoaded]);
 
   // ─── Thumbnail handlers ───────────────────────────────────────────────────
   const handleThumbnailUpload = (event) => {
@@ -3002,7 +1093,6 @@ const AssessmentDetails = () => {
   const onSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
       const formData = new FormData();
-      // formData.append("_method", "PUT");
       formData.append("type", "topic");
       formData.append("title", values.title);
       formData.append("description", values.description);
@@ -3110,7 +1200,7 @@ const AssessmentDetails = () => {
                         )}
                         required
                         options={programOptions}
-                        isLoading={loadingPrograms}
+                        isLoading={!isProgramsLoaded}
                         value={values.programId}
                         onChange={(option) => {
                           setFieldValue("programId", option);
@@ -3126,6 +1216,10 @@ const AssessmentDetails = () => {
                           setFilteredModules([]);
                           setFilteredChapters([]);
                           setFilteredTopics([]);
+                          setIsLevelsLoaded(false);
+                          setIsModulesLoaded(false);
+                          setIsChaptersLoaded(false);
+                          setIsTopicsLoaded(false);
                         }}
                       />
 
@@ -3138,8 +1232,8 @@ const AssessmentDetails = () => {
                         )}
                         required
                         options={levelOptions}
-                        disabled={!values.programId}
-                        isLoading={loadingLevels}
+                        disabled={!values.programId || !isProgramsLoaded}
+                        isLoading={!isLevelsLoaded && selectedProgram}
                         value={values.levelId}
                         onChange={(option) => {
                           setFieldValue("levelId", option);
@@ -3152,6 +1246,9 @@ const AssessmentDetails = () => {
                           setFilteredModules([]);
                           setFilteredChapters([]);
                           setFilteredTopics([]);
+                          setIsModulesLoaded(false);
+                          setIsChaptersLoaded(false);
+                          setIsTopicsLoaded(false);
                         }}
                       />
                     </div>
@@ -3166,8 +1263,8 @@ const AssessmentDetails = () => {
                         )}
                         required
                         options={moduleOptions}
-                        disabled={!values.levelId}
-                        isLoading={loadingModules}
+                        disabled={!values.levelId || !isLevelsLoaded}
+                        isLoading={!isModulesLoaded && selectedLevel}
                         value={values.moduleId}
                         onChange={(option) => {
                           setFieldValue("moduleId", option);
@@ -3177,6 +1274,8 @@ const AssessmentDetails = () => {
                           setSelectedChapter(null);
                           setFilteredChapters([]);
                           setFilteredTopics([]);
+                          setIsChaptersLoaded(false);
+                          setIsTopicsLoaded(false);
                         }}
                       />
 
@@ -3189,14 +1288,15 @@ const AssessmentDetails = () => {
                         )}
                         required
                         options={chapterOptions}
-                        disabled={!values.moduleId}
-                        isLoading={loadingChapters}
+                        disabled={!values.moduleId || !isModulesLoaded}
+                        isLoading={!isChaptersLoaded && selectedModule}
                         value={values.chapterId}
                         onChange={(option) => {
                           setFieldValue("chapterId", option);
                           setFieldValue("topicId", null);
                           setSelectedChapter(option);
                           setFilteredTopics([]);
+                          setIsTopicsLoaded(false);
                         }}
                       />
                     </div>
@@ -3211,8 +1311,8 @@ const AssessmentDetails = () => {
                         )}
                         required
                         options={topicOptions}
-                        disabled={!values.chapterId}
-                        isLoading={loadingTopics}
+                        disabled={!values.chapterId || !isChaptersLoaded}
+                        isLoading={!isTopicsLoaded && selectedChapter}
                         value={values.topicId}
                         onChange={(option) => setFieldValue("topicId", option)}
                       />
@@ -3233,6 +1333,7 @@ const AssessmentDetails = () => {
                         label={t("assessment.details.title")}
                         placeholder={t("assessment.details.titlePlaceholder")}
                         required
+                        maxLength={150}
                       />
                       <TextInput
                         name="duration"
@@ -3242,6 +1343,7 @@ const AssessmentDetails = () => {
                         )}
                         type="number"
                         required
+                        maxLength={3}
                       />
                     </div>
 
@@ -3254,6 +1356,7 @@ const AssessmentDetails = () => {
                         )}
                         type="number"
                         required
+                        maxLength={3}
                       />
                       <TextInput
                         name="passing_score"
@@ -3263,6 +1366,7 @@ const AssessmentDetails = () => {
                         )}
                         type="number"
                         required
+                        maxLength={3}
                       />
                     </div>
 
@@ -3275,6 +1379,7 @@ const AssessmentDetails = () => {
                         )}
                         rows={4}
                         required
+                        maxLength={500}
                       />
                     </div>
                   </div>

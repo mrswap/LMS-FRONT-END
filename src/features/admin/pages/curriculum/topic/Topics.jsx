@@ -43,75 +43,75 @@
 //   const { modules } = useSelector((state) => state.module);
 //   const { levels } = useSelector((state) => state.level);
 
+//   // ✅ Fixed: Dynamic level options with i18n
 //   const levelOption = [
-//     { value: "All", label: "All Level" },
+//     { value: "all", label: t("topic.filters.allLevels") },
 //     ...(levels?.data?.map((item) => ({
 //       value: item.id,
 //       label: item.title,
 //     })) || []),
 //   ];
 
+//   // ✅ Fixed: Dynamic status options with i18n
 //   const statusOptions = [
-//     { value: "all", label: "All Status" },
-//     { value: "1", label: "Active" },
-//     { value: "0", label: "Inactive" },
+//     { value: "all", label: t("topic.filters.allStatus") },
+//     { value: "1", label: t("topic.filters.active") },
+//     { value: "0", label: t("topic.filters.inactive") },
 //   ];
 
 //   const [level, setLevel] = useState(levelOption[0]);
-//   const [module, setModule] = useState(null);
-//   const [chapter, setChapter] = useState(null);
+//   const [moduleFilter, setModuleFilter] = useState(null);
+//   const [chapterFilter, setChapterFilter] = useState(null);
 //   const [status, setStatus] = useState(statusOptions[0]);
 //   const [search, setSearch] = useState("");
 //   const [page, setPage] = useState(1);
 
-//   // 🔥 Level ke according modules filter kar
+//   // Get module options based on selected level
 //   const getModuleOptions = () => {
-//     if (!level || level?.value === "All") {
+//     if (!level || level?.value === "all") {
 //       return [];
 //     }
-
 //     const filteredModules =
 //       modules?.data?.filter((item) => item.level?.id === level?.value) || [];
-
 //     return filteredModules.map((item) => ({
 //       value: item.id,
 //       label: item.title,
 //     }));
 //   };
 
-//   // 🔥 Module ke according chapters filter kar
+//   // Get chapter options based on selected module
 //   const getChapterOptions = () => {
-//     if (!module || module?.value === "All" || !module?.value) {
+//     if (!moduleFilter || !moduleFilter?.value) {
 //       return [];
 //     }
-
 //     const filteredChapters =
-//       chapters?.data?.filter((item) => item.module?.id === module?.value) || [];
-
+//       chapters?.data?.filter(
+//         (item) => item.module?.id === moduleFilter?.value,
+//       ) || [];
 //     return filteredChapters.map((item) => ({
 //       value: item.id,
 //       label: item.title,
 //     }));
 //   };
 
-//   // 🔥 Level change hone par module aur chapter reset
+//   // Reset module and chapter when level changes
 //   useEffect(() => {
-//     setModule(null);
-//     setChapter(null);
+//     setModuleFilter(null);
+//     setChapterFilter(null);
 //   }, [level]);
 
-//   // 🔥 Module change hone par chapter reset
+//   // Reset chapter when module changes
 //   useEffect(() => {
-//     setChapter(null);
-//   }, [module]);
+//     setChapterFilter(null);
+//   }, [moduleFilter]);
 
 //   const fetchTopics = (overridePage) => {
 //     const params = {
 //       search: search || "",
-//       chapter_id: chapter?.value || "",
-//       level_id: level?.value !== "All" ? level?.value : "",
-//       module_id: module?.value || "",
-//       status: status?.value !== "All" ? status?.value : "",
+//       chapter_id: chapterFilter?.value || "",
+//       level_id: level?.value !== "all" ? level?.value : "",
+//       module_id: moduleFilter?.value || "",
+//       status: status?.value !== "all" ? status?.value : "all",
 //       page: overridePage ?? page,
 //       limit: ITEMS_PER_PAGE,
 //     };
@@ -127,7 +127,7 @@
 //       fetchTopics(1);
 //     }, 500);
 //     return () => clearTimeout(delay);
-//   }, [search, level, module, chapter, status]);
+//   }, [search, level, moduleFilter, chapterFilter, status]);
 
 //   useEffect(() => {
 //     fetchTopics(page);
@@ -139,8 +139,8 @@
 
 //   const resetFilters = () => {
 //     setLevel(levelOption[0]);
-//     setModule(null);
-//     setChapter(null);
+//     setModuleFilter(null);
+//     setChapterFilter(null);
 //     setStatus(statusOptions[0]);
 //     setSearch("");
 //     setPage(1);
@@ -159,6 +159,11 @@
 //       opacity: state.isDisabled ? 0.6 : 1,
 //     }),
 //   };
+
+//   const isModuleDisabled = !level || level?.value === "all";
+//   const isChapterDisabled = !moduleFilter || !moduleFilter?.value;
+//   const moduleOptions = getModuleOptions();
+//   const chapterOptions = getChapterOptions();
 
 //   const columns = [
 //     {
@@ -186,7 +191,7 @@
 //       render: (row) => (
 //         <div>
 //           <p className="font-semibold text-gray-800">
-//             <TruncateText text={row?.module?.title} maxLength={25} />
+//             <TruncateText text={row.module?.title} maxLength={25} />
 //           </p>
 //         </div>
 //       ),
@@ -205,7 +210,7 @@
 //       header: t("topic.list.columns.duration"),
 //       render: (row) => (
 //         <span className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-semibold">
-//           {row.estimated_duration ?? 0} mins
+//           {row.estimated_duration ?? 0} {t("topic.list.minutes")}
 //         </span>
 //       ),
 //     },
@@ -236,12 +241,6 @@
 //     },
 //   ];
 
-//   // 🔥 Disabled logic
-//   const isModuleDisabled = !level || level?.value === "All";
-//   const isChapterDisabled = !module || !module?.value;
-//   const moduleOptions = getModuleOptions();
-//   const chapterOptions = getChapterOptions();
-
 //   if (isLoading && !topics?.data?.length) return <Loader />;
 //   if (isError) return <Error message={message} />;
 
@@ -255,7 +254,7 @@
 //         <PageHeaderRight>
 //           <Link
 //             to="create-topic"
-//             className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap"
+//             className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap hover:bg-opacity-90 transition"
 //           >
 //             {t("topic.actions.addNewTopic")}
 //           </Link>
@@ -267,8 +266,8 @@
 //           <div className="w-full">
 //             <div
 //               className="flex items-center bg-gray-50 border border-gray-200
-//       hover:border-blue-500 focus-within:border-blue-500
-//       rounded-xl px-4 py-2.5 transition-all"
+//               hover:border-blue-500 focus-within:border-blue-500
+//               rounded-xl px-4 py-2.5 transition-all"
 //             >
 //               <FiSearch className="text-gray-400 text-base" />
 //               <input
@@ -301,28 +300,32 @@
 
 //             <div className="w-full sm:w-[48%] lg:w-[210px]">
 //               <Select
-//                 value={module}
-//                 onChange={setModule}
+//                 value={moduleFilter}
+//                 onChange={setModuleFilter}
 //                 options={moduleOptions}
 //                 styles={customSelectStyles}
 //                 isSearchable={false}
 //                 isDisabled={isModuleDisabled}
 //                 placeholder={
-//                   isModuleDisabled ? "Select level first" : "Select module"
+//                   isModuleDisabled
+//                     ? t("topic.filters.selectLevelFirst")
+//                     : t("topic.filters.selectModule")
 //                 }
 //               />
 //             </div>
 
 //             <div className="w-full sm:w-[48%] lg:w-[210px]">
 //               <Select
-//                 value={chapter}
-//                 onChange={setChapter}
+//                 value={chapterFilter}
+//                 onChange={setChapterFilter}
 //                 options={chapterOptions}
 //                 styles={customSelectStyles}
 //                 isSearchable={false}
 //                 isDisabled={isChapterDisabled}
 //                 placeholder={
-//                   isChapterDisabled ? "Select module first" : "Select chapter"
+//                   isChapterDisabled
+//                     ? t("topic.filters.selectModuleFirst")
+//                     : t("topic.filters.selectChapter")
 //                 }
 //               />
 //             </div>
@@ -342,16 +345,15 @@
 //                 <button
 //                   onClick={resetFilters}
 //                   className="flex items-center justify-center w-9 h-9 rounded-lg cursor-pointer
-//       text-gray-500 hover:text-white hover:bg-red-500
-//       transition-all"
+//                   text-gray-500 hover:text-white hover:bg-red-500 transition-all"
 //                 >
 //                   <LuFilterX size={18} />
 //                 </button>
 //                 <div
 //                   className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2
-//       px-2 py-1 text-xs rounded-md bg-gray-800 text-white
-//       opacity-0 group-hover:opacity-100 transition-all duration-200
-//       whitespace-nowrap pointer-events-none"
+//                   px-2 py-1 text-xs rounded-md bg-gray-800 text-white
+//                   opacity-0 group-hover:opacity-100 transition-all duration-200
+//                   whitespace-nowrap pointer-events-none"
 //                 >
 //                   {t("topic.list.clearAll")}
 //                 </div>
@@ -372,6 +374,46 @@
 //             onPageChange={handlePageChange}
 //           />
 //         </div>
+
+//         {/* ========== COMMENTED CODE - STATS CARDS (FUTURE USE) ==========
+//         <div className="flex gap-4 w-full mt-4">
+//           <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-sm transition">
+//             <h3 className="text-[#6B7280] text-sm font-medium">
+//               {t("topic.stats.totalTopics.title")}
+//             </h3>
+//             <p className="text-2xl font-bold text-gray-800 mt-2">
+//               {topics?.total || 0}
+//             </p>
+//             <p className="text-sm text-[#6B7280] mt-1">
+//               {t("topic.stats.totalTopics.subtext")}
+//             </p>
+//           </div>
+
+//           <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-sm transition">
+//             <h3 className="text-[#6B7280] text-sm font-medium">
+//               {t("topic.stats.activeTopics.title")}
+//             </h3>
+//             <p className="text-2xl font-bold text-gray-800 mt-2">
+//               {topics?.data?.filter(t => t.status)?.length || 0}
+//             </p>
+//             <p className="text-sm text-[#6B7280] mt-1">
+//               {t("topic.stats.activeTopics.subtext")}
+//             </p>
+//           </div>
+
+//           <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-sm transition">
+//             <h3 className="text-[#6B7280] text-sm font-medium">
+//               {t("topic.stats.avgDuration.title")}
+//             </h3>
+//             <p className="text-2xl font-bold text-gray-800 mt-2">
+//               {Math.round(topics?.data?.reduce((sum, t) => sum + (t.estimated_duration || 0), 0) / (topics?.data?.length || 1)) || 0} mins
+//             </p>
+//             <p className="text-sm text-[#6B7280] mt-1">
+//               {t("topic.stats.avgDuration.subtext")}
+//             </p>
+//           </div>
+//         </div>
+//         ========== END COMMENTED CODE ========== */}
 //       </PageBody>
 //     </PageLayout>
 //   );
@@ -424,6 +466,11 @@ const Topics = () => {
   const { modules } = useSelector((state) => state.module);
   const { levels } = useSelector((state) => state.level);
 
+  // State to track loading sequence
+  const [isLevelsLoaded, setIsLevelsLoaded] = useState(false);
+  const [isModulesLoaded, setIsModulesLoaded] = useState(false);
+  const [isChaptersLoaded, setIsChaptersLoaded] = useState(false);
+
   // ✅ Fixed: Dynamic level options with i18n
   const levelOption = [
     { value: "all", label: t("topic.filters.allLevels") },
@@ -475,17 +522,52 @@ const Topics = () => {
     }));
   };
 
-  // Reset module and chapter when level changes
+  // Reset module, chapter, and their loaded states when level changes
   useEffect(() => {
     setModuleFilter(null);
     setChapterFilter(null);
+    setIsModulesLoaded(false);
+    setIsChaptersLoaded(false);
   }, [level]);
 
   // Reset chapter when module changes
   useEffect(() => {
     setChapterFilter(null);
+    setIsChaptersLoaded(false);
   }, [moduleFilter]);
 
+  // STEP 1: Load levels on component mount
+  useEffect(() => {
+    const loadLevels = async () => {
+      await dispatch(getAllLevels());
+      setIsLevelsLoaded(true);
+    };
+    loadLevels();
+  }, [dispatch]);
+
+  // STEP 2: Load modules only when level is selected (not "all")
+  useEffect(() => {
+    if (isLevelsLoaded && level?.value !== "all") {
+      const loadModules = async () => {
+        await dispatch(getAllModules());
+        setIsModulesLoaded(true);
+      };
+      loadModules();
+    }
+  }, [level, isLevelsLoaded, dispatch]);
+
+  // STEP 3: Load chapters only when module is selected
+  useEffect(() => {
+    if (isModulesLoaded && moduleFilter?.value) {
+      const loadChapters = async () => {
+        await dispatch(getAllChapters());
+        setIsChaptersLoaded(true);
+      };
+      loadChapters();
+    }
+  }, [moduleFilter, isModulesLoaded, dispatch]);
+
+  // STEP 4: Fetch topics when all dependencies are ready
   const fetchTopics = (overridePage) => {
     const params = {
       search: search || "",
@@ -497,22 +579,25 @@ const Topics = () => {
       limit: ITEMS_PER_PAGE,
     };
     dispatch(getAllTopics(params));
-    dispatch(getAllChapters());
-    dispatch(getAllModules());
-    dispatch(getAllLevels());
   };
 
+  // Fetch topics when filters change (only after levels are loaded)
   useEffect(() => {
+    if (!isLevelsLoaded) return;
+
     const delay = setTimeout(() => {
       setPage(1);
       fetchTopics(1);
     }, 500);
     return () => clearTimeout(delay);
-  }, [search, level, moduleFilter, chapterFilter, status]);
+  }, [search, status, level, moduleFilter, chapterFilter, isLevelsLoaded]);
 
+  // Fetch topics on page change
   useEffect(() => {
-    fetchTopics(page);
-  }, [page]);
+    if (isLevelsLoaded) {
+      fetchTopics(page);
+    }
+  }, [page, isLevelsLoaded]);
 
   const handlePageChange = (newPage) => {
     setPage(newPage);
@@ -525,6 +610,8 @@ const Topics = () => {
     setStatus(statusOptions[0]);
     setSearch("");
     setPage(1);
+    setIsModulesLoaded(false);
+    setIsChaptersLoaded(false);
   };
 
   const customSelectStyles = {
@@ -545,6 +632,19 @@ const Topics = () => {
   const isChapterDisabled = !moduleFilter || !moduleFilter?.value;
   const moduleOptions = getModuleOptions();
   const chapterOptions = getChapterOptions();
+
+  // Check if modules are loading
+  const isModulesLoading =
+    isLevelsLoaded &&
+    level?.value !== "all" &&
+    !isModulesLoaded &&
+    !modules?.data;
+  // Check if chapters are loading
+  const isChaptersLoading =
+    isModulesLoaded &&
+    moduleFilter?.value &&
+    !isChaptersLoaded &&
+    !chapters?.data;
 
   const columns = [
     {
@@ -676,6 +776,7 @@ const Topics = () => {
                 options={levelOption}
                 styles={customSelectStyles}
                 isSearchable={false}
+                isLoading={!isLevelsLoaded}
               />
             </div>
 
@@ -687,10 +788,13 @@ const Topics = () => {
                 styles={customSelectStyles}
                 isSearchable={false}
                 isDisabled={isModuleDisabled}
+                isLoading={isModulesLoading}
                 placeholder={
                   isModuleDisabled
                     ? t("topic.filters.selectLevelFirst")
-                    : t("topic.filters.selectModule")
+                    : isModulesLoading
+                      ? t("topic.filters.loadingModules")
+                      : t("topic.filters.selectModule")
                 }
               />
             </div>
@@ -703,10 +807,13 @@ const Topics = () => {
                 styles={customSelectStyles}
                 isSearchable={false}
                 isDisabled={isChapterDisabled}
+                isLoading={isChaptersLoading}
                 placeholder={
                   isChapterDisabled
                     ? t("topic.filters.selectModuleFirst")
-                    : t("topic.filters.selectChapter")
+                    : isChaptersLoading
+                      ? t("topic.filters.loadingChapters")
+                      : t("topic.filters.selectChapter")
                 }
               />
             </div>
@@ -755,46 +862,6 @@ const Topics = () => {
             onPageChange={handlePageChange}
           />
         </div>
-
-        {/* ========== COMMENTED CODE - STATS CARDS (FUTURE USE) ==========
-        <div className="flex gap-4 w-full mt-4">
-          <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-sm transition">
-            <h3 className="text-[#6B7280] text-sm font-medium">
-              {t("topic.stats.totalTopics.title")}
-            </h3>
-            <p className="text-2xl font-bold text-gray-800 mt-2">
-              {topics?.total || 0}
-            </p>
-            <p className="text-sm text-[#6B7280] mt-1">
-              {t("topic.stats.totalTopics.subtext")}
-            </p>
-          </div>
-
-          <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-sm transition">
-            <h3 className="text-[#6B7280] text-sm font-medium">
-              {t("topic.stats.activeTopics.title")}
-            </h3>
-            <p className="text-2xl font-bold text-gray-800 mt-2">
-              {topics?.data?.filter(t => t.status)?.length || 0}
-            </p>
-            <p className="text-sm text-[#6B7280] mt-1">
-              {t("topic.stats.activeTopics.subtext")}
-            </p>
-          </div>
-
-          <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-sm transition">
-            <h3 className="text-[#6B7280] text-sm font-medium">
-              {t("topic.stats.avgDuration.title")}
-            </h3>
-            <p className="text-2xl font-bold text-gray-800 mt-2">
-              {Math.round(topics?.data?.reduce((sum, t) => sum + (t.estimated_duration || 0), 0) / (topics?.data?.length || 1)) || 0} mins
-            </p>
-            <p className="text-sm text-[#6B7280] mt-1">
-              {t("topic.stats.avgDuration.subtext")}
-            </p>
-          </div>
-        </div>
-        ========== END COMMENTED CODE ========== */}
       </PageBody>
     </PageLayout>
   );

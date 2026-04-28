@@ -196,6 +196,7 @@ const QuestionDetails = () => {
                           )}
                           rows={4}
                           required={true}
+                          maxLength={250}
                         />
                       </div>
 
@@ -206,6 +207,7 @@ const QuestionDetails = () => {
                           placeholder={t("question.details.marksPlaceholder")}
                           type="number"
                           required={true}
+                          maxLength={3}
                         />
 
                         <TextInput
@@ -214,6 +216,7 @@ const QuestionDetails = () => {
                           placeholder={t("question.details.orderPlaceholder")}
                           type="number"
                           required={true}
+                          maxLength={3}
                         />
                       </div>
                     </div>
