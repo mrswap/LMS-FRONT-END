@@ -775,7 +775,7 @@ import {
   updateSingleContentById,
 } from "../../../../../../redux/slice/unitBuilderSlice";
 import { useQuill } from "react-quilljs";
-import "quill/dist/quill.snow.css";
+// import "quill/dist/quill.snow.css";/
 import { FiImage, FiType } from "react-icons/fi";
 import { showConfirm } from "../../../../../../redux/slice/confirmSlice";
 import Loader from "../../../../common/Loader";
