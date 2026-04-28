@@ -51,7 +51,6 @@
 //   useEffect(() => {
 //     if (quill) {
 //       quill.root.innerHTML = value || "";
-
 //       quill.on("text-change", () => {
 //         onChange(quill.root.innerHTML);
 //       });
@@ -73,7 +72,7 @@
 //   const { chapters } = useSelector((state) => state.chapter);
 //   const { topics } = useSelector((state) => state.topic);
 
-//   const [type, setType] = useState({ value: "all", label: "All Type" });
+//   const [type, setType] = useState({ value: "all", label: "All" });
 //   const [selectedOption, setSelectedOption] = useState(null);
 
 //   const [preview, setPreview] = useState(null);
@@ -91,11 +90,11 @@
 //     topics?.data?.map((i) => ({ value: i.id, label: i.title })) || [];
 
 //   const typeOptions = [
-//     { value: "all", label: "All" },
-//     { value: "level", label: "Level" },
-//     { value: "module", label: "Module" },
-//     { value: "chapter", label: "Chapter" },
-//     { value: "topic", label: "Topic" },
+//     { value: "all", label: t("faq.types.all") },
+//     { value: "level", label: t("faq.types.level") },
+//     { value: "module", label: t("faq.types.module") },
+//     { value: "chapter", label: t("faq.types.chapter") },
+//     { value: "topic", label: t("faq.types.topic") },
 //   ];
 
 //   const getOptions = () => {
@@ -118,35 +117,26 @@
 //     dispatch(getAllChapters());
 //     dispatch(getAllModules());
 //     dispatch(getAllLevels());
-//   }, []);
+//   }, [dispatch]);
 
+//   // ✅ Fixed: Validation schema with correct i18n keys
 //   const validationSchema = Yup.object({
 //     question: Yup.string()
 //       .required(t("faq.validation.questionRequired"))
-//       .min(5, t("validation.questionMin")),
-
+//       .min(5, t("faq.validation.questionMin")),
 //     answer: Yup.string()
 //       .required(t("faq.validation.answerRequired"))
 //       .min(10, t("faq.validation.answerMin")),
-
-//     type: Yup.string().required(t("faq.validation.typeRequired")),
-
-//     selectedId: Yup.string().when("type", {
-//       is: (type) => type !== "all",
-//       then: (schema) => schema.required(t("faq.validation.selectOption")),
-//       otherwise: (schema) => schema.notRequired(),
-//     }),
-
-//     image: Yup.mixed()
-//       .nullable()
-//       .test("fileType", t("faq.validation.imageType"), (value) => {
-//         if (!value) return true;
-//         return value && value.type.startsWith("image/");
-//       })
-//       .test("fileSize", t("faq.validation.imageSize"), (value) => {
-//         if (!value) return true;
-//         return value && value.size <= 5 * 1024 * 1024;
-//       }),
+//     // image: Yup.mixed()
+//     //   .nullable()
+//     //   .test("fileType", t("faq.validation.imageType"), (value) => {
+//     //     if (!value) return true;
+//     //     return value && value.type.startsWith("image/");
+//     //   })
+//     //   .test("fileSize", t("faq.validation.imageSize"), (value) => {
+//     //     if (!value) return true;
+//     //     return value && value.size <= 5 * 1024 * 1024;
+//     //   }),
 //   });
 
 //   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
@@ -154,36 +144,32 @@
 //       const formData = new FormData();
 
 //       formData.append("type", type.value);
-//       formData.append("id", selectedOption?.value || "");
+//       if (selectedOption?.value && type.value !== "all") {
+//         formData.append("id", selectedOption.value);
+//       }
 //       formData.append("question", values.question);
 //       formData.append("answer", values.answer);
 
-//       // Image upload on submit
 //       if (image) {
 //         formData.append("image", image);
 //       }
 
-//       console.log("SUBMIT DATA 👉", {
-//         type: type.value,
-//         topic_id: selectedOption?.value,
-//         question: values.question,
-//         answer: values.answer,
-//         image: image ? image.name : "No image",
-//       });
+//       // ========== FUTURE: Add more fields if needed ==========
+//       // formData.append("order", values.order);
+//       // formData.append("is_featured", values.is_featured);
+//       // ========== END FUTURE FIELDS ==========
 
-//       // Dispatch your createFaq action here
-//       await dispatch(createFaq(formData)).unwrap();
 //       const res = await dispatch(createFaq(formData)).unwrap();
-//       toast.success("FAQ created successfully!");
+//       toast.success(res?.message || t("faq.success.create"));
 //       resetForm();
 //       setImage(null);
 //       setImagePreview(null);
-//       setType({ value: "all", label: "All Type" });
+//       setType({ value: "all", label: "All" });
 //       setSelectedOption(null);
 //       navigate("/faq");
 //     } catch (err) {
 //       console.error("Error ❌", err);
-//       toast.error("Failed to create FAQ");
+//       toast.error(err?.message || t("faq.error.create"));
 //     } finally {
 //       setSubmitting(false);
 //     }
@@ -193,11 +179,11 @@
 //     const file = event.target.files[0];
 //     if (file) {
 //       if (!file.type.startsWith("image/")) {
-//         toast.error("Please upload an image file");
+//         toast.error(t("faq.validation.imageType"));
 //         return;
 //       }
 //       if (file.size > 5 * 1024 * 1024) {
-//         toast.error("File size should be less than 5MB");
+//         toast.error(t("faq.validation.imageSize"));
 //         return;
 //       }
 
@@ -230,8 +216,6 @@
 //             initialValues={{
 //               question: "",
 //               answer: "",
-//               type: "all",
-//               selectedId: "",
 //               image: null,
 //             }}
 //             validationSchema={validationSchema}
@@ -251,15 +235,9 @@
 //                       onChange={(val) => {
 //                         setType(val);
 //                         setSelectedOption(null);
-//                         setFieldValue("type", val?.value);
 //                       }}
 //                       placeholder={t("faq.details.typePlaceholder")}
 //                     />
-//                     {touched.type && errors.type && (
-//                       <div className="text-red-500 text-xs mt-1">
-//                         {errors.type}
-//                       </div>
-//                     )}
 //                   </div>
 
 //                   {/* DYNAMIC SELECT */}
@@ -269,19 +247,11 @@
 //                     </label>
 //                     <Select
 //                       value={selectedOption}
-//                       onChange={(val) => {
-//                         setSelectedOption(val);
-//                         setFieldValue("selectedId", val?.value);
-//                       }}
+//                       onChange={(val) => setSelectedOption(val)}
 //                       options={getOptions()}
 //                       isDisabled={type.value === "all"}
 //                       placeholder={t("faq.details.typeIdPlaceholder")}
 //                     />
-//                     {touched.selectedId && errors.selectedId && (
-//                       <div className="text-red-500 text-xs mt-1">
-//                         {errors.selectedId}
-//                       </div>
-//                     )}
 //                   </div>
 //                 </div>
 
@@ -290,6 +260,7 @@
 //                   name="question"
 //                   label={t("faq.details.question")}
 //                   placeholder={t("faq.details.questionPlaceholder")}
+//                   maxLength={250}
 //                 />
 
 //                 {/* ANSWER */}
@@ -308,7 +279,7 @@
 //                   )}
 //                 </div>
 
-//                 {/* IMAGE - Replaced thumbnail with word/image */}
+//                 {/* IMAGE */}
 //                 <div className="mt-6">
 //                   <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
 //                     <span className="text-blue-600">
@@ -335,7 +306,9 @@
 //                         <p className="text-sm text-gray-600 mb-1">
 //                           {t("faq.details.uploadText")}
 //                         </p>
-//                         <p className="text-xs text-gray-400">(Max size: 5MB)</p>
+//                         <p className="text-xs text-gray-400">
+//                           {t("faq.details.uploadSubText")}
+//                         </p>
 //                       </div>
 //                     ) : (
 //                       <div className="relative">
@@ -343,7 +316,7 @@
 //                           <div className="relative group">
 //                             <img
 //                               src={imagePreview}
-//                               alt="Image Preview"
+//                               alt={t("faq.details.imageAlt")}
 //                               className="w-32 h-32 object-cover rounded-lg border border-gray-300 shadow-sm"
 //                             />
 //                             <button
@@ -381,21 +354,22 @@
 //                   )}
 //                 </div>
 
-//                 {/* SUBMIT
-//                 <button
-//                   type="submit"
-//                   disabled={isSubmitting}
-//                   className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors disabled:bg-blue-300 disabled:cursor-not-allowed"
-//                 >
-//                   {isSubmitting ? "Submitting..." : "Submit"}
-//                 </button> */}
-
+//                 {/* Footer */}
 //                 <div className="flex justify-end items-center pt-4">
 //                   <div className="flex gap-3">
+//                     {/* ========== COMMENTED CODE - CANCEL BUTTON ==========
+//                     <button
+//                       type="button"
+//                       onClick={() => navigate("/faq")}
+//                       className="px-4 py-2 rounded-md text-sm text-gray-600 border border-gray-300 hover:bg-gray-50 cursor-pointer"
+//                     >
+//                       {t("faq.actions.cancel")}
+//                     </button>
+//                     ========== END COMMENTED CODE ========== */}
 //                     <button
 //                       type="submit"
 //                       disabled={isSubmitting}
-//                       className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
+//                       className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 cursor-pointer"
 //                     >
 //                       {isSubmitting
 //                         ? t("faq.actions.creating")
@@ -418,7 +392,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { TextInput } from "../../../../common/form";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Select from "react-select";
 import { useToast } from "../../../../common/toast/ToastContext";
 import { useNavigate } from "react-router-dom";
@@ -483,10 +457,18 @@ const CreateFaq = () => {
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
 
-  const { levels } = useSelector((state) => state.level);
-  const { modules } = useSelector((state) => state.module);
-  const { chapters } = useSelector((state) => state.chapter);
-  const { topics } = useSelector((state) => state.topic);
+  const { levels, isLoading: levelsLoading } = useSelector(
+    (state) => state.level,
+  );
+  const { modules, isLoading: modulesLoading } = useSelector(
+    (state) => state.module,
+  );
+  const { chapters, isLoading: chaptersLoading } = useSelector(
+    (state) => state.chapter,
+  );
+  const { topics, isLoading: topicsLoading } = useSelector(
+    (state) => state.topic,
+  );
 
   const [type, setType] = useState({ value: "all", label: "All" });
   const [selectedOption, setSelectedOption] = useState(null);
@@ -494,6 +476,14 @@ const CreateFaq = () => {
   const [preview, setPreview] = useState(null);
   const fileInputRef = useRef(null);
   const { t } = useTranslation();
+
+  // Track which data has been fetched
+  const [fetchedTypes, setFetchedTypes] = useState({
+    level: false,
+    module: false,
+    chapter: false,
+    topic: false,
+  });
 
   // OPTIONS
   const levelOption =
@@ -514,7 +504,7 @@ const CreateFaq = () => {
   ];
 
   const getOptions = () => {
-    switch (type.value) {
+    switch (type?.value) {
       case "level":
         return levelOption;
       case "module":
@@ -528,14 +518,62 @@ const CreateFaq = () => {
     }
   };
 
-  useEffect(() => {
-    dispatch(getAllTopics());
-    dispatch(getAllChapters());
-    dispatch(getAllModules());
-    dispatch(getAllLevels());
-  }, [dispatch]);
+  // Function to fetch data based on type
+  const fetchTypeSpecificData = useCallback(
+    async (typeValue) => {
+      switch (typeValue) {
+        case "level":
+          if (!fetchedTypes.level && !levelsLoading) {
+            await dispatch(getAllLevels());
+            setFetchedTypes((prev) => ({ ...prev, level: true }));
+          }
+          break;
+        case "module":
+          if (!fetchedTypes.module && !modulesLoading) {
+            await dispatch(getAllModules());
+            setFetchedTypes((prev) => ({ ...prev, module: true }));
+          }
+          break;
+        case "chapter":
+          if (!fetchedTypes.chapter && !chaptersLoading) {
+            await dispatch(getAllChapters());
+            setFetchedTypes((prev) => ({ ...prev, chapter: true }));
+          }
+          break;
+        case "topic":
+          if (!fetchedTypes.topic && !topicsLoading) {
+            await dispatch(getAllTopics());
+            setFetchedTypes((prev) => ({ ...prev, topic: true }));
+          }
+          break;
+        default:
+          break;
+      }
+    },
+    [
+      dispatch,
+      fetchedTypes,
+      levelsLoading,
+      modulesLoading,
+      chaptersLoading,
+      topicsLoading,
+    ],
+  );
 
-  // ✅ Fixed: Validation schema with correct i18n keys
+  // Handle type change
+  const handleTypeChange = useCallback(
+    async (selectedType) => {
+      setType(selectedType);
+      setSelectedOption(null);
+
+      // Fetch only the data for the selected type
+      if (selectedType?.value && selectedType.value !== "all") {
+        await fetchTypeSpecificData(selectedType.value);
+      }
+    },
+    [fetchTypeSpecificData],
+  );
+
   const validationSchema = Yup.object({
     question: Yup.string()
       .required(t("faq.validation.questionRequired"))
@@ -543,16 +581,6 @@ const CreateFaq = () => {
     answer: Yup.string()
       .required(t("faq.validation.answerRequired"))
       .min(10, t("faq.validation.answerMin")),
-    // image: Yup.mixed()
-    //   .nullable()
-    //   .test("fileType", t("faq.validation.imageType"), (value) => {
-    //     if (!value) return true;
-    //     return value && value.type.startsWith("image/");
-    //   })
-    //   .test("fileSize", t("faq.validation.imageSize"), (value) => {
-    //     if (!value) return true;
-    //     return value && value.size <= 5 * 1024 * 1024;
-    //   }),
   });
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
@@ -569,11 +597,6 @@ const CreateFaq = () => {
       if (image) {
         formData.append("image", image);
       }
-
-      // ========== FUTURE: Add more fields if needed ==========
-      // formData.append("order", values.order);
-      // formData.append("is_featured", values.is_featured);
-      // ========== END FUTURE FIELDS ==========
 
       const res = await dispatch(createFaq(formData)).unwrap();
       toast.success(res?.message || t("faq.success.create"));
@@ -618,6 +641,19 @@ const CreateFaq = () => {
 
   const triggerFileUpload = () => fileInputRef.current.click();
 
+  const customSelectStyles = {
+    control: (base) => ({
+      ...base,
+      borderRadius: "8px",
+      borderColor: "#E5E7EB",
+      minHeight: "38px",
+      boxShadow: "none",
+      cursor: "pointer",
+      fontSize: "14px",
+      backgroundColor: "#F8FAFC",
+    }),
+  };
+
   return (
     <PageLayout>
       <div className="p-8 rounded-lg border border-gray-300">
@@ -648,10 +684,8 @@ const CreateFaq = () => {
                     <Select
                       value={type}
                       options={typeOptions}
-                      onChange={(val) => {
-                        setType(val);
-                        setSelectedOption(null);
-                      }}
+                      onChange={handleTypeChange}
+                      styles={customSelectStyles}
                       placeholder={t("faq.details.typePlaceholder")}
                     />
                   </div>
@@ -665,8 +699,14 @@ const CreateFaq = () => {
                       value={selectedOption}
                       onChange={(val) => setSelectedOption(val)}
                       options={getOptions()}
-                      isDisabled={type.value === "all"}
-                      placeholder={t("faq.details.typeIdPlaceholder")}
+                      styles={customSelectStyles}
+                      isDisabled={type?.value === "all"}
+                      isLoading={
+                        (type?.value === "level" && levelsLoading) ||
+                        (type?.value === "module" && modulesLoading) ||
+                        (type?.value === "chapter" && chaptersLoading) ||
+                        (type?.value === "topic" && topicsLoading)
+                      }
                     />
                   </div>
                 </div>
@@ -676,6 +716,7 @@ const CreateFaq = () => {
                   name="question"
                   label={t("faq.details.question")}
                   placeholder={t("faq.details.questionPlaceholder")}
+                  maxLength={250}
                 />
 
                 {/* ANSWER */}
@@ -772,15 +813,6 @@ const CreateFaq = () => {
                 {/* Footer */}
                 <div className="flex justify-end items-center pt-4">
                   <div className="flex gap-3">
-                    {/* ========== COMMENTED CODE - CANCEL BUTTON ==========
-                    <button
-                      type="button"
-                      onClick={() => navigate("/faq")}
-                      className="px-4 py-2 rounded-md text-sm text-gray-600 border border-gray-300 hover:bg-gray-50 cursor-pointer"
-                    >
-                      {t("faq.actions.cancel")}
-                    </button>
-                    ========== END COMMENTED CODE ========== */}
                     <button
                       type="submit"
                       disabled={isSubmitting}

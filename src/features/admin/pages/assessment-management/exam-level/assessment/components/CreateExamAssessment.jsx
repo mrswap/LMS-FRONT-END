@@ -270,6 +270,7 @@ const CreateExamAssessment = () => {
                           label={t("assessment.details.title")}
                           placeholder={t("assessment.details.titlePlaceholder")}
                           required={true}
+                          maxLength={150}
                         />
 
                         <TextInput
@@ -280,6 +281,7 @@ const CreateExamAssessment = () => {
                           )}
                           type="number"
                           required={true}
+                          maxLength={3}
                         />
                       </div>
 
@@ -292,6 +294,7 @@ const CreateExamAssessment = () => {
                           )}
                           type="number"
                           required={true}
+                          maxLength={3}
                         />
 
                         <TextInput
@@ -302,6 +305,7 @@ const CreateExamAssessment = () => {
                           )}
                           type="number"
                           required={true}
+                          maxLength={3}
                         />
                       </div>
 
@@ -314,6 +318,7 @@ const CreateExamAssessment = () => {
                           )}
                           rows={4}
                           required={true}
+                          maxLength={500}
                         />
                       </div>
                     </div>

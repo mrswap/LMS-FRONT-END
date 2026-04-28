@@ -876,6 +876,7 @@ const CreateMediaLibrary = () => {
                         "mediaLibrary.details.mediaNamePlaceholder",
                       )}
                       required
+                      maxLength={150}
                     />
 
                     <SelectField
@@ -899,6 +900,7 @@ const CreateMediaLibrary = () => {
                       )}
                       rows={4}
                       required
+                      maxLength={500}
                     />
                   </div>
                 </div>
@@ -916,6 +918,7 @@ const CreateMediaLibrary = () => {
                     placeholder={t(
                       "mediaLibrary.details.externalUrlPlaceholder",
                     )}
+                    maxLength={250}
                     onChange={(e) => {
                       if (e.target.value) {
                         setFieldValue("externalUrl", e.target.value);

@@ -87,8 +87,6 @@
 //   });
 
 //   const onSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
-//     console.log("Form submitted!", values);
-
 //     try {
 //       const formData = new FormData();
 
@@ -101,14 +99,20 @@
 //       if (thumbnail) {
 //         formData.append("thumbnail", thumbnail);
 //       }
+
+//       // ========== FUTURE: Add more fields if needed ==========
+//       // formData.append("duration", values.duration);
+//       // formData.append("order", values.order);
+//       // ========== END FUTURE FIELDS ==========
+
 //       const res = await dispatch(createChapter(formData)).unwrap();
-//       toast.success(res.message || "Chapter created successfully ");
+//       toast.success(res?.message || t("chapter.success.create"));
 //       resetForm();
 //       removeThumbnail();
 //       navigate("/chapters");
 //     } catch (error) {
 //       setErrors({ submit: error.message });
-//       toast.error(error?.message || "Something went wrong ❌");
+//       toast.error(error?.message || t("chapter.error.create"));
 //     } finally {
 //       setSubmitting(false);
 //     }
@@ -118,11 +122,11 @@
 //     const file = event.target.files[0];
 //     if (file) {
 //       if (!file.type.startsWith("image/")) {
-//         alert("Please upload an image file");
+//         toast.error(t("chapter.validation.imageRequired"));
 //         return;
 //       }
 //       if (file.size > 5 * 1024 * 1024) {
-//         alert("File size should be less than 5MB");
+//         toast.error(t("chapter.validation.fileSize"));
 //         return;
 //       }
 
@@ -143,7 +147,7 @@
 
 //   return (
 //     <PageLayout>
-//       <div className=" p-8 rounded-lg border border-gray-300">
+//       <div className="p-8 rounded-lg border border-gray-300">
 //         <PageHeader>
 //           <PageHeaderLeft>
 //             <PageTitle>{t("chapter.create.title")}</PageTitle>
@@ -158,7 +162,7 @@
 //             onSubmit={onSubmit}
 //             enableReinitialize={true}
 //           >
-//             {({ isSubmitting, values, setFieldValue, handleSubmit }) => {
+//             {({ isSubmitting, setFieldValue, handleSubmit }) => {
 //               return (
 //                 <Form onSubmit={handleSubmit} className="space-y-8">
 //                   {/* General Details */}
@@ -179,6 +183,7 @@
 //                             "chapter.details.chapterNamePlaceholder",
 //                           )}
 //                           required={true}
+//                           maxLength={150}
 //                         />
 //                       </div>
 //                       <div>
@@ -189,23 +194,20 @@
 //                             "chapter.details.parentModulePlaceholder",
 //                           )}
 //                           required={true}
-//                           options={moduleOptions || []}
+//                           options={moduleOptions}
 //                           onChange={(option) => {
 //                             setFieldValue("moduleName", option);
-
-//                             const selectedModule = modules.data.find(
-//                               (chap) => chap.id === option.value,
+//                             const selectedModule = modules?.data?.find(
+//                               (mod) => mod.id === option.value,
 //                             );
-
 //                             if (selectedModule) {
 //                               setFieldValue("levelName", {
-//                                 label: selectedModule.level.title,
-//                                 value: selectedModule.level.id,
+//                                 label: selectedModule.level?.title,
+//                                 value: selectedModule.level?.id,
 //                               });
-
 //                               setFieldValue("programName", {
-//                                 label: selectedModule.program.title,
-//                                 value: selectedModule.program.id,
+//                                 label: selectedModule.program?.title,
+//                                 value: selectedModule.program?.id,
 //                               });
 //                             }
 //                           }}
@@ -222,7 +224,7 @@
 //                             "chapter.details.parentLevelPlaceholder",
 //                           )}
 //                           required={true}
-//                           options={levelOptions || []}
+//                           options={levelOptions}
 //                           disabled={true}
 //                         />
 //                       </div>
@@ -233,10 +235,26 @@
 //                           "chapter.details.perentProgramPlaceholder",
 //                         )}
 //                         required={true}
-//                         options={programOptions || []}
+//                         options={programOptions}
 //                         disabled={true}
 //                       />
 //                     </div>
+
+//                     {/* ========== COMMENTED CODE - FUTURE FIELDS ==========
+//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mt-2">
+//                       <TextInput
+//                         name="duration"
+//                         label={t("chapter.details.duration")}
+//                         placeholder={t("chapter.details.durationPlaceholder")}
+//                       />
+//                       <TextInput
+//                         name="order"
+//                         label={t("chapter.details.order")}
+//                         placeholder={t("chapter.details.orderPlaceholder")}
+//                         type="number"
+//                       />
+//                     </div>
+//                     ========== END COMMENTED CODE ========== */}
 
 //                     <div className="mt-2">
 //                       <TextareaField
@@ -247,6 +265,7 @@
 //                         )}
 //                         rows={4}
 //                         required={true}
+//                         maxLength={500}
 //                       />
 //                     </div>
 //                   </div>
@@ -288,7 +307,7 @@
 //                             <div className="relative group">
 //                               <img
 //                                 src={thumbnailPreview}
-//                                 alt="Thumbnail Preview"
+//                                 alt={t("chapter.details.thumbnailAlt")}
 //                                 className="w-32 h-32 object-cover rounded-lg border border-gray-300 shadow-sm"
 //                               />
 //                               <button
@@ -324,10 +343,19 @@
 //                   {/* Footer */}
 //                   <div className="flex justify-end items-center pt-4">
 //                     <div className="flex gap-3">
+//                       {/* ========== COMMENTED CODE - CANCEL BUTTON ==========
+//                       <button
+//                         type="button"
+//                         onClick={() => navigate("/chapters")}
+//                         className="px-4 py-2 rounded-md text-sm text-gray-600 border border-gray-300 hover:bg-gray-50 cursor-pointer"
+//                       >
+//                         {t("chapter.actions.cancel")}
+//                       </button>
+//                       ========== END COMMENTED CODE ========== */}
 //                       <button
 //                         type="submit"
 //                         disabled={isSubmitting}
-//                         className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
+//                         className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 cursor-pointer"
 //                       >
 //                         {isSubmitting
 //                           ? t("chapter.actions.creating")
@@ -347,7 +375,7 @@
 
 // export default CreateChapter;
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { TextInput, TextareaField, SelectField } from "../../../../common/form";
@@ -380,20 +408,25 @@ const CreateChapter = () => {
   const toast = useToast();
   const navigate = useNavigate();
 
-  const { programs } = useSelector((state) => state.program);
-  const { levels } = useSelector((state) => state.level);
-  const { modules } = useSelector((state) => state.module);
+  const { modules, isLoading: modulesLoading } = useSelector(
+    (state) => state.module,
+  );
+  const { levels, isLoading: levelsLoading } = useSelector(
+    (state) => state.level,
+  );
+  const { programs, isLoading: programsLoading } = useSelector(
+    (state) => state.program,
+  );
 
+  // Only fetch modules initially
   useEffect(() => {
-    dispatch(getAllPrograms());
-    dispatch(getAllLevels());
     dispatch(getAllModules());
   }, [dispatch]);
 
-  const programOptions =
-    programs?.data?.map((prog) => ({
-      label: prog.title,
-      value: prog.id,
+  const moduleOptions =
+    modules?.data?.map((mod) => ({
+      label: mod.title,
+      value: mod.id,
     })) || [];
 
   const levelOptions =
@@ -402,10 +435,10 @@ const CreateChapter = () => {
       value: lev.id,
     })) || [];
 
-  const moduleOptions =
-    modules?.data?.map((mod) => ({
-      label: mod.title,
-      value: mod.id,
+  const programOptions =
+    programs?.data?.map((prog) => ({
+      label: prog.title,
+      value: prog.id,
     })) || [];
 
   const initialValues = {
@@ -448,11 +481,6 @@ const CreateChapter = () => {
       if (thumbnail) {
         formData.append("thumbnail", thumbnail);
       }
-
-      // ========== FUTURE: Add more fields if needed ==========
-      // formData.append("duration", values.duration);
-      // formData.append("order", values.order);
-      // ========== END FUTURE FIELDS ==========
 
       const res = await dispatch(createChapter(formData)).unwrap();
       toast.success(res?.message || t("chapter.success.create"));
@@ -511,7 +539,7 @@ const CreateChapter = () => {
             onSubmit={onSubmit}
             enableReinitialize={true}
           >
-            {({ isSubmitting, setFieldValue, handleSubmit }) => {
+            {({ isSubmitting, setFieldValue, values, handleSubmit }) => {
               return (
                 <Form onSubmit={handleSubmit} className="space-y-8">
                   {/* General Details */}
@@ -532,6 +560,7 @@ const CreateChapter = () => {
                             "chapter.details.chapterNamePlaceholder",
                           )}
                           required={true}
+                          maxLength={150}
                         />
                       </div>
                       <div>
@@ -543,20 +572,35 @@ const CreateChapter = () => {
                           )}
                           required={true}
                           options={moduleOptions}
-                          onChange={(option) => {
+                          isLoading={modulesLoading}
+                          onChange={async (option) => {
                             setFieldValue("moduleName", option);
                             const selectedModule = modules?.data?.find(
                               (mod) => mod.id === option.value,
                             );
+
                             if (selectedModule) {
-                              setFieldValue("levelName", {
-                                label: selectedModule.level?.title,
-                                value: selectedModule.level?.id,
-                              });
-                              setFieldValue("programName", {
-                                label: selectedModule.program?.title,
-                                value: selectedModule.program?.id,
-                              });
+                              // First fetch level and program data
+                              if (selectedModule.level?.id) {
+                                // Fetch levels if not loaded
+                                if (!levels?.data) {
+                                  await dispatch(getAllLevels());
+                                }
+                                // Fetch programs if not loaded
+                                if (!programs?.data) {
+                                  await dispatch(getAllPrograms());
+                                }
+
+                                // Set level and program values
+                                setFieldValue("levelName", {
+                                  label: selectedModule.level?.title,
+                                  value: selectedModule.level?.id,
+                                });
+                                setFieldValue("programName", {
+                                  label: selectedModule.program?.title,
+                                  value: selectedModule.program?.id,
+                                });
+                              }
                             }
                           }}
                         />
@@ -573,7 +617,8 @@ const CreateChapter = () => {
                           )}
                           required={true}
                           options={levelOptions}
-                          disabled={true}
+                          isLoading={levelsLoading}
+                          disabled={!values.moduleName}
                         />
                       </div>
                       <SelectField
@@ -584,25 +629,10 @@ const CreateChapter = () => {
                         )}
                         required={true}
                         options={programOptions}
-                        disabled={true}
+                        isLoading={programsLoading}
+                        disabled={!values.moduleName}
                       />
                     </div>
-
-                    {/* ========== COMMENTED CODE - FUTURE FIELDS ==========
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mt-2">
-                      <TextInput
-                        name="duration"
-                        label={t("chapter.details.duration")}
-                        placeholder={t("chapter.details.durationPlaceholder")}
-                      />
-                      <TextInput
-                        name="order"
-                        label={t("chapter.details.order")}
-                        placeholder={t("chapter.details.orderPlaceholder")}
-                        type="number"
-                      />
-                    </div>
-                    ========== END COMMENTED CODE ========== */}
 
                     <div className="mt-2">
                       <TextareaField
@@ -613,6 +643,7 @@ const CreateChapter = () => {
                         )}
                         rows={4}
                         required={true}
+                        maxLength={500}
                       />
                     </div>
                   </div>
@@ -690,15 +721,6 @@ const CreateChapter = () => {
                   {/* Footer */}
                   <div className="flex justify-end items-center pt-4">
                     <div className="flex gap-3">
-                      {/* ========== COMMENTED CODE - CANCEL BUTTON ==========
-                      <button
-                        type="button"
-                        onClick={() => navigate("/chapters")}
-                        className="px-4 py-2 rounded-md text-sm text-gray-600 border border-gray-300 hover:bg-gray-50 cursor-pointer"
-                      >
-                        {t("chapter.actions.cancel")}
-                      </button>
-                      ========== END COMMENTED CODE ========== */}
                       <button
                         type="submit"
                         disabled={isSubmitting}

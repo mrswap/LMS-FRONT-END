@@ -33,13 +33,6 @@ const Users = () => {
     (state) => state.user,
   );
 
-  // const statusOptions = [
-  //   { value: "all", label: "All Status" },
-  //   { value: "1", label: "Active" },
-  //   { value: "0", label: "Inactive" },
-  // ];
-
-  // Status options with i18n
   const statusOptions = [
     { value: "all", label: t("userManagement.filters.allStatus") },
     { value: "1", label: t("userManagement.filters.active") },

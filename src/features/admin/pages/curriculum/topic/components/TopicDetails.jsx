@@ -22,6 +22,7 @@
 // import { getAllChapters } from "../../../../../../redux/slice/chapterSlice";
 // import { showConfirm } from "../../../../../../redux/slice/confirmSlice";
 // import Loader from "../../../../common/Loader";
+// import Error from "../../../../common/Error";
 
 // const TopicDetails = () => {
 //   const [thumbnail, setThumbnail] = useState(null);
@@ -38,25 +39,32 @@
 //   );
 
 //   const { programs } = useSelector((state) => state.program);
-//   const programOptions = programs?.data?.map((prog) => ({
-//     label: prog.title,
-//     value: prog.id,
-//   }));
+//   const programOptions =
+//     programs?.data?.map((prog) => ({
+//       label: prog.title,
+//       value: prog.id,
+//     })) || [];
+
 //   const { levels } = useSelector((state) => state.level);
-//   const levelOptions = levels?.data?.map((lev) => ({
-//     label: lev.title,
-//     value: lev.id,
-//   }));
+//   const levelOptions =
+//     levels?.data?.map((lev) => ({
+//       label: lev.title,
+//       value: lev.id,
+//     })) || [];
+
 //   const { modules } = useSelector((state) => state.module);
-//   const modulesOptions = modules?.data?.map((mod) => ({
-//     label: mod.title,
-//     value: mod.id,
-//   }));
+//   const modulesOptions =
+//     modules?.data?.map((mod) => ({
+//       label: mod.title,
+//       value: mod.id,
+//     })) || [];
+
 //   const { chapters } = useSelector((state) => state.chapter);
-//   const chaptersOptions = chapters?.data?.map((chap) => ({
-//     label: chap.title,
-//     value: chap.id,
-//   }));
+//   const chaptersOptions =
+//     chapters?.data?.map((chap) => ({
+//       label: chap.title,
+//       value: chap.id,
+//     })) || [];
 
 //   useEffect(() => {
 //     if (id) {
@@ -113,8 +121,6 @@
 //   });
 
 //   const onSubmit = async (values, { setSubmitting, setErrors }) => {
-//     console.log("valus", values);
-
 //     try {
 //       const formData = new FormData();
 
@@ -139,15 +145,19 @@
 //         formData.append("thumbnail", thumbnail);
 //       }
 
+//       // ========== FUTURE: Add more fields if needed ==========
+//       // if (values.video_url) formData.append("video_url", values.video_url);
+//       // ========== END FUTURE FIELDS ==========
+
 //       const res = await dispatch(
 //         updateTopicById({ id, data: formData }),
 //       ).unwrap();
 
-//       toast.success(res.message || "Topic updated successfully");
+//       toast.success(res?.message || t("topic.success.update"));
 //       navigate("/topics");
 //     } catch (error) {
 //       setErrors({ submit: error.message });
-//       toast.error(error?.message || "Update failed ");
+//       toast.error(error?.message || t("topic.error.update"));
 //     } finally {
 //       setSubmitting(false);
 //     }
@@ -162,27 +172,28 @@
 
 //     try {
 //       await dispatch(deleteSingleTopic(id)).unwrap();
-//       toast.success("topic deleted successfully ");
+//       toast.success(t("topic.success.delete"));
 //       setTimeout(() => {
 //         navigate("/topics");
 //       }, 1000);
 //     } catch (error) {
-//       toast.error(error?.message || "Delete failed ");
+//       toast.error(error?.message || t("topic.error.delete"));
 //     }
 //   };
 
-//   const handleThumbnailUpload = (event) => {
+//   const handleThumbnailUpload = (event, setFieldValue) => {
 //     const file = event.target.files[0];
 //     if (file) {
 //       if (!file.type.startsWith("image/")) {
-//         alert("Please upload an image file");
+//         toast.error(t("topic.validation.imageRequired"));
 //         return;
 //       }
 //       if (file.size > 5 * 1024 * 1024) {
-//         alert("File size should be less than 5MB");
+//         toast.error(t("topic.validation.fileSize"));
 //         return;
 //       }
 
+//       setFieldValue("thumbnail", file);
 //       setThumbnail(file);
 //       const reader = new FileReader();
 //       reader.onloadend = () => setThumbnailPreview(reader.result);
@@ -190,21 +201,21 @@
 //     }
 //   };
 
-//   const removeThumbnail = () => {
+//   const removeThumbnail = (setFieldValue) => {
 //     setThumbnail(null);
 //     setThumbnailPreview(null);
+//     setFieldValue("thumbnail", null);
 //     if (fileInputRef.current) fileInputRef.current.value = "";
 //   };
 
 //   const triggerFileUpload = () => fileInputRef.current.click();
 
-//   if (isLoading) {
-//     <Loader />;
-//   }
+//   if (isLoading) return <Loader />;
+//   if (isError) return <Error message={message} />;
 
 //   return (
 //     <PageLayout>
-//       <div className=" p-8 rounded-lg border border-gray-300">
+//       <div className="p-8 rounded-lg border border-gray-300">
 //         <Breadcrumb
 //           items={[
 //             {
@@ -223,7 +234,7 @@
 //             onSubmit={onSubmit}
 //             enableReinitialize={true}
 //           >
-//             {({ isSubmitting, values, setFieldValue, handleSubmit }) => {
+//             {({ isSubmitting, setFieldValue, handleSubmit }) => {
 //               return (
 //                 <Form onSubmit={handleSubmit} className="space-y-8">
 //                   {/* General Details */}
@@ -242,6 +253,7 @@
 //                           label={t("topic.details.topicName")}
 //                           placeholder={t("topic.details.topicNamePlaceholder")}
 //                           required={true}
+//                           maxLength={150}
 //                         />
 //                       </div>
 //                       <div>
@@ -252,28 +264,24 @@
 //                             "topic.details.parentChapterPlaceholder",
 //                           )}
 //                           required={true}
-//                           options={chaptersOptions || []}
+//                           options={chaptersOptions}
 //                           onChange={(option) => {
 //                             setFieldValue("chapterName", option);
-
-//                             const selectedChapter = chapters.data.find(
+//                             const selectedChapter = chapters?.data?.find(
 //                               (chap) => chap.id === option.value,
 //                             );
-
 //                             if (selectedChapter) {
 //                               setFieldValue("moduleName", {
-//                                 label: selectedChapter.module.title,
-//                                 value: selectedChapter.module.id,
+//                                 label: selectedChapter.module?.title,
+//                                 value: selectedChapter.module?.id,
 //                               });
-
 //                               setFieldValue("levelName", {
-//                                 label: selectedChapter.level.title,
-//                                 value: selectedChapter.level.id,
+//                                 label: selectedChapter.level?.title,
+//                                 value: selectedChapter.level?.id,
 //                               });
-
 //                               setFieldValue("programName", {
-//                                 label: selectedChapter.program.title,
-//                                 value: selectedChapter.program.id,
+//                                 label: selectedChapter.program?.title,
+//                                 value: selectedChapter.program?.id,
 //                               });
 //                             }
 //                           }}
@@ -290,7 +298,7 @@
 //                             "topic.details.parentModulePlaceholder",
 //                           )}
 //                           required={true}
-//                           options={modulesOptions || []}
+//                           options={modulesOptions}
 //                           disabled={true}
 //                         />
 //                       </div>
@@ -302,7 +310,7 @@
 //                             "topic.details.parentLevelPlaceholder",
 //                           )}
 //                           required={true}
-//                           options={levelOptions || []}
+//                           options={levelOptions}
 //                           disabled={true}
 //                         />
 //                       </div>
@@ -316,7 +324,7 @@
 //                           "topic.details.perentProgramPlaceholder",
 //                         )}
 //                         required={true}
-//                         options={programOptions || []}
+//                         options={programOptions}
 //                         disabled={true}
 //                       />
 //                       <div>
@@ -326,9 +334,20 @@
 //                           label={t("topic.details.duration")}
 //                           placeholder={t("topic.details.durationPlaceholder")}
 //                           required={true}
+//                           maxLength={500}
 //                         />
 //                       </div>
 //                     </div>
+
+//                     {/* ========== COMMENTED CODE - FUTURE FIELDS ==========
+//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mt-2">
+//                       <TextInput
+//                         name="video_url"
+//                         label={t("topic.details.videoUrl")}
+//                         placeholder={t("topic.details.videoUrlPlaceholder")}
+//                       />
+//                     </div>
+//                     ========== END COMMENTED CODE ========== */}
 
 //                     <div className="mt-2">
 //                       <TextareaField
@@ -355,7 +374,9 @@
 //                         ref={fileInputRef}
 //                         type="file"
 //                         accept="image/*"
-//                         onChange={handleThumbnailUpload}
+//                         onChange={(e) =>
+//                           handleThumbnailUpload(e, setFieldValue)
+//                         }
 //                         className="hidden"
 //                       />
 
@@ -378,12 +399,12 @@
 //                             <div className="relative group">
 //                               <img
 //                                 src={thumbnailPreview}
-//                                 alt="Thumbnail Preview"
+//                                 alt={t("topic.details.thumbnailAlt")}
 //                                 className="w-32 h-32 object-cover rounded-lg border border-gray-300 shadow-sm"
 //                               />
 //                               <button
 //                                 type="button"
-//                                 onClick={removeThumbnail}
+//                                 onClick={() => removeThumbnail(setFieldValue)}
 //                                 className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors shadow-md"
 //                               >
 //                                 <FiX className="text-xs" />
@@ -391,12 +412,12 @@
 //                             </div>
 //                             <div className="flex-1">
 //                               <p className="text-sm font-semibold text-gray-700 mb-1">
-//                                 {/* {thumbnail.name} */}
-//                                 name
+//                                 {thumbnail?.name ||
+//                                   topic?.thumbnail?.split("/").pop()}
 //                               </p>
 //                               <p className="text-xs text-gray-500 mb-3">
-//                                 {/* {(thumbnail.size / 1024).toFixed(2)} KB */}
-//                                 size
+//                                 {thumbnail &&
+//                                   `${(thumbnail.size / 1024).toFixed(2)} KB`}
 //                               </p>
 //                               <button
 //                                 type="button"
@@ -416,17 +437,26 @@
 //                   {/* Footer */}
 //                   <div className="flex justify-end items-center pt-4">
 //                     <div className="flex gap-3">
+//                       {/* ========== COMMENTED CODE - CANCEL BUTTON ==========
+//                       <button
+//                         type="button"
+//                         onClick={() => navigate("/topics")}
+//                         className="px-4 py-2 rounded-md text-sm text-gray-600 border border-gray-300 hover:bg-gray-50 cursor-pointer"
+//                       >
+//                         {t("topic.actions.cancel")}
+//                       </button>
+//                       ========== END COMMENTED CODE ========== */}
 //                       <button
 //                         type="button"
 //                         onClick={handleDelete}
-//                         className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-gray-50"
+//                         className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-red-50 cursor-pointer transition-colors"
 //                       >
 //                         {t("topic.actions.deleteTopic")}
 //                       </button>
 //                       <button
 //                         type="submit"
 //                         disabled={isSubmitting}
-//                         className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
+//                         className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 cursor-pointer"
 //                       >
 //                         {isSubmitting
 //                           ? t("topic.actions.updating")
@@ -446,7 +476,7 @@
 
 // export default TopicDetails;
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { TextInput, TextareaField, SelectField } from "../../../../common/form";
@@ -475,6 +505,7 @@ import Error from "../../../../common/Error";
 const TopicDetails = () => {
   const [thumbnail, setThumbnail] = useState(null);
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
   const fileInputRef = useRef(null);
   const { t } = useTranslation();
   const { id } = useParams();
@@ -486,49 +517,114 @@ const TopicDetails = () => {
     (state) => state.topic,
   );
 
-  const { programs } = useSelector((state) => state.program);
+  const { programs, isLoading: programsLoading } = useSelector(
+    (state) => state.program,
+  );
+  const { levels, isLoading: levelsLoading } = useSelector(
+    (state) => state.level,
+  );
+  const { modules, isLoading: modulesLoading } = useSelector(
+    (state) => state.module,
+  );
+  const { chapters, isLoading: chaptersLoading } = useSelector(
+    (state) => state.chapter,
+  );
+
   const programOptions =
     programs?.data?.map((prog) => ({
       label: prog.title,
       value: prog.id,
     })) || [];
 
-  const { levels } = useSelector((state) => state.level);
   const levelOptions =
     levels?.data?.map((lev) => ({
       label: lev.title,
       value: lev.id,
     })) || [];
 
-  const { modules } = useSelector((state) => state.module);
   const modulesOptions =
     modules?.data?.map((mod) => ({
       label: mod.title,
       value: mod.id,
     })) || [];
 
-  const { chapters } = useSelector((state) => state.chapter);
   const chaptersOptions =
     chapters?.data?.map((chap) => ({
       label: chap.title,
       value: chap.id,
     })) || [];
 
+  // Fetch topic data first
   useEffect(() => {
     if (id) {
       dispatch(getTopicById(id));
-      dispatch(getAllPrograms());
-      dispatch(getAllLevels());
-      dispatch(getAllModules());
-      dispatch(getAllChapters());
     }
   }, [dispatch, id]);
+
+  // When topic data is loaded, fetch all related data sequentially with loading
+  useEffect(() => {
+    const fetchAllData = async () => {
+      if (topic?.id && !isDataLoaded) {
+        try {
+          // First fetch chapters
+          await dispatch(getAllChapters()).unwrap();
+
+          // Then fetch modules
+          await dispatch(getAllModules()).unwrap();
+
+          // Then fetch levels
+          await dispatch(getAllLevels()).unwrap();
+
+          // Then fetch programs
+          await dispatch(getAllPrograms()).unwrap();
+
+          setIsDataLoaded(true);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          toast.error(t("topic.error.fetchData"));
+        }
+      }
+    };
+
+    fetchAllData();
+  }, [dispatch, topic?.id, isDataLoaded, toast, t]);
 
   useEffect(() => {
     if (topic?.thumbnail) {
       setThumbnailPreview(topic.thumbnail);
     }
   }, [topic]);
+
+  // const initialValues = {
+  //   topicName: topic?.title || "",
+  //   chapterName: topic?.chapter_id
+  //     ? {
+  //         label: topic?.chapter?.title,
+  //         value: topic?.chapter_id,
+  //       }
+  //     : null,
+  //   moduleName: topic?.module_id
+  //     ? {
+  //         label: topic?.module?.title,
+  //         value: topic?.module_id,
+  //       }
+  //     : null,
+  //   levelName: topic?.level_id
+  //     ? {
+  //         label: topic?.level?.title,
+  //         value: topic?.level_id,
+  //       }
+  //     : null,
+  //   programName: topic?.program_id
+  //     ? {
+  //         label: topic?.program?.title,
+  //         value: topic?.program_id,
+  //       }
+  //     : null,
+  //   description: topic?.description || "",
+  //   thumbnail: topic?.thumbnail || null,
+  //   duration: topic?.estimated_duration || "",
+  // };
 
   const initialValues = {
     topicName: topic?.title || "",
@@ -592,10 +688,6 @@ const TopicDetails = () => {
       if (thumbnail) {
         formData.append("thumbnail", thumbnail);
       }
-
-      // ========== FUTURE: Add more fields if needed ==========
-      // if (values.video_url) formData.append("video_url", values.video_url);
-      // ========== END FUTURE FIELDS ==========
 
       const res = await dispatch(
         updateTopicById({ id, data: formData }),
@@ -682,7 +774,7 @@ const TopicDetails = () => {
             onSubmit={onSubmit}
             enableReinitialize={true}
           >
-            {({ isSubmitting, setFieldValue, handleSubmit }) => {
+            {({ isSubmitting, setFieldValue, values, handleSubmit }) => {
               return (
                 <Form onSubmit={handleSubmit} className="space-y-8">
                   {/* General Details */}
@@ -701,6 +793,7 @@ const TopicDetails = () => {
                           label={t("topic.details.topicName")}
                           placeholder={t("topic.details.topicNamePlaceholder")}
                           required={true}
+                          maxLength={150}
                         />
                       </div>
                       <div>
@@ -712,6 +805,7 @@ const TopicDetails = () => {
                           )}
                           required={true}
                           options={chaptersOptions}
+                          isLoading={chaptersLoading}
                           onChange={(option) => {
                             setFieldValue("chapterName", option);
                             const selectedChapter = chapters?.data?.find(
@@ -746,7 +840,8 @@ const TopicDetails = () => {
                           )}
                           required={true}
                           options={modulesOptions}
-                          disabled={true}
+                          isLoading={modulesLoading}
+                          disabled={!values.chapterName}
                         />
                       </div>
                       <div>
@@ -758,7 +853,8 @@ const TopicDetails = () => {
                           )}
                           required={true}
                           options={levelOptions}
-                          disabled={true}
+                          isLoading={levelsLoading}
+                          disabled={!values.chapterName}
                         />
                       </div>
                     </div>
@@ -772,7 +868,8 @@ const TopicDetails = () => {
                         )}
                         required={true}
                         options={programOptions}
-                        disabled={true}
+                        isLoading={programsLoading}
+                        disabled={!values.chapterName}
                       />
                       <div>
                         <TextInput
@@ -781,19 +878,10 @@ const TopicDetails = () => {
                           label={t("topic.details.duration")}
                           placeholder={t("topic.details.durationPlaceholder")}
                           required={true}
+                          maxLength={500}
                         />
                       </div>
                     </div>
-
-                    {/* ========== COMMENTED CODE - FUTURE FIELDS ==========
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mt-2">
-                      <TextInput
-                        name="video_url"
-                        label={t("topic.details.videoUrl")}
-                        placeholder={t("topic.details.videoUrlPlaceholder")}
-                      />
-                    </div>
-                    ========== END COMMENTED CODE ========== */}
 
                     <div className="mt-2">
                       <TextareaField
@@ -883,15 +971,6 @@ const TopicDetails = () => {
                   {/* Footer */}
                   <div className="flex justify-end items-center pt-4">
                     <div className="flex gap-3">
-                      {/* ========== COMMENTED CODE - CANCEL BUTTON ==========
-                      <button
-                        type="button"
-                        onClick={() => navigate("/topics")}
-                        className="px-4 py-2 rounded-md text-sm text-gray-600 border border-gray-300 hover:bg-gray-50 cursor-pointer"
-                      >
-                        {t("topic.actions.cancel")}
-                      </button>
-                      ========== END COMMENTED CODE ========== */}
                       <button
                         type="button"
                         onClick={handleDelete}

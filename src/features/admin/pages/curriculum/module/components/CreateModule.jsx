@@ -74,8 +74,6 @@
 //   });
 
 //   const onSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
-//     console.log("Form submitted!", values);
-
 //     try {
 //       const formData = new FormData();
 
@@ -87,14 +85,20 @@
 //       if (thumbnail) {
 //         formData.append("thumbnail", thumbnail);
 //       }
+
+//       // ========== FUTURE: Add more fields if needed ==========
+//       // formData.append("duration", values.duration);
+//       // formData.append("order", values.order);
+//       // ========== END FUTURE FIELDS ==========
+
 //       const res = await dispatch(createModule(formData)).unwrap();
-//       toast.success(res.message || "Module created successfully ");
+//       toast.success(res?.message || t("module.success.create"));
 //       resetForm();
 //       removeThumbnail();
 //       navigate("/modules");
 //     } catch (error) {
 //       setErrors({ submit: error.message });
-//       toast.error(error?.message || "Something went wrong ❌");
+//       toast.error(error?.message || t("module.error.create"));
 //     } finally {
 //       setSubmitting(false);
 //     }
@@ -104,11 +108,11 @@
 //     const file = event.target.files[0];
 //     if (file) {
 //       if (!file.type.startsWith("image/")) {
-//         alert("Please upload an image file");
+//         toast.error(t("module.validation.imageRequired"));
 //         return;
 //       }
 //       if (file.size > 5 * 1024 * 1024) {
-//         alert("File size should be less than 5MB");
+//         toast.error(t("module.validation.fileSize"));
 //         return;
 //       }
 
@@ -129,7 +133,7 @@
 
 //   return (
 //     <PageLayout>
-//       <div className=" p-8 rounded-lg border border-gray-300">
+//       <div className="p-8 rounded-lg border border-gray-300">
 //         <PageHeader>
 //           <PageHeaderLeft>
 //             <PageTitle>{t("module.create.title")}</PageTitle>
@@ -144,7 +148,7 @@
 //             onSubmit={onSubmit}
 //             enableReinitialize={true}
 //           >
-//             {({ isSubmitting, values, setFieldValue, handleSubmit }) => {
+//             {({ isSubmitting, setFieldValue, handleSubmit }) => {
 //               return (
 //                 <Form onSubmit={handleSubmit} className="space-y-8">
 //                   {/* General Details */}
@@ -165,6 +169,7 @@
 //                             "module.details.moduleNamePlaceholder",
 //                           )}
 //                           required={true}
+//                           maxLength={150}
 //                         />
 //                       </div>
 //                       <div>
@@ -178,15 +183,13 @@
 //                           options={levelOptions}
 //                           onChange={(option) => {
 //                             setFieldValue("levelName", option);
-
-//                             const selectedLevel = levels.data.find(
+//                             const selectedLevel = levels?.data?.find(
 //                               (lev) => lev.id === option.value,
 //                             );
-
 //                             if (selectedLevel) {
 //                               setFieldValue("programName", {
-//                                 label: selectedLevel.program.title,
-//                                 value: selectedLevel.program.id,
+//                                 label: selectedLevel.program?.title,
+//                                 value: selectedLevel.program?.id,
 //                               });
 //                             }
 //                           }}
@@ -205,6 +208,13 @@
 //                         options={programOptions}
 //                         disabled={true}
 //                       />
+//                       {/* ========== COMMENTED CODE - FUTURE FIELDS ==========
+//                       <TextInput
+//                         name="duration"
+//                         label={t("module.details.duration")}
+//                         placeholder={t("module.details.durationPlaceholder")}
+//                       />
+//                       ========== END COMMENTED CODE ========== */}
 //                     </div>
 
 //                     <div className="mt-2">
@@ -214,6 +224,7 @@
 //                         placeholder={t("module.details.descriptionPlaceholder")}
 //                         rows={4}
 //                         required={true}
+//                         maxLength={500}
 //                       />
 //                     </div>
 //                   </div>
@@ -255,7 +266,7 @@
 //                             <div className="relative group">
 //                               <img
 //                                 src={thumbnailPreview}
-//                                 alt="Thumbnail Preview"
+//                                 alt={t("module.details.thumbnailAlt")}
 //                                 className="w-32 h-32 object-cover rounded-lg border border-gray-300 shadow-sm"
 //                               />
 //                               <button
@@ -291,6 +302,15 @@
 //                   {/* Footer */}
 //                   <div className="flex justify-end items-center pt-4">
 //                     <div className="flex gap-3">
+//                       {/* ========== COMMENTED CODE - CANCEL BUTTON ==========
+//                       <button
+//                         type="button"
+//                         onClick={() => navigate("/modules")}
+//                         className="px-4 py-2 rounded-md text-sm text-gray-600 border border-gray-300 hover:bg-gray-50 cursor-pointer"
+//                       >
+//                         {t("module.actions.cancel")}
+//                       </button>
+//                       ========== END COMMENTED CODE ========== */}
 //                       <button
 //                         type="submit"
 //                         disabled={isSubmitting}
@@ -336,23 +356,44 @@ import { useToast } from "../../../../common/toast/ToastContext";
 import { useNavigate } from "react-router-dom";
 import { getAllPrograms } from "../../../../../../redux/slice/programSlice";
 import { getAllLevels } from "../../../../../../redux/slice/levelSlice";
+import Loader from "../../../../common/Loader";
 
 const CreateModule = () => {
   const [thumbnail, setThumbnail] = useState(null);
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
   const fileInputRef = useRef(null);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const toast = useToast();
   const navigate = useNavigate();
 
-  const { programs } = useSelector((state) => state.program);
-  const { levels } = useSelector((state) => state.level);
+  const { programs, isLoading: programsLoading } = useSelector(
+    (state) => state.program,
+  );
+  const { levels, isLoading: levelsLoading } = useSelector(
+    (state) => state.level,
+  );
 
+  // Sequential API calls on component mount
   useEffect(() => {
-    dispatch(getAllPrograms());
-    dispatch(getAllLevels());
-  }, [dispatch]);
+    const fetchSequentialData = async () => {
+      try {
+        // First fetch programs
+        await dispatch(getAllPrograms()).unwrap();
+
+        // Then fetch levels
+        await dispatch(getAllLevels()).unwrap();
+
+        setIsDataLoaded(true);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        toast.error(t("module.error.fetchData"));
+      }
+    };
+
+    fetchSequentialData();
+  }, [dispatch, toast, t]);
 
   const programOptions =
     programs?.data?.map((prog) => ({
@@ -401,11 +442,6 @@ const CreateModule = () => {
       if (thumbnail) {
         formData.append("thumbnail", thumbnail);
       }
-
-      // ========== FUTURE: Add more fields if needed ==========
-      // formData.append("duration", values.duration);
-      // formData.append("order", values.order);
-      // ========== END FUTURE FIELDS ==========
 
       const res = await dispatch(createModule(formData)).unwrap();
       toast.success(res?.message || t("module.success.create"));
@@ -464,7 +500,7 @@ const CreateModule = () => {
             onSubmit={onSubmit}
             enableReinitialize={true}
           >
-            {({ isSubmitting, setFieldValue, handleSubmit }) => {
+            {({ isSubmitting, setFieldValue, values, handleSubmit }) => {
               return (
                 <Form onSubmit={handleSubmit} className="space-y-8">
                   {/* General Details */}
@@ -485,6 +521,7 @@ const CreateModule = () => {
                             "module.details.moduleNamePlaceholder",
                           )}
                           required={true}
+                          maxLength={150}
                         />
                       </div>
                       <div>
@@ -496,6 +533,7 @@ const CreateModule = () => {
                           )}
                           required={true}
                           options={levelOptions}
+                          isLoading={levelsLoading}
                           onChange={(option) => {
                             setFieldValue("levelName", option);
                             const selectedLevel = levels?.data?.find(
@@ -521,7 +559,8 @@ const CreateModule = () => {
                         )}
                         required={true}
                         options={programOptions}
-                        disabled={true}
+                        isLoading={programsLoading}
+                        disabled={!values.levelName}
                       />
                       {/* ========== COMMENTED CODE - FUTURE FIELDS ==========
                       <TextInput
@@ -539,6 +578,7 @@ const CreateModule = () => {
                         placeholder={t("module.details.descriptionPlaceholder")}
                         rows={4}
                         required={true}
+                        maxLength={500}
                       />
                     </div>
                   </div>
@@ -616,15 +656,6 @@ const CreateModule = () => {
                   {/* Footer */}
                   <div className="flex justify-end items-center pt-4">
                     <div className="flex gap-3">
-                      {/* ========== COMMENTED CODE - CANCEL BUTTON ==========
-                      <button
-                        type="button"
-                        onClick={() => navigate("/modules")}
-                        className="px-4 py-2 rounded-md text-sm text-gray-600 border border-gray-300 hover:bg-gray-50 cursor-pointer"
-                      >
-                        {t("module.actions.cancel")}
-                      </button>
-                      ========== END COMMENTED CODE ========== */}
                       <button
                         type="submit"
                         disabled={isSubmitting}
