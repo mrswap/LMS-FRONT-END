@@ -25,6 +25,7 @@ import { createTopic } from "../../../../../../redux/slice/topicSlice";
 import Breadcrumb from "../../../../common/layout/Breadcrumb";
 import { getContentById } from "../../../../../../redux/slice/unitBuilderSlice";
 import CreateLearningUnitBuilder from "./CreateLearningUnitBuilder";
+import Loader from "../../../../common/Loader";
 
 const LearningUnitBuilderDetails = () => {
   const { t } = useTranslation();
@@ -32,7 +33,7 @@ const LearningUnitBuilderDetails = () => {
   const toast = useToast();
   const navigate = useNavigate();
 
-  const { content } = useSelector((state) => state.content);
+  const { content, isLoading } = useSelector((state) => state.content);
   console.log("content", content);
   const { programs } = useSelector((state) => state.program);
   const { levels } = useSelector((state) => state.level);
@@ -330,6 +331,8 @@ const LearningUnitBuilderDetails = () => {
       setSubmitting(false);
     }
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <PageLayout>

@@ -112,7 +112,7 @@ const SingleLearningUnitBuilderDetails = () => {
   const toast = useToast();
   const navigate = useNavigate();
 
-  const { content, loading } = useSelector((state) => state.content);
+  const { content, isLoading: loading } = useSelector((state) => state.content);
   const { programs } = useSelector((state) => state.program);
   const { levels } = useSelector((state) => state.level);
   const { modules } = useSelector((state) => state.module);
@@ -388,17 +388,7 @@ const SingleLearningUnitBuilderDetails = () => {
   };
 
   if (loading && !content) {
-    return (
-      <PageLayout>
-        <div className="p-8 rounded-lg border border-gray-300">
-          <div className="flex justify-center items-center h-64">
-            <div className="text-gray-500">
-              <Loader />
-            </div>
-          </div>
-        </div>
-      </PageLayout>
-    );
+    return <Loader />;
   }
 
   if (!content && !loading) {
