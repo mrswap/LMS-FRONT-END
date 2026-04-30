@@ -36,6 +36,13 @@
 //   const { chapters } = useSelector((state) => state.chapter);
 //   const { topics } = useSelector((state) => state.topic);
 
+//   // States for sequential loading
+//   const [isProgramsLoaded, setIsProgramsLoaded] = useState(false);
+//   const [isLevelsLoaded, setIsLevelsLoaded] = useState(false);
+//   const [isModulesLoaded, setIsModulesLoaded] = useState(false);
+//   const [isChaptersLoaded, setIsChaptersLoaded] = useState(false);
+//   const [isTopicsLoaded, setIsTopicsLoaded] = useState(false);
+
 //   const [selectedProgram, setSelectedProgram] = useState(null);
 //   const [selectedLevel, setSelectedLevel] = useState(null);
 //   const [selectedModule, setSelectedModule] = useState(null);
@@ -47,17 +54,62 @@
 //   const [filteredTopics, setFilteredTopics] = useState([]);
 //   const [contentSections, setContentSections] = useState([]);
 
+//   // STEP 1: Sirf program load hoga initially
 //   useEffect(() => {
-//     dispatch(getAllPrograms());
-//     dispatch(getAllLevels());
-//     dispatch(getAllModules());
-//     dispatch(getAllChapters());
-//     dispatch(getAllTopics());
+//     const loadPrograms = async () => {
+//       await dispatch(getAllPrograms());
+//       setIsProgramsLoaded(true);
+//     };
+//     loadPrograms();
 //   }, [dispatch]);
+
+//   // STEP 2: Program select hone par level load hoga
+//   useEffect(() => {
+//     if (isProgramsLoaded && selectedProgram) {
+//       const loadLevels = async () => {
+//         await dispatch(getAllLevels());
+//         setIsLevelsLoaded(true);
+//       };
+//       loadLevels();
+//     }
+//   }, [selectedProgram, isProgramsLoaded, dispatch]);
+
+//   // STEP 3: Level select hone par module load hoga
+//   useEffect(() => {
+//     if (isLevelsLoaded && selectedLevel) {
+//       const loadModules = async () => {
+//         await dispatch(getAllModules());
+//         setIsModulesLoaded(true);
+//       };
+//       loadModules();
+//     }
+//   }, [selectedLevel, isLevelsLoaded, dispatch]);
+
+//   // STEP 4: Module select hone par chapter load hoga
+//   useEffect(() => {
+//     if (isModulesLoaded && selectedModule) {
+//       const loadChapters = async () => {
+//         await dispatch(getAllChapters());
+//         setIsChaptersLoaded(true);
+//       };
+//       loadChapters();
+//     }
+//   }, [selectedModule, isModulesLoaded, dispatch]);
+
+//   // STEP 5: Chapter select hone par topic load hoga
+//   useEffect(() => {
+//     if (isChaptersLoaded && selectedChapter) {
+//       const loadTopics = async () => {
+//         await dispatch(getAllTopics());
+//         setIsTopicsLoaded(true);
+//       };
+//       loadTopics();
+//     }
+//   }, [selectedChapter, isChaptersLoaded, dispatch]);
 
 //   // Filter levels based on selected program
 //   useEffect(() => {
-//     if (selectedProgram && levels?.data) {
+//     if (selectedProgram && levels?.data && isLevelsLoaded) {
 //       const programLevels = levels.data.filter((level) => {
 //         return (
 //           level.program_id === selectedProgram.value ||
@@ -69,11 +121,11 @@
 //     } else {
 //       setFilteredLevels([]);
 //     }
-//   }, [selectedProgram, levels]);
+//   }, [selectedProgram, levels, isLevelsLoaded]);
 
 //   // Filter modules based on selected level
 //   useEffect(() => {
-//     if (selectedLevel && modules?.data) {
+//     if (selectedLevel && modules?.data && isModulesLoaded) {
 //       const levelModules = modules.data.filter((module) => {
 //         return (
 //           module.level_id === selectedLevel.value ||
@@ -85,11 +137,11 @@
 //     } else {
 //       setFilteredModules([]);
 //     }
-//   }, [selectedLevel, modules]);
+//   }, [selectedLevel, modules, isModulesLoaded]);
 
 //   // Filter chapters based on selected module
 //   useEffect(() => {
-//     if (selectedModule && chapters?.data) {
+//     if (selectedModule && chapters?.data && isChaptersLoaded) {
 //       const moduleChapters = chapters.data.filter((chapter) => {
 //         return (
 //           chapter.module_id === selectedModule.value ||
@@ -101,11 +153,11 @@
 //     } else {
 //       setFilteredChapters([]);
 //     }
-//   }, [selectedModule, chapters]);
+//   }, [selectedModule, chapters, isChaptersLoaded]);
 
 //   // Filter topics based on selected chapter
 //   useEffect(() => {
-//     if (selectedChapter && topics?.data) {
+//     if (selectedChapter && topics?.data && isTopicsLoaded) {
 //       const chapterTopics = topics.data.filter((topic) => {
 //         return (
 //           topic.chapter_id === selectedChapter.value ||
@@ -117,7 +169,7 @@
 //     } else {
 //       setFilteredTopics([]);
 //     }
-//   }, [selectedChapter, topics]);
+//   }, [selectedChapter, topics, isTopicsLoaded]);
 
 //   const programOptions =
 //     programs?.data?.map((prog) => ({
@@ -187,9 +239,14 @@
 //           order: index + 1,
 //         };
 
-//         // Add media_shortcut only for media type
+//         // if (section.type === "media" && section.media_shortcut) {
+//         //   apiSection.media_shortcut = section.media_shortcut;
+//         // }
+
 //         if (section.type === "media" && section.media_shortcut) {
-//           apiSection.media_shortcut = section.media_shortcut;
+//           apiSection.meta = {
+//             shortcode: section.media_shortcut,
+//           };
 //         }
 
 //         return apiSection;
@@ -222,6 +279,10 @@
 //       setFilteredChapters([]);
 //       setFilteredTopics([]);
 //       setContentSections([]);
+//       setIsLevelsLoaded(false);
+//       setIsModulesLoaded(false);
+//       setIsChaptersLoaded(false);
+//       setIsTopicsLoaded(false);
 //       navigate("/learning-unit");
 //     } catch (error) {
 //       setErrors({ submit: error.message });
@@ -286,6 +347,10 @@
 //                               setSelectedLevel(null);
 //                               setSelectedModule(null);
 //                               setSelectedChapter(null);
+//                               setIsLevelsLoaded(false);
+//                               setIsModulesLoaded(false);
+//                               setIsChaptersLoaded(false);
+//                               setIsTopicsLoaded(false);
 //                             }}
 //                           />
 //                         </div>
@@ -309,6 +374,9 @@
 //                               setSelectedLevel(option);
 //                               setSelectedModule(null);
 //                               setSelectedChapter(null);
+//                               setIsModulesLoaded(false);
+//                               setIsChaptersLoaded(false);
+//                               setIsTopicsLoaded(false);
 //                             }}
 //                           />
 //                         </div>
@@ -334,11 +402,13 @@
 //                               setFieldValue("topicName", null);
 //                               setSelectedModule(option);
 //                               setSelectedChapter(null);
+//                               setIsChaptersLoaded(false);
+//                               setIsTopicsLoaded(false);
 //                             }}
 //                           />
 //                         </div>
 
-//                         {/* Chapter Selection - NEW */}
+//                         {/* Chapter Selection */}
 //                         <div>
 //                           <SelectField
 //                             name="chapterName"
@@ -355,6 +425,7 @@
 //                               setFieldValue("chapterName", option);
 //                               setFieldValue("topicName", null);
 //                               setSelectedChapter(option);
+//                               setIsTopicsLoaded(false);
 //                             }}
 //                           />
 //                         </div>
@@ -475,7 +546,6 @@ const CreateLearningUnitBuilder = () => {
   const { chapters } = useSelector((state) => state.chapter);
   const { topics } = useSelector((state) => state.topic);
 
-  // States for sequential loading
   const [isProgramsLoaded, setIsProgramsLoaded] = useState(false);
   const [isLevelsLoaded, setIsLevelsLoaded] = useState(false);
   const [isModulesLoaded, setIsModulesLoaded] = useState(false);
@@ -493,7 +563,6 @@ const CreateLearningUnitBuilder = () => {
   const [filteredTopics, setFilteredTopics] = useState([]);
   const [contentSections, setContentSections] = useState([]);
 
-  // STEP 1: Sirf program load hoga initially
   useEffect(() => {
     const loadPrograms = async () => {
       await dispatch(getAllPrograms());
@@ -502,7 +571,6 @@ const CreateLearningUnitBuilder = () => {
     loadPrograms();
   }, [dispatch]);
 
-  // STEP 2: Program select hone par level load hoga
   useEffect(() => {
     if (isProgramsLoaded && selectedProgram) {
       const loadLevels = async () => {
@@ -513,7 +581,6 @@ const CreateLearningUnitBuilder = () => {
     }
   }, [selectedProgram, isProgramsLoaded, dispatch]);
 
-  // STEP 3: Level select hone par module load hoga
   useEffect(() => {
     if (isLevelsLoaded && selectedLevel) {
       const loadModules = async () => {
@@ -524,7 +591,6 @@ const CreateLearningUnitBuilder = () => {
     }
   }, [selectedLevel, isLevelsLoaded, dispatch]);
 
-  // STEP 4: Module select hone par chapter load hoga
   useEffect(() => {
     if (isModulesLoaded && selectedModule) {
       const loadChapters = async () => {
@@ -535,7 +601,6 @@ const CreateLearningUnitBuilder = () => {
     }
   }, [selectedModule, isModulesLoaded, dispatch]);
 
-  // STEP 5: Chapter select hone par topic load hoga
   useEffect(() => {
     if (isChaptersLoaded && selectedChapter) {
       const loadTopics = async () => {
@@ -546,7 +611,6 @@ const CreateLearningUnitBuilder = () => {
     }
   }, [selectedChapter, isChaptersLoaded, dispatch]);
 
-  // Filter levels based on selected program
   useEffect(() => {
     if (selectedProgram && levels?.data && isLevelsLoaded) {
       const programLevels = levels.data.filter((level) => {
@@ -562,7 +626,6 @@ const CreateLearningUnitBuilder = () => {
     }
   }, [selectedProgram, levels, isLevelsLoaded]);
 
-  // Filter modules based on selected level
   useEffect(() => {
     if (selectedLevel && modules?.data && isModulesLoaded) {
       const levelModules = modules.data.filter((module) => {
@@ -578,7 +641,6 @@ const CreateLearningUnitBuilder = () => {
     }
   }, [selectedLevel, modules, isModulesLoaded]);
 
-  // Filter chapters based on selected module
   useEffect(() => {
     if (selectedModule && chapters?.data && isChaptersLoaded) {
       const moduleChapters = chapters.data.filter((chapter) => {
@@ -594,7 +656,6 @@ const CreateLearningUnitBuilder = () => {
     }
   }, [selectedModule, chapters, isChaptersLoaded]);
 
-  // Filter topics based on selected chapter
   useEffect(() => {
     if (selectedChapter && topics?.data && isTopicsLoaded) {
       const chapterTopics = topics.data.filter((topic) => {
@@ -678,10 +739,6 @@ const CreateLearningUnitBuilder = () => {
           order: index + 1,
         };
 
-        // if (section.type === "media" && section.media_shortcut) {
-        //   apiSection.media_shortcut = section.media_shortcut;
-        // }
-
         if (section.type === "media" && section.media_shortcut) {
           apiSection.meta = {
             shortcode: section.media_shortcut,
@@ -698,15 +755,13 @@ const CreateLearningUnitBuilder = () => {
         sections: apiSections,
       };
 
-      console.log("Payload to be sent to API:", payload);
-
       const res = await dispatch(
         createBulkContent({
           topicId: values.topicName.value,
           data: payload,
         }),
       ).unwrap();
-      toast.success(res.message || "Learning Unit created successfully");
+      toast.success(res.message || t("learningUnitBuilder.success.create"));
 
       resetForm();
       setSelectedProgram(null);
@@ -725,7 +780,7 @@ const CreateLearningUnitBuilder = () => {
       navigate("/learning-unit");
     } catch (error) {
       setErrors({ submit: error.message });
-      toast.error(error?.message || "Something went wrong ");
+      toast.error(error?.message || t("learningUnitBuilder.error.create"));
     } finally {
       setSubmitting(false);
     }
@@ -753,7 +808,6 @@ const CreateLearningUnitBuilder = () => {
             {({ isSubmitting, values, setFieldValue, handleSubmit }) => {
               return (
                 <Form onSubmit={handleSubmit} className="space-y-8">
-                  {/* General Details */}
                   <div>
                     <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
                       <span className="text-[18px] text-primary font-[700]">
@@ -764,7 +818,6 @@ const CreateLearningUnitBuilder = () => {
 
                     <div className="space-y-4">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
-                        {/* Program Selection */}
                         <div>
                           <SelectField
                             name="programName"
@@ -772,7 +825,7 @@ const CreateLearningUnitBuilder = () => {
                               "learningUnitBuilder.details.parentProgram",
                             )}
                             placeholder={t(
-                              "learningUnitBuilder.details.perentProgramPlaceholder",
+                              "learningUnitBuilder.details.parentProgramPlaceholder",
                             )}
                             required={true}
                             options={programOptions || []}
@@ -794,7 +847,6 @@ const CreateLearningUnitBuilder = () => {
                           />
                         </div>
 
-                        {/* Level Selection */}
                         <div>
                           <SelectField
                             name="levelName"
@@ -822,7 +874,6 @@ const CreateLearningUnitBuilder = () => {
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
-                        {/* Module Selection */}
                         <div>
                           <SelectField
                             name="moduleName"
@@ -847,7 +898,6 @@ const CreateLearningUnitBuilder = () => {
                           />
                         </div>
 
-                        {/* Chapter Selection */}
                         <div>
                           <SelectField
                             name="chapterName"
@@ -871,7 +921,6 @@ const CreateLearningUnitBuilder = () => {
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
-                        {/* Topic Selection */}
                         <div>
                           <SelectField
                             name="topicName"
@@ -891,7 +940,6 @@ const CreateLearningUnitBuilder = () => {
                     </div>
                   </div>
 
-                  {/* Dynamic Content Sections */}
                   <div>
                     <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
                       <span className="text-[18px] text-primary font-[700]">
@@ -918,10 +966,10 @@ const CreateLearningUnitBuilder = () => {
                       removeButtonText={t(
                         "learningUnitBuilder.details.content.removeSection",
                       )}
+                      t={t}
                     />
                   </div>
 
-                  {/* Footer */}
                   <div className="flex justify-end items-center pt-4">
                     <div className="flex gap-3">
                       <button

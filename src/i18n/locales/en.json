@@ -813,10 +813,10 @@
 
   "learningUnitBuilder": {
     "list": {
-      "title": "Learning Unit Management",
-      "subtitle": "Organize and manage course learning units and interactive content.",
-      "searchPlaceholder": "Search by title name...",
-      "clearAll": "Clear All",
+      "title": "Learning Unit Builder",
+      "subtitle": "Manage and create learning content for topics",
+      "searchPlaceholder": "Search by content title...",
+      "clearAll": "Clear all filters",
       "columns": {
         "title": "Title",
         "type": "Type",
@@ -824,67 +824,94 @@
         "parentChapter": "Parent Chapter",
         "parentModule": "Parent Module",
         "parentLevel": "Parent Level",
-        "duration": "Duration",
         "status": "Status",
         "actions": "Actions"
       }
     },
+    "create": {
+      "title": "Create Learning Content",
+      "subtitle": "Create new learning content for a topic"
+    },
     "details": {
       "generalDetails": "General Details",
-      "parentTopic": "Parent Topic",
-      "parentTopicPlaceholder": "Enter topic name",
-      "parentChapter": "Parent Chapter",
-      "parentChapterPlaceholder": "Select a chapter",
-      "parentModule": "Parent Module",
-      "parentModulePlaceholder": "Select a module",
-      "parentLevel": "Level Name",
-      "parentLevelPlaceholder": "Select a level",
       "parentProgram": "Parent Program",
-      "perentProgramPlaceholder": "Select a program",
-      "duration": "Duration (in minutes)",
-      "durationPlaceholder": "Enter duration in minutes",
-      "description": "Description",
-      "descriptionPlaceholder": "Write module description...",
+      "parentProgramPlaceholder": "Select program",
+      "parentLevel": "Parent Level",
+      "parentLevelPlaceholder": "Select level",
+      "parentModule": "Parent Module",
+      "parentModulePlaceholder": "Select module",
+      "parentChapter": "Parent Chapter",
+      "parentChapterPlaceholder": "Select chapter",
+      "parentTopic": "Parent Topic",
+      "parentTopicPlaceholder": "Select topic",
       "deleteText": "Are you sure you want to delete this content?",
       "content": {
         "contentSection": "Content Sections",
-        "sectionTitle": "Section Title",
+        "contentTitle": "Content Title",
         "content": "Content",
-        "mediaShortcut": "Media Shortcut",
-        "mediaUrlShortcut": "Media URL/Shortcut",
-        "addButtonSection": "Add New Section",
-        "removeSection": "Remove Section",
-        "order": "Order",
-        "type": "Type",
+        "type": "Content Type",
         "text": "Text",
         "media": "Media",
-        "description": "Description (Optional)",
-        "editorPlaceholder": "Write your content here...",
-        "preview": "Preview"
+        "sectionTitle": "Section Title",
+        "sectionTitlePlaceholder": "Enter section title",
+        "mediaShortcut": "Media URL / Shortcut",
+        "mediaShortcutPlaceholder": "e.g., yt_123, /uploads/video.mp4, https://youtu.be/...",
+        "description": "Description",
+        "order": "Order",
+        "preview": "Preview",
+        "addButtonSection": "+ Add New Section",
+        "removeSection": "Remove Section",
+        "editorPlaceholder": "Write your content here..."
       }
-    },
-    "create": {
-      "title": "Create Learning Unit",
-      "subtitle": "Add a new learning unit by providing lesson details, media resources, and interactive H5P content for the training program."
     },
     "actions": {
       "addNewContent": "+ Add New Content",
       "createContent": "Create Content",
       "creating": "Creating...",
-      "deleteContent": "Delete content",
-      "updateContent": "Update content",
-      "updating": "Updating..."
+      "updateContent": "Update Content",
+      "updating": "Updating...",
+      "deleteContent": "Delete Content"
     },
     "breadcrumb": {
       "contentManagement": "Content Management",
-      "view-content": "View content"
+      "editContent": "Edit Content"
+    },
+    "filters": {
+      "allLevels": "All Levels",
+      "allStatus": "All Status",
+      "allTypes": "All Types",
+      "active": "Active",
+      "inactive": "Inactive",
+      "text": "Text",
+      "media": "Media",
+      "selectLevelFirst": "Select level first",
+      "selectModule": "Select module",
+      "selectModuleFirst": "Select module first",
+      "selectChapter": "Select chapter",
+      "selectChapterFirst": "Select chapter first",
+      "selectTopic": "Select topic",
+      "loadingModules": "Loading modules...",
+      "loadingChapters": "Loading chapters...",
+      "loadingTopics": "Loading topics..."
     },
     "validation": {
-      "programRequired": "Parent program is required",
-      "levelRequired": "Level name is required",
-      "moduleRequired": "Module name is required",
-      "topicRequired": "Topic name is required"
-    }
+      "programRequired": "Program is required",
+      "levelRequired": "Level is required",
+      "moduleRequired": "Module is required",
+      "chapterRequired": "Chapter is required",
+      "topicRequired": "Topic is required"
+    },
+    "success": {
+      "create": "Learning content created successfully!",
+      "update": "Learning content updated successfully!",
+      "delete": "Learning content deleted successfully!"
+    },
+    "error": {
+      "create": "Failed to create learning content. Please try again.",
+      "update": "Failed to update learning content. Please try again.",
+      "delete": "Failed to delete learning content. Please try again."
+    },
+    "noContentFound": "No content found"
   },
 
   "mediaLibrary": {
@@ -1070,14 +1097,12 @@
     }
   },
 
-  "assessment": {
+  "quizAssessment": {
     "list": {
-      "quizTitle": "Quiz Management",
-      "quizSubtitle": "Create and manage topic-based quizzes to reinforce learning with focused questions.",
-      "examTitle": "Exam Management",
-      "examSubtitle": "Organize level-based exams to evaluate overall understanding and performance.",
-      "searchPlaceholder": "Search by title name...",
-      "clearAll": "Clear All",
+      "quizTitle": "Quiz Assessment",
+      "quizSubtitle": "Manage and create quizzes for topics",
+      "searchPlaceholder": "Search by quiz title...",
+      "clearAll": "Clear all filters",
       "columns": {
         "title": "Title",
         "type": "Type",
@@ -1085,86 +1110,74 @@
         "module": "Module",
         "chapter": "Chapter",
         "topic": "Topic",
-        "questionCount": "Question Count",
-        "totalMark": "Total Mark",
+        "questionCount": "Questions",
+        "totalMark": "Total Marks",
         "passingScore": "Passing Score",
         "duration": "Duration",
         "status": "Status",
         "actions": "Actions"
       }
     },
+    "create": {
+      "quizTitle": "Create Quiz",
+      "quizSubtitle": "Create a new quiz for a topic"
+    },
     "details": {
-      "generalDetails": "General Details",
-      "topicDetails": "Topic Details",
-      "levelDetails": "Level Details",
-      "assessmentConfiguration": "Assessment Configuration",
-      "assessmentFor": "Assessment For",
-      "assessmentForPlaceholder": "Select topic or level",
-      "topicName": "Topic Name",
-      "topicNamePlaceholder": "Select topic name",
-      "parentChapter": "Parent Chapter",
-      "parentChapterPlaceholder": "Select a chapter",
-      "parentModule": "Parent Module",
-      "parentModulePlaceholder": "Select a module",
-      "parentLevel": "Level Name",
-      "parentLevelPlaceholder": "Select a level",
+      "topicDetails": "Topic Selection",
+      "assessmentDetails": "Assessment Details",
       "parentProgram": "Parent Program",
-      "parentProgramPlaceholder": "Select a program",
-      "title": "Title",
-      "titlePlaceholder": "Enter assessment title",
-      "duration": "Duration (in minutes)",
+      "parentProgramPlaceholder": "Select program",
+      "parentLevel": "Parent Level",
+      "parentLevelPlaceholder": "Select level",
+      "parentModule": "Parent Module",
+      "parentModulePlaceholder": "Select module",
+      "parentChapter": "Parent Chapter",
+      "parentChapterPlaceholder": "Select chapter",
+      "topicName": "Topic Name",
+      "topicNamePlaceholder": "Select topic",
+      "title": "Quiz Title",
+      "titlePlaceholder": "Enter quiz title",
+      "duration": "Duration (minutes)",
       "durationPlaceholder": "Enter duration in minutes",
-      "levelAssessmentDetails": "Level Assessment Details",
+      "totalMarks": "Total Marks",
+      "totalMarksPlaceholder": "Enter total marks",
+      "passingScore": "Passing Score",
+      "passingScorePlaceholder": "Enter passing score",
       "description": "Description",
-      "descriptionPlaceholder": "Write module description...",
-      "thumbnail": "Level Thumbnail",
+      "descriptionPlaceholder": "Enter quiz description",
+      "thumbnail": "Quiz Thumbnail",
       "uploadText": "Click to upload thumbnail",
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
       "changeImage": "Change Image",
-      "deleteTextQuiz": "Are you sure you want to delete this quiz?",
-      "deleteTextExam": "Are you sure you want to delete this exam?",
-      "assessmentDetails": "Assessment Details",
-      "assessmentTitle": "Assessment Title",
-      "assessmentTitlePlaceholder": "Enter assessment title",
-      "assessmentDescription": "Assessment Description",
-      "assessmentDescriptionPlaceholder": "Enter assessment description",
-      "passingScore": "Passing Score",
-      "passingScorePlaceholder": "Enter passing score",
-      "totalMarks": "Total Marks",
-      "totalMarksPlaceholder": "Enter total marks",
-      "selectTopic": "Select Topic",
-      "selectTopicPlaceholder": "Choose a topic",
-      "selectLevel": "Select Level",
-      "selectLevelPlaceholder": "Choose a level",
-      "topicOption": "Topic",
-      "levelOption": "Level"
-    },
-    "create": {
-      "quizTitle": "Create Quiz",
-      "quizSubtitle": "Design a quick knowledge check to evaluate understanding of a specific topic.",
-      "examTitle": "Create  Exam",
-      "examSubtitle": "Build a comprehensive assessment to evaluate overall performance at this level."
+      "currentThumbnail": "Current thumbnail",
+      "deleteTextQuiz": "Are you sure you want to delete this quiz?"
     },
     "actions": {
-      "addNewQuiz": "Add New Quiz",
+      "addNewQuiz": "+ Add New Quiz",
       "createQuiz": "Create Quiz",
-      "deleteQuiz": "Delete Quiz",
-      "updateQuiz": "Update Quiz",
-      "addNewExam": "Add New Exam",
-      "createExam": "Create Exam",
-      "deleteExam": "Delete Exam",
-      "updateExam": "Update Exam",
       "creating": "Creating...",
-      "updating": "Updating..."
+      "updateQuiz": "Update Quiz",
+      "updating": "Updating...",
+      "deleteQuiz": "Delete Quiz"
     },
     "breadcrumb": {
       "quizManagement": "Quiz Management",
-      "view-quiz": "View Quiz",
-      "examManagement": "Exam Management",
-      "view-exam": "View Exam"
+      "view-quiz": "View Quiz"
+    },
+    "questions": "Questions",
+    "filters": {
+      "allLevels": "All Levels",
+      "allStatus": "All Status",
+      "active": "Active",
+      "inactive": "Inactive",
+      "selectLevelFirst": "Select level first",
+      "selectModule": "Select module",
+      "selectModuleFirst": "Select module first",
+      "selectChapter": "Select chapter",
+      "selectChapterFirst": "Select chapter first",
+      "selectTopic": "Select topic"
     },
     "validation": {
-      "assessment_type_required": "Assessment type is required",
       "program_required": "Program is required",
       "level_required": "Level is required",
       "module_required": "Module is required",
@@ -1177,7 +1190,109 @@
       "total_marks_required": "Total marks is required",
       "total_marks_positive": "Total marks must be positive",
       "duration_required": "Duration is required",
-      "duration_positive": "Duration must be positive"
+      "duration_positive": "Duration must be positive",
+      "invalidImage": "Only image files are allowed (JPG, PNG, etc.)",
+      "fileSizeExceeded": "Image size must be less than 5 MB"
+    },
+    "success": {
+      "create": "Quiz created successfully!",
+      "update": "Quiz updated successfully!",
+      "delete": "Quiz deleted successfully!"
+    },
+    "error": {
+      "create": "Failed to create quiz. Please try again.",
+      "update": "Failed to update quiz. Please try again.",
+      "delete": "Failed to delete quiz. Please try again."
+    }
+  },
+
+  "examAssessment": {
+    "list": {
+      "examTitle": "Exam Assessment",
+      "examSubtitle": "Manage and create exams for levels",
+      "searchPlaceholder": "Search by exam title...",
+      "clearAll": "Clear all filters",
+      "columns": {
+        "title": "Title",
+        "type": "Type",
+        "questionCount": "Questions",
+        "totalMark": "Total Marks",
+        "passingScore": "Passing Score",
+        "duration": "Duration",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "create": {
+      "examTitle": "Create Exam",
+      "examSubtitle": "Create a new exam for a level"
+    },
+    "details": {
+      "levelDetails": "Level Selection",
+      "assessmentDetails": "Assessment Details",
+      "parentProgram": "Parent Program",
+      "parentProgramPlaceholder": "Select program",
+      "selectLevel": "Select Level",
+      "selectLevelPlaceholder": "Select level",
+      "title": "Exam Title",
+      "titlePlaceholder": "Enter exam title",
+      "duration": "Duration (minutes)",
+      "durationPlaceholder": "Enter duration in minutes",
+      "totalMarks": "Total Marks",
+      "totalMarksPlaceholder": "Enter total marks",
+      "passingScore": "Passing Score",
+      "passingScorePlaceholder": "Enter passing score",
+      "description": "Description",
+      "descriptionPlaceholder": "Enter exam description",
+      "thumbnail": "Exam Thumbnail",
+      "uploadText": "Click to upload thumbnail",
+      "uploadSubText": "PNG, JPG, JPEG up to 5MB",
+      "changeImage": "Change Image",
+      "currentThumbnail": "Current thumbnail",
+      "deleteTextExam": "Are you sure you want to delete this exam?"
+    },
+    "actions": {
+      "addNewExam": "+ Add New Exam",
+      "createExam": "Create Exam",
+      "creating": "Creating...",
+      "updateExam": "Update Exam",
+      "updating": "Updating...",
+      "deleteExam": "Delete Exam"
+    },
+    "breadcrumb": {
+      "examManagement": "Exam Management",
+      "view-exam": "View Exam"
+    },
+    "questions": "Questions",
+    "filters": {
+      "allLevels": "All Levels",
+      "allStatus": "All Status",
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "validation": {
+      "program_required": "Program is required",
+      "level_required": "Level is required",
+      "title_required": "Title is required",
+      "description_required": "Description is required",
+      "passing_score_required": "Passing score is required",
+      "passing_score_positive": "Passing score must be positive",
+      "total_marks_required": "Total marks is required",
+      "total_marks_positive": "Total marks must be positive",
+      "duration_required": "Duration is required",
+      "duration_positive": "Duration must be positive",
+      "invalidImage": "Only image files are allowed (JPG, PNG, etc.)",
+      "fileSizeExceeded": "Image size must be less than 5 MB"
+    },
+    "success": {
+      "create": "Exam created successfully!",
+      "update": "Exam updated successfully!",
+      "delete": "Exam deleted successfully!"
+    },
+    "error": {
+      "create": "Failed to create exam. Please try again.",
+      "update": "Failed to update exam. Please try again.",
+      "delete": "Failed to delete exam. Please try again."
     }
   },
 

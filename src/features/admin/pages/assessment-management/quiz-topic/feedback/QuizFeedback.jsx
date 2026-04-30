@@ -110,6 +110,7 @@ const QuizFeedback = () => {
       rating: selectedRating?.value || "",
       assessment_id: selectedAssessment?.value || "",
       topic_id: topic?.value || "",
+      type: "topic",
       //   level_id: selectedLevel?.value !== "all" ? selectedLevel?.value : "",
     };
 

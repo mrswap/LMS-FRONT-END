@@ -565,78 +565,105 @@
 
   "learningUnitBuilder": {
     "list": {
-      "title": "ਲਰਨਿੰਗ ਯੂਨਿਟ ਪ੍ਰਬੰਧਨ",
-      "subtitle": "ਕੋਰਸ ਦੀਆਂ ਲਰਨਿੰਗ ਯੂਨਿਟਾਂ ਅਤੇ ਇੰਟਰਐਕਟਿਵ ਸਮੱਗਰੀ ਨੂੰ ਠੀਕ ਤਰ੍ਹਾਂ ਸੰਭਾਲੋ ਅਤੇ ਮੈਨੇਜ ਕਰੋ।",
-      "searchPlaceholder": "ਟਾਈਟਲ ਨਾਮ ਨਾਲ ਖੋਜੋ...",
-      "clearAll": "ਸਾਰਾ ਸਾਫ ਕਰੋ",
+      "title": "ਲਰਨਿੰਗ ਯੂਨਿਟ ਬਿਲਡਰ",
+      "subtitle": "ਵਿਸ਼ਿਆਂ ਲਈ ਲਰਨਿੰਗ ਕੰਟੈਂਟ ਦਾ ਪ੍ਰਬੰਧਨ ਅਤੇ ਸਿਰਜਣਾ ਕਰੋ",
+      "searchPlaceholder": "ਕੰਟੈਂਟ ਸਿਰਲੇਖ ਨਾਲ ਖੋਜੋ...",
+      "clearAll": "ਸਾਰੇ ਫਿਲਟਰ ਸਾਫ਼ ਕਰੋ",
       "columns": {
-        "title": "ਟਾਈਟਲ",
+        "title": "ਸਿਰਲੇਖ",
         "type": "ਕਿਸਮ",
-        "parentTopic": "ਮੁੱਖ ਵਿਸ਼ਾ",
-        "parentChapter": "ਮੁੱਖ ਚੈਪਟਰ",
-        "parentModule": "ਮੁੱਖ ਮੋਡੀਊਲ",
-        "parentLevel": "ਮੁੱਖ ਲੈਵਲ",
-        "duration": "ਅਵਧੀ",
-        "status": "ਸਟੇਟਸ",
-        "actions": "ਐਕਸ਼ਨ"
-      }
-    },
-    "details": {
-      "generalDetails": "ਸਧਾਰਣ ਵੇਰਵਾ",
-      "parentTopic": "ਮੁੱਖ ਵਿਸ਼ਾ",
-      "parentTopicPlaceholder": "ਵਿਸ਼ੇ ਦਾ ਨਾਮ ਦਰਜ ਕਰੋ",
-      "parentChapter": "ਮੁੱਖ ਚੈਪਟਰ",
-      "parentChapterPlaceholder": "ਇੱਕ ਚੈਪਟਰ ਚੁਣੋ",
-      "parentModule": "ਮੁੱਖ ਮੋਡੀਊਲ",
-      "parentModulePlaceholder": "ਇੱਕ ਮੋਡੀਊਲ ਚੁਣੋ",
-      "parentLevel": "ਲੈਵਲ ਨਾਮ",
-      "parentLevelPlaceholder": "ਇੱਕ ਲੈਵਲ ਚੁਣੋ",
-      "parentProgram": "ਮੁੱਖ ਪ੍ਰੋਗਰਾਮ",
-      "perentProgramPlaceholder": "ਇੱਕ ਪ੍ਰੋਗਰਾਮ ਚੁਣੋ",
-      "duration": "ਅਵਧੀ (ਮਿੰਟ ਵਿੱਚ)",
-      "durationPlaceholder": "ਮਿੰਟ ਵਿੱਚ ਅਵਧੀ ਦਰਜ ਕਰੋ",
-      "description": "ਵੇਰਵਾ",
-      "descriptionPlaceholder": "ਮੋਡੀਊਲ ਦਾ ਵੇਰਵਾ ਲਿਖੋ...",
-      "deleteText": "ਕੀ ਤੁਸੀਂ ਇਹ ਸਮੱਗਰੀ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
-      "content": {
-        "contentSection": "ਕੰਟੈਂਟ ਸੈਕਸ਼ਨ",
-        "sectionTitle": "ਸੈਕਸ਼ਨ ਟਾਈਟਲ",
-        "content": "ਕੰਟੈਂਟ",
-        "mediaShortcut": "ਮੀਡੀਆ ਸ਼ਾਰਟਕੱਟ",
-        "mediaUrlShortcut": "ਮੀਡੀਆ URL/ਸ਼ਾਰਟਕੱਟ",
-        "addButtonSection": "ਨਵਾਂ ਸੈਕਸ਼ਨ ਜੋੜੋ",
-        "removeSection": "ਸੈਕਸ਼ਨ ਹਟਾਓ",
-        "order": "ਕ੍ਰਮ",
-        "type": "ਕਿਸਮ",
-        "text": "ਟੈਕਸਟ",
-        "media": "ਮੀਡੀਆ",
-        "description": "ਵੇਰਵਾ (ਚੋਣਵਾਂ)",
-        "editorPlaceholder": "ਇੱਥੇ ਆਪਣਾ ਕੰਟੈਂਟ ਲਿਖੋ...",
-        "preview": "ਝਲਕ"
+        "parentTopic": "ਮੁੱਢਲਾ ਵਿਸ਼ਾ",
+        "parentChapter": "ਮੁੱਢਲਾ ਅਧਿਆਇ",
+        "parentModule": "ਮੁੱਢਲਾ ਮੋਡੀਊਲ",
+        "parentLevel": "ਮੁੱਢਲਾ ਪੱਧਰ",
+        "status": "ਸਥਿਤੀ",
+        "actions": "ਕਾਰਵਾਈਆਂ"
       }
     },
     "create": {
-      "title": "ਲਰਨਿੰਗ ਯੂਨਿਟ ਬਣਾਓ",
-      "subtitle": "ਟ੍ਰੇਨਿੰਗ ਪ੍ਰੋਗਰਾਮ ਲਈ ਲੈਸਨ ਵੇਰਵਾ, ਮੀਡੀਆ ਰਿਸੋਰਸ ਅਤੇ ਇੰਟਰਐਕਟਿਵ H5P ਕੰਟੈਂਟ ਨਾਲ ਨਵੀਂ ਲਰਨਿੰਗ ਯੂਨਿਟ ਬਣਾਓ।"
+      "title": "ਲਰਨਿੰਗ ਕੰਟੈਂਟ ਬਣਾਓ",
+      "subtitle": "ਕਿਸੇ ਵਿਸ਼ੇ ਲਈ ਨਵਾਂ ਲਰਨਿੰਗ ਕੰਟੈਂਟ ਬਣਾਓ"
+    },
+    "details": {
+      "generalDetails": "ਆਮ ਵੇਰਵੇ",
+      "parentProgram": "ਮੁੱਢਲਾ ਪ੍ਰੋਗਰਾਮ",
+      "parentProgramPlaceholder": "ਪ੍ਰੋਗਰਾਮ ਚੁਣੋ",
+      "parentLevel": "ਮੁੱਢਲਾ ਪੱਧਰ",
+      "parentLevelPlaceholder": "ਪੱਧਰ ਚੁਣੋ",
+      "parentModule": "ਮੁੱਢਲਾ ਮੋਡੀਊਲ",
+      "parentModulePlaceholder": "ਮੋਡੀਊਲ ਚੁਣੋ",
+      "parentChapter": "ਮੁੱਢਲਾ ਅਧਿਆਇ",
+      "parentChapterPlaceholder": "ਅਧਿਆਇ ਚੁਣੋ",
+      "parentTopic": "ਮੁੱਢਲਾ ਵਿਸ਼ਾ",
+      "parentTopicPlaceholder": "ਵਿਸ਼ਾ ਚੁਣੋ",
+      "deleteText": "ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਇਸ ਕੰਟੈਂਟ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
+      "content": {
+        "contentSection": "ਕੰਟੈਂਟ ਸੈਕਸ਼ਨ",
+        "contentTitle": "ਕੰਟੈਂਟ ਸਿਰਲੇਖ",
+        "content": "ਕੰਟੈਂਟ",
+        "type": "ਕੰਟੈਂਟ ਕਿਸਮ",
+        "text": "ਟੈਕਸਟ",
+        "media": "ਮੀਡੀਆ",
+        "sectionTitle": "ਸੈਕਸ਼ਨ ਸਿਰਲੇਖ",
+        "sectionTitlePlaceholder": "ਸੈਕਸ਼ਨ ਸਿਰਲੇਖ ਦਰਜ ਕਰੋ",
+        "mediaShortcut": "ਮੀਡੀਆ URL / ਸ਼ੌਰਟਕਟ",
+        "mediaShortcutPlaceholder": "ਉਦਾ: yt_123, /uploads/video.mp4, https://youtu.be/...",
+        "description": "ਵੇਰਵਾ",
+        "order": "ਕ੍ਰਮ",
+        "preview": "ਪੂਰਵਦਰਸ਼ਨ",
+        "addButtonSection": "+ ਨਵਾਂ ਸੈਕਸ਼ਨ ਸ਼ਾਮਲ ਕਰੋ",
+        "removeSection": "ਸੈਕਸ਼ਨ ਹਟਾਓ",
+        "editorPlaceholder": "ਆਪਣਾ ਕੰਟੈਂਟ ਇੱਥੇ ਲਿਖੋ..."
+      }
     },
     "actions": {
-      "addNewContent": "+ ਨਵਾਂ ਕੰਟੈਂਟ ਜੋੜੋ",
+      "addNewContent": "+ ਨਵਾਂ ਕੰਟੈਂਟ ਸ਼ਾਮਲ ਕਰੋ",
       "createContent": "ਕੰਟੈਂਟ ਬਣਾਓ",
       "creating": "ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...",
-      "deleteContent": "ਕੰਟੈਂਟ ਮਿਟਾਓ",
       "updateContent": "ਕੰਟੈਂਟ ਅੱਪਡੇਟ ਕਰੋ",
-      "updating": "ਅੱਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
+      "updating": "ਅੱਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+      "deleteContent": "ਕੰਟੈਂਟ ਹਟਾਓ"
     },
     "breadcrumb": {
-      "contentManagement": "ਕੰਟੈਂਟ ਮੈਨੇਜਮੈਂਟ",
-      "view-content": "ਕੰਟੈਂਟ ਵੇਖੋ"
+      "contentManagement": "ਕੰਟੈਂਟ ਪ੍ਰਬੰਧਨ",
+      "editContent": "ਕੰਟੈਂਟ ਸੰਪਾਦਿਤ ਕਰੋ"
+    },
+    "filters": {
+      "allLevels": "ਸਾਰੇ ਪੱਧਰ",
+      "allStatus": "ਸਾਰੀਆਂ ਸਥਿਤੀਆਂ",
+      "allTypes": "ਸਾਰੀਆਂ ਕਿਸਮਾਂ",
+      "active": "ਸਰਗਰਮ",
+      "inactive": "ਅਕਰਮਕ",
+      "text": "ਟੈਕਸਟ",
+      "media": "ਮੀਡੀਆ",
+      "selectLevelFirst": "ਪਹਿਲਾਂ ਪੱਧਰ ਚੁਣੋ",
+      "selectModule": "ਮੋਡੀਊਲ ਚੁਣੋ",
+      "selectModuleFirst": "ਪਹਿਲਾਂ ਮੋਡੀਊਲ ਚੁਣੋ",
+      "selectChapter": "ਅਧਿਆਇ ਚੁਣੋ",
+      "selectChapterFirst": "ਪਹਿਲਾਂ ਅਧਿਆਇ ਚੁਣੋ",
+      "selectTopic": "ਵਿਸ਼ਾ ਚੁਣੋ",
+      "loadingModules": "ਮੋਡੀਊਲ ਲੋਡ ਹੋ ਰਹੇ ਹਨ...",
+      "loadingChapters": "ਅਧਿਆਇ ਲੋਡ ਹੋ ਰਹੇ ਹਨ...",
+      "loadingTopics": "ਵਿਸ਼ੇ ਲੋਡ ਹੋ ਰਹੇ ਹਨ..."
     },
     "validation": {
-      "programRequired": "ਮੁੱਖ ਪ੍ਰੋਗਰਾਮ ਲਾਜ਼ਮੀ ਹੈ",
-      "levelRequired": "ਲੈਵਲ ਨਾਮ ਲਾਜ਼ਮੀ ਹੈ",
-      "moduleRequired": "ਮੋਡੀਊਲ ਨਾਮ ਲਾਜ਼ਮੀ ਹੈ",
-      "topicRequired": "ਵਿਸ਼ਾ ਨਾਮ ਲਾਜ਼ਮੀ ਹੈ"
-    }
+      "programRequired": "ਪ੍ਰੋਗਰਾਮ ਦੀ ਲੋੜ ਹੈ",
+      "levelRequired": "ਪੱਧਰ ਦੀ ਲੋੜ ਹੈ",
+      "moduleRequired": "ਮੋਡੀਊਲ ਦੀ ਲੋੜ ਹੈ",
+      "chapterRequired": "ਅਧਿਆਇ ਦੀ ਲੋੜ ਹੈ",
+      "topicRequired": "ਵਿਸ਼ੇ ਦੀ ਲੋੜ ਹੈ"
+    },
+    "success": {
+      "create": "ਲਰਨਿੰਗ ਕੰਟੈਂਟ ਸਫਲਤਾਪੂਰਵਕ ਬਣ ਗਿਆ!",
+      "update": "ਲਰਨਿੰਗ ਕੰਟੈਂਟ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਹੋ ਗਿਆ!",
+      "delete": "ਲਰਨਿੰਗ ਕੰਟੈਂਟ ਸਫਲਤਾਪੂਰਵਕ ਹਟਾ ਦਿੱਤਾ ਗਿਆ!"
+    },
+    "error": {
+      "create": "ਲਰਨਿੰਗ ਕੰਟੈਂਟ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "update": "ਲਰਨਿੰਗ ਕੰਟੈਂਟ ਅੱਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "delete": "ਲਰਨਿੰਗ ਕੰਟੈਂਟ ਹਟਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+    },
+    "noContentFound": "ਕੋਈ ਕੰਟੈਂਟ ਨਹੀਂ ਮਿਲਿਆ"
   },
 
   "mediaLibrary": {
@@ -749,12 +776,12 @@
     }
   },
 
-  "assessment": {
+  "quizAssessment": {
     "list": {
-      "title": "ਅਸੈਸਮੈਂਟ ਪ੍ਰਬੰਧਨ",
-      "subtitle": "ਚੈਪਟਰ ਸਮੱਗਰੀ ਨੂੰ ਇਸ ਤਰ੍ਹਾਂ ਪਰਿਭਾਸ਼ਿਤ ਅਤੇ ਸੰਰਚਿਤ ਕਰੋ ਕਿ ਮੋਡੀਊਲ ਨੂੰ ਆਸਾਨ ਅਤੇ ਸਮਝਣਯੋਗ ਹਿੱਸਿਆਂ ਵਿੱਚ ਵੰਡਿਆ ਜਾ ਸਕੇ।",
-      "searchPlaceholder": "ਸਿਰਲੇਖ ਨਾਲ ਖੋਜੋ...",
-      "clearAll": "ਸਭ ਸਾਫ ਕਰੋ",
+      "quizTitle": "ਕੁਇਜ਼ ਮੁਲਾਂਕਣ",
+      "quizSubtitle": "ਵਿਸ਼ਿਆਂ ਲਈ ਕੁਇਜ਼ਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਅਤੇ ਸਿਰਜਣਾ ਕਰੋ",
+      "searchPlaceholder": "ਕੁਇਜ਼ ਸਿਰਲੇਖ ਨਾਲ ਖੋਜੋ...",
+      "clearAll": "ਸਾਰੇ ਫਿਲਟਰ ਸਾਫ਼ ਕਰੋ",
       "columns": {
         "title": "ਸਿਰਲੇਖ",
         "type": "ਕਿਸਮ",
@@ -762,88 +789,189 @@
         "module": "ਮੋਡੀਊਲ",
         "chapter": "ਅਧਿਆਇ",
         "topic": "ਵਿਸ਼ਾ",
-        "questionCount": "ਸਵਾਲਾਂ ਦੀ ਗਿਣਤੀ",
+        "questionCount": "ਸਵਾਲ",
         "totalMark": "ਕੁੱਲ ਅੰਕ",
-        "passingScore": "ਪਾਸਿੰਗ ਅੰਕ",
-        "duration": "ਸਮਾਂ",
+        "passingScore": "ਪਾਸਿੰਗ ਸਕੋਰ",
+        "duration": "ਮਿਆਦ",
         "status": "ਸਥਿਤੀ",
         "actions": "ਕਾਰਵਾਈਆਂ"
       }
     },
+    "create": {
+      "quizTitle": "ਕੁਇਜ਼ ਬਣਾਓ",
+      "quizSubtitle": "ਕਿਸੇ ਵਿਸ਼ੇ ਲਈ ਨਵੀਂ ਕੁਇਜ਼ ਬਣਾਓ"
+    },
     "details": {
-      "generalDetails": "ਸਧਾਰਣ ਵੇਰਵਾ",
-      "assessmentConfiguration": "ਅਸੈਸਮੈਂਟ ਸੰਰਚਨਾ",
-      "assessmentFor": "ਅਸੈਸਮੈਂਟ ਲਈ",
-      "assessmentForPlaceholder": "ਟਾਪਿਕ ਜਾਂ ਲੈਵਲ ਚੁਣੋ",
-      "topicName": "ਟਾਪਿਕ ਨਾਮ",
-      "topicNamePlaceholder": "ਟਾਪਿਕ ਚੁਣੋ",
-      "parentChapter": "ਮੂਲ ਚੈਪਟਰ",
-      "parentChapterPlaceholder": "ਚੈਪਟਰ ਚੁਣੋ",
-      "parentModule": "ਮੂਲ ਮੋਡੀਊਲ",
-      "parentModulePlaceholder": "ਮੋਡੀਊਲ ਚੁਣੋ",
-      "parentLevel": "ਲੈਵਲ ਨਾਮ",
-      "parentLevelPlaceholder": "ਲੈਵਲ ਚੁਣੋ",
-      "parentProgram": "ਮੂਲ ਪ੍ਰੋਗਰਾਮ",
+      "topicDetails": "ਵਿਸ਼ਾ ਚੋਣ",
+      "assessmentDetails": "ਮੁਲਾਂਕਣ ਵੇਰਵੇ",
+      "parentProgram": "ਮੁੱਢਲਾ ਪ੍ਰੋਗਰਾਮ",
       "parentProgramPlaceholder": "ਪ੍ਰੋਗਰਾਮ ਚੁਣੋ",
-      "title": "ਸਿਰਲੇਖ",
-      "titlePlaceholder": "ਅਸੈਸਮੈਂਟ ਸਿਰਲੇਖ ਦਰਜ ਕਰੋ",
-      "duration": "ਅਵਧੀ (ਮਿੰਟ ਵਿੱਚ)",
-      "durationPlaceholder": "ਮਿੰਟ ਵਿੱਚ ਅਵਧੀ ਦਰਜ ਕਰੋ",
-      "levelAssessmentDetails": "ਲੈਵਲ ਅਸੈਸਮੈਂਟ ਵੇਰਵਾ",
-      "description": "ਵੇਰਵਾ",
-      "descriptionPlaceholder": "ਮੋਡੀਊਲ ਵੇਰਵਾ ਲਿਖੋ...",
-      "thumbnail": "ਲੈਵਲ ਥੰਬਨੇਲ",
-      "uploadText": "ਥੰਬਨੇਲ ਅਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
-      "uploadSubText": "PNG, JPG, JPEG (5MB ਤੱਕ)",
-      "changeImage": "ਤਸਵੀਰ ਬਦਲੋ",
-      "deleteText": "ਕੀ ਤੁਸੀਂ ਯਕੀਨਨ ਇਸ ਅਸੈਸਮੈਂਟ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
-      "assessmentDetails": "ਅਸੈਸਮੈਂਟ ਵੇਰਵਾ",
-      "assessmentTitle": "ਅਸੈਸਮੈਂਟ ਸਿਰਲੇਖ",
-      "assessmentTitlePlaceholder": "ਸਿਰਲੇਖ ਦਰਜ ਕਰੋ",
-      "assessmentDescription": "ਅਸੈਸਮੈਂਟ ਵੇਰਵਾ",
-      "assessmentDescriptionPlaceholder": "ਵੇਰਵਾ ਦਰਜ ਕਰੋ",
-      "passingScore": "ਪਾਸਿੰਗ ਅੰਕ",
-      "passingScorePlaceholder": "ਪਾਸਿੰਗ ਅੰਕ ਦਰਜ ਕਰੋ",
+      "parentLevel": "ਮੁੱਢਲਾ ਪੱਧਰ",
+      "parentLevelPlaceholder": "ਪੱਧਰ ਚੁਣੋ",
+      "parentModule": "ਮੁੱਢਲਾ ਮੋਡੀਊਲ",
+      "parentModulePlaceholder": "ਮੋਡੀਊਲ ਚੁਣੋ",
+      "parentChapter": "ਮੁੱਢਲਾ ਅਧਿਆਇ",
+      "parentChapterPlaceholder": "ਅਧਿਆਇ ਚੁਣੋ",
+      "topicName": "ਵਿਸ਼ਾ ਨਾਮ",
+      "topicNamePlaceholder": "ਵਿਸ਼ਾ ਚੁਣੋ",
+      "title": "ਕੁਇਜ਼ ਸਿਰਲੇਖ",
+      "titlePlaceholder": "ਕੁਇਜ਼ ਸਿਰਲੇਖ ਦਰਜ ਕਰੋ",
+      "duration": "ਮਿਆਦ (ਮਿੰਟਾਂ ਵਿੱਚ)",
+      "durationPlaceholder": "ਮਿੰਟਾਂ ਵਿੱਚ ਮਿਆਦ ਦਰਜ ਕਰੋ",
       "totalMarks": "ਕੁੱਲ ਅੰਕ",
       "totalMarksPlaceholder": "ਕੁੱਲ ਅੰਕ ਦਰਜ ਕਰੋ",
-      "selectTopic": "ਟਾਪਿਕ ਚੁਣੋ",
-      "selectTopicPlaceholder": "ਟਾਪਿਕ ਚੁਣੋ",
-      "selectLevel": "ਲੈਵਲ ਚੁਣੋ",
-      "selectLevelPlaceholder": "ਲੈਵਲ ਚੁਣੋ",
-      "topicOption": "ਟਾਪਿਕ",
-      "levelOption": "ਲੈਵਲ"
-    },
-    "create": {
-      "title": "ਨਵਾਂ ਅਸੈਸਮੈਂਟ ਬਣਾਓ",
-      "subtitle": "ਆਪਣੇ ਮੈਡੀਕਲ ਅਸੈਸਮੈਂਟ ਲਈ ਮੁੱਖ ਪੈਰਾਮੀਟਰ ਅਤੇ ਗ੍ਰੇਡਿੰਗ ਮਾਪਦੰਡ ਤਿਆਰ ਕਰੋ।"
+      "passingScore": "ਪਾਸਿੰਗ ਸਕੋਰ",
+      "passingScorePlaceholder": "ਪਾਸਿੰਗ ਸਕੋਰ ਦਰਜ ਕਰੋ",
+      "description": "ਵੇਰਵਾ",
+      "descriptionPlaceholder": "ਕੁਇਜ਼ ਦਾ ਵੇਰਵਾ ਦਰਜ ਕਰੋ",
+      "thumbnail": "ਕੁਇਜ਼ ਥੰਬਨੇਲ",
+      "uploadText": "ਥੰਬਨੇਲ ਅਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+      "uploadSubText": "PNG, JPG, JPEG 5MB ਤੱਕ",
+      "changeImage": "ਤਸਵੀਰ ਬਦਲੋ",
+      "currentThumbnail": "ਮੌਜੂਦਾ ਥੰਬਨੇਲ",
+      "deleteTextQuiz": "ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਇਸ ਕੁਇਜ਼ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
     },
     "actions": {
-      "addNewAssessment": "+ ਨਵਾਂ ਅਸੈਸਮੈਂਟ ਜੋੜੋ",
-      "createAssessment": "ਅਸੈਸਮੈਂਟ ਬਣਾਓ",
+      "addNewQuiz": "+ ਨਵੀਂ ਕੁਇਜ਼ ਸ਼ਾਮਲ ਕਰੋ",
+      "createQuiz": "ਕੁਇਜ਼ ਬਣਾਓ",
       "creating": "ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...",
-      "deleteAssessment": "ਅਸੈਸਮੈਂਟ ਮਿਟਾਓ",
-      "updateAssessment": "ਅਸੈਸਮੈਂਟ ਅੱਪਡੇਟ ਕਰੋ",
-      "updating": "ਅੱਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
+      "updateQuiz": "ਕੁਇਜ਼ ਅੱਪਡੇਟ ਕਰੋ",
+      "updating": "ਅੱਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+      "deleteQuiz": "ਕੁਇਜ਼ ਹਟਾਓ"
     },
     "breadcrumb": {
-      "assessment": "ਅਸੈਸਮੈਂਟ",
-      "view-assessment": "ਅਸੈਸਮੈਂਟ ਵੇਖੋ"
+      "quizManagement": "ਕੁਇਜ਼ ਪ੍ਰਬੰਧਨ",
+      "view-quiz": "ਕੁਇਜ਼ ਦੇਖੋ"
+    },
+    "questions": "ਸਵਾਲ",
+    "filters": {
+      "allLevels": "ਸਾਰੇ ਪੱਧਰ",
+      "allStatus": "ਸਾਰੀਆਂ ਸਥਿਤੀਆਂ",
+      "active": "ਸਰਗਰਮ",
+      "inactive": "ਅਕਰਮਕ",
+      "selectLevelFirst": "ਪਹਿਲਾਂ ਪੱਧਰ ਚੁਣੋ",
+      "selectModule": "ਮੋਡੀਊਲ ਚੁਣੋ",
+      "selectModuleFirst": "ਪਹਿਲਾਂ ਮੋਡੀਊਲ ਚੁਣੋ",
+      "selectChapter": "ਅਧਿਆਇ ਚੁਣੋ",
+      "selectChapterFirst": "ਪਹਿਲਾਂ ਅਧਿਆਇ ਚੁਣੋ",
+      "selectTopic": "ਵਿਸ਼ਾ ਚੁਣੋ"
     },
     "validation": {
-      "assessment_type_required": "ਅਸੈਸਮੈਂਟ ਕਿਸਮ ਲਾਜ਼ਮੀ ਹੈ",
-      "program_required": "ਪ੍ਰੋਗਰਾਮ ਲਾਜ਼ਮੀ ਹੈ",
-      "level_required": "ਲੈਵਲ ਲਾਜ਼ਮੀ ਹੈ",
-      "module_required": "ਮੋਡੀਊਲ ਲਾਜ਼ਮੀ ਹੈ",
-      "chapter_required": "ਚੈਪਟਰ ਲਾਜ਼ਮੀ ਹੈ",
-      "topic_required": "ਟਾਪਿਕ ਲਾਜ਼ਮੀ ਹੈ",
-      "title_required": "ਸਿਰਲੇਖ ਲਾਜ਼ਮੀ ਹੈ",
-      "description_required": "ਵੇਰਵਾ ਲਾਜ਼ਮੀ ਹੈ",
-      "passing_score_required": "ਪਾਸਿੰਗ ਅੰਕ ਲਾਜ਼ਮੀ ਹੈ",
-      "passing_score_positive": "ਪਾਸਿੰਗ ਅੰਕ ਸਕਾਰਾਤਮਕ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
-      "total_marks_required": "ਕੁੱਲ ਅੰਕ ਲਾਜ਼ਮੀ ਹੈ",
-      "total_marks_positive": "ਕੁੱਲ ਅੰਕ ਸਕਾਰਾਤਮਕ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
-      "duration_required": "ਅਵਧੀ ਲਾਜ਼ਮੀ ਹੈ",
-      "duration_positive": "ਅਵਧੀ ਸਕਾਰਾਤਮਕ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ"
+      "program_required": "ਪ੍ਰੋਗਰਾਮ ਦੀ ਲੋੜ ਹੈ",
+      "level_required": "ਪੱਧਰ ਦੀ ਲੋੜ ਹੈ",
+      "module_required": "ਮੋਡੀਊਲ ਦੀ ਲੋੜ ਹੈ",
+      "chapter_required": "ਅਧਿਆਇ ਦੀ ਲੋੜ ਹੈ",
+      "topic_required": "ਵਿਸ਼ੇ ਦੀ ਲੋੜ ਹੈ",
+      "title_required": "ਸਿਰਲੇਖ ਦੀ ਲੋੜ ਹੈ",
+      "description_required": "ਵੇਰਵੇ ਦੀ ਲੋੜ ਹੈ",
+      "passing_score_required": "ਪਾਸਿੰਗ ਸਕੋਰ ਦੀ ਲੋੜ ਹੈ",
+      "passing_score_positive": "ਪਾਸਿੰਗ ਸਕੋਰ ਸਕਾਰਾਤਮਕ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "total_marks_required": "ਕੁੱਲ ਅੰਕਾਂ ਦੀ ਲੋੜ ਹੈ",
+      "total_marks_positive": "ਕੁੱਲ ਅੰਕ ਸਕਾਰਾਤਮਕ ਹੋਣੇ ਚਾਹੀਦੇ ਹਨ",
+      "duration_required": "ਮਿਆਦ ਦੀ ਲੋੜ ਹੈ",
+      "duration_positive": "ਮਿਆਦ ਸਕਾਰਾਤਮਕ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ",
+      "invalidImage": "ਸਿਰਫ ਤਸਵੀਰ ਫਾਈਲਾਂ ਦੀ ਇਜਾਜ਼ਤ ਹੈ (JPG, PNG, ਆਦਿ)",
+      "fileSizeExceeded": "ਤਸਵੀਰ ਦਾ ਆਕਾਰ 5 MB ਤੋਂ ਘੱਟ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ"
+    },
+    "success": {
+      "create": "ਕੁਇਜ਼ ਸਫਲਤਾਪੂਰਵਕ ਬਣ ਗਈ!",
+      "update": "ਕੁਇਜ਼ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਹੋ ਗਈ!",
+      "delete": "ਕੁਇਜ਼ ਸਫਲਤਾਪੂਰਵਕ ਹਟਾ ਦਿੱਤੀ ਗਈ!"
+    },
+    "error": {
+      "create": "ਕੁਇਜ਼ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "update": "ਕੁਇਜ਼ ਅੱਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "delete": "ਕੁਇਜ਼ ਹਟਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+    }
+  },
+
+  "examAssessment": {
+    "list": {
+      "examTitle": "ਪ੍ਰੀਖਿਆ ਮੁਲਾਂਕਣ",
+      "examSubtitle": "ਪੱਧਰਾਂ ਲਈ ਪ੍ਰੀਖਿਆਵਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਅਤੇ ਸਿਰਜਣਾ ਕਰੋ",
+      "searchPlaceholder": "ਪ੍ਰੀਖਿਆ ਸਿਰਲੇਖ ਨਾਲ ਖੋਜੋ...",
+      "clearAll": "ਸਾਰੇ ਫਿਲਟਰ ਸਾਫ਼ ਕਰੋ",
+      "columns": {
+        "title": "ਸਿਰਲੇਖ",
+        "type": "ਕਿਸਮ",
+        "questionCount": "ਸਵਾਲ",
+        "totalMark": "ਕੁੱਲ ਅੰਕ",
+        "passingScore": "ਪਾਸਿੰਗ ਸਕੋਰ",
+        "duration": "ਮਿਆਦ",
+        "status": "ਸਥਿਤੀ",
+        "actions": "ਕਾਰਵਾਈਆਂ"
+      }
+    },
+    "create": {
+      "examTitle": "ਪ੍ਰੀਖਿਆ ਬਣਾਓ",
+      "examSubtitle": "ਕਿਸੇ ਪੱਧਰ ਲਈ ਨਵੀਂ ਪ੍ਰੀਖਿਆ ਬਣਾਓ"
+    },
+    "details": {
+      "levelDetails": "ਪੱਧਰ ਚੋਣ",
+      "assessmentDetails": "ਮੁਲਾਂਕਣ ਵੇਰਵੇ",
+      "parentProgram": "ਮੁੱਢਲਾ ਪ੍ਰੋਗਰਾਮ",
+      "parentProgramPlaceholder": "ਪ੍ਰੋਗਰਾਮ ਚੁਣੋ",
+      "selectLevel": "ਪੱਧਰ ਚੁਣੋ",
+      "selectLevelPlaceholder": "ਪੱਧਰ ਚੁਣੋ",
+      "title": "ਪ੍ਰੀਖਿਆ ਸਿਰਲੇਖ",
+      "titlePlaceholder": "ਪ੍ਰੀਖਿਆ ਸਿਰਲੇਖ ਦਰਜ ਕਰੋ",
+      "duration": "ਮਿਆਦ (ਮਿੰਟਾਂ ਵਿੱਚ)",
+      "durationPlaceholder": "ਮਿੰਟਾਂ ਵਿੱਚ ਮਿਆਦ ਦਰਜ ਕਰੋ",
+      "totalMarks": "ਕੁੱਲ ਅੰਕ",
+      "totalMarksPlaceholder": "ਕੁੱਲ ਅੰਕ ਦਰਜ ਕਰੋ",
+      "passingScore": "ਪਾਸਿੰਗ ਸਕੋਰ",
+      "passingScorePlaceholder": "ਪਾਸਿੰਗ ਸਕੋਰ ਦਰਜ ਕਰੋ",
+      "description": "ਵੇਰਵਾ",
+      "descriptionPlaceholder": "ਪ੍ਰੀਖਿਆ ਦਾ ਵੇਰਵਾ ਦਰਜ ਕਰੋ",
+      "thumbnail": "ਪ੍ਰੀਖਿਆ ਥੰਬਨੇਲ",
+      "uploadText": "ਥੰਬਨੇਲ ਅਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+      "uploadSubText": "PNG, JPG, JPEG 5MB ਤੱਕ",
+      "changeImage": "ਤਸਵੀਰ ਬਦਲੋ",
+      "currentThumbnail": "ਮੌਜੂਦਾ ਥੰਬਨੇਲ",
+      "deleteTextExam": "ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਇਸ ਪ੍ਰੀਖਿਆ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+    },
+    "actions": {
+      "addNewExam": "+ ਨਵੀਂ ਪ੍ਰੀਖਿਆ ਸ਼ਾਮਲ ਕਰੋ",
+      "createExam": "ਪ੍ਰੀਖਿਆ ਬਣਾਓ",
+      "creating": "ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...",
+      "updateExam": "ਪ੍ਰੀਖਿਆ ਅੱਪਡੇਟ ਕਰੋ",
+      "updating": "ਅੱਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+      "deleteExam": "ਪ੍ਰੀਖਿਆ ਹਟਾਓ"
+    },
+    "breadcrumb": {
+      "examManagement": "ਪ੍ਰੀਖਿਆ ਪ੍ਰਬੰਧਨ",
+      "view-exam": "ਪ੍ਰੀਖਿਆ ਦੇਖੋ"
+    },
+    "questions": "ਸਵਾਲ",
+    "filters": {
+      "allLevels": "ਸਾਰੇ ਪੱਧਰ",
+      "allStatus": "ਸਾਰੀਆਂ ਸਥਿਤੀਆਂ",
+      "active": "ਸਰਗਰਮ",
+      "inactive": "ਅਕਰਮਕ"
+    },
+    "validation": {
+      "program_required": "ਪ੍ਰੋਗਰਾਮ ਦੀ ਲੋੜ ਹੈ",
+      "level_required": "ਪੱਧਰ ਦੀ ਲੋੜ ਹੈ",
+      "title_required": "ਸਿਰਲੇਖ ਦੀ ਲੋੜ ਹੈ",
+      "description_required": "ਵੇਰਵੇ ਦੀ ਲੋੜ ਹੈ",
+      "passing_score_required": "ਪਾਸਿੰਗ ਸਕੋਰ ਦੀ ਲੋੜ ਹੈ",
+      "passing_score_positive": "ਪਾਸਿੰਗ ਸਕੋਰ ਸਕਾਰਾਤਮਕ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "total_marks_required": "ਕੁੱਲ ਅੰਕਾਂ ਦੀ ਲੋੜ ਹੈ",
+      "total_marks_positive": "ਕੁੱਲ ਅੰਕ ਸਕਾਰਾਤਮਕ ਹੋਣੇ ਚਾਹੀਦੇ ਹਨ",
+      "duration_required": "ਮਿਆਦ ਦੀ ਲੋੜ ਹੈ",
+      "duration_positive": "ਮਿਆਦ ਸਕਾਰਾਤਮਕ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ",
+      "invalidImage": "ਸਿਰਫ ਤਸਵੀਰ ਫਾਈਲਾਂ ਦੀ ਇਜਾਜ਼ਤ ਹੈ (JPG, PNG, ਆਦਿ)",
+      "fileSizeExceeded": "ਤਸਵੀਰ ਦਾ ਆਕਾਰ 5 MB ਤੋਂ ਘੱਟ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ"
+    },
+    "success": {
+      "create": "ਪ੍ਰੀਖਿਆ ਸਫਲਤਾਪੂਰਵਕ ਬਣ ਗਈ!",
+      "update": "ਪ੍ਰੀਖਿਆ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਹੋ ਗਈ!",
+      "delete": "ਪ੍ਰੀਖਿਆ ਸਫਲਤਾਪੂਰਵਕ ਹਟਾ ਦਿੱਤੀ ਗਈ!"
+    },
+    "error": {
+      "create": "ਪ੍ਰੀਖਿਆ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "update": "ਪ੍ਰੀਖਿਆ ਅੱਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "delete": "ਪ੍ਰੀਖਿਆ ਹਟਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
     }
   },
 
