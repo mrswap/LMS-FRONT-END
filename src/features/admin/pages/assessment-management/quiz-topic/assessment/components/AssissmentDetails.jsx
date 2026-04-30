@@ -22,7 +22,6 @@
 //   deleteSingleAssessment,
 //   getAssessmentById,
 //   updateAssessmentById,
-//   // updateAssessment,
 // } from "../../../../../../../redux/slice/assissmentSlice";
 // import { showConfirm } from "../../../../../../../redux/slice/confirmSlice";
 // import Breadcrumb from "../../../../../common/layout/Breadcrumb";
@@ -47,18 +46,18 @@
 //   const { chapters } = useSelector((state) => state.chapter);
 //   const { topics } = useSelector((state) => state.topic);
 
+//   // States for sequential loading
+//   const [isProgramsLoaded, setIsProgramsLoaded] = useState(false);
+//   const [isLevelsLoaded, setIsLevelsLoaded] = useState(false);
+//   const [isModulesLoaded, setIsModulesLoaded] = useState(false);
+//   const [isChaptersLoaded, setIsChaptersLoaded] = useState(false);
+//   const [isTopicsLoaded, setIsTopicsLoaded] = useState(false);
+
 //   // Selected state for cascading dropdowns
 //   const [selectedProgram, setSelectedProgram] = useState(null);
 //   const [selectedLevel, setSelectedLevel] = useState(null);
 //   const [selectedModule, setSelectedModule] = useState(null);
 //   const [selectedChapter, setSelectedChapter] = useState(null);
-
-//   // Loading flags for API calls
-//   const [loadingPrograms, setLoadingPrograms] = useState(false);
-//   const [loadingLevels, setLoadingLevels] = useState(false);
-//   const [loadingModules, setLoadingModules] = useState(false);
-//   const [loadingChapters, setLoadingChapters] = useState(false);
-//   const [loadingTopics, setLoadingTopics] = useState(false);
 
 //   // Filtered dropdown data
 //   const [filteredLevels, setFilteredLevels] = useState([]);
@@ -83,51 +82,54 @@
 //     }
 //   }, [assessment]);
 
-//   // ─── 3. Load all required master data (programs, levels, modules, chapters, topics)
-//   //        Triggers once assessment is available. Uses existing Redux data if present.
+//   // ─── 3. STEP 1: Load programs after assessment is available ─────────────────
 //   useEffect(() => {
-//     if (!assessment) return;
-
-//     // Load Programs
-//     if (!programs?.data && !loadingPrograms) {
-//       setLoadingPrograms(true);
-//       dispatch(getAllPrograms()).finally(() => setLoadingPrograms(false));
+//     if (assessment && !isProgramsLoaded) {
+//       dispatch(getAllPrograms()).then(() => {
+//         setIsProgramsLoaded(true);
+//       });
 //     }
+//   }, [assessment, isProgramsLoaded, dispatch]);
 
-//     // For topic-type assessments load the full hierarchy master data
-//     if (assessment.type === "topic" || assessment?.hierarchy?.level) {
-//       if (!levels?.data && !loadingLevels) {
-//         setLoadingLevels(true);
-//         dispatch(getAllLevels()).finally(() => setLoadingLevels(false));
-//       }
-//       if (!modules?.data && !loadingModules) {
-//         setLoadingModules(true);
-//         dispatch(getAllModules()).finally(() => setLoadingModules(false));
-//       }
-//       if (!chapters?.data && !loadingChapters) {
-//         setLoadingChapters(true);
-//         dispatch(getAllChapters()).finally(() => setLoadingChapters(false));
-//       }
-//       if (!topics?.data && !loadingTopics) {
-//         setLoadingTopics(true);
-//         dispatch(getAllTopics()).finally(() => setLoadingTopics(false));
-//       }
-//     }
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, [assessment]);
-
-//   // ─── 4. Once master data is available, derive selected values & filtered lists
+//   // ─── 4. STEP 2: Load levels when program is selected ────────────────────────
 //   useEffect(() => {
-//     if (!assessment?.hierarchy || !programs?.data) return;
-
-//     const isTopicType =
-//       assessment.type === "topic" || assessment?.hierarchy?.level;
-
-//     // For topic-type, wait until all master data is loaded
-//     if (isTopicType) {
-//       if (!levels?.data || !modules?.data || !chapters?.data || !topics?.data)
-//         return;
+//     if (isProgramsLoaded && selectedProgram && !isLevelsLoaded) {
+//       dispatch(getAllLevels()).then(() => {
+//         setIsLevelsLoaded(true);
+//       });
 //     }
+//   }, [selectedProgram, isProgramsLoaded, isLevelsLoaded, dispatch]);
+
+//   // ─── 5. STEP 3: Load modules when level is selected ─────────────────────────
+//   useEffect(() => {
+//     if (isLevelsLoaded && selectedLevel && !isModulesLoaded) {
+//       dispatch(getAllModules()).then(() => {
+//         setIsModulesLoaded(true);
+//       });
+//     }
+//   }, [selectedLevel, isLevelsLoaded, isModulesLoaded, dispatch]);
+
+//   // ─── 6. STEP 4: Load chapters when module is selected ───────────────────────
+//   useEffect(() => {
+//     if (isModulesLoaded && selectedModule && !isChaptersLoaded) {
+//       dispatch(getAllChapters()).then(() => {
+//         setIsChaptersLoaded(true);
+//       });
+//     }
+//   }, [selectedModule, isModulesLoaded, isChaptersLoaded, dispatch]);
+
+//   // ─── 7. STEP 5: Load topics when chapter is selected ────────────────────────
+//   useEffect(() => {
+//     if (isChaptersLoaded && selectedChapter && !isTopicsLoaded) {
+//       dispatch(getAllTopics()).then(() => {
+//         setIsTopicsLoaded(true);
+//       });
+//     }
+//   }, [selectedChapter, isChaptersLoaded, isTopicsLoaded, dispatch]);
+
+//   // ─── 8. Once master data is available, derive selected values & filtered lists
+//   useEffect(() => {
+//     if (!assessment?.hierarchy || !isProgramsLoaded) return;
 
 //     const { hierarchy } = assessment;
 
@@ -149,12 +151,13 @@
 //       : null;
 
 //     setSelectedProgram(prog);
-//     setSelectedLevel(lev);
-//     setSelectedModule(mod);
-//     setSelectedChapter(chap);
+
+//     if (lev) setSelectedLevel(lev);
+//     if (mod) setSelectedModule(mod);
+//     if (chap) setSelectedChapter(chap);
 
 //     // ── Filter cascaded lists ─────────────────────────────────────────────────
-//     if (prog && levels?.data) {
+//     if (prog && levels?.data && isLevelsLoaded) {
 //       setFilteredLevels(
 //         levels.data.filter(
 //           (l) =>
@@ -165,7 +168,7 @@
 //       );
 //     }
 
-//     if (lev && modules?.data) {
+//     if (lev && modules?.data && isModulesLoaded) {
 //       setFilteredModules(
 //         modules.data.filter(
 //           (m) =>
@@ -176,7 +179,7 @@
 //       );
 //     }
 
-//     if (mod && chapters?.data) {
+//     if (mod && chapters?.data && isChaptersLoaded) {
 //       setFilteredChapters(
 //         chapters.data.filter(
 //           (c) =>
@@ -187,7 +190,7 @@
 //       );
 //     }
 
-//     if (chap && topics?.data) {
+//     if (chap && topics?.data && isTopicsLoaded) {
 //       setFilteredTopics(
 //         topics.data.filter(
 //           (tp) =>
@@ -199,11 +202,22 @@
 //     }
 
 //     setIsDataLoaded(true);
-//   }, [assessment, programs, levels, modules, chapters, topics]);
+//   }, [
+//     assessment,
+//     isProgramsLoaded,
+//     isLevelsLoaded,
+//     isModulesLoaded,
+//     isChaptersLoaded,
+//     isTopicsLoaded,
+//     levels,
+//     modules,
+//     chapters,
+//     topics,
+//   ]);
 
-//   // ─── 5. Re-filter on manual dropdown changes ──────────────────────────────
+//   // ─── 9. Re-filter on manual dropdown changes ──────────────────────────────
 //   useEffect(() => {
-//     if (selectedProgram && levels?.data) {
+//     if (selectedProgram && levels?.data && isLevelsLoaded) {
 //       setFilteredLevels(
 //         levels.data.filter(
 //           (l) =>
@@ -213,10 +227,10 @@
 //         ),
 //       );
 //     }
-//   }, [selectedProgram, levels]);
+//   }, [selectedProgram, levels, isLevelsLoaded]);
 
 //   useEffect(() => {
-//     if (selectedLevel && modules?.data) {
+//     if (selectedLevel && modules?.data && isModulesLoaded) {
 //       setFilteredModules(
 //         modules.data.filter(
 //           (m) =>
@@ -226,10 +240,10 @@
 //         ),
 //       );
 //     }
-//   }, [selectedLevel, modules]);
+//   }, [selectedLevel, modules, isModulesLoaded]);
 
 //   useEffect(() => {
-//     if (selectedModule && chapters?.data) {
+//     if (selectedModule && chapters?.data && isChaptersLoaded) {
 //       setFilteredChapters(
 //         chapters.data.filter(
 //           (c) =>
@@ -239,10 +253,10 @@
 //         ),
 //       );
 //     }
-//   }, [selectedModule, chapters]);
+//   }, [selectedModule, chapters, isChaptersLoaded]);
 
 //   useEffect(() => {
-//     if (selectedChapter && topics?.data) {
+//     if (selectedChapter && topics?.data && isTopicsLoaded) {
 //       setFilteredTopics(
 //         topics.data.filter(
 //           (tp) =>
@@ -252,7 +266,7 @@
 //         ),
 //       );
 //     }
-//   }, [selectedChapter, topics]);
+//   }, [selectedChapter, topics, isTopicsLoaded]);
 
 //   // ─── Thumbnail handlers ───────────────────────────────────────────────────
 //   const handleThumbnailUpload = (event) => {
@@ -342,7 +356,6 @@
 //   const onSubmit = async (values, { setSubmitting, setErrors }) => {
 //     try {
 //       const formData = new FormData();
-//       // formData.append("_method", "PUT");
 //       formData.append("type", "topic");
 //       formData.append("title", values.title);
 //       formData.append("description", values.description);
@@ -450,7 +463,7 @@
 //                         )}
 //                         required
 //                         options={programOptions}
-//                         isLoading={loadingPrograms}
+//                         isLoading={!isProgramsLoaded}
 //                         value={values.programId}
 //                         onChange={(option) => {
 //                           setFieldValue("programId", option);
@@ -466,6 +479,10 @@
 //                           setFilteredModules([]);
 //                           setFilteredChapters([]);
 //                           setFilteredTopics([]);
+//                           setIsLevelsLoaded(false);
+//                           setIsModulesLoaded(false);
+//                           setIsChaptersLoaded(false);
+//                           setIsTopicsLoaded(false);
 //                         }}
 //                       />
 
@@ -478,8 +495,8 @@
 //                         )}
 //                         required
 //                         options={levelOptions}
-//                         disabled={!values.programId}
-//                         isLoading={loadingLevels}
+//                         disabled={!values.programId || !isProgramsLoaded}
+//                         isLoading={!isLevelsLoaded && selectedProgram}
 //                         value={values.levelId}
 //                         onChange={(option) => {
 //                           setFieldValue("levelId", option);
@@ -492,6 +509,9 @@
 //                           setFilteredModules([]);
 //                           setFilteredChapters([]);
 //                           setFilteredTopics([]);
+//                           setIsModulesLoaded(false);
+//                           setIsChaptersLoaded(false);
+//                           setIsTopicsLoaded(false);
 //                         }}
 //                       />
 //                     </div>
@@ -506,8 +526,8 @@
 //                         )}
 //                         required
 //                         options={moduleOptions}
-//                         disabled={!values.levelId}
-//                         isLoading={loadingModules}
+//                         disabled={!values.levelId || !isLevelsLoaded}
+//                         isLoading={!isModulesLoaded && selectedLevel}
 //                         value={values.moduleId}
 //                         onChange={(option) => {
 //                           setFieldValue("moduleId", option);
@@ -517,6 +537,8 @@
 //                           setSelectedChapter(null);
 //                           setFilteredChapters([]);
 //                           setFilteredTopics([]);
+//                           setIsChaptersLoaded(false);
+//                           setIsTopicsLoaded(false);
 //                         }}
 //                       />
 
@@ -529,14 +551,15 @@
 //                         )}
 //                         required
 //                         options={chapterOptions}
-//                         disabled={!values.moduleId}
-//                         isLoading={loadingChapters}
+//                         disabled={!values.moduleId || !isModulesLoaded}
+//                         isLoading={!isChaptersLoaded && selectedModule}
 //                         value={values.chapterId}
 //                         onChange={(option) => {
 //                           setFieldValue("chapterId", option);
 //                           setFieldValue("topicId", null);
 //                           setSelectedChapter(option);
 //                           setFilteredTopics([]);
+//                           setIsTopicsLoaded(false);
 //                         }}
 //                       />
 //                     </div>
@@ -551,8 +574,8 @@
 //                         )}
 //                         required
 //                         options={topicOptions}
-//                         disabled={!values.chapterId}
-//                         isLoading={loadingTopics}
+//                         disabled={!values.chapterId || !isChaptersLoaded}
+//                         isLoading={!isTopicsLoaded && selectedChapter}
 //                         value={values.topicId}
 //                         onChange={(option) => setFieldValue("topicId", option)}
 //                       />
@@ -783,43 +806,36 @@ const AssessmentDetails = () => {
   const { chapters } = useSelector((state) => state.chapter);
   const { topics } = useSelector((state) => state.topic);
 
-  // States for sequential loading
   const [isProgramsLoaded, setIsProgramsLoaded] = useState(false);
   const [isLevelsLoaded, setIsLevelsLoaded] = useState(false);
   const [isModulesLoaded, setIsModulesLoaded] = useState(false);
   const [isChaptersLoaded, setIsChaptersLoaded] = useState(false);
   const [isTopicsLoaded, setIsTopicsLoaded] = useState(false);
 
-  // Selected state for cascading dropdowns
   const [selectedProgram, setSelectedProgram] = useState(null);
   const [selectedLevel, setSelectedLevel] = useState(null);
   const [selectedModule, setSelectedModule] = useState(null);
   const [selectedChapter, setSelectedChapter] = useState(null);
 
-  // Filtered dropdown data
   const [filteredLevels, setFilteredLevels] = useState([]);
   const [filteredModules, setFilteredModules] = useState([]);
   const [filteredChapters, setFilteredChapters] = useState([]);
   const [filteredTopics, setFilteredTopics] = useState([]);
 
-  // Flag: hierarchy selections have been set
   const [isDataLoaded, setIsDataLoaded] = useState(false);
 
-  // ─── 1. Fetch assessment on mount ───────────────────────────────────────────
   useEffect(() => {
     if (id) {
       dispatch(getAssessmentById(id));
     }
   }, [dispatch, id]);
 
-  // ─── 2. Set thumbnail preview ────────────────────────────────────────────────
   useEffect(() => {
     if (assessment?.assessment?.file) {
       setThumbnailPreview(assessment.assessment.file);
     }
   }, [assessment]);
 
-  // ─── 3. STEP 1: Load programs after assessment is available ─────────────────
   useEffect(() => {
     if (assessment && !isProgramsLoaded) {
       dispatch(getAllPrograms()).then(() => {
@@ -828,7 +844,6 @@ const AssessmentDetails = () => {
     }
   }, [assessment, isProgramsLoaded, dispatch]);
 
-  // ─── 4. STEP 2: Load levels when program is selected ────────────────────────
   useEffect(() => {
     if (isProgramsLoaded && selectedProgram && !isLevelsLoaded) {
       dispatch(getAllLevels()).then(() => {
@@ -837,7 +852,6 @@ const AssessmentDetails = () => {
     }
   }, [selectedProgram, isProgramsLoaded, isLevelsLoaded, dispatch]);
 
-  // ─── 5. STEP 3: Load modules when level is selected ─────────────────────────
   useEffect(() => {
     if (isLevelsLoaded && selectedLevel && !isModulesLoaded) {
       dispatch(getAllModules()).then(() => {
@@ -846,7 +860,6 @@ const AssessmentDetails = () => {
     }
   }, [selectedLevel, isLevelsLoaded, isModulesLoaded, dispatch]);
 
-  // ─── 6. STEP 4: Load chapters when module is selected ───────────────────────
   useEffect(() => {
     if (isModulesLoaded && selectedModule && !isChaptersLoaded) {
       dispatch(getAllChapters()).then(() => {
@@ -855,7 +868,6 @@ const AssessmentDetails = () => {
     }
   }, [selectedModule, isModulesLoaded, isChaptersLoaded, dispatch]);
 
-  // ─── 7. STEP 5: Load topics when chapter is selected ────────────────────────
   useEffect(() => {
     if (isChaptersLoaded && selectedChapter && !isTopicsLoaded) {
       dispatch(getAllTopics()).then(() => {
@@ -864,13 +876,11 @@ const AssessmentDetails = () => {
     }
   }, [selectedChapter, isChaptersLoaded, isTopicsLoaded, dispatch]);
 
-  // ─── 8. Once master data is available, derive selected values & filtered lists
   useEffect(() => {
     if (!assessment?.hierarchy || !isProgramsLoaded) return;
 
     const { hierarchy } = assessment;
 
-    // ── Set selected dropdown values ──────────────────────────────────────────
     const prog = hierarchy.program
       ? { label: hierarchy.program.title, value: hierarchy.program.id }
       : null;
@@ -888,12 +898,10 @@ const AssessmentDetails = () => {
       : null;
 
     setSelectedProgram(prog);
-
     if (lev) setSelectedLevel(lev);
     if (mod) setSelectedModule(mod);
     if (chap) setSelectedChapter(chap);
 
-    // ── Filter cascaded lists ─────────────────────────────────────────────────
     if (prog && levels?.data && isLevelsLoaded) {
       setFilteredLevels(
         levels.data.filter(
@@ -952,7 +960,6 @@ const AssessmentDetails = () => {
     topics,
   ]);
 
-  // ─── 9. Re-filter on manual dropdown changes ──────────────────────────────
   useEffect(() => {
     if (selectedProgram && levels?.data && isLevelsLoaded) {
       setFilteredLevels(
@@ -1005,17 +1012,16 @@ const AssessmentDetails = () => {
     }
   }, [selectedChapter, topics, isTopicsLoaded]);
 
-  // ─── Thumbnail handlers ───────────────────────────────────────────────────
   const handleThumbnailUpload = (event) => {
     const file = event.target.files[0];
     if (!file) return;
 
     if (!file.type.startsWith("image/")) {
-      toast.error(t("assessment.validation.invalidImage"));
+      toast.error(t("quizAssessment.validation.invalidImage"));
       return;
     }
     if (file.size > 5 * 1024 * 1024) {
-      toast.error(t("assessment.validation.fileSizeExceeded"));
+      toast.error(t("quizAssessment.validation.fileSizeExceeded"));
       return;
     }
 
@@ -1033,7 +1039,6 @@ const AssessmentDetails = () => {
 
   const triggerFileUpload = () => fileInputRef.current?.click();
 
-  // ─── Dropdown options ─────────────────────────────────────────────────────
   const programOptions =
     programs?.data?.map((p) => ({ label: p.title, value: p.id })) || [];
 
@@ -1057,39 +1062,37 @@ const AssessmentDetails = () => {
     value: tp.id,
   }));
 
-  // ─── Validation schema ────────────────────────────────────────────────────
   const validationSchema = Yup.object({
     programId: Yup.object()
       .nullable()
-      .required(t("assessment.validation.program_required")),
+      .required(t("quizAssessment.validation.program_required")),
     levelId: Yup.object()
       .nullable()
-      .required(t("assessment.validation.level_required")),
+      .required(t("quizAssessment.validation.level_required")),
     moduleId: Yup.object()
       .nullable()
-      .required(t("assessment.validation.module_required")),
+      .required(t("quizAssessment.validation.module_required")),
     chapterId: Yup.object()
       .nullable()
-      .required(t("assessment.validation.chapter_required")),
+      .required(t("quizAssessment.validation.chapter_required")),
     topicId: Yup.object()
       .nullable()
-      .required(t("assessment.validation.topic_required")),
-    title: Yup.string().required(t("assessment.validation.title_required")),
+      .required(t("quizAssessment.validation.topic_required")),
+    title: Yup.string().required(t("quizAssessment.validation.title_required")),
     description: Yup.string().required(
-      t("assessment.validation.description_required"),
+      t("quizAssessment.validation.description_required"),
     ),
     passing_score: Yup.number()
-      .required(t("assessment.validation.passing_score_required"))
-      .positive(t("assessment.validation.passing_score_positive")),
+      .required(t("quizAssessment.validation.passing_score_required"))
+      .positive(t("quizAssessment.validation.passing_score_positive")),
     total_marks: Yup.number()
-      .required(t("assessment.validation.total_marks_required"))
-      .positive(t("assessment.validation.total_marks_positive")),
+      .required(t("quizAssessment.validation.total_marks_required"))
+      .positive(t("quizAssessment.validation.total_marks_positive")),
     duration: Yup.number()
-      .required(t("assessment.validation.duration_required"))
-      .positive(t("assessment.validation.duration_positive")),
+      .required(t("quizAssessment.validation.duration_required"))
+      .positive(t("quizAssessment.validation.duration_positive")),
   });
 
-  // ─── Submit handler ───────────────────────────────────────────────────────
   const onSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
       const formData = new FormData();
@@ -1107,38 +1110,35 @@ const AssessmentDetails = () => {
       }
 
       await dispatch(updateAssessmentById({ id, data: formData })).unwrap();
-      toast.success(t("Updated Quiz"));
+      toast.success(t("quizAssessment.success.update"));
       navigate("/assessment");
     } catch (error) {
       setErrors({ submit: error.message });
-      toast.error(error?.message || t("assessment.messages.updateError"));
+      toast.error(error?.message || t("quizAssessment.error.update"));
     } finally {
       setSubmitting(false);
     }
   };
 
-  // ─── Delete handler ───────────────────────────────────────────────────────
   const handleDelete = async () => {
     const ok = await dispatch(
-      showConfirm({ message: t("assessment.details.deleteTextQuiz") }),
+      showConfirm({ message: t("quizAssessment.details.deleteTextQuiz") }),
     );
     if (!ok) return;
 
     try {
       await dispatch(deleteSingleAssessment(id)).unwrap();
-      toast.success(t("assessment.messages.deleteSuccess"));
+      toast.success(t("quizAssessment.success.delete"));
       setTimeout(() => navigate("/assessment"), 1000);
     } catch (error) {
-      toast.error(error?.message || t("assessment.messages.deleteError"));
+      toast.error(error?.message || t("quizAssessment.error.delete"));
     }
   };
 
-  // ─── Guard: show loader until everything is ready ─────────────────────────
   if (isLoading || !isDataLoaded) {
     return <Loader />;
   }
 
-  // ─── Derived initial values (computed once isDataLoaded = true) ───────────
   const initialFormValues = {
     programId: selectedProgram,
     levelId: selectedLevel,
@@ -1157,17 +1157,16 @@ const AssessmentDetails = () => {
     duration: assessment?.assessment?.duration ?? "",
   };
 
-  // ─── Render ───────────────────────────────────────────────────────────────
   return (
     <PageLayout>
       <div className="p-8 rounded-lg border border-gray-300">
         <Breadcrumb
           items={[
             {
-              label: t("assessment.breadcrumb.quizManagement"),
+              label: t("quizAssessment.breadcrumb.quizManagement"),
               path: "/assessment",
             },
-            { label: t("assessment.breadcrumb.view-quiz") },
+            { label: t("quizAssessment.breadcrumb.view-quiz") },
           ]}
         />
 
@@ -1180,23 +1179,21 @@ const AssessmentDetails = () => {
           >
             {({ isSubmitting, values, setFieldValue, handleSubmit }) => (
               <Form onSubmit={handleSubmit} className="space-y-8">
-                {/* ── Topic Selection ─────────────────────────────────────── */}
                 <div>
                   <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
                     <span className="text-[18px] text-primary font-[700]">
                       <AiOutlineExclamationCircle />
                     </span>
-                    {t("assessment.details.topicDetails")}
+                    {t("quizAssessment.details.topicDetails")}
                   </h3>
 
                   <div className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {/* Program */}
                       <SelectField
                         name="programId"
-                        label={t("assessment.details.parentProgram")}
+                        label={t("quizAssessment.details.parentProgram")}
                         placeholder={t(
-                          "assessment.details.perentProgramPlaceholder",
+                          "quizAssessment.details.parentProgramPlaceholder",
                         )}
                         required
                         options={programOptions}
@@ -1223,12 +1220,11 @@ const AssessmentDetails = () => {
                         }}
                       />
 
-                      {/* Level */}
                       <SelectField
                         name="levelId"
-                        label={t("assessment.details.parentLevel")}
+                        label={t("quizAssessment.details.parentLevel")}
                         placeholder={t(
-                          "assessment.details.parentLevelPlaceholder",
+                          "quizAssessment.details.parentLevelPlaceholder",
                         )}
                         required
                         options={levelOptions}
@@ -1254,12 +1250,11 @@ const AssessmentDetails = () => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {/* Module */}
                       <SelectField
                         name="moduleId"
-                        label={t("assessment.details.parentModule")}
+                        label={t("quizAssessment.details.parentModule")}
                         placeholder={t(
-                          "assessment.details.parentModulePlaceholder",
+                          "quizAssessment.details.parentModulePlaceholder",
                         )}
                         required
                         options={moduleOptions}
@@ -1279,12 +1274,11 @@ const AssessmentDetails = () => {
                         }}
                       />
 
-                      {/* Chapter */}
                       <SelectField
                         name="chapterId"
-                        label={t("assessment.details.parentChapter")}
+                        label={t("quizAssessment.details.parentChapter")}
                         placeholder={t(
-                          "assessment.details.parentChapterPlaceholder",
+                          "quizAssessment.details.parentChapterPlaceholder",
                         )}
                         required
                         options={chapterOptions}
@@ -1302,12 +1296,11 @@ const AssessmentDetails = () => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {/* Topic */}
                       <SelectField
                         name="topicId"
-                        label={t("assessment.details.topicName")}
+                        label={t("quizAssessment.details.topicName")}
                         placeholder={t(
-                          "assessment.details.topicNamePlaceholder",
+                          "quizAssessment.details.topicNamePlaceholder",
                         )}
                         required
                         options={topicOptions}
@@ -1320,26 +1313,27 @@ const AssessmentDetails = () => {
                   </div>
                 </div>
 
-                {/* ── Assessment Details ──────────────────────────────────── */}
                 <div>
                   <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-                    {t("assessment.details.assessmentDetails")}
+                    {t("quizAssessment.details.assessmentDetails")}
                   </h3>
 
                   <div className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <TextInput
                         name="title"
-                        label={t("assessment.details.title")}
-                        placeholder={t("assessment.details.titlePlaceholder")}
+                        label={t("quizAssessment.details.title")}
+                        placeholder={t(
+                          "quizAssessment.details.titlePlaceholder",
+                        )}
                         required
                         maxLength={150}
                       />
                       <TextInput
                         name="duration"
-                        label={t("assessment.details.duration")}
+                        label={t("quizAssessment.details.duration")}
                         placeholder={t(
-                          "assessment.details.durationPlaceholder",
+                          "quizAssessment.details.durationPlaceholder",
                         )}
                         type="number"
                         required
@@ -1350,9 +1344,9 @@ const AssessmentDetails = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <TextInput
                         name="total_marks"
-                        label={t("assessment.details.totalMarks")}
+                        label={t("quizAssessment.details.totalMarks")}
                         placeholder={t(
-                          "assessment.details.totalMarksPlaceholder",
+                          "quizAssessment.details.totalMarksPlaceholder",
                         )}
                         type="number"
                         required
@@ -1360,9 +1354,9 @@ const AssessmentDetails = () => {
                       />
                       <TextInput
                         name="passing_score"
-                        label={t("assessment.details.passingScore")}
+                        label={t("quizAssessment.details.passingScore")}
                         placeholder={t(
-                          "assessment.details.passingScorePlaceholder",
+                          "quizAssessment.details.passingScorePlaceholder",
                         )}
                         type="number"
                         required
@@ -1373,9 +1367,9 @@ const AssessmentDetails = () => {
                     <div className="grid grid-cols-1 gap-4">
                       <TextareaField
                         name="description"
-                        label={t("assessment.details.description")}
+                        label={t("quizAssessment.details.description")}
                         placeholder={t(
-                          "assessment.details.descriptionPlaceholder",
+                          "quizAssessment.details.descriptionPlaceholder",
                         )}
                         rows={4}
                         required
@@ -1385,13 +1379,12 @@ const AssessmentDetails = () => {
                   </div>
                 </div>
 
-                {/* ── Thumbnail ───────────────────────────────────────────── */}
                 <div>
                   <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
                     <span className="text-blue-600">
                       <FiImage />
                     </span>
-                    {t("assessment.details.thumbnail")}
+                    {t("quizAssessment.details.thumbnail")}
                   </h3>
 
                   <div className="border border-gray-300 bg-[#F8FAFC] p-6 rounded-lg">
@@ -1410,10 +1403,10 @@ const AssessmentDetails = () => {
                       >
                         <FiUpload className="text-4xl text-gray-400 mb-3" />
                         <p className="text-sm text-gray-600 mb-1">
-                          {t("assessment.details.uploadText")}
+                          {t("quizAssessment.details.uploadText")}
                         </p>
                         <p className="text-xs text-gray-400">
-                          {t("assessment.details.uploadSubText")}
+                          {t("quizAssessment.details.uploadSubText")}
                         </p>
                       </div>
                     ) : (
@@ -1445,7 +1438,7 @@ const AssessmentDetails = () => {
                               </>
                             ) : (
                               <p className="text-sm font-semibold text-gray-700 mb-3">
-                                {t("assessment.details.currentThumbnail")}
+                                {t("quizAssessment.details.currentThumbnail")}
                               </p>
                             )}
                             <button
@@ -1454,7 +1447,7 @@ const AssessmentDetails = () => {
                               className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1"
                             >
                               <FiUpload className="text-sm" />
-                              {t("assessment.details.changeImage")}
+                              {t("quizAssessment.details.changeImage")}
                             </button>
                           </div>
                         </div>
@@ -1463,7 +1456,6 @@ const AssessmentDetails = () => {
                   </div>
                 </div>
 
-                {/* ── Footer ──────────────────────────────────────────────── */}
                 <div className="flex justify-end items-center pt-4">
                   <div className="flex gap-3">
                     <button
@@ -1471,7 +1463,7 @@ const AssessmentDetails = () => {
                       onClick={handleDelete}
                       className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-gray-50"
                     >
-                      {t("assessment.actions.deleteQuiz")}
+                      {t("quizAssessment.actions.deleteQuiz")}
                     </button>
                     <button
                       type="submit"
@@ -1479,8 +1471,8 @@ const AssessmentDetails = () => {
                       className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
                     >
                       {isSubmitting
-                        ? t("assessment.actions.updating")
-                        : t("assessment.actions.updateQuiz")}
+                        ? t("quizAssessment.actions.updating")
+                        : t("quizAssessment.actions.updateQuiz")}
                     </button>
                   </div>
                 </div>

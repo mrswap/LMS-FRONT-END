@@ -565,78 +565,105 @@
 
   "learningUnitBuilder": {
     "list": {
-      "title": "लर्निंग यूनिट प्रबंधन",
-      "subtitle": "कोर्स की लर्निंग यूनिट्स और इंटरएक्टिव कंटेंट को व्यवस्थित और प्रबंधित करें।",
-      "searchPlaceholder": "शीर्षक नाम से खोजें...",
-      "clearAll": "सभी साफ करें",
+      "title": "लर्निंग यूनिट बिल्डर",
+      "subtitle": "विषयों के लिए लर्निंग कंटेंट प्रबंधित और बनाएं",
+      "searchPlaceholder": "कंटेंट शीर्षक से खोजें...",
+      "clearAll": "सभी फ़िल्टर साफ़ करें",
       "columns": {
         "title": "शीर्षक",
         "type": "प्रकार",
-        "parentTopic": "मुख्य विषय",
-        "parentChapter": "मुख्य अध्याय",
-        "parentModule": "मुख्य मॉड्यूल",
-        "parentLevel": "मुख्य स्तर",
-        "duration": "अवधि",
+        "parentTopic": "मूल विषय",
+        "parentChapter": "मूल अध्याय",
+        "parentModule": "मूल मॉड्यूल",
+        "parentLevel": "मूल स्तर",
         "status": "स्थिति",
         "actions": "कार्य"
       }
     },
+    "create": {
+      "title": "लर्निंग कंटेंट बनाएं",
+      "subtitle": "किसी विषय के लिए नया लर्निंग कंटेंट बनाएं"
+    },
     "details": {
       "generalDetails": "सामान्य विवरण",
-      "parentTopic": "मुख्य विषय",
-      "parentTopicPlaceholder": "विषय का नाम दर्ज करें",
-      "parentChapter": "मुख्य अध्याय",
-      "parentChapterPlaceholder": "एक अध्याय चुनें",
-      "parentModule": "मुख्य मॉड्यूल",
-      "parentModulePlaceholder": "एक मॉड्यूल चुनें",
-      "parentLevel": "स्तर का नाम",
-      "parentLevelPlaceholder": "एक स्तर चुनें",
-      "parentProgram": "मुख्य प्रोग्राम",
-      "perentProgramPlaceholder": "एक प्रोग्राम चुनें",
-      "duration": "अवधि (मिनट में)",
-      "durationPlaceholder": "मिनट में अवधि दर्ज करें",
-      "description": "विवरण",
-      "descriptionPlaceholder": "मॉड्यूल का विवरण लिखें...",
+      "parentProgram": "मूल कार्यक्रम",
+      "parentProgramPlaceholder": "कार्यक्रम चुनें",
+      "parentLevel": "मूल स्तर",
+      "parentLevelPlaceholder": "स्तर चुनें",
+      "parentModule": "मूल मॉड्यूल",
+      "parentModulePlaceholder": "मॉड्यूल चुनें",
+      "parentChapter": "मूल अध्याय",
+      "parentChapterPlaceholder": "अध्याय चुनें",
+      "parentTopic": "मूल विषय",
+      "parentTopicPlaceholder": "विषय चुनें",
       "deleteText": "क्या आप वाकई इस कंटेंट को हटाना चाहते हैं?",
       "content": {
         "contentSection": "कंटेंट सेक्शन",
-        "sectionTitle": "सेक्शन शीर्षक",
+        "contentTitle": "कंटेंट शीर्षक",
         "content": "कंटेंट",
-        "mediaShortcut": "मीडिया शॉर्टकट",
-        "mediaUrlShortcut": "मीडिया URL/शॉर्टकट",
-        "addButtonSection": "नया सेक्शन जोड़ें",
-        "removeSection": "सेक्शन हटाएं",
-        "order": "क्रम",
-        "type": "प्रकार",
+        "type": "कंटेंट प्रकार",
         "text": "टेक्स्ट",
         "media": "मीडिया",
-        "description": "विवरण (वैकल्पिक)",
-        "editorPlaceholder": "यहाँ अपना कंटेंट लिखें...",
-        "preview": "पूर्वावलोकन"
+        "sectionTitle": "सेक्शन शीर्षक",
+        "sectionTitlePlaceholder": "सेक्शन शीर्षक दर्ज करें",
+        "mediaShortcut": "मीडिया URL / शॉर्टकट",
+        "mediaShortcutPlaceholder": "उदा: yt_123, /uploads/video.mp4, https://youtu.be/...",
+        "description": "विवरण",
+        "order": "क्रम",
+        "preview": "पूर्वावलोकन",
+        "addButtonSection": "+ नया सेक्शन जोड़ें",
+        "removeSection": "सेक्शन हटाएं",
+        "editorPlaceholder": "अपना कंटेंट यहां लिखें..."
       }
-    },
-    "create": {
-      "title": "लर्निंग यूनिट बनाएं",
-      "subtitle": "ट्रेनिंग प्रोग्राम के लिए लेसन विवरण, मीडिया संसाधन और इंटरएक्टिव H5P कंटेंट जोड़कर नई लर्निंग यूनिट बनाएं।"
     },
     "actions": {
       "addNewContent": "+ नया कंटेंट जोड़ें",
       "createContent": "कंटेंट बनाएं",
       "creating": "बनाया जा रहा है...",
-      "deleteContent": "कंटेंट हटाएं",
       "updateContent": "कंटेंट अपडेट करें",
-      "updating": "अपडेट हो रहा है..."
+      "updating": "अपडेट किया जा रहा है...",
+      "deleteContent": "कंटेंट हटाएं"
     },
     "breadcrumb": {
       "contentManagement": "कंटेंट प्रबंधन",
-      "view-content": "कंटेंट देखें"
+      "editContent": "कंटेंट संपादित करें"
+    },
+    "filters": {
+      "allLevels": "सभी स्तर",
+      "allStatus": "सभी स्थितियाँ",
+      "allTypes": "सभी प्रकार",
+      "active": "सक्रिय",
+      "inactive": "निष्क्रिय",
+      "text": "टेक्स्ट",
+      "media": "मीडिया",
+      "selectLevelFirst": "पहले स्तर चुनें",
+      "selectModule": "मॉड्यूल चुनें",
+      "selectModuleFirst": "पहले मॉड्यूल चुनें",
+      "selectChapter": "अध्याय चुनें",
+      "selectChapterFirst": "पहले अध्याय चुनें",
+      "selectTopic": "विषय चुनें",
+      "loadingModules": "मॉड्यूल लोड हो रहे हैं...",
+      "loadingChapters": "अध्याय लोड हो रहे हैं...",
+      "loadingTopics": "विषय लोड हो रहे हैं..."
     },
     "validation": {
-      "programRequired": "मुख्य प्रोग्राम आवश्यक है",
-      "levelRequired": "स्तर का नाम आवश्यक है",
-      "moduleRequired": "मॉड्यूल का नाम आवश्यक है",
-      "topicRequired": "विषय का नाम आवश्यक है"
-    }
+      "programRequired": "कार्यक्रम आवश्यक है",
+      "levelRequired": "स्तर आवश्यक है",
+      "moduleRequired": "मॉड्यूल आवश्यक है",
+      "chapterRequired": "अध्याय आवश्यक है",
+      "topicRequired": "विषय आवश्यक है"
+    },
+    "success": {
+      "create": "लर्निंग कंटेंट सफलतापूर्वक बन गया!",
+      "update": "लर्निंग कंटेंट सफलतापूर्वक अपडेट हो गया!",
+      "delete": "लर्निंग कंटेंट सफलतापूर्वक हटा दिया गया!"
+    },
+    "error": {
+      "create": "लर्निंग कंटेंट बनाने में विफल। कृपया पुनः प्रयास करें।",
+      "update": "लर्निंग कंटेंट अपडेट करने में विफल। कृपया पुनः प्रयास करें।",
+      "delete": "लर्निंग कंटेंट हटाने में विफल। कृपया पुनः प्रयास करें।"
+    },
+    "noContentFound": "कोई कंटेंट नहीं मिला"
   },
 
   "mediaLibrary": {
@@ -749,12 +776,12 @@
     }
   },
 
-  "assessment": {
+  "quizAssessment": {
     "list": {
-      "title": "मूल्यांकन प्रबंधन",
-      "subtitle": "अध्याय सामग्री को इस तरह परिभाषित और संरचित करें कि मॉड्यूल को आसान और समझने योग्य हिस्सों में विभाजित किया जा सके।",
-      "searchPlaceholder": "शीर्षक नाम से खोजें...",
-      "clearAll": "सभी साफ करें",
+      "quizTitle": "प्रश्नोत्तरी मूल्यांकन",
+      "quizSubtitle": "विषयों के लिए प्रश्नोत्तरी प्रबंधित और बनाएं",
+      "searchPlaceholder": "प्रश्नोत्तरी शीर्षक से खोजें...",
+      "clearAll": "सभी फ़िल्टर साफ़ करें",
       "columns": {
         "title": "शीर्षक",
         "type": "प्रकार",
@@ -762,88 +789,189 @@
         "module": "मॉड्यूल",
         "chapter": "अध्याय",
         "topic": "विषय",
-        "questionCount": "प्रश्नों की संख्या",
+        "questionCount": "प्रश्न",
         "totalMark": "कुल अंक",
-        "passingScore": "उत्तीर्ण अंक",
-        "duration": "समय अवधि",
+        "passingScore": "उत्तीर्णांक",
+        "duration": "अवधि",
         "status": "स्थिति",
-        "actions": "कार्रवाई"
+        "actions": "कार्य"
       }
     },
+    "create": {
+      "quizTitle": "प्रश्नोत्तरी बनाएं",
+      "quizSubtitle": "किसी विषय के लिए नई प्रश्नोत्तरी बनाएं"
+    },
     "details": {
-      "generalDetails": "सामान्य विवरण",
-      "assessmentConfiguration": "मूल्यांकन कॉन्फ़िगरेशन",
-      "assessmentFor": "मूल्यांकन के लिए",
-      "assessmentForPlaceholder": "विषय या स्तर चुनें",
-      "topicName": "विषय नाम",
-      "topicNamePlaceholder": "विषय चुनें",
-      "parentChapter": "मूल अध्याय",
-      "parentChapterPlaceholder": "अध्याय चुनें",
+      "topicDetails": "विषय चयन",
+      "assessmentDetails": "मूल्यांकन विवरण",
+      "parentProgram": "मूल कार्यक्रम",
+      "parentProgramPlaceholder": "कार्यक्रम चुनें",
+      "parentLevel": "मूल स्तर",
+      "parentLevelPlaceholder": "स्तर चुनें",
       "parentModule": "मूल मॉड्यूल",
       "parentModulePlaceholder": "मॉड्यूल चुनें",
-      "parentLevel": "स्तर नाम",
-      "parentLevelPlaceholder": "स्तर चुनें",
-      "parentProgram": "मूल प्रोग्राम",
-      "parentProgramPlaceholder": "प्रोग्राम चुनें",
-      "title": "शीर्षक",
-      "titlePlaceholder": "मूल्यांकन शीर्षक दर्ज करें",
+      "parentChapter": "मूल अध्याय",
+      "parentChapterPlaceholder": "अध्याय चुनें",
+      "topicName": "विषय का नाम",
+      "topicNamePlaceholder": "विषय चुनें",
+      "title": "प्रश्नोत्तरी शीर्षक",
+      "titlePlaceholder": "प्रश्नोत्तरी शीर्षक दर्ज करें",
       "duration": "अवधि (मिनट में)",
-      "durationPlaceholder": "मिनट में अवधि दर्ज करें",
-      "levelAssessmentDetails": "स्तर मूल्यांकन विवरण",
-      "description": "विवरण",
-      "descriptionPlaceholder": "मॉड्यूल विवरण लिखें...",
-      "thumbnail": "स्तर थंबनेल",
-      "uploadText": "थंबनेल अपलोड करने के लिए क्लिक करें",
-      "uploadSubText": "PNG, JPG, JPEG (5MB तक)",
-      "changeImage": "इमेज बदलें",
-      "deleteText": "क्या आप वाकई इस मूल्यांकन को हटाना चाहते हैं?",
-      "assessmentDetails": "मूल्यांकन विवरण",
-      "assessmentTitle": "मूल्यांकन शीर्षक",
-      "assessmentTitlePlaceholder": "शीर्षक दर्ज करें",
-      "assessmentDescription": "मूल्यांकन विवरण",
-      "assessmentDescriptionPlaceholder": "विवरण दर्ज करें",
-      "passingScore": "उत्तीर्ण अंक",
-      "passingScorePlaceholder": "उत्तीर्ण अंक दर्ज करें",
+      "durationPlaceholder": "मिनटों में अवधि दर्ज करें",
       "totalMarks": "कुल अंक",
       "totalMarksPlaceholder": "कुल अंक दर्ज करें",
-      "selectTopic": "विषय चुनें",
-      "selectTopicPlaceholder": "विषय चुनें",
-      "selectLevel": "स्तर चुनें",
-      "selectLevelPlaceholder": "स्तर चुनें",
-      "topicOption": "विषय",
-      "levelOption": "स्तर"
-    },
-    "create": {
-      "title": "नया मूल्यांकन बनाएं",
-      "subtitle": "अपने मेडिकल मूल्यांकन के मुख्य पैरामीटर और ग्रेडिंग मानदंड निर्धारित करें।"
+      "passingScore": "उत्तीर्णांक",
+      "passingScorePlaceholder": "उत्तीर्णांक दर्ज करें",
+      "description": "विवरण",
+      "descriptionPlaceholder": "प्रश्नोत्तरी का विवरण दर्ज करें",
+      "thumbnail": "प्रश्नोत्तरी थंबनेल",
+      "uploadText": "थंबनेल अपलोड करने के लिए क्लिक करें",
+      "uploadSubText": "PNG, JPG, JPEG अधिकतम 5MB",
+      "changeImage": "छवि बदलें",
+      "currentThumbnail": "वर्तमान थंबनेल",
+      "deleteTextQuiz": "क्या आप वाकई इस प्रश्नोत्तरी को हटाना चाहते हैं?"
     },
     "actions": {
-      "addNewAssessment": "+ नया मूल्यांकन जोड़ें",
-      "createAssessment": "मूल्यांकन बनाएं",
+      "addNewQuiz": "+ नई प्रश्नोत्तरी जोड़ें",
+      "createQuiz": "प्रश्नोत्तरी बनाएं",
       "creating": "बनाया जा रहा है...",
-      "deleteAssessment": "मूल्यांकन हटाएं",
-      "updateAssessment": "मूल्यांकन अपडेट करें",
-      "updating": "अपडेट किया जा रहा है..."
+      "updateQuiz": "प्रश्नोत्तरी अपडेट करें",
+      "updating": "अपडेट किया जा रहा है...",
+      "deleteQuiz": "प्रश्नोत्तरी हटाएं"
     },
     "breadcrumb": {
-      "assessment": "मूल्यांकन",
-      "view-assessment": "मूल्यांकन देखें"
+      "quizManagement": "प्रश्नोत्तरी प्रबंधन",
+      "view-quiz": "प्रश्नोत्तरी देखें"
+    },
+    "questions": "प्रश्न",
+    "filters": {
+      "allLevels": "सभी स्तर",
+      "allStatus": "सभी स्थितियाँ",
+      "active": "सक्रिय",
+      "inactive": "निष्क्रिय",
+      "selectLevelFirst": "पहले स्तर चुनें",
+      "selectModule": "मॉड्यूल चुनें",
+      "selectModuleFirst": "पहले मॉड्यूल चुनें",
+      "selectChapter": "अध्याय चुनें",
+      "selectChapterFirst": "पहले अध्याय चुनें",
+      "selectTopic": "विषय चुनें"
     },
     "validation": {
-      "assessment_type_required": "मूल्यांकन प्रकार आवश्यक है",
-      "program_required": "प्रोग्राम आवश्यक है",
+      "program_required": "कार्यक्रम आवश्यक है",
       "level_required": "स्तर आवश्यक है",
       "module_required": "मॉड्यूल आवश्यक है",
       "chapter_required": "अध्याय आवश्यक है",
       "topic_required": "विषय आवश्यक है",
       "title_required": "शीर्षक आवश्यक है",
       "description_required": "विवरण आवश्यक है",
-      "passing_score_required": "उत्तीर्ण अंक आवश्यक है",
-      "passing_score_positive": "उत्तीर्ण अंक सकारात्मक होना चाहिए",
+      "passing_score_required": "उत्तीर्णांक आवश्यक है",
+      "passing_score_positive": "उत्तीर्णांक धनात्मक होना चाहिए",
       "total_marks_required": "कुल अंक आवश्यक है",
-      "total_marks_positive": "कुल अंक सकारात्मक होना चाहिए",
+      "total_marks_positive": "कुल अंक धनात्मक होना चाहिए",
       "duration_required": "अवधि आवश्यक है",
-      "duration_positive": "अवधि सकारात्मक होनी चाहिए"
+      "duration_positive": "अवधि धनात्मक होनी चाहिए",
+      "invalidImage": "केवल छवि फ़ाइलों की अनुमति है (JPG, PNG, आदि)",
+      "fileSizeExceeded": "छवि का आकार 5 MB से कम होना चाहिए"
+    },
+    "success": {
+      "create": "प्रश्नोत्तरी सफलतापूर्वक बन गई!",
+      "update": "प्रश्नोत्तरी सफलतापूर्वक अपडेट हो गई!",
+      "delete": "प्रश्नोत्तरी सफलतापूर्वक हटा दी गई!"
+    },
+    "error": {
+      "create": "प्रश्नोत्तरी बनाने में विफल। कृपया पुनः प्रयास करें।",
+      "update": "प्रश्नोत्तरी अपडेट करने में विफल। कृपया पुनः प्रयास करें।",
+      "delete": "प्रश्नोत्तरी हटाने में विफल। कृपया पुनः प्रयास करें।"
+    }
+  },
+
+  "examAssessment": {
+    "list": {
+      "examTitle": "परीक्षा मूल्यांकन",
+      "examSubtitle": "स्तरों के लिए परीक्षाएं प्रबंधित और बनाएं",
+      "searchPlaceholder": "परीक्षा शीर्षक से खोजें...",
+      "clearAll": "सभी फ़िल्टर साफ़ करें",
+      "columns": {
+        "title": "शीर्षक",
+        "type": "प्रकार",
+        "questionCount": "प्रश्न",
+        "totalMark": "कुल अंक",
+        "passingScore": "उत्तीर्णांक",
+        "duration": "अवधि",
+        "status": "स्थिति",
+        "actions": "कार्य"
+      }
+    },
+    "create": {
+      "examTitle": "परीक्षा बनाएं",
+      "examSubtitle": "किसी स्तर के लिए नई परीक्षा बनाएं"
+    },
+    "details": {
+      "levelDetails": "स्तर चयन",
+      "assessmentDetails": "मूल्यांकन विवरण",
+      "parentProgram": "मूल कार्यक्रम",
+      "parentProgramPlaceholder": "कार्यक्रम चुनें",
+      "selectLevel": "स्तर चुनें",
+      "selectLevelPlaceholder": "स्तर चुनें",
+      "title": "परीक्षा शीर्षक",
+      "titlePlaceholder": "परीक्षा शीर्षक दर्ज करें",
+      "duration": "अवधि (मिनट में)",
+      "durationPlaceholder": "मिनटों में अवधि दर्ज करें",
+      "totalMarks": "कुल अंक",
+      "totalMarksPlaceholder": "कुल अंक दर्ज करें",
+      "passingScore": "उत्तीर्णांक",
+      "passingScorePlaceholder": "उत्तीर्णांक दर्ज करें",
+      "description": "विवरण",
+      "descriptionPlaceholder": "परीक्षा का विवरण दर्ज करें",
+      "thumbnail": "परीक्षा थंबनेल",
+      "uploadText": "थंबनेल अपलोड करने के लिए क्लिक करें",
+      "uploadSubText": "PNG, JPG, JPEG अधिकतम 5MB",
+      "changeImage": "छवि बदलें",
+      "currentThumbnail": "वर्तमान थंबनेल",
+      "deleteTextExam": "क्या आप वाकई इस परीक्षा को हटाना चाहते हैं?"
+    },
+    "actions": {
+      "addNewExam": "+ नई परीक्षा जोड़ें",
+      "createExam": "परीक्षा बनाएं",
+      "creating": "बनाया जा रहा है...",
+      "updateExam": "परीक्षा अपडेट करें",
+      "updating": "अपडेट किया जा रहा है...",
+      "deleteExam": "परीक्षा हटाएं"
+    },
+    "breadcrumb": {
+      "examManagement": "परीक्षा प्रबंधन",
+      "view-exam": "परीक्षा देखें"
+    },
+    "questions": "प्रश्न",
+    "filters": {
+      "allLevels": "सभी स्तर",
+      "allStatus": "सभी स्थितियाँ",
+      "active": "सक्रिय",
+      "inactive": "निष्क्रिय"
+    },
+    "validation": {
+      "program_required": "कार्यक्रम आवश्यक है",
+      "level_required": "स्तर आवश्यक है",
+      "title_required": "शीर्षक आवश्यक है",
+      "description_required": "विवरण आवश्यक है",
+      "passing_score_required": "उत्तीर्णांक आवश्यक है",
+      "passing_score_positive": "उत्तीर्णांक धनात्मक होना चाहिए",
+      "total_marks_required": "कुल अंक आवश्यक है",
+      "total_marks_positive": "कुल अंक धनात्मक होना चाहिए",
+      "duration_required": "अवधि आवश्यक है",
+      "duration_positive": "अवधि धनात्मक होनी चाहिए",
+      "invalidImage": "केवल छवि फ़ाइलों की अनुमति है (JPG, PNG, आदि)",
+      "fileSizeExceeded": "छवि का आकार 5 MB से कम होना चाहिए"
+    },
+    "success": {
+      "create": "परीक्षा सफलतापूर्वक बन गई!",
+      "update": "परीक्षा सफलतापूर्वक अपडेट हो गई!",
+      "delete": "परीक्षा सफलतापूर्वक हटा दी गई!"
+    },
+    "error": {
+      "create": "परीक्षा बनाने में विफल। कृपया पुनः प्रयास करें।",
+      "update": "परीक्षा अपडेट करने में विफल। कृपया पुनः प्रयास करें।",
+      "delete": "परीक्षा हटाने में विफल। कृपया पुनः प्रयास करें।"
     }
   },
 

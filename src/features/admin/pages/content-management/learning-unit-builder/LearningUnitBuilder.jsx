@@ -48,6 +48,12 @@
 //   const { chapters } = useSelector((state) => state.chapter);
 //   const { topics } = useSelector((state) => state.topic);
 
+//   // State to track loading sequence
+//   const [isLevelsLoaded, setIsLevelsLoaded] = useState(false);
+//   const [isModulesLoaded, setIsModulesLoaded] = useState(false);
+//   const [isChaptersLoaded, setIsChaptersLoaded] = useState(false);
+//   const [isTopicsLoaded, setIsTopicsLoaded] = useState(false);
+
 //   const levelOption = [
 //     { value: "", label: "All Levels" },
 //     ...(levels?.data?.map((item) => ({
@@ -122,24 +128,73 @@
 //     }));
 //   };
 
-//   // 🔥 Level change hone par module, chapter, topic reset
+//   // Reset states when level changes
 //   useEffect(() => {
 //     setModule(null);
 //     setChapter(null);
 //     setTopic(null);
+//     setIsModulesLoaded(false);
+//     setIsChaptersLoaded(false);
+//     setIsTopicsLoaded(false);
 //   }, [level]);
 
-//   // 🔥 Module change hone par chapter, topic reset
+//   // Reset states when module changes
 //   useEffect(() => {
 //     setChapter(null);
 //     setTopic(null);
+//     setIsChaptersLoaded(false);
+//     setIsTopicsLoaded(false);
 //   }, [module]);
 
-//   // 🔥 Chapter change hone par topic reset
+//   // Reset states when chapter changes
 //   useEffect(() => {
 //     setTopic(null);
+//     setIsTopicsLoaded(false);
 //   }, [chapter]);
 
+//   // STEP 1: Load levels on component mount
+//   useEffect(() => {
+//     const loadLevels = async () => {
+//       await dispatch(getAllLevels());
+//       setIsLevelsLoaded(true);
+//     };
+//     loadLevels();
+//   }, [dispatch]);
+
+//   // STEP 2: Load modules only when level is selected (not "all" or empty)
+//   useEffect(() => {
+//     if (isLevelsLoaded && level?.value !== "" && level?.value) {
+//       const loadModules = async () => {
+//         await dispatch(getAllModules());
+//         setIsModulesLoaded(true);
+//       };
+//       loadModules();
+//     }
+//   }, [level, isLevelsLoaded, dispatch]);
+
+//   // STEP 3: Load chapters only when module is selected
+//   useEffect(() => {
+//     if (isModulesLoaded && module?.value) {
+//       const loadChapters = async () => {
+//         await dispatch(getAllChapters());
+//         setIsChaptersLoaded(true);
+//       };
+//       loadChapters();
+//     }
+//   }, [module, isModulesLoaded, dispatch]);
+
+//   // STEP 4: Load topics only when chapter is selected
+//   useEffect(() => {
+//     if (isChaptersLoaded && chapter?.value) {
+//       const loadTopics = async () => {
+//         await dispatch(getAllTopics());
+//         setIsTopicsLoaded(true);
+//       };
+//       loadTopics();
+//     }
+//   }, [chapter, isChaptersLoaded, dispatch]);
+
+//   // STEP 5: Fetch contents when all dependencies are ready
 //   const fetchContents = (overridePage) => {
 //     const params = {
 //       search: search || "",
@@ -153,23 +208,25 @@
 //       limit: ITEMS_PER_PAGE,
 //     };
 //     dispatch(getAllContents(params));
-//     dispatch(getAllLevels());
-//     dispatch(getAllModules());
-//     dispatch(getAllChapters());
-//     dispatch(getAllTopics());
 //   };
 
+//   // Fetch contents when filters change (only after levels are loaded)
 //   useEffect(() => {
+//     if (!isLevelsLoaded) return;
+
 //     const delay = setTimeout(() => {
 //       setPage(1);
 //       fetchContents(1);
 //     }, 500);
 //     return () => clearTimeout(delay);
-//   }, [search, level, module, chapter, topic, status, type]);
+//   }, [search, level, module, chapter, topic, status, type, isLevelsLoaded]);
 
+//   // Fetch contents on page change
 //   useEffect(() => {
-//     fetchContents(page);
-//   }, [page]);
+//     if (isLevelsLoaded) {
+//       fetchContents(page);
+//     }
+//   }, [page, isLevelsLoaded]);
 
 //   const handlePageChange = (newPage) => {
 //     setPage(newPage);
@@ -184,6 +241,9 @@
 //     setStatus(statusOptions[0]);
 //     setSearch("");
 //     setPage(1);
+//     setIsModulesLoaded(false);
+//     setIsChaptersLoaded(false);
+//     setIsTopicsLoaded(false);
 //   };
 
 //   const customSelectStyles = {
@@ -199,6 +259,18 @@
 //       opacity: state.isDisabled ? 0.6 : 1,
 //     }),
 //   };
+
+//   // Check loading states
+//   const isModulesLoading =
+//     isLevelsLoaded &&
+//     level?.value !== "" &&
+//     level?.value &&
+//     !isModulesLoaded &&
+//     !modules?.data;
+//   const isChaptersLoading =
+//     isModulesLoaded && module?.value && !isChaptersLoaded && !chapters?.data;
+//   const isTopicsLoading =
+//     isChaptersLoaded && chapter?.value && !isTopicsLoaded && !topics?.data;
 
 //   const columns = [
 //     {
@@ -356,6 +428,7 @@
 //                 options={levelOption}
 //                 styles={customSelectStyles}
 //                 isSearchable={false}
+//                 isLoading={!isLevelsLoaded}
 //               />
 //             </div>
 
@@ -367,8 +440,13 @@
 //                 styles={customSelectStyles}
 //                 isSearchable={false}
 //                 isDisabled={isModuleDisabled}
+//                 isLoading={isModulesLoading}
 //                 placeholder={
-//                   isModuleDisabled ? "Select level first" : "Select module"
+//                   isModuleDisabled
+//                     ? "Select level first"
+//                     : isModulesLoading
+//                       ? "Loading modules..."
+//                       : "Select module"
 //                 }
 //               />
 //             </div>
@@ -381,8 +459,13 @@
 //                 styles={customSelectStyles}
 //                 isSearchable={false}
 //                 isDisabled={isChapterDisabled}
+//                 isLoading={isChaptersLoading}
 //                 placeholder={
-//                   isChapterDisabled ? "Select module first" : "Select chapter"
+//                   isChapterDisabled
+//                     ? "Select module first"
+//                     : isChaptersLoading
+//                       ? "Loading chapters..."
+//                       : "Select chapter"
 //                 }
 //               />
 //             </div>
@@ -395,8 +478,13 @@
 //                 styles={customSelectStyles}
 //                 isSearchable={false}
 //                 isDisabled={isTopicDisabled}
+//                 isLoading={isTopicsLoading}
 //                 placeholder={
-//                   isTopicDisabled ? "Select chapter first" : "Select topic"
+//                   isTopicDisabled
+//                     ? "Select chapter first"
+//                     : isTopicsLoading
+//                       ? "Loading topics..."
+//                       : "Select topic"
 //                 }
 //               />
 //             </div>
@@ -513,14 +601,13 @@ const LearningUnitBuilder = () => {
   const { chapters } = useSelector((state) => state.chapter);
   const { topics } = useSelector((state) => state.topic);
 
-  // State to track loading sequence
   const [isLevelsLoaded, setIsLevelsLoaded] = useState(false);
   const [isModulesLoaded, setIsModulesLoaded] = useState(false);
   const [isChaptersLoaded, setIsChaptersLoaded] = useState(false);
   const [isTopicsLoaded, setIsTopicsLoaded] = useState(false);
 
   const levelOption = [
-    { value: "", label: "All Levels" },
+    { value: "", label: t("learningUnitBuilder.filters.allLevels") },
     ...(levels?.data?.map((item) => ({
       value: item.id,
       label: item.title,
@@ -528,15 +615,15 @@ const LearningUnitBuilder = () => {
   ];
 
   const statusOptions = [
-    { value: "all", label: "All Status" },
-    { value: "1", label: "Active" },
-    { value: "0", label: "Inactive" },
+    { value: "all", label: t("learningUnitBuilder.filters.allStatus") },
+    { value: "1", label: t("learningUnitBuilder.filters.active") },
+    { value: "0", label: t("learningUnitBuilder.filters.inactive") },
   ];
 
   const typeOptions = [
-    { value: "", label: "All Types" },
-    { value: "text", label: "Text" },
-    { value: "media", label: "Media" },
+    { value: "", label: t("learningUnitBuilder.filters.allTypes") },
+    { value: "text", label: t("learningUnitBuilder.filters.text") },
+    { value: "media", label: t("learningUnitBuilder.filters.media") },
   ];
 
   const [type, setType] = useState(typeOptions[0]);
@@ -548,52 +635,42 @@ const LearningUnitBuilder = () => {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
 
-  // 🔥 Level ke according modules filter kar
   const getModuleOptions = () => {
     if (!level || level?.value === "") {
       return [];
     }
-
     const filteredModules =
       modules?.data?.filter((item) => item.level?.id === level?.value) || [];
-
     return filteredModules.map((item) => ({
       value: item.id,
       label: item.title,
     }));
   };
 
-  // 🔥 Module ke according chapters filter kar
   const getChapterOptions = () => {
     if (!module || !module?.value) {
       return [];
     }
-
     const filteredChapters =
       chapters?.data?.filter((item) => item.module?.id === module?.value) || [];
-
     return filteredChapters.map((item) => ({
       value: item.id,
       label: item.title,
     }));
   };
 
-  // 🔥 Chapter ke according topics filter kar
   const getTopicOptions = () => {
     if (!chapter || !chapter?.value) {
       return [];
     }
-
     const filteredTopics =
       topics?.data?.filter((item) => item.chapter?.id === chapter?.value) || [];
-
     return filteredTopics.map((item) => ({
       value: item.id,
       label: item.title,
     }));
   };
 
-  // Reset states when level changes
   useEffect(() => {
     setModule(null);
     setChapter(null);
@@ -603,7 +680,6 @@ const LearningUnitBuilder = () => {
     setIsTopicsLoaded(false);
   }, [level]);
 
-  // Reset states when module changes
   useEffect(() => {
     setChapter(null);
     setTopic(null);
@@ -611,13 +687,11 @@ const LearningUnitBuilder = () => {
     setIsTopicsLoaded(false);
   }, [module]);
 
-  // Reset states when chapter changes
   useEffect(() => {
     setTopic(null);
     setIsTopicsLoaded(false);
   }, [chapter]);
 
-  // STEP 1: Load levels on component mount
   useEffect(() => {
     const loadLevels = async () => {
       await dispatch(getAllLevels());
@@ -626,7 +700,6 @@ const LearningUnitBuilder = () => {
     loadLevels();
   }, [dispatch]);
 
-  // STEP 2: Load modules only when level is selected (not "all" or empty)
   useEffect(() => {
     if (isLevelsLoaded && level?.value !== "" && level?.value) {
       const loadModules = async () => {
@@ -637,7 +710,6 @@ const LearningUnitBuilder = () => {
     }
   }, [level, isLevelsLoaded, dispatch]);
 
-  // STEP 3: Load chapters only when module is selected
   useEffect(() => {
     if (isModulesLoaded && module?.value) {
       const loadChapters = async () => {
@@ -648,7 +720,6 @@ const LearningUnitBuilder = () => {
     }
   }, [module, isModulesLoaded, dispatch]);
 
-  // STEP 4: Load topics only when chapter is selected
   useEffect(() => {
     if (isChaptersLoaded && chapter?.value) {
       const loadTopics = async () => {
@@ -659,7 +730,6 @@ const LearningUnitBuilder = () => {
     }
   }, [chapter, isChaptersLoaded, dispatch]);
 
-  // STEP 5: Fetch contents when all dependencies are ready
   const fetchContents = (overridePage) => {
     const params = {
       search: search || "",
@@ -675,10 +745,8 @@ const LearningUnitBuilder = () => {
     dispatch(getAllContents(params));
   };
 
-  // Fetch contents when filters change (only after levels are loaded)
   useEffect(() => {
     if (!isLevelsLoaded) return;
-
     const delay = setTimeout(() => {
       setPage(1);
       fetchContents(1);
@@ -686,7 +754,6 @@ const LearningUnitBuilder = () => {
     return () => clearTimeout(delay);
   }, [search, level, module, chapter, topic, status, type, isLevelsLoaded]);
 
-  // Fetch contents on page change
   useEffect(() => {
     if (isLevelsLoaded) {
       fetchContents(page);
@@ -725,7 +792,6 @@ const LearningUnitBuilder = () => {
     }),
   };
 
-  // Check loading states
   const isModulesLoading =
     isLevelsLoaded &&
     level?.value !== "" &&
@@ -830,7 +896,6 @@ const LearningUnitBuilder = () => {
     },
   ];
 
-  // 🔥 Disabled logic
   const isModuleDisabled = !level || level?.value === "";
   const isChapterDisabled = !module || !module?.value;
   const isTopicDisabled = !chapter || !chapter?.value;
@@ -864,8 +929,8 @@ const LearningUnitBuilder = () => {
           <div className="w-full">
             <div
               className="flex items-center bg-gray-50 border border-gray-200
-      hover:border-blue-500 focus-within:border-blue-500
-      rounded-xl px-4 py-2.5 transition-all"
+              hover:border-blue-500 focus-within:border-blue-500
+              rounded-xl px-4 py-2.5 transition-all"
             >
               <FiSearch className="text-gray-400 text-base" />
               <input
@@ -908,10 +973,10 @@ const LearningUnitBuilder = () => {
                 isLoading={isModulesLoading}
                 placeholder={
                   isModuleDisabled
-                    ? "Select level first"
+                    ? t("learningUnitBuilder.filters.selectLevelFirst")
                     : isModulesLoading
-                      ? "Loading modules..."
-                      : "Select module"
+                      ? t("learningUnitBuilder.filters.loadingModules")
+                      : t("learningUnitBuilder.filters.selectModule")
                 }
               />
             </div>
@@ -927,10 +992,10 @@ const LearningUnitBuilder = () => {
                 isLoading={isChaptersLoading}
                 placeholder={
                   isChapterDisabled
-                    ? "Select module first"
+                    ? t("learningUnitBuilder.filters.selectModuleFirst")
                     : isChaptersLoading
-                      ? "Loading chapters..."
-                      : "Select chapter"
+                      ? t("learningUnitBuilder.filters.loadingChapters")
+                      : t("learningUnitBuilder.filters.selectChapter")
                 }
               />
             </div>
@@ -946,10 +1011,10 @@ const LearningUnitBuilder = () => {
                 isLoading={isTopicsLoading}
                 placeholder={
                   isTopicDisabled
-                    ? "Select chapter first"
+                    ? t("learningUnitBuilder.filters.selectChapterFirst")
                     : isTopicsLoading
-                      ? "Loading topics..."
-                      : "Select topic"
+                      ? t("learningUnitBuilder.filters.loadingTopics")
+                      : t("learningUnitBuilder.filters.selectTopic")
                 }
               />
             </div>
@@ -979,18 +1044,17 @@ const LearningUnitBuilder = () => {
                 <button
                   onClick={resetFilters}
                   className="flex items-center justify-center w-9 h-9 rounded-lg cursor-pointer
-      text-gray-500 hover:text-white hover:bg-red-500
-      transition-all"
+                  text-gray-500 hover:text-white hover:bg-red-500 transition-all"
                 >
                   <LuFilterX size={18} />
                 </button>
                 <div
                   className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2
-      px-2 py-1 text-xs rounded-md bg-gray-800 text-white
-      opacity-0 group-hover:opacity-100 transition-all duration-200
-      whitespace-nowrap pointer-events-none"
+                  px-2 py-1 text-xs rounded-md bg-gray-800 text-white
+                  opacity-0 group-hover:opacity-100 transition-all duration-200
+                  whitespace-nowrap pointer-events-none"
                 >
-                  {t("topic.list.clearAll")}
+                  {t("learningUnitBuilder.list.clearAll")}
                 </div>
               </div>
             </div>
