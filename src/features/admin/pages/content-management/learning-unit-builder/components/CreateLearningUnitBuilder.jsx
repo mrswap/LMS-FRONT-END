@@ -678,8 +678,14 @@ const CreateLearningUnitBuilder = () => {
           order: index + 1,
         };
 
+        // if (section.type === "media" && section.media_shortcut) {
+        //   apiSection.media_shortcut = section.media_shortcut;
+        // }
+
         if (section.type === "media" && section.media_shortcut) {
-          apiSection.media_shortcut = section.media_shortcut;
+          apiSection.meta = {
+            shortcode: section.media_shortcut,
+          };
         }
 
         return apiSection;

@@ -847,6 +847,124 @@
     }
   },
 
+  "quizFeedback": {
+    "title": "ਕੁਇਜ਼ ਫੀਡਬੈਕ",
+    "subtitle": "ਸਾਰੇ ਕੁਇਜ਼ ਫੀਡਬੈਕ ਨੂੰ ਪ੍ਰਬੰਧਿਤ ਅਤੇ ਵੇਖੋ",
+    "searchPlaceholder": "ਰਿਵਿਊ ਕਮੈਂਟ ਨਾਲ ਖੋਜੋ...",
+    "clearAll": "ਸਾਰੇ ਫਿਲਟਰ ਸਾਫ ਕਰੋ",
+    "anonymous": "ਗੁਮਨਾਮ",
+    "quiz": "ਕੁਇਜ਼",
+    "score": "ਸਕੋਰ",
+    "percentage": "ਪ੍ਰਤੀਸ਼ਤ",
+    "noReview": "ਕੋਈ ਰਿਵਿਊ ਨਹੀਂ ਦਿੱਤਾ ਗਿਆ",
+    "columns": {
+      "user": "ਯੂਜ਼ਰ",
+      "assessment": "ਮੁਲਾਂਕਣ",
+      "scorePercentage": "ਸਕੋਰ/ਪ੍ਰਤੀਸ਼ਤ",
+      "rating": "ਰੇਟਿੰਗ",
+      "date": "ਤਾਰੀਖ",
+      "actions": "ਕਾਰਵਾਈਆਂ"
+    },
+    "filters": {
+      "allUsers": "ਸਾਰੇ ਯੂਜ਼ਰ",
+      "allAssessments": "ਸਾਰੇ ਮੁਲਾਂਕਣ",
+      "alltopics": "ਸਾਰੇ ਵਿਸ਼ੇ",
+      "allRatings": "ਸਾਰੀਆਂ ਰੇਟਿੰਗਾਂ",
+      "fiveStars": "5 ਸਟਾਰ",
+      "fourStars": "4 ਸਟਾਰ",
+      "threeStars": "3 ਸਟਾਰ",
+      "twoStars": "2 ਸਟਾਰ",
+      "oneStar": "1 ਸਟਾਰ",
+      "filterByUser": "ਯੂਜ਼ਰ ਅਨੁਸਾਰ ਫਿਲਟਰ ਕਰੋ",
+      "filterByAssessment": "ਮੁਲਾਂਕਣ ਅਨੁਸਾਰ ਫਿਲਟਰ ਕਰੋ",
+      "filterByRating": "ਰੇਟਿੰਗ ਅਨੁਸਾਰ ਫਿਲਟਰ ਕਰੋ",
+      "filterByTopic": "ਵਿਸ਼ੇ ਅਨੁਸਾਰ ਫਿਲਟਰ ਕਰੋ"
+    },
+    "actions": {
+      "viewDetails": "ਵੇਰਵਾ ਵੇਖੋ"
+    },
+    "breadcrumb": {
+      "list": "ਕੁਇਜ਼ ਫੀਡਬੈਕ",
+      "details": "ਫੀਡਬੈਕ ਵੇਖੋ"
+    },
+    "details": {
+      "feedbackDetails": "ਫੀਡਬੈਕ ਵੇਰਵਾ",
+      "assessmentType": "ਮੁਲਾਂਕਣ ਕਿਸਮ",
+      "userInformation": "ਯੂਜ਼ਰ ਜਾਣਕਾਰੀ",
+      "name": "ਨਾਮ",
+      "email": "ਈਮੇਲ",
+      "assessmentDetails": "ਮੁਲਾਂਕਣ ਵੇਰਵਾ",
+      "assessmentId": "ਮੁਲਾਂਕਣ ਆਈਡੀ",
+      "status": "ਸਥਿਤੀ",
+      "score": "ਸਕੋਰ",
+      "review": "ਰਿਵਿਊ / ਫੀਡਬੈਕ"
+    },
+    "status": {
+      "passed": "ਪਾਸ",
+      "failed": "ਫੇਲ",
+      "na": "ਲਾਗੂ ਨਹੀਂ"
+    }
+  },
+
+  "examFeedback": {
+    "title": "ਇਮਤਿਹਾਨ ਫੀਡਬੈਕ",
+    "subtitle": "ਸਾਰੇ ਇਮਤਿਹਾਨ ਫੀਡਬੈਕ ਨੂੰ ਪ੍ਰਬੰਧਿਤ ਅਤੇ ਵੇਖੋ",
+    "searchPlaceholder": "ਰਿਵਿਊ ਕਮੈਂਟ ਨਾਲ ਖੋਜੋ...",
+    "clearAll": "ਸਾਰੇ ਫਿਲਟਰ ਸਾਫ ਕਰੋ",
+    "anonymous": "ਗੁਮਨਾਮ",
+    "exam": "ਇਮਤਿਹਾਨ",
+    "score": "ਸਕੋਰ",
+    "percentage": "ਪ੍ਰਤੀਸ਼ਤ",
+    "noReview": "ਕੋਈ ਰਿਵਿਊ ਨਹੀਂ ਦਿੱਤਾ ਗਿਆ",
+    "columns": {
+      "user": "ਯੂਜ਼ਰ",
+      "assessment": "ਮੁਲਾਂਕਣ",
+      "scorePercentage": "ਸਕੋਰ/ਪ੍ਰਤੀਸ਼ਤ",
+      "rating": "ਰੇਟਿੰਗ",
+      "date": "ਤਾਰੀਖ",
+      "actions": "ਕਾਰਵਾਈਆਂ"
+    },
+    "filters": {
+      "allUsers": "ਸਾਰੇ ਯੂਜ਼ਰ",
+      "allLevels": "ਸਾਰੇ ਲੈਵਲ",
+      "allAssessments": "ਸਾਰੇ ਮੁਲਾਂਕਣ",
+      "allRatings": "ਸਾਰੀਆਂ ਰੇਟਿੰਗਾਂ",
+      "fiveStars": "5 ਸਟਾਰ",
+      "fourStars": "4 ਸਟਾਰ",
+      "threeStars": "3 ਸਟਾਰ",
+      "twoStars": "2 ਸਟਾਰ",
+      "oneStar": "1 ਸਟਾਰ",
+      "filterByUser": "ਯੂਜ਼ਰ ਅਨੁਸਾਰ ਫਿਲਟਰ ਕਰੋ",
+      "filterByAssessment": "ਮੁਲਾਂਕਣ ਅਨੁਸਾਰ ਫਿਲਟਰ ਕਰੋ",
+      "filterByRating": "ਰੇਟਿੰਗ ਅਨੁਸਾਰ ਫਿਲਟਰ ਕਰੋ",
+      "filterByLevel": "ਲੈਵਲ ਅਨੁਸਾਰ ਫਿਲਟਰ ਕਰੋ"
+    },
+    "actions": {
+      "viewDetails": "ਵੇਰਵਾ ਵੇਖੋ"
+    },
+    "breadcrumb": {
+      "list": "ਇਮਤਿਹਾਨ ਫੀਡਬੈਕ",
+      "details": "ਫੀਡਬੈਕ ਵੇਖੋ"
+    },
+    "details": {
+      "feedbackDetails": "ਫੀਡਬੈਕ ਵੇਰਵਾ",
+      "assessmentType": "ਮੁਲਾਂਕਣ ਕਿਸਮ",
+      "userInformation": "ਯੂਜ਼ਰ ਜਾਣਕਾਰੀ",
+      "name": "ਨਾਮ",
+      "email": "ਈਮੇਲ",
+      "assessmentDetails": "ਮੁਲਾਂਕਣ ਵੇਰਵਾ",
+      "assessmentId": "ਮੁਲਾਂਕਣ ਆਈਡੀ",
+      "status": "ਸਥਿਤੀ",
+      "score": "ਸਕੋਰ",
+      "review": "ਰਿਵਿਊ / ਫੀਡਬੈਕ"
+    },
+    "status": {
+      "passed": "ਪਾਸ",
+      "failed": "ਫੇਲ",
+      "na": "ਲਾਗੂ ਨਹੀਂ"
+    }
+  },
+
   "language": {
     "title": "ਭਾਸ਼ਾ ਪ੍ਰਬੰਧਨ",
     "desc": "ਪਲੇਟਫਾਰਮ ਇੰਟਰਫੇਸ ਅਤੇ ਸਿੱਖਣ ਸਮੱਗਰੀ ਲਈ ਸਿਸਟਮ ਭਾਸ਼ਾਵਾਂ ਅਤੇ ਅਨੁਵਾਦ ਪ੍ਰਬੰਧਿਤ ਕਰੋ।",
@@ -1050,6 +1168,58 @@
     },
     "error": {
       "update": "ਸੈਟਿੰਗਜ਼ ਅਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ"
+    }
+  },
+
+  "contact": {
+    "list": {
+      "title": "ਸੰਪਰਕ ਪ੍ਰਬੰਧਨ",
+      "subtitle": "ਸਾਰੇ ਸੰਪਰਕ ਪੁੱਛਗਿੱਛਾਂ ਨੂੰ ਵੇਖੋ ਅਤੇ ਮੈਨੇਜ ਕਰੋ",
+      "searchPlaceholder": "ਨਾਂ, ਈਮੇਲ, ਵਿਸ਼ਾ ਜਾਂ ਸੁਨੇਹੇ ਨਾਲ ਖੋਜ ਕਰੋ...",
+      "clearAll": "ਸਾਰੇ ਫਿਲਟਰ ਸਾਫ ਕਰੋ"
+    },
+    "details": {
+      "subject": "ਵਿਸ਼ਾ",
+      "message": "ਸੁਨੇਹਾ",
+      "created": "ਬਣਾਇਆ ਗਿਆ",
+      "lastUpdated": "ਆਖਰੀ ਅੱਪਡੇਟ",
+      "replyViaEmail": "ਈਮੇਲ ਰਾਹੀਂ ਜਵਾਬ ਦਿਓ",
+      "markAsSeen": "ਵੇਖਿਆ ਹੋਇਆ ਮਾਰਕ ਕਰੋ",
+      "markAsUnseen": "ਨਾ ਵੇਖਿਆ ਮਾਰਕ ਕਰੋ"
+    },
+    "columns": {
+      "userDetails": "ਯੂਜ਼ਰ ਵੇਰਵਾ",
+      "subject": "ਵਿਸ਼ਾ",
+      "status": "ਸਟੇਟਸ",
+      "dateTime": "ਤਾਰੀਖ ਅਤੇ ਸਮਾਂ",
+      "actions": "ਐਕਸ਼ਨ"
+    },
+    "status": {
+      "seen": "ਵੇਖਿਆ",
+      "unseen": "ਨਾ ਵੇਖਿਆ"
+    },
+    "filters": {
+      "allContacts": "ਸਾਰੇ ਸੰਪਰਕ",
+      "seen": "ਵੇਖਿਆ",
+      "unseen": "ਨਾ ਵੇਖਿਆ",
+      "filterByStatus": "ਸਟੇਟਸ ਅਨੁਸਾਰ ਫਿਲਟਰ ਕਰੋ"
+    },
+    "actions": {
+      "viewDetails": "ਵੇਰਵਾ ਵੇਖੋ",
+      "markAsSeen": "ਵੇਖਿਆ ਹੋਇਆ ਮਾਰਕ ਕਰੋ",
+      "markAsUnseen": "ਨਾ ਵੇਖਿਆ ਮਾਰਕ ਕਰੋ"
+    },
+    "breadcrumb": {
+      "contactManagement": "ਸੰਪਰਕ ਪ੍ਰਬੰਧਨ",
+      "viewContact": "ਸੰਪਰਕ ਵੇਖੋ"
+    },
+    "success": {
+      "markAsSeen": "ਸਫਲਤਾਪੂਰਵਕ ਵੇਖਿਆ ਮਾਰਕ ਕੀਤਾ ਗਿਆ",
+      "markAsUnseen": "ਸਫਲਤਾਪੂਰਵਕ ਨਾ ਵੇਖਿਆ ਮਾਰਕ ਕੀਤਾ ਗਿਆ"
+    },
+    "error": {
+      "markAsSeen": "ਵੇਖਿਆ ਮਾਰਕ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+      "markAsUnseen": "ਨਾ ਵੇਖਿਆ ਮਾਰਕ ਕਰਨ ਵਿੱਚ ਅਸਫਲ"
     }
   },
 
