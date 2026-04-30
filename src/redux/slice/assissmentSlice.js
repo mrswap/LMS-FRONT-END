@@ -105,13 +105,48 @@ export const deleteSingleAssessment = createAsyncThunk(
     }
 );
 
+// ======================= ASSESSMENT FEEDBACKS - GET ALL =======================
+export const getAllAssessmentFeedbacks = createAsyncThunk(
+    "assessment/getAllFeedbacks",
+    async (params, thunkAPI) => {
+        try {
+            const query = new URLSearchParams(params).toString();
+            const res = await axiosInstance.get(`/assessments/assessment-feedbacks?${query}`, getAuthConfig());
+            return res.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(
+                error.response?.data || { message: "Fetch feedbacks failed" }
+            );
+        }
+    }
+);
+
+// ======================= ASSESSMENT FEEDBACKS - GET BY ID =======================
+export const getAssessmentFeedbackById = createAsyncThunk(
+    "assessment/getFeedbackById",
+    async (id, thunkAPI) => {
+        try {
+            const res = await axiosInstance.get(
+                `/assessments/assessment-feedbacks/${id}`,
+                getAuthConfig()
+            );
+            return res.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(
+                error.response?.data || { message: "Fetch single feedback failed" }
+            );
+        }
+    }
+);
+
 // ======================= SLICE =======================
 const assessmentSlice = createSlice({
     name: "assessment",
     initialState: {
         assessments: [],
         assessment: null,
-
+        assessmentFeedbacks: [],
+        singleFeedback: null,
         isLoading: false,
         isError: false,
         isSuccess: false,
@@ -255,7 +290,37 @@ const assessmentSlice = createSlice({
                 state.isLoading = false;
                 state.isError = true;
                 state.message = action.payload?.message;
-            });
+            })
+
+            // ===== GET ALL ASSESSMENT FEEDBACKS =====
+            .addCase(getAllAssessmentFeedbacks.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(getAllAssessmentFeedbacks.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.assessmentFeedbacks = action.payload.data;
+            })
+            .addCase(getAllAssessmentFeedbacks.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload?.message;
+            })
+
+            // ===== GET SINGLE ASSESSMENT FEEDBACK =====
+            .addCase(getAssessmentFeedbackById.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(getAssessmentFeedbackById.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.singleFeedback = action.payload.data;
+            })
+            .addCase(getAssessmentFeedbackById.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload?.message;
+            })
     },
 });
 

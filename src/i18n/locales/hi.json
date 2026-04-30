@@ -847,6 +847,124 @@
     }
   },
 
+  "quizFeedback": {
+    "title": "क्विज़ फीडबैक",
+    "subtitle": "सभी क्विज़ फीडबैक को प्रबंधित और देखें",
+    "searchPlaceholder": "रिव्यू कमेंट से खोजें...",
+    "clearAll": "सभी फ़िल्टर साफ करें",
+    "anonymous": "गुमनाम",
+    "quiz": "क्विज़",
+    "score": "स्कोर",
+    "percentage": "प्रतिशत",
+    "noReview": "कोई समीक्षा उपलब्ध नहीं",
+    "columns": {
+      "user": "उपयोगकर्ता",
+      "assessment": "मूल्यांकन",
+      "scorePercentage": "स्कोर/प्रतिशत",
+      "rating": "रेटिंग",
+      "date": "तारीख",
+      "actions": "क्रियाएँ"
+    },
+    "filters": {
+      "allUsers": "सभी उपयोगकर्ता",
+      "allAssessments": "सभी मूल्यांकन",
+      "alltopics": "सभी विषय",
+      "allRatings": "सभी रेटिंग",
+      "fiveStars": "5 स्टार",
+      "fourStars": "4 स्टार",
+      "threeStars": "3 स्टार",
+      "twoStars": "2 स्टार",
+      "oneStar": "1 स्टार",
+      "filterByUser": "उपयोगकर्ता के अनुसार फ़िल्टर करें",
+      "filterByAssessment": "मूल्यांकन के अनुसार फ़िल्टर करें",
+      "filterByRating": "रेटिंग के अनुसार फ़िल्टर करें",
+      "filterByTopic": "विषय के अनुसार फ़िल्टर करें"
+    },
+    "actions": {
+      "viewDetails": "विवरण देखें"
+    },
+    "breadcrumb": {
+      "list": "क्विज़ फीडबैक",
+      "details": "फीडबैक देखें"
+    },
+    "details": {
+      "feedbackDetails": "फीडबैक विवरण",
+      "assessmentType": "मूल्यांकन प्रकार",
+      "userInformation": "उपयोगकर्ता जानकारी",
+      "name": "नाम",
+      "email": "ईमेल",
+      "assessmentDetails": "मूल्यांकन विवरण",
+      "assessmentId": "मूल्यांकन आईडी",
+      "status": "स्थिति",
+      "score": "स्कोर",
+      "review": "समीक्षा / फीडबैक"
+    },
+    "status": {
+      "passed": "उत्तीर्ण",
+      "failed": "असफल",
+      "na": "लागू नहीं"
+    }
+  },
+
+  "examFeedback": {
+    "title": "परीक्षा फीडबैक",
+    "subtitle": "सभी परीक्षा फीडबैक को प्रबंधित और देखें",
+    "searchPlaceholder": "रिव्यू कमेंट से खोजें...",
+    "clearAll": "सभी फ़िल्टर साफ करें",
+    "anonymous": "गुमनाम",
+    "exam": "परीक्षा",
+    "score": "स्कोर",
+    "percentage": "प्रतिशत",
+    "noReview": "कोई समीक्षा उपलब्ध नहीं",
+    "columns": {
+      "user": "उपयोगकर्ता",
+      "assessment": "मूल्यांकन",
+      "scorePercentage": "स्कोर/प्रतिशत",
+      "rating": "रेटिंग",
+      "date": "तारीख",
+      "actions": "क्रियाएँ"
+    },
+    "filters": {
+      "allUsers": "सभी उपयोगकर्ता",
+      "allLevels": "सभी स्तर",
+      "allAssessments": "सभी मूल्यांकन",
+      "allRatings": "सभी रेटिंग",
+      "fiveStars": "5 स्टार",
+      "fourStars": "4 स्टार",
+      "threeStars": "3 स्टार",
+      "twoStars": "2 स्टार",
+      "oneStar": "1 स्टार",
+      "filterByUser": "उपयोगकर्ता के अनुसार फ़िल्टर करें",
+      "filterByAssessment": "मूल्यांकन के अनुसार फ़िल्टर करें",
+      "filterByRating": "रेटिंग के अनुसार फ़िल्टर करें",
+      "filterByLevel": "स्तर के अनुसार फ़िल्टर करें"
+    },
+    "actions": {
+      "viewDetails": "विवरण देखें"
+    },
+    "breadcrumb": {
+      "list": "परीक्षा फीडबैक",
+      "details": "फीडबैक देखें"
+    },
+    "details": {
+      "feedbackDetails": "फीडबैक विवरण",
+      "assessmentType": "मूल्यांकन प्रकार",
+      "userInformation": "उपयोगकर्ता जानकारी",
+      "name": "नाम",
+      "email": "ईमेल",
+      "assessmentDetails": "मूल्यांकन विवरण",
+      "assessmentId": "मूल्यांकन आईडी",
+      "status": "स्थिति",
+      "score": "स्कोर",
+      "review": "समीक्षा / फीडबैक"
+    },
+    "status": {
+      "passed": "उत्तीर्ण",
+      "failed": "असफल",
+      "na": "लागू नहीं"
+    }
+  },
+
   "language": {
     "title": "भाषा प्रबंधन",
     "desc": "प्लेटफ़ॉर्म इंटरफ़ेस और शिक्षण सामग्री के लिए सिस्टम भाषाएं और अनुवाद प्रबंधित करें।",
@@ -1050,6 +1168,58 @@
     },
     "error": {
       "update": "सेटिंग्स अपडेट करने में विफल"
+    }
+  },
+
+  "contact": {
+    "list": {
+      "title": "संपर्क प्रबंधन",
+      "subtitle": "सभी संपर्क पूछताछ को देखें और प्रबंधित करें",
+      "searchPlaceholder": "नाम, ईमेल, विषय या संदेश से खोजें...",
+      "clearAll": "सभी फ़िल्टर साफ करें"
+    },
+    "details": {
+      "subject": "विषय",
+      "message": "संदेश",
+      "created": "बनाया गया",
+      "lastUpdated": "अंतिम अपडेट",
+      "replyViaEmail": "ईमेल के माध्यम से जवाब दें",
+      "markAsSeen": "देखा हुआ चिह्नित करें",
+      "markAsUnseen": "अनदेखा चिह्नित करें"
+    },
+    "columns": {
+      "userDetails": "उपयोगकर्ता विवरण",
+      "subject": "विषय",
+      "status": "स्थिति",
+      "dateTime": "तारीख और समय",
+      "actions": "कार्रवाइयाँ"
+    },
+    "status": {
+      "seen": "देखा गया",
+      "unseen": "अनदेखा"
+    },
+    "filters": {
+      "allContacts": "सभी संपर्क",
+      "seen": "देखा गया",
+      "unseen": "अनदेखा",
+      "filterByStatus": "स्थिति के अनुसार फ़िल्टर करें"
+    },
+    "actions": {
+      "viewDetails": "विवरण देखें",
+      "markAsSeen": "देखा हुआ चिह्नित करें",
+      "markAsUnseen": "अनदेखा चिह्नित करें"
+    },
+    "breadcrumb": {
+      "contactManagement": "संपर्क प्रबंधन",
+      "viewContact": "संपर्क देखें"
+    },
+    "success": {
+      "markAsSeen": "सफलतापूर्वक देखा हुआ चिह्नित किया गया",
+      "markAsUnseen": "सफलतापूर्वक अनदेखा चिह्नित किया गया"
+    },
+    "error": {
+      "markAsSeen": "देखा हुआ चिह्नित करने में विफल",
+      "markAsUnseen": "अनदेखा चिह्नित करने में विफल"
     }
   },
 

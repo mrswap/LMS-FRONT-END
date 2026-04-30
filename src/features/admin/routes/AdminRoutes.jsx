@@ -204,6 +204,12 @@ import { Route, Navigate } from "react-router-dom";
 import { lazy } from "react";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminLayout from "../layout/AdminLayout";
+// import QuizFeedback from "../pages/assessment-management/quiz-topic/feedback/QuizFeedback";
+// import ExamFeedback from "../pages/assessment-management/exam-level/feedback/ExamFeedback";
+// import Contact from "../pages/reports-administration/contact-us/Contact";
+// import ContactDetails from "../pages/reports-administration/contact-us/components/ContactDetails";
+// import FeedbackDetails from "../pages/assessment-management/quiz-topic/feedback/components/FeedbackDetails";
+// import ExamFeedbackDetails from "../pages/assessment-management/exam-level/feedback/components/ExamFeedbackDetails";
 
 // 🔥 Lazy imports
 const Dashboard = lazy(() => import("../pages/dashboad/Dashboard"));
@@ -331,6 +337,30 @@ const AssissmentDetails = lazy(
     import("../pages/assessment-management/quiz-topic/assessment/components/AssissmentDetails"),
 );
 
+const QuizFeedback = lazy(
+  () =>
+    import("../pages/assessment-management/quiz-topic/feedback/QuizFeedback"),
+);
+const ExamFeedback = lazy(
+  () =>
+    import("../pages/assessment-management/exam-level/feedback/ExamFeedback"),
+);
+const Contact = lazy(
+  () => import("../pages/reports-administration/contact-us/Contact"),
+);
+const ContactDetails = lazy(
+  () =>
+    import("../pages/reports-administration/contact-us/components/ContactDetails"),
+);
+const FeedbackDetails = lazy(
+  () =>
+    import("../pages/assessment-management/quiz-topic/feedback/components/FeedbackDetails"),
+);
+const ExamFeedbackDetails = lazy(
+  () =>
+    import("../pages/assessment-management/exam-level/feedback/components/ExamFeedbackDetails"),
+);
+
 const Question = lazy(
   () => import("../pages/assessment-management/quiz-topic/question/Question"),
 );
@@ -451,6 +481,8 @@ const AdminRoutes = (
 
       {/* Exam Level */}
       <Route path="exam-level" element={<ExamAssessment />} />
+      <Route path="exam-feedback" element={<ExamFeedback />} />
+      <Route path="exam-feedback/:id" element={<ExamFeedbackDetails />} />
       <Route path="exam-level/create-exam" element={<CreateExamAssessment />} />
       <Route
         path="exam-level/exam-details/:assessmentId"
@@ -459,6 +491,8 @@ const AdminRoutes = (
 
       {/* Assessment */}
       <Route path="assessment" element={<Assissment />} />
+      <Route path="assessment-feedback" element={<QuizFeedback />} />
+      <Route path="assessment-feedback/:id" element={<FeedbackDetails />} />
       <Route path="assessment/create" element={<CreateAssessment />} />
       <Route path="assessment/:assessmentId" element={<AssissmentDetails />} />
 
@@ -502,6 +536,8 @@ const AdminRoutes = (
       <Route path="smtp-setting" element={<SmtpSettings />} />
       <Route path="language" element={<LanguageSettings />} />
       <Route path="system-settings" element={<SystemSetting />} />
+      <Route path="contact-us" element={<Contact />} />
+      <Route path="contact-us/:id" element={<ContactDetails />} />
 
       {/* Fallback */}
       <Route path="*" element={<WorkInProgress />} />

@@ -1181,6 +1181,124 @@
     }
   },
 
+  "quizFeedback": {
+    "title": "Quiz Feedbacks",
+    "subtitle": "Manage and view all quiz feedbacks",
+    "searchPlaceholder": "Search by review comment...",
+    "clearAll": "Clear all filters",
+    "anonymous": "Anonymous",
+    "quiz": "Quiz",
+    "score": "Score",
+    "percentage": "Percentage",
+    "noReview": "No review provided",
+    "columns": {
+      "user": "User",
+      "assessment": "Assessment",
+      "scorePercentage": "Score/Percentage",
+      "rating": "Rating",
+      "date": "Date",
+      "actions": "Actions"
+    },
+    "filters": {
+      "allUsers": "All Users",
+      "allAssessments": "All Assessments",
+      "alltopics": "All Topics",
+      "allRatings": "All Ratings",
+      "fiveStars": "5 Stars",
+      "fourStars": "4 Stars",
+      "threeStars": "3 Stars",
+      "twoStars": "2 Stars",
+      "oneStar": "1 Star",
+      "filterByUser": "Filter by user",
+      "filterByAssessment": "Filter by assessment",
+      "filterByRating": "Filter by rating",
+      "filterByTopic": "Filter by Topic"
+    },
+    "actions": {
+      "viewDetails": "View Details"
+    },
+    "breadcrumb": {
+      "list": "Quiz Feedbacks",
+      "details": "View Feedback"
+    },
+    "details": {
+      "feedbackDetails": "Feedback Details",
+      "assessmentType": "Assessment Type",
+      "userInformation": "User Information",
+      "name": "Name",
+      "email": "Email",
+      "assessmentDetails": "Assessment Details",
+      "assessmentId": "Assessment ID",
+      "status": "Status",
+      "score": "Score",
+      "review": "Review / Feedback"
+    },
+    "status": {
+      "passed": "PASSED",
+      "failed": "FAILED",
+      "na": "N/A"
+    }
+  },
+
+  "examFeedback": {
+    "title": "Exam Feedbacks",
+    "subtitle": "Manage and view all exam feedbacks",
+    "searchPlaceholder": "Search by review comment...",
+    "clearAll": "Clear all filters",
+    "anonymous": "Anonymous",
+    "exam": "Exam",
+    "score": "Score",
+    "percentage": "Percentage",
+    "noReview": "No review provided",
+    "columns": {
+      "user": "User",
+      "assessment": "Assessment",
+      "scorePercentage": "Score/Percentage",
+      "rating": "Rating",
+      "date": "Date",
+      "actions": "Actions"
+    },
+    "filters": {
+      "allUsers": "All Users",
+      "allLevels": "All Levels",
+      "allAssessments": "All Assessments",
+      "allRatings": "All Ratings",
+      "fiveStars": "5 Stars",
+      "fourStars": "4 Stars",
+      "threeStars": "3 Stars",
+      "twoStars": "2 Stars",
+      "oneStar": "1 Star",
+      "filterByUser": "Filter by user",
+      "filterByAssessment": "Filter by assessment",
+      "filterByRating": "Filter by rating",
+      "filterByLevel": "Filter by level"
+    },
+    "actions": {
+      "viewDetails": "View Details"
+    },
+    "breadcrumb": {
+      "list": "Exam Feedbacks",
+      "details": "View Feedback"
+    },
+    "details": {
+      "feedbackDetails": "Feedback Details",
+      "assessmentType": "Assessment Type",
+      "userInformation": "User Information",
+      "name": "Name",
+      "email": "Email",
+      "assessmentDetails": "Assessment Details",
+      "assessmentId": "Assessment ID",
+      "status": "Status",
+      "score": "Score",
+      "review": "Review / Feedback"
+    },
+    "status": {
+      "passed": "PASSED",
+      "failed": "FAILED",
+      "na": "N/A"
+    }
+  },
+
   "question": {
     "title": "Manage Question",
     "subtitle": "Centralized space to manage all your assessment questions.",
@@ -1572,6 +1690,58 @@
     },
     "error": {
       "update": "Failed to update settings"
+    }
+  },
+
+  "contact": {
+    "list": {
+      "title": "Contact Management",
+      "subtitle": "Manage and view all contact inquiries",
+      "searchPlaceholder": "Search by name, email, subject, or message...",
+      "clearAll": "Clear all filters"
+    },
+    "details": {
+      "subject": "Subject",
+      "message": "Message",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "replyViaEmail": "Reply via Email",
+      "markAsSeen": "Mark as Seen",
+      "markAsUnseen": "Mark as Unseen"
+    },
+    "columns": {
+      "userDetails": "User Details",
+      "subject": "Subject",
+      "status": "Status",
+      "dateTime": "Date & Time",
+      "actions": "Actions"
+    },
+    "status": {
+      "seen": "Seen",
+      "unseen": "Unseen"
+    },
+    "filters": {
+      "allContacts": "All Contacts",
+      "seen": "Seen",
+      "unseen": "Unseen",
+      "filterByStatus": "Filter by status"
+    },
+    "actions": {
+      "viewDetails": "View Details",
+      "markAsSeen": "Mark as Seen",
+      "markAsUnseen": "Mark as Unseen"
+    },
+    "breadcrumb": {
+      "contactManagement": "Contact Management",
+      "viewContact": "View Contact"
+    },
+    "success": {
+      "markAsSeen": "Marked as seen successfully",
+      "markAsUnseen": "Marked as unseen successfully"
+    },
+    "error": {
+      "markAsSeen": "Failed to mark as seen",
+      "markAsUnseen": "Failed to mark as unseen"
     }
   },
 

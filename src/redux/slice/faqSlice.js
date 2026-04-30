@@ -176,16 +176,16 @@ const faqSlice = createSlice({
                 state.isSuccess = true;
                 state.message = action.payload.message;
 
-                const updated = action.payload.data;
+                const updated = action.payload;
 
-                const index = state.faqs.findIndex(
-                    (f) => f.id === updated.id
-                );
-                if (index !== -1) {
-                    state.faqs[index] = updated;
-                }
+                // const index = state.faqs.findIndex(
+                //     (f) => f.id === updated.id
+                // );
+                // if (index !== -1) {
+                //     state.faqs[index] = updated;
+                // }
 
-                state.faq = updated;
+                // state.faq = updated;
             })
 
             // ===== UPDATE STATUS =====

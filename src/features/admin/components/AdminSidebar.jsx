@@ -94,21 +94,9 @@ const AdminSidebar = ({ isOpen, onClose }) => {
       label: t("sidebar.assessmentManagement"),
       children: [
         { label: t("sidebar.quizForTopic"), path: "/assessment" },
-        // {
-        //   label: t("sidebar.quizForTopic"),
-        //   children: [
-        //     { label: "Assessment", path: "/assessment" },
-        //     // {
-        //     //   label: "Assissment Qustions",
-        //     //   path: "/assissment-question-topic",
-        //     // },
-        //     // {
-        //     //   label: "Qestion Options",
-        //     //   path: "/assissment-question-option-topic",
-        //     // },
-        //   ],
-        // },
+        { label: "Quize feedback", path: "/assessment-feedback" },
         { label: t("sidebar.examForLevel"), path: "/exam-level" },
+        { label: "Exam feedback", path: "/exam-feedback" },
       ],
     },
 
@@ -126,7 +114,8 @@ const AdminSidebar = ({ isOpen, onClose }) => {
       icon: FiBarChart2,
       label: t("sidebar.reportsAdministration"),
       children: [
-        { label: t("sidebar.topResult"), path: "/top-result" },
+        // { label: t("sidebar.topResult"), path: "/top-result" },
+        { label: "Contact-us", path: "/contact-us" },
         {
           label: t("sidebar.reportsAnalytics"),
           children: [
