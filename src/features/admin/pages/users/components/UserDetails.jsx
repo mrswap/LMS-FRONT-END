@@ -24,6 +24,7 @@ import {
 import { getAllDesignation } from "../../../../../redux/slice/designationSlice";
 import { getAllRoles } from "../../../../../redux/slice/rolesSlice";
 import countryOptions from "../../../../../utils/countries.json";
+import UserAdditionalDetails from "./UserAdditionalDetails";
 
 const UserDetails = () => {
   const { t } = useTranslation();
@@ -169,7 +170,7 @@ const UserDetails = () => {
         ]}
       />
 
-      <div className="p-6 border border-gray-300 rounded-lg">
+      <div className="p-6 border border-gray-300 rounded-lg mb-4">
         {/* HEADER */}
         <div className="flex justify-between items-center border-b border-gray-300 pb-4 mb-4">
           <div className="flex items-center gap-4">
@@ -377,6 +378,10 @@ const UserDetails = () => {
           </Formik>
         </PageBody>
       </div>
+
+      {/* user additional details */}
+
+      <UserAdditionalDetails id={id} />
     </PageLayout>
   );
 };

@@ -104,6 +104,27 @@ export const deleteSingleUser = createAsyncThunk(
     }
 );
 
+// Add this to your existing userSlice.js file
+
+// ======================= RESET DEVICE =======================
+export const resetUserDevice = createAsyncThunk(
+    "user/resetDevice",
+    async (id, thunkAPI) => {
+        try {
+            const res = await axiosInstance.post(
+                `/users/${id}/reset-device`,
+                {},
+                getAuthConfig()
+            );
+            return res.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(
+                error.response?.data || { message: "Device reset failed" }
+            );
+        }
+    }
+);
+
 // ======================= SLICE =======================
 const userSlice = createSlice({
     name: "user",
@@ -253,7 +274,30 @@ const userSlice = createSlice({
                 state.isLoading = false;
                 state.isError = true;
                 state.message = action.payload?.message;
+            })
+
+
+            // ===== RESET DEVICE =====
+            .addCase(resetUserDevice.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(resetUserDevice.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.message = action.payload.message;
+
+                // // Optional: You can update user state or add any additional logic
+                // if (state.user) {
+                //     // If you want to clear any device-related info from user state
+                //     state.user.devices_logged_in = 0; // Example property
+                // }
+            })
+            .addCase(resetUserDevice.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload?.message;
             });
+
     },
 });
 
