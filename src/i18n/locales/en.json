@@ -1860,6 +1860,150 @@
     }
   },
 
+  "auditLogReport": {
+    "title": "Audit Logs Report",
+    "subtitle": "View and track all system activities and user actions",
+    "searchPlaceholder": "Search",
+    "clearAll": "Clear all",
+    "columns": {
+      "userDetails": "User Details",
+      "event": "Event",
+      "description": "Description",
+      "ipAddress": "IP Address",
+      "device": "Device",
+      "dateTime": "Date & Time"
+    },
+    "filters": {
+      "allEvents": "All Events",
+      "login": "Login",
+      "profile_viewed": "Profile viewed",
+      "reset_device": "reset password",
+      "chapter_viewed": "chapter viewed",
+      "allUsers": "All users",
+      "selectEvent": "Select Event",
+      "selectUser": "Select User"
+    }
+  },
+
+  "userProgressReport": {
+    "title": "User Progress Report",
+    "subtitle": "Track user learning progress, completion status, and course activities",
+    "searchPlaceholder": "Search by user name, email, or employee ID...",
+    "clearAll": "Clear all filters",
+    "completion": "Completion",
+    "locked": "Locked",
+    "unlocked": "Unlocked",
+    "columns": {
+      "userDetails": "User Details",
+      "level": "Level",
+      "module": "Module",
+      "chapter": "Chapter",
+      "topic": "Topic",
+      "progress": "Progress",
+      "status": "Status",
+      "lastActivity": "Last Activity"
+    },
+    "filters": {
+      "allLevels": "All Levels",
+      "allStatus": "All Status",
+      "allUsers": "All Users",
+      "completed": "Completed",
+      "inProgress": "In Progress",
+      "pending": "Pending",
+      "selectUser": "Select User",
+      "selectStatus": "Select Status",
+      "selectLevel": "Select Level",
+      "selectModule": "Select Module",
+      "selectChapter": "Select Chapter",
+      "selectTopic": "Select Topic",
+      "selectLevelFirst": "Select level first",
+      "selectModuleFirst": "Select module first",
+      "selectChapterFirst": "Select chapter first"
+    },
+    "stats": {
+      "totalRecords": "Total Records",
+      "completed": "Completed",
+      "inProgress": "In Progress",
+      "avgCompletion": "Avg. Completion"
+    }
+  },
+
+  "assessmentReport": {
+    "title": "Assessment Report",
+    "subtitle": "Track and analyze student assessment performance and progress",
+    "searchPlaceholder": "Search by user name, email or employee ID...",
+    "clearAll": "Clear all",
+    "passing": "Passing",
+    "correct": "Correct",
+    "incorrect": "Incorrect",
+    "skipped": "Skipped",
+    "attemptNumber": "Attempt",
+    "columns": {
+      "userDetails": "User Details",
+      "assessment": "Assessment",
+      "scorePercentage": "Score / Percentage",
+      "status": "Status",
+      "answers": "Answers",
+      "attempt": "Attempt",
+      "dateTime": "Date & Time"
+    },
+    "filters": {
+      "allTypes": "All Types",
+      "level": "Level",
+      "topic": "Topic",
+      "allStatus": "All Status",
+      "passed": "Passed",
+      "failed": "Failed",
+      "allUsers": "All users",
+      "selectUser": "Select User",
+      "selectType": "Select Type",
+      "selectStatus": "Select Status"
+    }
+  },
+
+  "contentStatusReport": {
+    "title": "Content Status Report",
+    "subtitle": "Track content publication status across all levels, modules, chapters and topics",
+    "searchPlaceholder": "Search by program, lesson name...",
+    "clearAll": "Clear all filters",
+    "columns": {
+      "program": "Program",
+      "level": "Level",
+      "module": "Module",
+      "chapter": "Chapter",
+      "topic": "Topic",
+      "lessonName": "Lesson Name",
+      "languages": "Languages",
+      "status": "Status",
+      "uploadedBy": "Uploaded By",
+      "approvedBy": "Approved By",
+      "publishDate": "Publish Date",
+      "lastUpdated": "Last Updated"
+    },
+    "filters": {
+      "allLevels": "All Levels",
+      "allStatus": "All Status",
+      "published": "Published",
+      "draft": "Draft",
+      "selectLevel": "Select Level",
+      "selectModule": "Select Module",
+      "selectChapter": "Select Chapter",
+      "selectTopic": "Select Topic",
+      "selectStatus": "Select Status",
+      "selectLevelFirst": "Select level first",
+      "selectModuleFirst": "Select module first",
+      "selectChapterFirst": "Select chapter first"
+    },
+    "languages": {
+      "hi": "Hindi",
+      "en": "English",
+      "te": "Telugu",
+      "ta": "Tamil",
+      "ml": "Malayalam",
+      "kn": "Kannada"
+    }
+  },
+
   "globalConfirmationModal": {
     "confirmDeletion": "Confirm Deletion",
     "cancle": "Cancle",

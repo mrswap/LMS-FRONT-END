@@ -204,14 +204,7 @@ import { Route, Navigate } from "react-router-dom";
 import { lazy } from "react";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminLayout from "../layout/AdminLayout";
-// import QuizFeedback from "../pages/assessment-management/quiz-topic/feedback/QuizFeedback";
-// import ExamFeedback from "../pages/assessment-management/exam-level/feedback/ExamFeedback";
-// import Contact from "../pages/reports-administration/contact-us/Contact";
-// import ContactDetails from "../pages/reports-administration/contact-us/components/ContactDetails";
-// import FeedbackDetails from "../pages/assessment-management/quiz-topic/feedback/components/FeedbackDetails";
-// import ExamFeedbackDetails from "../pages/assessment-management/exam-level/feedback/components/ExamFeedbackDetails";
 
-// 🔥 Lazy imports
 const Dashboard = lazy(() => import("../pages/dashboad/Dashboard"));
 const Users = lazy(() => import("../pages/users/Users"));
 const LanguageSettings = lazy(
@@ -351,6 +344,24 @@ const Contact = lazy(
 const ContactDetails = lazy(
   () =>
     import("../pages/reports-administration/contact-us/components/ContactDetails"),
+);
+const AuditLogsReport = lazy(
+  () => import("../pages/reports-administration/audit-logs/AuditLogsReport"),
+);
+const UserProgressReport = lazy(
+  () =>
+    import("../pages/reports-administration/user-progress/UserProgressReport"),
+);
+const AssessmentReport = lazy(
+  () => import("../pages/reports-administration/assessment/AssessmentReport"),
+);
+const ContentStatusReport = lazy(
+  () =>
+    import("../pages/reports-administration/content-status/ContentStatusReport"),
+);
+const CertificationReport = lazy(
+  () =>
+    import("../pages/reports-administration/certification/CertificationReport"),
 );
 const FeedbackDetails = lazy(
   () =>
@@ -536,8 +547,15 @@ const AdminRoutes = (
       <Route path="smtp-setting" element={<SmtpSettings />} />
       <Route path="language" element={<LanguageSettings />} />
       <Route path="system-settings" element={<SystemSetting />} />
-      <Route path="contact-us" element={<Contact />} />
-      <Route path="contact-us/:id" element={<ContactDetails />} />
+
+      {/* Reports */}
+      <Route path="contact-us-report" element={<Contact />} />
+      <Route path="contact-us-report/:id" element={<ContactDetails />} />
+      <Route path="audit-logs-report" element={<AuditLogsReport />} />
+      <Route path="user-progress-report" element={<UserProgressReport />} />
+      <Route path="assessment-report" element={<AssessmentReport />} />
+      <Route path="content-status-report" element={<ContentStatusReport />} />
+      <Route path="certification-report" element={<CertificationReport />} />
 
       {/* Fallback */}
       <Route path="*" element={<WorkInProgress />} />

@@ -24,7 +24,7 @@ const Login = () => {
   const { isLoading } = useSelector((state) => state.auth);
 
   const initialValues = {
-    email: "ajaycharve109@gmail.com",
+    email: "swapnil@netswaptech.com",
     password: "12345678",
   };
 

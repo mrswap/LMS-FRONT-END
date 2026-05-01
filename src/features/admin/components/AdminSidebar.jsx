@@ -115,25 +115,30 @@ const AdminSidebar = ({ isOpen, onClose }) => {
       label: t("sidebar.reportsAdministration"),
       children: [
         // { label: t("sidebar.topResult"), path: "/top-result" },
-        { label: "Contact-us", path: "/contact-us" },
-        {
-          label: t("sidebar.reportsAnalytics"),
-          children: [
-            { label: t("sidebar.userAnalytics"), path: "/user-analytics" },
-            {
-              label: t("sidebar.trainingAnalytics"),
-              path: "/training-analytics",
-            },
-            {
-              label: t("sidebar.performanceReports"),
-              path: "/performance-reports",
-            },
-            {
-              label: t("sidebar.completionReports"),
-              path: "/completion-reports",
-            },
-          ],
-        },
+        { label: "Contact-us", path: "/contact-us-report" },
+        { label: "Audit Logs Report", path: "/audit-logs-report" },
+        { label: "User Progress Report", path: "/user-progress-report" },
+        { label: "Assessment Report", path: "/assessment-report" },
+        { label: "Content Status Report", path: "/content-status-report" },
+        { label: "Certification Report", path: "/certification-report" },
+        // {
+        //   label: t("sidebar.reportsAnalytics"),
+        //   children: [
+        //     { label: t("sidebar.userAnalytics"), path: "/user-analytics" },
+        //     {
+        //       label: t("sidebar.trainingAnalytics"),
+        //       path: "/training-analytics",
+        //     },
+        //     {
+        //       label: t("sidebar.performanceReports"),
+        //       path: "/performance-reports",
+        //     },
+        //     {
+        //       label: t("sidebar.completionReports"),
+        //       path: "/completion-reports",
+        //     },
+        //   ],
+        // },
       ],
     },
 

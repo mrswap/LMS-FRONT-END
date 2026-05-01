@@ -283,7 +283,7 @@ const ContactDetails = () => {
         items={[
           {
             label: t("contact.breadcrumb.contactManagement"),
-            path: "/contact-us",
+            path: "/contact-us-report",
           },
           { label: t("contact.breadcrumb.viewContact") },
         ]}
