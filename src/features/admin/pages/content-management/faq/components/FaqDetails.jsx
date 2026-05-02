@@ -854,6 +854,7 @@ const FaqDetails = () => {
                       onChange={handleTypeChange}
                       styles={customSelectStyles}
                       placeholder={t("faq.details.typePlaceholder")}
+                      required
                     />
                   </div>
 
@@ -868,6 +869,7 @@ const FaqDetails = () => {
                       options={getOptions()}
                       styles={customSelectStyles}
                       isDisabled={!type || type?.value === "all"}
+                      required
                       isLoading={
                         (type?.value === "level" && levelsLoading) ||
                         (type?.value === "module" && modulesLoading) ||
@@ -884,6 +886,7 @@ const FaqDetails = () => {
                   label={t("faq.details.question")}
                   placeholder={t("faq.details.questionPlaceholder")}
                   maxLength={250}
+                  required
                 />
 
                 {/* ANSWER */}

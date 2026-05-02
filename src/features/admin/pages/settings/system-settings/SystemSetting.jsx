@@ -828,6 +828,7 @@ const SystemSetting = () => {
                     as="textarea"
                     rows={3}
                     maxLength={500}
+                    required
                   />
                 </SectionCard>
 
@@ -841,13 +842,15 @@ const SystemSetting = () => {
                       name="app_ios_store"
                       label={t("systemSettings.fields.iosStore")}
                       placeholder={t("systemSettings.placeholders.iosStore")}
-                      maxLength={150}
+                      maxLength={255}
+                      required
                     />
                     <TextInput
                       name="app_ios_download"
                       label={t("systemSettings.fields.iosDownload")}
                       placeholder={t("systemSettings.placeholders.iosDownload")}
-                      maxLength={150}
+                      maxLength={255}
+                      required
                     />
                     <TextInput
                       name="app_android_store"
@@ -855,7 +858,8 @@ const SystemSetting = () => {
                       placeholder={t(
                         "systemSettings.placeholders.androidStore",
                       )}
-                      maxLength={150}
+                      required
+                      maxLength={255}
                     />
                     <TextInput
                       name="app_android_download"
@@ -863,7 +867,8 @@ const SystemSetting = () => {
                       placeholder={t(
                         "systemSettings.placeholders.androidDownload",
                       )}
-                      maxLength={150}
+                      required
+                      maxLength={255}
                     />
                   </div>
                 </SectionCard>
@@ -880,13 +885,15 @@ const SystemSetting = () => {
                       placeholder={t(
                         "systemSettings.placeholders.contactHeading",
                       )}
-                      maxLength={150}
+                      required
+                      maxLength={255}
                     />
                     <TextInput
                       name="contact_text"
                       label={t("systemSettings.fields.contactText")}
                       placeholder={t("systemSettings.placeholders.contactText")}
-                      maxLength={150}
+                      required
+                      maxLength={255}
                     />
                     <div className="relative">
                       <TextInput
@@ -896,6 +903,7 @@ const SystemSetting = () => {
                           "systemSettings.placeholders.contactPhone",
                         )}
                         className="!pl-10 !pr-10"
+                        required
                       />
                       <FiPhone className="absolute left-3 top-9 w-4 h-4 text-gray-400" />
                     </div>
@@ -908,6 +916,7 @@ const SystemSetting = () => {
                         )}
                         type="email"
                         className="!pl-10 !pr-10"
+                        required
                       />
                       <FiMail className="absolute left-3 top-9 w-4 h-4 text-gray-400" />
                     </div>
@@ -926,6 +935,8 @@ const SystemSetting = () => {
                         label={t("systemSettings.fields.facebook")}
                         placeholder={t("systemSettings.placeholders.facebook")}
                         className="!pl-10 !pr-10 "
+                        required
+                        maxLength={255}
                       />
                       <FiFacebook className="absolute left-3 top-9 w-4 h-4 text-blue-600" />
                     </div>
@@ -935,6 +946,8 @@ const SystemSetting = () => {
                         label={t("systemSettings.fields.linkedin")}
                         placeholder={t("systemSettings.placeholders.linkedin")}
                         className="!pl-10 !pr-10"
+                        required
+                        maxLength={255}
                       />
                       <FiLinkedin className="absolute left-3 top-9 w-4 h-4 text-blue-700" />
                     </div>
@@ -944,6 +957,8 @@ const SystemSetting = () => {
                         label={t("systemSettings.fields.instagram")}
                         placeholder={t("systemSettings.placeholders.instagram")}
                         className="!pl-10 !pr-10"
+                        required
+                        maxLength={255}
                       />
                       <FiInstagram className="absolute left-3 top-9 w-4 h-4 text-pink-600" />
                     </div>
@@ -953,6 +968,8 @@ const SystemSetting = () => {
                         label={t("systemSettings.fields.twitter")}
                         placeholder={t("systemSettings.placeholders.twitter")}
                         className="!pl-10 !pr-10"
+                        required
+                        maxLength={255}
                       />
                       <FiTwitter className="absolute left-3 top-9 w-4 h-4 text-blue-400" />
                     </div>
@@ -969,6 +986,7 @@ const SystemSetting = () => {
                     label={t("systemSettings.fields.footerText")}
                     placeholder={t("systemSettings.placeholders.footerText")}
                     maxLength={255}
+                    required
                   />
                 </SectionCard>
 

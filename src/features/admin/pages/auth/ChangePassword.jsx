@@ -95,6 +95,7 @@ const ChangePassword = () => {
                     placeholder={t("changePassword.oldPasswordPlaceholder")}
                     className="!pl-10 h-11 rounded-lg border-gray-300 focus:ring-2 focus:ring-[#22A699]"
                     maxLength={50}
+                    required
                   />
 
                   <div
@@ -116,6 +117,7 @@ const ChangePassword = () => {
                     placeholder={t("changePassword.placeholderNew")}
                     className="!pl-10 h-11 rounded-lg border-gray-300 focus:ring-2 focus:ring-[#22A699]"
                     maxLength={50}
+                    required
                   />
 
                   <div
@@ -137,6 +139,7 @@ const ChangePassword = () => {
                     placeholder={t("changePassword.placeholderConfirm")}
                     className="!pl-10 h-11 rounded-lg border-gray-300 focus:ring-2 focus:ring-[#22A699]"
                     maxLength={50}
+                    required
                   />
 
                   <div

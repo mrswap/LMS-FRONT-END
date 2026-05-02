@@ -187,13 +187,21 @@
     "mediaLibrary": "Media Library",
     "assessmentManagement": "Assessment Management",
     "quizForTopic": "Quiz for Topic",
+    "quizFeedback": "Quiz Feedback",
     "examForLevel": "Exam for Level",
+    "examFeedback": "Exam Feedback",
     "faq": "FAQ",
     "trainingCertification": "Training & Certification",
     "trainingAssignment": "Training Assignment",
     "progressTracker": "Progress Tracker",
     "certification": "Certification",
     "reportsAdministration": "Reports & Administration",
+    "contactUs": "Contact Us",
+    "auditLogsReport": "Audit Logs Report",
+    "userProgressReport": "User Progress Report",
+    "assessmentReport": "Assessment Report",
+    "contentStatusReport": "Content Status Report",
+    "certificationReport": "Certification Report",
     "topResult": "Top Result",
     "reportsAnalytics": "Reports & Analytics",
     "userAnalytics": "User Analytics",
@@ -206,6 +214,7 @@
     "designation": "Designation Management",
     "smtpSetting": "SMTP Setting",
     "multiLanguage": "Multi Language",
+    "certificationSetting": "Certification Setting",
     "logout": "Logout"
   },
 
@@ -314,6 +323,73 @@
       "create": "Failed to create user. Please try again.",
       "update": "Failed to update user. Please try again.",
       "delete": "Failed to delete user. Please try again."
+    }
+  },
+
+  "userAdditionalDetails": {
+    "userActivityDetails": "User Activity Details",
+    "resetAllDevices": "Reset All Devices",
+    "resetting": "Resetting...",
+    "resetSuccess": "Device reset successful!",
+    "resetFailed": "Failed to reset device",
+    "noDataFound": "No",
+    "audit": {
+      "event": "Event",
+      "description": "Description",
+      "ipAddress": "IP Address",
+      "device": "Device",
+      "dateTime": "Date & Time"
+    },
+    "progress": {
+      "level": "Level",
+      "module": "Module",
+      "chapter": "Chapter",
+      "topic": "Topic",
+      "progress": "Progress",
+      "completion": "Completion",
+      "status": "Status",
+      "notStarted": "Not Started",
+      "lastActivity": "Last Activity"
+    },
+    "assessment": {
+      "assessment": "Assessment",
+      "score": "Score",
+      "status": "Status",
+      "answers": "Answers",
+      "correct": "Correct",
+      "incorrect": "Incorrect",
+      "skipped": "Skipped",
+      "attempt": "Attempt",
+      "date": "Date",
+      "action": "Action",
+      "viewCertificate": "View Certificate"
+    },
+    "certification": {
+      "certificateId": "Certificate ID",
+      "id": "ID",
+      "type": "Type",
+      "topicLevel": "Topic/Level",
+      "percentage": "Percentage",
+      "issueDate": "Issue Date",
+      "status": "Status"
+    },
+    "tabs": {
+      "auditLogs": "Audit Logs",
+      "progress": "Progress",
+      "quizAssessment": "Quiz Assessment",
+      "examAssessment": "Exam Assessment",
+      "certifications": "Certifications"
+    },
+    "modal": {
+      "title": "Reset User Devices",
+      "warning": "This action will log the user out from all devices and active sessions.",
+      "confirmMessage": "Are you sure you want to reset devices for this user?",
+      "effect1": "User will be logged out from all devices",
+      "effect2": "All active sessions will be terminated",
+      "effect3": "User will need to login again on all devices",
+      "auditNote": "This action will be recorded in the audit logs for security purposes.",
+      "cancel": "Cancel",
+      "confirm": "Yes, Reset Devices"
     }
   },
 
@@ -1563,6 +1639,58 @@
     }
   },
 
+  "certificateSetting": {
+    "title": "Certificate Settings",
+    "subtitle": "Configure certificate templates and dynamic variables",
+    "defaultHeading": "Certificate of Excellence",
+    "editorPlaceholder": "Write certificate content here... Click on variables to insert dynamic content",
+    "logoConstraints": "PNG, JPG, WEBP (Max 2MB)",
+    "variables": {
+      "title": "Dynamic Variables",
+      "subtitle": "Click to insert or copy",
+      "loading": "Loading variables...",
+      "insert": "Insert variable"
+    },
+    "sections": {
+      "certificateInfo": "Certificate Information",
+      "certificateContent": "Certificate Content",
+      "contentSubtitle": "Design your certificate layout",
+      "footerSettings": "Footer Settings"
+    },
+    "fields": {
+      "companyLogo": "Company Logo",
+      "certificateHeading": "Certificate Heading",
+      "companyName": "Organization Name",
+      "signerName": "Authorized Signatory",
+      "signerDesignation": "Signatory Title",
+      "footerText": "Footer Text"
+    },
+    "placeholders": {
+      "certificateHeading": "e.g., Certificate of Excellence",
+      "companyName": "Your company name",
+      "signerName": "Full name of signer",
+      "signerDesignation": "e.g., CEO, Director",
+      "footerText": "Certificate validity, issue date, or additional information"
+    },
+    "buttons": {
+      "changeLogo": "Change Logo",
+      "uploadLogo": "Click to upload company logo",
+      "saveSettings": "Save Settings",
+      "saving": "Saving..."
+    },
+    "tips": {
+      "insertVariable": "Tip: Click on variables from the left panel to insert dynamic content"
+    },
+    "success": {
+      "save": "Certificate settings saved successfully"
+    },
+    "errors": {
+      "logoSize": "Logo size should be less than 2MB",
+      "logoType": "Please upload JPEG, PNG, or WEBP image only",
+      "save": "Failed to update settings"
+    }
+  },
+
   "role": {
     "list": {
       "title": "Roles & Permissions",
@@ -2001,6 +2129,35 @@
       "ta": "Tamil",
       "ml": "Malayalam",
       "kn": "Kannada"
+    }
+  },
+
+  "certificationReport": {
+    "title": "Certification Report",
+    "subtitle": "Track and manage user certifications, their status and validity",
+    "searchPlaceholder": "Search by user name, email, employee ID or certificate ID...",
+    "clearAll": "Clear All",
+    "id": "ID",
+    "columns": {
+      "userDetails": "User Details",
+      "type": "Type",
+      "levelTopic": "Level / Topic",
+      "certificateDetails": "Certificate Details",
+      "percentage": "Percentage",
+      "issueDate": "Issue Date",
+      "status": "Status"
+    },
+    "filters": {
+      "allTypes": "All Types",
+      "topic": "Topic",
+      "level": "Level",
+      "allStatus": "All Status",
+      "active": "Active",
+      "inactive": "Inactive",
+      "allUsers": "All Users",
+      "selectUser": "Select User",
+      "selectType": "Select Type",
+      "selectStatus": "Select Status"
     }
   },
 

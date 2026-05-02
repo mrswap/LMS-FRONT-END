@@ -686,6 +686,7 @@ const CreateFaq = () => {
                       options={typeOptions}
                       onChange={handleTypeChange}
                       styles={customSelectStyles}
+                      required={true}
                       placeholder={t("faq.details.typePlaceholder")}
                     />
                   </div>
@@ -699,6 +700,7 @@ const CreateFaq = () => {
                       value={selectedOption}
                       onChange={(val) => setSelectedOption(val)}
                       options={getOptions()}
+                      required
                       styles={customSelectStyles}
                       isDisabled={type?.value === "all"}
                       isLoading={
@@ -717,6 +719,7 @@ const CreateFaq = () => {
                   label={t("faq.details.question")}
                   placeholder={t("faq.details.questionPlaceholder")}
                   maxLength={250}
+                  required
                 />
 
                 {/* ANSWER */}

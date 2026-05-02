@@ -218,12 +218,14 @@ const UserDetails = () => {
                       "userManagement.details.fullNamePlaceholder",
                     )}
                     maxLength={100}
+                    required
                   />
                   <TextInput
                     name="email"
                     label={t("userManagement.details.email")}
                     placeholder={t("userManagement.details.emailPlaceholder")}
                     maxLength={255}
+                    required
                   />
                 </div>
 
@@ -251,12 +253,14 @@ const UserDetails = () => {
                     label={t("userManagement.details.region")}
                     placeholder={t("userManagement.details.regionPlaceholder")}
                     options={regionOptions}
+                    required
                   />
                   <TextInput
                     name="city"
                     label={t("userManagement.details.city")}
                     placeholder={t("userManagement.details.cityPlaceholder")}
                     maxLength={100}
+                    required
                   />
                 </div>
 
@@ -266,6 +270,7 @@ const UserDetails = () => {
                     label={t("userManagement.details.role")}
                     placeholder={t("userManagement.details.rolePlaceholder")}
                     options={roleOptions}
+                    required
                   />
                   <SelectField
                     name="designation"

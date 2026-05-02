@@ -100,6 +100,7 @@ const ForgotPassword = () => {
                     placeholder={t("forgotPassword.emailPlaceholder")}
                     className="!pl-10"
                     maxLength={255}
+                    required
                   />
                 </div>
               </div>

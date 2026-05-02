@@ -38,11 +38,7 @@ const AdminSidebar = ({ isOpen, onClose }) => {
     {
       icon: FiBookOpen,
       label: t("sidebar.trainingPrograms"),
-      children: [
-        { label: t("sidebar.programList"), path: "/programs" },
-        // { label: t("sidebar.createProgram"), path: "/create-program" },
-        // { label: t("sidebar.programAssignment"), path: "/program-assignment" },
-      ],
+      children: [{ label: t("sidebar.programList"), path: "/programs" }],
     },
 
     {
@@ -62,10 +58,6 @@ const AdminSidebar = ({ isOpen, onClose }) => {
       label: t("sidebar.contentManagement"),
       children: [
         { label: t("sidebar.learningUnitBuilder"), path: "/learning-unit" },
-        // {
-        //   label: t("sidebar.interactiveContent"),
-        //   path: "/interactive-content",
-        // },
         { label: t("sidebar.mediaLibrary"), path: "/media-library" },
         { label: t("sidebar.faq"), path: "/faq" },
         // {
@@ -94,9 +86,9 @@ const AdminSidebar = ({ isOpen, onClose }) => {
       label: t("sidebar.assessmentManagement"),
       children: [
         { label: t("sidebar.quizForTopic"), path: "/assessment" },
-        { label: "Quize feedback", path: "/assessment-feedback" },
+        { label: t("sidebar.quizFeedback"), path: "/assessment-feedback" },
         { label: t("sidebar.examForLevel"), path: "/exam-level" },
-        { label: "Exam feedback", path: "/exam-feedback" },
+        { label: t("sidebar.examFeedback"), path: "/exam-feedback" },
       ],
     },
 
@@ -114,13 +106,27 @@ const AdminSidebar = ({ isOpen, onClose }) => {
       icon: FiBarChart2,
       label: t("sidebar.reportsAdministration"),
       children: [
-        // { label: t("sidebar.topResult"), path: "/top-result" },
-        { label: "Contact-us", path: "/contact-us-report" },
-        { label: "Audit Logs Report", path: "/audit-logs-report" },
-        { label: "User Progress Report", path: "/user-progress-report" },
-        { label: "Assessment Report", path: "/assessment-report" },
-        { label: "Content Status Report", path: "/content-status-report" },
-        { label: "Certification Report", path: "/certification-report" },
+        // { label: "Contact-us", path: "/contact-us-report" },
+        // { label: "Audit Logs Report", path: "/audit-logs-report" },
+        // { label: "User Progress Report", path: "/user-progress-report" },
+        // { label: "Assessment Report", path: "/assessment-report" },
+        // { label: "Content Status Report", path: "/content-status-report" },
+        // { label: "Certification Report", path: "/certification-report" },
+        { label: t("sidebar.contactUs"), path: "/contact-us-report" },
+        { label: t("sidebar.auditLogsReport"), path: "/audit-logs-report" },
+        {
+          label: t("sidebar.userProgressReport"),
+          path: "/user-progress-report",
+        },
+        { label: t("sidebar.assessmentReport"), path: "/assessment-report" },
+        {
+          label: t("sidebar.contentStatusReport"),
+          path: "/content-status-report",
+        },
+        {
+          label: t("sidebar.certificationReport"),
+          path: "/certification-report",
+        },
         // {
         //   label: t("sidebar.reportsAnalytics"),
         //   children: [
@@ -146,6 +152,10 @@ const AdminSidebar = ({ isOpen, onClose }) => {
       icon: IoSettingsOutline,
       label: t("sidebar.settings"),
       children: [
+        {
+          label: t("sidebar.certificationSetting"),
+          path: "/certification-settings",
+        },
         { label: t("sidebar.rolesPermission"), path: "/roles-permission" },
         { label: t("sidebar.designation"), path: "/designation" },
         { label: t("sidebar.smtpSetting"), path: "/smtp-setting" },
