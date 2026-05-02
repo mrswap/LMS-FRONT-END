@@ -19,6 +19,7 @@ import assessmentOptionReducer from "./slice/assessmentOptionSlice"
 import systemSettingReducer from "./slice/systemSettingSlice"
 import contactReducer from "./slice/contactSlice"
 import reportReducer from "./slice/reportSlice"
+import certificateSettingReducer from "./slice/certificateSettingSlice"
 
 export const store = configureStore({
     reducer: {
@@ -41,6 +42,7 @@ export const store = configureStore({
         option: assessmentOptionReducer,
         systemSetting: systemSettingReducer,
         contact: contactReducer,
-        report: reportReducer
+        report: reportReducer,
+        certificateSettings: certificateSettingReducer
     },
 }); 

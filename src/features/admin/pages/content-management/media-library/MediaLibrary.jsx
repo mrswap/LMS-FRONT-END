@@ -100,7 +100,7 @@ const MediaLibrary = () => {
         <PageHeaderRight>
           <Link
             to="create-media"
-            className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition"
+            className="bg-accent text-white whitespace-nowrap px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition"
           >
             {t("mediaLibrary.actions.uploadMedia")}
           </Link>
