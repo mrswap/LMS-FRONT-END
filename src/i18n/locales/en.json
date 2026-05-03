@@ -1645,6 +1645,7 @@
     "defaultHeading": "Certificate of Excellence",
     "editorPlaceholder": "Write certificate content here... Click on variables to insert dynamic content",
     "logoConstraints": "PNG, JPG, WEBP (Max 2MB)",
+    "signatureConstraints": "PNG, JPG, WEBP (Max 2MB)",
     "variables": {
       "title": "Dynamic Variables",
       "subtitle": "Click to insert or copy",
@@ -1659,6 +1660,7 @@
     },
     "fields": {
       "companyLogo": "Company Logo",
+      "signature": "Authorized Signature",
       "certificateHeading": "Certificate Heading",
       "companyName": "Organization Name",
       "signerName": "Authorized Signatory",
@@ -1675,6 +1677,8 @@
     "buttons": {
       "changeLogo": "Change Logo",
       "uploadLogo": "Click to upload company logo",
+      "changeSignature": "Change Signature",
+      "uploadSignature": "Click to upload authorized signature",
       "saveSettings": "Save Settings",
       "saving": "Saving..."
     },
@@ -1687,6 +1691,8 @@
     "errors": {
       "logoSize": "Logo size should be less than 2MB",
       "logoType": "Please upload JPEG, PNG, or WEBP image only",
+      "signatureSize": "Signature image size should be less than 2MB",
+      "signatureType": "Please upload JPEG, PNG, or WEBP image only for signature",
       "save": "Failed to update settings"
     }
   },

@@ -22,6 +22,7 @@ import {
 } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import countryOption from "../../../../utils/countries.json";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -43,11 +44,13 @@ const Profile = () => {
   }, [profile]);
 
   // Dynamic region options with translation
-  const regionOptions = [
-    { label: t("profile.countries.india"), value: "india" },
-    { label: t("profile.countries.usa"), value: "usa" },
-    { label: t("profile.countries.uk"), value: "uk" },
-  ];
+  // const regionOptions = [
+  //   { label: t("profile.countries.india"), value: "india" },
+  //   { label: t("profile.countries.usa"), value: "usa" },
+  //   { label: t("profile.countries.uk"), value: "uk" },
+  // ];
+
+  const regionOptions = countryOption;
 
   const initialValues = {
     name: profile?.name || "",
