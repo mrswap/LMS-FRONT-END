@@ -82,6 +82,23 @@ export const getAllCertifications = createAsyncThunk(
     }
 );
 
+/* ===========================
+   GET CERTIFICATE BY ID
+=========================== */
+export const getCertificateById = createAsyncThunk(
+    "report/getCertificateById",
+    async (certificateId, thunkAPI) => {
+        try {
+            const res = await axiosInstance.get(`/reports/certificate/${certificateId}`, getAuthConfig());
+            return res.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(
+                error.response?.data || { message: "Failed to fetch certificate" }
+            );
+        }
+    }
+);
+
 // ======================= REPORTS SLICE =======================
 const reportsSlice = createSlice({
     name: "reports",
@@ -91,6 +108,7 @@ const reportsSlice = createSlice({
         assessmentReports: [],
         contentStatus: [],
         certifications: [],
+        currentCertificate: null,
         isLoading: false,
         isError: false,
         isSuccess: false,
@@ -204,7 +222,24 @@ const reportsSlice = createSlice({
                 state.loadingCertifications = false;
                 state.isError = true;
                 state.message = action.payload?.message;
-            });
+            })
+
+            /* ===== GET CERTIFICATE BY ID ===== */
+            .addCase(getCertificateById.pending, (state) => {
+                state.isLoading = true;
+                state.isError = false;
+            })
+            .addCase(getCertificateById.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.currentCertificate = action.payload;
+                state.message = action.payload.message;
+            })
+            .addCase(getCertificateById.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload?.message;
+            })
     },
 });
 

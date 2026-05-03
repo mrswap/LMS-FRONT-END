@@ -28,12 +28,14 @@ import { LuFilterX } from "react-icons/lu";
 import { getAllCertifications } from "../../../../../redux/slice/reportSlice";
 import { getAllUsers } from "../../../../../redux/slice/userSlice";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 5;
 
 const CertificationReport = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     certifications: certificationReports,
     loadingCertifications,
@@ -244,6 +246,29 @@ const CertificationReport = () => {
           </div>
         </div>
       ),
+    },
+    {
+      header: t("certificationReport.columns.action"),
+      render: (row) => {
+        const isValidCertificate = Number(row?.passed_attempt_id) > 0;
+
+        return (
+          <div>
+            {isValidCertificate ? (
+              <button
+                onClick={() =>
+                  navigate(`/certificate/${row.passed_attempt_id}`)
+                }
+                className="px-3 py-1 text-xs font-semibold cursor-pointer text-blue-600 bg-blue-50 border border-blue-200 rounded-md hover:bg-blue-100 hover:border-blue-300 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all duration-150"
+              >
+                {t("certificationReport.columns.viewCertificate")}
+              </button>
+            ) : (
+              <span className="text-xs text-gray-400 italic">—</span>
+            )}
+          </div>
+        );
+      },
     },
   ];
 

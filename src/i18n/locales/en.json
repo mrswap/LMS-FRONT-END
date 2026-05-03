@@ -2151,7 +2151,9 @@
       "certificateDetails": "Certificate Details",
       "percentage": "Percentage",
       "issueDate": "Issue Date",
-      "status": "Status"
+      "status": "Status",
+      "action": "Actions",
+      "viewCertificate": "View Certificate"
     },
     "filters": {
       "allTypes": "All Types",
@@ -2165,6 +2167,37 @@
       "selectType": "Select Type",
       "selectStatus": "Select Status"
     }
+  },
+
+  "certificate": {
+    "pageTitle": "Certificate of Achievement",
+    "downloadButton": "Download Certificate",
+    "ofAchievement": "OF ACHIEVEMENT",
+    "presentedTo": "This certificate is proudly presented to",
+    "recipientName": "Recipient Name",
+    "employeeId": "Employee ID",
+    "achievementScore": "Achievement Score",
+    "questions": "Questions",
+    "passed": "Passed",
+    "completed": "Completed",
+    "finalStatus": "Final Status",
+    "passingScore": "Passing Score",
+    "timeTaken": "Time Taken",
+    "attempt": "Attempt",
+    "assessmentDetails": "Assessment Details",
+    "assessmentDate": "Assessment Date",
+    "questionsAttempted": "Questions Attempted",
+    "correctAnswers": "Correct Answers",
+    "correct": "correct",
+    "courseType": "Course Type",
+    "signature": "Signature",
+    "authorizedSignatory": "Authorized Signatory",
+    "dateOfIssue": "Date of Issue",
+    "certificateId": "Certificate ID",
+    "digitallyVerified": "Digitally Verified Certificate",
+    "whatsapp": "WhatsApp",
+    "facebook": "Facebook",
+    "linkedin": "LinkedIn"
   },
 
   "globalConfirmationModal": {
