@@ -1640,53 +1640,59 @@
   },
 
   "certificateSetting": {
-    "title": "प्रमाण पत्र सेटिंग्स",
-    "subtitle": "प्रमाण पत्र टेम्पलेट और गतिशील चर कॉन्फ़िगर करें",
+    "title": "प्रमाणपत्र सेटिंग्स",
+    "subtitle": "प्रमाणपत्र टेम्पलेट और डायनामिक वेरिएबल कॉन्फ़िगर करें",
     "defaultHeading": "उत्कृष्टता का प्रमाण पत्र",
-    "editorPlaceholder": "यहाँ प्रमाण पत्र सामग्री लिखें... गतिशील सामग्री डालने के लिए चर पर क्लिक करें",
+    "editorPlaceholder": "प्रमाणपत्र सामग्री यहाँ लिखें... डायनामिक कंटेंट डालने के लिए वेरिएबल पर क्लिक करें",
     "logoConstraints": "PNG, JPG, WEBP (अधिकतम 2MB)",
+    "signatureConstraints": "PNG, JPG, WEBP (अधिकतम 2MB)",
     "variables": {
-      "title": "गतिशील चर",
+      "title": "डायनामिक वेरिएबल",
       "subtitle": "डालने या कॉपी करने के लिए क्लिक करें",
-      "loading": "चर लोड हो रहे हैं...",
-      "insert": "चर डालें"
+      "loading": "वेरिएबल लोड हो रहे हैं...",
+      "insert": "वेरिएबल डालें"
     },
     "sections": {
-      "certificateInfo": "प्रमाण पत्र जानकारी",
-      "certificateContent": "प्रमाण पत्र सामग्री",
-      "contentSubtitle": "अपना प्रमाण पत्र लेआउट डिज़ाइन करें",
-      "footerSettings": "फ़ुटर सेटिंग्स"
+      "certificateInfo": "प्रमाणपत्र की जानकारी",
+      "certificateContent": "प्रमाणपत्र सामग्री",
+      "contentSubtitle": "अपना प्रमाणपत्र लेआउट डिज़ाइन करें",
+      "footerSettings": "फूटर सेटिंग्स"
     },
     "fields": {
-      "companyLogo": "कंपनी लोगो",
-      "certificateHeading": "प्रमाण पत्र शीर्षक",
-      "companyName": "संगठन नाम",
+      "companyLogo": "कंपनी का लोगो",
+      "signature": "अधिकृत हस्ताक्षर",
+      "certificateHeading": "प्रमाणपत्र शीर्षक",
+      "companyName": "संगठन का नाम",
       "signerName": "अधिकृत हस्ताक्षरकर्ता",
-      "signerDesignation": "हस्ताक्षरकर्ता पदनाम",
-      "footerText": "फ़ुटर टेक्स्ट"
+      "signerDesignation": "हस्ताक्षरकर्ता का पद",
+      "footerText": "फूटर टेक्स्ट"
     },
     "placeholders": {
       "certificateHeading": "जैसे, उत्कृष्टता का प्रमाण पत्र",
       "companyName": "आपकी कंपनी का नाम",
       "signerName": "हस्ताक्षरकर्ता का पूरा नाम",
-      "signerDesignation": "जैसे, CEO, निदेशक",
-      "footerText": "प्रमाण पत्र की वैधता, जारी करने की तिथि, या अतिरिक्त जानकारी"
+      "signerDesignation": "जैसे, सीईओ, निदेशक",
+      "footerText": "प्रमाणपत्र की वैधता, जारी करने की तिथि, या अतिरिक्त जानकारी"
     },
     "buttons": {
       "changeLogo": "लोगो बदलें",
       "uploadLogo": "कंपनी लोगो अपलोड करने के लिए क्लिक करें",
+      "changeSignature": "हस्ताक्षर बदलें",
+      "uploadSignature": "अधिकृत हस्ताक्षर अपलोड करने के लिए क्लिक करें",
       "saveSettings": "सेटिंग्स सहेजें",
       "saving": "सहेजा जा रहा है..."
     },
     "tips": {
-      "insertVariable": "टिप: गतिशील सामग्री डालने के लिए बाएं पैनल से चर पर क्लिक करें"
+      "insertVariable": "टिप: डायनामिक कंटेंट डालने के लिए बाएं पैनल से वेरिएबल पर क्लिक करें"
     },
     "success": {
-      "save": "प्रमाण पत्र सेटिंग्स सफलतापूर्वक सहेजी गईं"
+      "save": "प्रमाणपत्र सेटिंग्स सफलतापूर्वक सहेजी गईं"
     },
     "errors": {
       "logoSize": "लोगो का आकार 2MB से कम होना चाहिए",
-      "logoType": "कृपया केवल JPEG, PNG, या WEBP छवि अपलोड करें",
+      "logoType": "कृपया केवल JPEG, PNG, या WEBP इमेज अपलोड करें",
+      "signatureSize": "हस्ताक्षर इमेज का आकार 2MB से कम होना चाहिए",
+      "signatureType": "कृपया हस्ताक्षर के लिए केवल JPEG, PNG, या WEBP इमेज अपलोड करें",
       "save": "सेटिंग्स अपडेट करने में विफल"
     }
   },

@@ -1177,11 +1177,12 @@
   },
 
   "certificateSetting": {
-    "title": "ਸਰਟੀਫਿਕੇਟ ਸੈਟਿੰਗਜ਼",
-    "subtitle": "ਸਰਟੀਫਿਕੇਟ ਟੈਂਪਲੇਟ ਅਤੇ ਡਾਇਨਾਮਿਕ ਵੇਰੀਏਬਲ ਕੌਨਫ਼ਿਗਰ ਕਰੋ",
-    "defaultHeading": "ਉੱਤਮਤਾ ਸਰਟੀਫਿਕੇਟ",
+    "title": "ਸਰਟੀਫਿਕੇਟ ਸੈਟਿੰਗਾਂ",
+    "subtitle": "ਸਰਟੀਫਿਕੇਟ ਟੈਂਪਲੇਟ ਅਤੇ ਡਾਇਨਾਮਿਕ ਵੇਰੀਏਬਲ ਕੌਨਫਿਗਰ ਕਰੋ",
+    "defaultHeading": "ਉੱਤਮਤਾ ਦਾ ਸਰਟੀਫਿਕੇਟ",
     "editorPlaceholder": "ਸਰਟੀਫਿਕੇਟ ਸਮੱਗਰੀ ਇੱਥੇ ਲਿਖੋ... ਡਾਇਨਾਮਿਕ ਸਮੱਗਰੀ ਪਾਉਣ ਲਈ ਵੇਰੀਏਬਲ 'ਤੇ ਕਲਿੱਕ ਕਰੋ",
     "logoConstraints": "PNG, JPG, WEBP (ਵੱਧ ਤੋਂ ਵੱਧ 2MB)",
+    "signatureConstraints": "PNG, JPG, WEBP (ਵੱਧ ਤੋਂ ਵੱਧ 2MB)",
     "variables": {
       "title": "ਡਾਇਨਾਮਿਕ ਵੇਰੀਏਬਲ",
       "subtitle": "ਪਾਉਣ ਜਾਂ ਕਾਪੀ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
@@ -1189,42 +1190,47 @@
       "insert": "ਵੇਰੀਏਬਲ ਪਾਓ"
     },
     "sections": {
-      "certificateInfo": "ਸਰਟੀਫਿਕੇਟ ਜਾਣਕਾਰੀ",
+      "certificateInfo": "ਸਰਟੀਫਿਕੇਟ ਦੀ ਜਾਣਕਾਰੀ",
       "certificateContent": "ਸਰਟੀਫਿਕੇਟ ਸਮੱਗਰੀ",
       "contentSubtitle": "ਆਪਣਾ ਸਰਟੀਫਿਕੇਟ ਲੇਆਉਟ ਡਿਜ਼ਾਈਨ ਕਰੋ",
-      "footerSettings": "ਫੁੱਟਰ ਸੈਟਿੰਗਜ਼"
+      "footerSettings": "ਫੁੱਟਰ ਸੈਟਿੰਗਾਂ"
     },
     "fields": {
-      "companyLogo": "ਕੰਪਨੀ ਲੋਗੋ",
-      "certificateHeading": "ਸਰਟੀਫਿਕੇਟ ਹੈੱਡਿੰਗ",
+      "companyLogo": "ਕੰਪਨੀ ਦਾ ਲੋਗੋ",
+      "signature": "ਅਧਿਕਾਰਤ ਦਸਤਖਤ",
+      "certificateHeading": "ਸਰਟੀਫਿਕੇਟ ਹੈਡਿੰਗ",
       "companyName": "ਸੰਗਠਨ ਦਾ ਨਾਮ",
-      "signerName": "ਅਧਿਕਾਰਤ ਦਸਤਖਤਕਾਰ",
-      "signerDesignation": "ਦਸਤਖਤਕਾਰ ਅਹੁਦਾ",
+      "signerName": "ਅਧਿਕਾਰਤ ਦਸਤਖਤਕਰਤਾ",
+      "signerDesignation": "ਦਸਤਖਤਕਰਤਾ ਦਾ ਅਹੁਦਾ",
       "footerText": "ਫੁੱਟਰ ਟੈਕਸਟ"
     },
     "placeholders": {
-      "certificateHeading": "ਉਦਾ: ਉੱਤਮਤਾ ਸਰਟੀਫਿਕੇਟ",
+      "certificateHeading": "ਜਿਵੇਂ, ਉੱਤਮਤਾ ਦਾ ਸਰਟੀਫਿਕੇਟ",
       "companyName": "ਤੁਹਾਡੀ ਕੰਪਨੀ ਦਾ ਨਾਮ",
-      "signerName": "ਦਸਤਖਤਕਾਰ ਦਾ ਪੂਰਾ ਨਾਮ",
-      "signerDesignation": "ਉਦਾ: ਸੀ.ਈ.ਓ., ਡਾਇਰੈਕਟਰ",
-      "footerText": "ਸਰਟੀਫਿਕੇਟ ਵੈਧਤਾ, ਜਾਰੀ ਕਰਨ ਦੀ ਮਿਤੀ ਜਾਂ ਵਾਧੂ ਜਾਣਕਾਰੀ"
+      "signerName": "ਦਸਤਖਤਕਰਤਾ ਦਾ ਪੂਰਾ ਨਾਮ",
+      "signerDesignation": "ਜਿਵੇਂ, ਸੀਈਓ, ਡਾਇਰੈਕਟਰ",
+      "footerText": "ਸਰਟੀਫਿਕੇਟ ਦੀ ਵੈਧਤਾ, ਜਾਰੀ ਕਰਨ ਦੀ ਮਿਤੀ, ਜਾਂ ਵਾਧੂ ਜਾਣਕਾਰੀ"
     },
     "buttons": {
       "changeLogo": "ਲੋਗੋ ਬਦਲੋ",
       "uploadLogo": "ਕੰਪਨੀ ਲੋਗੋ ਅਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
-      "saveSettings": "ਸੈਟਿੰਗਜ਼ ਸੇਵ ਕਰੋ",
-      "saving": "ਸੇਵ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
+      "changeSignature": "ਦਸਤਖਤ ਬਦਲੋ",
+      "uploadSignature": "ਅਧਿਕਾਰਤ ਦਸਤਖਤ ਅਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+      "saveSettings": "ਸੈਟਿੰਗਾਂ ਸੇਵ ਕਰੋ",
+      "saving": "ਸੇਵ ਹੋ ਰਿਹਾ ਹੈ..."
     },
     "tips": {
-      "insertVariable": "ਸੁਝਾਅ: ਡਾਇਨਾਮਿਕ ਸਮੱਗਰੀ ਪਾਉਣ ਲਈ ਖੱਬੇ ਪੈਨਲ ਤੋਂ ਵੇਰੀਏਬਲ 'ਤੇ ਕਲਿੱਕ ਕਰੋ"
+      "insertVariable": "ਟਿਪ: ਡਾਇਨਾਮਿਕ ਸਮੱਗਰੀ ਪਾਉਣ ਲਈ ਖੱਬੇ ਪੈਨਲ ਤੋਂ ਵੇਰੀਏਬਲ 'ਤੇ ਕਲਿੱਕ ਕਰੋ"
     },
     "success": {
-      "save": "ਸਰਟੀਫਿਕੇਟ ਸੈਟਿੰਗਜ਼ ਸਫਲਤਾਪੂਰਵਕ ਸੇਵ ਹੋ ਗਈਆਂ"
+      "save": "ਸਰਟੀਫਿਕੇਟ ਸੈਟਿੰਗਾਂ ਸਫਲਤਾਪੂਰਵਕ ਸੇਵ ਹੋ ਗਈਆਂ"
     },
     "errors": {
       "logoSize": "ਲੋਗੋ ਦਾ ਆਕਾਰ 2MB ਤੋਂ ਘੱਟ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
-      "logoType": "ਕਿਰਪਾ ਕਰਕੇ ਸਿਰਫ JPEG, PNG, ਜਾਂ WEBP ਤਸਵੀਰ ਅਪਲੋਡ ਕਰੋ",
-      "save": "ਸੈਟਿੰਗਜ਼ ਅਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ"
+      "logoType": "ਕਿਰਪਾ ਕਰਕੇ ਸਿਰਫ਼ JPEG, PNG, ਜਾਂ WEBP ਇਮੇਜ ਅਪਲੋਡ ਕਰੋ",
+      "signatureSize": "ਦਸਤਖਤ ਇਮੇਜ ਦਾ ਆਕਾਰ 2MB ਤੋਂ ਘੱਟ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "signatureType": "ਕਿਰਪਾ ਕਰਕੇ ਦਸਤਖਤ ਲਈ ਸਿਰਫ਼ JPEG, PNG, ਜਾਂ WEBP ਇਮੇਜ ਅਪਲੋਡ ਕਰੋ",
+      "save": "ਸੈਟਿੰਗਾਂ ਅਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ"
     }
   },
 
