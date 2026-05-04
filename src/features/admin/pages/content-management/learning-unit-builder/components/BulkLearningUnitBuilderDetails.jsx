@@ -1,13 +1,13 @@
-import { useState, useEffect, useRef, memo, useCallback } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { SelectField } from "../../../../common/form";
-import { AiOutlineExclamationCircle } from "react-icons/ai";
+import { AiOutlineExclamationCircle, AiOutlineDelete } from "react-icons/ai";
 import { PageLayout, PageBody } from "../../../../common/layout";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useToast } from "../../../../common/toast/ToastContext";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getAllPrograms } from "../../../../../../redux/slice/programSlice";
 import { getAllLevels } from "../../../../../../redux/slice/levelSlice";
 import { getAllModules } from "../../../../../../redux/slice/moduleSlice";
@@ -15,13 +15,11 @@ import { getAllChapters } from "../../../../../../redux/slice/chapterSlice";
 import { getAllTopics } from "../../../../../../redux/slice/topicSlice";
 import Breadcrumb from "../../../../common/layout/Breadcrumb";
 import {
-  deleteSingleContent,
-  getContentById,
-  updateSingleContentById,
+  getBulkContentById,
+  //   deleteContent,
 } from "../../../../../../redux/slice/unitBuilderSlice";
 import { useQuill } from "react-quilljs";
 import { FiImage, FiType } from "react-icons/fi";
-import { showConfirm } from "../../../../../../redux/slice/confirmSlice";
 import Loader from "../../../../common/Loader";
 
 const TextEditor = memo(({ value, onChange, id, isActive, t }) => {
@@ -98,21 +96,21 @@ const TextEditor = memo(({ value, onChange, id, isActive, t }) => {
 
 TextEditor.displayName = "TextEditor";
 
-const SingleLearningUnitBuilderDetails = () => {
+const BulkLearningUnitBuilderDetails = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const toast = useToast();
   const navigate = useNavigate();
 
-  const { content, isLoading: loading } = useSelector((state) => state.content);
+  const { bulkContent: content, isLoading: loading } = useSelector(
+    (state) => state.content,
+  );
   const { programs } = useSelector((state) => state.program);
   const { levels } = useSelector((state) => state.level);
   const { modules } = useSelector((state) => state.module);
   const { chapters } = useSelector((state) => state.chapter);
   const { topics } = useSelector((state) => state.topic);
   const { id } = useParams();
-  const [searchParams] = useSearchParams();
-  const topicId = searchParams.get("topic_id");
 
   const [isProgramsLoaded, setIsProgramsLoaded] = useState(false);
   const [isLevelsLoaded, setIsLevelsLoaded] = useState(false);
@@ -131,19 +129,13 @@ const SingleLearningUnitBuilderDetails = () => {
   const [filteredChapters, setFilteredChapters] = useState([]);
   const [filteredTopics, setFilteredTopics] = useState([]);
 
-  const [localContent, setLocalContent] = useState({
-    type: "text",
-    title: "",
-    content: "",
-    media_shortcut: "",
-    order: 1,
-  });
+  const [localContents, setLocalContents] = useState([]);
 
   useEffect(() => {
-    if (id && topicId) {
-      dispatch(getContentById({ topicId, id }));
+    if (id) {
+      dispatch(getBulkContentById({ id }));
     }
-  }, [dispatch, id, topicId]);
+  }, [dispatch, id]);
 
   useEffect(() => {
     if (content?.topic) {
@@ -227,14 +219,18 @@ const SingleLearningUnitBuilderDetails = () => {
   }, [selectedChapter, isChaptersLoaded, isTopicsLoaded, dispatch]);
 
   useEffect(() => {
-    if (content) {
-      setLocalContent({
-        type: content.type || "text",
-        title: content.title || "",
-        content: content.content || "",
-        media_shortcut: content.media_shortcut || "",
-        order: content.order || 1,
-      });
+    if (content?.data && Array.isArray(content.data)) {
+      const contentsArray = content.data.map((item) => ({
+        id: item.id,
+        type: item.type || "text",
+        title: item.title || "",
+        content: item.content || "",
+        media_shortcut: item.media_shortcode || item.media_shortcut || "",
+        order: item.order || 1,
+      }));
+      // Sort by order
+      contentsArray.sort((a, b) => a.order - b.order);
+      setLocalContents(contentsArray);
     }
   }, [content]);
 
@@ -354,42 +350,74 @@ const SingleLearningUnitBuilderDetails = () => {
       .required(t("learningUnitBuilder.validation.topicRequired")),
   });
 
-  const handleContentChange = (field, value) => {
-    setLocalContent((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
+  const handleContentChange = (index, field, value) => {
+    setLocalContents((prev) => {
+      const updated = [...prev];
+      updated[index] = {
+        ...updated[index],
+        [field]: value,
+      };
+      return updated;
+    });
   };
 
-  const handleTypeChange = (newType) => {
-    setLocalContent((prev) => ({
-      ...prev,
-      type: newType,
-      ...(newType === "text" ? { media_shortcut: "" } : {}),
-    }));
+  const handleTypeChange = (index, newType) => {
+    setLocalContents((prev) => {
+      const updated = [...prev];
+      updated[index] = {
+        ...updated[index],
+        type: newType,
+        ...(newType === "text" ? { media_shortcut: "" } : {}),
+      };
+      return updated;
+    });
+  };
+
+  // Delete content handler
+  const handleDeleteContent = async (index, contentId) => {
+    if (!contentId) {
+      toast.error(t("learningUnitBuilder.error.delete.noId"));
+      return;
+    }
+
+    // Show confirmation dialog
+    const confirmDelete = window.confirm(
+      t("learningUnitBuilder.details.content.deleteConfirm") ||
+        "Are you sure you want to delete this content?",
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+      // Call delete API
+      const result = await dispatch(deleteContent({ id: contentId })).unwrap();
+
+      if (result.success) {
+        // Remove from local state
+        setLocalContents((prev) => {
+          const updated = [...prev];
+          updated.splice(index, 1);
+          // Re-sort orders after deletion
+          return updated.map((item, idx) => ({
+            ...item,
+            order: idx + 1,
+          }));
+        });
+        toast.success(
+          t("learningUnitBuilder.success.delete") ||
+            "Content deleted successfully",
+        );
+      } else {
+        toast.error(result.message || t("learningUnitBuilder.error.delete"));
+      }
+    } catch (error) {
+      toast.error(error?.message || t("learningUnitBuilder.error.delete"));
+    }
   };
 
   const onSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
-      const formData = new FormData();
-
-      formData.append("title", localContent.title);
-      formData.append("type", localContent.type);
-      formData.append("content", localContent.content);
-      formData.append("order", localContent.order);
-
-      if (localContent.type === "media" && localContent.media_shortcut) {
-        formData.append("media_shortcut", localContent.media_shortcut);
-      }
-
-      await dispatch(
-        updateSingleContentById({
-          topicId,
-          id,
-          data: formData,
-        }),
-      ).unwrap();
-
+      console.log("Contents to save:", localContents);
       toast.success(t("learningUnitBuilder.success.update"));
       navigate("/learning-unit");
     } catch (error) {
@@ -397,24 +425,6 @@ const SingleLearningUnitBuilderDetails = () => {
       toast.error(error?.message || t("learningUnitBuilder.error.update"));
     } finally {
       setSubmitting(false);
-    }
-  };
-
-  const handleDelete = async () => {
-    const ok = await dispatch(
-      showConfirm({ message: t("learningUnitBuilder.details.deleteText") }),
-    );
-
-    if (!ok) return;
-
-    try {
-      await dispatch(deleteSingleContent({ topicId, id })).unwrap();
-      toast.success(t("learningUnitBuilder.success.delete"));
-      setTimeout(() => {
-        navigate("/learning-unit");
-      }, 1000);
-    } catch (error) {
-      toast.error(error?.message || t("learningUnitBuilder.error.delete"));
     }
   };
 
@@ -607,6 +617,7 @@ const SingleLearningUnitBuilderDetails = () => {
                     </div>
                   </div>
 
+                  {/* Multiple Content Sections - Ek ke niche ek with Order */}
                   <div>
                     <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
                       <span className="text-[18px] text-primary font-[700]">
@@ -615,169 +626,184 @@ const SingleLearningUnitBuilderDetails = () => {
                       {t("learningUnitBuilder.details.content.content")}
                     </h3>
 
-                    <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
-                      <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          {t("learningUnitBuilder.details.content.type")}
-                        </label>
-                        <div className="flex gap-4">
-                          <button
-                            type="button"
-                            onClick={() => handleTypeChange("text")}
-                            className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors ${
-                              localContent.type === "text"
-                                ? "bg-blue-500 text-white"
-                                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                            }`}
-                          >
-                            <FiType size={16} />
-                            {t("learningUnitBuilder.details.content.text")}
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => handleTypeChange("media")}
-                            className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors ${
-                              localContent.type === "media"
-                                ? "bg-blue-500 text-white"
-                                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                            }`}
-                          >
-                            <FiImage size={16} />
-                            {t("learningUnitBuilder.details.content.media")}
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          {t(
-                            "learningUnitBuilder.details.content.sectionTitle",
+                    {localContents.map((item, index) => (
+                      <div
+                        key={item.id || index}
+                        className="mb-8 border border-gray-200 rounded-lg p-4 bg-gray-50 relative"
+                      >
+                        {/* Delete Icon - Top Right Section */}
+                        <button
+                          type="button"
+                          onClick={() => handleDeleteContent(index, item.id)}
+                          className="absolute top-4 right-4 text-red-500 hover:text-red-700 cursor-pointer transition-colors p-1 rounded-full hover:bg-red-50"
+                          title={t(
+                            "learningUnitBuilder.details.content.delete",
                           )}
-                        </label>
-                        <input
-                          type="text"
-                          value={localContent.title}
-                          maxLength={150}
-                          onChange={(e) =>
-                            handleContentChange("title", e.target.value)
-                          }
-                          placeholder={t(
-                            "learningUnitBuilder.details.content.sectionTitlePlaceholder",
-                          )}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
-                        />
-                      </div>
+                        >
+                          <AiOutlineDelete size={20} />
+                        </button>
 
-                      {localContent.type === "text" ? (
                         <div className="mb-4">
                           <label className="block text-sm font-medium text-gray-700 mb-2">
-                            {t("learningUnitBuilder.details.content.content")}
+                            Order : {item.order}
                           </label>
-                          <TextEditor
-                            key="text-editor"
-                            id="content-editor"
-                            value={localContent.content}
-                            onChange={(value) =>
-                              handleContentChange("content", value)
+                          <div className="flex gap-4">
+                            <button
+                              type="button"
+                              onClick={() => handleTypeChange(index, "text")}
+                              className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors ${
+                                item.type === "text"
+                                  ? "bg-blue-500 text-white"
+                                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                              }`}
+                            >
+                              <FiType size={16} />
+                              {t("learningUnitBuilder.details.content.text")}
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => handleTypeChange(index, "media")}
+                              className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors ${
+                                item.type === "media"
+                                  ? "bg-blue-500 text-white"
+                                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                              }`}
+                            >
+                              <FiImage size={16} />
+                              {t("learningUnitBuilder.details.content.media")}
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="mb-4">
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            {t(
+                              "learningUnitBuilder.details.content.sectionTitle",
+                            )}
+                          </label>
+                          <input
+                            type="text"
+                            value={item.title}
+                            maxLength={150}
+                            onChange={(e) =>
+                              handleContentChange(
+                                index,
+                                "title",
+                                e.target.value,
+                              )
                             }
-                            isActive={true}
-                            t={t}
+                            placeholder={t(
+                              "learningUnitBuilder.details.content.sectionTitlePlaceholder",
+                            )}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
                           />
                         </div>
-                      ) : (
-                        <>
-                          <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                              {t(
-                                "learningUnitBuilder.details.content.mediaShortcut",
-                              )}
-                            </label>
-                            <input
-                              type="text"
-                              value={localContent.media_shortcut}
-                              maxLength={250}
-                              onChange={(e) =>
-                                handleContentChange(
-                                  "media_shortcut",
-                                  e.target.value,
-                                )
-                              }
-                              placeholder={t(
-                                "learningUnitBuilder.details.content.mediaShortcutPlaceholder",
-                              )}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
-                            />
-                          </div>
 
+                        {item.type === "text" ? (
                           <div className="mb-4">
                             <label className="block text-sm font-medium text-gray-700 mb-2">
-                              {t(
-                                "learningUnitBuilder.details.content.description",
-                              )}
+                              {t("learningUnitBuilder.details.content.content")}
                             </label>
                             <TextEditor
-                              key="media-editor"
-                              id="media-editor"
-                              value={localContent.content}
+                              key={`text-editor-${index}`}
+                              id={`content-editor-${index}`}
+                              value={item.content}
                               onChange={(value) =>
-                                handleContentChange("content", value)
+                                handleContentChange(index, "content", value)
                               }
                               isActive={true}
                               t={t}
                             />
                           </div>
-
-                          {localContent.media_shortcut && (
-                            <div className="mt-2 p-2 bg-gray-100 rounded">
-                              <p className="text-xs text-gray-500 mb-1">
+                        ) : (
+                          <>
+                            <div className="mb-4">
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
                                 {t(
-                                  "learningUnitBuilder.details.content.preview",
+                                  "learningUnitBuilder.details.content.mediaShortcut",
                                 )}
-                                :
-                              </p>
-                              {localContent.media_shortcut.match(
-                                /\.(jpeg|jpg|gif|png|webp)$/i,
-                              ) ? (
-                                <img
-                                  src={localContent.media_shortcut}
-                                  alt="Preview"
-                                  className="mt-1 max-h-32 object-contain"
-                                  onError={(e) =>
-                                    (e.target.style.display = "none")
-                                  }
-                                />
-                              ) : localContent.media_shortcut.match(
-                                  /\.(mp4|webm|ogg)$/i,
-                                ) ? (
-                                <video
-                                  src={localContent.media_shortcut}
-                                  controls
-                                  className="mt-1 max-h-32"
-                                />
-                              ) : (
-                                <p className="text-xs text-gray-600">
-                                  {t(
-                                    "learningUnitBuilder.details.content.media",
-                                  )}
-                                  : {localContent.media_shortcut}
-                                </p>
-                              )}
+                              </label>
+                              <input
+                                type="text"
+                                value={item.media_shortcut}
+                                maxLength={250}
+                                onChange={(e) =>
+                                  handleContentChange(
+                                    index,
+                                    "media_shortcut",
+                                    e.target.value,
+                                  )
+                                }
+                                placeholder={t(
+                                  "learningUnitBuilder.details.content.mediaShortcutPlaceholder",
+                                )}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                              />
                             </div>
-                          )}
-                        </>
-                      )}
-                    </div>
+
+                            <div className="mb-4">
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                {t(
+                                  "learningUnitBuilder.details.content.description",
+                                )}
+                              </label>
+                              <TextEditor
+                                key={`media-editor-${index}`}
+                                id={`media-editor-${index}`}
+                                value={item.content}
+                                onChange={(value) =>
+                                  handleContentChange(index, "content", value)
+                                }
+                                isActive={true}
+                                t={t}
+                              />
+                            </div>
+
+                            {item.media_shortcut && (
+                              <div className="mt-2 p-2 bg-gray-100 rounded">
+                                <p className="text-xs text-gray-500 mb-1">
+                                  {t(
+                                    "learningUnitBuilder.details.content.preview",
+                                  )}
+                                  :
+                                </p>
+                                {item.media_shortcut.match(
+                                  /\.(jpeg|jpg|gif|png|webp)$/i,
+                                ) ? (
+                                  <img
+                                    src={item.media_shortcut}
+                                    alt="Preview"
+                                    className="mt-1 max-h-32 object-contain"
+                                    onError={(e) =>
+                                      (e.target.style.display = "none")
+                                    }
+                                  />
+                                ) : item.media_shortcut.match(
+                                    /\.(mp4|webm|ogg)$/i,
+                                  ) ? (
+                                  <video
+                                    src={item.media_shortcut}
+                                    controls
+                                    className="mt-1 max-h-32"
+                                  />
+                                ) : (
+                                  <p className="text-xs text-gray-600">
+                                    {t(
+                                      "learningUnitBuilder.details.content.media",
+                                    )}
+                                    : {item.media_shortcut}
+                                  </p>
+                                )}
+                              </div>
+                            )}
+                          </>
+                        )}
+                      </div>
+                    ))}
                   </div>
 
                   <div className="flex justify-end items-center pt-4">
                     <div className="flex gap-3">
-                      <button
-                        type="button"
-                        // onClick={handleDelete}
-                        className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-gray-50"
-                      >
-                        {t("learningUnitBuilder.actions.deleteContent")}
-                      </button>
                       <button
                         type="submit"
                         disabled={isSubmitting}
@@ -799,4 +825,4 @@ const SingleLearningUnitBuilderDetails = () => {
   );
 };
 
-export default SingleLearningUnitBuilderDetails;
+export default BulkLearningUnitBuilderDetails;

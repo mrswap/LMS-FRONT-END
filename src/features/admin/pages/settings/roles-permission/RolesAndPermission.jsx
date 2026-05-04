@@ -24,7 +24,7 @@ import {
   updateSingleRoleStatus,
 } from "../../../../../redux/slice/rolesSlice";
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 10;
 
 const RolesAndPermission = () => {
   const { t } = useTranslation();

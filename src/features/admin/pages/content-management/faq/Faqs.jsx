@@ -28,7 +28,7 @@ import { getAllChapters } from "../../../../../redux/slice/chapterSlice";
 import { getAllModules } from "../../../../../redux/slice/moduleSlice";
 import { getAllLevels } from "../../../../../redux/slice/levelSlice";
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 10;
 
 const Faqs = () => {
   const { t } = useTranslation();

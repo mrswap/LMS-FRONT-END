@@ -55,6 +55,24 @@ export const getContentById = createAsyncThunk(
     }
 );
 
+// ======================= GET BULK BY ID =======================
+export const getBulkContentById = createAsyncThunk(
+    "content/getBulkContentId",
+    async ({ id }, thunkAPI) => {
+        try {
+            const res = await axiosInstance.get(
+                `content-topics/${id}/contents/bulk-edit`,
+                getAuthConfig()
+            );
+            return res.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(
+                error.response?.data || { message: "Fetch by id failed" }
+            );
+        }
+    }
+);
+
 
 // ======================= UPDATE =======================
 export const updateSingleContentById = createAsyncThunk(
@@ -118,6 +136,7 @@ const unitBuilderSlice = createSlice({
     initialState: {
         contents: [],
         content: null,
+        bulkContent: null,
 
         isLoading: false,
         isError: false,
@@ -184,6 +203,21 @@ const unitBuilderSlice = createSlice({
                 state.content = action.payload.data;
             })
             .addCase(getContentById.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload?.message;
+            })
+
+            // ===== GET BULK BY ID =====
+            .addCase(getBulkContentById.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(getBulkContentById.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.bulkContent = action.payload;
+            })
+            .addCase(getBulkContentById.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
                 state.message = action.payload?.message;

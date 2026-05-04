@@ -119,6 +119,11 @@ const SingleLearningUnitBuilderDetails = lazy(
     import("../pages/content-management/learning-unit-builder/components/SingleLearningUnitBuilderDetails"),
 );
 
+const BulkLearningUnitBuilderDetails = lazy(
+  () =>
+    import("../pages/content-management/learning-unit-builder/components/BulkLearningUnitBuilderDetails"),
+);
+
 const Assissment = lazy(
   () =>
     import("../pages/assessment-management/quiz-topic/assessment/Assissment"),
@@ -256,6 +261,10 @@ const AdminRoutes = (
       <Route path="topics" element={<Topics />} />
       <Route path="topics/create-topic" element={<CreateTopic />} />
       <Route path="topics/topic-details/:id" element={<TopicDetails />} />
+      <Route
+        path="learning-unit/bulk/:id"
+        element={<BulkLearningUnitBuilderDetails />}
+      />
 
       {/* Learning Unit */}
       <Route path="learning-unit" element={<LearningUnitBuilder />} />

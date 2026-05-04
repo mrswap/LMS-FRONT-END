@@ -25,7 +25,7 @@ import Error from "../../common/Error";
 import StatusToggle from "../../common/StatusToggle";
 import { LuFilterX } from "react-icons/lu";
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 10;
 
 const Users = () => {
   const { t } = useTranslation();
