@@ -43,13 +43,6 @@ const Profile = () => {
     }
   }, [profile]);
 
-  // Dynamic region options with translation
-  // const regionOptions = [
-  //   { label: t("profile.countries.india"), value: "india" },
-  //   { label: t("profile.countries.usa"), value: "usa" },
-  //   { label: t("profile.countries.uk"), value: "uk" },
-  // ];
-
   const regionOptions = countryOption;
 
   const initialValues = {

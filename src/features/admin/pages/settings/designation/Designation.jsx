@@ -24,7 +24,7 @@ import {
   updateSingleDesignationStatus,
 } from "../../../../../redux/slice/designationSlice";
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 10;
 
 const Designation = () => {
   const { t } = useTranslation();

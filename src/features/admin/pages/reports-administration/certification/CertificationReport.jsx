@@ -30,7 +30,7 @@ import { getAllUsers } from "../../../../../redux/slice/userSlice";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 10;
 
 const CertificationReport = () => {
   const { t } = useTranslation();

@@ -26,7 +26,7 @@ import TruncateText from "../../../common/TruncateText";
 import StatusToggle from "../../../common/StatusToggle";
 import { LuFilterX } from "react-icons/lu";
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 10;
 
 const Module = () => {
   const { t } = useTranslation();

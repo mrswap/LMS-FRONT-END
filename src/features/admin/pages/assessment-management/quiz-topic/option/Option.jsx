@@ -30,8 +30,6 @@ const Option = () => {
     (state) => state.option,
   );
 
-  console.log("options", options);
-
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [questionData, setQuestionData] = useState(null);
