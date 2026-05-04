@@ -3,6 +3,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { SelectField } from "../../../../common/form";
 import { AiOutlineExclamationCircle, AiOutlineDelete } from "react-icons/ai";
+import { FiPlus, FiEye, FiTrash2 } from "react-icons/fi";
 import { PageLayout, PageBody } from "../../../../common/layout";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -230,12 +231,40 @@ const BulkLearningUnitBuilderDetails = () => {
         content: item.content || "",
         media_shortcut: item.media_shortcode || item.media_shortcut || "",
         order: item.order || 1,
+        isFromApi: true, // Mark that this came from API
       }));
       // Sort by order
       contentsArray.sort((a, b) => a.order - b.order);
       setLocalContents(contentsArray);
     }
   }, [content]);
+
+  // Add new section handler
+  const handleAddSection = () => {
+    const newSection = {
+      id: null, // New section won't have an ID until saved
+      type: "text",
+      title: "",
+      content: "",
+      media_shortcut: "",
+      order: localContents.length + 1,
+      isFromApi: false, // Mark that this is a new local section
+    };
+    setLocalContents((prev) => [...prev, newSection]);
+
+    // Scroll to the new section
+    setTimeout(() => {
+      const newSectionElement = document.getElementById(
+        `section-${localContents.length}`,
+      );
+      if (newSectionElement) {
+        newSectionElement.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    }, 100);
+  };
 
   useEffect(() => {
     if (selectedProgram && levels?.data && isLevelsLoaded) {
@@ -376,52 +405,23 @@ const BulkLearningUnitBuilderDetails = () => {
     });
   };
 
+  // Preview handler - navigate to single content view
+  const handlePreview = (contentId) => {
+    if (contentId) {
+      navigate(`/learning-unit/content/${contentId}`);
+    }
+  };
+
   // Delete content handler
-  // const handleDeleteContent = async (index, contentId) => {
-  //   console.log("indexId", index);
-  //   console.log("contentId", contentId);
-
-  //   // if (!contentId) {
-  //   //   toast.error(t("learningUnitBuilder.error.delete.noId"));
-  //   //   return;
-  //   // }
-
-  //   // // Show confirmation dialog
-  //   // const confirmDelete = window.confirm(
-  //   //   t("learningUnitBuilder.details.content.deleteConfirm") ||
-  //   //     "Are you sure you want to delete this content?",
-  //   // );
-
-  //   // if (!confirmDelete) return;
-
-  //   // try {
-  //   //   // Call delete API
-  //   //   const result = await dispatch(deleteContent({ id: contentId })).unwrap();
-
-  //   //   if (result.success) {
-  //   //     // Remove from local state
-  //   //     setLocalContents((prev) => {
-  //   //       const updated = [...prev];
-  //   //       updated.splice(index, 1);
-  //   //       // Re-sort orders after deletion
-  //   //       return updated.map((item, idx) => ({
-  //   //         ...item,
-  //   //         order: idx + 1,
-  //   //       }));
-  //   //     });
-  //   //     toast.success(
-  //   //       t("learningUnitBuilder.success.delete") ||
-  //   //         "Content deleted successfully",
-  //   //     );
-  //   //   } else {
-  //   //     toast.error(result.message || t("learningUnitBuilder.error.delete"));
-  //   //   }
-  //   // } catch (error) {
-  //   //   toast.error(error?.message || t("learningUnitBuilder.error.delete"));
-  //   // }
-  // };
-
   const handleDeleteContent = async (index, contentId) => {
+    // If it's a new section (no ID), just remove from local state
+    if (!contentId) {
+      setLocalContents((prev) => prev.filter((_, i) => i !== index));
+      toast.success(t("learningUnitBuilder.success.delete"));
+      return;
+    }
+
+    // If it's an existing section, call API
     const ok = await dispatch(
       showConfirm({ message: t("learningUnitBuilder.details.deleteText") }),
     );
@@ -433,33 +433,17 @@ const BulkLearningUnitBuilderDetails = () => {
         deleteSingleContent({ topicId: id, id: contentId }),
       ).unwrap();
       toast.success(t("learningUnitBuilder.success.delete"));
-      // setTimeout(() => {
-      //   navigate("/learning-unit");
-      // }, 1000);
       dispatch(getBulkContentById({ id }));
     } catch (error) {
       toast.error(error?.message || t("learningUnitBuilder.error.delete"));
     }
   };
 
-  // const onSubmit = async (values, { setSubmitting, setErrors }) => {
-  //   try {
-  //     console.log("Contents to save:", localContents);
-  //     toast.success(t("learningUnitBuilder.success.update"));
-  //     navigate("/learning-unit");
-  //   } catch (error) {
-  //     setErrors({ submit: error.message });
-  //     toast.error(error?.message || t("learningUnitBuilder.error.update"));
-  //   } finally {
-  //     setSubmitting(false);
-  //   }
-  // };
-
   const onSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
       const apiSections = localContents.map((section, index) => {
         const apiSection = {
-          id: section.id, // IMPORTANT (update ke liye)
+          id: section.id, // IMPORTANT (update ke liye) - null for new sections
           type: section.type,
           title: section.title,
           content:
@@ -480,9 +464,6 @@ const BulkLearningUnitBuilderDetails = () => {
         topic_id: values.topicName.value,
         sections: apiSections,
       };
-
-      // console.log("UPDATE PAYLOAD:", payload);
-      // console.log("values:", values);
 
       const res = await dispatch(
         updateBulkContent({
@@ -690,7 +671,7 @@ const BulkLearningUnitBuilderDetails = () => {
                     </div>
                   </div>
 
-                  {/* Multiple Content Sections - Ek ke niche ek with Order */}
+                  {/* Multiple Content Sections */}
                   <div>
                     <h3 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
                       <span className="text-[18px] text-primary font-[700]">
@@ -701,20 +682,43 @@ const BulkLearningUnitBuilderDetails = () => {
 
                     {localContents.map((item, index) => (
                       <div
-                        key={item.id || index}
+                        id={`section-${index}`}
+                        key={item.id || `new-${index}`}
                         className="mb-8 border border-gray-200 rounded-lg p-4 bg-gray-50 relative"
                       >
-                        {/* Delete Icon - Top Right Section */}
-                        <button
-                          type="button"
-                          onClick={() => handleDeleteContent(index, item.id)}
-                          className="absolute top-4 right-4 text-red-500 hover:text-red-700 cursor-pointer transition-colors p-1 rounded-full hover:bg-red-50"
-                          title={t(
-                            "learningUnitBuilder.details.content.delete",
+                        {/* Action Buttons - Top Right Section */}
+                        <div className="absolute top-4 right-4 flex gap-2">
+                          {/* Preview Button - Only for API content */}
+                          {item.isFromApi && item.id && (
+                            <button
+                              type="button"
+                              onClick={() => handlePreview(item.id)}
+                              className="flex items-center gap-1 px-3 py-1 text-xs font-semibold cursor-pointer text-blue-600 bg-blue-50 border border-blue-200 rounded-md hover:bg-blue-100 hover:border-blue-300 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all duration-150"
+                              title={t(
+                                "learningUnitBuilder.details.content.preview",
+                              )}
+                            >
+                              <FiEye size={18} />
+                              <span className="text-sm">
+                                {t(
+                                  "learningUnitBuilder.details.content.preview",
+                                )}
+                              </span>
+                            </button>
                           )}
-                        >
-                          <AiOutlineDelete size={20} />
-                        </button>
+
+                          {/* Delete Button */}
+                          <button
+                            type="button"
+                            onClick={() => handleDeleteContent(index, item.id)}
+                            className="text-red-500 hover:text-red-700 cursor-pointer transition-colors p-1 rounded-full hover:bg-red-50"
+                            title={t(
+                              "learningUnitBuilder.details.content.delete",
+                            )}
+                          >
+                            <FiTrash2 size={18} />
+                          </button>
+                        </div>
 
                         <div className="mb-4">
                           <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -873,6 +877,20 @@ const BulkLearningUnitBuilderDetails = () => {
                         )}
                       </div>
                     ))}
+
+                    {/* Add Section Button - Bottom */}
+                    <div className="flex justify-center mt-6 mb-4">
+                      <button
+                        type="button"
+                        onClick={handleAddSection}
+                        className="w-full flex items-center justify-center cursor-pointer gap-2 px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-blue-500 hover:text-blue-500 transition-colors"
+                      >
+                        <FiPlus size={18} />
+                        {t(
+                          "learningUnitBuilder.details.content.addButtonSection",
+                        )}
+                      </button>
+                    </div>
                   </div>
 
                   <div className="flex justify-end items-center pt-4">

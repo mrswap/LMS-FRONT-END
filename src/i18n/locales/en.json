@@ -791,7 +791,8 @@
         "parentLevel": "Parent Level",
         "duration": "Duration",
         "status": "Status",
-        "actions": "Actions"
+        "actions": "Actions",
+        "viewContent": "View all contents"
       }
     },
     "details": {
@@ -935,7 +936,7 @@
         "description": "Description",
         "order": "Order",
         "preview": "Preview",
-        "addButtonSection": "+ Add New Section",
+        "addButtonSection": "Add New Section",
         "removeSection": "Remove Section",
         "editorPlaceholder": "Write your content here..."
       }

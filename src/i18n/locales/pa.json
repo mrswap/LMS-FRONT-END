@@ -572,12 +572,13 @@
       "clearAll": "ਸਭ ਸਾਫ਼ ਕਰੋ",
       "columns": {
         "topicName": "ਵਿਸ਼ੇ ਦਾ ਨਾਮ",
-        "parentChapter": "ਮੂਲ ਅਧਿਆਏ",
-        "parentModule": "ਮੂਲ ਮੌਡਿਊਲ",
+        "parentChapter": "ਮੂਲ ਅਧਿਆਇ",
+        "parentModule": "ਮੂਲ ਮੋਡੀਊਲ",
         "parentLevel": "ਮੂਲ ਪੱਧਰ",
-        "duration": "ਮਿਆਦ",
+        "duration": "ਅਵਧੀ",
         "status": "ਸਥਿਤੀ",
-        "actions": "ਕਾਰਵਾਈਆਂ"
+        "actions": "ਕਾਰਵਾਈਆਂ",
+        "viewContent": "ਸਾਰੀ ਸਮੱਗਰੀ ਵੇਖੋ"
       }
     },
     "details": {
@@ -634,74 +635,74 @@
   "learningUnitBuilder": {
     "list": {
       "title": "ਲਰਨਿੰਗ ਯੂਨਿਟ ਬਿਲਡਰ",
-      "subtitle": "ਵਿਸ਼ਿਆਂ ਲਈ ਲਰਨਿੰਗ ਕੰਟੈਂਟ ਦਾ ਪ੍ਰਬੰਧਨ ਅਤੇ ਸਿਰਜਣਾ ਕਰੋ",
-      "searchPlaceholder": "ਕੰਟੈਂਟ ਸਿਰਲੇਖ ਨਾਲ ਖੋਜੋ...",
-      "clearAll": "ਸਾਰੇ ਫਿਲਟਰ ਸਾਫ਼ ਕਰੋ",
+      "subtitle": "ਵਿਸ਼ਿਆਂ ਲਈ ਸਿੱਖਣ ਸਮੱਗਰੀ ਬਣਾਓ ਅਤੇ ਮੈਨੇਜ ਕਰੋ",
+      "searchPlaceholder": "ਸਮੱਗਰੀ ਦੇ ਸਿਰਲੇਖ ਨਾਲ ਖੋਜੋ...",
+      "clearAll": "ਸਾਰੇ ਫਿਲਟਰ ਹਟਾਓ",
       "columns": {
         "title": "ਸਿਰਲੇਖ",
         "type": "ਕਿਸਮ",
-        "parentTopic": "ਮੁੱਢਲਾ ਵਿਸ਼ਾ",
-        "parentChapter": "ਮੁੱਢਲਾ ਅਧਿਆਇ",
-        "parentModule": "ਮੁੱਢਲਾ ਮੋਡੀਊਲ",
-        "parentLevel": "ਮੁੱਢਲਾ ਪੱਧਰ",
+        "parentTopic": "ਮੂਲ ਵਿਸ਼ਾ",
+        "parentChapter": "ਮੂਲ ਅਧਿਆਇ",
+        "parentModule": "ਮੂਲ ਮੋਡੀਊਲ",
+        "parentLevel": "ਮੂਲ ਪੱਧਰ",
         "status": "ਸਥਿਤੀ",
         "actions": "ਕਾਰਵਾਈਆਂ"
       }
     },
     "create": {
-      "title": "ਲਰਨਿੰਗ ਕੰਟੈਂਟ ਬਣਾਓ",
-      "subtitle": "ਕਿਸੇ ਵਿਸ਼ੇ ਲਈ ਨਵਾਂ ਲਰਨਿੰਗ ਕੰਟੈਂਟ ਬਣਾਓ"
+      "title": "ਲਰਨਿੰਗ ਸਮੱਗਰੀ ਬਣਾਓ",
+      "subtitle": "ਕਿਸੇ ਵਿਸ਼ੇ ਲਈ ਨਵੀਂ ਲਰਨਿੰਗ ਸਮੱਗਰੀ ਬਣਾਓ"
     },
     "details": {
-      "generalDetails": "ਆਮ ਵੇਰਵੇ",
-      "parentProgram": "ਮੁੱਢਲਾ ਪ੍ਰੋਗਰਾਮ",
+      "generalDetails": "ਆਮ ਵੇਰਵਾ",
+      "parentProgram": "ਮੂਲ ਪ੍ਰੋਗਰਾਮ",
       "parentProgramPlaceholder": "ਪ੍ਰੋਗਰਾਮ ਚੁਣੋ",
-      "parentLevel": "ਮੁੱਢਲਾ ਪੱਧਰ",
+      "parentLevel": "ਮੂਲ ਪੱਧਰ",
       "parentLevelPlaceholder": "ਪੱਧਰ ਚੁਣੋ",
-      "parentModule": "ਮੁੱਢਲਾ ਮੋਡੀਊਲ",
+      "parentModule": "ਮੂਲ ਮੋਡੀਊਲ",
       "parentModulePlaceholder": "ਮੋਡੀਊਲ ਚੁਣੋ",
-      "parentChapter": "ਮੁੱਢਲਾ ਅਧਿਆਇ",
+      "parentChapter": "ਮੂਲ ਅਧਿਆਇ",
       "parentChapterPlaceholder": "ਅਧਿਆਇ ਚੁਣੋ",
-      "parentTopic": "ਮੁੱਢਲਾ ਵਿਸ਼ਾ",
+      "parentTopic": "ਮੂਲ ਵਿਸ਼ਾ",
       "parentTopicPlaceholder": "ਵਿਸ਼ਾ ਚੁਣੋ",
-      "deleteText": "ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਇਸ ਕੰਟੈਂਟ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
+      "deleteText": "ਕੀ ਤੁਸੀਂ ਇਹ ਸਮੱਗਰੀ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
       "content": {
-        "contentSection": "ਕੰਟੈਂਟ ਸੈਕਸ਼ਨ",
-        "contentTitle": "ਕੰਟੈਂਟ ਸਿਰਲੇਖ",
-        "content": "ਕੰਟੈਂਟ",
-        "type": "ਕੰਟੈਂਟ ਕਿਸਮ",
+        "contentSection": "ਸਮੱਗਰੀ ਸੈਕਸ਼ਨ",
+        "contentTitle": "ਸਮੱਗਰੀ ਸਿਰਲੇਖ",
+        "content": "ਸਮੱਗਰੀ",
+        "type": "ਸਮੱਗਰੀ ਦੀ ਕਿਸਮ",
         "text": "ਟੈਕਸਟ",
         "media": "ਮੀਡੀਆ",
         "sectionTitle": "ਸੈਕਸ਼ਨ ਸਿਰਲੇਖ",
         "sectionTitlePlaceholder": "ਸੈਕਸ਼ਨ ਸਿਰਲੇਖ ਦਰਜ ਕਰੋ",
-        "mediaShortcut": "ਮੀਡੀਆ URL / ਸ਼ੌਰਟਕਟ",
-        "mediaShortcutPlaceholder": "ਉਦਾ: yt_123, /uploads/video.mp4, https://youtu.be/...",
+        "mediaShortcut": "ਮੀਡੀਆ URL / ਸ਼ਾਰਟਕਟ",
+        "mediaShortcutPlaceholder": "ਜਿਵੇਂ: yt_123, /uploads/video.mp4, https://youtu.be/...",
         "description": "ਵੇਰਵਾ",
         "order": "ਕ੍ਰਮ",
-        "preview": "ਪੂਰਵਦਰਸ਼ਨ",
-        "addButtonSection": "+ ਨਵਾਂ ਸੈਕਸ਼ਨ ਸ਼ਾਮਲ ਕਰੋ",
+        "preview": "ਪ੍ਰੀਵਿਊ",
+        "addButtonSection": "ਨਵਾਂ ਸੈਕਸ਼ਨ ਸ਼ਾਮਲ ਕਰੋ",
         "removeSection": "ਸੈਕਸ਼ਨ ਹਟਾਓ",
-        "editorPlaceholder": "ਆਪਣਾ ਕੰਟੈਂਟ ਇੱਥੇ ਲਿਖੋ..."
+        "editorPlaceholder": "ਇੱਥੇ ਆਪਣੀ ਸਮੱਗਰੀ ਲਿਖੋ..."
       }
     },
     "actions": {
-      "addNewContent": "+ ਨਵਾਂ ਕੰਟੈਂਟ ਸ਼ਾਮਲ ਕਰੋ",
-      "createContent": "ਕੰਟੈਂਟ ਬਣਾਓ",
-      "creating": "ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...",
-      "updateContent": "ਕੰਟੈਂਟ ਅੱਪਡੇਟ ਕਰੋ",
-      "updating": "ਅੱਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
-      "deleteContent": "ਕੰਟੈਂਟ ਹਟਾਓ"
+      "addNewContent": "+ ਨਵੀਂ ਸਮੱਗਰੀ ਸ਼ਾਮਲ ਕਰੋ",
+      "createContent": "ਸਮੱਗਰੀ ਬਣਾਓ",
+      "creating": "ਬਣਾਈ ਜਾ ਰਹੀ ਹੈ...",
+      "updateContent": "ਸਮੱਗਰੀ ਅਪਡੇਟ ਕਰੋ",
+      "updating": "ਅਪਡੇਟ ਹੋ ਰਹੀ ਹੈ...",
+      "deleteContent": "ਸਮੱਗਰੀ ਹਟਾਓ"
     },
     "breadcrumb": {
-      "contentManagement": "ਕੰਟੈਂਟ ਪ੍ਰਬੰਧਨ",
-      "editContent": "ਕੰਟੈਂਟ ਸੰਪਾਦਿਤ ਕਰੋ"
+      "contentManagement": "ਸਮੱਗਰੀ ਪ੍ਰਬੰਧਨ",
+      "editContent": "ਸਮੱਗਰੀ ਸੋਧੋ"
     },
     "filters": {
       "allLevels": "ਸਾਰੇ ਪੱਧਰ",
-      "allStatus": "ਸਾਰੀਆਂ ਸਥਿਤੀਆਂ",
+      "allStatus": "ਸਾਰੀ ਸਥਿਤੀ",
       "allTypes": "ਸਾਰੀਆਂ ਕਿਸਮਾਂ",
-      "active": "ਸਰਗਰਮ",
-      "inactive": "ਅਕਰਮਕ",
+      "active": "ਸਕ੍ਰਿਆ",
+      "inactive": "ਨਿਸ਼ਕ੍ਰਿਆ",
       "text": "ਟੈਕਸਟ",
       "media": "ਮੀਡੀਆ",
       "selectLevelFirst": "ਪਹਿਲਾਂ ਪੱਧਰ ਚੁਣੋ",
@@ -715,23 +716,23 @@
       "loadingTopics": "ਵਿਸ਼ੇ ਲੋਡ ਹੋ ਰਹੇ ਹਨ..."
     },
     "validation": {
-      "programRequired": "ਪ੍ਰੋਗਰਾਮ ਦੀ ਲੋੜ ਹੈ",
-      "levelRequired": "ਪੱਧਰ ਦੀ ਲੋੜ ਹੈ",
-      "moduleRequired": "ਮੋਡੀਊਲ ਦੀ ਲੋੜ ਹੈ",
-      "chapterRequired": "ਅਧਿਆਇ ਦੀ ਲੋੜ ਹੈ",
-      "topicRequired": "ਵਿਸ਼ੇ ਦੀ ਲੋੜ ਹੈ"
+      "programRequired": "ਪ੍ਰੋਗਰਾਮ ਲਾਜ਼ਮੀ ਹੈ",
+      "levelRequired": "ਪੱਧਰ ਲਾਜ਼ਮੀ ਹੈ",
+      "moduleRequired": "ਮੋਡੀਊਲ ਲਾਜ਼ਮੀ ਹੈ",
+      "chapterRequired": "ਅਧਿਆਇ ਲਾਜ਼ਮੀ ਹੈ",
+      "topicRequired": "ਵਿਸ਼ਾ ਲਾਜ਼ਮੀ ਹੈ"
     },
     "success": {
-      "create": "ਲਰਨਿੰਗ ਕੰਟੈਂਟ ਸਫਲਤਾਪੂਰਵਕ ਬਣ ਗਿਆ!",
-      "update": "ਲਰਨਿੰਗ ਕੰਟੈਂਟ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਹੋ ਗਿਆ!",
-      "delete": "ਲਰਨਿੰਗ ਕੰਟੈਂਟ ਸਫਲਤਾਪੂਰਵਕ ਹਟਾ ਦਿੱਤਾ ਗਿਆ!"
+      "create": "ਲਰਨਿੰਗ ਸਮੱਗਰੀ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਈ ਗਈ!",
+      "update": "ਲਰਨਿੰਗ ਸਮੱਗਰੀ ਸਫਲਤਾਪੂਰਵਕ ਅਪਡੇਟ ਕੀਤੀ ਗਈ!",
+      "delete": "ਲਰਨਿੰਗ ਸਮੱਗਰੀ ਸਫਲਤਾਪੂਰਵਕ ਹਟਾਈ ਗਈ!"
     },
     "error": {
-      "create": "ਲਰਨਿੰਗ ਕੰਟੈਂਟ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
-      "update": "ਲਰਨਿੰਗ ਕੰਟੈਂਟ ਅੱਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
-      "delete": "ਲਰਨਿੰਗ ਕੰਟੈਂਟ ਹਟਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+      "create": "ਲਰਨਿੰਗ ਸਮੱਗਰੀ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "update": "ਲਰਨਿੰਗ ਸਮੱਗਰੀ ਅਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "delete": "ਲਰਨਿੰਗ ਸਮੱਗਰੀ ਹਟਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
     },
-    "noContentFound": "ਕੋਈ ਕੰਟੈਂਟ ਨਹੀਂ ਮਿਲਿਆ"
+    "noContentFound": "ਕੋਈ ਸਮੱਗਰੀ ਨਹੀਂ ਮਿਲੀ"
   },
 
   "mediaLibrary": {

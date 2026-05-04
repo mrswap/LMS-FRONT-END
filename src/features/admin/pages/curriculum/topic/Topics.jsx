@@ -289,18 +289,26 @@ const Topics = () => {
     {
       header: t("topic.list.columns.actions"),
       render: (row) => (
-        <div className="flex gap-6">
+        <div className="flex gap-2">
           <button
             onClick={() => navigate(`topic-details/${row.id}`)}
             className="text-gray-800 text-lg cursor-pointer hover:text-[#184994] transition-colors"
           >
             <FaEye />
           </button>
-          <button
+          {/* <button
             onClick={() => navigate(`/learning-unit/bulk//${row.id}`)}
             className="text-gray-800 text-lg cursor-pointer hover:text-[#184994] transition-colors"
           >
             <FaArrowRight />
+          </button> */}
+
+          <button
+            onClick={() => navigate(`/learning-unit/bulk//${row.id}`)}
+            className="px-3 py-1 text-xs font-semibold cursor-pointer text-blue-600 bg-blue-50 border border-blue-200 rounded-md hover:bg-blue-100 hover:border-blue-300 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all duration-150"
+          >
+            {/* View all content */}
+            {t("topic.list.columns.viewContent")}
           </button>
         </div>
       ),

@@ -785,13 +785,14 @@
       "clearAll": "सब हटाएं",
       "minutes": "मिनट",
       "columns": {
-        "topicName": "विषय नाम",
+        "topicName": "विषय का नाम",
         "parentChapter": "मूल अध्याय",
         "parentModule": "मूल मॉड्यूल",
         "parentLevel": "मूल स्तर",
         "duration": "अवधि",
         "status": "स्थिति",
-        "actions": "क्रियाएं"
+        "actions": "कार्य",
+        "viewContent": "सभी सामग्री देखें"
       }
     },
     "details": {
@@ -890,8 +891,8 @@
   "learningUnitBuilder": {
     "list": {
       "title": "लर्निंग यूनिट बिल्डर",
-      "subtitle": "विषयों के लिए शिक्षण सामग्री प्रबंधित और बनाएं",
-      "searchPlaceholder": "सामग्री शीर्षक से खोजें...",
+      "subtitle": "विषयों के लिए लर्निंग कंटेंट बनाएं और मैनेज करें",
+      "searchPlaceholder": "कंटेंट शीर्षक से खोजें...",
       "clearAll": "सभी फ़िल्टर हटाएं",
       "columns": {
         "title": "शीर्षक",
@@ -901,17 +902,17 @@
         "parentModule": "मूल मॉड्यूल",
         "parentLevel": "मूल स्तर",
         "status": "स्थिति",
-        "actions": "क्रियाएं"
+        "actions": "कार्य"
       }
     },
     "create": {
-      "title": "शिक्षण सामग्री बनाएं",
-      "subtitle": "किसी विषय के लिए नई शिक्षण सामग्री बनाएं"
+      "title": "लर्निंग कंटेंट बनाएं",
+      "subtitle": "किसी विषय के लिए नया लर्निंग कंटेंट बनाएं"
     },
     "details": {
       "generalDetails": "सामान्य विवरण",
-      "parentProgram": "मूल कार्यक्रम",
-      "parentProgramPlaceholder": "कार्यक्रम चुनें",
+      "parentProgram": "मूल प्रोग्राम",
+      "parentProgramPlaceholder": "प्रोग्राम चुनें",
       "parentLevel": "मूल स्तर",
       "parentLevelPlaceholder": "स्तर चुनें",
       "parentModule": "मूल मॉड्यूल",
@@ -920,41 +921,41 @@
       "parentChapterPlaceholder": "अध्याय चुनें",
       "parentTopic": "मूल विषय",
       "parentTopicPlaceholder": "विषय चुनें",
-      "deleteText": "क्या आप वाकई इस सामग्री को हटाना चाहते हैं?",
+      "deleteText": "क्या आप इस कंटेंट को हटाना चाहते हैं?",
       "content": {
-        "contentSection": "सामग्री अनुभाग",
-        "contentTitle": "सामग्री शीर्षक",
-        "content": "सामग्री",
-        "type": "सामग्री प्रकार",
+        "contentSection": "कंटेंट सेक्शन",
+        "contentTitle": "कंटेंट शीर्षक",
+        "content": "कंटेंट",
+        "type": "कंटेंट प्रकार",
         "text": "टेक्स्ट",
         "media": "मीडिया",
-        "sectionTitle": "अनुभाग शीर्षक",
-        "sectionTitlePlaceholder": "अनुभाग शीर्षक दर्ज करें",
+        "sectionTitle": "सेक्शन शीर्षक",
+        "sectionTitlePlaceholder": "सेक्शन शीर्षक दर्ज करें",
         "mediaShortcut": "मीडिया URL / शॉर्टकट",
-        "mediaShortcutPlaceholder": "जैसे, yt_123, /uploads/video.mp4, https://youtu.be/...",
+        "mediaShortcutPlaceholder": "जैसे: yt_123, /uploads/video.mp4, https://youtu.be/...",
         "description": "विवरण",
         "order": "क्रम",
         "preview": "पूर्वावलोकन",
-        "addButtonSection": "+ नया अनुभाग जोड़ें",
-        "removeSection": "अनुभाग हटाएं",
-        "editorPlaceholder": "यहाँ अपनी सामग्री लिखें..."
+        "addButtonSection": "नया सेक्शन जोड़ें",
+        "removeSection": "सेक्शन हटाएं",
+        "editorPlaceholder": "यहाँ अपना कंटेंट लिखें..."
       }
     },
     "actions": {
-      "addNewContent": "+ नई सामग्री जोड़ें",
-      "createContent": "सामग्री बनाएं",
+      "addNewContent": "+ नया कंटेंट जोड़ें",
+      "createContent": "कंटेंट बनाएं",
       "creating": "बनाया जा रहा है...",
-      "updateContent": "सामग्री अपडेट करें",
-      "updating": "अपडेट हो रहा है...",
-      "deleteContent": "सामग्री हटाएं"
+      "updateContent": "कंटेंट अपडेट करें",
+      "updating": "अपडेट किया जा रहा है...",
+      "deleteContent": "कंटेंट हटाएं"
     },
     "breadcrumb": {
-      "contentManagement": "सामग्री प्रबंधन",
-      "editContent": "सामग्री संपादित करें"
+      "contentManagement": "कंटेंट प्रबंधन",
+      "editContent": "कंटेंट संपादित करें"
     },
     "filters": {
       "allLevels": "सभी स्तर",
-      "allStatus": "सभी स्थितियां",
+      "allStatus": "सभी स्थिति",
       "allTypes": "सभी प्रकार",
       "active": "सक्रिय",
       "inactive": "निष्क्रिय",
@@ -971,23 +972,23 @@
       "loadingTopics": "विषय लोड हो रहे हैं..."
     },
     "validation": {
-      "programRequired": "कार्यक्रम आवश्यक है",
+      "programRequired": "प्रोग्राम आवश्यक है",
       "levelRequired": "स्तर आवश्यक है",
       "moduleRequired": "मॉड्यूल आवश्यक है",
       "chapterRequired": "अध्याय आवश्यक है",
       "topicRequired": "विषय आवश्यक है"
     },
     "success": {
-      "create": "शिक्षण सामग्री सफलतापूर्वक बनाई गई!",
-      "update": "शिक्षण सामग्री सफलतापूर्वक अपडेट हुई!",
-      "delete": "शिक्षण सामग्री सफलतापूर्वक हटाई गई!"
+      "create": "लर्निंग कंटेंट सफलतापूर्वक बनाया गया!",
+      "update": "लर्निंग कंटेंट सफलतापूर्वक अपडेट किया गया!",
+      "delete": "लर्निंग कंटेंट सफलतापूर्वक हटाया गया!"
     },
     "error": {
-      "create": "शिक्षण सामग्री बनाने में विफल। कृपया पुनः प्रयास करें।",
-      "update": "शिक्षण सामग्री अपडेट करने में विफल। कृपया पुनः प्रयास करें।",
-      "delete": "शिक्षण सामग्री हटाने में विफल। कृपया पुनः प्रयास करें।"
+      "create": "लर्निंग कंटेंट बनाने में विफल। कृपया फिर से प्रयास करें।",
+      "update": "लर्निंग कंटेंट अपडेट करने में विफल। कृपया फिर से प्रयास करें।",
+      "delete": "लर्निंग कंटेंट हटाने में विफल। कृपया फिर से प्रयास करें।"
     },
-    "noContentFound": "कोई सामग्री नहीं मिली"
+    "noContentFound": "कोई कंटेंट नहीं मिला"
   },
 
   "mediaLibrary": {
