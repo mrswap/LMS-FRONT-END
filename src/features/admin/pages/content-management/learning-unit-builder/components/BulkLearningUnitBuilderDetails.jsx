@@ -15,12 +15,15 @@ import { getAllChapters } from "../../../../../../redux/slice/chapterSlice";
 import { getAllTopics } from "../../../../../../redux/slice/topicSlice";
 import Breadcrumb from "../../../../common/layout/Breadcrumb";
 import {
+  deleteSingleContent,
   getBulkContentById,
-  //   deleteContent,
+  getContentById,
+  updateBulkContent,
 } from "../../../../../../redux/slice/unitBuilderSlice";
 import { useQuill } from "react-quilljs";
 import { FiImage, FiType } from "react-icons/fi";
 import Loader from "../../../../common/Loader";
+import { showConfirm } from "../../../../../../redux/slice/confirmSlice";
 
 const TextEditor = memo(({ value, onChange, id, isActive, t }) => {
   const { quill, quillRef } = useQuill({
@@ -374,52 +377,122 @@ const BulkLearningUnitBuilderDetails = () => {
   };
 
   // Delete content handler
-  const handleDeleteContent = async (index, contentId) => {
-    if (!contentId) {
-      toast.error(t("learningUnitBuilder.error.delete.noId"));
-      return;
-    }
+  // const handleDeleteContent = async (index, contentId) => {
+  //   console.log("indexId", index);
+  //   console.log("contentId", contentId);
 
-    // Show confirmation dialog
-    const confirmDelete = window.confirm(
-      t("learningUnitBuilder.details.content.deleteConfirm") ||
-        "Are you sure you want to delete this content?",
+  //   // if (!contentId) {
+  //   //   toast.error(t("learningUnitBuilder.error.delete.noId"));
+  //   //   return;
+  //   // }
+
+  //   // // Show confirmation dialog
+  //   // const confirmDelete = window.confirm(
+  //   //   t("learningUnitBuilder.details.content.deleteConfirm") ||
+  //   //     "Are you sure you want to delete this content?",
+  //   // );
+
+  //   // if (!confirmDelete) return;
+
+  //   // try {
+  //   //   // Call delete API
+  //   //   const result = await dispatch(deleteContent({ id: contentId })).unwrap();
+
+  //   //   if (result.success) {
+  //   //     // Remove from local state
+  //   //     setLocalContents((prev) => {
+  //   //       const updated = [...prev];
+  //   //       updated.splice(index, 1);
+  //   //       // Re-sort orders after deletion
+  //   //       return updated.map((item, idx) => ({
+  //   //         ...item,
+  //   //         order: idx + 1,
+  //   //       }));
+  //   //     });
+  //   //     toast.success(
+  //   //       t("learningUnitBuilder.success.delete") ||
+  //   //         "Content deleted successfully",
+  //   //     );
+  //   //   } else {
+  //   //     toast.error(result.message || t("learningUnitBuilder.error.delete"));
+  //   //   }
+  //   // } catch (error) {
+  //   //   toast.error(error?.message || t("learningUnitBuilder.error.delete"));
+  //   // }
+  // };
+
+  const handleDeleteContent = async (index, contentId) => {
+    const ok = await dispatch(
+      showConfirm({ message: t("learningUnitBuilder.details.deleteText") }),
     );
 
-    if (!confirmDelete) return;
+    if (!ok) return;
 
     try {
-      // Call delete API
-      const result = await dispatch(deleteContent({ id: contentId })).unwrap();
-
-      if (result.success) {
-        // Remove from local state
-        setLocalContents((prev) => {
-          const updated = [...prev];
-          updated.splice(index, 1);
-          // Re-sort orders after deletion
-          return updated.map((item, idx) => ({
-            ...item,
-            order: idx + 1,
-          }));
-        });
-        toast.success(
-          t("learningUnitBuilder.success.delete") ||
-            "Content deleted successfully",
-        );
-      } else {
-        toast.error(result.message || t("learningUnitBuilder.error.delete"));
-      }
+      await dispatch(
+        deleteSingleContent({ topicId: id, id: contentId }),
+      ).unwrap();
+      toast.success(t("learningUnitBuilder.success.delete"));
+      // setTimeout(() => {
+      //   navigate("/learning-unit");
+      // }, 1000);
+      dispatch(getBulkContentById({ id }));
     } catch (error) {
       toast.error(error?.message || t("learningUnitBuilder.error.delete"));
     }
   };
 
+  // const onSubmit = async (values, { setSubmitting, setErrors }) => {
+  //   try {
+  //     console.log("Contents to save:", localContents);
+  //     toast.success(t("learningUnitBuilder.success.update"));
+  //     navigate("/learning-unit");
+  //   } catch (error) {
+  //     setErrors({ submit: error.message });
+  //     toast.error(error?.message || t("learningUnitBuilder.error.update"));
+  //   } finally {
+  //     setSubmitting(false);
+  //   }
+  // };
+
   const onSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
-      console.log("Contents to save:", localContents);
+      const apiSections = localContents.map((section, index) => {
+        const apiSection = {
+          id: section.id, // IMPORTANT (update ke liye)
+          type: section.type,
+          title: section.title,
+          content:
+            section.type === "text" ? section.content : section.content || "",
+          order: index + 1,
+        };
+
+        if (section.type === "media" && section.media_shortcut) {
+          apiSection.meta = {
+            shortcode: section.media_shortcut,
+          };
+        }
+
+        return apiSection;
+      });
+
+      const payload = {
+        topic_id: values.topicName.value,
+        sections: apiSections,
+      };
+
+      // console.log("UPDATE PAYLOAD:", payload);
+      // console.log("values:", values);
+
+      const res = await dispatch(
+        updateBulkContent({
+          topicId: values.topicName.value,
+          data: payload,
+        }),
+      ).unwrap();
+
       toast.success(t("learningUnitBuilder.success.update"));
-      navigate("/learning-unit");
+      navigate("/topics");
     } catch (error) {
       setErrors({ submit: error.message });
       toast.error(error?.message || t("learningUnitBuilder.error.update"));

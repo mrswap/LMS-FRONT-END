@@ -141,12 +141,12 @@ const topicSlice = createSlice({
                 state.isSuccess = true;
                 state.message = action.payload.message;
 
-                const newTopic = action.payload.data;
+                // const newTopic = action.payload.data;
 
-                if (!Array.isArray(state.topics)) {
-                    state.topics = [];
-                }
-                state.topics.unshift(newTopic);
+                // if (!Array.isArray(state.topics)) {
+                //     state.topics = [];
+                // }
+                // state.topics.unshift(newTopic);
             })
             .addCase(createTopic.rejected, (state, action) => {
                 state.isLoading = false;
@@ -193,18 +193,18 @@ const topicSlice = createSlice({
                 state.isSuccess = true;
                 state.message = action.payload.message;
 
-                const updated = action.payload.data;
+                // const updated = action.payload.data;
 
 
-                if (Array.isArray(state.topics)) {
-                    const index = state.topics.findIndex(
-                        (t) => t.id === updated.id
-                    );
-                    if (index !== -1) {
-                        state.topics[index] = updated;
-                    }
-                }
-                state.topic = updated;
+                // if (Array.isArray(state.topics)) {
+                //     const index = state.topics.findIndex(
+                //         (t) => t.id === updated.id
+                //     );
+                //     if (index !== -1) {
+                //         state.topics[index] = updated;
+                //     }
+                // }
+                // state.topic = updated;
             })
             .addCase(updateTopicById.rejected, (state, action) => {
                 state.isLoading = false;
