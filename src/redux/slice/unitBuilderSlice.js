@@ -21,6 +21,43 @@ export const createBulkContent = createAsyncThunk(
     }
 );
 
+// ======================= UPDATE BULK =======================
+// export const updateBulkContent = createAsyncThunk(
+//     "content/updateBulk",
+//     async ({ topicId, data }, thunkAPI) => {
+//         try {
+//             const res = await axiosInstance.post(
+//                 `/content-topics/${topic_id}/contents/update-bulk`,
+//                 data,
+//                 getAuthConfig()
+//             );
+//             return res.data;
+//         } catch (error) {
+//             return thunkAPI.rejectWithValue(
+//                 error.response?.data || { message: "Updated failed" }
+//             );
+//         }
+//     }
+// );
+
+export const updateBulkContent = createAsyncThunk(
+    "content/updateBulk",
+    async ({ topicId, data }, thunkAPI) => {
+        try {
+            const res = await axiosInstance.patch(
+                `/content-topics/${topicId}/contents/update-bulk`,
+                data,
+                getAuthConfig()
+            );
+            return res.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(
+                error.response?.data || { message: "Updated failed" }
+            );
+        }
+    }
+);
+
 // ======================= GET ALL =======================
 export const getAllContents = createAsyncThunk(
     "content/getAll",
@@ -165,14 +202,30 @@ const unitBuilderSlice = createSlice({
                 state.isSuccess = true;
                 state.message = action.payload.message;
 
-                const newContent = action.payload.data;
+                // const newContent = action.payload.data;
 
-                if (!Array.isArray(state.contents)) {
-                    state.contents = [];
-                }
-                state.contents.unshift(newContent);
+                // if (!Array.isArray(state.contents)) {
+                //     state.contents = [];
+                // }
+                // state.contents.unshift(newContent);
             })
             .addCase(createBulkContent.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload?.message;
+            })
+
+            // ===== UPDATE-BULK =====
+            .addCase(updateBulkContent.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(updateBulkContent.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.message = action.payload.message;
+
+            })
+            .addCase(updateBulkContent.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
                 state.message = action.payload?.message;
@@ -234,15 +287,15 @@ const unitBuilderSlice = createSlice({
 
                 const updated = action.payload.data;
 
-                if (Array.isArray(state.contents)) {
-                    const index = state.contents.findIndex(
-                        (t) => t.id === updated.id
-                    );
-                    if (index !== -1) {
-                        state.contents[index] = updated;
-                    }
-                }
-                state.content = updated;
+                // if (Array.isArray(state.contents)) {
+                //     const index = state.contents.findIndex(
+                //         (t) => t.id === updated.id
+                //     );
+                //     if (index !== -1) {
+                //         state.contents[index] = updated;
+                //     }
+                // }
+                // state.content = updated;
             })
             .addCase(updateSingleContentById.rejected, (state, action) => {
                 state.isLoading = false;
