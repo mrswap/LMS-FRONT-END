@@ -92,15 +92,15 @@ const AdminSidebar = ({ isOpen, onClose }) => {
       ],
     },
 
-    {
-      icon: FiAward,
-      label: t("sidebar.trainingCertification"),
-      children: [
-        { label: t("sidebar.trainingAssignment"), path: "/training-assign" },
-        { label: t("sidebar.progressTracker"), path: "/progress" },
-        { label: t("sidebar.certification"), path: "/certification" },
-      ],
-    },
+    // {
+    //   icon: FiAward,
+    //   label: t("sidebar.trainingCertification"),
+    //   children: [
+    //     { label: t("sidebar.trainingAssignment"), path: "/training-assign" },
+    //     { label: t("sidebar.progressTracker"), path: "/progress" },
+    //     { label: t("sidebar.certification"), path: "/certification" },
+    //   ],
+    // },
 
     {
       icon: FiBarChart2,
