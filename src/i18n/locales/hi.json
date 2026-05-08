@@ -170,6 +170,7 @@
   "sidebar": {
     "dashboard": "डैशबोर्ड",
     "userManagement": "उपयोगकर्ता प्रबंधन",
+    "users": "उपयोगकर्ता",
     "assignTrainingProgram": "प्रशिक्षण कार्यक्रम असाइन करें",
     "trainingPrograms": "प्रशिक्षण कार्यक्रम",
     "programList": "कार्यक्रम सूची",

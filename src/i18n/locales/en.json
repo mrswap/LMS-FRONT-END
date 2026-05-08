@@ -170,6 +170,7 @@
   "sidebar": {
     "dashboard": "Dashboard",
     "userManagement": "User Management",
+    "users": "Users",
     "assignTrainingProgram": "Assign Training Program",
     "trainingPrograms": "Training Programs",
     "programList": "Program List",
