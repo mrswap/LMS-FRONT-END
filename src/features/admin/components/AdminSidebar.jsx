@@ -395,9 +395,8 @@ const AdminSidebar = ({ isOpen, onClose }) => {
       icon: FiUsers,
       label: t("sidebar.userManagement"),
       permission: "users.view",
-      children: [
-        { label: t("sidebar.assignTrainingProgram"), path: "/assign-training" },
-      ],
+      // path: "/assign-training",
+      children: [{ label: t("sidebar.users"), path: "/assign-training" }],
     },
 
     {

@@ -238,16 +238,16 @@ const userSlice = createSlice({
                 state.isSuccess = true;
                 state.message = action.payload.message;
 
-                const updated = action.payload.data;
+                // const updated = action.payload.data;
 
-                if (Array.isArray(state.users?.data)) {
-                    const index = state.users.data.findIndex(
-                        (t) => t.id === updated.id
-                    );
-                    if (index !== -1) {
-                        state.users.data[index] = updated;
-                    }
-                }
+                // if (Array.isArray(state.users?.data)) {
+                //     const index = state.users.data.findIndex(
+                //         (t) => t.id === updated.id
+                //     );
+                //     if (index !== -1) {
+                //         state.users.data[index] = updated;
+                //     }
+                // }
             })
             .addCase(updateSingleUserStatus.rejected, (state, action) => {
                 state.isLoading = false;
