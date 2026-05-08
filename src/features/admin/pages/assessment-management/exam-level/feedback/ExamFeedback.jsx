@@ -24,6 +24,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getAllTopics } from "../../../../../../redux/slice/topicSlice";
 import { getAllLevels } from "../../../../../../redux/slice/levelSlice";
+import usePermission from "../../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -36,6 +37,7 @@ const ExamFeedback = () => {
     (state) => state.assessment,
   );
 
+  const { hasPermission } = usePermission();
   const { users } = useSelector((state) => state.user);
   const { levels } = useSelector((state) => state.level);
   const { assessments } = useSelector((state) => state.assessment);
@@ -237,6 +239,10 @@ const ExamFeedback = () => {
 
   if (isLoading && !assessmentFeedbacks?.data?.length) return <Loader />;
   if (isError) return <Error message={message} />;
+
+  if (!hasPermission("feedbacks.view")) {
+    return null;
+  }
 
   return (
     <PageLayout>

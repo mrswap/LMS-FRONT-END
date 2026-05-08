@@ -123,10 +123,10 @@ const Error = ({
     : "w-full";
 
   const alertClasses = `
-    ${config.bgColor} 
-    ${config.borderColor} 
-    border-l-4 
-    rounded-lg 
+    ${config.bgColor}
+    ${config.borderColor}
+    border-l-4
+    rounded-lg
     shadow-lg
     ${fullScreen ? "max-w-md w-full" : "w-full"}
   `;
@@ -161,8 +161,8 @@ const Error = ({
                     className={`
                       inline-flex items-center px-3 py-1.5 text-sm font-medium
                       rounded-md transition-all duration-200
-                      ${config.textColor} 
-                      ${config.bgColor} 
+                      ${config.textColor}
+                      ${config.bgColor}
                       hover:bg-opacity-80
                       focus:outline-none focus:ring-2 focus:ring-offset-2
                       focus:ring-${type === "error" ? "red" : type === "warning" ? "yellow" : "blue"}-500
@@ -254,3 +254,209 @@ const Error = ({
 };
 
 export default Error;
+
+// import React, { useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// import { FiAlertCircle, FiRefreshCw, FiX, FiHome } from "react-icons/fi";
+// import { useDispatch } from "react-redux";
+// import { logout } from "../../../redux/slice/authSlice";
+
+// const Error = ({
+//   type = "error",
+//   title,
+//   message,
+//   onRetry,
+//   onDismiss,
+//   fullScreen = false,
+//   showIcon = true,
+//   showRetry = true,
+//   showDismiss = true,
+//   showHome = true,
+//   autoReload = false,
+//   reloadDelay = 5000,
+// }) => {
+//   const [isVisible, setIsVisible] = useState(true);
+//   const [countdown, setCountdown] = useState(reloadDelay / 1000);
+//   const navigate = useNavigate();
+//   const dispatch = useDispatch();
+
+//   // Function to check token from localStorage
+//   const getToken = () => {
+//     return localStorage.getItem("token"); // Adjust key name if different (e.g., "authToken", "userToken")
+//   };
+
+//   // Function to remove token from localStorage and dispatch logout action
+//   const handleLogout = () => {
+//     const token = getToken();
+//     if (token) {
+//       dispatch(logout());
+//     }
+//   };
+
+//   // Function to cleanup and redirect to login
+//   const cleanupAndRedirect = () => {
+//     handleLogout(); // Remove token if exists
+//     navigate("/login", { replace: true });
+//   };
+
+//   useEffect(() => {
+//     let intervalId;
+//     let timeoutId;
+
+//     if (isVisible) {
+//       // Countdown timer
+//       intervalId = setInterval(() => {
+//         setCountdown((prev) => {
+//           if (prev <= 1) {
+//             clearInterval(intervalId);
+//             return 0;
+//           }
+//           return prev - 1;
+//         });
+//       }, 1000);
+
+//       // Navigate to login after delay
+//       timeoutId = setTimeout(() => {
+//         cleanupAndRedirect();
+//       }, reloadDelay);
+//     }
+
+//     // Cleanup timers
+//     return () => {
+//       if (intervalId) clearInterval(intervalId);
+//       if (timeoutId) clearTimeout(timeoutId);
+//     };
+//   }, [isVisible, reloadDelay]);
+
+//   const handleDismiss = () => {
+//     setIsVisible(false);
+//     cleanupAndRedirect();
+//     if (onDismiss) onDismiss();
+//   };
+
+//   const handleRetry = () => {
+//     if (onRetry) {
+//       onRetry();
+//     } else {
+//       cleanupAndRedirect();
+//     }
+//   };
+
+//   const handleHome = () => {
+//     // Optional: clear token when going home
+//     // handleLogout();
+//     navigate("/");
+//   };
+
+//   if (!isVisible) return null;
+
+//   const alertConfig = {
+//     error: {
+//       bgColor: "bg-red-50",
+//       borderColor: "border-red-200",
+//       textColor: "text-red-800",
+//       iconColor: "text-red-500",
+//       title: "Error",
+//       icon: <FiAlertCircle />,
+//     },
+//     warning: {
+//       bgColor: "bg-yellow-50",
+//       borderColor: "border-yellow-200",
+//       textColor: "text-yellow-800",
+//       iconColor: "text-yellow-500",
+//       title: "Warning",
+//       icon: <FiAlertCircle />,
+//     },
+//     info: {
+//       bgColor: "bg-blue-50",
+//       borderColor: "border-blue-200",
+//       textColor: "text-blue-800",
+//       iconColor: "text-blue-500",
+//       title: "Info",
+//       icon: <FiAlertCircle />,
+//     },
+//   };
+
+//   const config = alertConfig[type] || alertConfig.error;
+//   const displayTitle = title || config.title;
+
+//   return (
+//     <div
+//       className={
+//         fullScreen
+//           ? "fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+//           : "w-full"
+//       }
+//     >
+//       <div
+//         className={`border-l-4 rounded-lg shadow-lg p-5 w-full max-w-md mx-auto
+//         ${config.bgColor} ${config.borderColor}`}
+//       >
+//         <div className="flex items-start gap-3">
+//           {/* Icon */}
+//           {showIcon && (
+//             <div className={`text-xl ${config.iconColor}`}>{config.icon}</div>
+//           )}
+
+//           <div className="flex-1">
+//             {/* Title */}
+//             <h3 className={`text-lg font-semibold ${config.textColor}`}>
+//               {displayTitle}
+//             </h3>
+
+//             {/* Message - Always shows "Something went wrong" */}
+//             <p className={`mt-1 text-sm ${config.textColor}`}>
+//               Something went wrong. Please try again some time.
+//             </p>
+
+//             {/* Auto navigation countdown */}
+//             {countdown > 0 && (
+//               <p className={`mt-2 text-xs ${config.textColor} opacity-75`}>
+//                 Redirecting to login page in {countdown} second
+//                 {countdown !== 1 ? "s" : ""}...
+//               </p>
+//             )}
+
+//             {/* Buttons */}
+//             <div className="mt-4 flex flex-wrap gap-2">
+//               {/* Dismiss button */}
+//               {showDismiss && (
+//                 <button
+//                   onClick={handleDismiss}
+//                   className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-md bg-gray-100 hover:bg-gray-200 transition-colors"
+//                 >
+//                   <FiX className="text-sm" />
+//                   Dismiss
+//                 </button>
+//               )}
+
+//               {/* Retry button - now navigates to login */}
+//               {showRetry && (
+//                 <button
+//                   onClick={handleRetry}
+//                   className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-md bg-gray-100 hover:bg-gray-200 transition-colors"
+//                 >
+//                   <FiRefreshCw className="text-sm" />
+//                   Try Again
+//                 </button>
+//               )}
+
+//               {/* Home button - navigates to home */}
+//               {showHome && (
+//                 <button
+//                   onClick={handleHome}
+//                   className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-md text-white bg-accent hover:opacity-90 transition-opacity"
+//                 >
+//                   <FiHome className="text-sm" />
+//                   Home
+//                 </button>
+//               )}
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Error;

@@ -218,6 +218,57 @@
     "logout": "लॉगआउट"
   },
 
+  "dashboard": {
+    "title": "डैशबोर्ड",
+    "subtitle": "वापस खुशामदीद! आपके लर्निंग प्लेटफॉर्म पर क्या हो रहा है, यहाँ देखें।",
+    "refresh": "रीफ्रेश करें",
+    "lastUpdated": "आखिरी बार अपडेट किया गया",
+    "total": "कुल",
+    "published": "प्रकाशित",
+    "draft": "ड्राफ्ट",
+    "unpublished": "अप्रकाशित",
+    "overview": "समान अवलोकन",
+    "totalUsers": "कुल उपयोगकर्ता",
+    "activeUsers": "सक्रिय उपयोगकर्ता",
+    "totalPrograms": "कुल प्रोग्राम",
+    "totalModules": "कुल मॉड्यूल",
+    "totalChapters": "कुल अध्याय",
+    "totalTopics": "कुल विषय",
+    "totalContents": "कुल सामग्री",
+    "totalAssessments": "कुल मूल्यांकन",
+    "learningFunnel": "सीखने का फ़नल",
+    "notStarted": "शुरू नहीं हुआ",
+    "started": "शुरू हुआ",
+    "inProgress": "जारी है",
+    "completed": "पूरा हुआ",
+    "engagementMetrics": "सांख्यिकी मेट्रिक्स",
+    "dailyActive": "रोज़ाना सक्रिय",
+    "weeklyActive": "साप्ताहिक सक्रिय",
+    "monthlyActive": "मासिक सक्रिय",
+    "contentReadsToday": "आज कंटेंट पढ़े गए",
+    "publishingPipeline": "प्रकाशन पाइपलाइन",
+    "programs": "प्रोग्राम",
+    "levels": "स्तर",
+    "modules": "मॉड्यूल",
+    "chapters": "अध्याय",
+    "topics": "विषय",
+    "contents": "सामग्री",
+    "assessmentAnalytics": "मूल्यांकन एनालिटिक्स",
+    "totalAttempts": "कुल प्रयास",
+    "passRate": "उत्तीर्ण दर",
+    "avgScore": "औसत अंक",
+    "topicQuizAvg": "विषय क्विज़ औसत",
+    "mostFailedAssessments": "सबसे ज़्यादा फेल मूल्यांकन",
+    "fails": "फेल",
+    "riskIndicators": "जोखिम संकेतक",
+    "inactiveUsers": "निष्क्रिय उपयोगकर्ता (7+ दिन)",
+    "programsWithHighDrafts": "अधिक ड्राफ्ट वाले प्रोग्राम",
+    "drafts": "ड्राफ्ट",
+    "programAnalytics": "प्रोग्राम एनालिटिक्स",
+    "activeLearners": "सक्रिय शिक्षार्थी",
+    "completionRate": "पूर्णता दर"
+  },
+
   "userManagement": {
     "list": {
       "title": "उपयोगकर्ता प्रबंधन",
@@ -393,6 +444,15 @@
     }
   },
 
+  "publishedDropdown": {
+    "status": {
+      "title": "दृश्यता",
+      "draft": "ड्राफ्ट",
+      "unpublished": "अप्रकाशित",
+      "published": "प्रकाशित"
+    }
+  },
+
   "program": {
     "list": {
       "title": "कार्यक्रम प्रबंधन",
@@ -547,7 +607,11 @@
     "filters": {
       "allStatus": "सभी स्थितियां",
       "active": "सक्रिय",
-      "inactive": "निष्क्रिय"
+      "inactive": "निष्क्रिय",
+      "allVisibility": "सभी दृश्यता",
+      "published": "प्रकाशित",
+      "unpublished": "अप्रकाशित",
+      "draft": "ड्राफ्ट"
     },
     "stats": {
       "totalLevels": {
@@ -648,7 +712,11 @@
       "allStatus": "सभी स्थितियां",
       "allLevels": "सभी स्तर",
       "active": "सक्रिय",
-      "inactive": "निष्क्रिय"
+      "inactive": "निष्क्रिय",
+      "allVisibility": "सभी दृश्यता",
+      "published": "प्रकाशित",
+      "unpublished": "अप्रकाशित",
+      "draft": "ड्राफ्ट"
     },
     "stats": {
       "totalModules": {
@@ -749,7 +817,11 @@
       "active": "सक्रिय",
       "inactive": "निष्क्रिय",
       "selectLevelFirst": "पहले स्तर चुनें",
-      "selectModule": "मॉड्यूल चुनें"
+      "selectModule": "मॉड्यूल चुनें",
+      "allVisibility": "सभी दृश्यता",
+      "published": "प्रकाशित",
+      "unpublished": "अप्रकाशित",
+      "draft": "ड्राफ्ट"
     },
     "stats": {
       "totalChapters": {
@@ -860,7 +932,11 @@
       "selectLevelFirst": "पहले स्तर चुनें",
       "selectModule": "मॉड्यूल चुनें",
       "selectModuleFirst": "पहले मॉड्यूल चुनें",
-      "selectChapter": "अध्याय चुनें"
+      "selectChapter": "अध्याय चुनें",
+      "allVisibility": "सभी दृश्यता",
+      "published": "प्रकाशित",
+      "unpublished": "अप्रकाशित",
+      "draft": "ड्राफ्ट"
     },
     "stats": {
       "totalTopics": {
@@ -969,7 +1045,11 @@
       "selectTopic": "विषय चुनें",
       "loadingModules": "मॉड्यूल लोड हो रहे हैं...",
       "loadingChapters": "अध्याय लोड हो रहे हैं...",
-      "loadingTopics": "विषय लोड हो रहे हैं..."
+      "loadingTopics": "विषय लोड हो रहे हैं...",
+      "allVisibility": "सभी दृश्यता",
+      "published": "प्रकाशित",
+      "unpublished": "अप्रकाशित",
+      "draft": "ड्राफ्ट"
     },
     "validation": {
       "programRequired": "प्रोग्राम आवश्यक है",
@@ -989,6 +1069,26 @@
       "delete": "लर्निंग कंटेंट हटाने में विफल। कृपया फिर से प्रयास करें।"
     },
     "noContentFound": "कोई कंटेंट नहीं मिला"
+  },
+
+  "singlePreviewContent": {
+    "types": {
+      "text": "टेक्स्ट",
+      "video": "वीडियो",
+      "pdf": "पीडीएफ",
+      "audio": "ऑडियो",
+      "image": "छवि"
+    },
+    "pdf": {
+      "title": "पीडीएफ दस्तावेज़",
+      "download": "डाउनलोड करें"
+    },
+    "notFound": {
+      "title": "सामग्री नहीं मिली",
+      "description": "आप जिस सामग्री को खोज रहे हैं वह मौजूद नहीं है या हटा दी गई है।",
+      "button": "वापस जाएं"
+    },
+    "unsupported": "असमर्थित सामग्री प्रकार:"
   },
 
   "mediaLibrary": {
@@ -1700,40 +1800,40 @@
 
   "role": {
     "list": {
-      "title": "भूमिकाएं और अनुमतियां",
-      "subtitle": "स्टाफ और शिक्षार्थियों के लिए पहुंच स्तर और कार्यात्मक अनुमतियां परिभाषित करें।",
-      "searchPlaceholder": "भूमिका नाम से खोजें...",
-      "clearAll": "सब हटाएं",
+      "title": "भूमिकाएँ और अनुमतियाँ",
+      "subtitle": "स्टाफ और शिक्षार्थियों के लिए पहुँच स्तर और कार्यात्मक अनुमतियाँ परिभाषित करें।",
+      "searchPlaceholder": "भूमिका के नाम से खोजें...",
+      "clearAll": "सभी साफ़ करें",
       "columns": {
-        "id": "ID",
+        "id": "आईडी",
         "name": "नाम",
         "status": "स्थिति",
-        "actions": "क्रियाएं"
+        "actions": "कार्य"
       }
     },
     "details": {
       "name": "नाम",
-      "namePlaceholder": "भूमिका नाम दर्ज करें",
+      "namePlaceholder": "भूमिका का नाम दर्ज करें",
       "label": "लेबल",
       "labelPlaceholder": "लेबल नाम दर्ज करें",
       "email": "ईमेल पता",
       "deleteText": "क्या आप वाकई इस भूमिका को हटाना चाहते हैं?"
     },
     "create": {
-      "title": "नई भूमिका बनाएं",
-      "subtitle": "भूमिका बनाएं"
+      "title": "नई भूमिका बनाएँ",
+      "subtitle": "भूमिका बनाएँ"
     },
     "actions": {
-      "addNewRole": "+ नई भूमिका जोड़ें",
-      "deleteRole": "भूमिका हटाएं",
+      "addNewRole": "+ नई भूमिका शामिल करें",
+      "deleteRole": "भूमिका हटाएँ",
       "cancle": "रद्द करें",
-      "createRole": "भूमिका बनाएं",
-      "creating": "बनाया जा रहा है...",
+      "createRole": "भूमिका बनाएँ",
+      "creating": "बना रहे हैं...",
       "updateRole": "भूमिका अपडेट करें",
-      "updating": "अपडेट हो रहा है..."
+      "updating": "अपडेट कर रहे हैं..."
     },
     "breadcrumb": {
-      "role": "भूमिकाएं और अनुमतियां",
+      "role": "भूमिकाएँ और अनुमतियाँ",
       "viewRole": "भूमिका देखें"
     },
     "validation": {
@@ -1741,19 +1841,26 @@
       "labelRequired": "लेबल आवश्यक है"
     },
     "filters": {
-      "allStatus": "सभी स्थितियां",
+      "allStatus": "सभी स्थितियाँ",
       "active": "सक्रिय",
       "inactive": "निष्क्रिय"
     },
+    "permissions": {
+      "title": "अनुमतियाँ",
+      "subtitle": "इस भूमिका के लिए अनुमतियाँ चुनें",
+      "selectAll": "सभी चुनें",
+      "deselectAll": "सभी हटाएँ",
+      "loading": "अनुमतियाँ लोड हो रही हैं..."
+    },
     "success": {
-      "create": "भूमिका सफलतापूर्वक बनाई गई!",
-      "update": "भूमिका सफलतापूर्वक अपडेट हुई!",
-      "delete": "भूमिका सफलतापूर्वक हटाई गई!"
+      "create": "भूमिका सफलतापूर्वक बना दी गई!",
+      "update": "भूमिका सफलतापूर्वक अपडेट हो गई!",
+      "delete": "भूमिका सफलतापूर्वक हटा दी गई!"
     },
     "error": {
-      "create": "भूमिका बनाने में विफल। कृपया पुनः प्रयास करें।",
-      "update": "भूमिका अपडेट करने में विफल। कृपया पुनः प्रयास करें।",
-      "delete": "भूमिका हटाने में विफल। कृपया पुनः प्रयास करें।"
+      "create": "भूमिका बनाना विफल। कृपया पुनः प्रयास करें।",
+      "update": "भूमिका अपडेट करना विफल। कृपया पुनः प्रयास करें।",
+      "delete": "भूमिका हटाना विफल। कृपया पुनः प्रयास करें।"
     }
   },
 
@@ -1876,18 +1983,19 @@
 
   "systemSettings": {
     "title": "सिस्टम सेटिंग्स",
-    "subtitle": "अपनी एप्लिकेशन सेटिंग्स प्रबंधित करें",
+    "subtitle": "अपने एप्लिकेशन की सेटिंग्स प्रबंधित करें",
     "sections": {
-      "companyInfo": "कंपनी जानकारी",
+      "companyInfo": "कंपनी की जानकारी",
       "appLinks": "ऐप लिंक",
       "contactInfo": "संपर्क जानकारी",
       "socialLinks": "सोशल मीडिया लिंक",
-      "footer": "फ़ुटर",
-      "contentPages": "सामग्री पेज"
+      "footer": "फूटर",
+      "contentPages": "सामग्री पृष्ठ",
+      "firebaseConfig": "फायरबेस कॉन्फ़िगरेशन"
     },
     "fields": {
       "companyLogo": "कंपनी लोगो",
-      "companyBio": "कंपनी परिचय",
+      "companyBio": "कंपनी बायो",
       "iosStore": "iOS स्टोर URL",
       "iosDownload": "iOS डाउनलोड URL",
       "androidStore": "Android स्टोर URL",
@@ -1900,13 +2008,14 @@
       "linkedin": "LinkedIn URL",
       "instagram": "Instagram URL",
       "twitter": "Twitter URL",
-      "footerText": "फ़ुटर टेक्स्ट",
+      "footerText": "फूटर टेक्स्ट",
       "aboutUs": "हमारे बारे में",
       "privacyPolicy": "गोपनीयता नीति",
-      "termsConditions": "नियम और शर्तें"
+      "termsConditions": "नियम और शर्तें",
+      "firebaseJson": "Firebase JSON कॉन्फ़िगरेशन"
     },
     "placeholders": {
-      "companyBio": "कंपनी परिचय दर्ज करें (अधिकतम 500 अक्षर)",
+      "companyBio": "कंपनी बायो दर्ज करें (अधिकतम 500 अक्षर)",
       "iosStore": "https://apps.apple.com/app/id...",
       "iosDownload": "https://yourdomain.com/ios-app.apk",
       "androidStore": "https://play.google.com/store/apps/details?id=...",
@@ -1919,7 +2028,8 @@
       "linkedin": "https://linkedin.com/company/company",
       "instagram": "https://instagram.com/company",
       "twitter": "https://x.com/company",
-      "footerText": "© 2026 कंपनी नाम"
+      "footerText": "© 2026 कंपनी का नाम",
+      "firebaseJson": "अपना Firebase config JSON यहाँ पेस्ट करें..."
     },
     "actions": {
       "uploadLogo": "लोगो अपलोड करें",
@@ -1928,15 +2038,17 @@
       "saving": "सहेजा जा रहा है..."
     },
     "validation": {
-      "bioMax": "कंपनी परिचय 500 अक्षरों से अधिक नहीं होना चाहिए",
+      "bioMax": "कंपनी बायो 500 अक्षरों से अधिक नहीं होनी चाहिए",
       "phoneInvalid": "कृपया एक वैध फ़ोन नंबर दर्ज करें",
       "emailInvalid": "कृपया एक वैध ईमेल पता दर्ज करें",
       "urlInvalid": "कृपया एक वैध URL दर्ज करें",
       "imageType": "कृपया एक वैध छवि फ़ाइल अपलोड करें",
-      "imageSize": "छवि का आकार 2MB से कम होना चाहिए"
+      "imageSize": "छवि का आकार 2MB से कम होना चाहिए",
+      "firebaseRequired": "Firebase कॉन्फ़िगरेशन आवश्यक है",
+      "firebaseInvalid": "अमान्य JSON प्रारूप। कृपया अपना Firebase कॉन्फ़िगरेशन जांचें"
     },
     "success": {
-      "update": "सेटिंग्स सफलतापूर्वक अपडेट हुईं"
+      "update": "सेटिंग्स सफलतापूर्वक अपडेट हो गईं"
     },
     "error": {
       "update": "सेटिंग्स अपडेट करने में विफल"

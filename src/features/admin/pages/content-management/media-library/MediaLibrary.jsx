@@ -15,6 +15,7 @@ import { getAllMedia } from "../../../../../redux/slice/mediaLibrarySlice";
 import { FiSearch } from "react-icons/fi";
 import Loader from "../../../common/Loader";
 import Error from "../../../common/Error";
+import usePermission from "../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -26,6 +27,7 @@ const MediaLibrary = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { hasPermission } = usePermission();
 
   const { media, isLoading, isError, message } = useSelector(
     (state) => state.media,
@@ -89,6 +91,10 @@ const MediaLibrary = () => {
   if (isLoading && !media?.length) return <Loader />;
   if (isError) return <Error message={message} />;
 
+  if (!hasPermission("media.view")) {
+    return null;
+  }
+
   return (
     <PageLayout>
       <PageHeader>
@@ -98,12 +104,14 @@ const MediaLibrary = () => {
         </PageHeaderLeft>
 
         <PageHeaderRight>
-          <Link
-            to="create-media"
-            className="bg-accent text-white whitespace-nowrap px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition"
-          >
-            {t("mediaLibrary.actions.uploadMedia")}
-          </Link>
+          {hasPermission("media.create") && (
+            <Link
+              to="create-media"
+              className="bg-accent text-white whitespace-nowrap px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition"
+            >
+              {t("mediaLibrary.actions.uploadMedia")}
+            </Link>
+          )}
         </PageHeaderRight>
       </PageHeader>
 

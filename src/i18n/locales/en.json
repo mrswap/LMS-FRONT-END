@@ -218,6 +218,57 @@
     "logout": "Logout"
   },
 
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Welcome back! Here's what's happening with your learning platform.",
+    "refresh": "Refresh",
+    "lastUpdated": "Last updated",
+    "total": "Total",
+    "published": "Published",
+    "draft": "Draft",
+    "unpublished": "Unpublished",
+    "overview": "Overview",
+    "totalUsers": "Total Users",
+    "activeUsers": "Active Users",
+    "totalPrograms": "Total Programs",
+    "totalModules": "Total Modules",
+    "totalChapters": "Total Chapters",
+    "totalTopics": "Total Topics",
+    "totalContents": "Total Contents",
+    "totalAssessments": "Total Assessments",
+    "learningFunnel": "Learning Funnel",
+    "notStarted": "Not Started",
+    "started": "Started",
+    "inProgress": "In Progress",
+    "completed": "Completed",
+    "engagementMetrics": "Engagement Metrics",
+    "dailyActive": "Daily Active",
+    "weeklyActive": "Weekly Active",
+    "monthlyActive": "Monthly Active",
+    "contentReadsToday": "Content Reads Today",
+    "publishingPipeline": "Publishing Pipeline",
+    "programs": "Programs",
+    "levels": "Levels",
+    "modules": "Modules",
+    "chapters": "Chapters",
+    "topics": "Topics",
+    "contents": "Contents",
+    "assessmentAnalytics": "Assessment Analytics",
+    "totalAttempts": "Total Attempts",
+    "passRate": "Pass Rate",
+    "avgScore": "Avg Score",
+    "topicQuizAvg": "Topic Quiz Avg",
+    "mostFailedAssessments": "Most Failed Assessments",
+    "fails": "fails",
+    "riskIndicators": "Risk Indicators",
+    "inactiveUsers": "Inactive Users (7+ days)",
+    "programsWithHighDrafts": "Programs with High Drafts",
+    "drafts": "drafts",
+    "programAnalytics": "Program Analytics",
+    "activeLearners": "Active Learners",
+    "completionRate": "Completion Rate"
+  },
+
   "userManagement": {
     "list": {
       "title": "User Management",
@@ -393,6 +444,15 @@
     }
   },
 
+  "publishedDropdown": {
+    "status": {
+      "title": "Visibility",
+      "draft": "Draft",
+      "unpublished": "Unpublished",
+      "published": "Published"
+    }
+  },
+
   "program": {
     "list": {
       "title": "Program Management",
@@ -547,7 +607,11 @@
     "filters": {
       "allStatus": "All Status",
       "active": "Active",
-      "inactive": "Inactive"
+      "inactive": "Inactive",
+      "allVisibility": "All Visibility",
+      "published": "Published",
+      "unpublished": "Unpublished",
+      "draft": "Draft"
     },
     "stats": {
       "totalLevels": {
@@ -648,7 +712,11 @@
       "allStatus": "All Status",
       "allLevels": "All Levels",
       "active": "Active",
-      "inactive": "Inactive"
+      "inactive": "Inactive",
+      "allVisibility": "All Visibility",
+      "published": "Published",
+      "unpublished": "Unpublished",
+      "draft": "Draft"
     },
     "stats": {
       "totalModules": {
@@ -749,7 +817,11 @@
       "active": "Active",
       "inactive": "Inactive",
       "selectLevelFirst": "Select level first",
-      "selectModule": "Select module"
+      "selectModule": "Select module",
+      "allVisibility": "All Visibility",
+      "published": "Published",
+      "unpublished": "Unpublished",
+      "draft": "Draft"
     },
     "stats": {
       "totalChapters": {
@@ -860,7 +932,11 @@
       "selectLevelFirst": "Select level first",
       "selectModule": "Select module",
       "selectModuleFirst": "Select module first",
-      "selectChapter": "Select chapter"
+      "selectChapter": "Select chapter",
+      "allVisibility": "All Visibility",
+      "published": "Published",
+      "unpublished": "Unpublished",
+      "draft": "Draft"
     },
     "stats": {
       "totalTopics": {
@@ -969,7 +1045,11 @@
       "selectTopic": "Select topic",
       "loadingModules": "Loading modules...",
       "loadingChapters": "Loading chapters...",
-      "loadingTopics": "Loading topics..."
+      "loadingTopics": "Loading topics...",
+      "allVisibility": "All Visibility",
+      "published": "Published",
+      "unpublished": "Unpublished",
+      "draft": "Draft"
     },
     "validation": {
       "programRequired": "Program is required",
@@ -989,6 +1069,26 @@
       "delete": "Failed to delete learning content. Please try again."
     },
     "noContentFound": "No content found"
+  },
+
+  "singlePreviewContent": {
+    "types": {
+      "text": "Text",
+      "video": "Video",
+      "pdf": "PDF",
+      "audio": "Audio",
+      "image": "Image"
+    },
+    "pdf": {
+      "title": "PDF Document",
+      "download": "Download"
+    },
+    "notFound": {
+      "title": "Content Not Found",
+      "description": "The content you're looking for doesn't exist or has been removed.",
+      "button": "Go Back"
+    },
+    "unsupported": "Unsupported content type:"
   },
 
   "mediaLibrary": {
@@ -1745,6 +1845,13 @@
       "active": "Active",
       "inactive": "Inactive"
     },
+    "permissions": {
+      "title": "Permissions",
+      "subtitle": "Select the permissions for this role",
+      "selectAll": "Select All",
+      "deselectAll": "Deselect All",
+      "loading": "Loading permissions..."
+    },
     "success": {
       "create": "Role created successfully!",
       "update": "Role updated successfully!",
@@ -1883,7 +1990,8 @@
       "contactInfo": "Contact Information",
       "socialLinks": "Social Media Links",
       "footer": "Footer",
-      "contentPages": "Content Pages"
+      "contentPages": "Content Pages",
+      "firebaseConfig": "Firebase Configuration"
     },
     "fields": {
       "companyLogo": "Company Logo",
@@ -1903,7 +2011,8 @@
       "footerText": "Footer Text",
       "aboutUs": "About Us",
       "privacyPolicy": "Privacy Policy",
-      "termsConditions": "Terms & Conditions"
+      "termsConditions": "Terms & Conditions",
+      "firebaseJson": "Firebase JSON Configuration"
     },
     "placeholders": {
       "companyBio": "Enter company bio (max 500 characters)",
@@ -1919,7 +2028,8 @@
       "linkedin": "https://linkedin.com/company/company",
       "instagram": "https://instagram.com/company",
       "twitter": "https://x.com/company",
-      "footerText": "© 2026 Company Name"
+      "footerText": "© 2026 Company Name",
+      "firebaseJson": "Paste your Firebase config JSON here..."
     },
     "actions": {
       "uploadLogo": "Upload Logo",
@@ -1933,7 +2043,9 @@
       "emailInvalid": "Please enter a valid email address",
       "urlInvalid": "Please enter a valid URL",
       "imageType": "Please upload a valid image file",
-      "imageSize": "Image size should be less than 2MB"
+      "imageSize": "Image size should be less than 2MB",
+      "firebaseRequired": "Firebase configuration is required",
+      "firebaseInvalid": "Invalid JSON format. Please check your Firebase configuration"
     },
     "success": {
       "update": "Settings updated successfully"

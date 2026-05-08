@@ -14,6 +14,7 @@ import {
   getDesignationById,
   updateDesignationById,
 } from "../../../../../../redux/slice/designationSlice";
+import usePermission from "../../../../../../hooks/usePermission";
 
 const DesignationDetails = () => {
   const { t } = useTranslation();
@@ -22,8 +23,7 @@ const DesignationDetails = () => {
   const { id } = useParams();
   const toast = useToast();
   const { designation } = useSelector((state) => state.designation);
-
-  console.log("designation:", designation);
+  const { hasPermission } = usePermission();
 
   useEffect(() => {
     dispatch(getDesignationById(id));
@@ -109,22 +109,27 @@ const DesignationDetails = () => {
               </div>
 
               <div className="flex justify-end gap-3">
-                <button
-                  type="button"
-                  onClick={handleDelete}
-                  className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-red-50 cursor-pointer transition-colors"
-                >
-                  {t("designation.actions.deleteDesignation")}
-                </button>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="bg-accent text-white px-4 py-2 rounded cursor-pointer hover:bg-opacity-90 transition"
-                >
-                  {isSubmitting
-                    ? t("designation.actions.updating")
-                    : t("designation.actions.updateDesignation")}
-                </button>
+                {hasPermission("designations.delete") && (
+                  <button
+                    type="button"
+                    onClick={handleDelete}
+                    className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-red-50 cursor-pointer transition-colors"
+                  >
+                    {t("designation.actions.deleteDesignation")}
+                  </button>
+                )}
+
+                {hasPermission("designations.edit") && (
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="bg-accent text-white px-4 py-2 rounded cursor-pointer hover:bg-opacity-90 transition"
+                  >
+                    {isSubmitting
+                      ? t("designation.actions.updating")
+                      : t("designation.actions.updateDesignation")}
+                  </button>
+                )}
               </div>
             </Form>
           )}

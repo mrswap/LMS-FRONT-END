@@ -23,11 +23,13 @@ import {
 import { showConfirm } from "../../../../../../../redux/slice/confirmSlice";
 import Breadcrumb from "../../../../../common/layout/Breadcrumb";
 import Loader from "../../../../../common/Loader";
+import usePermission from "../../../../../../../hooks/usePermission";
 
 const ExamAssessmentDetails = () => {
   const [thumbnail, setThumbnail] = useState(null);
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
   const fileInputRef = useRef(null);
+  const { hasPermission } = usePermission();
 
   const { assessment, isLoading } = useSelector((state) => state.assessment);
 
@@ -447,22 +449,27 @@ const ExamAssessmentDetails = () => {
 
                 <div className="flex justify-end items-center pt-4">
                   <div className="flex gap-3">
-                    <button
-                      type="button"
-                      onClick={handleDelete}
-                      className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-gray-50"
-                    >
-                      {t("examAssessment.actions.deleteExam")}
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
-                    >
-                      {isSubmitting
-                        ? t("examAssessment.actions.updating")
-                        : t("examAssessment.actions.updateExam")}
-                    </button>
+                    {hasPermission("assessments.delete") && (
+                      <button
+                        type="button"
+                        onClick={handleDelete}
+                        className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-gray-50"
+                      >
+                        {t("examAssessment.actions.deleteExam")}
+                      </button>
+                    )}
+
+                    {hasPermission("assessments.edit") && (
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
+                      >
+                        {isSubmitting
+                          ? t("examAssessment.actions.updating")
+                          : t("examAssessment.actions.updateExam")}
+                      </button>
+                    )}
                   </div>
                 </div>
               </Form>

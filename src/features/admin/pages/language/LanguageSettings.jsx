@@ -3,6 +3,7 @@ import CustomeTable from "../../common/table/CustomeTable";
 import { FiSearch } from "react-icons/fi";
 import i18n from "../../../../i18n/index";
 import { useTranslation } from "react-i18next";
+import usePermission from "../../../../hooks/usePermission";
 
 const initialLanguages = [
   { id: "LANG001", name: "ENGLISH", status: "Active" },
@@ -49,6 +50,7 @@ const CheckIcon = () => (
 
 export default function LanguageManagement() {
   const { t } = useTranslation();
+  const { hasPermission } = usePermission();
 
   const [languages, setLanguages] = useState(() => {
     const saved = localStorage.getItem("languages");
@@ -125,6 +127,10 @@ export default function LanguageManagement() {
     setNewLang({ id: "", name: "", status: "Inactive" });
     setShowModal(false);
   };
+
+  if (!hasPermission("languages.view")) {
+    return null;
+  }
 
   return (
     <div className="">

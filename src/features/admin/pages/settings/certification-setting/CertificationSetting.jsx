@@ -31,6 +31,7 @@ import { useToast } from "../../../common/toast/ToastContext";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
+import usePermission from "../../../../../hooks/usePermission";
 
 const CertificationSetting = () => {
   const { t } = useTranslation();
@@ -43,6 +44,7 @@ const CertificationSetting = () => {
   const [copiedVariable, setCopiedVariable] = useState(null);
   const fileInputRef = useRef(null);
   const signatureInputRef = useRef(null);
+  const { hasPermission } = usePermission();
 
   const { quill, quillRef } = useQuill({
     theme: "snow",
@@ -219,6 +221,10 @@ const CertificationSetting = () => {
     footer_text: Yup.string().max(500),
     content: Yup.string(),
   });
+
+  if (!hasPermission("certificate-settings.view")) {
+    return null;
+  }
 
   return (
     <PageLayout>
@@ -587,16 +593,18 @@ const CertificationSetting = () => {
 
                   {/* Action Buttons */}
                   <div className="flex justify-end gap-3 pt-4">
-                    <button
-                      type="submit"
-                      disabled={isSubmitting || isSaving}
-                      className="px-6 py-2 bg-accent hover:opacity-90 cursor-pointer text-white rounded-md transition-colors flex items-center gap-2 disabled:opacity-50"
-                    >
-                      <FiSave size={16} />
-                      {isSubmitting || isSaving
-                        ? t("certificateSetting.buttons.saving")
-                        : t("certificateSetting.buttons.saveSettings")}
-                    </button>
+                    {hasPermission("certificate-settings.edit") && (
+                      <button
+                        type="submit"
+                        disabled={isSubmitting || isSaving}
+                        className="px-6 py-2 bg-accent hover:opacity-90 cursor-pointer text-white rounded-md transition-colors flex items-center gap-2 disabled:opacity-50"
+                      >
+                        <FiSave size={16} />
+                        {isSubmitting || isSaving
+                          ? t("certificateSetting.buttons.saving")
+                          : t("certificateSetting.buttons.saveSettings")}
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

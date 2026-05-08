@@ -26,6 +26,9 @@ import Error from "../../../common/Error";
 import TruncateText from "../../../common/TruncateText";
 import StatusToggle from "../../../common/StatusToggle";
 import { LuFilterX } from "react-icons/lu";
+import PublishedDropdown from "../../../common/PublishedDropdown";
+import { updatePublishStatus } from "../../../../../redux/slice/commonSlice";
+import usePermission from "../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -50,6 +53,13 @@ const Chapters = () => {
     { value: "all", label: t("chapter.filters.allStatus") },
     { value: "1", label: t("chapter.filters.active") },
     { value: "0", label: t("chapter.filters.inactive") },
+  ];
+
+  const publishStatusOptions = [
+    { value: "all", label: t("chapter.filters.allVisibility") },
+    { value: "published", label: t("chapter.filters.published") },
+    { value: "unpublished", label: t("chapter.filters.unpublished") },
+    { value: "draft", label: t("chapter.filters.draft") },
   ];
 
   const getFilteredModuleOptions = () => {
@@ -81,10 +91,13 @@ const Chapters = () => {
   });
   const [level, setLevel] = useState(levelOption[0]);
   const [status, setStatus] = useState(statusOptions[0]);
+  const [publish_status, setPublishStatus] = useState(publishStatusOptions[0]);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [isLevelsLoaded, setIsLevelsLoaded] = useState(false);
   const navigate = useNavigate();
+
+  const { hasPermission } = usePermission();
 
   // Reset module filter when level changes
   useEffect(() => {
@@ -113,6 +126,8 @@ const Chapters = () => {
       level_id: level?.value !== "all" ? level?.value : "",
       module_id: moduleFilter?.value !== "all" ? moduleFilter?.value : "",
       status: status?.value !== "all" ? status?.value : "all",
+      publish_status:
+        publish_status?.value !== "all" ? publish_status?.value : "all",
       page: overridePage ?? page,
       limit: ITEMS_PER_PAGE,
     };
@@ -128,7 +143,7 @@ const Chapters = () => {
       fetchChapters(1);
     }, 500);
     return () => clearTimeout(delay);
-  }, [search, status, moduleFilter, level, isLevelsLoaded]);
+  }, [search, status, moduleFilter, level, isLevelsLoaded, publish_status]);
 
   // Fetch chapters on page change
   useEffect(() => {
@@ -145,6 +160,7 @@ const Chapters = () => {
     setLevel(levelOption[0]);
     setModuleFilter({ value: "all", label: t("chapter.filters.allModules") });
     setStatus(statusOptions[0]);
+    setPublishStatus(publishStatusOptions[0]);
     setSearch("");
     setPage(1);
   };
@@ -212,36 +228,69 @@ const Chapters = () => {
         </span>
       ),
     },
+    ...(hasPermission("chapters.status")
+      ? [
+          {
+            header: t("chapter.list.columns.status"),
+            render: (row) => (
+              <StatusToggle
+                value={row.status}
+                onToggle={async (newStatus) => {
+                  await dispatch(
+                    updateSingleChapterStatus({
+                      id: row.id,
+                      status: newStatus,
+                    }),
+                  ).unwrap();
+                  await fetchChapters(1);
+                }}
+              />
+            ),
+          },
+        ]
+      : []),
     {
-      header: t("chapter.list.columns.status"),
+      header: t("publishedDropdown.status.title"),
       render: (row) => (
-        <StatusToggle
-          value={row.status}
+        <PublishedDropdown
+          value={row.publish_status}
           onToggle={async (newStatus) => {
             await dispatch(
-              updateSingleChapterStatus({ id: row.id, status: newStatus }),
+              updatePublishStatus({
+                type: "chapter",
+                id: row.id,
+                publish_status: newStatus,
+              }),
             ).unwrap();
             await fetchChapters(1);
           }}
         />
       ),
     },
-    {
-      header: t("chapter.list.columns.actions"),
-      render: (row) => (
-        <button
-          onClick={() => navigate(`chapter-details/${row.id}`)}
-          className="text-gray-800 text-lg cursor-pointer hover:text-blue-600 transition-colors"
-        >
-          <FaEye />
-        </button>
-      ),
-    },
+    ...(hasPermission("chapters.edit")
+      ? [
+          {
+            header: t("chapter.list.columns.actions"),
+            render: (row) => (
+              <button
+                onClick={() => navigate(`chapter-details/${row.id}`)}
+                className="text-gray-800 text-lg cursor-pointer hover:text-blue-600 transition-colors"
+              >
+                <FaEye />
+              </button>
+            ),
+          },
+        ]
+      : []),
   ];
 
   if (isLoading && !chapters?.data?.length && !isLevelsLoaded)
     return <Loader />;
   if (isError) return <Error message={message} />;
+
+  if (!hasPermission("chapters.view")) {
+    return null;
+  }
 
   return (
     <PageLayout>
@@ -251,12 +300,14 @@ const Chapters = () => {
           <PageSubtitle>{t("chapter.list.subtitle")}</PageSubtitle>
         </PageHeaderLeft>
         <PageHeaderRight>
-          <Link
-            to="create-chapter"
-            className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap hover:bg-opacity-90 transition"
-          >
-            {t("chapter.actions.addNewChapter")}
-          </Link>
+          {hasPermission("chapters.create") && (
+            <Link
+              to="create-chapter"
+              className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap hover:bg-opacity-90 transition"
+            >
+              {t("chapter.actions.addNewChapter")}
+            </Link>
+          )}
         </PageHeaderRight>
       </PageHeader>
 
@@ -322,6 +373,16 @@ const Chapters = () => {
                 value={status}
                 onChange={setStatus}
                 options={statusOptions}
+                styles={customSelectStyles}
+                isSearchable={false}
+              />
+            </div>
+
+            <div className="w-full sm:w-[48%] lg:w-[210px]">
+              <Select
+                value={publish_status}
+                onChange={setPublishStatus}
+                options={publishStatusOptions}
                 styles={customSelectStyles}
                 isSearchable={false}
               />

@@ -26,6 +26,7 @@ import { showConfirm } from "../../../../../../redux/slice/confirmSlice";
 import Breadcrumb from "../../../../common/layout/Breadcrumb";
 import Loader from "../../../../common/Loader";
 import Error from "../../../../common/Error";
+import usePermission from "../../../../../../hooks/usePermission";
 
 // Allowed extensions configuration
 const ALLOWED_EXTENSIONS = {
@@ -49,6 +50,7 @@ const MediaLibraryDetails = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
+  const { hasPermission } = usePermission();
 
   const { singleMedia, isLoading, isError, message } = useSelector(
     (state) => state.media,
@@ -487,31 +489,27 @@ const MediaLibraryDetails = () => {
                 {/* Footer Buttons */}
                 <div className="flex justify-end items-center pt-4 border-t border-gray-200">
                   <div className="flex gap-3">
-                    <button
-                      type="button"
-                      onClick={() => navigate("/media-library")}
-                      className="px-4 py-2 rounded-md text-sm text-gray-600 border border-gray-300 hover:bg-gray-50 cursor-pointer transition-colors"
-                    >
-                      {t("mediaLibrary.actions.cancel")}
-                    </button>
+                    {hasPermission("media.delete") && (
+                      <button
+                        type="button"
+                        onClick={handleDelete}
+                        className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-red-50 cursor-pointer transition-colors"
+                      >
+                        {t("mediaLibrary.actions.deleteMedia")}
+                      </button>
+                    )}
 
-                    <button
-                      type="button"
-                      onClick={handleDelete}
-                      className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-red-50 cursor-pointer transition-colors"
-                    >
-                      {t("mediaLibrary.actions.deleteMedia")}
-                    </button>
-
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="px-4 py-2 rounded-md text-sm text-white bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-700 cursor-pointer transition-colors"
-                    >
-                      {isSubmitting
-                        ? t("mediaLibrary.actions.updating")
-                        : t("mediaLibrary.actions.updateMedia")}
-                    </button>
+                    {hasPermission("media.edit") && (
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="px-4 py-2 rounded-md text-sm text-white bg-accent hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-colors"
+                      >
+                        {isSubmitting
+                          ? t("mediaLibrary.actions.updating")
+                          : t("mediaLibrary.actions.updateMedia")}
+                      </button>
+                    )}
                   </div>
                 </div>
               </Form>

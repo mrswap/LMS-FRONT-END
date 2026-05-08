@@ -1,16 +1,35 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+// import axiosInstance from "../../app/axios";
+// import axiosCommonInstance from "../../app/axiosCommon";
 import axiosInstance from "../../app/axios";
-import axiosCommonInstance from "../../app/axiosCommon";
+
 import { getAuthConfig } from "../../utils/authConfig";
 
 // ======================= GET SITE SETTINGS =======================
+// export const getSiteSettings = createAsyncThunk(
+//     "siteSettings/get",
+//     async (_, thunkAPI) => {
+//         try {
+//             const res = await axiosCommonInstance.get(
+//                 "/common/site/settings"
+//                 // getAuthConfig()
+//             );
+//             return res.data;
+//         } catch (error) {
+//             return thunkAPI.rejectWithValue(
+//                 error.response?.data || { message: "Fetch failed" }
+//             );
+//         }
+//     }
+// );
+
 export const getSiteSettings = createAsyncThunk(
     "siteSettings/get",
     async (_, thunkAPI) => {
         try {
-            const res = await axiosCommonInstance.get(
-                "/common/site/settings"
-                // getAuthConfig()
+            const res = await axiosInstance.get(
+                "/setting/site",
+                getAuthConfig()
             );
             return res.data;
         } catch (error) {

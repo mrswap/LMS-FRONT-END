@@ -31,6 +31,9 @@ import {
   getAllContents,
   updateSingleContentStatus,
 } from "../../../../../redux/slice/unitBuilderSlice";
+import usePermission from "../../../../../hooks/usePermission";
+import PublishedDropdown from "../../../common/PublishedDropdown";
+import { updatePublishStatus } from "../../../../../redux/slice/commonSlice";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -38,6 +41,7 @@ const LearningUnitBuilder = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { hasPermission } = usePermission();
 
   const { contents, isLoading, isError, message } = useSelector(
     (state) => state.content,
@@ -73,12 +77,23 @@ const LearningUnitBuilder = () => {
     { value: "media", label: t("learningUnitBuilder.filters.media") },
   ];
 
+  const publishStatusOptions = [
+    { value: "all", label: t("learningUnitBuilder.filters.allVisibility") },
+    { value: "published", label: t("learningUnitBuilder.filters.published") },
+    {
+      value: "unpublished",
+      label: t("learningUnitBuilder.filters.unpublished"),
+    },
+    { value: "draft", label: t("learningUnitBuilder.filters.draft") },
+  ];
+
   const [type, setType] = useState(typeOptions[0]);
   const [level, setLevel] = useState(levelOption[0]);
   const [module, setModule] = useState(null);
   const [chapter, setChapter] = useState(null);
   const [topic, setTopic] = useState(null);
   const [status, setStatus] = useState(statusOptions[0]);
+  const [publish_status, setPublishStatus] = useState(publishStatusOptions[0]);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
 
@@ -186,6 +201,8 @@ const LearningUnitBuilder = () => {
       topic_id: topic?.value || "",
       type: type?.value || "",
       status: status?.value || "",
+      publish_status:
+        publish_status?.value !== "all" ? publish_status?.value : "all",
       page: overridePage ?? page,
       limit: ITEMS_PER_PAGE,
     };
@@ -199,7 +216,17 @@ const LearningUnitBuilder = () => {
       fetchContents(1);
     }, 500);
     return () => clearTimeout(delay);
-  }, [search, level, module, chapter, topic, status, type, isLevelsLoaded]);
+  }, [
+    search,
+    level,
+    module,
+    chapter,
+    topic,
+    status,
+    type,
+    isLevelsLoaded,
+    publish_status,
+  ]);
 
   useEffect(() => {
     if (isLevelsLoaded) {
@@ -218,6 +245,7 @@ const LearningUnitBuilder = () => {
     setTopic(null);
     setType(typeOptions[0]);
     setStatus(statusOptions[0]);
+    setPublishStatus(publishStatusOptions[0]);
     setSearch("");
     setPage(1);
     setIsModulesLoaded(false);
@@ -311,16 +339,39 @@ const LearningUnitBuilder = () => {
         </div>
       ),
     },
+    ...(hasPermission("content.status")
+      ? [
+          {
+            header: t("learningUnitBuilder.list.columns.status"),
+            render: (row) => (
+              <StatusToggle
+                value={row.status}
+                onToggle={async (newStatus) => {
+                  await dispatch(
+                    updateSingleContentStatus({
+                      topicId: row?.topic?.id,
+                      id: row.id,
+                    }),
+                  ).unwrap();
+                  await fetchContents(1);
+                }}
+              />
+            ),
+          },
+        ]
+      : []),
+
     {
-      header: t("learningUnitBuilder.list.columns.status"),
+      header: t("publishedDropdown.status.title"),
       render: (row) => (
-        <StatusToggle
-          value={row.status}
+        <PublishedDropdown
+          value={row.publish_status}
           onToggle={async (newStatus) => {
             await dispatch(
-              updateSingleContentStatus({
-                topicId: row?.topic?.id,
+              updatePublishStatus({
+                type: "topic_content",
                 id: row.id,
+                publish_status: newStatus,
               }),
             ).unwrap();
             await fetchContents(1);
@@ -328,19 +379,24 @@ const LearningUnitBuilder = () => {
         />
       ),
     },
-    {
-      header: t("learningUnitBuilder.list.columns.actions"),
-      render: (row) => (
-        <button
-          onClick={() =>
-            navigate(`single/${row.id}?topic_id=${row?.topic?.id}`)
-          }
-          className="text-gray-800 text-lg cursor-pointer hover:text-[#184994] transition-colors"
-        >
-          <FaEye />
-        </button>
-      ),
-    },
+
+    ...(hasPermission("content.edit")
+      ? [
+          {
+            header: t("learningUnitBuilder.list.columns.actions"),
+            render: (row) => (
+              <button
+                onClick={() =>
+                  navigate(`single/${row.id}?topic_id=${row?.topic?.id}`)
+                }
+                className="text-gray-800 text-lg cursor-pointer hover:text-[#184994] transition-colors"
+              >
+                <FaEye />
+              </button>
+            ),
+          },
+        ]
+      : []),
   ];
 
   const isModuleDisabled = !level || level?.value === "";
@@ -354,6 +410,10 @@ const LearningUnitBuilder = () => {
   if (isLoading && !contents?.data?.length) return <Loader />;
   if (isError) return <Error message={message} />;
 
+  if (!hasPermission("content.view")) {
+    return null;
+  }
+
   return (
     <PageLayout>
       <PageHeader>
@@ -362,12 +422,14 @@ const LearningUnitBuilder = () => {
           <PageSubtitle>{t("learningUnitBuilder.list.subtitle")}</PageSubtitle>
         </PageHeaderLeft>
         <PageHeaderRight>
-          <Link
-            to="create"
-            className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap"
-          >
-            {t("learningUnitBuilder.actions.addNewContent")}
-          </Link>
+          {hasPermission("content.bulk-create") && (
+            <Link
+              to="create"
+              className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap"
+            >
+              {t("learningUnitBuilder.actions.addNewContent")}
+            </Link>
+          )}
         </PageHeaderRight>
       </PageHeader>
 
@@ -481,6 +543,16 @@ const LearningUnitBuilder = () => {
                 value={status}
                 onChange={setStatus}
                 options={statusOptions}
+                styles={customSelectStyles}
+                isSearchable={false}
+              />
+            </div>
+
+            <div className="w-full sm:w-[48%] lg:w-[210px]">
+              <Select
+                value={publish_status}
+                onChange={setPublishStatus}
+                options={publishStatusOptions}
                 styles={customSelectStyles}
                 isSearchable={false}
               />

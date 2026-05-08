@@ -21,6 +21,7 @@ import { getAllPrograms } from "../../../../../../redux/slice/programSlice";
 import { getAllLevels } from "../../../../../../redux/slice/levelSlice";
 import { getAllModules } from "../../../../../../redux/slice/moduleSlice";
 import { createChapter } from "../../../../../../redux/slice/chapterSlice";
+import usePermission from "../../../../../../hooks/usePermission";
 
 const CreateChapter = () => {
   const [thumbnail, setThumbnail] = useState(null);
@@ -30,6 +31,7 @@ const CreateChapter = () => {
   const dispatch = useDispatch();
   const toast = useToast();
   const navigate = useNavigate();
+  const { hasPermission } = usePermission();
 
   const { modules, isLoading: modulesLoading } = useSelector(
     (state) => state.module,

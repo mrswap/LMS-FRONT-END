@@ -18,6 +18,7 @@ import { useToast } from "../../../../common/toast/ToastContext";
 import { showConfirm } from "../../../../../../redux/slice/confirmSlice";
 import Loader from "../../../../common/Loader";
 import Error from "../../../../common/Error";
+import usePermission from "../../../../../../hooks/usePermission";
 
 const ProgramDetails = () => {
   const [thumbnail, setThumbnail] = useState(null);
@@ -26,6 +27,7 @@ const ProgramDetails = () => {
   const { t } = useTranslation();
   const { id } = useParams();
   const toast = useToast();
+  const { hasPermission } = usePermission();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -306,31 +308,27 @@ const ProgramDetails = () => {
                   {/* Footer */}
                   <div className="flex justify-end items-center pt-4">
                     <div className="flex gap-3">
-                      {/* ========== COMMENTED CODE - CANCEL BUTTON ==========
-                      <button
-                        type="button"
-                        onClick={() => navigate("/programs")}
-                        className="px-4 py-2 rounded-md text-sm text-gray-600 border border-gray-300 hover:bg-gray-50 cursor-pointer"
-                      >
-                        {t("program.actions.cancel")}
-                      </button>
-                      ========== END COMMENTED CODE ========== */}
-                      <button
-                        type="button"
-                        onClick={handleDelete}
-                        className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-red-50 cursor-pointer transition-colors"
-                      >
-                        {t("program.actions.deleteProgram")}
-                      </button>
-                      <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 cursor-pointer"
-                      >
-                        {isSubmitting
-                          ? t("program.actions.updating")
-                          : t("program.actions.updateProgram")}
-                      </button>
+                      {hasPermission("programs.delete") && (
+                        <button
+                          type="button"
+                          onClick={handleDelete}
+                          className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-red-50 cursor-pointer transition-colors"
+                        >
+                          {t("program.actions.deleteProgram")}
+                        </button>
+                      )}
+
+                      {hasPermission("programs.edit") && (
+                        <button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 cursor-pointer"
+                        >
+                          {isSubmitting
+                            ? t("program.actions.updating")
+                            : t("program.actions.updateProgram")}
+                        </button>
+                      )}
                     </div>
                   </div>
                 </Form>

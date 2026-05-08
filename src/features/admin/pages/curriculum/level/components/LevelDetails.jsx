@@ -19,6 +19,7 @@ import { getAllPrograms } from "../../../../../../redux/slice/programSlice";
 import { showConfirm } from "../../../../../../redux/slice/confirmSlice";
 import Loader from "../../../../common/Loader";
 import Error from "../../../../common/Error";
+import usePermission from "../../../../../../hooks/usePermission";
 
 const LevelDetails = () => {
   const [thumbnail, setThumbnail] = useState(null);
@@ -29,6 +30,7 @@ const LevelDetails = () => {
   const toast = useToast();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { hasPermission } = usePermission();
 
   const { level, isLoading, isError, message } = useSelector(
     (state) => state.level,
@@ -214,22 +216,6 @@ const LevelDetails = () => {
                       </div>
                     </div>
 
-                    {/* ========== COMMENTED CODE - FUTURE FIELDS ==========
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mt-2">
-                      <TextInput
-                        name="order"
-                        label={t("levels.details.order")}
-                        placeholder={t("levels.details.orderPlaceholder")}
-                        type="number"
-                      />
-                      <TextInput
-                        name="duration"
-                        label={t("levels.details.duration")}
-                        placeholder={t("levels.details.durationPlaceholder")}
-                      />
-                    </div>
-                    ========== END COMMENTED CODE ========== */}
-
                     <div className="mt-2">
                       <TextareaField
                         name="description"
@@ -319,31 +305,27 @@ const LevelDetails = () => {
                   {/* Footer */}
                   <div className="flex justify-end items-center pt-4">
                     <div className="flex gap-3">
-                      {/* ========== COMMENTED CODE - CANCEL BUTTON ==========
-                      <button
-                        type="button"
-                        onClick={() => navigate("/levels")}
-                        className="px-4 py-2 rounded-md text-sm text-gray-600 border border-gray-300 hover:bg-gray-50 cursor-pointer"
-                      >
-                        {t("levels.actions.cancel")}
-                      </button>
-                      ========== END COMMENTED CODE ========== */}
-                      <button
-                        type="button"
-                        onClick={handleDelete}
-                        className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-red-50 cursor-pointer transition-colors"
-                      >
-                        {t("levels.actions.deleteLevel")}
-                      </button>
-                      <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 cursor-pointer"
-                      >
-                        {isSubmitting
-                          ? t("levels.actions.updating")
-                          : t("levels.actions.updateLevel")}
-                      </button>
+                      {hasPermission("levels.delete") && (
+                        <button
+                          type="button"
+                          onClick={handleDelete}
+                          className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-red-50 cursor-pointer transition-colors"
+                        >
+                          {t("levels.actions.deleteLevel")}
+                        </button>
+                      )}
+
+                      {hasPermission("levels.edit") && (
+                        <button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 cursor-pointer"
+                        >
+                          {isSubmitting
+                            ? t("levels.actions.updating")
+                            : t("levels.actions.updateLevel")}
+                        </button>
+                      )}
                     </div>
                   </div>
                 </Form>

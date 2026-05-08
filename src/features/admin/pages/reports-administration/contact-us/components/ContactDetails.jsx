@@ -21,6 +21,7 @@ import { useTranslation } from "react-i18next";
 import { useParams, useNavigate } from "react-router-dom";
 import Breadcrumb from "../../../../common/layout/Breadcrumb";
 import { useToast } from "../../../../common/toast/ToastContext";
+import usePermission from "../../../../../../hooks/usePermission";
 
 const ContactDetails = () => {
   const { t } = useTranslation();
@@ -31,6 +32,8 @@ const ContactDetails = () => {
   const { contact, isLoading, isError, message } = useSelector(
     (state) => state.contact,
   );
+
+  const { hasPermission } = usePermission();
 
   const [isUpdating, setIsUpdating] = useState(false);
   const contactData = contact?.data || contact;
@@ -99,14 +102,19 @@ const ContactDetails = () => {
                         <FaCheckCircle size={12} />
                         {t("contact.status.seen")}
                       </span>
-                      <button
-                        onClick={handleMarkAsUnseen}
-                        disabled={isUpdating}
-                        className="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition-colors cursor-pointer disabled:opacity-50"
-                      >
-                        <MdMarkEmailUnread size={16} className="inline mr-1" />
-                        {t("contact.details.markAsUnseen")}
-                      </button>
+                      {hasPermission("contacts.mark-seen") && (
+                        <button
+                          onClick={handleMarkAsUnseen}
+                          disabled={isUpdating}
+                          className="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition-colors cursor-pointer disabled:opacity-50"
+                        >
+                          <MdMarkEmailUnread
+                            size={16}
+                            className="inline mr-1"
+                          />
+                          {t("contact.details.markAsUnseen")}
+                        </button>
+                      )}
                     </>
                   ) : (
                     <>
@@ -114,14 +122,16 @@ const ContactDetails = () => {
                         <FaRegCircle size={12} />
                         {t("contact.status.unseen")}
                       </span>
-                      <button
-                        onClick={handleMarkAsSeen}
-                        disabled={isUpdating}
-                        className="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition-colors cursor-pointer disabled:opacity-50"
-                      >
-                        <MdMarkEmailRead size={16} className="inline mr-1" />
-                        {t("contact.details.markAsSeen")}
-                      </button>
+                      {hasPermission("contacts.mark-unseen") && (
+                        <button
+                          onClick={handleMarkAsSeen}
+                          disabled={isUpdating}
+                          className="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition-colors cursor-pointer disabled:opacity-50"
+                        >
+                          <MdMarkEmailRead size={16} className="inline mr-1" />
+                          {t("contact.details.markAsSeen")}
+                        </button>
+                      )}
                     </>
                   )}
                 </div>

@@ -23,6 +23,7 @@ import { getAllChapters } from "../../../../../../redux/slice/chapterSlice";
 import { showConfirm } from "../../../../../../redux/slice/confirmSlice";
 import Loader from "../../../../common/Loader";
 import Error from "../../../../common/Error";
+import usePermission from "../../../../../../hooks/usePermission";
 
 const TopicDetails = () => {
   const [thumbnail, setThumbnail] = useState(null);
@@ -34,6 +35,7 @@ const TopicDetails = () => {
   const toast = useToast();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { hasPermission } = usePermission();
 
   const { topic, isLoading, isError, message } = useSelector(
     (state) => state.topic,
@@ -116,37 +118,6 @@ const TopicDetails = () => {
       setThumbnailPreview(topic.thumbnail);
     }
   }, [topic]);
-
-  // const initialValues = {
-  //   topicName: topic?.title || "",
-  //   chapterName: topic?.chapter_id
-  //     ? {
-  //         label: topic?.chapter?.title,
-  //         value: topic?.chapter_id,
-  //       }
-  //     : null,
-  //   moduleName: topic?.module_id
-  //     ? {
-  //         label: topic?.module?.title,
-  //         value: topic?.module_id,
-  //       }
-  //     : null,
-  //   levelName: topic?.level_id
-  //     ? {
-  //         label: topic?.level?.title,
-  //         value: topic?.level_id,
-  //       }
-  //     : null,
-  //   programName: topic?.program_id
-  //     ? {
-  //         label: topic?.program?.title,
-  //         value: topic?.program_id,
-  //       }
-  //     : null,
-  //   description: topic?.description || "",
-  //   thumbnail: topic?.thumbnail || null,
-  //   duration: topic?.estimated_duration || "",
-  // };
 
   const initialValues = {
     topicName: topic?.title || "",
@@ -493,22 +464,27 @@ const TopicDetails = () => {
                   {/* Footer */}
                   <div className="flex justify-end items-center pt-4">
                     <div className="flex gap-3">
-                      <button
-                        type="button"
-                        onClick={handleDelete}
-                        className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-red-50 cursor-pointer transition-colors"
-                      >
-                        {t("topic.actions.deleteTopic")}
-                      </button>
-                      <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 cursor-pointer"
-                      >
-                        {isSubmitting
-                          ? t("topic.actions.updating")
-                          : t("topic.actions.updateTopic")}
-                      </button>
+                      {hasPermission("topics.delete") && (
+                        <button
+                          type="button"
+                          onClick={handleDelete}
+                          className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-red-50 cursor-pointer transition-colors"
+                        >
+                          {t("topic.actions.deleteTopic")}
+                        </button>
+                      )}
+
+                      {hasPermission("topics.edit") && (
+                        <button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 cursor-pointer"
+                        >
+                          {isSubmitting
+                            ? t("topic.actions.updating")
+                            : t("topic.actions.updateTopic")}
+                        </button>
+                      )}
                     </div>
                   </div>
                 </Form>

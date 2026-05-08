@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import { getAllAuditLogs } from "../../../../../redux/slice/reportSlice";
 import { getAllUsers } from "../../../../../redux/slice/userSlice";
 import { useTranslation } from "react-i18next";
+import usePermission from "../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -31,6 +32,8 @@ const AuditLogsReport = () => {
   const { auditLogs, loadingAuditLogs, isError, message } = useSelector(
     (state) => state.report,
   );
+
+  const { hasPermission } = usePermission();
 
   const { users } = useSelector((state) => state.user);
 
@@ -222,6 +225,10 @@ const AuditLogsReport = () => {
   if (isError) return <Error message={message} />;
 
   const pagination = getPaginationData();
+
+  if (!hasPermission("reports.audit")) {
+    return null;
+  }
 
   return (
     <PageLayout>

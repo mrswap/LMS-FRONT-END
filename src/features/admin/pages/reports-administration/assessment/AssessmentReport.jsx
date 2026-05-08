@@ -20,6 +20,7 @@ import { LuFilterX } from "react-icons/lu";
 import { getAllAssessmentReports } from "../../../../../redux/slice/reportSlice";
 import { getAllUsers } from "../../../../../redux/slice/userSlice";
 import { useTranslation } from "react-i18next";
+import usePermission from "../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -30,6 +31,7 @@ const AssessmentReport = () => {
     useSelector((state) => state.report);
 
   const { users } = useSelector((state) => state.user);
+  const { hasPermission } = usePermission();
 
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
@@ -239,6 +241,10 @@ const AssessmentReport = () => {
   if (isError) return <Error message={message} />;
 
   const pagination = getPaginationData();
+
+  if (!hasPermission("reports.assessment")) {
+    return null;
+  }
 
   return (
     <PageLayout>

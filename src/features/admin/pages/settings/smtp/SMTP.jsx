@@ -23,12 +23,14 @@ import {
 } from "../../../../../redux/slice/smtpSlice";
 import SendTestMailModal from "./SendTestMailModal";
 import { useTranslation } from "react-i18next";
+import usePermission from "../../../../../hooks/usePermission";
 
 const SmtpSettings = () => {
   const dispatch = useDispatch();
   const toast = useToast();
   const { smtp } = useSelector((state) => state.smtp);
   const { t } = useTranslation();
+  const { hasPermission } = usePermission();
 
   const [openModal, setOpenModal] = useState(false);
   const [email, setEmail] = useState("");
@@ -93,6 +95,10 @@ const SmtpSettings = () => {
       setSending(false);
     }
   };
+
+  if (!hasPermission("smtp.view")) {
+    return null;
+  }
 
   return (
     <PageLayout>
@@ -185,23 +191,27 @@ const SmtpSettings = () => {
               </div>
 
               <div className="flex justify-end gap-3">
-                <button
-                  type="button"
-                  onClick={() => setOpenModal(true)}
-                  className="px-4 py-2 border rounded-md border-gray-300 text-gray-700 cursor-pointer hover:bg-gray-50 transition"
-                >
-                  {t("smtp.actions.sendTestMail")}
-                </button>
+                {hasPermission("smtp.test") && (
+                  <button
+                    type="button"
+                    onClick={() => setOpenModal(true)}
+                    className="px-4 py-2 border rounded-md border-gray-300 text-gray-700 cursor-pointer hover:bg-gray-50 transition"
+                  >
+                    {t("smtp.actions.sendTestMail")}
+                  </button>
+                )}
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="bg-accent text-white px-4 py-2 rounded cursor-pointer hover:bg-opacity-90 transition"
-                >
-                  {isSubmitting
-                    ? t("smtp.actions.updating")
-                    : t("smtp.actions.updateSMTP")}
-                </button>
+                {hasPermission("smtp.edit") && (
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="bg-accent text-white px-4 py-2 rounded cursor-pointer hover:bg-opacity-90 transition"
+                  >
+                    {isSubmitting
+                      ? t("smtp.actions.updating")
+                      : t("smtp.actions.updateSMTP")}
+                  </button>
+                )}
               </div>
             </Form>
           )}

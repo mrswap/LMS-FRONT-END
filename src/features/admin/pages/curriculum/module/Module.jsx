@@ -25,6 +25,9 @@ import { FiSearch } from "react-icons/fi";
 import TruncateText from "../../../common/TruncateText";
 import StatusToggle from "../../../common/StatusToggle";
 import { LuFilterX } from "react-icons/lu";
+import { updatePublishStatus } from "../../../../../redux/slice/commonSlice";
+import PublishedDropdown from "../../../common/PublishedDropdown";
+import usePermission from "../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -52,17 +55,28 @@ const Module = () => {
     { value: "0", label: t("module.filters.inactive") },
   ];
 
+  const publishStatusOptions = [
+    { value: "all", label: t("module.filters.allVisibility") },
+    { value: "published", label: t("module.filters.published") },
+    { value: "unpublished", label: t("module.filters.unpublished") },
+    { value: "draft", label: t("module.filters.draft") },
+  ];
+
   const [level, setLevel] = useState(levelOption[0]);
   const [status, setStatus] = useState(statusOptions[0]);
+  const [publish_status, setPublishStatus] = useState(publishStatusOptions[0]);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
+  const { hasPermission } = usePermission();
 
   const fetchModules = (overridePage) => {
     const params = {
       search: search || "",
       level_id: level?.value !== "all" ? level?.value : "",
       status: status?.value !== "all" ? status?.value : "all",
+      publish_status:
+        publish_status?.value !== "all" ? publish_status?.value : "all",
       page: overridePage ?? page,
       limit: ITEMS_PER_PAGE,
     };
@@ -76,7 +90,7 @@ const Module = () => {
       fetchModules(1);
     }, 500);
     return () => clearTimeout(delay);
-  }, [search, status, level]);
+  }, [search, status, level, publish_status]);
 
   useEffect(() => {
     fetchModules(page);
@@ -89,6 +103,7 @@ const Module = () => {
   const resetFilters = () => {
     setLevel(levelOption[0]);
     setStatus(statusOptions[0]);
+    setPublishStatus(publishStatusOptions[0]);
     setSearch("");
     setPage(1);
   };
@@ -151,35 +166,66 @@ const Module = () => {
         </span>
       ),
     },
+    ...(hasPermission("modules.status")
+      ? [
+          {
+            header: t("module.list.columns.status"),
+            render: (row) => (
+              <StatusToggle
+                value={row.status}
+                onToggle={async (newStatus) => {
+                  await dispatch(
+                    updateSingleModuleStatus({ id: row.id, status: newStatus }),
+                  ).unwrap();
+                  await fetchModules(1);
+                }}
+              />
+            ),
+          },
+        ]
+      : []),
+
     {
-      header: t("module.list.columns.status"),
+      header: t("publishedDropdown.status.title"),
       render: (row) => (
-        <StatusToggle
-          value={row.status}
+        <PublishedDropdown
+          value={row.publish_status}
           onToggle={async (newStatus) => {
             await dispatch(
-              updateSingleModuleStatus({ id: row.id, status: newStatus }),
+              updatePublishStatus({
+                type: "module",
+                id: row.id,
+                publish_status: newStatus,
+              }),
             ).unwrap();
             await fetchModules(1);
           }}
         />
       ),
     },
-    {
-      header: t("module.list.columns.actions"),
-      render: (row) => (
-        <button
-          onClick={() => navigate(`module-details/${row.id}`)}
-          className="text-gray-800 text-lg cursor-pointer hover:text-blue-600 transition-colors"
-        >
-          <FaEye />
-        </button>
-      ),
-    },
+    ...(hasPermission("modules.edit")
+      ? [
+          {
+            header: t("module.list.columns.actions"),
+            render: (row) => (
+              <button
+                onClick={() => navigate(`module-details/${row.id}`)}
+                className="text-gray-800 text-lg cursor-pointer hover:text-blue-600 transition-colors"
+              >
+                <FaEye />
+              </button>
+            ),
+          },
+        ]
+      : []),
   ];
 
   if (isLoading && !modules?.data?.length) return <Loader />;
   if (isError) return <Error message={message} />;
+
+  if (!hasPermission("modules.view")) {
+    return null;
+  }
 
   return (
     <PageLayout>
@@ -189,12 +235,14 @@ const Module = () => {
           <PageSubtitle>{t("module.list.subtitle")}</PageSubtitle>
         </PageHeaderLeft>
         <PageHeaderRight>
-          <Link
-            to="create-module"
-            className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap hover:bg-opacity-90 transition"
-          >
-            {t("module.actions.addNewModule")}
-          </Link>
+          {hasPermission("modules.create") && (
+            <Link
+              to="create-module"
+              className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap hover:bg-opacity-90 transition"
+            >
+              {t("module.actions.addNewModule")}
+            </Link>
+          )}
         </PageHeaderRight>
       </PageHeader>
 
@@ -245,6 +293,16 @@ const Module = () => {
               />
             </div>
 
+            <div className="w-full sm:w-[48%] lg:w-[210px]">
+              <Select
+                value={publish_status}
+                onChange={setPublishStatus}
+                options={publishStatusOptions}
+                styles={customSelectStyles}
+                isSearchable={false}
+              />
+            </div>
+
             <div className="ml-auto flex items-center h-[40px]">
               <div className="relative group">
                 <button
@@ -279,44 +337,6 @@ const Module = () => {
             onPageChange={handlePageChange}
           />
         </div>
-
-        {/* ========== COMMENTED CODE - STATS CARDS (FUTURE USE) ==========
-        <div className="flex gap-4 w-full mt-4">
-          <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-sm transition">
-            <h3 className="text-[#6B7280] text-sm font-medium">
-              {t("module.stats.totalModules.title")}
-            </h3>
-            <p className="text-2xl font-bold text-gray-800 mt-2">
-              {modules?.total || 0}
-            </p>
-            <p className="text-sm text-[#6B7280] mt-1">
-              {t("module.stats.totalModules.subtext")}
-            </p>
-          </div>
-
-          <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-sm transition">
-            <h3 className="text-[#6B7280] text-sm font-medium">
-              {t("module.stats.activeModules.title")}
-            </h3>
-            <p className="text-2xl font-bold text-gray-800 mt-2">
-              {modules?.data?.filter(m => m.status)?.length || 0}
-            </p>
-            <p className="text-sm text-[#6B7280] mt-1">
-              {t("module.stats.activeModules.subtext")}
-            </p>
-          </div>
-
-          <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-sm transition">
-            <h3 className="text-[#6B7280] text-sm font-medium">
-              {t("module.stats.avgCompletion.title")}
-            </h3>
-            <p className="text-2xl font-bold text-gray-800 mt-2">68%</p>
-            <p className="text-sm text-[#6B7280] mt-1">
-              {t("module.stats.avgCompletion.subtext")}
-            </p>
-          </div>
-        </div>
-        ========== END COMMENTED CODE ========== */}
       </PageBody>
     </PageLayout>
   );

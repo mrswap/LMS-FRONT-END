@@ -24,6 +24,7 @@ import Loader from "../../common/Loader";
 import Error from "../../common/Error";
 import StatusToggle from "../../common/StatusToggle";
 import { LuFilterX } from "react-icons/lu";
+import usePermission from "../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -32,6 +33,7 @@ const Users = () => {
   const { users, isLoading, isError, message } = useSelector(
     (state) => state.user,
   );
+  const { hasPermission } = usePermission();
 
   const statusOptions = [
     { value: "all", label: t("userManagement.filters.allStatus") },
@@ -130,35 +132,47 @@ const Users = () => {
         </span>
       ),
     },
-    // {
-    //   header: t("userManagement.list.columns.status"),
-    //   render: (row) => (
-    //     <StatusToggle
-    //       value={row.status}
-    //       onToggle={async (newStatus) => {
-    //         await dispatch(
-    //           updateSingleUserStatus({ id: row.id, status: newStatus }),
-    //         ).unwrap();
-    //         await fetchUsers(1);
-    //       }}
-    //     />
-    //   ),
-    // },
-    {
-      header: t("userManagement.list.columns.actions"),
-      render: (row) => (
-        <button
-          onClick={() => navigate(`user-details/${row.id}`)}
-          className="text-gray-800 text-lg cursor-pointer"
-        >
-          <FaEye />
-        </button>
-      ),
-    },
+    ...(hasPermission("users.status")
+      ? [
+          {
+            header: t("userManagement.list.columns.status"),
+            render: (row) => (
+              <StatusToggle
+                value={row.status}
+                onToggle={async (newStatus) => {
+                  await dispatch(
+                    updateSingleUserStatus({ id: row.id, status: newStatus }),
+                  ).unwrap();
+                  await fetchUsers(1);
+                }}
+              />
+            ),
+          },
+        ]
+      : []),
+    ...(hasPermission("users.edit")
+      ? [
+          {
+            header: t("userManagement.list.columns.actions"),
+            render: (row) => (
+              <button
+                onClick={() => navigate(`user-details/${row.id}`)}
+                className="text-gray-800 text-lg cursor-pointer"
+              >
+                <FaEye />
+              </button>
+            ),
+          },
+        ]
+      : []),
   ];
 
   if (isLoading && !users?.data?.length) return <Loader />;
   if (isError) return <Error message={message} />;
+
+  if (!hasPermission("users.view")) {
+    return null;
+  }
 
   return (
     <PageLayout>
@@ -168,12 +182,14 @@ const Users = () => {
           <PageSubtitle>{t("userManagement.list.subtitle")}</PageSubtitle>
         </PageHeaderLeft>
         <PageHeaderRight>
-          <Link
-            to="create-user"
-            className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap"
-          >
-            {t("userManagement.actions.addNewUser")}
-          </Link>
+          {hasPermission("users.create") && (
+            <Link
+              to="create-user"
+              className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap"
+            >
+              {t("userManagement.actions.addNewUser")}
+            </Link>
+          )}
         </PageHeaderRight>
       </PageHeader>
 
@@ -255,39 +271,6 @@ const Users = () => {
             onPageChange={handlePageChange}
           />
         </div>
-
-        {/* CARDS */}
-        {/* <div className="flex gap-4 w-full mt-4">
-          <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-sx transition">
-            <h3 className="text-[#6B7280] text-[14px] text-sm font-medium">
-              {t("userManagement.list.stats.totalActive.title")}
-            </h3>
-            <p className="text-2xl font-bold text-gray-800 mt-2">1200</p>
-            <p className="text-sm text-[#6B7280] text-[12px] mt-1">
-              {t("userManagement.list.stats.totalActive.growth")}
-            </p>
-          </div>
-
-          <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-xs transition">
-            <h3 className="text-[#6B7280] text-[14px] font-medium">
-              {t("userManagement.list.stats.avgProgress.title")}
-            </h3>
-            <p className="text-2xl font-bold text-gray-800 mt-2">68%</p>
-            <p className="text-[#6B7280] text-[12px] mt-1">
-              {t("userManagement.list.stats.avgProgress.growth")}
-            </p>
-          </div>
-
-          <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-xs transition">
-            <h3 className="text-[#6B7280] text-[14px] font-medium">
-              {t("userManagement.list.stats.pending.title")}
-            </h3>
-            <p className="text-2xl font-bold text-gray-800 mt-2">32</p>
-            <p className="text-[#6B7280] text-[14px] mt-1">
-              {t("userManagement.list.stats.pending.subtext")}
-            </p>
-          </div>
-        </div> */}
       </PageBody>
     </PageLayout>
   );

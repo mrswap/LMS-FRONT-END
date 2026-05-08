@@ -20,6 +20,7 @@ import { getAllContacts } from "../../../../../redux/slice/contactSlice";
 import { LuFilterX } from "react-icons/lu";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import usePermission from "../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -30,6 +31,8 @@ const Contact = () => {
   const { contacts, isLoading, isError, message } = useSelector(
     (state) => state.contact,
   );
+
+  const { hasPermission } = usePermission();
 
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
@@ -183,6 +186,10 @@ const Contact = () => {
   if (isError) return <Error message={message} />;
 
   const pagination = getPaginationData();
+
+  if (!hasPermission("contacts.view")) {
+    return null;
+  }
 
   return (
     <PageLayout>

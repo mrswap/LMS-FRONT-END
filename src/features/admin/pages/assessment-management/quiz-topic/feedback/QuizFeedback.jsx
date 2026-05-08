@@ -23,6 +23,7 @@ import { LuFilterX } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getAllTopics } from "../../../../../../redux/slice/topicSlice";
+import usePermission from "../../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -46,6 +47,7 @@ const QuizFeedback = () => {
   const [selectedAssessment, setSelectedAssessment] = useState(null);
   const [selectedRating, setSelectedRating] = useState(null);
   const [topic, setTopic] = useState(null);
+  const { hasPermission } = usePermission();
 
   const userOptions = [
     { value: "", label: t("quizFeedback.filters.allUsers") },
@@ -87,18 +89,6 @@ const QuizFeedback = () => {
     dispatch(getAllAssessments());
     dispatch(getAllTopics());
   }, [dispatch]);
-
-  // const fetchFeedbacks = (overridePage) => {
-  //   const params = {
-  //     search: search || "",
-  //     limit: ITEMS_PER_PAGE,
-  //     page: overridePage ?? page,
-  //     user_id: selectedUser?.value,
-  //     rating: selectedRating?.value,
-  //     assessment_id: selectedAssessment?.value || "",
-  //   };
-  //   dispatch(getAllAssessmentFeedbacks(params));
-  // };
 
   // Fetch feedbacks with all filters
   const fetchFeedbacks = (overridePage) => {
@@ -250,6 +240,10 @@ const QuizFeedback = () => {
 
   if (isLoading && !assessmentFeedbacks?.data?.length) return <Loader />;
   if (isError) return <Error message={message} />;
+
+  if (!hasPermission("feedbacks.view")) {
+    return null;
+  }
 
   return (
     <PageLayout>

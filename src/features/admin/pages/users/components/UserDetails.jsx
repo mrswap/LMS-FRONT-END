@@ -25,6 +25,7 @@ import { getAllDesignation } from "../../../../../redux/slice/designationSlice";
 import { getAllRoles } from "../../../../../redux/slice/rolesSlice";
 import countryOptions from "../../../../../utils/countries.json";
 import UserAdditionalDetails from "./UserAdditionalDetails";
+import usePermission from "../../../../../hooks/usePermission";
 
 const UserDetails = () => {
   const { t } = useTranslation();
@@ -34,6 +35,7 @@ const UserDetails = () => {
   const toast = useToast();
   const { roles } = useSelector((state) => state.role);
   const { designations } = useSelector((state) => state.designation);
+  const { hasPermission } = usePermission();
 
   useEffect(() => {
     dispatch(getAllDesignation());
@@ -187,13 +189,6 @@ const UserDetails = () => {
               </p>
             </div>
           </div>
-
-          <button
-            onClick={handleDelete}
-            className="bg-red-500 text-white px-4 py-2 rounded cursor-pointer"
-          >
-            {t("userManagement.actions.deleteUser")}
-          </button>
         </div>
 
         <PageBody>
@@ -367,16 +362,29 @@ const UserDetails = () => {
                 </div>
 
                 {/* Footer */}
-                <div className="flex justify-end gap-3">
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="bg-accent text-white px-4 py-2 rounded cursor-pointer"
-                  >
-                    {isSubmitting
-                      ? t("userManagement.actions.updating")
-                      : t("userManagement.actions.updateUser")}
-                  </button>
+                <div className="flex justify-end items-center pt-4">
+                  <div className="flex gap-3">
+                    {hasPermission("users.delete") && (
+                      <button
+                        onClick={handleDelete}
+                        className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-red-50 cursor-pointer transition-colors"
+                      >
+                        {t("userManagement.actions.deleteUser")}
+                      </button>
+                    )}
+
+                    {hasPermission("users.edit") && (
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="bg-accent text-white px-4 py-2 rounded cursor-pointer"
+                      >
+                        {isSubmitting
+                          ? t("userManagement.actions.updating")
+                          : t("userManagement.actions.updateUser")}
+                      </button>
+                    )}
+                  </div>
                 </div>
               </Form>
             )}

@@ -25,6 +25,7 @@ import {
 import { showConfirm } from "../../../../../../../redux/slice/confirmSlice";
 import Loader from "../../../../../common/Loader";
 import Error from "../../../../../common/Error";
+import usePermission from "../../../../../../../hooks/usePermission";
 
 const OptionDetails = () => {
   const [thumbnail, setThumbnail] = useState(null);
@@ -36,6 +37,7 @@ const OptionDetails = () => {
   const toast = useToast();
   const navigate = useNavigate();
   const { assessmentId, questionId, optionId } = useParams();
+  const { hasPermission } = usePermission();
 
   const { option, isLoading, isError, message } = useSelector(
     (state) => state.option,
@@ -271,22 +273,27 @@ const OptionDetails = () => {
 
                 <div className="flex justify-end items-center pt-4">
                   <div className="flex gap-3">
-                    <button
-                      type="button"
-                      onClick={handleDelete}
-                      className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-red-50 cursor-pointer"
-                    >
-                      {t("option.actions.deleteOption")}
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 cursor-pointer"
-                    >
-                      {isSubmitting
-                        ? t("option.actions.updating")
-                        : t("option.actions.updateOption")}
-                    </button>
+                    {hasPermission("options.delete") && (
+                      <button
+                        type="button"
+                        onClick={handleDelete}
+                        className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-red-50 cursor-pointer"
+                      >
+                        {t("option.actions.deleteOption")}
+                      </button>
+                    )}
+
+                    {hasPermission("options.edit") && (
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 cursor-pointer"
+                      >
+                        {isSubmitting
+                          ? t("option.actions.updating")
+                          : t("option.actions.updateOption")}
+                      </button>
+                    )}
                   </div>
                 </div>
               </Form>

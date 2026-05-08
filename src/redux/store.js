@@ -20,6 +20,8 @@ import systemSettingReducer from "./slice/systemSettingSlice"
 import contactReducer from "./slice/contactSlice"
 import reportReducer from "./slice/reportSlice"
 import certificateSettingReducer from "./slice/certificateSettingSlice"
+import dashboardReducer from "./slice/dashboardSlice"
+import commonReducer from "./slice/commonSlice"
 
 export const store = configureStore({
     reducer: {
@@ -43,6 +45,8 @@ export const store = configureStore({
         systemSetting: systemSettingReducer,
         contact: contactReducer,
         report: reportReducer,
-        certificateSettings: certificateSettingReducer
+        certificateSettings: certificateSettingReducer,
+        dashboard: dashboardReducer,
+        common: commonReducer
     },
 }); 
