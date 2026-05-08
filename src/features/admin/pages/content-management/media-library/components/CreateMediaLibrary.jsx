@@ -432,7 +432,7 @@ const CreateMediaLibrary = () => {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="px-4 py-2 rounded-md text-sm text-white bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-700 cursor-pointer transition-colors"
+                      className="px-4 py-2 rounded-md text-sm text-white bg-accent hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed  cursor-pointer transition-colors"
                     >
                       {isSubmitting
                         ? t("mediaLibrary.actions.creating")

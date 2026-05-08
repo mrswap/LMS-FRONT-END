@@ -20,6 +20,7 @@ import Error from "../../../common/Error";
 import TruncateText from "../../../common/TruncateText";
 import { FiSearch } from "react-icons/fi";
 import { LuFilterX } from "react-icons/lu";
+import usePermission from "../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -30,6 +31,8 @@ const Programs = () => {
   const { programs, isLoading, isError, message } = useSelector(
     (state) => state.program,
   );
+
+  const { hasPermission } = usePermission();
 
   // ✅ Fixed: Dynamic status options with i18n
   const statusOptions = [
@@ -155,6 +158,10 @@ const Programs = () => {
   if (isLoading && !programs?.data?.length) return <Loader />;
   if (isError) return <Error message={message} />;
 
+  if (!hasPermission("programs.view")) {
+    return null;
+  }
+
   return (
     <PageLayout>
       <PageHeader>
@@ -164,12 +171,14 @@ const Programs = () => {
         </PageHeaderLeft>
 
         <PageHeaderRight>
-          <Link
-            to="create-program"
-            className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap"
-          >
-            {t("program.actions.addNewProgram")}
-          </Link>
+          {hasPermission("programs.create") && (
+            <Link
+              to="create-program"
+              className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap"
+            >
+              {t("program.actions.addNewProgram")}
+            </Link>
+          )}
         </PageHeaderRight>
       </PageHeader>
 

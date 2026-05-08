@@ -28,6 +28,7 @@ import { getAllModules } from "../../../../../redux/slice/moduleSlice";
 import { getAllChapters } from "../../../../../redux/slice/chapterSlice";
 import { getAllTopics } from "../../../../../redux/slice/topicSlice";
 import { useTranslation } from "react-i18next";
+import usePermission from "../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -40,6 +41,7 @@ const ContentStatusReport = () => {
     isError,
     message,
   } = useSelector((state) => state.report);
+  const { hasPermission } = usePermission();
 
   const { levels } = useSelector((state) => state.level);
   const { modules } = useSelector((state) => state.module);
@@ -375,25 +377,6 @@ const ContentStatusReport = () => {
         </div>
       ),
     },
-    // {
-    //   header: t("contentStatusReport.columns.uploadedBy"),
-    //   render: (row) => (
-    //     <div>
-    //       <p className="text-sm text-gray-600 flex items-center gap-1">
-    //         <FaUser size={12} />
-    //         {row?.uploaded_by || "-"}
-    //       </p>
-    //     </div>
-    //   ),
-    // },
-    // {
-    //   header: t("contentStatusReport.columns.approvedBy"),
-    //   render: (row) => (
-    //     <div>
-    //       <p className="text-sm text-gray-600">{row?.approved_by || "-"}</p>
-    //     </div>
-    //   ),
-    // },
     {
       header: t("contentStatusReport.columns.publishDate"),
       render: (row) => (
@@ -457,6 +440,10 @@ const ContentStatusReport = () => {
 
   const pagination = getPaginationData();
   const tableData = getTableData();
+
+  if (!hasPermission("reports.content-status")) {
+    return null;
+  }
 
   return (
     <PageLayout>

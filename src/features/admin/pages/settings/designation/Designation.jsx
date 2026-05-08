@@ -23,6 +23,7 @@ import {
   getAllDesignation,
   updateSingleDesignationStatus,
 } from "../../../../../redux/slice/designationSlice";
+import usePermission from "../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -43,6 +44,7 @@ const Designation = () => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { hasPermission } = usePermission();
 
   const fetchDesignation = (overridePage) => {
     const params = {
@@ -101,35 +103,50 @@ const Designation = () => {
         <p className="font-semibold text-gray-800 cursor-pointer">{row.name}</p>
       ),
     },
-    {
-      header: t("designation.list.columns.status"),
-      render: (row) => (
-        <StatusToggle
-          value={row.is_active}
-          onToggle={async (newStatus) => {
-            await dispatch(
-              updateSingleDesignationStatus({ id: row.id, status: newStatus }),
-            ).unwrap();
-            await fetchDesignation(1);
-          }}
-        />
-      ),
-    },
-    {
-      header: t("designation.list.columns.actions"),
-      render: (row) => (
-        <button
-          onClick={() => navigate(`designation-details/${row.id}`)}
-          className="text-gray-800 text-lg cursor-pointer hover:text-blue-600 transition-colors"
-        >
-          <FaEye />
-        </button>
-      ),
-    },
+    ...(hasPermission("designations.status")
+      ? [
+          {
+            header: t("designation.list.columns.status"),
+            render: (row) => (
+              <StatusToggle
+                value={row.is_active}
+                onToggle={async (newStatus) => {
+                  await dispatch(
+                    updateSingleDesignationStatus({
+                      id: row.id,
+                      status: newStatus,
+                    }),
+                  ).unwrap();
+                  await fetchDesignation(1);
+                }}
+              />
+            ),
+          },
+        ]
+      : []),
+    ...(hasPermission("designations.edit")
+      ? [
+          {
+            header: t("designation.list.columns.actions"),
+            render: (row) => (
+              <button
+                onClick={() => navigate(`designation-details/${row.id}`)}
+                className="text-gray-800 text-lg cursor-pointer hover:text-blue-600 transition-colors"
+              >
+                <FaEye />
+              </button>
+            ),
+          },
+        ]
+      : []),
   ];
 
   if (isLoading && !designations?.length) return <Loader />;
   if (isError) return <Error message={message} />;
+
+  if (!hasPermission("designations.view")) {
+    return null;
+  }
 
   return (
     <PageLayout>
@@ -139,12 +156,14 @@ const Designation = () => {
           <PageSubtitle>{t("designation.list.subtitle")}</PageSubtitle>
         </PageHeaderLeft>
         <PageHeaderRight>
-          <Link
-            to="create-designation"
-            className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap hover:bg-opacity-90 transition"
-          >
-            {t("designation.actions.addNewDesignation")}
-          </Link>
+          {hasPermission("designations.create") && (
+            <Link
+              to="create-designation"
+              className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap hover:bg-opacity-90 transition"
+            >
+              {t("designation.actions.addNewDesignation")}
+            </Link>
+          )}
         </PageHeaderRight>
       </PageHeader>
 

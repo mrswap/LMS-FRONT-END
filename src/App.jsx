@@ -30,6 +30,7 @@ import React, { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import AdminRoutes from "./features/admin/routes/AdminRoutes";
 import GlobalConfirmModal from "./features/admin/common/GlobalConfirmModal";
+import Loader from "./features/admin/common/Loader";
 
 // 🔥 Lazy auth pages
 const Login = lazy(() => import("./features/admin/pages/auth/Login"));
@@ -48,7 +49,13 @@ const App = () => {
   return (
     <>
       {/* 🔥 Suspense yaha wrap karega sab routes ko */}
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense
+        fallback={
+          <div>
+            <Loader />
+          </div>
+        }
+      >
         <Routes>
           <Route path="/test" element={<LoginTest />} />
           <Route path="/login" element={<Login />} />

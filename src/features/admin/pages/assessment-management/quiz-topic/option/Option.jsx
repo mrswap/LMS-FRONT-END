@@ -17,6 +17,7 @@ import Loader from "../../../../common/Loader";
 import Error from "../../../../common/Error";
 import TruncateText from "../../../../common/TruncateText";
 import { getAllOptions } from "../../../../../../redux/slice/assessmentOptionSlice";
+import usePermission from "../../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -25,6 +26,7 @@ const Option = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { assessmentId, questionId } = useParams();
+  const { hasPermission } = usePermission();
 
   const { options, isLoading, isError, message } = useSelector(
     (state) => state.option,
@@ -106,28 +108,35 @@ const Option = () => {
         </span>
       ),
     },
-    {
-      header: t("option.columns.actions"),
-      render: (row) => (
-        // console.log("row", row),/
-        <div className="flex gap-4">
-          <button
-            onClick={() =>
-              navigate(
-                `/assessment-question-option/${assessmentId}/${questionId}/option-details/${row.id}`,
-              )
-            }
-            className="text-gray-800 text-lg cursor-pointer hover:text-[#184994]"
-          >
-            <FaEye />
-          </button>
-        </div>
-      ),
-    },
+    ...(hasPermission("options.edit")
+      ? [
+          {
+            header: t("option.columns.actions"),
+            render: (row) => (
+              <div className="flex gap-4">
+                <button
+                  onClick={() =>
+                    navigate(
+                      `/assessment-question-option/${assessmentId}/${questionId}/option-details/${row.id}`,
+                    )
+                  }
+                  className="text-gray-800 text-lg cursor-pointer hover:text-[#184994]"
+                >
+                  <FaEye />
+                </button>
+              </div>
+            ),
+          },
+        ]
+      : []),
   ];
 
   if (isLoading && !options?.options?.length) return <Loader />;
   if (isError & message) return <Error message={message} />;
+
+  if (!hasPermission("options.view")) {
+    return null;
+  }
 
   return (
     <PageLayout>
@@ -137,13 +146,15 @@ const Option = () => {
           <PageSubtitle>{t("option.subtitle")}</PageSubtitle>
         </PageHeaderLeft>
         <PageHeaderRight>
-          <Link
-            to={`create`}
-            className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2"
-          >
-            <FaPlus size={14} />
-            {t("option.actions.addOption")}
-          </Link>
+          {hasPermission("options.create") && (
+            <Link
+              to={`create`}
+              className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2"
+            >
+              <FaPlus size={14} />
+              {t("option.actions.addOption")}
+            </Link>
+          )}
         </PageHeaderRight>
       </PageHeader>
 

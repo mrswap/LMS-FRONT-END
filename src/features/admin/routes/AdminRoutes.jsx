@@ -119,6 +119,11 @@ const SingleLearningUnitBuilderDetails = lazy(
     import("../pages/content-management/learning-unit-builder/components/SingleLearningUnitBuilderDetails"),
 );
 
+const SingleContentPreview = lazy(
+  () =>
+    import("../pages/content-management/learning-unit-builder/components/SingleContentPreview"),
+);
+
 const BulkLearningUnitBuilderDetails = lazy(
   () =>
     import("../pages/content-management/learning-unit-builder/components/BulkLearningUnitBuilderDetails"),
@@ -275,6 +280,10 @@ const AdminRoutes = (
       <Route
         path="learning-unit/single/:id"
         element={<SingleLearningUnitBuilderDetails />}
+      />
+      <Route
+        path="learning-unit/preview/:topicId/:contentId"
+        element={<SingleContentPreview />}
       />
 
       {/* Media */}

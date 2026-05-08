@@ -27,6 +27,7 @@ import { getAllTopics } from "../../../../../redux/slice/topicSlice";
 import { getAllChapters } from "../../../../../redux/slice/chapterSlice";
 import { getAllModules } from "../../../../../redux/slice/moduleSlice";
 import { getAllLevels } from "../../../../../redux/slice/levelSlice";
+import usePermission from "../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -35,6 +36,7 @@ const Faqs = () => {
   const { faqs, isLoading, isError, message } = useSelector(
     (state) => state.faq,
   );
+  const { hasPermission } = usePermission();
 
   const { levels } = useSelector((state) => state.level);
   const { modules } = useSelector((state) => state.module);
@@ -280,35 +282,47 @@ const Faqs = () => {
         </span>
       ),
     },
-    {
-      header: t("faq.list.columns.status"),
-      render: (row) => (
-        <StatusToggle
-          value={row.status}
-          onToggle={async (newStatus) => {
-            await dispatch(
-              updateSingleFaqStatus({ id: row.id, status: newStatus }),
-            ).unwrap();
-            await fetchAllFaqs(1);
-          }}
-        />
-      ),
-    },
-    {
-      header: t("faq.list.columns.actions"),
-      render: (row) => (
-        <button
-          onClick={() => navigate(`${row.id}`)}
-          className="text-gray-800 text-lg cursor-pointer hover:text-blue-600 transition-colors"
-        >
-          <FaEye />
-        </button>
-      ),
-    },
+    ...(hasPermission("faqs.status")
+      ? [
+          {
+            header: t("faq.list.columns.status"),
+            render: (row) => (
+              <StatusToggle
+                value={row.status}
+                onToggle={async (newStatus) => {
+                  await dispatch(
+                    updateSingleFaqStatus({ id: row.id, status: newStatus }),
+                  ).unwrap();
+                  await fetchAllFaqs(1);
+                }}
+              />
+            ),
+          },
+        ]
+      : []),
+    ...(hasPermission("faqs.status")
+      ? [
+          {
+            header: t("faq.list.columns.actions"),
+            render: (row) => (
+              <button
+                onClick={() => navigate(`${row.id}`)}
+                className="text-gray-800 text-lg cursor-pointer hover:text-blue-600 transition-colors"
+              >
+                <FaEye />
+              </button>
+            ),
+          },
+        ]
+      : []),
   ];
 
   if (isLoading && !faqs?.data?.length) return <Loader />;
   if (isError) return <Error message={message} />;
+
+  if (!hasPermission("faqs.view")) {
+    return null;
+  }
 
   return (
     <PageLayout>
@@ -318,12 +332,14 @@ const Faqs = () => {
           <PageSubtitle>{t("faq.list.subtitle")}</PageSubtitle>
         </PageHeaderLeft>
         <PageHeaderRight>
-          <Link
-            to="create"
-            className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap hover:bg-opacity-90 transition"
-          >
-            {t("faq.actions.addNewFaq")}
-          </Link>
+          {hasPermission("faqs.create") && (
+            <Link
+              to="create"
+              className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap hover:bg-opacity-90 transition"
+            >
+              {t("faq.actions.addNewFaq")}
+            </Link>
+          )}
         </PageHeaderRight>
       </PageHeader>
 

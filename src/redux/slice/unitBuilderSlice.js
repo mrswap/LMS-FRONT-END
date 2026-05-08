@@ -167,6 +167,27 @@ export const deleteSingleContent = createAsyncThunk(
     }
 );
 
+/* ===========================
+   GET SINGLE CONTENT
+=========================== */
+export const getSingleContent = createAsyncThunk(
+    "coursePreview/getSingleContent",
+    async ({ topicId, contentId }, thunkAPI) => {
+        try {
+            const res = await axiosInstance.get(
+                `/content/single-preview/${topicId}/${contentId}`,
+                getAuthConfig()
+            );
+
+            return res.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(
+                error.response?.data || { message: "Failed to fetch content" }
+            );
+        }
+    }
+);
+
 // ======================= SLICE =======================
 const unitBuilderSlice = createSlice({
     name: "content",
@@ -174,6 +195,7 @@ const unitBuilderSlice = createSlice({
         contents: [],
         content: null,
         bulkContent: null,
+        currentContent: null,
 
         isLoading: false,
         isError: false,
@@ -348,7 +370,23 @@ const unitBuilderSlice = createSlice({
                 state.isLoading = false;
                 state.isError = true;
                 state.message = action.payload?.message;
-            });
+            })
+
+            /* ===== GET SINGLE CONTENT ===== */
+            .addCase(getSingleContent.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(getSingleContent.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.currentContent = action.payload.data || action.payload;
+                state.message = action.payload.message;
+            })
+            .addCase(getSingleContent.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload?.message;
+            })
     },
 });
 

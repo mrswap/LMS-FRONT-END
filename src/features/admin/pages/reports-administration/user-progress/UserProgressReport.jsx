@@ -23,6 +23,7 @@ import { getAllChapters } from "../../../../../redux/slice/chapterSlice";
 import { getAllTopics } from "../../../../../redux/slice/topicSlice";
 import { getAllUsers } from "../../../../../redux/slice/userSlice";
 import { useTranslation } from "react-i18next";
+import usePermission from "../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -32,6 +33,8 @@ const UserProgressReport = () => {
   const { userProgress, loadingUserProgress, isError, message } = useSelector(
     (state) => state.report,
   );
+
+  const { hasPermission } = usePermission();
 
   const { levels } = useSelector((state) => state.level);
   const { modules } = useSelector((state) => state.module);
@@ -451,6 +454,10 @@ const UserProgressReport = () => {
 
   const pagination = getPaginationData();
   const tableData = getTableData();
+
+  if (!hasPermission("reports.progress")) {
+    return null;
+  }
 
   return (
     <PageLayout>

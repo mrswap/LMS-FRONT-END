@@ -32,6 +32,7 @@ import Breadcrumb from "../../../../common/layout/Breadcrumb";
 import { showConfirm } from "../../../../../../redux/slice/confirmSlice";
 import Loader from "../../../../common/Loader";
 import Error from "../../../../common/Error";
+import usePermission from "../../../../../../hooks/usePermission";
 
 const QuillEditor = ({ value, onChange }) => {
   const { quill, quillRef } = useQuill({
@@ -73,6 +74,7 @@ const FaqDetails = () => {
   const navigate = useNavigate();
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const { hasPermission } = usePermission();
 
   const { levels, isLoading: levelsLoading } = useSelector(
     (state) => state.level,
@@ -515,22 +517,27 @@ const FaqDetails = () => {
                 {/* Footer */}
                 <div className="flex justify-end items-center pt-4">
                   <div className="flex gap-3">
-                    <button
-                      type="button"
-                      onClick={handleDelete}
-                      className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-red-50 cursor-pointer transition-colors"
-                    >
-                      {t("faq.actions.deleteFaq")}
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 cursor-pointer"
-                    >
-                      {isSubmitting
-                        ? t("faq.actions.updating")
-                        : t("faq.actions.updateFaq")}
-                    </button>
+                    {hasPermission("faqs.delete") && (
+                      <button
+                        type="button"
+                        onClick={handleDelete}
+                        className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-red-50 cursor-pointer transition-colors"
+                      >
+                        {t("faq.actions.deleteFaq")}
+                      </button>
+                    )}
+
+                    {hasPermission("faqs.edit") && (
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 cursor-pointer"
+                      >
+                        {isSubmitting
+                          ? t("faq.actions.updating")
+                          : t("faq.actions.updateFaq")}
+                      </button>
+                    )}
                   </div>
                 </div>
               </Form>

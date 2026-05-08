@@ -114,12 +114,32 @@ export const deleteSingleRole = createAsyncThunk(
     }
 );
 
+// ======================= GET ALL PERMISSIONS =======================
+export const getAllPermissions = createAsyncThunk(
+    "roles/getAllPermissions",
+    async (_, thunkAPI) => {
+        try {
+            const res = await axiosInstance.get(
+                "/setting/permissions",
+                getAuthConfig()
+            );
+            return res.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(
+                error.response?.data || { message: "Fetch permissions failed" }
+            );
+        }
+    }
+);
+
 // ======================= SLICE =======================
 const rolesSlice = createSlice({
     name: "roles",
     initialState: {
         roles: [],
         role: null,
+        permissions: [],      // <-- YEH ADD KAREIN
+        permissionsGrouped: [], // <-- OPTIONAL: Grouped permissions ke liye
 
         isLoading: false,
         isError: false,
@@ -168,7 +188,7 @@ const rolesSlice = createSlice({
             .addCase(getAllRoles.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
-                state.roles = action.payload;
+                state.roles = action.payload?.data;
             })
             .addCase(getAllRoles.rejected, (state, action) => {
                 state.isLoading = false;
@@ -183,7 +203,7 @@ const rolesSlice = createSlice({
             .addCase(getRoleById.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
-                state.role = action.payload;
+                state.role = action.payload?.data;
             })
             .addCase(getRoleById.rejected, (state, action) => {
                 state.isLoading = false;
@@ -260,6 +280,33 @@ const rolesSlice = createSlice({
                 state.message = action.payload.message;
             })
             .addCase(deleteSingleRole.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload?.message;
+            })
+
+            // ===== GET ALL PERMISSIONS =====
+            .addCase(getAllPermissions.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(getAllPermissions.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                // Aapke API response mein data array hai grouped by module
+                state.permissionsGrouped = action.payload?.data || [];
+
+                // Agar aap flat permissions list bhi chahate hain
+                const flatPermissions = [];
+                if (action.payload?.data && Array.isArray(action.payload.data)) {
+                    action.payload.data.forEach(moduleGroup => {
+                        if (moduleGroup.permissions && Array.isArray(moduleGroup.permissions)) {
+                            flatPermissions.push(...moduleGroup.permissions);
+                        }
+                    });
+                }
+                state.permissions = flatPermissions;
+            })
+            .addCase(getAllPermissions.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
                 state.message = action.payload?.message;

@@ -27,6 +27,9 @@ import { getAllModules } from "../../../../../redux/slice/moduleSlice";
 import { getAllLevels } from "../../../../../redux/slice/levelSlice";
 import StatusToggle from "../../../common/StatusToggle";
 import { LuFilterX } from "react-icons/lu";
+import PublishedDropdown from "../../../common/PublishedDropdown";
+import { updatePublishStatus } from "../../../../../redux/slice/commonSlice";
+import usePermission from "../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -64,12 +67,21 @@ const Topics = () => {
     { value: "0", label: t("topic.filters.inactive") },
   ];
 
+  const publishStatusOptions = [
+    { value: "all", label: t("topic.filters.allVisibility") },
+    { value: "published", label: t("topic.filters.published") },
+    { value: "unpublished", label: t("topic.filters.unpublished") },
+    { value: "draft", label: t("topic.filters.draft") },
+  ];
+
   const [level, setLevel] = useState(levelOption[0]);
   const [moduleFilter, setModuleFilter] = useState(null);
   const [chapterFilter, setChapterFilter] = useState(null);
   const [status, setStatus] = useState(statusOptions[0]);
+  const [publish_status, setPublishStatus] = useState(publishStatusOptions[0]);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
+  const { hasPermission } = usePermission();
 
   // Get module options based on selected level
   const getModuleOptions = () => {
@@ -152,6 +164,8 @@ const Topics = () => {
       level_id: level?.value !== "all" ? level?.value : "",
       module_id: moduleFilter?.value || "",
       status: status?.value !== "all" ? status?.value : "all",
+      publish_status:
+        publish_status?.value !== "all" ? publish_status?.value : "all",
       page: overridePage ?? page,
       limit: ITEMS_PER_PAGE,
     };
@@ -167,7 +181,15 @@ const Topics = () => {
       fetchTopics(1);
     }, 500);
     return () => clearTimeout(delay);
-  }, [search, status, level, moduleFilter, chapterFilter, isLevelsLoaded]);
+  }, [
+    search,
+    status,
+    level,
+    moduleFilter,
+    chapterFilter,
+    isLevelsLoaded,
+    publish_status,
+  ]);
 
   // Fetch topics on page change
   useEffect(() => {
@@ -185,6 +207,7 @@ const Topics = () => {
     setModuleFilter(null);
     setChapterFilter(null);
     setStatus(statusOptions[0]);
+    setPublishStatus(publishStatusOptions[0]);
     setSearch("");
     setPage(1);
     setIsModulesLoaded(false);
@@ -272,51 +295,80 @@ const Topics = () => {
         </span>
       ),
     },
+    ...(hasPermission("topics.status")
+      ? [
+          {
+            header: t("topic.list.columns.status"),
+            render: (row) => (
+              <StatusToggle
+                value={row.status}
+                onToggle={async (newStatus) => {
+                  await dispatch(
+                    updateSingleTopicStatus({ id: row.id, status: newStatus }),
+                  ).unwrap();
+                  await fetchTopics(1);
+                }}
+              />
+            ),
+          },
+        ]
+      : []),
+
     {
-      header: t("topic.list.columns.status"),
+      header: t("publishedDropdown.status.title"),
       render: (row) => (
-        <StatusToggle
-          value={row.status}
+        <PublishedDropdown
+          value={row.publish_status}
           onToggle={async (newStatus) => {
             await dispatch(
-              updateSingleTopicStatus({ id: row.id, status: newStatus }),
+              updatePublishStatus({
+                type: "topic",
+                id: row.id,
+                publish_status: newStatus,
+              }),
             ).unwrap();
             await fetchTopics(1);
           }}
         />
       ),
     },
-    {
-      header: t("topic.list.columns.actions"),
-      render: (row) => (
-        <div className="flex gap-2">
-          <button
-            onClick={() => navigate(`topic-details/${row.id}`)}
-            className="text-gray-800 text-lg cursor-pointer hover:text-[#184994] transition-colors"
-          >
-            <FaEye />
-          </button>
-          {/* <button
-            onClick={() => navigate(`/learning-unit/bulk//${row.id}`)}
-            className="text-gray-800 text-lg cursor-pointer hover:text-[#184994] transition-colors"
-          >
-            <FaArrowRight />
-          </button> */}
+    ...(hasPermission("topics.edit") || hasPermission("content.view")
+      ? [
+          {
+            header: t("topic.list.columns.actions"),
+            render: (row) => (
+              <div className="flex gap-2">
+                {hasPermission("topics.edit") && (
+                  <button
+                    onClick={() => navigate(`topic-details/${row.id}`)}
+                    className="text-gray-800 text-lg cursor-pointer hover:text-[#184994] transition-colors"
+                  >
+                    <FaEye />
+                  </button>
+                )}
 
-          <button
-            onClick={() => navigate(`/learning-unit/bulk//${row.id}`)}
-            className="px-3 py-1 text-xs font-semibold cursor-pointer text-blue-600 bg-blue-50 border border-blue-200 rounded-md hover:bg-blue-100 hover:border-blue-300 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all duration-150"
-          >
-            {/* View all content */}
-            {t("topic.list.columns.viewContent")}
-          </button>
-        </div>
-      ),
-    },
+                {hasPermission("content.view") && (
+                  <button
+                    onClick={() => navigate(`/learning-unit/bulk//${row.id}`)}
+                    className="px-3 py-1 text-xs font-semibold cursor-pointer text-blue-600 bg-blue-50 border border-blue-200 rounded-md hover:bg-blue-100 hover:border-blue-300 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all duration-150"
+                  >
+                    {/* View all content */}
+                    {t("topic.list.columns.viewContent")}
+                  </button>
+                )}
+              </div>
+            ),
+          },
+        ]
+      : []),
   ];
 
   if (isLoading && !topics?.data?.length) return <Loader />;
   if (isError) return <Error message={message} />;
+
+  if (!hasPermission("topics.view")) {
+    return null;
+  }
 
   return (
     <PageLayout>
@@ -326,12 +378,14 @@ const Topics = () => {
           <PageSubtitle>{t("topic.list.subtitle")}</PageSubtitle>
         </PageHeaderLeft>
         <PageHeaderRight>
-          <Link
-            to="create-topic"
-            className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap hover:bg-opacity-90 transition"
-          >
-            {t("topic.actions.addNewTopic")}
-          </Link>
+          {hasPermission("topics.create") && (
+            <Link
+              to="create-topic"
+              className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap hover:bg-opacity-90 transition"
+            >
+              {t("topic.actions.addNewTopic")}
+            </Link>
+          )}
         </PageHeaderRight>
       </PageHeader>
 
@@ -416,6 +470,16 @@ const Topics = () => {
                 value={status}
                 onChange={setStatus}
                 options={statusOptions}
+                styles={customSelectStyles}
+                isSearchable={false}
+              />
+            </div>
+
+            <div className="w-full sm:w-[48%] lg:w-[210px]">
+              <Select
+                value={publish_status}
+                onChange={setPublishStatus}
+                options={publishStatusOptions}
                 styles={customSelectStyles}
                 isSearchable={false}
               />

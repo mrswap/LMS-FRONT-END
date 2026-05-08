@@ -23,6 +23,7 @@ import {
   getAllRoles,
   updateSingleRoleStatus,
 } from "../../../../../redux/slice/rolesSlice";
+import usePermission from "../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -31,6 +32,8 @@ const RolesAndPermission = () => {
   const { roles, isLoading, isError, message } = useSelector(
     (state) => state.role,
   );
+
+  const { hasPermission } = usePermission();
 
   const statusOptions = [
     { value: "all", label: t("role.filters.allStatus") },
@@ -101,35 +104,48 @@ const RolesAndPermission = () => {
         <p className="font-semibold text-gray-800 cursor-pointer">{row.name}</p>
       ),
     },
-    {
-      header: t("role.list.columns.status"),
-      render: (row) => (
-        <StatusToggle
-          value={row.is_active}
-          onToggle={async (newStatus) => {
-            await dispatch(
-              updateSingleRoleStatus({ id: row.id, status: newStatus }),
-            ).unwrap();
-            await fetchRoles(1);
-          }}
-        />
-      ),
-    },
-    {
-      header: t("role.list.columns.actions"),
-      render: (row) => (
-        <button
-          onClick={() => navigate(`role-details/${row.id}`)}
-          className="text-gray-800 text-lg cursor-pointer hover:text-blue-600 transition-colors"
-        >
-          <FaEye />
-        </button>
-      ),
-    },
+    ...(hasPermission("roles.status")
+      ? [
+          {
+            header: t("role.list.columns.status"),
+            render: (row) => (
+              <StatusToggle
+                value={row.is_active}
+                onToggle={async (newStatus) => {
+                  await dispatch(
+                    updateSingleRoleStatus({ id: row.id, status: newStatus }),
+                  ).unwrap();
+                  await fetchRoles(1);
+                }}
+              />
+            ),
+          },
+        ]
+      : []),
+
+    ...(hasPermission("roles.edit")
+      ? [
+          {
+            header: t("role.list.columns.actions"),
+            render: (row) => (
+              <button
+                onClick={() => navigate(`role-details/${row.id}`)}
+                className="text-gray-800 text-lg cursor-pointer hover:text-blue-600 transition-colors"
+              >
+                <FaEye />
+              </button>
+            ),
+          },
+        ]
+      : []),
   ];
 
   if (isLoading && !roles?.length) return <Loader />;
   if (isError) return <Error message={message} />;
+
+  if (!hasPermission("roles.view")) {
+    return null;
+  }
 
   return (
     <PageLayout>

@@ -1,6 +1,6 @@
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { TextInput } from "../../../common/form";
+import { TextareaField, TextInput } from "../../../common/form";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -38,6 +38,7 @@ import {
 } from "../../../../../redux/slice/systemSettingSlice";
 import Loader from "../../../common/Loader";
 import Error from "../../../common/Error";
+import usePermission from "../../../../../hooks/usePermission";
 
 const QuillEditor = ({ value, onChange, label }) => {
   const { quill, quillRef } = useQuill({
@@ -122,6 +123,7 @@ const SystemSetting = () => {
   const { settings, isLoading, isError, message } = useSelector(
     (state) => state.systemSetting,
   );
+  const { hasPermission } = usePermission();
 
   useEffect(() => {
     dispatch(getSiteSettings());
@@ -152,6 +154,7 @@ const SystemSetting = () => {
     about_us: settings?.about_us || "",
     privacy_policy: settings?.privacy_policy || "",
     terms_conditions: settings?.terms_conditions || "",
+    firebase_json: settings?.firebase_json || "",
   };
 
   const validationSchema = Yup.object({
@@ -183,6 +186,20 @@ const SystemSetting = () => {
       t("systemSettings.validation.urlInvalid"),
     ),
     social_twitter: Yup.string().url(t("systemSettings.validation.urlInvalid")),
+    firebase_json: Yup.string()
+      .required(t("systemSettings.validation.firebaseRequired"))
+      .test(
+        "is-json",
+        t("systemSettings.validation.firebaseInvalid"),
+        (value) => {
+          try {
+            JSON.parse(value);
+            return true;
+          } catch {
+            return false;
+          }
+        },
+      ),
   });
 
   const handleLogoUpload = (event, setFieldValue) => {
@@ -242,6 +259,10 @@ const SystemSetting = () => {
 
   if (isError) {
     return <Error message={message} />;
+  }
+
+  if (!hasPermission("site-settings.view")) {
+    return null;
   }
 
   return (
@@ -501,6 +522,24 @@ const SystemSetting = () => {
                   />
                 </SectionCard>
 
+                {/* Fire base */}
+                <SectionCard
+                  title={t("systemSettings.sections.firebaseConfig")}
+                  icon={FiFileText}
+                >
+                  <TextareaField
+                    name="firebase_json"
+                    label={t("systemSettings.fields.firebaseJson")}
+                    placeholder={t("systemSettings.placeholders.firebaseJson")}
+                    rows={10}
+                    required
+                  />
+
+                  <InfoBox>
+                    {t("systemSettings.placeholders.firebaseJson")}
+                  </InfoBox>
+                </SectionCard>
+
                 {/* Content Pages */}
                 <SectionCard
                   title={t("systemSettings.sections.contentPages")}
@@ -561,16 +600,18 @@ const SystemSetting = () => {
 
                 {/* Footer Actions */}
                 <div className="flex justify-end gap-3">
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="inline-flex items-center gap-2 px-6 py-2.5 bg-accent text-white rounded-lg text-sm font-medium shadow-sm"
-                  >
-                    <FiSave className="w-4 h-4" />
-                    {isSubmitting
-                      ? t("systemSettings.actions.saving")
-                      : t("systemSettings.actions.saveSettings")}
-                  </button>
+                  {hasPermission("site-settings.edit") && (
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="inline-flex items-center gap-2 px-6 py-2.5 bg-accent text-white rounded-lg text-sm font-medium shadow-sm"
+                    >
+                      <FiSave className="w-4 h-4" />
+                      {isSubmitting
+                        ? t("systemSettings.actions.saving")
+                        : t("systemSettings.actions.saveSettings")}
+                    </button>
+                  )}
                 </div>
               </Form>
             )}

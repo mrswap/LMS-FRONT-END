@@ -21,6 +21,7 @@ import { getAllPrograms } from "../../../../../../redux/slice/programSlice";
 import { showConfirm } from "../../../../../../redux/slice/confirmSlice";
 import Loader from "../../../../common/Loader";
 import Error from "../../../../common/Error";
+import usePermission from "../../../../../../hooks/usePermission";
 
 const ModuleDetails = () => {
   const [thumbnail, setThumbnail] = useState(null);
@@ -32,6 +33,7 @@ const ModuleDetails = () => {
   const toast = useToast();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { hasPermission } = usePermission();
 
   const { module, isLoading, isError, message } = useSelector(
     (state) => state.module,
@@ -287,13 +289,6 @@ const ModuleDetails = () => {
                         isLoading={programsLoading}
                         disabled={!values.levelName}
                       />
-                      {/* ========== COMMENTED CODE - FUTURE FIELDS ==========
-                      <TextInput
-                        name="duration"
-                        label={t("module.details.duration")}
-                        placeholder={t("module.details.durationPlaceholder")}
-                      />
-                      ========== END COMMENTED CODE ========== */}
                     </div>
 
                     <div className="mt-2">
@@ -385,22 +380,27 @@ const ModuleDetails = () => {
                   {/* Footer */}
                   <div className="flex justify-end items-center pt-4">
                     <div className="flex gap-3">
-                      <button
-                        type="button"
-                        onClick={handleDelete}
-                        className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-red-50 cursor-pointer transition-colors"
-                      >
-                        {t("module.actions.deleteModule")}
-                      </button>
-                      <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 cursor-pointer"
-                      >
-                        {isSubmitting
-                          ? t("module.actions.updating")
-                          : t("module.actions.updateModule")}
-                      </button>
+                      {hasPermission("modules.delete") && (
+                        <button
+                          type="button"
+                          onClick={handleDelete}
+                          className="px-4 py-2 border border-red-500 rounded-md text-sm text-red-500 hover:bg-red-50 cursor-pointer transition-colors"
+                        >
+                          {t("module.actions.deleteModule")}
+                        </button>
+                      )}
+
+                      {hasPermission("modules.edit") && (
+                        <button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 cursor-pointer"
+                        >
+                          {isSubmitting
+                            ? t("module.actions.updating")
+                            : t("module.actions.updateModule")}
+                        </button>
+                      )}
                     </div>
                   </div>
                 </Form>

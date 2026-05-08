@@ -31,6 +31,7 @@ import {
   getAllAssessments,
   updateSingleAssismentStatus,
 } from "../../../../../../redux/slice/assissmentSlice";
+import usePermission from "../../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -75,6 +76,7 @@ const Assissment = () => {
   const [status, setStatus] = useState(statusOptions[0]);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
+  const { hasPermission } = usePermission();
 
   const getModuleOptions = () => {
     if (!level || level?.value === "All") {
@@ -323,43 +325,54 @@ const Assissment = () => {
         </span>
       ),
     },
-    {
-      header: t("quizAssessment.list.columns.status"),
-      render: (row) => (
-        <StatusToggle
-          value={row.status}
-          onToggle={async (newStatus) => {
-            try {
-              await dispatch(
-                updateSingleAssismentStatus({ id: row.id, status: newStatus }),
-              ).unwrap();
-              await fetchAssissments(1);
-            } catch (err) {
-              console.error("Toggle failed:", err);
-            }
-          }}
-        />
-      ),
-    },
-    {
-      header: t("quizAssessment.list.columns.actions"),
-      render: (row) => (
-        <div className="flex gap-4">
-          <button
-            onClick={() => navigate(`${row.id}`)}
-            className="text-gray-800 text-lg cursor-pointer hover:text-[#184994] transition-colors"
-          >
-            <FaEye />
-          </button>
-          <button
-            onClick={() => navigate(`/assessment-question/${row.id}`)}
-            className="text-sm text-blue-500 hover:text-blue-600 hover:underline cursor-pointer"
-          >
-            {t("quizAssessment.questions")}
-          </button>
-        </div>
-      ),
-    },
+    ...(hasPermission("assessments.status")
+      ? [
+          {
+            header: t("quizAssessment.list.columns.status"),
+            render: (row) => (
+              <StatusToggle
+                value={row.status}
+                onToggle={async (newStatus) => {
+                  try {
+                    await dispatch(
+                      updateSingleAssismentStatus({
+                        id: row.id,
+                        status: newStatus,
+                      }),
+                    ).unwrap();
+                    await fetchAssissments(1);
+                  } catch (err) {
+                    console.error("Toggle failed:", err);
+                  }
+                }}
+              />
+            ),
+          },
+        ]
+      : []),
+    ...(hasPermission("assessments.edit")
+      ? [
+          {
+            header: t("quizAssessment.list.columns.actions"),
+            render: (row) => (
+              <div className="flex gap-4">
+                <button
+                  onClick={() => navigate(`${row.id}`)}
+                  className="text-gray-800 text-lg cursor-pointer hover:text-[#184994] transition-colors"
+                >
+                  <FaEye />
+                </button>
+                <button
+                  onClick={() => navigate(`/assessment-question/${row.id}`)}
+                  className="text-sm text-blue-500 hover:text-blue-600 hover:underline cursor-pointer"
+                >
+                  {t("quizAssessment.questions")}
+                </button>
+              </div>
+            ),
+          },
+        ]
+      : []),
   ];
 
   const isModuleDisabled = !level || level?.value === "All";
@@ -372,6 +385,10 @@ const Assissment = () => {
   if (isLoading && !assessments?.data?.length) return <Loader />;
   if (isError) return <Error message={message} />;
 
+  if (!hasPermission("assessments.view")) {
+    return null;
+  }
+
   return (
     <PageLayout>
       <PageHeader>
@@ -380,12 +397,14 @@ const Assissment = () => {
           <PageSubtitle>{t("quizAssessment.list.quizSubtitle")}</PageSubtitle>
         </PageHeaderLeft>
         <PageHeaderRight>
-          <Link
-            to="create"
-            className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap"
-          >
-            {t("quizAssessment.actions.addNewQuiz")}
-          </Link>
+          {hasPermission("assessments.create") && (
+            <Link
+              to="create"
+              className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap"
+            >
+              {t("quizAssessment.actions.addNewQuiz")}
+            </Link>
+          )}
         </PageHeaderRight>
       </PageHeader>
 

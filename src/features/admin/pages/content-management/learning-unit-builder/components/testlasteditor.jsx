@@ -713,408 +713,138 @@
 // export default DynamicContentSection;
 
 import { useState, useEffect, useRef, memo, useCallback } from "react";
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-// ✅ Yeh karo (correct way)
-import { Table } from "@tiptap/extension-table";
-import { TableRow } from "@tiptap/extension-table-row";
-import { TableCell } from "@tiptap/extension-table-cell";
-import { TableHeader } from "@tiptap/extension-table-header";
-import Image from "@tiptap/extension-image";
-import Link from "@tiptap/extension-link";
-import Placeholder from "@tiptap/extension-placeholder";
-import {
-  FiPlus,
-  FiTrash2,
-  FiImage,
-  FiType,
-  FiTable,
-  FiLink,
-  FiBold,
-  FiItalic,
-  FiList,
-  FiAlignLeft,
-  FiAlignCenter,
-  FiAlignRight,
-  FiUnderline,
-} from "react-icons/fi";
+import Quill from "quill";
+import "quill/dist/quill.snow.css";
+import "quill-better-table/dist/quill-better-table.css";
+import { FiPlus, FiTrash2, FiImage, FiType } from "react-icons/fi";
 import usePermission from "../../../../../../hooks/usePermission";
 
-// ─── TipTap Text Editor with Table Support ─────────────────────────────────────────────
+// ✅ Register Table Module
+import QuillBetterTable from "quill-better-table";
+Quill.register(
+  {
+    "modules/better-table": QuillBetterTable,
+  },
+  true,
+);
+
+// ─── Text Editor with In-Editor Table Support ─────────────────────────────────────────────
 const TextEditor = memo(({ value, onChange, t }) => {
-  const editor = useEditor({
-    extensions: [
-      StarterKit.configure({
-        heading: {
-          levels: [1, 2, 3, 4, 5, 6],
+  const editorRef = useRef(null);
+  const quillInstance = useRef(null);
+  const isInitialized = useRef(false);
+
+  useEffect(() => {
+    if (!editorRef.current || isInitialized.current) return;
+
+    // Initialize Quill with table module
+    quillInstance.current = new Quill(editorRef.current, {
+      theme: "snow",
+      placeholder: t("learningUnitBuilder.details.content.editorPlaceholder"),
+      modules: {
+        toolbar: [
+          [{ header: [1, 2, 3, 4, 5, 6, false] }],
+          ["bold", "italic", "underline", "strike"],
+          [{ color: [] }, { background: [] }],
+          [{ list: "ordered" }, { list: "bullet" }],
+          [{ indent: "-1" }, { indent: "+1" }],
+          [{ align: [] }],
+          ["link", "clean"],
+          ["table"], // ✅ Table button - toolbar me dikhega
+        ],
+        table: true, // ✅ Enable table module
+        "better-table": {
+          operationMenu: {
+            items: {
+              insertColumnRight: "Insert column right",
+              insertColumnLeft: "Insert column left",
+              insertRowUp: "Insert row above",
+              insertRowDown: "Insert row below",
+              mergeCells: "Merge cells",
+              unmergeCells: "Unmerge cells",
+              deleteColumn: "Delete column",
+              deleteRow: "Delete row",
+              deleteTable: "Delete table",
+            },
+          },
         },
-      }),
-      Link.configure({
-        openOnClick: false,
-        HTMLAttributes: {
-          class: "text-blue-500 underline",
+        keyboard: {
+          bindings: QuillBetterTable.keyboardBindings,
         },
-      }),
-      Image.configure({
-        inline: true,
-        allowBase64: true,
-        HTMLAttributes: {
-          class: "max-w-full h-auto rounded-lg",
-        },
-      }),
-      Placeholder.configure({
-        placeholder:
-          t("learningUnitBuilder.details.content.editorPlaceholder") ||
-          "Write something...",
-      }),
-      Table.configure({
-        resizable: true,
-        HTMLAttributes: {
-          class: "min-w-full border-collapse",
-        },
-      }),
-      TableRow,
-      TableCell,
-      TableHeader,
-    ],
-    content: value || "",
-    onUpdate: ({ editor }) => {
-      onChange(editor.getHTML());
-    },
-    editorProps: {
-      attributes: {
-        class: "prose max-w-none focus:outline-none min-h-[300px] p-4",
       },
-    },
-  });
+    });
+
+    // Set initial value
+    if (value) {
+      quillInstance.current.root.innerHTML = value;
+    }
+
+    // Handle text change
+    quillInstance.current.on("text-change", () => {
+      onChange(quillInstance.current.root.innerHTML);
+    });
+
+    isInitialized.current = true;
+
+    // ✅ Add custom table size picker
+    const toolbar = document.querySelector(".ql-toolbar");
+    if (toolbar) {
+      let tableButton = toolbar.querySelector(".ql-table");
+      if (tableButton) {
+        // Replace default table button with custom one that shows picker
+        const newButton = document.createElement("button");
+        newButton.className = "ql-table";
+        newButton.innerHTML = "📊";
+        newButton.title = "Insert Table";
+        newButton.style.width = "30px";
+
+        newButton.onclick = (e) => {
+          e.preventDefault();
+          const rows = prompt("Enter number of rows:", "3");
+          const cols = prompt("Enter number of columns:", "3");
+          if (rows && cols) {
+            const tableModule = quillInstance.current.getModule("better-table");
+            if (tableModule) {
+              tableModule.insertTable(parseInt(rows), parseInt(cols));
+            }
+          }
+        };
+
+        tableButton.parentNode.replaceChild(newButton, tableButton);
+      }
+    }
+
+    return () => {
+      if (quillInstance.current) {
+        quillInstance.current.off("text-change");
+      }
+    };
+  }, []);
 
   // Update content when value changes externally
   useEffect(() => {
-    if (editor && value !== editor.getHTML()) {
-      editor.commands.setContent(value || "");
+    if (
+      quillInstance.current &&
+      value !== undefined &&
+      !isInitialized.current
+    ) {
+      const currentContent = quillInstance.current.root.innerHTML;
+      if (currentContent !== value) {
+        quillInstance.current.root.innerHTML = value;
+      }
     }
-  }, [editor, value]);
-
-  if (!editor) {
-    return (
-      <div className="border border-gray-300 rounded-lg p-4 min-h-[350px] bg-gray-50 flex items-center justify-center">
-        <div className="text-gray-400">Loading editor...</div>
-      </div>
-    );
-  }
-
-  // Toolbar functions
-  const addTable = () => {
-    const rows = prompt("Number of rows:", "3");
-    const cols = prompt("Number of columns:", "3");
-    if (rows && cols) {
-      editor.commands.insertTable({
-        rows: parseInt(rows),
-        cols: parseInt(cols),
-        withHeaderRow: true,
-      });
-    }
-  };
-
-  const addImage = () => {
-    const url = prompt("Enter image URL:");
-    if (url) {
-      editor.chain().focus().setImage({ src: url }).run();
-    }
-  };
-
-  const addLink = () => {
-    const url = prompt("Enter URL:");
-    if (url) {
-      editor.chain().focus().setLink({ href: url }).run();
-    }
-  };
+  }, [value]);
 
   return (
-    <div className="tiptap-editor-wrapper border border-gray-300 rounded-lg overflow-hidden bg-white">
-      {/* Toolbar */}
-      <div className="toolbar border-b border-gray-200 bg-gray-50 p-2 flex flex-wrap gap-1 sticky top-0 z-10">
-        {/* Text Formatting */}
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleBold().run()}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${editor.isActive("bold") ? "bg-gray-200 text-blue-600" : "text-gray-700"}`}
-          title="Bold"
-        >
-          <FiBold size={16} />
-        </button>
-
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleItalic().run()}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${editor.isActive("italic") ? "bg-gray-200 text-blue-600" : "text-gray-700"}`}
-          title="Italic"
-        >
-          <FiItalic size={16} />
-        </button>
-
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleUnderline().run()}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${editor.isActive("underline") ? "bg-gray-200 text-blue-600" : "text-gray-700"}`}
-          title="Underline"
-        >
-          <FiUnderline size={16} />
-        </button>
-
-        <div className="w-px h-6 bg-gray-300 mx-1" />
-
-        {/* Headers */}
-        <select
-          onChange={(e) => {
-            const value = e.target.value;
-            if (value === "paragraph") {
-              editor.chain().focus().setParagraph().run();
-            } else {
-              editor
-                .chain()
-                .focus()
-                .toggleHeading({ level: parseInt(value) })
-                .run();
-            }
-          }}
-          className="p-1 rounded border border-gray-300 text-sm bg-white"
-          value={(() => {
-            if (editor.isActive("heading", { level: 1 })) return "1";
-            if (editor.isActive("heading", { level: 2 })) return "2";
-            if (editor.isActive("heading", { level: 3 })) return "3";
-            if (editor.isActive("heading", { level: 4 })) return "4";
-            return "paragraph";
-          })()}
-        >
-          <option value="paragraph">Normal</option>
-          <option value="1">Heading 1</option>
-          <option value="2">Heading 2</option>
-          <option value="3">Heading 3</option>
-          <option value="4">Heading 4</option>
-        </select>
-
-        <div className="w-px h-6 bg-gray-300 mx-1" />
-
-        {/* Lists */}
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${editor.isActive("bulletList") ? "bg-gray-200 text-blue-600" : "text-gray-700"}`}
-          title="Bullet List"
-        >
-          <FiList size={16} />
-        </button>
-
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${editor.isActive("orderedList") ? "bg-gray-200 text-blue-600" : "text-gray-700"}`}
-          title="Numbered List"
-        >
-          <span className="font-bold text-sm">1.</span>
-        </button>
-
-        <div className="w-px h-6 bg-gray-300 mx-1" />
-
-        {/* Alignment */}
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().setTextAlign("left").run()}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${editor.isActive({ textAlign: "left" }) ? "bg-gray-200 text-blue-600" : "text-gray-700"}`}
-          title="Align Left"
-        >
-          <FiAlignLeft size={16} />
-        </button>
-
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().setTextAlign("center").run()}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${editor.isActive({ textAlign: "center" }) ? "bg-gray-200 text-blue-600" : "text-gray-700"}`}
-          title="Align Center"
-        >
-          <FiAlignCenter size={16} />
-        </button>
-
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().setTextAlign("right").run()}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${editor.isActive({ textAlign: "right" }) ? "bg-gray-200 text-blue-600" : "text-gray-700"}`}
-          title="Align Right"
-        >
-          <FiAlignRight size={16} />
-        </button>
-
-        <div className="w-px h-6 bg-gray-300 mx-1" />
-
-        {/* Table */}
-        <button
-          type="button"
-          onClick={addTable}
-          className="p-2 rounded hover:bg-gray-200 transition-colors text-gray-700"
-          title="Insert Table"
-        >
-          <FiTable size={16} />
-        </button>
-
-        {/* Image */}
-        <button
-          type="button"
-          onClick={addImage}
-          className="p-2 rounded hover:bg-gray-200 transition-colors text-gray-700"
-          title="Insert Image"
-        >
-          <FiImage size={16} />
-        </button>
-
-        {/* Link */}
-        <button
-          type="button"
-          onClick={addLink}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${editor.isActive("link") ? "bg-gray-200 text-blue-600" : "text-gray-700"}`}
-          title="Insert Link"
-        >
-          <FiLink size={16} />
-        </button>
-
-        <div className="w-px h-6 bg-gray-300 mx-1" />
-
-        {/* Table Row/Column Operations (only show when inside a table) */}
-        {editor.isActive("table") && (
-          <>
-            <button
-              type="button"
-              onClick={() => editor.chain().focus().addRowBefore().run()}
-              className="p-2 rounded hover:bg-gray-200 transition-colors text-gray-700 text-xs font-medium"
-              title="Add Row Above"
-            >
-              + Row ↑
-            </button>
-            <button
-              type="button"
-              onClick={() => editor.chain().focus().addRowAfter().run()}
-              className="p-2 rounded hover:bg-gray-200 transition-colors text-gray-700 text-xs font-medium"
-              title="Add Row Below"
-            >
-              + Row ↓
-            </button>
-            <button
-              type="button"
-              onClick={() => editor.chain().focus().addColumnBefore().run()}
-              className="p-2 rounded hover:bg-gray-200 transition-colors text-gray-700 text-xs font-medium"
-              title="Add Column Left"
-            >
-              + Col ←
-            </button>
-            <button
-              type="button"
-              onClick={() => editor.chain().focus().addColumnAfter().run()}
-              className="p-2 rounded hover:bg-gray-200 transition-colors text-gray-700 text-xs font-medium"
-              title="Add Column Right"
-            >
-              + Col →
-            </button>
-            <button
-              type="button"
-              onClick={() => editor.chain().focus().deleteRow().run()}
-              className="p-2 rounded hover:bg-red-100 transition-colors text-red-600 text-xs font-medium"
-              title="Delete Row"
-            >
-              - Row
-            </button>
-            <button
-              type="button"
-              onClick={() => editor.chain().focus().deleteColumn().run()}
-              className="p-2 rounded hover:bg-red-100 transition-colors text-red-600 text-xs font-medium"
-              title="Delete Column"
-            >
-              - Col
-            </button>
-            <button
-              type="button"
-              onClick={() => editor.chain().focus().deleteTable().run()}
-              className="p-2 rounded hover:bg-red-100 transition-colors text-red-600 text-xs font-medium"
-              title="Delete Table"
-            >
-              Delete Table
-            </button>
-          </>
-        )}
-      </div>
-
-      {/* Editor Content */}
-      <EditorContent editor={editor} className="tiptap-content" />
-
-      <style>{`
-        .tiptap-content .ProseMirror {
-          min-height: 300px;
-          padding: 1rem;
-        }
-        .tiptap-content .ProseMirror:focus {
-          outline: none;
-        }
-        .tiptap-content table {
-          border-collapse: collapse;
-          width: 100%;
-          margin: 1rem 0;
-        }
-        .tiptap-content td,
-        .tiptap-content th {
-          border: 1px solid #ddd;
-          padding: 8px;
-          position: relative;
-        }
-        .tiptap-content th {
-          background-color: #f3f4f6;
-          font-weight: 600;
-        }
-        .tiptap-content .selectedCell {
-          background-color: #e0f2fe;
-        }
-        .tiptap-content p {
-          margin: 0 0 1rem;
-        }
-        .tiptap-content ul, 
-        .tiptap-content ol {
-          padding-left: 1.5rem;
-          margin: 0 0 1rem;
-        }
-        .tiptap-content li {
-          margin: 0.25rem 0;
-        }
-        .tiptap-content h1 {
-          font-size: 2rem;
-          font-weight: 700;
-          margin: 1rem 0 0.5rem;
-        }
-        .tiptap-content h2 {
-          font-size: 1.5rem;
-          font-weight: 600;
-          margin: 1rem 0 0.5rem;
-        }
-        .tiptap-content h3 {
-          font-size: 1.25rem;
-          font-weight: 600;
-          margin: 0.75rem 0 0.5rem;
-        }
-        .tiptap-content img {
-          max-width: 100%;
-          height: auto;
-          margin: 0.5rem 0;
-          border-radius: 0.5rem;
-        }
-        .tiptap-content a {
-          color: #3b82f6;
-          text-decoration: underline;
-        }
-      `}</style>
+    <div className="quill-wrapper" style={{ minHeight: "350px" }}>
+      <div ref={editorRef} style={{ height: "350px" }} />
     </div>
   );
 });
 
 TextEditor.displayName = "TextEditor";
 
-// ─── Section Component ───────────────────────────────────────────────────────────
+// ─── Single Section ───────────────────────────────────────────────────────────
 const Section = ({
   section,
   onUpdate,
@@ -1316,7 +1046,7 @@ const Section = ({
   );
 };
 
-// ─── DynamicContentSection Component ───────────────────────────────────────────
+// ─── DynamicContentSection ────────────────────────────────────────────────────
 const DynamicContentSection = ({
   sections = [],
   onSectionsChange,

@@ -29,6 +29,7 @@ import { getAllCertifications } from "../../../../../redux/slice/reportSlice";
 import { getAllUsers } from "../../../../../redux/slice/userSlice";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import usePermission from "../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -42,6 +43,7 @@ const CertificationReport = () => {
     isError,
     message,
   } = useSelector((state) => state.report);
+  const { hasPermission } = usePermission();
 
   const { users } = useSelector((state) => state.user);
 
@@ -284,6 +286,10 @@ const CertificationReport = () => {
 
   const tableData = getTableData();
   const pagination = getPaginationData();
+
+  if (!hasPermission("reports.certifications")) {
+    return null;
+  }
 
   return (
     <PageLayout>

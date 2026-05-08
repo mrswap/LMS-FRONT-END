@@ -24,12 +24,16 @@ import { FiSearch } from "react-icons/fi";
 import TruncateText from "../../../common/TruncateText";
 import StatusToggle from "../../../common/StatusToggle";
 import { LuFilterX } from "react-icons/lu";
+import { updatePublishStatus } from "../../../../../redux/slice/commonSlice";
+import PublishedDropdown from "../../../common/PublishedDropdown";
+import usePermission from "../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
 const Levels = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { hasPermission } = usePermission();
 
   const { levels, isLoading, isError, message } = useSelector(
     (state) => state.level,
@@ -41,7 +45,15 @@ const Levels = () => {
     { value: "0", label: t("levels.filters.inactive") },
   ];
 
+  const publishStatusOptions = [
+    { value: "all", label: t("levels.filters.allVisibility") },
+    { value: "published", label: t("levels.filters.published") },
+    { value: "unpublished", label: t("levels.filters.unpublished") },
+    { value: "draft", label: t("levels.filters.draft") },
+  ];
+
   const [status, setStatus] = useState(statusOptions[0]);
+  const [publish_status, setPublishStatus] = useState(publishStatusOptions[0]);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
@@ -50,6 +62,8 @@ const Levels = () => {
     const params = {
       search: search || "",
       status: status?.value !== "all" ? status?.value : "all",
+      publish_status:
+        publish_status?.value !== "all" ? publish_status?.value : "all",
       page: overridePage ?? page,
       limit: ITEMS_PER_PAGE,
     };
@@ -62,7 +76,7 @@ const Levels = () => {
       fetchLevels(1);
     }, 500);
     return () => clearTimeout(delay);
-  }, [search, status]);
+  }, [search, status, publish_status]);
 
   useEffect(() => {
     fetchLevels(page);
@@ -74,6 +88,7 @@ const Levels = () => {
 
   const resetFilters = () => {
     setStatus(statusOptions[0]);
+    setPublishStatus(publishStatusOptions[0]);
     setSearch("");
     setPage(1);
   };
@@ -113,10 +128,10 @@ const Levels = () => {
       ),
     },
     {
-      header: t("levels.list.columns.totalChapters"),
+      header: t("levels.list.columns.totalModules"),
       render: (row) => (
-        <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">
-          {row.chapters_count || 0}
+        <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">
+          {row.modules_count || 0}
         </span>
       ),
     },
@@ -129,42 +144,72 @@ const Levels = () => {
       ),
     },
     {
-      header: t("levels.list.columns.totalModules"),
+      header: t("levels.list.columns.totalChapters"),
       render: (row) => (
-        <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">
-          {row.modules_count || 0}
+        <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">
+          {row.chapters_count || 0}
         </span>
       ),
     },
+    ...(hasPermission("levels.edit")
+      ? [
+          {
+            header: t("levels.list.columns.status"),
+            render: (row) => (
+              <StatusToggle
+                value={row.status}
+                onToggle={async (newStatus) => {
+                  await dispatch(
+                    updateSingleLevelStatus({ id: row.id, status: newStatus }),
+                  ).unwrap();
+                  await fetchLevels(1);
+                }}
+              />
+            ),
+          },
+        ]
+      : []),
     {
-      header: t("levels.list.columns.status"),
+      header: t("publishedDropdown.status.title"),
       render: (row) => (
-        <StatusToggle
-          value={row.status}
+        <PublishedDropdown
+          value={row.publish_status}
           onToggle={async (newStatus) => {
             await dispatch(
-              updateSingleLevelStatus({ id: row.id, status: newStatus }),
+              updatePublishStatus({
+                type: "level",
+                id: row.id,
+                publish_status: newStatus,
+              }),
             ).unwrap();
             await fetchLevels(1);
           }}
         />
       ),
     },
-    {
-      header: t("levels.list.columns.actions"),
-      render: (row) => (
-        <button
-          onClick={() => navigate(`level-details/${row.id}`)}
-          className="text-gray-800 text-lg cursor-pointer hover:text-blue-600 transition-colors"
-        >
-          <FaEye />
-        </button>
-      ),
-    },
+    ...(hasPermission("levels.edit")
+      ? [
+          {
+            header: t("levels.list.columns.actions"),
+            render: (row) => (
+              <button
+                onClick={() => navigate(`level-details/${row.id}`)}
+                className="text-gray-800 text-lg cursor-pointer hover:text-blue-600 transition-colors"
+              >
+                <FaEye />
+              </button>
+            ),
+          },
+        ]
+      : []),
   ];
 
   if (isLoading && !levels?.data?.length) return <Loader />;
   if (isError) return <Error message={message} />;
+
+  if (!hasPermission("levels.view")) {
+    return null;
+  }
 
   return (
     <PageLayout>
@@ -174,12 +219,14 @@ const Levels = () => {
           <PageSubtitle>{t("levels.list.subtitle")}</PageSubtitle>
         </PageHeaderLeft>
         <PageHeaderRight>
-          <Link
-            to="create-level"
-            className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap hover:bg-opacity-90 transition"
-          >
-            {t("levels.actions.addNew")}
-          </Link>
+          {hasPermission("levels.create") && (
+            <Link
+              to="create-level"
+              className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap hover:bg-opacity-90 transition"
+            >
+              {t("levels.actions.addNew")}
+            </Link>
+          )}
         </PageHeaderRight>
       </PageHeader>
 
@@ -220,6 +267,16 @@ const Levels = () => {
               />
             </div>
 
+            <div className="w-full sm:w-[48%] lg:w-[210px]">
+              <Select
+                value={publish_status}
+                onChange={setPublishStatus}
+                options={publishStatusOptions}
+                styles={customSelectStyles}
+                isSearchable={false}
+              />
+            </div>
+
             <div className="ml-auto flex items-center h-[40px]">
               <div className="relative group">
                 <button
@@ -254,46 +311,6 @@ const Levels = () => {
             onPageChange={handlePageChange}
           />
         </div>
-
-        {/* ========== COMMENTED CODE - STATS CARDS (FUTURE USE) ==========
-        <div className="flex gap-4 w-full mt-4">
-          <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-sm transition">
-            <h3 className="text-[#6B7280] text-sm font-medium">
-              {t("levels.stats.totalLevels.title")}
-            </h3>
-            <p className="text-2xl font-bold text-gray-800 mt-2">
-              {levels?.total || 0}
-            </p>
-            <p className="text-sm text-[#6B7280] mt-1">
-              {t("levels.stats.totalLevels.subtext")}
-            </p>
-          </div>
-
-          <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-sm transition">
-            <h3 className="text-[#6B7280] text-sm font-medium">
-              {t("levels.stats.activeLevels.title")}
-            </h3>
-            <p className="text-2xl font-bold text-gray-800 mt-2">
-              {levels?.data?.filter(l => l.status)?.length || 0}
-            </p>
-            <p className="text-sm text-[#6B7280] mt-1">
-              {t("levels.stats.activeLevels.subtext")}
-            </p>
-          </div>
-
-          <div className="flex-1 border border-gray-300 rounded-xl p-5 bg-white shadow-sm transition">
-            <h3 className="text-[#6B7280] text-sm font-medium">
-              {t("levels.stats.totalChapters.title")}
-            </h3>
-            <p className="text-2xl font-bold text-gray-800 mt-2">
-              {levels?.data?.reduce((sum, l) => sum + (l.chapters_count || 0), 0) || 0}
-            </p>
-            <p className="text-sm text-[#6B7280] mt-1">
-              {t("levels.stats.totalChapters.subtext")}
-            </p>
-          </div>
-        </div>
-        ========== END COMMENTED CODE ========== */}
       </PageBody>
     </PageLayout>
   );

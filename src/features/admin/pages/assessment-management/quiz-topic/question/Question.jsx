@@ -19,6 +19,7 @@ import Error from "../../../../common/Error";
 import TruncateText from "../../../../common/TruncateText";
 import { LuFilterX } from "react-icons/lu";
 import { getAllQuestions } from "../../../../../../redux/slice/assessmentQuestionSlice";
+import usePermission from "../../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -27,6 +28,7 @@ const Question = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { assessmentId } = useParams();
+  const { hasPermission } = usePermission();
 
   const { questions, isLoading, isError, message } = useSelector(
     (state) => state.question,
@@ -93,12 +95,6 @@ const Question = () => {
       ),
     },
     {
-      header: t("question.columns.negativeMarks"),
-      render: (row) => (
-        <p className="font-semibold text-gray-800">{row.negative_marks || 0}</p>
-      ),
-    },
-    {
       header: t("question.columns.options"),
       render: (row) => {
         const options = row.options;
@@ -120,31 +116,46 @@ const Question = () => {
         );
       },
     },
-    {
-      header: t("question.columns.actions"),
-      render: (row) => (
-        <div className="flex gap-4">
-          <button
-            onClick={() => navigate(`create/${row.id}`)}
-            className="text-gray-800 text-lg cursor-pointer hover:text-[#184994]"
-          >
-            <FaEye />
-          </button>
-          <button
-            onClick={() =>
-              navigate(`/assessment-question-option/${assessmentId}/${row.id}`)
-            }
-            className="text-sm text-blue-500 hover:text-blue-600 hover:underline cursor-pointer"
-          >
-            {t("question.options")}
-          </button>
-        </div>
-      ),
-    },
+    ...(hasPermission("questions.edit") || hasPermission("options.view")
+      ? [
+          {
+            header: t("question.columns.actions"),
+            render: (row) => (
+              <div className="flex gap-4">
+                {hasPermission("questions.edit") && (
+                  <button
+                    onClick={() => navigate(`create/${row.id}`)}
+                    className="text-gray-800 text-lg cursor-pointer hover:text-[#184994]"
+                  >
+                    <FaEye />
+                  </button>
+                )}
+
+                {hasPermission("options.view") && (
+                  <button
+                    onClick={() =>
+                      navigate(
+                        `/assessment-question-option/${assessmentId}/${row.id}`,
+                      )
+                    }
+                    className="text-sm text-blue-500 hover:text-blue-600 hover:underline cursor-pointer"
+                  >
+                    {t("question.options")}
+                  </button>
+                )}
+              </div>
+            ),
+          },
+        ]
+      : []),
   ];
 
   if (isLoading && !questions?.length) return <Loader />;
   if (isError & message) return <Error message={message} />;
+
+  if (!hasPermission("questions.view")) {
+    return null;
+  }
 
   return (
     <PageLayout>
@@ -154,13 +165,15 @@ const Question = () => {
           <PageSubtitle>{t("question.subtitle")}</PageSubtitle>
         </PageHeaderLeft>
         <PageHeaderRight>
-          <Link
-            to="create"
-            className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap flex items-center gap-2"
-          >
-            <FaPlus size={14} />
-            {t("question.actions.addQuestion")}
-          </Link>
+          {hasPermission("questions.create") && (
+            <Link
+              to="create"
+              className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap flex items-center gap-2"
+            >
+              <FaPlus size={14} />
+              {t("question.actions.addQuestion")}
+            </Link>
+          )}
         </PageHeaderRight>
       </PageHeader>
 

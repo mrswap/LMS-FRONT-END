@@ -35,6 +35,7 @@ import {
 import { MdDevices } from "react-icons/md";
 import { useToast } from "../../../common/toast/ToastContext";
 import { useTranslation } from "react-i18next";
+import usePermission from "../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -45,6 +46,7 @@ const UserAdditionalDetails = ({ id }) => {
   const [isResetting, setIsResetting] = useState(false);
   const [showResetModal, setShowResetModal] = useState(false);
   const toast = useToast();
+  const { hasPermission } = usePermission();
 
   const { isLoading: userLoading } = useSelector((state) => state.user);
   const { auditLogs, loadingAuditLogs } = useSelector((state) => state.report);
@@ -599,21 +601,23 @@ const UserAdditionalDetails = ({ id }) => {
             </h3>
           </div>
 
-          <button
-            onClick={() => setShowResetModal(true)}
-            disabled={isResetting || userLoading}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all
+          {hasPermission("users.reset-device") && (
+            <button
+              onClick={() => setShowResetModal(true)}
+              disabled={isResetting || userLoading}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all
               ${
                 isResetting || userLoading
                   ? "bg-gray-300 cursor-not-allowed text-gray-500"
                   : "bg-red-500 hover:bg-red-600 text-white shadow-md hover:shadow-lg"
               }`}
-          >
-            <FaRedoAlt className={`${isResetting ? "animate-spin" : ""}`} />
-            {isResetting
-              ? t("userAdditionalDetails.resetting")
-              : t("userAdditionalDetails.resetAllDevices")}
-          </button>
+            >
+              <FaRedoAlt className={`${isResetting ? "animate-spin" : ""}`} />
+              {isResetting
+                ? t("userAdditionalDetails.resetting")
+                : t("userAdditionalDetails.resetAllDevices")}
+            </button>
+          )}
         </div>
 
         <div className="flex border-b border-gray-200 bg-gray-50 overflow-x-auto">
