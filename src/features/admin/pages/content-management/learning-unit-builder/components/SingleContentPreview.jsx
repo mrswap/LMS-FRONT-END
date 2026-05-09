@@ -80,13 +80,152 @@ const SingleContentPreview = () => {
 
   const renderTextContent = () => (
     <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-      <div className="p-8 bg-gradient-to-br from-gray-50 to-white">
-        <div className="prose prose-lg prose-slate max-w-none">
+      <div className="p-6">
+        {/* <div
+          // className="prose prose-lg prose-slate max-w-none custom-content"
+          className="max-w-none custom-content"
+        >
           <div
             dangerouslySetInnerHTML={{
               __html: content?.body || content?.content,
             }}
           />
+          <style>{`
+  .custom-content {
+    line-height: 1.8;
+    color: #1f2937;
+  }
+
+  .custom-content p {
+    margin-bottom: 18px;
+    line-height: 1.9;
+  }
+
+  .custom-content h1,
+  .custom-content h2,
+  .custom-content h3,
+  .custom-content h4 {
+    margin-top: 28px;
+    margin-bottom: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .custom-content ul,
+  .custom-content ol {
+    margin-top: 16px;
+    margin-bottom: 20px;
+    padding-left: 24px;
+  }
+
+  .custom-content li {
+    margin-bottom: 10px;
+    line-height: 1.8;
+  }
+
+  .custom-content hr {
+    margin: 32px 0;
+    border: none;
+    border-top: 1px solid #d1d5db;
+  }
+
+  .custom-content img {
+    margin: 24px auto;
+    border-radius: 12px;
+    max-width: 100%;
+  }
+
+  .custom-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    border: 1px solid #d1d5db;
+  }
+
+  .custom-content td,
+  .custom-content th {
+    border: 1px solid #d1d5db;
+    padding: 14px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .custom-content th {
+    background: #f3f4f6;
+    font-weight: 600;
+  }
+
+  .custom-content tr:nth-child(even) {
+    background: #f9fafb;
+  }
+`}</style>
+        </div> */}
+
+        <div className="max-w-none custom-content">
+          <div
+            dangerouslySetInnerHTML={{
+              __html: content?.body || content?.content,
+            }}
+          />
+
+          <style>{`
+    .custom-content p {
+      margin: 0 0 16px;
+      line-height: 1.8;
+    }
+
+    .custom-content h1,
+    .custom-content h2,
+    .custom-content h3,
+    .custom-content h4,
+    .custom-content h5,
+    .custom-content h6 {
+      margin: 24px 0 16px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .custom-content ul,
+    .custom-content ol {
+      margin: 0 0 16px;
+      padding-left: 24px;
+    }
+
+    .custom-content li {
+      margin-bottom: 8px;
+    }
+
+    .custom-content hr {
+      margin: 24px 0;
+      border: none;
+      border-top: 1px solid #d1d5db;
+    }
+
+    .custom-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      border: 1px solid #d1d5db;
+    }
+
+    .custom-content td,
+    .custom-content th {
+      border: 1px solid #d1d5db;
+      padding: 12px;
+      vertical-align: top;
+    }
+
+    .custom-content th {
+      background-color: #f3f4f6;
+      font-weight: 600;
+    }
+
+    .custom-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+  `}</style>
         </div>
       </div>
     </div>
@@ -101,7 +240,7 @@ const SingleContentPreview = () => {
   );
 
   const renderPDFContent = () => (
-    <div className="bg-gray-100 rounded-xl overflow-hidden shadow-lg border border-gray-200">
+    <div className="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-200">
       <div className="bg-gray-800 text-white px-4 py-2 flex items-center justify-between">
         <span className="text-sm flex items-center gap-2">
           <MdPictureAsPdf className="text-red-400" />
@@ -124,7 +263,7 @@ const SingleContentPreview = () => {
   );
 
   const renderAudioContent = () => (
-    <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl border border-gray-200 shadow-sm p-8">
+    <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-8">
       <div className="max-w-md mx-auto text-center">
         <div className="w-24 h-24 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center mx-auto mb-6">
           <FaHeadphones className="text-4xl text-green-600" />
@@ -140,14 +279,14 @@ const SingleContentPreview = () => {
   );
 
   const renderImageContent = () => (
-    <div className="bg-gray-50 rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+    <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
       <img
         src={content?.image_url || content?.content}
         alt={content?.title}
         className="w-full h-auto object-contain max-h-[600px] bg-white"
       />
       {content?.description && (
-        <div className="p-4 bg-gray-50 border-t border-gray-200">
+        <div className="p-4 bg-white border-t border-gray-200">
           <p className="text-gray-600 text-sm">{content.description}</p>
         </div>
       )}

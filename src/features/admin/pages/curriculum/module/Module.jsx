@@ -48,7 +48,6 @@ const Module = () => {
     })) || []),
   ];
 
-  // ✅ Fixed: Dynamic status options with i18n
   const statusOptions = [
     { value: "all", label: t("module.filters.allStatus") },
     { value: "1", label: t("module.filters.active") },

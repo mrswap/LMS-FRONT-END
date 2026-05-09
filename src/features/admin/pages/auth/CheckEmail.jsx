@@ -8,7 +8,6 @@ const CheckEmail = () => {
   const { t } = useTranslation();
   const location = useLocation();
 
-  // Email ko location state se le rahe hain (forgot password page se aayega)
   const userEmail = location.state?.email || "user@example.com";
 
   return (

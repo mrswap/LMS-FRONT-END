@@ -287,14 +287,14 @@ const Topics = () => {
         </div>
       ),
     },
-    {
-      header: t("topic.list.columns.duration"),
-      render: (row) => (
-        <span className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-semibold">
-          {row.estimated_duration ?? 0} {t("topic.list.minutes")}
-        </span>
-      ),
-    },
+    // {
+    //   header: t("topic.list.columns.duration"),
+    //   render: (row) => (
+    //     <span className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-semibold">
+    //       {row.estimated_duration ?? 0} {t("topic.list.minutes")}
+    //     </span>
+    //   ),
+    // },
     ...(hasPermission("topics.status")
       ? [
           {

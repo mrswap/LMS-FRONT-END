@@ -90,18 +90,10 @@ const TopicDetails = () => {
     const fetchAllData = async () => {
       if (topic?.id && !isDataLoaded) {
         try {
-          // First fetch chapters
           await dispatch(getAllChapters()).unwrap();
-
-          // Then fetch modules
           await dispatch(getAllModules()).unwrap();
-
-          // Then fetch levels
           await dispatch(getAllLevels()).unwrap();
-
-          // Then fetch programs
           await dispatch(getAllPrograms()).unwrap();
-
           setIsDataLoaded(true);
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -136,10 +128,6 @@ const TopicDetails = () => {
 
   const validationSchema = Yup.object({
     topicName: Yup.string().required(t("topic.validation.topicNameRequired")),
-    duration: Yup.number()
-      .typeError(t("topic.validation.durationNumber"))
-      .positive(t("topic.validation.durationPositive"))
-      .required(t("topic.validation.durationRequired")),
     chapterName: Yup.object()
       .nullable()
       .required(t("topic.validation.chapterRequired")),
@@ -162,7 +150,6 @@ const TopicDetails = () => {
       const formData = new FormData();
 
       formData.append("title", values.topicName);
-      formData.append("estimated_duration", values.duration);
       formData.append("description", values.description);
       formData.append(
         "chapter_id",
@@ -364,16 +351,6 @@ const TopicDetails = () => {
                         isLoading={programsLoading}
                         disabled={!values.chapterName}
                       />
-                      <div>
-                        <TextInput
-                          name="duration"
-                          type="number"
-                          label={t("topic.details.duration")}
-                          placeholder={t("topic.details.durationPlaceholder")}
-                          required={true}
-                          maxLength={500}
-                        />
-                      </div>
                     </div>
 
                     <div className="mt-2">

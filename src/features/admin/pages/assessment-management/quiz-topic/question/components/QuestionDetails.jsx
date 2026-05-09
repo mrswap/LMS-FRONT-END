@@ -118,7 +118,7 @@ const QuestionDetails = () => {
 
       const res = await dispatch(
         updateQuestionById({
-          questionId: 1,
+          questionId: questionId,
           assessmentId: assessmentId,
           data: formData,
         }),
