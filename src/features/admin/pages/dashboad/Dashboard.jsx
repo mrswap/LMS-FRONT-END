@@ -197,7 +197,7 @@ const Dashboard = () => {
             <FaChartBar className="w-5 h-5 text-gray-600" />
             {t("dashboard.overview")}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6  gap-4">
             <StatCard
               title={t("dashboard.totalUsers")}
               value={overview.total_users}
@@ -359,7 +359,7 @@ const Dashboard = () => {
             <FaBolt className="w-5 h-5 text-gray-600" />
             {t("dashboard.publishingPipeline")}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
             <PublishingCard
               title={t("dashboard.programs")}
               published={pipeline.programs?.published || 0}

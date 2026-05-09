@@ -165,7 +165,7 @@ const ExamAssessment = () => {
       header: t("examAssessment.list.columns.duration"),
       render: (row) => (
         <span className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-semibold">
-          {row.estimated_duration ?? 0} mins
+          {row.duration ?? 0} mins
         </span>
       ),
     },
