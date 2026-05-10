@@ -109,6 +109,10 @@ const CreateTopic = () => {
 
   const validationSchema = Yup.object({
     topicName: Yup.string().required(t("topic.validation.topicNameRequired")),
+    duration: Yup.number()
+      .typeError(t("topic.validation.durationNumber"))
+      .positive(t("topic.validation.durationPositive"))
+      .required(t("topic.validation.durationRequired")),
     chapterName: Yup.object()
       .nullable()
       .required(t("topic.validation.chapterRequired")),
@@ -136,6 +140,7 @@ const CreateTopic = () => {
       formData.append("level_id", values.levelName.value);
       formData.append("program_id", values.programName.value);
       formData.append("description", values.description);
+      formData.append("estimated_duration", values.duration);
 
       if (thumbnail) {
         formData.append("thumbnail", thumbnail);
@@ -295,6 +300,16 @@ const CreateTopic = () => {
                         isLoading={programsLoading}
                         disabled={!values.chapterName}
                       />
+                      <div>
+                        <TextInput
+                          name="duration"
+                          type="number"
+                          label={t("topic.details.duration")}
+                          placeholder={t("topic.details.durationPlaceholder")}
+                          required={true}
+                          maxLength={500}
+                        />
+                      </div>
                     </div>
 
                     <div className="mt-2">

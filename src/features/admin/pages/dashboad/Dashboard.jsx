@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getDashboardData } from "../../../../redux/slice/dashboardSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   FaUsers,
   FaUserCheck,
@@ -40,6 +41,7 @@ import { useTranslation } from "react-i18next";
 const Dashboard = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { dashboardData, isLoading, isError, message } = useSelector(
     (state) => state.dashboard,
   );
@@ -56,6 +58,11 @@ const Dashboard = () => {
     setTimeout(() => setRefreshing(false), 500);
   };
 
+  // Navigation handlers
+  const handleNavigate = (path) => {
+    navigate(path);
+  };
+
   if (isLoading) return <Loader />;
 
   if (isError) return <Error message={message} />;
@@ -69,8 +76,19 @@ const Dashboard = () => {
   const programAnalytics = data.program_analytics || [];
   const riskIndicators = data.risk_indicators || {};
 
-  const StatCard = ({ title, value, icon: Icon, color, trend, trendValue }) => (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5 hover:shadow-md transition-all duration-300">
+  const StatCard = ({
+    title,
+    value,
+    icon: Icon,
+    color,
+    trend,
+    trendValue,
+    navigateTo,
+  }) => (
+    <div
+      onClick={() => navigateTo && handleNavigate(navigateTo)}
+      className={`bg-white rounded-lg shadow-sm border border-gray-200 p-5 hover:shadow-md transition-all duration-300 ${navigateTo ? "cursor-pointer hover:border-blue-300" : ""}`}
+    >
       <div className="flex items-center justify-between">
         <div>
           <p className="text-sm text-gray-500 font-medium mb-1">{title}</p>
@@ -105,6 +123,7 @@ const Dashboard = () => {
     draft,
     unpublished,
     icon: Icon,
+    navigateTo,
   }) => {
     const total = published + draft + unpublished;
     const publishedPercent = total > 0 ? (published / total) * 100 : 0;
@@ -112,7 +131,10 @@ const Dashboard = () => {
     const unpublishedPercent = total > 0 ? (unpublished / total) * 100 : 0;
 
     return (
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-all duration-300">
+      <div
+        onClick={() => navigateTo && handleNavigate(navigateTo)}
+        className={`bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-all duration-300 ${navigateTo ? "cursor-pointer hover:border-blue-300" : ""}`}
+      >
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             <Icon className="w-4 h-4 text-gray-500" />
@@ -197,54 +219,69 @@ const Dashboard = () => {
             <FaChartBar className="w-5 h-5 text-gray-600" />
             {t("dashboard.overview")}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6  gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 gap-4">
             <StatCard
               title={t("dashboard.totalUsers")}
               value={overview.total_users}
               icon={FaUsers}
               color="bg-blue-500"
+              navigateTo="/assign-training"
             />
             <StatCard
               title={t("dashboard.activeUsers")}
               value={overview.active_users}
               icon={FaUserCheck}
               color="bg-green-500"
+              navigateTo="/assign-training"
             />
             <StatCard
               title={t("dashboard.totalPrograms")}
               value={overview.total_programs}
               icon={FaBook}
               color="bg-purple-500"
+              navigateTo="/programs"
+            />
+            <StatCard
+              title={t("dashboard.totalLevels")}
+              value={overview.total_levels}
+              icon={FaGraduationCap}
+              color="bg-cyan-500"
+              navigateTo="/levels"
             />
             <StatCard
               title={t("dashboard.totalModules")}
               value={overview.total_modules}
               icon={FaLayerGroup}
               color="bg-indigo-500"
+              navigateTo="/modules"
             />
             <StatCard
               title={t("dashboard.totalChapters")}
               value={overview.total_chapters}
               icon={FaTh}
               color="bg-pink-500"
+              navigateTo="/chapters"
             />
             <StatCard
               title={t("dashboard.totalTopics")}
               value={overview.total_topics}
               icon={FaFileAlt}
               color="bg-orange-500"
+              navigateTo="/topics"
             />
             <StatCard
               title={t("dashboard.totalContents")}
               value={overview.total_contents}
               icon={FaEye}
               color="bg-teal-500"
+              navigateTo="/learning-unit"
             />
             <StatCard
               title={t("dashboard.totalAssessments")}
               value={overview.total_assessments}
               icon={FaQuestionCircle}
               color="bg-red-500"
+              navigateTo="/assessment"
             />
           </div>
         </div>
@@ -313,7 +350,10 @@ const Dashboard = () => {
               {t("dashboard.engagementMetrics")}
             </h2>
             <div className="grid grid-cols-2 gap-4">
-              <div className="text-center p-3 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg">
+              <div
+                onClick={() => handleNavigate("/assign-assign-training")}
+                className="text-center p-3 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg cursor-pointer hover:from-blue-100 hover:to-blue-200 transition-all"
+              >
                 <FaCalendarAlt className="w-5 h-5 text-blue-500 mx-auto mb-2" />
                 <p className="text-xs text-gray-500 font-medium">
                   {t("dashboard.dailyActive")}
@@ -322,7 +362,10 @@ const Dashboard = () => {
                   {engagement.daily_active_users?.toLocaleString() || 0}
                 </p>
               </div>
-              <div className="text-center p-3 bg-gradient-to-br from-green-50 to-green-100 rounded-lg">
+              <div
+                onClick={() => handleNavigate("/assign-assign-training")}
+                className="text-center p-3 bg-gradient-to-br from-green-50 to-green-100 rounded-lg cursor-pointer hover:from-green-100 hover:to-green-200 transition-all"
+              >
                 <FaCalendarAlt className="w-5 h-5 text-green-500 mx-auto mb-2" />
                 <p className="text-xs text-gray-500 font-medium">
                   {t("dashboard.weeklyActive")}
@@ -331,7 +374,10 @@ const Dashboard = () => {
                   {engagement.weekly_active_users?.toLocaleString() || 0}
                 </p>
               </div>
-              <div className="text-center p-3 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg">
+              <div
+                onClick={() => handleNavigate("/assign-assign-training")}
+                className="text-center p-3 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg cursor-pointer hover:from-purple-100 hover:to-purple-200 transition-all"
+              >
                 <FaCalendarAlt className="w-5 h-5 text-purple-500 mx-auto mb-2" />
                 <p className="text-xs text-gray-500 font-medium">
                   {t("dashboard.monthlyActive")}
@@ -340,7 +386,10 @@ const Dashboard = () => {
                   {engagement.monthly_active_users?.toLocaleString() || 0}
                 </p>
               </div>
-              <div className="text-center p-3 bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg">
+              <div
+                onClick={() => handleNavigate("/learning-unit")}
+                className="text-center p-3 bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg cursor-pointer hover:from-orange-100 hover:to-orange-200 transition-all"
+              >
                 <FaEye className="w-5 h-5 text-orange-500 mx-auto mb-2" />
                 <p className="text-xs text-gray-500 font-medium">
                   {t("dashboard.contentReadsToday")}
@@ -366,6 +415,7 @@ const Dashboard = () => {
               draft={pipeline.programs?.draft || 0}
               unpublished={pipeline.programs?.unpublished || 0}
               icon={FaBook}
+              navigateTo="/programs"
             />
             <PublishingCard
               title={t("dashboard.levels")}
@@ -373,6 +423,7 @@ const Dashboard = () => {
               draft={pipeline.levels?.draft || 0}
               unpublished={pipeline.levels?.unpublished || 0}
               icon={FaLayerGroup}
+              navigateTo="/levels"
             />
             <PublishingCard
               title={t("dashboard.modules")}
@@ -380,6 +431,7 @@ const Dashboard = () => {
               draft={pipeline.modules?.draft || 0}
               unpublished={pipeline.modules?.unpublished || 0}
               icon={FaTh}
+              navigateTo="/modules"
             />
             <PublishingCard
               title={t("dashboard.chapters")}
@@ -387,6 +439,7 @@ const Dashboard = () => {
               draft={pipeline.chapters?.draft || 0}
               unpublished={pipeline.chapters?.unpublished || 0}
               icon={FaFileAlt}
+              navigateTo="/chapters"
             />
             <PublishingCard
               title={t("dashboard.topics")}
@@ -394,6 +447,7 @@ const Dashboard = () => {
               draft={pipeline.topics?.draft || 0}
               unpublished={pipeline.topics?.unpublished || 0}
               icon={FaQuestionCircle}
+              navigateTo="/topics"
             />
             <PublishingCard
               title={t("dashboard.contents")}
@@ -401,6 +455,7 @@ const Dashboard = () => {
               draft={pipeline.contents?.draft || 0}
               unpublished={pipeline.contents?.unpublished || 0}
               icon={FaEye}
+              navigateTo="/learning-unit"
             />
           </div>
         </div>
@@ -413,7 +468,10 @@ const Dashboard = () => {
               {t("dashboard.assessmentAnalytics")}
             </h2>
             <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="bg-gray-50 rounded-lg p-3 text-center">
+              <div
+                onClick={() => handleNavigate("/assessment")}
+                className="bg-gray-50 rounded-lg p-3 text-center cursor-pointer hover:bg-gray-100 transition-all"
+              >
                 <p className="text-xs text-gray-500 font-medium">
                   {t("dashboard.totalAttempts")}
                 </p>
@@ -421,7 +479,10 @@ const Dashboard = () => {
                   {assessment.total_attempts?.toLocaleString() || 0}
                 </p>
               </div>
-              <div className="bg-gray-50 rounded-lg p-3 text-center">
+              <div
+                onClick={() => handleNavigate("/assessment")}
+                className="bg-gray-50 rounded-lg p-3 text-center cursor-pointer hover:bg-gray-100 transition-all"
+              >
                 <p className="text-xs text-gray-500 font-medium">
                   {t("dashboard.passRate")}
                 </p>
@@ -429,7 +490,10 @@ const Dashboard = () => {
                   {assessment.pass_rate || 0}%
                 </p>
               </div>
-              <div className="bg-gray-50 rounded-lg p-3 text-center">
+              <div
+                onClick={() => handleNavigate("/assessment")}
+                className="bg-gray-50 rounded-lg p-3 text-center cursor-pointer hover:bg-gray-100 transition-all"
+              >
                 <p className="text-xs text-gray-500 font-medium">
                   {t("dashboard.avgScore")}
                 </p>
@@ -437,7 +501,10 @@ const Dashboard = () => {
                   {assessment.avg_score || 0}%
                 </p>
               </div>
-              <div className="bg-gray-50 rounded-lg p-3 text-center">
+              <div
+                onClick={() => handleNavigate("/assessment")}
+                className="bg-gray-50 rounded-lg p-3 text-center cursor-pointer hover:bg-gray-100 transition-all"
+              >
                 <p className="text-xs text-gray-500 font-medium">
                   {t("dashboard.topicQuizAvg")}
                 </p>
@@ -459,7 +526,8 @@ const Dashboard = () => {
                       .map((item, idx) => (
                         <div
                           key={idx}
-                          className="flex justify-between items-center text-sm p-2 bg-gray-50 rounded hover:bg-gray-100 transition-colors"
+                          onClick={() => handleNavigate("/assessment")}
+                          className="flex justify-between items-center text-sm p-2 bg-gray-50 rounded hover:bg-gray-100 transition-colors cursor-pointer"
                         >
                           <span className="text-gray-600 font-medium">
                             {item.title} ({item.type})
@@ -481,7 +549,10 @@ const Dashboard = () => {
               {t("dashboard.riskIndicators")}
             </h2>
             <div className="space-y-4">
-              <div className="flex justify-between items-center p-3 bg-red-50 rounded-lg border border-red-100">
+              <div
+                onClick={() => handleNavigate("/assign-assign-training")}
+                className="flex justify-between items-center p-3 bg-red-50 rounded-lg border border-red-100 cursor-pointer hover:bg-red-100 transition-all"
+              >
                 <div className="flex items-center gap-2">
                   <FaUserTimes className="w-4 h-4 text-red-600" />
                   <span className="text-sm text-gray-700 font-medium">
@@ -504,7 +575,8 @@ const Dashboard = () => {
                         (program, idx) => (
                           <div
                             key={idx}
-                            className="flex justify-between items-center text-sm p-2 bg-yellow-50 rounded border border-yellow-100"
+                            onClick={() => handleNavigate("/programs")}
+                            className="flex justify-between items-center text-sm p-2 bg-yellow-50 rounded border border-yellow-100 cursor-pointer hover:bg-yellow-100 transition-all"
                           >
                             <span className="text-gray-600 font-medium">
                               {program.title}
@@ -534,7 +606,8 @@ const Dashboard = () => {
               {programAnalytics.map((program) => (
                 <div
                   key={program.id}
-                  className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-all duration-300"
+                  onClick={() => handleNavigate("/programs")}
+                  className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-all duration-300 cursor-pointer hover:border-blue-300"
                 >
                   <h3 className="font-semibold text-gray-800 mb-3">
                     {program.title}

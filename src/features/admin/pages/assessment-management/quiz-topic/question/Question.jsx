@@ -20,6 +20,7 @@ import TruncateText from "../../../../common/TruncateText";
 import { LuFilterX } from "react-icons/lu";
 import { getAllQuestions } from "../../../../../../redux/slice/assessmentQuestionSlice";
 import usePermission from "../../../../../../hooks/usePermission";
+import Breadcrumb from "../../../../common/layout/Breadcrumb";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -33,6 +34,8 @@ const Question = () => {
   const { questions, isLoading, isError, message } = useSelector(
     (state) => state.question,
   );
+
+  // console.log("questions", questions);
 
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
@@ -150,7 +153,7 @@ const Question = () => {
       : []),
   ];
 
-  if (isLoading && !questions?.length) return <Loader />;
+  if (isLoading && !questions?.questions?.length) return <Loader />;
   if (isError & message) return <Error message={message} />;
 
   if (!hasPermission("questions.view")) {
@@ -159,6 +162,34 @@ const Question = () => {
 
   return (
     <PageLayout>
+      {/* <Breadcrumb
+        items={[
+          {
+            label: "Assessment",
+            path: "/assessment",
+          },
+          {
+            label: "Question",
+          },
+        ]}
+      /> */}
+      <Breadcrumb
+        items={[
+          {
+            label:
+              questions?.assessment_type === "level"
+                ? t("examAssessment.list.examTitle")
+                : t("quizAssessment.list.quizTitle"),
+            path:
+              questions?.assessment_type === "level"
+                ? "/exam-level"
+                : "/assessment",
+          },
+          {
+            label: t("question.columns.question"),
+          },
+        ]}
+      />
       <PageHeader>
         <PageHeaderLeft>
           <PageTitle>{t("question.title")}</PageTitle>
@@ -205,11 +236,11 @@ const Question = () => {
 
         <CustomeTable
           columns={columns}
-          data={questions || []}
+          data={questions?.questions || []}
           serverSide={true}
-          currentPage={questions?.current_page || 1}
-          totalPages={questions?.last_page || 1}
-          totalItems={questions?.total || 0}
+          currentPage={questions?.questions?.current_page || 1}
+          totalPages={questions?.questions?.last_page || 1}
+          totalItems={questions?.questions?.total || 0}
           itemsPerPage={ITEMS_PER_PAGE}
           onPageChange={handlePageChange}
         />

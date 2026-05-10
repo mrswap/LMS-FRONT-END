@@ -66,10 +66,10 @@ const CreateQuestion = () => {
     question_text: Yup.string().required(
       t("question.validation.questionTextRequired"),
     ),
-    marks: Yup.number()
-      .required(t("question.validation.marksRequired"))
-      .positive(t("question.validation.marksPositive"))
-      .integer(t("question.validation.marksInteger")),
+    // marks: Yup.number()
+    //   .required(t("question.validation.marksRequired"))
+    //   .positive(t("question.validation.marksPositive"))
+    //   .integer(t("question.validation.marksInteger")),
     order: Yup.number()
       .required(t("question.validation.orderRequired"))
       .positive(t("question.validation.orderPositive"))
@@ -80,7 +80,7 @@ const CreateQuestion = () => {
     try {
       const formData = new FormData();
       formData.append("question_text", values.question_text);
-      formData.append("marks", values.marks);
+      // formData.append("marks", values.marks);
       formData.append("order", values.order);
 
       if (thumbnail) {
@@ -145,14 +145,14 @@ const CreateQuestion = () => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <TextInput
+                      {/* <TextInput
                         name="marks"
                         label={t("question.details.marks")}
                         placeholder={t("question.details.marksPlaceholder")}
                         type="number"
                         required={true}
                         maxLength={3}
-                      />
+                      /> */}
                       <TextInput
                         name="order"
                         label={t("question.details.order")}

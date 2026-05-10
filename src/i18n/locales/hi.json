@@ -221,34 +221,35 @@
 
   "dashboard": {
     "title": "डैशबोर्ड",
-    "subtitle": "वापस खुशामदीद! आपके लर्निंग प्लेटफॉर्म पर क्या हो रहा है, यहाँ देखें।",
-    "refresh": "रीफ्रेश करें",
-    "lastUpdated": "आखिरी बार अपडेट किया गया",
+    "subtitle": "वापसी पर स्वागत है! यहाँ आपके लर्निंग प्लेटफॉर्म का ताज़ा अपडेट है।",
+    "refresh": "रिफ्रेश करें",
+    "lastUpdated": "अंतिम अपडेट",
     "total": "कुल",
     "published": "प्रकाशित",
     "draft": "ड्राफ्ट",
     "unpublished": "अप्रकाशित",
-    "overview": "समान अवलोकन",
+    "overview": "अवलोकन",
     "totalUsers": "कुल उपयोगकर्ता",
     "activeUsers": "सक्रिय उपयोगकर्ता",
-    "totalPrograms": "कुल प्रोग्राम",
+    "totalPrograms": "कुल कार्यक्रम",
+    "totalLevels": "कुल स्तर",
     "totalModules": "कुल मॉड्यूल",
     "totalChapters": "कुल अध्याय",
     "totalTopics": "कुल विषय",
     "totalContents": "कुल सामग्री",
     "totalAssessments": "कुल मूल्यांकन",
-    "learningFunnel": "सीखने का फ़नल",
-    "notStarted": "शुरू नहीं हुआ",
-    "started": "शुरू हुआ",
-    "inProgress": "जारी है",
-    "completed": "पूरा हुआ",
-    "engagementMetrics": "सांख्यिकी मेट्रिक्स",
-    "dailyActive": "रोज़ाना सक्रिय",
+    "learningFunnel": "लर्निंग फ़नल",
+    "notStarted": "शुरू नहीं",
+    "started": "शुरू किया",
+    "inProgress": "प्रगति पर",
+    "completed": "पूर्ण",
+    "engagementMetrics": "सहभागिता मेट्रिक्स",
+    "dailyActive": "दैनिक सक्रिय",
     "weeklyActive": "साप्ताहिक सक्रिय",
     "monthlyActive": "मासिक सक्रिय",
-    "contentReadsToday": "आज कंटेंट पढ़े गए",
+    "contentReadsToday": "आज की सामग्री पढ़ाई",
     "publishingPipeline": "प्रकाशन पाइपलाइन",
-    "programs": "प्रोग्राम",
+    "programs": "कार्यक्रम",
     "levels": "स्तर",
     "modules": "मॉड्यूल",
     "chapters": "अध्याय",
@@ -257,15 +258,15 @@
     "assessmentAnalytics": "मूल्यांकन एनालिटिक्स",
     "totalAttempts": "कुल प्रयास",
     "passRate": "उत्तीर्ण दर",
-    "avgScore": "औसत अंक",
+    "avgScore": "औसत स्कोर",
     "topicQuizAvg": "विषय क्विज़ औसत",
-    "mostFailedAssessments": "सबसे ज़्यादा फेल मूल्यांकन",
+    "mostFailedAssessments": "सबसे अधिक फेल मूल्यांकन",
     "fails": "फेल",
     "riskIndicators": "जोखिम संकेतक",
     "inactiveUsers": "निष्क्रिय उपयोगकर्ता (7+ दिन)",
-    "programsWithHighDrafts": "अधिक ड्राफ्ट वाले प्रोग्राम",
+    "programsWithHighDrafts": "उच्च ड्राफ्ट वाले कार्यक्रम",
     "drafts": "ड्राफ्ट",
-    "programAnalytics": "प्रोग्राम एनालिटिक्स",
+    "programAnalytics": "कार्यक्रम एनालिटिक्स",
     "activeLearners": "सक्रिय शिक्षार्थी",
     "completionRate": "पूर्णता दर"
   },
@@ -549,49 +550,49 @@
   "levels": {
     "list": {
       "title": "स्तर प्रबंधन",
-      "subtitle": "सीखने की यात्रा को संरचित करने के लिए प्रशिक्षण स्तरों का प्रबंधन और व्यवस्था करें...",
-      "searchPlaceholder": "स्तर नाम से खोजें...",
-      "clearAll": "सब हटाएं",
+      "subtitle": "प्रशिक्षण स्तरों को प्रबंधित और व्यवस्थित करें ताकि सीखने की यात्रा को संरचित किया जा सके...",
+      "searchPlaceholder": "स्तर के नाम से खोजें...",
+      "clearAll": "सभी साफ़ करें",
       "columns": {
-        "levelName": "स्तर नाम",
+        "levelName": "स्तर का नाम",
         "parentProgram": "मूल कार्यक्रम",
         "totalChapters": "कुल अध्याय",
         "totalTopics": "कुल विषय",
         "totalModules": "कुल मॉड्यूल",
         "status": "स्थिति",
-        "actions": "क्रियाएं"
+        "actions": "कार्य"
       }
     },
     "details": {
       "generalDetails": "सामान्य विवरण",
-      "levelName": "स्तर नाम",
-      "levelNamePlaceholder": "स्तर नाम दर्ज करें",
+      "levelName": "स्तर का नाम",
+      "levelNamePlaceholder": "स्तर का नाम दर्ज करें",
       "parentProgram": "मूल कार्यक्रम",
-      "perentProgramPlaceholder": "कोई कार्यक्रम चुनें",
+      "perentProgramPlaceholder": "एक कार्यक्रम चुनें",
       "description": "विवरण",
-      "descriptionPlaceholder": "स्तर विवरण लिखें...",
-      "thumbnail": "स्तर थंबनेल",
+      "descriptionPlaceholder": "स्तर का विवरण लिखें...",
+      "thumbnail": "स्तर का थंबनेल",
       "uploadText": "थंबनेल अपलोड करने के लिए क्लिक करें",
       "uploadSubText": "PNG, JPG, JPEG अधिकतम 5MB",
       "changeImage": "छवि बदलें",
       "thumbnailAlt": "स्तर थंबनेल पूर्वावलोकन",
-      "deleteText": "क्या आप वाकई इस स्तर को हटाना चाहते हैं?",
+      "deleteText": "क्या आप वाकई इस स्तर को हटाना चाहते हैं? इस स्तर को हटाने से इसके अंतर्गत सभी संबंधित मॉड्यूल, अध्याय, विषय, परीक्षाएं, क्विज़, FAQs और अन्य संबंधित सामग्री स्थायी रूप से हट जाएगी। यह क्रिया पूर्ववत नहीं की जा सकती।",
       "order": "क्रम",
       "orderPlaceholder": "प्रदर्शन क्रम दर्ज करें",
       "duration": "अवधि",
       "durationPlaceholder": "स्तर की अवधि दर्ज करें"
     },
     "create": {
-      "title": "स्तर बनाएं",
-      "subtitle": "बुनियादी ज्ञान से उन्नत नैदानिक विशेषज्ञता तक सीखने की यात्रा को संरचित करने के लिए प्रशिक्षण स्तरों का प्रबंधन करें।"
+      "title": "स्तर बनाएँ",
+      "subtitle": "प्रशिक्षण स्तरों को प्रबंधित और व्यवस्थित करें ताकि बुनियादी ज्ञान से लेकर उन्नत नैदानिक विशेषज्ञता तक सीखने की यात्रा संरचित की जा सके।"
     },
     "actions": {
       "addNew": "+ नया स्तर जोड़ें",
-      "createLevel": "स्तर बनाएं",
+      "createLevel": "स्तर बनाएँ",
       "creating": "बनाया जा रहा है...",
       "updateLevel": "स्तर अपडेट करें",
       "updating": "अपडेट हो रहा है...",
-      "deleteLevel": "स्तर हटाएं",
+      "deleteLevel": "स्तर हटाएँ",
       "cancel": "रद्द करें"
     },
     "breadcrumb": {
@@ -599,14 +600,14 @@
       "view-level": "स्तर देखें"
     },
     "validation": {
-      "levelNameRequired": "स्तर नाम आवश्यक है",
+      "levelNameRequired": "स्तर का नाम आवश्यक है",
       "programRequired": "मूल कार्यक्रम आवश्यक है",
       "descriptionRequired": "विवरण आवश्यक है",
       "imageRequired": "कृपया एक छवि फ़ाइल अपलोड करें",
       "fileSize": "फ़ाइल का आकार 5MB से कम होना चाहिए"
     },
     "filters": {
-      "allStatus": "सभी स्थितियां",
+      "allStatus": "सभी स्थितियाँ",
       "active": "सक्रिय",
       "inactive": "निष्क्रिय",
       "allVisibility": "सभी दृश्यता",
@@ -617,7 +618,7 @@
     "stats": {
       "totalLevels": {
         "title": "कुल स्तर",
-        "subtext": "बनाए गए कुल स्तर"
+        "subtext": "कुल स्तर बनाए गए"
       },
       "activeLevels": {
         "title": "सक्रिय स्तर",
@@ -630,7 +631,7 @@
     },
     "success": {
       "create": "स्तर सफलतापूर्वक बनाया गया!",
-      "update": "स्तर सफलतापूर्वक अपडेट हुआ!",
+      "update": "स्तर सफलतापूर्वक अपडेट किया गया!",
       "delete": "स्तर सफलतापूर्वक हटाया गया!"
     },
     "error": {
@@ -643,44 +644,44 @@
   "module": {
     "list": {
       "title": "मॉड्यूल प्रबंधन",
-      "subtitle": "सहज सीखने के अनुभव के लिए संरचित सामग्री, मूल्यांकन और प्रगति ट्रैकिंग के साथ मॉड्यूल डिज़ाइन, व्यवस्थित और प्रबंधित करें।",
-      "searchPlaceholder": "मॉड्यूल नाम से खोजें...",
-      "clearAll": "सब हटाएं",
+      "subtitle": "संरचित सामग्री, मूल्यांकन और प्रगति ट्रैकिंग के साथ मॉड्यूल डिज़ाइन, व्यवस्थित और प्रबंधित करें।",
+      "searchPlaceholder": "मॉड्यूल के नाम से खोजें...",
+      "clearAll": "सभी साफ़ करें",
       "notSpecified": "निर्दिष्ट नहीं",
       "columns": {
-        "moduleName": "मॉड्यूल नाम",
+        "moduleName": "मॉड्यूल का नाम",
         "parentLevel": "मूल स्तर",
         "totalChapters": "कुल अध्याय",
         "totalTopics": "कुल विषय",
         "duration": "अवधि",
         "status": "स्थिति",
-        "actions": "क्रियाएं"
+        "actions": "कार्य"
       }
     },
     "details": {
       "generalDetails": "सामान्य विवरण",
-      "moduleName": "मॉड्यूल नाम",
-      "moduleNamePlaceholder": "मॉड्यूल नाम दर्ज करें",
+      "moduleName": "मॉड्यूल का नाम",
+      "moduleNamePlaceholder": "मॉड्यूल का नाम दर्ज करें",
       "parentLevel": "मूल स्तर",
-      "parentLevelPlaceholder": "कोई स्तर चुनें",
+      "parentLevelPlaceholder": "एक स्तर चुनें",
       "parentProgram": "मूल कार्यक्रम",
-      "perentProgramPlaceholder": "कोई कार्यक्रम चुनें",
+      "perentProgramPlaceholder": "एक कार्यक्रम चुनें",
       "description": "विवरण",
-      "descriptionPlaceholder": "मॉड्यूल विवरण लिखें...",
+      "descriptionPlaceholder": "मॉड्यूल का विवरण लिखें...",
       "thumbnail": "मॉड्यूल थंबनेल",
       "uploadText": "थंबनेल अपलोड करने के लिए क्लिक करें",
       "uploadSubText": "PNG, JPG, JPEG अधिकतम 5MB",
       "changeImage": "छवि बदलें",
       "thumbnailAlt": "मॉड्यूल थंबनेल पूर्वावलोकन",
-      "deleteText": "क्या आप वाकई इस मॉड्यूल को हटाना चाहते हैं?",
+      "deleteText": "क्या आप वाकई इस मॉड्यूल को हटाना चाहते हैं? इस मॉड्यूल को हटाने से इसके अंतर्गत सभी संबंधित अध्याय, विषय, क्विज़ और अन्य संबंधित सामग्री स्थायी रूप से हट जाएगी। यह क्रिया पूर्ववत नहीं की जा सकती।",
       "duration": "अवधि",
       "durationPlaceholder": "मॉड्यूल की अवधि दर्ज करें (जैसे, 2 घंटे)",
       "order": "प्रदर्शन क्रम",
       "orderPlaceholder": "प्रदर्शन क्रम दर्ज करें"
     },
     "create": {
-      "title": "मॉड्यूल बनाएं",
-      "subtitle": "सहज सीखने के अनुभव के लिए संरचित सामग्री, मूल्यांकन और प्रगति ट्रैकिंग के साथ मॉड्यूल डिज़ाइन, व्यवस्थित और प्रबंधित करें।"
+      "title": "मॉड्यूल बनाएँ",
+      "subtitle": "संरचित सामग्री, मूल्यांकन और प्रगति ट्रैकिंग के साथ मॉड्यूल डिज़ाइन, व्यवस्थित और प्रबंधित करें।"
     },
     "status": {
       "active": "सक्रिय",
@@ -690,9 +691,9 @@
     },
     "actions": {
       "addNewModule": "+ नया मॉड्यूल जोड़ें",
-      "createModule": "मॉड्यूल बनाएं",
+      "createModule": "मॉड्यूल बनाएँ",
       "creating": "बनाया जा रहा है...",
-      "deleteModule": "मॉड्यूल हटाएं",
+      "deleteModule": "मॉड्यूल हटाएँ",
       "updateModule": "मॉड्यूल अपडेट करें",
       "updating": "अपडेट हो रहा है...",
       "cancel": "रद्द करें"
@@ -702,7 +703,7 @@
       "view-module": "मॉड्यूल देखें"
     },
     "validation": {
-      "moduleNameRequired": "मॉड्यूल नाम आवश्यक है",
+      "moduleNameRequired": "मॉड्यूल का नाम आवश्यक है",
       "levelRequired": "मूल स्तर आवश्यक है",
       "programRequired": "मूल कार्यक्रम आवश्यक है",
       "descriptionRequired": "विवरण आवश्यक है",
@@ -710,7 +711,7 @@
       "fileSize": "फ़ाइल का आकार 5MB से कम होना चाहिए"
     },
     "filters": {
-      "allStatus": "सभी स्थितियां",
+      "allStatus": "सभी स्थितियाँ",
       "allLevels": "सभी स्तर",
       "active": "सक्रिय",
       "inactive": "निष्क्रिय",
@@ -722,7 +723,7 @@
     "stats": {
       "totalModules": {
         "title": "कुल मॉड्यूल",
-        "subtext": "बनाए गए कुल मॉड्यूल"
+        "subtext": "कुल मॉड्यूल बनाए गए"
       },
       "activeModules": {
         "title": "सक्रिय मॉड्यूल",
@@ -735,7 +736,7 @@
     },
     "success": {
       "create": "मॉड्यूल सफलतापूर्वक बनाया गया!",
-      "update": "मॉड्यूल सफलतापूर्वक अपडेट हुआ!",
+      "update": "मॉड्यूल सफलतापूर्वक अपडेट किया गया!",
       "delete": "मॉड्यूल सफलतापूर्वक हटाया गया!"
     },
     "error": {
@@ -748,52 +749,52 @@
   "chapter": {
     "list": {
       "title": "अध्याय प्रबंधन",
-      "subtitle": "मॉड्यूल को केंद्रित और समझने योग्य शिक्षण खंडों में विभाजित करने के लिए अध्याय सामग्री को परिभाषित और संरचित करें।",
-      "searchPlaceholder": "अध्याय नाम से खोजें...",
-      "clearAll": "सब हटाएं",
+      "subtitle": "अध्याय सामग्री को परिभाषित और संरचित करें ताकि मॉड्यूल को केंद्रित, आसानी से समझ में आने वाले सीखने के खंडों में विभाजित किया जा सके।",
+      "searchPlaceholder": "अध्याय के नाम से खोजें...",
+      "clearAll": "सभी साफ़ करें",
       "notSpecified": "निर्दिष्ट नहीं",
       "columns": {
-        "chapterName": "अध्याय नाम",
+        "chapterName": "अध्याय का नाम",
         "parentModule": "मूल मॉड्यूल",
         "parentLevel": "मूल स्तर",
         "totalTopics": "कुल विषय",
         "duration": "अवधि",
         "status": "स्थिति",
-        "actions": "क्रियाएं"
+        "actions": "कार्य"
       }
     },
     "details": {
       "generalDetails": "सामान्य विवरण",
-      "chapterName": "अध्याय नाम",
-      "chapterNamePlaceholder": "अध्याय नाम दर्ज करें",
+      "chapterName": "अध्याय का नाम",
+      "chapterNamePlaceholder": "अध्याय का नाम दर्ज करें",
       "parentModule": "मूल मॉड्यूल",
-      "parentModulePlaceholder": "कोई मॉड्यूल चुनें",
+      "parentModulePlaceholder": "एक मॉड्यूल चुनें",
       "parentLevel": "मूल स्तर",
-      "parentLevelPlaceholder": "कोई स्तर चुनें",
+      "parentLevelPlaceholder": "एक स्तर चुनें",
       "parentProgram": "मूल कार्यक्रम",
-      "perentProgramPlaceholder": "कोई कार्यक्रम चुनें",
+      "perentProgramPlaceholder": "एक कार्यक्रम चुनें",
       "description": "विवरण",
-      "descriptionPlaceholder": "अध्याय विवरण लिखें...",
+      "descriptionPlaceholder": "अध्याय का विवरण लिखें...",
       "thumbnail": "अध्याय थंबनेल",
       "uploadText": "थंबनेल अपलोड करने के लिए क्लिक करें",
       "uploadSubText": "PNG, JPG, JPEG अधिकतम 5MB",
       "changeImage": "छवि बदलें",
       "thumbnailAlt": "अध्याय थंबनेल पूर्वावलोकन",
-      "deleteText": "क्या आप वाकई इस अध्याय को हटाना चाहते हैं?",
+      "deleteText": "क्या आप वाकई इस अध्याय को हटाना चाहते हैं? इस अध्याय को हटाने से इसके अंतर्गत सभी संबंधित विषय, क्विज़ और अन्य संबंधित सामग्री स्थायी रूप से हट जाएगी। यह क्रिया पूर्ववत नहीं की जा सकती।",
       "duration": "अवधि",
       "durationPlaceholder": "अध्याय की अवधि दर्ज करें (जैसे, 30 मिनट)",
       "order": "प्रदर्शन क्रम",
       "orderPlaceholder": "प्रदर्शन क्रम दर्ज करें"
     },
     "create": {
-      "title": "नया अध्याय बनाएं",
-      "subtitle": "मॉड्यूल को केंद्रित और समझने योग्य शिक्षण खंडों में विभाजित करने के लिए अध्याय सामग्री को परिभाषित और संरचित करें।"
+      "title": "नया अध्याय बनाएँ",
+      "subtitle": "अध्याय सामग्री को परिभाषित और संरचित करें ताकि मॉड्यूल को केंद्रित, आसानी से समझ में आने वाले सीखने के खंडों में विभाजित किया जा सके।"
     },
     "actions": {
       "addNewChapter": "+ नया अध्याय जोड़ें",
-      "createChapter": "अध्याय बनाएं",
+      "createChapter": "अध्याय बनाएँ",
       "creating": "बनाया जा रहा है...",
-      "deleteChapter": "अध्याय हटाएं",
+      "deleteChapter": "अध्याय हटाएँ",
       "updateChapter": "अध्याय अपडेट करें",
       "updating": "अपडेट हो रहा है...",
       "cancel": "रद्द करें"
@@ -803,7 +804,7 @@
       "view-chapter": "अध्याय देखें"
     },
     "validation": {
-      "chapterNameRequired": "अध्याय नाम आवश्यक है",
+      "chapterNameRequired": "अध्याय का नाम आवश्यक है",
       "moduleRequired": "मूल मॉड्यूल आवश्यक है",
       "levelRequired": "मूल स्तर आवश्यक है",
       "programRequired": "मूल कार्यक्रम आवश्यक है",
@@ -812,7 +813,7 @@
       "fileSize": "फ़ाइल का आकार 5MB से कम होना चाहिए"
     },
     "filters": {
-      "allStatus": "सभी स्थितियां",
+      "allStatus": "सभी स्थितियाँ",
       "allLevels": "सभी स्तर",
       "allModules": "सभी मॉड्यूल",
       "active": "सक्रिय",
@@ -827,7 +828,7 @@
     "stats": {
       "totalChapters": {
         "title": "कुल अध्याय",
-        "subtext": "बनाए गए कुल अध्याय"
+        "subtext": "कुल अध्याय बनाए गए"
       },
       "activeChapters": {
         "title": "सक्रिय अध्याय",
@@ -840,7 +841,7 @@
     },
     "success": {
       "create": "अध्याय सफलतापूर्वक बनाया गया!",
-      "update": "अध्याय सफलतापूर्वक अपडेट हुआ!",
+      "update": "अध्याय सफलतापूर्वक अपडेट किया गया!",
       "delete": "अध्याय सफलतापूर्वक हटाया गया!"
     },
     "error": {
@@ -853,16 +854,16 @@
   "topic": {
     "list": {
       "title": "विषय प्रबंधन",
-      "subtitle": "विशेष चिकित्सा विभागों में छात्र प्रगति और सामग्री वितरण को ट्रैक करते हुए विस्तृत सीखने के उद्देश्यों का प्रबंधन करें।",
-      "searchPlaceholder": "विषय नाम से खोजें...",
-      "clearAll": "सब हटाएं",
+      "subtitle": "छात्र प्रगति और सामग्री वितरण को ट्रैक करते हुए विस्तृत सीखने के उद्देश्यों का प्रबंधन करें।",
+      "searchPlaceholder": "विषय के नाम से खोजें...",
+      "clearAll": "सभी साफ़ करें",
       "minutes": "मिनट",
       "columns": {
         "topicName": "विषय का नाम",
         "parentChapter": "मूल अध्याय",
         "parentModule": "मूल मॉड्यूल",
         "parentLevel": "मूल स्तर",
-        "duration": "अवधि",
+        "duration": "अनुमानित अवधि",
         "status": "स्थिति",
         "actions": "कार्य",
         "viewContent": "सभी सामग्री देखें"
@@ -870,40 +871,40 @@
     },
     "details": {
       "generalDetails": "सामान्य विवरण",
-      "topicName": "विषय नाम",
-      "topicNamePlaceholder": "विषय नाम दर्ज करें",
+      "topicName": "विषय का नाम",
+      "topicNamePlaceholder": "विषय का नाम दर्ज करें",
       "parentChapter": "मूल अध्याय",
-      "parentChapterPlaceholder": "कोई अध्याय चुनें",
+      "parentChapterPlaceholder": "एक अध्याय चुनें",
       "parentModule": "मूल मॉड्यूल",
-      "parentModulePlaceholder": "कोई मॉड्यूल चुनें",
-      "parentLevel": "स्तर नाम",
-      "parentLevelPlaceholder": "कोई स्तर चुनें",
+      "parentModulePlaceholder": "एक मॉड्यूल चुनें",
+      "parentLevel": "स्तर का नाम",
+      "parentLevelPlaceholder": "एक स्तर चुनें",
       "parentProgram": "मूल कार्यक्रम",
-      "perentProgramPlaceholder": "कोई कार्यक्रम चुनें",
-      "duration": "अवधि (मिनटों में)",
+      "perentProgramPlaceholder": "एक कार्यक्रम चुनें",
+      "duration": "अनुमानित अवधि (मिनटों में)",
       "durationPlaceholder": "मिनटों में अवधि दर्ज करें",
       "description": "विवरण",
-      "descriptionPlaceholder": "विषय विवरण लिखें...",
+      "descriptionPlaceholder": "विषय का विवरण लिखें...",
       "thumbnail": "विषय थंबनेल",
       "uploadText": "थंबनेल अपलोड करने के लिए क्लिक करें",
       "uploadSubText": "PNG, JPG, JPEG अधिकतम 5MB",
       "changeImage": "छवि बदलें",
       "thumbnailAlt": "विषय थंबनेल पूर्वावलोकन",
-      "deleteText": "क्या आप वाकई इस विषय को हटाना चाहते हैं?",
+      "deleteText": "क्या आप वाकई इस विषय को हटाना चाहते हैं? इस विषय को हटाने से इसके अंतर्गत सभी संबंधित सामग्री, क्विज़ और अन्य संबंधित डेटा स्थायी रूप से हट जाएगा। यह क्रिया पूर्ववत नहीं की जा सकती।",
       "videoUrl": "वीडियो URL",
       "videoUrlPlaceholder": "वीडियो URL दर्ज करें (YouTube, Vimeo, आदि)",
-      "attachment": "अनुलग्नक",
+      "attachment": "अटैचमेंट",
       "attachmentPlaceholder": "अतिरिक्त सामग्री अपलोड करें"
     },
     "create": {
-      "title": "नया विषय बनाएं",
-      "subtitle": "विशेष चिकित्सा विभागों में छात्र प्रगति और सामग्री वितरण को ट्रैक करते हुए विस्तृत सीखने के उद्देश्यों का प्रबंधन करें।"
+      "title": "नया विषय बनाएँ",
+      "subtitle": "छात्र प्रगति और सामग्री वितरण को ट्रैक करते हुए विस्तृत सीखने के उद्देश्यों का प्रबंधन करें।"
     },
     "actions": {
       "addNewTopic": "+ नया विषय जोड़ें",
-      "createTopic": "विषय बनाएं",
+      "createTopic": "विषय बनाएँ",
       "creating": "बनाया जा रहा है...",
-      "deleteTopic": "विषय हटाएं",
+      "deleteTopic": "विषय हटाएँ",
       "updateTopic": "विषय अपडेट करें",
       "updating": "अपडेट हो रहा है...",
       "cancel": "रद्द करें"
@@ -913,7 +914,7 @@
       "view-topic": "विषय देखें"
     },
     "validation": {
-      "topicNameRequired": "विषय नाम आवश्यक है",
+      "topicNameRequired": "विषय का नाम आवश्यक है",
       "durationRequired": "अवधि आवश्यक है",
       "durationNumber": "अवधि एक संख्या होनी चाहिए",
       "durationPositive": "अवधि 0 से अधिक होनी चाहिए",
@@ -926,7 +927,7 @@
       "fileSize": "फ़ाइल का आकार 5MB से कम होना चाहिए"
     },
     "filters": {
-      "allStatus": "सभी स्थितियां",
+      "allStatus": "सभी स्थितियाँ",
       "allLevels": "सभी स्तर",
       "active": "सक्रिय",
       "inactive": "निष्क्रिय",
@@ -942,7 +943,7 @@
     "stats": {
       "totalTopics": {
         "title": "कुल विषय",
-        "subtext": "बनाए गए कुल विषय"
+        "subtext": "कुल विषय बनाए गए"
       },
       "activeTopics": {
         "title": "सक्रिय विषय",
@@ -955,7 +956,7 @@
     },
     "success": {
       "create": "विषय सफलतापूर्वक बनाया गया!",
-      "update": "विषय सफलतापूर्वक अपडेट हुआ!",
+      "update": "विषय सफलतापूर्वक अपडेट किया गया!",
       "delete": "विषय सफलतापूर्वक हटाया गया!"
     },
     "error": {
@@ -1280,7 +1281,7 @@
       "quizTitle": "क्विज़ मूल्यांकन",
       "quizSubtitle": "विषयों के लिए क्विज़ प्रबंधित और बनाएं",
       "searchPlaceholder": "क्विज़ शीर्षक से खोजें...",
-      "clearAll": "सभी फ़िल्टर हटाएं",
+      "clearAll": "सभी फ़िल्टर साफ़ करें",
       "columns": {
         "title": "शीर्षक",
         "type": "प्रकार",
@@ -1290,15 +1291,15 @@
         "topic": "विषय",
         "questionCount": "प्रश्न",
         "totalMark": "कुल अंक",
-        "passingScore": "उत्तीर्ण अंक",
+        "passingScore": "उत्तीर्णांक",
         "duration": "अवधि",
         "status": "स्थिति",
-        "actions": "क्रियाएं"
+        "actions": "कार्य"
       }
     },
     "create": {
-      "quizTitle": "क्विज़ बनाएं",
-      "quizSubtitle": "किसी विषय के लिए नया क्विज़ बनाएं"
+      "quizTitle": "क्विज़ बनाएँ",
+      "quizSubtitle": "विषय के लिए नई क्विज़ बनाएँ"
     },
     "details": {
       "topicDetails": "विषय चयन",
@@ -1311,7 +1312,7 @@
       "parentModulePlaceholder": "मॉड्यूल चुनें",
       "parentChapter": "मूल अध्याय",
       "parentChapterPlaceholder": "अध्याय चुनें",
-      "topicName": "विषय नाम",
+      "topicName": "विषय का नाम",
       "topicNamePlaceholder": "विषय चुनें",
       "title": "क्विज़ शीर्षक",
       "titlePlaceholder": "क्विज़ शीर्षक दर्ज करें",
@@ -1319,24 +1320,24 @@
       "durationPlaceholder": "मिनटों में अवधि दर्ज करें",
       "totalMarks": "कुल अंक",
       "totalMarksPlaceholder": "कुल अंक दर्ज करें",
-      "passingScore": "उत्तीर्ण अंक",
-      "passingScorePlaceholder": "उत्तीर्ण अंक दर्ज करें",
+      "passingScore": "उत्तीर्णांक",
+      "passingScorePlaceholder": "उत्तीर्णांक दर्ज करें",
       "description": "विवरण",
-      "descriptionPlaceholder": "क्विज़ विवरण दर्ज करें",
+      "descriptionPlaceholder": "क्विज़ का विवरण दर्ज करें",
       "thumbnail": "क्विज़ थंबनेल",
       "uploadText": "थंबनेल अपलोड करने के लिए क्लिक करें",
       "uploadSubText": "PNG, JPG, JPEG अधिकतम 5MB",
       "changeImage": "छवि बदलें",
       "currentThumbnail": "वर्तमान थंबनेल",
-      "deleteTextQuiz": "क्या आप वाकई इस क्विज़ को हटाना चाहते हैं?"
+      "deleteTextQuiz": "क्या आप वाकई इस क्विज़ को हटाना चाहते हैं? इस क्विज़ को हटाने से सभी संबंधित FAQs और संबंधित क्विज़ डेटा भी स्थायी रूप से हट जाएगा। यह क्रिया पूर्ववत नहीं की जा सकती।"
     },
     "actions": {
-      "addNewQuiz": "+ नया क्विज़ जोड़ें",
-      "createQuiz": "क्विज़ बनाएं",
+      "addNewQuiz": "+ नई क्विज़ जोड़ें",
+      "createQuiz": "क्विज़ बनाएँ",
       "creating": "बनाया जा रहा है...",
       "updateQuiz": "क्विज़ अपडेट करें",
       "updating": "अपडेट हो रहा है...",
-      "deleteQuiz": "क्विज़ हटाएं"
+      "deleteQuiz": "क्विज़ हटाएँ"
     },
     "breadcrumb": {
       "quizManagement": "क्विज़ प्रबंधन",
@@ -1345,7 +1346,7 @@
     "questions": "प्रश्न",
     "filters": {
       "allLevels": "सभी स्तर",
-      "allStatus": "सभी स्थितियां",
+      "allStatus": "सभी स्थितियाँ",
       "active": "सक्रिय",
       "inactive": "निष्क्रिय",
       "selectLevelFirst": "पहले स्तर चुनें",
@@ -1363,19 +1364,19 @@
       "topic_required": "विषय आवश्यक है",
       "title_required": "शीर्षक आवश्यक है",
       "description_required": "विवरण आवश्यक है",
-      "passing_score_required": "उत्तीर्ण अंक आवश्यक है",
-      "passing_score_positive": "उत्तीर्ण अंक सकारात्मक होना चाहिए",
+      "passing_score_required": "उत्तीर्णांक आवश्यक है",
+      "passing_score_positive": "उत्तीर्णांक धनात्मक होना चाहिए",
       "total_marks_required": "कुल अंक आवश्यक है",
-      "total_marks_positive": "कुल अंक सकारात्मक होना चाहिए",
+      "total_marks_positive": "कुल अंक धनात्मक होना चाहिए",
       "duration_required": "अवधि आवश्यक है",
-      "duration_positive": "अवधि सकारात्मक होनी चाहिए",
-      "invalidImage": "केवल छवि फ़ाइलें अनुमत हैं (JPG, PNG, आदि)",
+      "duration_positive": "अवधि धनात्मक होनी चाहिए",
+      "invalidImage": "केवल छवि फ़ाइलों की अनुमति है (JPG, PNG, आदि)",
       "fileSizeExceeded": "छवि का आकार 5 MB से कम होना चाहिए"
     },
     "success": {
-      "create": "क्विज़ सफलतापूर्वक बनाया गया!",
-      "update": "क्विज़ सफलतापूर्वक अपडेट हुआ!",
-      "delete": "क्विज़ सफलतापूर्वक हटाया गया!"
+      "create": "क्विज़ सफलतापूर्वक बनाई गई!",
+      "update": "क्विज़ सफलतापूर्वक अपडेट की गई!",
+      "delete": "क्विज़ सफलतापूर्वक हटाई गई!"
     },
     "error": {
       "create": "क्विज़ बनाने में विफल। कृपया पुनः प्रयास करें।",
@@ -1389,21 +1390,21 @@
       "examTitle": "परीक्षा मूल्यांकन",
       "examSubtitle": "स्तरों के लिए परीक्षाएं प्रबंधित और बनाएं",
       "searchPlaceholder": "परीक्षा शीर्षक से खोजें...",
-      "clearAll": "सभी फ़िल्टर हटाएं",
+      "clearAll": "सभी फ़िल्टर साफ़ करें",
       "columns": {
         "title": "शीर्षक",
         "type": "प्रकार",
         "questionCount": "प्रश्न",
         "totalMark": "कुल अंक",
-        "passingScore": "उत्तीर्ण अंक",
+        "passingScore": "उत्तीर्णांक",
         "duration": "अवधि",
         "status": "स्थिति",
-        "actions": "क्रियाएं"
+        "actions": "कार्य"
       }
     },
     "create": {
-      "examTitle": "परीक्षा बनाएं",
-      "examSubtitle": "किसी स्तर के लिए नई परीक्षा बनाएं"
+      "examTitle": "परीक्षा बनाएँ",
+      "examSubtitle": "स्तर के लिए नई परीक्षा बनाएँ"
     },
     "details": {
       "levelDetails": "स्तर चयन",
@@ -1418,24 +1419,24 @@
       "durationPlaceholder": "मिनटों में अवधि दर्ज करें",
       "totalMarks": "कुल अंक",
       "totalMarksPlaceholder": "कुल अंक दर्ज करें",
-      "passingScore": "उत्तीर्ण अंक",
-      "passingScorePlaceholder": "उत्तीर्ण अंक दर्ज करें",
+      "passingScore": "उत्तीर्णांक",
+      "passingScorePlaceholder": "उत्तीर्णांक दर्ज करें",
       "description": "विवरण",
-      "descriptionPlaceholder": "परीक्षा विवरण दर्ज करें",
+      "descriptionPlaceholder": "परीक्षा का विवरण दर्ज करें",
       "thumbnail": "परीक्षा थंबनेल",
       "uploadText": "थंबनेल अपलोड करने के लिए क्लिक करें",
       "uploadSubText": "PNG, JPG, JPEG अधिकतम 5MB",
       "changeImage": "छवि बदलें",
       "currentThumbnail": "वर्तमान थंबनेल",
-      "deleteTextExam": "क्या आप वाकई इस परीक्षा को हटाना चाहते हैं?"
+      "deleteTextExam": "क्या आप वाकई इस परीक्षा को हटाना चाहते हैं? इस परीक्षा को हटाने से सभी संबंधित FAQs और संबंधित परीक्षा डेटा भी स्थायी रूप से हट जाएगा। यह क्रिया पूर्ववत नहीं की जा सकती।"
     },
     "actions": {
       "addNewExam": "+ नई परीक्षा जोड़ें",
-      "createExam": "परीक्षा बनाएं",
+      "createExam": "परीक्षा बनाएँ",
       "creating": "बनाया जा रहा है...",
       "updateExam": "परीक्षा अपडेट करें",
       "updating": "अपडेट हो रहा है...",
-      "deleteExam": "परीक्षा हटाएं"
+      "deleteExam": "परीक्षा हटाएँ"
     },
     "breadcrumb": {
       "examManagement": "परीक्षा प्रबंधन",
@@ -1444,7 +1445,7 @@
     "questions": "प्रश्न",
     "filters": {
       "allLevels": "सभी स्तर",
-      "allStatus": "सभी स्थितियां",
+      "allStatus": "सभी स्थितियाँ",
       "active": "सक्रिय",
       "inactive": "निष्क्रिय"
     },
@@ -1453,18 +1454,18 @@
       "level_required": "स्तर आवश्यक है",
       "title_required": "शीर्षक आवश्यक है",
       "description_required": "विवरण आवश्यक है",
-      "passing_score_required": "उत्तीर्ण अंक आवश्यक है",
-      "passing_score_positive": "उत्तीर्ण अंक सकारात्मक होना चाहिए",
+      "passing_score_required": "उत्तीर्णांक आवश्यक है",
+      "passing_score_positive": "उत्तीर्णांक धनात्मक होना चाहिए",
       "total_marks_required": "कुल अंक आवश्यक है",
-      "total_marks_positive": "कुल अंक सकारात्मक होना चाहिए",
+      "total_marks_positive": "कुल अंक धनात्मक होना चाहिए",
       "duration_required": "अवधि आवश्यक है",
-      "duration_positive": "अवधि सकारात्मक होनी चाहिए",
-      "invalidImage": "केवल छवि फ़ाइलें अनुमत हैं (JPG, PNG, आदि)",
+      "duration_positive": "अवधि धनात्मक होनी चाहिए",
+      "invalidImage": "केवल छवि फ़ाइलों की अनुमति है (JPG, PNG, आदि)",
       "fileSizeExceeded": "छवि का आकार 5 MB से कम होना चाहिए"
     },
     "success": {
       "create": "परीक्षा सफलतापूर्वक बनाई गई!",
-      "update": "परीक्षा सफलतापूर्वक अपडेट हुई!",
+      "update": "परीक्षा सफलतापूर्वक अपडेट की गई!",
       "delete": "परीक्षा सफलतापूर्वक हटाई गई!"
     },
     "error": {
@@ -2178,9 +2179,9 @@
 
   "assessmentReport": {
     "title": "मूल्यांकन रिपोर्ट",
-    "subtitle": "छात्र मूल्यांकन प्रदर्शन और प्रगति को ट्रैक और विश्लेषण करें",
-    "searchPlaceholder": "उपयोगकर्ता नाम, ईमेल या कर्मचारी ID से खोजें...",
-    "clearAll": "सब हटाएं",
+    "subtitle": "छात्र मूल्यांकन प्रदर्शन और प्रगति को ट्रैक और विश्लेषित करें",
+    "searchPlaceholder": "उपयोगकर्ता नाम, ईमेल या कर्मचारी आईडी से खोजें...",
+    "clearAll": "सभी साफ़ करें",
     "passing": "उत्तीर्ण",
     "correct": "सही",
     "incorrect": "गलत",
@@ -2193,13 +2194,15 @@
       "status": "स्थिति",
       "answers": "उत्तर",
       "attempt": "प्रयास",
-      "dateTime": "दिनांक और समय"
+      "dateTime": "तिथि और समय",
+      "action": "कार्रवाई",
+      "viewCertificate": "प्रमाणपत्र देखें"
     },
     "filters": {
       "allTypes": "सभी प्रकार",
       "level": "स्तर",
       "topic": "विषय",
-      "allStatus": "सभी स्थितियां",
+      "allStatus": "सभी स्थितियाँ",
       "passed": "उत्तीर्ण",
       "failed": "अनुत्तीर्ण",
       "allUsers": "सभी उपयोगकर्ता",

@@ -236,14 +236,6 @@ const CustomEditor = memo(
         */}
 
           {/* Table */}
-          {/* <button
-            type="button"
-            onClick={addTable}
-            className="p-2 rounded hover:bg-gray-200 transition-colors text-gray-700"
-            title="Insert Table"
-          >
-            <FiTable size={16} />
-          </button> */}
           <button
             type="button"
             onClick={addTable}

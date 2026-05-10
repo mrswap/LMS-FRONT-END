@@ -18,6 +18,7 @@ import Error from "../../../../common/Error";
 import TruncateText from "../../../../common/TruncateText";
 import { getAllOptions } from "../../../../../../redux/slice/assessmentOptionSlice";
 import usePermission from "../../../../../../hooks/usePermission";
+import Breadcrumb from "../../../../common/layout/Breadcrumb";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -140,6 +141,25 @@ const Option = () => {
 
   return (
     <PageLayout>
+      <Breadcrumb
+        items={[
+          {
+            label:
+              options?.type === "level"
+                ? t("examAssessment.list.examTitle")
+                : t("quizAssessment.list.quizTitle"),
+            path: options?.type === "level" ? "/exam-level" : "/assessment",
+          },
+          {
+            label: t("question.columns.question"),
+            path: `/assessment-question/${assessmentId}`,
+          },
+          ,
+          {
+            label: t("option.columns.option"),
+          },
+        ]}
+      />
       <PageHeader>
         <PageHeaderLeft>
           <PageTitle>{t("option.title")}</PageTitle>

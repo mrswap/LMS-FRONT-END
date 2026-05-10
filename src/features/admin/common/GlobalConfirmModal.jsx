@@ -25,7 +25,8 @@ const GlobalConfirmModal = () => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 backdrop-blur-sm">
-      <div className="bg-white rounded-xl shadow-2xl w-[400px] overflow-hidden border-l-4 border-l-blue-500">
+      {/* <div className="bg-white rounded-xl shadow-2xl w-fit max-w-[60vw] min-w-[400px] overflow-hidden border-l-4 border-l-blue-500"> */}
+      <div className="bg-white rounded-xl shadow-2xl w-[90%] max-w-[400px] md:max-w-[600px] lg:max-w-[750px] overflow-hidden border-l-4 border-l-blue-500">
         <div className="bg-gradient-to-r from-blue-50 to-cyan-50 px-6 py-4 border-b border-blue-100">
           <div className="flex items-center gap-3">
             <svg
