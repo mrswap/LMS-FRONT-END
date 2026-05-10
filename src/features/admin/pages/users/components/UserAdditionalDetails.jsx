@@ -36,6 +36,7 @@ import { MdDevices } from "react-icons/md";
 import { useToast } from "../../../common/toast/ToastContext";
 import { useTranslation } from "react-i18next";
 import usePermission from "../../../../../hooks/usePermission";
+import { useNavigate } from "react-router-dom";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -67,6 +68,8 @@ const UserAdditionalDetails = ({ id }) => {
   const [userCertifications, setUserCertifications] = useState([]);
   const [loadingUserCertifications, setLoadingUserCertifications] =
     useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (id) {
@@ -392,11 +395,28 @@ const UserAdditionalDetails = ({ id }) => {
     },
     {
       header: t("userAdditionalDetails.assessment.action"),
-      render: (row) => (
-        <p className="text-sm text-gray-700">
-          {t("userAdditionalDetails.assessment.viewCertificate")}
-        </p>
-      ),
+      render: (row) => {
+        const certificateAvailable =
+          row?.status?.toLowerCase()?.trim() === "passed" &&
+          row?.passed_attempt_id;
+
+        return (
+          <div>
+            {certificateAvailable ? (
+              <button
+                onClick={() =>
+                  navigate(`/certificate/${row?.passed_attempt_id}`)
+                }
+                className="px-3 py-1 text-xs font-semibold cursor-pointer text-blue-600 bg-blue-50 border border-blue-200 rounded-md hover:bg-blue-100 hover:border-blue-300 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all duration-150"
+              >
+                {t("userAdditionalDetails.assessment.viewCertificate")}
+              </button>
+            ) : (
+              <span className="text-xs text-gray-400 italic">—</span>
+            )}
+          </div>
+        );
+      },
     },
   ];
 

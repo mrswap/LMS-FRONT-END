@@ -232,6 +232,7 @@
     "totalUsers": "Total Users",
     "activeUsers": "Active Users",
     "totalPrograms": "Total Programs",
+    "totalLevels": "Total Levels",
     "totalModules": "Total Modules",
     "totalChapters": "Total Chapters",
     "totalTopics": "Total Topics",
@@ -575,7 +576,7 @@
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
       "changeImage": "Change Image",
       "thumbnailAlt": "Level thumbnail preview",
-      "deleteText": "Are you sure you want to delete this level?",
+      "deleteText": "Are you sure you want to delete this level? Deleting this level will permanently remove all associated modules, chapters, topics, exams, quizzes, FAQs, and other related content underneath it. This action cannot be undone.",
       "order": "Order",
       "orderPlaceholder": "Enter display order",
       "duration": "Duration",
@@ -672,7 +673,7 @@
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
       "changeImage": "Change Image",
       "thumbnailAlt": "Module thumbnail preview",
-      "deleteText": "Are you sure you want to delete this module?",
+      "deleteText": "Are you sure you want to delete this module? Deleting this module will permanently remove all associated chapters, topics, quizzes, and other related content underneath it. This action cannot be undone.",
       "duration": "Duration",
       "durationPlaceholder": "Enter module duration (e.g., 2 hours)",
       "order": "Display Order",
@@ -779,7 +780,7 @@
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
       "changeImage": "Change Image",
       "thumbnailAlt": "Chapter thumbnail preview",
-      "deleteText": "Are you sure you want to delete this chapter?",
+      "deleteText": "Are you sure you want to delete this chapter? Deleting this chapter will permanently remove all associated topics, quizzes, and other related content underneath it. This action cannot be undone.",
       "duration": "Duration",
       "durationPlaceholder": "Enter chapter duration (e.g., 30 minutes)",
       "order": "Display Order",
@@ -862,7 +863,7 @@
         "parentChapter": "Parent Chapter",
         "parentModule": "Parent Module",
         "parentLevel": "Parent Level",
-        "duration": "Duration",
+        "duration": "Estimated Duration",
         "status": "Status",
         "actions": "Actions",
         "viewContent": "View all contents"
@@ -880,7 +881,7 @@
       "parentLevelPlaceholder": "Select a level",
       "parentProgram": "Parent Program",
       "perentProgramPlaceholder": "Select a program",
-      "duration": "Duration (in minutes)",
+      "duration": "Estimated Duration (in minutes)",
       "durationPlaceholder": "Enter duration in minutes",
       "description": "Description",
       "descriptionPlaceholder": "Write topic description...",
@@ -889,7 +890,7 @@
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
       "changeImage": "Change Image",
       "thumbnailAlt": "Topic thumbnail preview",
-      "deleteText": "Are you sure you want to delete this topic?",
+      "deleteText": "Are you sure you want to delete this topic? Deleting this topic will permanently remove all associated content, quizzes, and other related data underneath it. This action cannot be undone.",
       "videoUrl": "Video URL",
       "videoUrlPlaceholder": "Enter video URL (YouTube, Vimeo, etc.)",
       "attachment": "Attachment",
@@ -1328,7 +1329,7 @@
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
       "changeImage": "Change Image",
       "currentThumbnail": "Current thumbnail",
-      "deleteTextQuiz": "Are you sure you want to delete this quiz?"
+      "deleteTextQuiz": "Are you sure you want to delete this quiz? Deleting this quiz will also permanently delete all associated FAQs and related quiz data. This action cannot be undone."
     },
     "actions": {
       "addNewQuiz": "+ Add New Quiz",
@@ -1427,7 +1428,7 @@
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
       "changeImage": "Change Image",
       "currentThumbnail": "Current thumbnail",
-      "deleteTextExam": "Are you sure you want to delete this exam?"
+      "deleteTextExam": "Are you sure you want to delete this exam? Deleting this exam will also permanently delete all associated FAQs and related exam data. This action cannot be undone."
     },
     "actions": {
       "addNewExam": "+ Add New Exam",
@@ -2193,7 +2194,9 @@
       "status": "Status",
       "answers": "Answers",
       "attempt": "Attempt",
-      "dateTime": "Date & Time"
+      "dateTime": "Date & Time",
+      "action": "Action",
+      "viewCertificate": "View Certificate"
     },
     "filters": {
       "allTypes": "All Types",

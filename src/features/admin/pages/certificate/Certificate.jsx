@@ -39,6 +39,8 @@ import Loader from "../../common/Loader";
 import Error from "../../common/Error";
 import { useTranslation } from "react-i18next";
 import { getCertificateById } from "../../../../redux/slice/reportSlice";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const Certificate = () => {
   const { id } = useParams();
@@ -59,7 +61,94 @@ const Certificate = () => {
     }
   }, [dispatch, id]);
 
-  const handleDownload = () => {};
+  const handleDownload = async () => {
+    const element = certificateRef.current;
+    if (!element) return;
+
+    try {
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: "#ffffff",
+        logging: false,
+        onclone: (clonedDoc, clonedElement) => {
+          // Inject hex color overrides to replace oklch
+          const style = clonedDoc.createElement("style");
+          style.innerHTML = `
+          * {
+            --tw-ring-color: #10b981 !important;
+            --tw-shadow-color: rgba(0,0,0,0.1) !important;
+          }
+
+          /* Force all oklch-based colors to hex equivalents */
+          .text-emerald-800, .text-emerald-900 { color: #065f46 !important; }
+          .text-emerald-700 { color: #047857 !important; }
+          .text-emerald-600 { color: #059669 !important; }
+          .text-emerald-500 { color: #10b981 !important; }
+          .text-emerald-400 { color: #34d399 !important; }
+
+          .bg-emerald-700 { background-color: #047857 !important; }
+          .bg-emerald-600 { background-color: #059669 !important; }
+          .bg-emerald-500 { background-color: #10b981 !important; }
+          .bg-emerald-200 { background-color: #a7f3d0 !important; }
+          .bg-emerald-50  { background-color: #ecfdf5 !important; }
+
+          .border-emerald-700 { border-color: #047857 !important; }
+          .border-emerald-600 { border-color: #059669 !important; }
+          .border-emerald-500 { border-color: #10b981 !important; }
+          .border-emerald-300 { border-color: #6ee7b7 !important; }
+          .border-emerald-200 { border-color: #a7f3d0 !important; }
+
+          .text-gray-800 { color: #1f2937 !important; }
+          .text-gray-600 { color: #4b5563 !important; }
+          .text-gray-500 { color: #6b7280 !important; }
+          .text-gray-400 { color: #9ca3af !important; }
+
+          .text-green-700 { color: #15803d !important; }
+          .bg-green-600  { background-color: #16a34a !important; }
+
+          .bg-blue-700  { background-color: #1d4ed8 !important; }
+          .bg-blue-800  { background-color: #1e40af !important; }
+          .bg-blue-900  { background-color: #1e3a8a !important; }
+
+          .bg-white { background-color: #ffffff !important; }
+          .text-white { color: #ffffff !important; }
+
+          /* Gradient fallback */
+          .bg-gradient-to-br {
+            background: #ecfdf5 !important;
+          }
+        `;
+          clonedDoc.head.appendChild(style);
+        },
+      });
+
+      const imgData = canvas.toDataURL("image/jpeg", 1.0);
+
+      const pdf = new jsPDF({
+        orientation: "landscape",
+        unit: "mm",
+        format: "a4",
+      });
+
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const ratio = Math.min(
+        pdfWidth / canvas.width,
+        pdfHeight / canvas.height,
+      );
+      const imgWidth = canvas.width * ratio;
+      const imgHeight = canvas.height * ratio;
+      const x = (pdfWidth - imgWidth) / 2;
+      const y = (pdfHeight - imgHeight) / 2;
+
+      pdf.addImage(imgData, "JPEG", x, y, imgWidth, imgHeight);
+      pdf.save(`${certificate_id || "certificate"}.pdf`);
+    } catch (error) {
+      console.error("Download failed:", error);
+    }
+  };
 
   if (loadingCertificate) return <Loader />;
   if (isError) return <Error message={message} />;
@@ -77,14 +166,14 @@ const Certificate = () => {
           </PageTitle>
           <PageSubtitle>{certificate_id}</PageSubtitle>
         </PageHeaderLeft>
-        {/* <PageHeaderRight>
+        <PageHeaderRight>
           <button
             onClick={handleDownload}
             className="flex items-center gap-2 px-6 py-2 text-sm font-medium text-white bg-accent rounded-md hover:opacity-90 cursor-pointer shadow-md"
           >
             <FaDownload /> {t("certificate.downloadButton")}
           </button>
-        </PageHeaderRight> */}
+        </PageHeaderRight>
       </PageHeader>
 
       <PageBody>
@@ -103,7 +192,7 @@ const Certificate = () => {
             <div className="absolute top-6 left-6 w-16 h-16 border-t-4 border-l-4 border-emerald-700"></div>
             <div className="absolute top-6 right-6 w-16 h-16 border-t-4 border-r-4 border-emerald-700"></div>
             <div className="absolute bottom-6 left-6 w-16 h-16 border-b-4 border-l-4 border-emerald-700"></div>
-            <div className="absolute bottom-6 right-16 w-16 h-16 border-b-4 border-r-4 border-emerald-700"></div>
+            <div className="absolute bottom-6 right-6 w-16 h-16 border-b-4 border-r-4 border-emerald-700"></div>
 
             {/* Decorative Icons at Corners */}
             <div className="absolute top-12 left-12 text-emerald-600 opacity-50">

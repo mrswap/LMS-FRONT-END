@@ -212,22 +212,14 @@ const Chapters = () => {
         </div>
       ),
     },
-    {
-      header: t("chapter.list.columns.totalTopics"),
-      render: (row) => (
-        <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">
-          {row.topics_count || 0}
-        </span>
-      ),
-    },
-    {
-      header: t("chapter.list.columns.duration"),
-      render: (row) => (
-        <span className="text-gray-600">
-          {row.duration || t("chapter.list.notSpecified")}
-        </span>
-      ),
-    },
+    // {
+    //   header: t("chapter.list.columns.totalTopics"),
+    //   render: (row) => (
+    //     <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">
+    //       {row.topics_count || 0}
+    //     </span>
+    //   ),
+    // },
     ...(hasPermission("chapters.status")
       ? [
           {
