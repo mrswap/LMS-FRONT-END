@@ -683,16 +683,6 @@ const SingleLearningUnitBuilderDetails = () => {
                           <label className="block text-sm font-medium text-gray-700 mb-2">
                             {t("learningUnitBuilder.details.content.content")}
                           </label>
-                          {/* <TextEditor
-                            key="text-editor"
-                            id="content-editor"
-                            value={localContent.content}
-                            onChange={(value) =>
-                              handleContentChange("content", value)
-                            }
-                            isActive={true}
-                            t={t}
-                          /> */}
                           <CustomEditor
                             value={localContent.content}
                             onChange={(value) =>
