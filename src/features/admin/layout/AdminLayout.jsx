@@ -51,7 +51,7 @@ const AdminLayout = () => {
           {/* Main Content */}
           <main className="flex-1 overflow-auto bg-white custom-scrollbar">
             {/* Inner padding — slightly tighter on mobile */}
-            <div className="p-4 sm:p-5 lg:p-6 min-h-full ">
+            <div className="p-4 sm:p-5 lg:p-6 min-h-full max-w-[1544px] mx-auto ">
               <Outlet />
             </div>
           </main>

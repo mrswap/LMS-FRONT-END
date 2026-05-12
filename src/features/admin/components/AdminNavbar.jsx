@@ -7,6 +7,15 @@ import {
   FiMenu,
   FiX,
 } from "react-icons/fi";
+import {
+  MdOutlineVideoLibrary,
+  MdAnalytics,
+  MdSettings,
+  MdLogout,
+  MdPerson,
+  MdAssignment,
+  MdNotifications,
+} from "react-icons/md";
 import logo from "../../../assets/admin/AvanteMedicalLogo.png";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +24,8 @@ import { getProfile, logout } from "../../../redux/slice/authSlice";
 import { useToast } from "../common/toast/ToastContext";
 import Loader from "../common/Loader";
 import Error from "../common/Error";
+import NotificationDropdown from "../common/noitification/NotificationDropdown";
+import { getUnreadCount } from "../../../redux/slice/notificationSlicer";
 
 const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
   const { t } = useTranslation();
@@ -29,11 +40,22 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
     (state) => state.auth,
   );
 
+  const { unreadCount } = useSelector((state) => state.notification);
+
   useEffect(() => {
     dispatch(getProfile());
+    dispatch(getUnreadCount());
   }, [dispatch]);
 
   const dropdownRef = useRef();
+
+  // Handle notification click
+  const handleNotificationClick = () => {
+    navigate("/notification");
+  };
+
+  // In the component, add this state
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -95,12 +117,29 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
         </button>
 
         {/* Notifications */}
-        <div className="relative cursor-pointer hover:scale-105 transition">
+        {/* <div className="relative cursor-pointer hover:scale-105 transition">
           <FiBell size={18} />
           <span className="absolute -top-1 -right-1 bg-red-500 text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
             1
           </span>
-        </div>
+        </div> */}
+        <button
+          onClick={() => setIsNotificationOpen(!isNotificationOpen)}
+          className="relative bg-white/10 backdrop-blur-sm rounded-full p-2 border border-white/20 hover:bg-white/20 transition-all duration-200 cursor-pointer"
+        >
+          <MdNotifications className="w-5 h-5 text-white" />
+          {/* Notification Badge */}
+          {unreadCount > 0 && (
+            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
+              {unreadCount}
+            </span>
+          )}
+        </button>
+        {/* Add Notification Dropdown */}
+        <NotificationDropdown
+          isOpen={isNotificationOpen}
+          onClose={() => setIsNotificationOpen(false)}
+        />
 
         {/* PROFILE */}
         <div ref={dropdownRef} className="relative">

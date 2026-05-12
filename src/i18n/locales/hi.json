@@ -154,6 +154,55 @@
     }
   },
 
+  "notification": {
+    "notifications": "सूचनाएँ",
+    "markAllAsRead": "सभी को पढ़ा हुआ मार्क करें",
+    "stayUpdated": "अपनी सीखने की यात्रा और उपलब्धियों से अपडेट रहें",
+    "readMore": "और पढ़ें",
+    "justNow": "अभी अभी",
+    "minAgo": "मिनट पहले",
+    "hourAgo_one": "घंटा पहले",
+    "hourAgo_other": "घंटे पहले",
+    "yesterday": "कल",
+    "daysAgo": "दिन पहले",
+    "weeksAgo_one": "सप्ताह पहले",
+    "weeksAgo_other": "सप्ताह पहले",
+    "monthsAgo_one": "महीना पहले",
+    "monthsAgo_other": "महीने पहले",
+    "yearsAgo_one": "साल पहले",
+    "yearsAgo_other": "साल पहले",
+    "page": "पृष्ठ",
+    "of": "का",
+    "noNotifications": "कोई सूचना नहीं",
+    "quietCenter": "आपका सूचना केंद्र शांत है",
+    "viewAll": "सभी सूचनाएँ देखें",
+    "allNotifications": "सभी सूचनाएँ",
+    "unread": "अपठित",
+    "allCaughtUp": "सब पढ़ लिया",
+    "noNotificationsYet": "अभी तक कोई सूचना नहीं",
+    "allRead": "आपने अपनी सभी सूचनाएँ पढ़ ली हैं",
+    "willAppear": "जब आपको सूचनाएँ मिलेंगी, तो वे यहाँ दिखाई देंगी",
+    "notFound": "सूचना नहीं मिली",
+    "notFoundDescription": "आप जिस सूचना को खोज रहे हैं, वह मौजूद नहीं है",
+    "goBack": "सूचनाओं पर वापस जाएँ",
+    "detailSubtitle": "सूचना विवरण और जानकारी",
+    "additionalInfo": "अतिरिक्त जानकारी",
+    "screen": "स्क्रीन",
+    "link": "लिंक",
+    "new": "नया",
+    "stats": {
+      "total": "कुल सूचनाएँ",
+      "unread": "अपठित",
+      "read": "पढ़ी हुई"
+    }
+  },
+
+  "breadcrumb": {
+    "home": "होम",
+    "notifications": "सूचनाएँ",
+    "notificationDetails": "सूचना विवरण"
+  },
+
   "navbar": {
     "searchPlaceholder": "एनालिटिक्स, उपयोगकर्ता या कोर्स खोजें...",
     "notifications": "सूचनाएं",

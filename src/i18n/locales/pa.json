@@ -150,6 +150,55 @@
     }
   },
 
+  "notification": {
+    "notifications": "ਸੂਚਨਾਵਾਂ",
+    "markAllAsRead": "ਸਭ ਨੂੰ ਪੜ੍ਹਿਆ ਹੋਇਆ ਮਾਰਕ ਕਰੋ",
+    "stayUpdated": "ਆਪਣੀ ਸਿੱਖਣ ਦੀ ਯਾਤਰਾ ਅਤੇ ਪ੍ਰਾਪਤੀਆਂ ਨਾਲ ਅਪਡੇਟ ਰਹੋ",
+    "readMore": "ਹੋਰ ਪੜ੍ਹੋ",
+    "justNow": "ਹੁਣੇ ਹੁਣੇ",
+    "minAgo": "ਮਿੰਟ ਪਹਿਲਾਂ",
+    "hourAgo_one": "ਘੰਟਾ ਪਹਿਲਾਂ",
+    "hourAgo_other": "ਘੰਟੇ ਪਹਿਲਾਂ",
+    "yesterday": "ਕੱਲ੍ਹ",
+    "daysAgo": "ਦਿਨ ਪਹਿਲਾਂ",
+    "weeksAgo_one": "ਹਫ਼ਤਾ ਪਹਿਲਾਂ",
+    "weeksAgo_other": "ਹਫ਼ਤੇ ਪਹਿਲਾਂ",
+    "monthsAgo_one": "ਮਹੀਨਾ ਪਹਿਲਾਂ",
+    "monthsAgo_other": "ਮਹੀਨੇ ਪਹਿਲਾਂ",
+    "yearsAgo_one": "ਸਾਲ ਪਹਿਲਾਂ",
+    "yearsAgo_other": "ਸਾਲ ਪਹਿਲਾਂ",
+    "page": "ਸਫ਼ਾ",
+    "of": "ਦਾ",
+    "noNotifications": "ਕੋਈ ਸੂਚਨਾ ਨਹੀਂ",
+    "quietCenter": "ਤੁਹਾਡਾ ਸੂਚਨਾ ਕੇਂਦਰ ਸ਼ਾਂਤ ਹੈ",
+    "viewAll": "ਸਾਰੀਆਂ ਸੂਚਨਾਵਾਂ ਵੇਖੋ",
+    "allNotifications": "ਸਾਰੀਆਂ ਸੂਚਨਾਵਾਂ",
+    "unread": "ਅਪੜ੍ਹੀਆਂ",
+    "allCaughtUp": "ਸਭ ਪੜ੍ਹ ਲਿਆ",
+    "noNotificationsYet": "ਅਜੇ ਤੱਕ ਕੋਈ ਸੂਚਨਾ ਨਹੀਂ",
+    "allRead": "ਤੁਸੀਂ ਆਪਣੀਆਂ ਸਾਰੀਆਂ ਸੂਚਨਾਵਾਂ ਪੜ੍ਹ ਲਈਆਂ ਹਨ",
+    "willAppear": "ਜਦੋਂ ਤੁਹਾਨੂੰ ਸੂਚਨਾਵਾਂ ਮਿਲਣਗੀਆਂ, ਉਹ ਇੱਥੇ ਦਿਖਾਈ ਦੇਣਗੀਆਂ",
+    "notFound": "ਸੂਚਨਾ ਨਹੀਂ ਮਿਲੀ",
+    "notFoundDescription": "ਤੁਸੀਂ ਜਿਸ ਸੂਚਨਾ ਨੂੰ ਲੱਭ ਰਹੇ ਹੋ, ਉਹ ਮੌਜੂਦ ਨਹੀਂ ਹੈ",
+    "goBack": "ਸੂਚਨਾਵਾਂ 'ਤੇ ਵਾਪਸ ਜਾਓ",
+    "detailSubtitle": "ਸੂਚਨਾ ਵੇਰਵੇ ਅਤੇ ਜਾਣਕਾਰੀ",
+    "additionalInfo": "ਵਾਧੂ ਜਾਣਕਾਰੀ",
+    "screen": "ਸਕ੍ਰੀਨ",
+    "link": "ਲਿੰਕ",
+    "new": "ਨਵਾਂ",
+    "stats": {
+      "total": "ਕੁੱਲ ਸੂਚਨਾਵਾਂ",
+      "unread": "ਅਪੜ੍ਹੀਆਂ",
+      "read": "ਪੜ੍ਹੀਆਂ ਹੋਈਆਂ"
+    }
+  },
+
+  "breadcrumb": {
+    "home": "ਹੋਮ",
+    "notifications": "ਸੂਚਨਾਵਾਂ",
+    "notificationDetails": "ਸੂਚਨਾ ਵੇਰਵੇ"
+  },
+
   "navbar": {
     "searchPlaceholder": "ਐਨਾਲਿਟਿਕਸ, ਉਪਭੋਗਤਾ ਜਾਂ ਕੋਰਸ ਖੋਜੋ...",
     "notifications": "ਸੂਚਨਾਵਾਂ",

@@ -185,7 +185,7 @@ const SingleLearningUnitBuilderDetails = () => {
         type: content.type || "text",
         title: content.title || "",
         content: content.content || "",
-        media_shortcut: content.media_shortcut || "",
+        media_shortcut: content?.meta?.shortcode || "",
         order: content.order || 1,
       });
     }
@@ -329,24 +329,115 @@ const SingleLearningUnitBuilderDetails = () => {
     }));
   };
 
+  // const onSubmit = async (values, { setSubmitting, setErrors }) => {
+  //   try {
+  //     const formData = new FormData();
+
+  //     formData.append("title", localContent.title);
+  //     formData.append("type", localContent.type);
+  //     formData.append("content", localContent.content);
+  //     formData.append("order", localContent.order);
+
+  //     if (localContent.type === "media" && localContent.media_shortcut) {
+  //       formData.append("media_shortcut", localContent.media_shortcut);
+  //     }
+
+  //     // formData log
+  //     for (let [key, value] of formData.entries()) {
+  //       console.log(key, value);
+  //     }
+
+  //     // await dispatch(
+  //     //   updateSingleContentById({
+  //     //     topicId,
+  //     //     id,
+  //     //     data: formData,
+  //     //   }),
+  //     // ).unwrap();
+
+  //     // toast.success(t("learningUnitBuilder.success.update"));
+  //     // navigate("/learning-unit");
+  //   } catch (error) {
+  //     setErrors({ submit: error.message });
+  //     toast.error(error?.message || t("learningUnitBuilder.error.update"));
+  //   } finally {
+  //     setSubmitting(false);
+  //   }
+  // };
+
+  // const onSubmit = async (values, { setSubmitting, setErrors }) => {
+  //   try {
+  //     const payload = {
+  //       topic_id: values.topicName.value,
+  //       sections: [
+  //         {
+  //           type: localContent.type,
+  //           title: localContent.title,
+  //           content: localContent.content,
+  //           order: localContent.order,
+  //           ...(localContent.type === "media" &&
+  //             localContent.media_shortcut && {
+  //               meta: {
+  //                 shortcode: localContent.media_shortcut,
+  //               },
+  //             }),
+  //         },
+  //       ],
+  //     };
+
+  //     console.log("UPDATE PAYLOAD", payload);
+
+  //     await dispatch(
+  //       updateSingleContentById({
+  //         topicId,
+  //         id,
+  //         data: payload,
+  //       }),
+  //     ).unwrap();
+
+  //     toast.success(t("learningUnitBuilder.success.update"));
+
+  //     navigate("/learning-unit");
+  //   } catch (error) {
+  //     setErrors({ submit: error.message });
+
+  //     toast.error(error?.message || t("learningUnitBuilder.error.update"));
+  //   } finally {
+  //     setSubmitting(false);
+  //   }
+  // };
+
   const onSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
-      const formData = new FormData();
+      let payload = {};
 
-      formData.append("title", localContent.title);
-      formData.append("type", localContent.type);
-      formData.append("content", localContent.content);
-      formData.append("order", localContent.order);
+      if (localContent.type === "text") {
+        payload = {
+          type: "text",
+          title: localContent.title,
+          content: localContent.content,
+          order: localContent.order,
+        };
+      }
 
       if (localContent.type === "media" && localContent.media_shortcut) {
-        formData.append("media_shortcut", localContent.media_shortcut);
+        payload = {
+          type: "media",
+          title: localContent.title,
+          meta: {
+            shortcode: localContent.media_shortcut,
+          },
+          order: localContent.order,
+        };
       }
+
+      // console.log("payload", payload);
 
       await dispatch(
         updateSingleContentById({
           topicId,
           id,
-          data: formData,
+          data: payload,
         }),
       ).unwrap();
 
@@ -735,7 +826,7 @@ const SingleLearningUnitBuilderDetails = () => {
                             />
                           </div>
 
-                          {localContent.media_shortcut && (
+                          {/* {localContent.media_shortcut && (
                             <div className="mt-2 p-2 bg-gray-100 rounded">
                               <p className="text-xs text-gray-500 mb-1">
                                 {t(
@@ -771,7 +862,7 @@ const SingleLearningUnitBuilderDetails = () => {
                                 </p>
                               )}
                             </div>
-                          )}
+                          )} */}
                         </>
                       )}
                     </div>
