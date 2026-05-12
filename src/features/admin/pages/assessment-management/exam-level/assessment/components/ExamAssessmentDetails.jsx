@@ -30,24 +30,19 @@ const ExamAssessmentDetails = () => {
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
   const fileInputRef = useRef(null);
   const { hasPermission } = usePermission();
-
   const { assessment, isLoading } = useSelector((state) => state.assessment);
-
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const toast = useToast();
   const navigate = useNavigate();
   const { assessmentId: id } = useParams();
-
   const { programs } = useSelector((state) => state.program);
   const { levels } = useSelector((state) => state.level);
 
   const [selectedProgram, setSelectedProgram] = useState(null);
   const [selectedLevel, setSelectedLevel] = useState(null);
-
   const [loadingPrograms, setLoadingPrograms] = useState(false);
   const [loadingLevels, setLoadingLevels] = useState(false);
-
   const [filteredLevels, setFilteredLevels] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
 
