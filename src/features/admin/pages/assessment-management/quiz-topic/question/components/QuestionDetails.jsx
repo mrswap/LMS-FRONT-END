@@ -106,7 +106,7 @@ const QuestionDetails = () => {
       const formData = new FormData();
 
       formData.append("question_text", values.question_text);
-      formData.append("marks", values.marks);
+      // formData.append("marks", values.marks);
       formData.append("order", values.order);
 
       if (thumbnail) {
@@ -210,6 +210,7 @@ const QuestionDetails = () => {
                           type="number"
                           required={true}
                           maxLength={3}
+                          isDisabled={true}
                         />
 
                         <TextInput

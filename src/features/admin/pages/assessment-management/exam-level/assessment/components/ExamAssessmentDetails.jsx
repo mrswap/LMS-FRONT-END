@@ -41,8 +41,10 @@ const ExamAssessmentDetails = () => {
 
   const [selectedProgram, setSelectedProgram] = useState(null);
   const [selectedLevel, setSelectedLevel] = useState(null);
+
   const [loadingPrograms, setLoadingPrograms] = useState(false);
   const [loadingLevels, setLoadingLevels] = useState(false);
+
   const [filteredLevels, setFilteredLevels] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
 

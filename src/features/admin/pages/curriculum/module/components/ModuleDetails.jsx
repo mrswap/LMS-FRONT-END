@@ -204,7 +204,7 @@ const ModuleDetails = () => {
   const triggerFileUpload = () => fileInputRef.current.click();
 
   if (isLoading) return <Loader />;
-  // if (isError) return <Error message={message} />;
+  if (isError) return <Error message={message} />;
 
   return (
     <PageLayout>
