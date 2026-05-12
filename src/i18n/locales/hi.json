@@ -1145,23 +1145,22 @@
   "mediaLibrary": {
     "list": {
       "title": "मीडिया लाइब्रेरी",
-      "subtitle": "अपने चिकित्सा छात्रों के लिए सर्जिकल वीडियो, नैदानिक आरेख और कोर्स दस्तावेज़ीकरण प्रबंधित करें।",
-      "searchPlaceholder": "नाम, टैग या मेटाडेटा से फ़ाइलें खोजें...",
+      "subtitle": "अपने मेडिकल छात्रों के लिए सर्जिकल वीडियो, क्लिनिकल डायग्राम और कोर्स दस्तावेज़ प्रबंधित करें।",
+      "searchPlaceholder": "नाम, टैग या मेटाडेटा द्वारा फ़ाइलें खोजें...",
       "noDataFound": "कोई डेटा नहीं मिला",
       "unknownCreator": "अज्ञात",
-      "shortcode": "शॉर्टकोड",
       "tabs": {
         "all": "सभी फ़ाइलें",
         "videos": "वीडियो",
-        "images": "छवियां",
+        "images": "छवियाँ",
         "documents": "दस्तावेज़",
         "audio": "ऑडियो"
       }
     },
     "details": {
       "generalDetails": "सामान्य विवरण",
-      "mediaName": "मीडिया लाइब्रेरी नाम",
-      "mediaNamePlaceholder": "मीडिया लाइब्रेरी नाम दर्ज करें",
+      "mediaName": "मीडिया लाइब्रेरी का नाम",
+      "mediaNamePlaceholder": "मीडिया लाइब्रेरी का नाम दर्ज करें",
       "type": "प्रकार",
       "typePlaceholder": "मीडिया प्रकार चुनें",
       "description": "विवरण",
@@ -1170,24 +1169,36 @@
       "externalUrlPlaceholder": "https://example.com/file",
       "uploadFile": "फ़ाइल अपलोड करें",
       "uploadText": "फ़ाइल अपलोड करने के लिए क्लिक करें",
-      "uploadSubText": "PNG, JPG, JPEG, MP4, PDF अधिकतम 10MB",
+      "uploadSubText": "PNG, JPG, JPEG, MP4, PDF 10MB तक",
       "changeImage": "छवि बदलें",
       "deleteText": "क्या आप वाकई इस मीडिया को हटाना चाहते हैं?",
       "previewAlt": "मीडिया पूर्वावलोकन",
-      "currentFile": "वर्तमान फ़ाइल"
+      "selectInputMethod": "इनपुट विधि चुनें",
+      "uploadMethod": "जोड़ने का तरीका चुनें",
+      "uploadMethodPlaceholder": "अपलोड विधि चुनें",
+      "allowedFormats": "अनुमत: {formats} (अधिकतम 10MB)",
+      "fileType": "प्रकार",
+      "currentFile": "वर्तमान फ़ाइल",
+      "currentServerFile": "सर्वर से वर्तमान फ़ाइल",
+      "newFileToUpload": "अपलोड की जाने वाली नई फ़ाइल",
+      "currentVideoFile": "वर्तमान वीडियो फ़ाइल",
+      "videoAllowedFormats": "अनुमत: MP4, MOV, AVI, MKV (अधिकतम 10MB)"
     },
     "create": {
-      "title": "मीडिया लाइब्रेरी बनाएं",
-      "subtitle": "अपने चिकित्सा छात्रों के लिए सर्जिकल वीडियो, नैदानिक आरेख और कोर्स दस्तावेज़ीकरण प्रबंधित करें।"
+      "title": "मीडिया लाइब्रेरी बनाएँ",
+      "subtitle": "अपने मेडिकल छात्रों के लिए सर्जिकल वीडियो, क्लिनिकल डायग्राम और कोर्स दस्तावेज़ प्रबंधित करें।"
     },
     "actions": {
       "uploadMedia": "मीडिया अपलोड करें",
       "creating": "बनाया जा रहा है...",
-      "createMedia": "मीडिया बनाएं",
-      "updating": "अपडेट हो रहा है...",
+      "createMedia": "मीडिया बनाएँ",
+      "updating": "अपडेट किया जा रहा है...",
       "updateMedia": "मीडिया अपडेट करें",
-      "deleteMedia": "मीडिया हटाएं",
-      "cancel": "रद्द करें"
+      "deleteMedia": "मीडिया हटाएँ",
+      "cancel": "रद्द करें",
+      "preview": "पूर्वावलोकन",
+      "viewDetails": "विवरण देखें",
+      "copyShortcode": "शॉर्टकोड कॉपी करें"
     },
     "types": {
       "image": "छवि",
@@ -1195,28 +1206,64 @@
       "audio": "ऑडियो",
       "document": "दस्तावेज़"
     },
+    "videoInput": {
+      "uploadFile": "फ़ाइल अपलोड करें",
+      "externalUrl": "बाहरी URL"
+    },
     "validation": {
       "titleRequired": "शीर्षक आवश्यक है",
+      "titleMin": "शीर्षक कम से कम 3 अक्षर का होना चाहिए",
+      "titleMax": "शीर्षक 255 अक्षरों से अधिक नहीं होना चाहिए",
       "typeRequired": "प्रकार आवश्यक है",
       "descriptionRequired": "विवरण आवश्यक है",
+      "descriptionMin": "विवरण कम से कम 10 अक्षर का होना चाहिए",
+      "fileRequired": "कृपया एक फ़ाइल अपलोड करें",
+      "urlRequired": "कृपया एक बाहरी URL प्रदान करें",
       "invalidUrl": "कृपया एक वैध URL दर्ज करें",
-      "fileOrUrlRequired": "फ़ाइल या बाहरी URL में से कोई एक आवश्यक है",
-      "invalidFileType": "अमान्य फ़ाइल प्रकार। कृपया एक वैध फ़ाइल अपलोड करें",
-      "fileSize": "फ़ाइल का आकार 10MB से कम होना चाहिए"
+      "videoInputMethodRequired": "कृपया फ़ाइल अपलोड करें या बाहरी URL चुनें",
+      "invalidVideoFormat": "अमान्य वीडियो प्रारूप। अनुमत: mp4, mov, avi, mkv",
+      "invalidFileFormat": "अमान्य {type} प्रारूप। अनुमत: {formats}",
+      "fileSizeExceeded": "फ़ाइल का आकार 10MB से कम होना चाहिए",
+      "selectTypeFirst": "कृपया पहले मीडिया प्रकार चुनें",
+      "selectUploadMethodFirst": "कृपया पहले फ़ाइल अपलोड करें या बाहरी URL चुनें"
     },
     "breadcrumb": {
       "contentManagement": "सामग्री प्रबंधन",
       "view-media": "मीडिया देखें"
     },
+    "pagination": {
+      "previous": "पिछला",
+      "next": "अगला",
+      "page": "पृष्ठ",
+      "of": "का"
+    },
     "success": {
       "create": "मीडिया सफलतापूर्वक बनाया गया!",
-      "update": "मीडिया सफलतापूर्वक अपडेट हुआ!",
+      "update": "मीडिया सफलतापूर्वक अपडेट किया गया!",
       "delete": "मीडिया सफलतापूर्वक हटाया गया!"
     },
     "error": {
       "create": "मीडिया बनाने में विफल। कृपया पुनः प्रयास करें।",
       "update": "मीडिया अपडेट करने में विफल। कृपया पुनः प्रयास करें।",
-      "delete": "मीडिया हटाने में विफल। कृपया पुनः प्रयास करें।"
+      "delete": "मीडिया हटाने में विफल। कृपया पुनः प्रयास करें।",
+      "notFound": "मीडिया नहीं मिला"
+    },
+    "preview": {
+      "back": "वापस",
+      "copied": "कॉपी हो गया!",
+      "copyShortcode": "शॉर्टकोड कॉपी करें",
+      "type": "प्रकार",
+      "backToLibrary": "मीडिया लाइब्रेरी पर वापस जाएं",
+      "videoNotSupported": "आपका ब्राउज़र वीडियो टैग का समर्थन नहीं करता है।",
+      "videoPreviewNotAvailable": "वीडियो पूर्वावलोकन उपलब्ध नहीं है",
+      "audioNotSupported": "आपका ब्राउज़र ऑडियो एलिमेंट का समर्थन नहीं करता है।",
+      "documentPreviewNotAvailable": "इस दस्तावेज़ के लिए पूर्वावलोकन उपलब्ध नहीं है",
+      "filePreviewNotAvailable": "इस फ़ाइल प्रकार के लिए पूर्वावलोकन उपलब्ध नहीं है",
+      "imageNotFoundPlaceholder": "https://placehold.co/600x400?text=छवि+नहीं+मिली",
+      "notFound": {
+        "title": "मीडिया नहीं मिला",
+        "description": "आप जिस मीडिया को ढूंढ रहे हैं, वह मौजूद नहीं है या हटा दिया गया है।"
+      }
     }
   },
 

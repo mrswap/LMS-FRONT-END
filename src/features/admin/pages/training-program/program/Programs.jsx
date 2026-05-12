@@ -169,7 +169,7 @@ const Programs = () => {
           <PageTitle>{t("program.list.title")}</PageTitle>
           <PageSubtitle>{t("program.list.subtitle")}</PageSubtitle>
         </PageHeaderLeft>
-
+        {/* 
         <PageHeaderRight>
           {hasPermission("programs.create") && (
             <Link
@@ -179,7 +179,7 @@ const Programs = () => {
               {t("program.actions.addNewProgram")}
             </Link>
           )}
-        </PageHeaderRight>
+        </PageHeaderRight> */}
       </PageHeader>
 
       <PageBody>

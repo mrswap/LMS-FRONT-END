@@ -2,9 +2,23 @@ import { Route, Navigate } from "react-router-dom";
 import { lazy } from "react";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminLayout from "../layout/AdminLayout";
-import Certificate from "../pages/certificate/Certificate";
-import Notification from "../common/noitification/Notification";
-import NotificationDetail from "../common/noitification/NotificatinDetails";
+// import Certificate from "../pages/certificate/Certificate";
+// import Notification from "../common/noitification/Notification";
+// import NotificationDetail from "../common/noitification/NotificatinDetails";
+// import SingleMediaPreview from "../pages/content-management/media-library/components/SingleMediaPreview";
+
+const Certificate = lazy(() => import("../pages/certificate/Certificate"));
+
+const Notification = lazy(() => import("../common/noitification/Notification"));
+
+const NotificationDetail = lazy(
+  () => import("../common/noitification/NotificatinDetails"),
+);
+
+const SingleMediaPreview = lazy(
+  () =>
+    import("../pages/content-management/media-library/components/SingleMediaPreview"),
+);
 
 const Dashboard = lazy(() => import("../pages/dashboad/Dashboard"));
 const Users = lazy(() => import("../pages/users/Users"));
@@ -299,6 +313,10 @@ const AdminRoutes = (
       <Route
         path="media-library/media-details/:id"
         element={<MediaLibraryDetails />}
+      />
+      <Route
+        path="media-library/preview/:id"
+        element={<SingleMediaPreview />}
       />
 
       {/* FAQ */}

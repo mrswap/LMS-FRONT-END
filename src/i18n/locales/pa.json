@@ -1142,12 +1142,11 @@
     "list": {
       "title": "ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ",
       "subtitle": "ਆਪਣੇ ਮੈਡੀਕਲ ਵਿਦਿਆਰਥੀਆਂ ਲਈ ਸਰਜੀਕਲ ਵੀਡੀਓ, ਕਲੀਨਿਕਲ ਡਾਇਗ੍ਰਾਮ ਅਤੇ ਕੋਰਸ ਦਸਤਾਵੇਜ਼ ਪ੍ਰਬੰਧਿਤ ਕਰੋ।",
-      "searchPlaceholder": "ਨਾਮ, ਟੈਗਾਂ, ਜਾਂ ਮੈਟਾਡੇਟਾ ਦੁਆਰਾ ਫਾਈਲਾਂ ਖੋਜੋ...",
+      "searchPlaceholder": "ਨਾਮ, ਟੈਗ ਜਾਂ ਮੈਟਾਡੇਟਾ ਦੁਆਰਾ ਫ਼ਾਈਲਾਂ ਖੋਜੋ...",
       "noDataFound": "ਕੋਈ ਡਾਟਾ ਨਹੀਂ ਮਿਲਿਆ",
       "unknownCreator": "ਅਣਜਾਣ",
-      "shortcode": "ਸ਼ਾਰਟਕੋਡ",
       "tabs": {
-        "all": "ਸਭ ਫਾਈਲਾਂ",
+        "all": "ਸਾਰੀਆਂ ਫ਼ਾਈਲਾਂ",
         "videos": "ਵੀਡੀਓਜ਼",
         "images": "ਤਸਵੀਰਾਂ",
         "documents": "ਦਸਤਾਵੇਜ਼",
@@ -1156,21 +1155,30 @@
     },
     "details": {
       "generalDetails": "ਆਮ ਵੇਰਵੇ",
-      "mediaName": "ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ ਨਾਂ",
-      "mediaNamePlaceholder": "ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ ਨਾਂ ਦਰਜ ਕਰੋ",
+      "mediaName": "ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ ਨਾਮ",
+      "mediaNamePlaceholder": "ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ ਨਾਮ ਦਰਜ ਕਰੋ",
       "type": "ਕਿਸਮ",
       "typePlaceholder": "ਮੀਡੀਆ ਕਿਸਮ ਚੁਣੋ",
       "description": "ਵੇਰਵਾ",
       "descriptionPlaceholder": "ਮੀਡੀਆ ਵੇਰਵਾ ਲਿਖੋ...",
       "externalUrl": "ਬਾਹਰੀ URL",
       "externalUrlPlaceholder": "https://example.com/file",
-      "uploadFile": "ਫਾਈਲ ਅਪਲੋਡ ਕਰੋ",
-      "uploadText": "ਫਾਈਲ ਅਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
-      "uploadSubText": "PNG, JPG, JPEG, MP4, PDF (10MB ਤੱਕ)",
+      "uploadFile": "ਫ਼ਾਈਲ ਅਪਲੋਡ ਕਰੋ",
+      "uploadText": "ਫ਼ਾਈਲ ਅਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+      "uploadSubText": "PNG, JPG, JPEG, MP4, PDF 10MB ਤੱਕ",
       "changeImage": "ਤਸਵੀਰ ਬਦਲੋ",
-      "deleteText": "ਕੀ ਤੁਸੀਂ ਇਹ ਮੀਡੀਆ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
-      "previewAlt": "ਮੀਡੀਆ ਪੂਰਵ-ਦਰਸ਼ਨ",
-      "currentFile": "ਮੌਜੂਦਾ ਫਾਈਲ"
+      "deleteText": "ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਇਸ ਮੀਡੀਆ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
+      "previewAlt": "ਮੀਡੀਆ ਪੂਰਵਦਰਸ਼ਨ",
+      "selectInputMethod": "ਇਨਪੁਟ ਵਿਧੀ ਚੁਣੋ",
+      "uploadMethod": "ਜੋੜਨ ਦਾ ਤਰੀਕਾ ਚੁਣੋ",
+      "uploadMethodPlaceholder": "ਅਪਲੋਡ ਵਿਧੀ ਚੁਣੋ",
+      "allowedFormats": "ਇਜਾਜ਼ਤ: {formats} (ਵੱਧੋ-ਵੱਧ 10MB)",
+      "fileType": "ਕਿਸਮ",
+      "currentFile": "ਮੌਜੂਦਾ ਫ਼ਾਈਲ",
+      "currentServerFile": "ਸਰਵਰ ਤੋਂ ਮੌਜੂਦਾ ਫ਼ਾਈਲ",
+      "newFileToUpload": "ਅਪਲੋਡ ਕੀਤੀ ਜਾਣ ਵਾਲੀ ਨਵੀਂ ਫ਼ਾਈਲ",
+      "currentVideoFile": "ਮੌਜੂਦਾ ਵੀਡੀਓ ਫ਼ਾਈਲ",
+      "videoAllowedFormats": "ਇਜਾਜ਼ਤ: MP4, MOV, AVI, MKV (ਵੱਧੋ-ਵੱਧ 10MB)"
     },
     "create": {
       "title": "ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ ਬਣਾਓ",
@@ -1180,10 +1188,13 @@
       "uploadMedia": "ਮੀਡੀਆ ਅਪਲੋਡ ਕਰੋ",
       "creating": "ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...",
       "createMedia": "ਮੀਡੀਆ ਬਣਾਓ",
-      "updating": "ਅੱਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
-      "updateMedia": "ਮੀਡੀਆ ਅੱਪਡੇਟ ਕਰੋ",
-      "deleteMedia": "ਮੀਡੀਆ ਮਿਟਾਓ",
-      "cancel": "ਰੱਦ ਕਰੋ"
+      "updating": "ਅਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+      "updateMedia": "ਮੀਡੀਆ ਅਪਡੇਟ ਕਰੋ",
+      "deleteMedia": "ਮੀਡੀਆ ਹਟਾਓ",
+      "cancel": "ਰੱਦ ਕਰੋ",
+      "preview": "ਪੂਰਵਦਰਸ਼ਨ",
+      "viewDetails": "ਵੇਰਵੇ ਵੇਖੋ",
+      "copyShortcode": "ਸ਼ਾਰਟਕੋਡ ਕਾਪੀ ਕਰੋ"
     },
     "types": {
       "image": "ਤਸਵੀਰ",
@@ -1191,28 +1202,64 @@
       "audio": "ਆਡੀਓ",
       "document": "ਦਸਤਾਵੇਜ਼"
     },
+    "videoInput": {
+      "uploadFile": "ਫ਼ਾਈਲ ਅਪਲੋਡ ਕਰੋ",
+      "externalUrl": "ਬਾਹਰੀ URL"
+    },
     "validation": {
-      "titleRequired": "ਸਿਰਲੇਖ ਚਾਹੀਦਾ ਹੈ",
-      "typeRequired": "ਕਿਸਮ ਚਾਹੀਦੀ ਹੈ",
-      "descriptionRequired": "ਵੇਰਵਾ ਚਾਹੀਦਾ ਹੈ",
-      "invalidUrl": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਯੋਗ URL ਦਰਜ ਕਰੋ",
-      "fileOrUrlRequired": "ਜਾਂ ਤਾਂ ਫਾਈਲ ਜਾਂ ਬਾਹਰੀ URL ਚਾਹੀਦਾ ਹੈ",
-      "invalidFileType": "ਅਵੈਧ ਫਾਈਲ ਕਿਸਮ। ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਯੋਗ ਫਾਈਲ ਅਪਲੋਡ ਕਰੋ",
-      "fileSize": "ਫਾਈਲ ਦਾ ਆਕਾਰ 10MB ਤੋਂ ਘੱਟ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ"
+      "titleRequired": "ਸਿਰਲੇਖ ਲੋੜੀਂਦਾ ਹੈ",
+      "titleMin": "ਸਿਰਲੇਖ ਘੱਟੋ-ਘੱਟ 3 ਅੱਖਰਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "titleMax": "ਸਿਰਲੇਖ 255 ਅੱਖਰਾਂ ਤੋਂ ਵੱਧ ਨਹੀਂ ਹੋਣਾ ਚਾਹੀਦਾ",
+      "typeRequired": "ਕਿਸਮ ਲੋੜੀਂਦੀ ਹੈ",
+      "descriptionRequired": "ਵੇਰਵਾ ਲੋੜੀਂਦਾ ਹੈ",
+      "descriptionMin": "ਵੇਰਵਾ ਘੱਟੋ-ਘੱਟ 10 ਅੱਖਰਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "fileRequired": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਫ਼ਾਈਲ ਅਪਲੋਡ ਕਰੋ",
+      "urlRequired": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਬਾਹਰੀ URL ਪ੍ਰਦਾਨ ਕਰੋ",
+      "invalidUrl": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਵੈਧ URL ਦਰਜ ਕਰੋ",
+      "videoInputMethodRequired": "ਕਿਰਪਾ ਕਰਕੇ ਫ਼ਾਈਲ ਅਪਲੋਡ ਕਰੋ ਜਾਂ ਬਾਹਰੀ URL ਚੁਣੋ",
+      "invalidVideoFormat": "ਅਵੈਧ ਵੀਡੀਓ ਫਾਰਮੈਟ। ਇਜਾਜ਼ਤ: mp4, mov, avi, mkv",
+      "invalidFileFormat": "ਅਵੈਧ {type} ਫਾਰਮੈਟ। ਇਜਾਜ਼ਤ: {formats}",
+      "fileSizeExceeded": "ਫ਼ਾਈਲ ਦਾ ਆਕਾਰ 10MB ਤੋਂ ਘੱਟ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "selectTypeFirst": "ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਮੀਡੀਆ ਕਿਸਮ ਚੁਣੋ",
+      "selectUploadMethodFirst": "ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਫ਼ਾਈਲ ਅਪਲੋਡ ਕਰੋ ਜਾਂ ਬਾਹਰੀ URL ਚੁਣੋ"
     },
     "breadcrumb": {
       "contentManagement": "ਸਮੱਗਰੀ ਪ੍ਰਬੰਧਨ",
-      "view-media": "ਮੀਡੀਆ ਦੇਖੋ"
+      "view-media": "ਮੀਡੀਆ ਵੇਖੋ"
+    },
+    "pagination": {
+      "previous": "ਪਿਛਲਾ",
+      "next": "ਅਗਲਾ",
+      "page": "ਸਫ਼ਾ",
+      "of": "ਦਾ"
     },
     "success": {
       "create": "ਮੀਡੀਆ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਇਆ ਗਿਆ!",
-      "update": "ਮੀਡੀਆ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ!",
-      "delete": "ਮੀਡੀਆ ਸਫਲਤਾਪੂਰਵਕ ਮਿਟਾਇਆ ਗਿਆ!"
+      "update": "ਮੀਡੀਆ ਸਫਲਤਾਪੂਰਵਕ ਅਪਡੇਟ ਕੀਤਾ ਗਿਆ!",
+      "delete": "ਮੀਡੀਆ ਸਫਲਤਾਪੂਰਵਕ ਹਟਾਇਆ ਗਿਆ!"
     },
     "error": {
-      "create": "ਮੀਡੀਆ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
-      "update": "ਮੀਡੀਆ ਅੱਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
-      "delete": "ਮੀਡੀਆ ਮਿਟਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+      "create": "ਮੀਡੀਆ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "update": "ਮੀਡੀਆ ਅਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "delete": "ਮੀਡੀਆ ਹਟਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "notFound": "ਮੀਡੀਆ ਨਹੀਂ ਮਿਲਿਆ"
+    },
+    "preview": {
+      "back": "ਵਾਪਸ",
+      "copied": "ਕਾਪੀ ਹੋ ਗਿਆ!",
+      "copyShortcode": "ਸ਼ਾਰਟਕੋਡ ਕਾਪੀ ਕਰੋ",
+      "type": "ਕਿਸਮ",
+      "backToLibrary": "ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ 'ਤੇ ਵਾਪਸ ਜਾਓ",
+      "videoNotSupported": "ਤੁਹਾਡਾ ਬ੍ਰਾਊਜ਼ਰ ਵੀਡੀਓ ਟੈਗ ਦਾ ਸਮਰਥਨ ਨਹੀਂ ਕਰਦਾ।",
+      "videoPreviewNotAvailable": "ਵੀਡੀਓ ਪੂਰਵਦਰਸ਼ਨ ਉਪਲਬਧ ਨਹੀਂ ਹੈ",
+      "audioNotSupported": "ਤੁਹਾਡਾ ਬ੍ਰਾਊਜ਼ਰ ਆਡੀਓ ਐਲੀਮੈਂਟ ਦਾ ਸਮਰਥਨ ਨਹੀਂ ਕਰਦਾ।",
+      "documentPreviewNotAvailable": "ਇਸ ਦਸਤਾਵੇਜ਼ ਲਈ ਪੂਰਵਦਰਸ਼ਨ ਉਪਲਬਧ ਨਹੀਂ ਹੈ",
+      "filePreviewNotAvailable": "ਇਸ ਫ਼ਾਈਲ ਕਿਸਮ ਲਈ ਪੂਰਵਦਰਸ਼ਨ ਉਪਲਬਧ ਨਹੀਂ ਹੈ",
+      "imageNotFoundPlaceholder": "https://placehold.co/600x400?text=ਤਸਵੀਰ+ਨਹੀਂ+ਮਿਲੀ",
+      "notFound": {
+        "title": "ਮੀਡੀਆ ਨਹੀਂ ਮਿਲਿਆ",
+        "description": "ਤੁਸੀਂ ਜਿਸ ਮੀਡੀਆ ਨੂੰ ਲੱਭ ਰਹੇ ਹੋ, ਉਹ ਮੌਜੂਦ ਨਹੀਂ ਹੈ ਜਾਂ ਹਟਾ ਦਿੱਤਾ ਗਿਆ ਹੈ।"
+      }
     }
   },
 

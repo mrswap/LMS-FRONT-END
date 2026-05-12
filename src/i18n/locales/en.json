@@ -1149,7 +1149,6 @@
       "searchPlaceholder": "Search files by name, tags, or metadata...",
       "noDataFound": "No Data Found",
       "unknownCreator": "Unknown",
-      "shortcode": "Shortcode",
       "tabs": {
         "all": "All Files",
         "videos": "Videos",
@@ -1174,7 +1173,16 @@
       "changeImage": "Change Image",
       "deleteText": "Are you sure you want to delete this media?",
       "previewAlt": "Media preview",
-      "currentFile": "Current file"
+      "selectInputMethod": "Select Input Method",
+      "uploadMethod": "Choose how to add",
+      "uploadMethodPlaceholder": "Select upload method",
+      "allowedFormats": "Allowed: {formats} (Max 10MB)",
+      "fileType": "Type",
+      "currentFile": "Current file",
+      "currentServerFile": "Current file from server",
+      "newFileToUpload": "New file to be uploaded",
+      "currentVideoFile": "Current video file",
+      "videoAllowedFormats": "Allowed: MP4, MOV, AVI, MKV (Max 10MB)"
     },
     "create": {
       "title": "Create Media Library",
@@ -1187,7 +1195,10 @@
       "updating": "Updating...",
       "updateMedia": "Update Media",
       "deleteMedia": "Delete Media",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "preview": "Preview",
+      "viewDetails": "View Details",
+      "copyShortcode": "Copy shortcode"
     },
     "types": {
       "image": "Image",
@@ -1195,18 +1206,36 @@
       "audio": "Audio",
       "document": "Document"
     },
+    "videoInput": {
+      "uploadFile": "Upload File",
+      "externalUrl": "External URL"
+    },
     "validation": {
       "titleRequired": "Title is required",
+      "titleMin": "Title must be at least 3 characters",
+      "titleMax": "Title must not exceed 255 characters",
       "typeRequired": "Type is required",
       "descriptionRequired": "Description is required",
+      "descriptionMin": "Description must be at least 10 characters",
+      "fileRequired": "Please upload a file",
+      "urlRequired": "Please provide an external URL",
       "invalidUrl": "Please enter a valid URL",
-      "fileOrUrlRequired": "Either file or external URL is required",
-      "invalidFileType": "Invalid file type. Please upload a valid file",
-      "fileSize": "File size should be less than 10MB"
+      "videoInputMethodRequired": "Please select either Upload File or External URL",
+      "invalidVideoFormat": "Invalid video format. Allowed: mp4, mov, avi, mkv",
+      "invalidFileFormat": "Invalid {type} format. Allowed: {formats}",
+      "fileSizeExceeded": "File size should be less than 10MB",
+      "selectTypeFirst": "Please select media type first",
+      "selectUploadMethodFirst": "Please select Upload File or External URL first"
     },
     "breadcrumb": {
       "contentManagement": "Content Management",
       "view-media": "View Media"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page",
+      "of": "of"
     },
     "success": {
       "create": "Media created successfully!",
@@ -1216,7 +1245,25 @@
     "error": {
       "create": "Failed to create media. Please try again.",
       "update": "Failed to update media. Please try again.",
-      "delete": "Failed to delete media. Please try again."
+      "delete": "Failed to delete media. Please try again.",
+      "notFound": "Media not found"
+    },
+    "preview": {
+      "back": "Back",
+      "copied": "Copied!",
+      "copyShortcode": "Copy Shortcode",
+      "type": "Type",
+      "backToLibrary": "Back to Media Library",
+      "videoNotSupported": "Your browser does not support the video tag.",
+      "videoPreviewNotAvailable": "Video preview not available",
+      "audioNotSupported": "Your browser does not support the audio element.",
+      "documentPreviewNotAvailable": "Preview not available for this document",
+      "filePreviewNotAvailable": "Preview not available for this file type",
+      "imageNotFoundPlaceholder": "https://placehold.co/600x400?text=Image+Not+Found",
+      "notFound": {
+        "title": "Media not found",
+        "description": "The media you're looking for doesn't exist or has been removed."
+      }
     }
   },
 
