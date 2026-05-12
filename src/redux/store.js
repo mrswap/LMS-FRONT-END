@@ -22,6 +22,7 @@ import reportReducer from "./slice/reportSlice"
 import certificateSettingReducer from "./slice/certificateSettingSlice"
 import dashboardReducer from "./slice/dashboardSlice"
 import commonReducer from "./slice/commonSlice"
+import notificationsReducer from "./slice/notificationSlicer"
 
 export const store = configureStore({
     reducer: {
@@ -47,6 +48,7 @@ export const store = configureStore({
         report: reportReducer,
         certificateSettings: certificateSettingReducer,
         dashboard: dashboardReducer,
-        common: commonReducer
+        common: commonReducer,
+        notification: notificationsReducer
     },
 }); 

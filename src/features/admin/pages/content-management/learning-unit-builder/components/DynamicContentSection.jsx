@@ -177,7 +177,7 @@ const Section = ({
             />
           </div>
 
-          {section.media_shortcut && (
+          {/* {section.media_shortcut && (
             <div className="mt-2 p-2 bg-gray-100 rounded">
               <p className="text-xs text-gray-500 mb-1">
                 {t("learningUnitBuilder.details.content.preview")}:
@@ -202,7 +202,7 @@ const Section = ({
                 </p>
               )}
             </div>
-          )}
+          )} */}
         </>
       )}
     </div>

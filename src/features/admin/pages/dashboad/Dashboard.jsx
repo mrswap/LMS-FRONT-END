@@ -219,7 +219,7 @@ const Dashboard = () => {
             <FaChartBar className="w-5 h-5 text-gray-600" />
             {t("dashboard.overview")}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-4">
             <StatCard
               title={t("dashboard.totalUsers")}
               value={overview.total_users}
@@ -351,7 +351,7 @@ const Dashboard = () => {
             </h2>
             <div className="grid grid-cols-2 gap-4">
               <div
-                onClick={() => handleNavigate("/assign-assign-training")}
+                onClick={() => handleNavigate("/assign-training")}
                 className="text-center p-3 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg cursor-pointer hover:from-blue-100 hover:to-blue-200 transition-all"
               >
                 <FaCalendarAlt className="w-5 h-5 text-blue-500 mx-auto mb-2" />
@@ -363,7 +363,7 @@ const Dashboard = () => {
                 </p>
               </div>
               <div
-                onClick={() => handleNavigate("/assign-assign-training")}
+                onClick={() => handleNavigate("/assign-training")}
                 className="text-center p-3 bg-gradient-to-br from-green-50 to-green-100 rounded-lg cursor-pointer hover:from-green-100 hover:to-green-200 transition-all"
               >
                 <FaCalendarAlt className="w-5 h-5 text-green-500 mx-auto mb-2" />
@@ -375,7 +375,7 @@ const Dashboard = () => {
                 </p>
               </div>
               <div
-                onClick={() => handleNavigate("/assign-assign-training")}
+                onClick={() => handleNavigate("/assign-training")}
                 className="text-center p-3 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg cursor-pointer hover:from-purple-100 hover:to-purple-200 transition-all"
               >
                 <FaCalendarAlt className="w-5 h-5 text-purple-500 mx-auto mb-2" />
@@ -550,7 +550,7 @@ const Dashboard = () => {
             </h2>
             <div className="space-y-4">
               <div
-                onClick={() => handleNavigate("/assign-assign-training")}
+                onClick={() => handleNavigate("/assign-training")}
                 className="flex justify-between items-center p-3 bg-red-50 rounded-lg border border-red-100 cursor-pointer hover:bg-red-100 transition-all"
               >
                 <div className="flex items-center gap-2">

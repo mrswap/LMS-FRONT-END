@@ -411,6 +411,8 @@ const BulkLearningUnitBuilderDetails = () => {
         sections: apiSections,
       };
 
+      console.log("Payload to submit:", payload);
+
       const res = await dispatch(
         updateBulkContent({
           topicId: values.topicName.value,
@@ -750,16 +752,6 @@ const BulkLearningUnitBuilderDetails = () => {
                             <label className="block text-sm font-medium text-gray-700 mb-2">
                               {t("learningUnitBuilder.details.content.content")}
                             </label>
-                            {/* <TextEditor
-                              key={`text-editor-${index}`}
-                              id={`content-editor-${index}`}
-                              value={item.content}
-                              onChange={(value) =>
-                                handleContentChange(index, "content", value)
-                              }
-                              isActive={true}
-                              t={t}
-                            /> */}
                             <CustomEditor
                               value={item.content}
                               onChange={(value) =>
@@ -802,16 +794,6 @@ const BulkLearningUnitBuilderDetails = () => {
                                   "learningUnitBuilder.details.content.description",
                                 )}
                               </label>
-                              {/* <TextEditor
-                                key={`media-editor-${index}`}
-                                id={`media-editor-${index}`}
-                                value={item.content}
-                                onChange={(value) =>
-                                  handleContentChange(index, "content", value)
-                                }
-                                isActive={true}
-                                t={t}
-                              /> */}
                               <CustomEditor
                                 value={item.content}
                                 onChange={(value) =>
@@ -823,7 +805,7 @@ const BulkLearningUnitBuilderDetails = () => {
                               />
                             </div>
 
-                            {item.media_shortcut && (
+                            {/* {item.media_shortcut && (
                               <div className="mt-2 p-2 bg-gray-100 rounded">
                                 <p className="text-xs text-gray-500 mb-1">
                                   {t(
@@ -859,7 +841,7 @@ const BulkLearningUnitBuilderDetails = () => {
                                   </p>
                                 )}
                               </div>
-                            )}
+                            )} */}
                           </>
                         )}
                       </div>

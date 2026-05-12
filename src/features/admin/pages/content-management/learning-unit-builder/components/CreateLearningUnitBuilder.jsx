@@ -245,6 +245,8 @@ const CreateLearningUnitBuilder = () => {
         sections: apiSections,
       };
 
+      console.log("Payload to submit:", payload);
+
       const res = await dispatch(
         createBulkContent({
           topicId: values.topicName.value,

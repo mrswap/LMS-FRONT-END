@@ -138,12 +138,12 @@ const mediaSlice = createSlice({
                 state.isSuccess = true;
                 state.message = action.payload.message;
 
-                const newMedia = action.payload.data;
+                // const newMedia = action.payload.data;
 
-                if (!Array.isArray(state.media)) {
-                    state.media = [];
-                }
-                state.media.unshift(newMedia);
+                // if (!Array.isArray(state.media)) {
+                //     state.media = [];
+                // }
+                // state.media.unshift(newMedia);
             })
             .addCase(createMedia.rejected, (state, action) => {
                 state.isLoading = false;
@@ -192,15 +192,15 @@ const mediaSlice = createSlice({
 
                 const updated = action.payload.data;
 
-                if (Array.isArray(state.media)) {
-                    const index = state.media.findIndex(
-                        (m) => m.id === updated.id
-                    );
-                    if (index !== -1) {
-                        state.media[index] = updated;
-                    }
-                }
-                state.singleMedia = updated;
+                // if (Array.isArray(state.media)) {
+                //     const index = state.media.findIndex(
+                //         (m) => m.id === updated.id
+                //     );
+                //     if (index !== -1) {
+                //         state.media[index] = updated;
+                //     }
+                // }
+                // state.singleMedia = updated;
             })
             .addCase(updateMediaById.rejected, (state, action) => {
                 state.isLoading = false;
@@ -219,14 +219,14 @@ const mediaSlice = createSlice({
 
                 const updated = action.payload.data;
 
-                if (Array.isArray(state.media)) {
-                    const index = state.media.findIndex(
-                        (m) => m.id === updated.id
-                    );
-                    if (index !== -1) {
-                        state.media[index] = updated;
-                    }
-                }
+                // if (Array.isArray(state.media)) {
+                //     const index = state.media.findIndex(
+                //         (m) => m.id === updated.id
+                //     );
+                //     if (index !== -1) {
+                //         state.media[index] = updated;
+                //     }
+                // }
             })
             .addCase(updateSingleMediaStatus.rejected, (state, action) => {
                 state.isLoading = false;
@@ -242,11 +242,11 @@ const mediaSlice = createSlice({
                 state.isLoading = false;
                 state.isSuccess = true;
 
-                if (Array.isArray(state.media)) {
-                    state.media = state.media.filter(
-                        (m) => m.id !== action.meta.arg
-                    );
-                }
+                // if (Array.isArray(state.media)) {
+                //     state.media = state.media.filter(
+                //         (m) => m.id !== action.meta.arg
+                //     );
+                // }
                 state.message = action.payload.message;
             })
             .addCase(deleteSingleMedia.rejected, (state, action) => {
