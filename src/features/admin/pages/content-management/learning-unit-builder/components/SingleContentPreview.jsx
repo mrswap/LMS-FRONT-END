@@ -13,6 +13,7 @@ import Loader from "../../../../common/Loader";
 import { PageLayout, PageBody } from "../../../../common/layout";
 import { getSingleContent } from "../../../../../../redux/slice/unitBuilderSlice";
 import { useTranslation } from "react-i18next";
+import Error from "../../../../common/Error";
 
 // Common component for HTML content with styles
 const RichTextContent = ({ htmlContent }) => {
@@ -92,7 +93,9 @@ const SingleContentPreview = () => {
   const { topicId, contentId } = useParams();
   const hasMarkedRead = useRef(false);
 
-  const { currentContent, isLoading } = useSelector((state) => state.content);
+  const { currentContent, isLoading, isError, message } = useSelector(
+    (state) => state.content,
+  );
 
   const content = currentContent?.current;
 
@@ -288,6 +291,8 @@ const SingleContentPreview = () => {
   if (isLoading) {
     return <Loader />;
   }
+
+  if (isError) return <Error message={message} />;
 
   if (!content) {
     return (

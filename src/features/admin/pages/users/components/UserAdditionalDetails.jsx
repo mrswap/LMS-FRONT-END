@@ -49,7 +49,11 @@ const UserAdditionalDetails = ({ id }) => {
   const toast = useToast();
   const { hasPermission } = usePermission();
 
-  const { isLoading: userLoading } = useSelector((state) => state.user);
+  const {
+    isLoading: userLoading,
+    isError,
+    message,
+  } = useSelector((state) => state.user);
   const { auditLogs, loadingAuditLogs } = useSelector((state) => state.report);
   const { userProgress, loadingUserProgress } = useSelector(
     (state) => state.report,
@@ -609,6 +613,8 @@ const UserAdditionalDetails = ({ id }) => {
       </div>
     );
   }
+
+  if (isError) return <Error message={message} />;
 
   return (
     <>

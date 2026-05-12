@@ -26,6 +26,8 @@ import { getAllRoles } from "../../../../../redux/slice/rolesSlice";
 import countryOptions from "../../../../../utils/countries.json";
 import UserAdditionalDetails from "./UserAdditionalDetails";
 import usePermission from "../../../../../hooks/usePermission";
+import Error from "../../../common/Error";
+import Loader from "../../../common/Loader";
 
 const UserDetails = () => {
   const { t } = useTranslation();
@@ -42,7 +44,9 @@ const UserDetails = () => {
     dispatch(getAllRoles());
   }, []);
 
-  const { user } = useSelector((state) => state.user);
+  const { user, isLoading, isError, message } = useSelector(
+    (state) => state.user,
+  );
   const [preview, setPreview] = useState(null);
 
   useEffect(() => {
@@ -159,6 +163,9 @@ const UserDetails = () => {
     toast.success(t("userManagement.success.delete"));
     navigate("/assign-training");
   };
+
+  if (isLoading) return <Loader />;
+  if (isError) return <Error message={message} />;
 
   return (
     <PageLayout>
