@@ -29,6 +29,7 @@ import { getAllChapters } from "../../../../../redux/slice/chapterSlice";
 import { getAllTopics } from "../../../../../redux/slice/topicSlice";
 import { useTranslation } from "react-i18next";
 import usePermission from "../../../../../hooks/usePermission";
+import TruncateText from "../../../common/TruncateText";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -310,7 +311,9 @@ const ContentStatusReport = () => {
       header: t("contentStatusReport.columns.program"),
       render: (row) => (
         <div className="min-w-[120px]">
-          <p className="font-semibold text-gray-800">{row?.program || "-"}</p>
+          <p className="font-semibold text-gray-800">
+            <TruncateText text={row?.program || "-"} maxLength={25} />
+          </p>
         </div>
       ),
     },
@@ -318,7 +321,9 @@ const ContentStatusReport = () => {
       header: t("contentStatusReport.columns.level"),
       render: (row) => (
         <div className="min-w-[100px]">
-          <p className="text-sm text-gray-700">{row?.level || "-"}</p>
+          <p className="text-sm text-gray-700">
+            <TruncateText text={row?.level || "-"} maxLength={25} />
+          </p>
         </div>
       ),
     },
@@ -326,7 +331,9 @@ const ContentStatusReport = () => {
       header: t("contentStatusReport.columns.module"),
       render: (row) => (
         <div className="min-w-[100px]">
-          <p className="text-sm text-gray-700">{row?.module || "-"}</p>
+          <p className="text-sm text-gray-700">
+            <TruncateText text={row?.module || "-"} maxLength={25} />
+          </p>
         </div>
       ),
     },
@@ -334,7 +341,9 @@ const ContentStatusReport = () => {
       header: t("contentStatusReport.columns.chapter"),
       render: (row) => (
         <div className="min-w-[100px]">
-          <p className="text-sm text-gray-700">{row?.chapter || "-"}</p>
+          <p className="text-sm text-gray-700">
+            <TruncateText text={row?.chapter || "-"} maxLength={25} />
+          </p>
         </div>
       ),
     },
@@ -342,7 +351,9 @@ const ContentStatusReport = () => {
       header: t("contentStatusReport.columns.topic"),
       render: (row) => (
         <div className="min-w-[100px]">
-          <p className="text-sm text-gray-700">{row?.topic || "-"}</p>
+          <p className="text-sm text-gray-700">
+            <TruncateText text={row?.topic || "-"} maxLength={25} />
+          </p>
         </div>
       ),
     },
@@ -350,7 +361,9 @@ const ContentStatusReport = () => {
       header: t("contentStatusReport.columns.lessonName"),
       render: (row) => (
         <div className="min-w-[150px]">
-          <p className="font-medium text-gray-800">{row?.lesson_name || "-"}</p>
+          <p className="font-medium text-gray-800">
+            <TruncateText text={row?.lesson_name || "-"} maxLength={25} />
+          </p>
         </div>
       ),
     },

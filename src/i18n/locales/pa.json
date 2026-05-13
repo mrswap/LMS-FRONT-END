@@ -214,8 +214,10 @@
 
   "sidebar": {
     "dashboard": "ਡੈਸ਼ਬੋਰਡ",
-    "userManagement": "ਉਪਭੋਗਤਾ ਪ੍ਰਬੰਧਨ",
+    "userManagement": "ਯੂਜ਼ਰ ਪ੍ਰਬੰਧਨ",
     "users": "ਯੂਜ਼ਰ",
+    "sales-trainee": "ਸੇਲਜ਼ ਟ੍ਰੇਨੀ",
+    "staff": "ਸਟਾਫ",
     "assignTrainingProgram": "ਸਿਖਲਾਈ ਪ੍ਰੋਗਰਾਮ ਅਸਾਈਨ ਕਰੋ",
     "trainingPrograms": "ਸਿਖਲਾਈ ਪ੍ਰੋਗਰਾਮ",
     "programList": "ਪ੍ਰੋਗਰਾਮ ਸੂਚੀ",
@@ -229,38 +231,38 @@
     "bulkImport": "ਬਲਕ ਇੰਪੋਰਟ",
     "contentManagement": "ਸਮੱਗਰੀ ਪ੍ਰਬੰਧਨ",
     "learningUnitBuilder": "ਲਰਨਿੰਗ ਯੂਨਿਟ ਬਿਲਡਰ",
-    "interactiveContent": "ਇੰਟਰਐਕਟਿਵ ਸਮੱਗਰੀ",
+    "interactiveContent": "ਇੰਟਰੈਕਟਿਵ ਸਮੱਗਰੀ",
     "mediaLibrary": "ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ",
-    "assessmentManagement": "ਅਸੈਸਮੈਂਟ ਪ੍ਰਬੰਧਨ",
+    "assessmentManagement": "ਮੁਲਾਂਕਣ ਪ੍ਰਬੰਧਨ",
     "quizForTopic": "ਵਿਸ਼ੇ ਲਈ ਕੁਇਜ਼",
     "quizFeedback": "ਕੁਇਜ਼ ਫੀਡਬੈਕ",
     "examForLevel": "ਪੱਧਰ ਲਈ ਪ੍ਰੀਖਿਆ",
     "examFeedback": "ਪ੍ਰੀਖਿਆ ਫੀਡਬੈਕ",
-    "faq": "ਅਕਸਰ ਪੁੱਛੇ ਜਾਂਦੇ ਸਵਾਲ",
-    "trainingCertification": "ਸਿਖਲਾਈ ਅਤੇ ਸਰਟੀਫਿਕੇਸ਼ਨ",
+    "faq": "ਅਕਸਰ ਪੁੱਛੇ ਜਾਣ ਵਾਲੇ ਸਵਾਲ",
+    "trainingCertification": "ਸਿਖਲਾਈ ਅਤੇ ਪ੍ਰਮਾਣੀਕਰਨ",
     "trainingAssignment": "ਸਿਖਲਾਈ ਅਸਾਈਨਮੈਂਟ",
     "progressTracker": "ਪ੍ਰਗਤੀ ਟਰੈਕਰ",
-    "certification": "ਸਰਟੀਫਿਕੇਸ਼ਨ",
+    "certification": "ਪ੍ਰਮਾਣੀਕਰਨ",
     "reportsAdministration": "ਰਿਪੋਰਟਾਂ ਅਤੇ ਪ੍ਰਸ਼ਾਸਨ",
     "contactUs": "ਸਾਡੇ ਨਾਲ ਸੰਪਰਕ ਕਰੋ",
-    "auditLogsReport": "ਆਡਿਟ ਲੌਗਸ ਰਿਪੋਰਟ",
-    "userProgressReport": "ਉਪਭੋਗਤਾ ਪ੍ਰਗਤੀ ਰਿਪੋਰਟ",
-    "assessmentReport": "ਅਸੈਸਮੈਂਟ ਰਿਪੋਰਟ",
+    "auditLogsReport": "ਆਡਿਟ ਲੌਗ ਰਿਪੋਰਟ",
+    "userProgressReport": "ਯੂਜ਼ਰ ਪ੍ਰਗਤੀ ਰਿਪੋਰਟ",
+    "assessmentReport": "ਮੁਲਾਂਕਣ ਰਿਪੋਰਟ",
     "contentStatusReport": "ਸਮੱਗਰੀ ਸਥਿਤੀ ਰਿਪੋਰਟ",
-    "certificationReport": "ਸਰਟੀਫਿਕੇਸ਼ਨ ਰਿਪੋਰਟ",
+    "certificationReport": "ਪ੍ਰਮਾਣੀਕਰਨ ਰਿਪੋਰਟ",
     "topResult": "ਚੋਟੀ ਦਾ ਨਤੀਜਾ",
-    "reportsAnalytics": "ਰਿਪੋਰਟਾਂ ਅਤੇ ਐਨਾਲਿਟਿਕਸ",
-    "userAnalytics": "ਉਪਭੋਗਤਾ ਐਨਾਲਿਟਿਕਸ",
-    "trainingAnalytics": "ਸਿਖਲਾਈ ਐਨਾਲਿਟਿਕਸ",
-    "performanceReports": "ਕਾਰਗੁਜ਼ਾਰੀ ਰਿਪੋਰਟਾਂ",
-    "completionReports": "ਸੰਪੂਰਨਤਾ ਰਿਪੋਰਟਾਂ",
+    "reportsAnalytics": "ਰਿਪੋਰਟਾਂ ਅਤੇ ਵਿਸ਼ਲੇਸ਼ਣ",
+    "userAnalytics": "ਯੂਜ਼ਰ ਵਿਸ਼ਲੇਸ਼ਣ",
+    "trainingAnalytics": "ਸਿਖਲਾਈ ਵਿਸ਼ਲੇਸ਼ਣ",
+    "performanceReports": "ਪ੍ਰਦਰਸ਼ਨ ਰਿਪੋਰਟਾਂ",
+    "completionReports": "ਪੂਰਤੀ ਰਿਪੋਰਟਾਂ",
     "rolesPermission": "ਭੂਮਿਕਾਵਾਂ ਅਤੇ ਇਜਾਜ਼ਤਾਂ",
-    "systemSettings": "ਸਿਸਟਮ ਸੈਟਿੰਗਜ਼",
-    "settings": "ਸੈਟਿੰਗਜ਼",
+    "systemSettings": "ਸਿਸਟਮ ਸੈਟਿੰਗਾਂ",
+    "settings": "ਸੈਟਿੰਗਾਂ",
     "designation": "ਅਹੁਦਾ ਪ੍ਰਬੰਧਨ",
     "smtpSetting": "SMTP ਸੈਟਿੰਗ",
-    "multiLanguage": "ਬਹੁ-ਭਾਸ਼ਾ",
-    "certificationSetting": "ਸਰਟੀਫਿਕੇਸ਼ਨ ਸੈਟਿੰਗ",
+    "multiLanguage": "ਬਹੁ-ਭਾਸ਼ੀ",
+    "certificationSetting": "ਪ੍ਰਮਾਣੀਕਰਨ ਸੈਟਿੰਗ",
     "logout": "ਲੌਗਆਉਟ"
   },
 
@@ -318,13 +320,14 @@
 
   "userManagement": {
     "list": {
-      "title": "ਉਪਭੋਗਤਾ ਪ੍ਰਬੰਧਨ",
-      "subtitle": "ਸਾਰੇ ਖੇਤਰਾਂ ਵਿੱਚ ਮੈਡੀਕਲ ਪੇਸ਼ੇਵਰ ਖਾਤਿਆਂ ਦਾ ਪ੍ਰਬੰਧਨ, ਆਡਿਟ ਅਤੇ ਸਮਰਥਨ ਕਰੋ।",
-      "searchPlaceholder": "ਨਾਂ, ਈਮੇਲ ਜਾਂ ID ਨਾਲ ਖੋਜੋ...",
+      "salesTitle": "ਸੇਲਜ਼ ਟ੍ਰੇਨੀ ਪ੍ਰਬੰਧਨ",
+      "staffTitle": "ਸਟਾਫ ਪ੍ਰਬੰਧਨ",
+      "subtitle": "ਸਾਰੇ ਖੇਤਰਾਂ ਵਿੱਚ ਮੈਡੀਕਲ ਪੇਸ਼ੇਵਰ ਖਾਤਿਆਂ ਦਾ ਪ੍ਰਬੰਧਨ, ਆਡਿਟ ਅਤੇ ਸਹਾਇਤਾ ਕਰੋ।",
+      "searchPlaceholder": "ਨਾਮ, ਈਮੇਲ ਜਾਂ ID ਨਾਲ ਖੋਜੋ...",
       "clearAll": "ਸਭ ਸਾਫ਼ ਕਰੋ",
       "columns": {
-        "userId": "ਉਪਭੋਗਤਾ ID",
-        "name": "ਨਾਂ",
+        "userId": "ਯੂਜ਼ਰ ID",
+        "name": "ਨਾਮ",
         "contact": "ਸੰਪਰਕ",
         "region": "ਖੇਤਰ",
         "programs": "ਪ੍ਰੋਗਰਾਮ",
@@ -335,55 +338,56 @@
     "details": {
       "personalInfo": "ਨਿੱਜੀ ਜਾਣਕਾਰੀ",
       "createPassword": "ਪਾਸਵਰਡ ਬਣਾਓ",
-      "fullName": "ਪੂਰਾ ਨਾਂ",
-      "fullNamePlaceholder": "ਪੂਰਾ ਨਾਂ ਦਿਓ",
+      "fullName": "ਪੂਰਾ ਨਾਮ",
+      "fullNamePlaceholder": "ਪੂਰਾ ਨਾਮ ਦਰਜ ਕਰੋ",
       "email": "ਈਮੇਲ ਪਤਾ",
-      "emailPlaceholder": "ਈਮੇਲ ਪਤਾ ਦਿਓ",
+      "emailPlaceholder": "ਈਮੇਲ ਪਤਾ ਦਰਜ ਕਰੋ",
       "phone": "ਫ਼ੋਨ ਨੰਬਰ",
-      "phonePlaceholder": "ਫ਼ੋਨ ਨੰਬਰ ਦਿਓ",
+      "phonePlaceholder": "ਫ਼ੋਨ ਨੰਬਰ ਦਰਜ ਕਰੋ",
       "employeeId": "ਕਰਮਚਾਰੀ ID",
-      "employeeIdPlaceholder": "ਕਰਮਚਾਰੀ ID ਦਿਓ",
+      "employeeIdPlaceholder": "ਕਰਮਚਾਰੀ ID ਦਰਜ ਕਰੋ",
       "department": "ਵਿਭਾਗ",
-      "departmentPlaceholder": "ਵਿਭਾਗ ਦਿਓ",
+      "departmentPlaceholder": "ਵਿਭਾਗ ਦਰਜ ਕਰੋ",
       "designation": "ਅਹੁਦਾ",
       "designationPlaceholder": "ਅਹੁਦਾ ਚੁਣੋ",
       "region": "ਖੇਤਰ",
       "regionPlaceholder": "ਖੇਤਰ ਚੁਣੋ",
       "city": "ਸ਼ਹਿਰ",
-      "cityPlaceholder": "ਸ਼ਹਿਰ ਦਿਓ",
+      "cityPlaceholder": "ਸ਼ਹਿਰ ਦਰਜ ਕਰੋ",
       "role": "ਭੂਮਿਕਾ",
       "rolePlaceholder": "ਭੂਮਿਕਾ ਚੁਣੋ",
       "password": "ਪਾਸਵਰਡ",
-      "passwordPlaceholder": "ਪਾਸਵਰਡ ਦਿਓ",
+      "passwordPlaceholder": "ਪਾਸਵਰਡ ਦਰਜ ਕਰੋ",
       "newPassword": "ਨਵਾਂ ਪਾਸਵਰਡ",
-      "newPasswordPlaceholder": "ਨਵਾਂ ਪਾਸਵਰਡ ਦਿਓ",
+      "newPasswordPlaceholder": "ਨਵਾਂ ਪਾਸਵਰਡ ਦਰਜ ਕਰੋ",
       "confirmPassword": "ਪਾਸਵਰਡ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ",
-      "confirmPasswordPlaceholder": "ਪਾਸਵਰਡ ਦੁਬਾਰਾ ਦਿਓ",
+      "confirmPasswordPlaceholder": "ਪਾਸਵਰਡ ਦੁਬਾਰਾ ਦਰਜ ਕਰੋ",
       "profileImage": "ਪ੍ਰੋਫਾਈਲ ਤਸਵੀਰ",
       "profileImageAlt": "ਪ੍ਰੋਫਾਈਲ ਤਸਵੀਰ",
       "uploadImage": "ਤਸਵੀਰ ਅੱਪਲੋਡ ਕਰੋ",
-      "deleteText": "ਕੀ ਤੁਸੀਂ ਇਸ ਉਪਭੋਗਤਾ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
+      "deleteText": "ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਇਸ ਯੂਜ਼ਰ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
       "id": "ID"
     },
     "create": {
-      "title": "ਨਵਾਂ ਉਪਭੋਗਤਾ ਬਣਾਓ",
-      "subtitle": "ਪਲੇਟਫਾਰਮ 'ਤੇ ਇੱਕ ਨਵਾਂ ਮੈਡੀਕਲ ਪੇਸ਼ੇਵਰ ਜਾਂ ਸਟਾਫ ਮੈਂਬਰ ਸ਼ਾਮਲ ਕਰੋ।"
+      "title": "ਨਵਾਂ ਯੂਜ਼ਰ ਬਣਾਓ",
+      "subtitle": "ਪਲੇਟਫਾਰਮ ਵਿੱਚ ਇੱਕ ਨਵਾਂ ਮੈਡੀਕਲ ਪੇਸ਼ੇਵਰ ਜਾਂ ਸਟਾਫ ਮੈਂਬਰ ਸ਼ਾਮਲ ਕਰੋ।"
     },
     "actions": {
-      "addNewUser": "+ ਨਵਾਂ ਉਪਭੋਗਤਾ ਸ਼ਾਮਲ ਕਰੋ",
-      "deleteUser": "ਉਪਭੋਗਤਾ ਮਿਟਾਓ",
+      "addNewUser": "+ ਨਵਾਂ ਯੂਜ਼ਰ ਜੋੜੋ",
+      "deleteUser": "ਯੂਜ਼ਰ ਹਟਾਓ",
       "cancle": "ਰੱਦ ਕਰੋ",
-      "createUser": "ਉਪਭੋਗਤਾ ਬਣਾਓ",
+      "createUser": "ਯੂਜ਼ਰ ਬਣਾਓ",
       "creating": "ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...",
-      "updateUser": "ਉਪਭੋਗਤਾ ਅਪਡੇਟ ਕਰੋ",
-      "updating": "ਅਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
+      "updateUser": "ਯੂਜ਼ਰ ਅੱਪਡੇਟ ਕਰੋ",
+      "updating": "ਅੱਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
     },
     "breadcrumb": {
-      "users": "ਉਪਭੋਗਤਾ",
-      "viewUserProfile": "ਉਪਭੋਗਤਾ ਪ੍ਰੋਫਾਈਲ ਦੇਖੋ"
+      "salesTrainee": "ਸੇਲਜ਼ ਟ੍ਰੇਨੀ",
+      "staff": "ਸਟਾਫ",
+      "viewProfile": "ਪ੍ਰੋਫਾਈਲ ਦੇਖੋ"
     },
     "validation": {
-      "nameRequired": "ਨਾਂ ਦੀ ਲੋੜ ਹੈ",
+      "nameRequired": "ਨਾਮ ਦੀ ਲੋੜ ਹੈ",
       "emailRequired": "ਈਮੇਲ ਦੀ ਲੋੜ ਹੈ",
       "emailInvalid": "ਅਵੈਧ ਈਮੇਲ ਪਤਾ",
       "roleRequired": "ਭੂਮਿਕਾ ਦੀ ਲੋੜ ਹੈ",
@@ -393,34 +397,34 @@
       "cityRequired": "ਸ਼ਹਿਰ ਦੀ ਲੋੜ ਹੈ",
       "mobileRequired": "ਮੋਬਾਈਲ ਨੰਬਰ ਦੀ ਲੋੜ ਹੈ",
       "passwordRequired": "ਪਾਸਵਰਡ ਦੀ ਲੋੜ ਹੈ",
-      "passwordMin": "ਪਾਸਵਰਡ ਘੱਟੋ-ਘੱਟ 6 ਅੱਖਰਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
-      "confirmPasswordRequired": "ਪਾਸਵਰਡ ਪੁਸ਼ਟੀ ਕਰਨ ਦੀ ਲੋੜ ਹੈ",
-      "passwordMatch": "ਪਾਸਵਰਡਾਂ ਦਾ ਮੇਲ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ"
+      "passwordMin": "ਪਾਸਵਰਡ ਘੱਟੋ-ਘੱਟ 8 ਅੱਖਰਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "confirmPasswordRequired": "ਪਾਸਵਰਡ ਪੁਸ਼ਟੀ ਦੀ ਲੋੜ ਹੈ",
+      "passwordMatch": "ਪਾਸਵਰਡ ਮੇਲ ਖਾਣੇ ਚਾਹੀਦੇ ਹਨ"
     },
     "roles": {
       "sales": "ਸੇਲਜ਼",
-      "admin": "ਅਡਮਿਨ",
+      "admin": "ਪ੍ਰਬੰਧਕ",
       "manager": "ਮੈਨੇਜਰ"
     },
     "regions": {
       "india": "ਭਾਰਤ 🇮🇳",
       "usa": "ਸੰਯੁਕਤ ਰਾਜ ਅਮਰੀਕਾ 🇺🇸",
-      "uk": "ਸੰਯੁਕਤ ਬਾਦਸ਼ਾਹੀ 🇬🇧"
+      "uk": "ਯੂਨਾਈਟਡ ਕਿੰਗਡਮ 🇬🇧"
     },
     "filters": {
       "allStatus": "ਸਾਰੀਆਂ ਸਥਿਤੀਆਂ",
       "active": "ਸਰਗਰਮ",
-      "inactive": "ਨਿਸ਼ਕਿਰਿਆ"
+      "inactive": "ਨਿਸ਼ਕ੍ਰਿਯ"
     },
     "success": {
-      "create": "ਉਪਭੋਗਤਾ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਇਆ ਗਿਆ!",
-      "update": "ਉਪਭੋਗਤਾ ਸਫਲਤਾਪੂਰਵਕ ਅਪਡੇਟ ਕੀਤਾ ਗਿਆ!",
-      "delete": "ਉਪਭੋਗਤਾ ਸਫਲਤਾਪੂਰਵਕ ਮਿਟਾਇਆ ਗਿਆ!"
+      "create": "ਯੂਜ਼ਰ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਇਆ ਗਿਆ!",
+      "update": "ਯੂਜ਼ਰ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ!",
+      "delete": "ਯੂਜ਼ਰ ਸਫਲਤਾਪੂਰਵਕ ਹਟਾ ਦਿੱਤਾ ਗਿਆ!"
     },
     "error": {
-      "create": "ਉਪਭੋਗਤਾ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
-      "update": "ਉਪਭੋਗਤਾ ਅਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
-      "delete": "ਉਪਭੋਗਤਾ ਮਿਟਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+      "create": "ਯੂਜ਼ਰ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕ੍ਰਿਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "update": "ਯੂਜ਼ਰ ਅੱਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕ੍ਰਿਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "delete": "ਯੂਜ਼ਰ ਹਟਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕ੍ਰਿਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
     }
   },
 

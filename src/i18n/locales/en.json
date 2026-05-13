@@ -220,6 +220,8 @@
     "dashboard": "Dashboard",
     "userManagement": "User Management",
     "users": "Users",
+    "sales-trainee": "Sales Trainee",
+    "staff": "Staff",
     "assignTrainingProgram": "Assign Training Program",
     "trainingPrograms": "Training Programs",
     "programList": "Program List",
@@ -322,7 +324,8 @@
 
   "userManagement": {
     "list": {
-      "title": "User Management",
+      "salesTitle": "Sales Trainee Management",
+      "staffTitle": "Staff Management",
       "subtitle": "Manage, audit, and support medical professional accounts across all regions.",
       "searchPlaceholder": "Search by name, email or ID...",
       "clearAll": "Clear All",
@@ -383,8 +386,9 @@
       "updating": "Updating..."
     },
     "breadcrumb": {
-      "users": "Users",
-      "viewUserProfile": "View User Profile"
+      "salesTrainee": "Sales Trainee",
+      "staff": "Staff",
+      "viewProfile": "View Profile"
     },
     "validation": {
       "nameRequired": "Name is required",
@@ -397,7 +401,7 @@
       "cityRequired": "City is required",
       "mobileRequired": "Mobile number is required",
       "passwordRequired": "Password is required",
-      "passwordMin": "Password must be at least 6 characters",
+      "passwordMin": "Password must be at least 8 characters",
       "confirmPasswordRequired": "Confirm password is required",
       "passwordMatch": "Passwords must match"
     },

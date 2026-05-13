@@ -26,6 +26,8 @@ import { getAllRoles } from "../../../../../redux/slice/rolesSlice";
 import countryOptions from "../../../../../utils/countries.json";
 import UserAdditionalDetails from "./UserAdditionalDetails";
 import usePermission from "../../../../../hooks/usePermission";
+import Error from "../../../common/Error";
+import Loader from "../../../common/Loader";
 
 const UserDetails = () => {
   const { t } = useTranslation();
@@ -42,7 +44,12 @@ const UserDetails = () => {
     dispatch(getAllRoles());
   }, []);
 
-  const { user } = useSelector((state) => state.user);
+  const { user, isLoading, isError, message } = useSelector(
+    (state) => state.user,
+  );
+
+  // console.log("user", user);
+
   const [preview, setPreview] = useState(null);
 
   useEffect(() => {
@@ -66,6 +73,8 @@ const UserDetails = () => {
   }));
 
   const regionOptions = countryOptions;
+
+  const currentRole = roles?.find((role) => role.id === user?.role_id);
 
   const initialValues = {
     name: user?.name || "",
@@ -118,6 +127,13 @@ const UserDetails = () => {
   });
 
   const onSubmit = async (values, { setSubmitting }) => {
+    const updatedRole = roles?.find((role) => role.id === values.role?.value);
+
+    const redirectPath =
+      updatedRole?.label?.toLowerCase() === "sales"
+        ? "/assign-training"
+        : "/staff";
+
     try {
       const formData = new FormData();
 
@@ -141,13 +157,16 @@ const UserDetails = () => {
 
       await dispatch(updateUserById({ id, data: formData })).unwrap();
       toast.success(t("userManagement.success.update"));
-      navigate("/assign-training");
+      // navigate("/assign-training");
+      navigate(redirectPath);
     } catch (err) {
       toast.error(err?.message || t("userManagement.error.update"));
     } finally {
       setSubmitting(false);
     }
   };
+
+  const isSales = currentRole?.label?.toLowerCase() === "sales";
 
   const handleDelete = async () => {
     const ok = await dispatch(
@@ -157,18 +176,33 @@ const UserDetails = () => {
 
     await dispatch(deleteSingleUser(id));
     toast.success(t("userManagement.success.delete"));
-    navigate("/assign-training");
+    // navigate("/assign-training");
+    navigate(isSales ? "/assign-training" : "/staff");
   };
+
+  if (isLoading) return <Loader />;
+  if (isError) return <Error message={message} />;
 
   return (
     <PageLayout>
       <Breadcrumb
         items={[
+          // {
+          //   label: t("userManagement.breadcrumb.salesTrainee"),
+          //   path: "/assign-training",
+          // },
           {
-            label: t("userManagement.breadcrumb.users"),
-            path: "/assign-training",
+            label:
+              currentRole?.label?.toLowerCase() === "sales"
+                ? t("userManagement.breadcrumb.salesTrainee")
+                : t("userManagement.breadcrumb.staff"),
+            // path: "/assign-training",
+            path:
+              currentRole?.label?.toLowerCase() === "sales"
+                ? "/assign-training"
+                : "/staff",
           },
-          { label: t("userManagement.breadcrumb.viewUserProfile") },
+          { label: t("userManagement.breadcrumb.viewProfile") },
         ]}
       />
 
@@ -393,8 +427,9 @@ const UserDetails = () => {
       </div>
 
       {/* user additional details */}
-
-      <UserAdditionalDetails id={id} />
+      {currentRole?.label?.toLowerCase() === "sales" && (
+        <UserAdditionalDetails id={id} />
+      )}
     </PageLayout>
   );
 };

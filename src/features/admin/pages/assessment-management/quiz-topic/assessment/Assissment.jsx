@@ -259,7 +259,10 @@ const Assissment = () => {
       header: t("quizAssessment.list.columns.level"),
       render: (row) => (
         <p className="text-gray-800 text-sm">
-          {row?.hierarchy?.level?.title || "-"}
+          <TruncateText
+            text={row?.hierarchy?.level?.title || "-"}
+            maxLength={25}
+          />
         </p>
       ),
     },
@@ -267,7 +270,10 @@ const Assissment = () => {
       header: t("quizAssessment.list.columns.module"),
       render: (row) => (
         <p className="text-gray-800 text-sm">
-          {row?.hierarchy?.module?.title || "-"}
+          <TruncateText
+            text={row?.hierarchy?.module?.title || "-"}
+            maxLength={25}
+          />
         </p>
       ),
     },
@@ -275,7 +281,10 @@ const Assissment = () => {
       header: t("quizAssessment.list.columns.chapter"),
       render: (row) => (
         <p className="text-gray-800 text-sm">
-          {row?.hierarchy?.chapter?.title || "-"}
+          <TruncateText
+            text={row?.hierarchy?.chapter?.title || "-"}
+            maxLength={25}
+          />
         </p>
       ),
     },
@@ -283,7 +292,10 @@ const Assissment = () => {
       header: t("quizAssessment.list.columns.topic"),
       render: (row) => (
         <p className="text-gray-800 text-sm">
-          {row?.hierarchy?.topic?.title || "-"}
+          <TruncateText
+            text={row?.hierarchy?.topic?.title || "-"}
+            maxLength={25}
+          />
         </p>
       ),
     },

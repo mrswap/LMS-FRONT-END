@@ -28,6 +28,7 @@ import { getAllChapters } from "../../../../../redux/slice/chapterSlice";
 import { getAllModules } from "../../../../../redux/slice/moduleSlice";
 import { getAllLevels } from "../../../../../redux/slice/levelSlice";
 import usePermission from "../../../../../hooks/usePermission";
+import TruncateText from "../../../common/TruncateText";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -268,9 +269,10 @@ const Faqs = () => {
       header: t("faq.list.columns.question"),
       render: (row) => (
         <p className="font-semibold text-gray-800 cursor-pointer">
-          {row.question?.length > 50
+          <TruncateText text={row.question} />
+          {/* {row.question?.length > 50
             ? row.question.substring(0, 50) + "..."
-            : row.question}
+            : row.question} */}
         </p>
       ),
     },

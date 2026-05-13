@@ -90,7 +90,7 @@ const CreateUser = () => {
       t("userManagement.validation.mobileRequired"),
     ),
     password: Yup.string()
-      .min(6, t("userManagement.validation.passwordMin"))
+      .min(8, t("userManagement.validation.passwordMin"))
       .required(t("userManagement.validation.passwordRequired")),
     confirmPassword: Yup.string()
       .oneOf(
@@ -106,7 +106,13 @@ const CreateUser = () => {
   };
 
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
-    console.log("values", values);
+    // console.log("values", values);
+    const selectedRole = roles?.find((role) => role.id === values.role?.value);
+
+    const redirectPath =
+      selectedRole?.label?.toLowerCase() === "sales"
+        ? "/assign-training"
+        : "/staff";
 
     try {
       const formData = new FormData();
@@ -129,7 +135,8 @@ const CreateUser = () => {
       toast.success(t("userManagement.success.create"));
       resetForm();
       setPreview(null);
-      navigate("/assign-training");
+      // navigate("/assign-training");
+      navigate(redirectPath);
     } catch (error) {
       toast.error(error?.message || t("userManagement.error.create"));
     } finally {

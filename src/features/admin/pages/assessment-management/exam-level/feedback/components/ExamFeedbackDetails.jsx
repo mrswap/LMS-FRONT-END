@@ -56,7 +56,7 @@ const ExamFeedbackDetails = () => {
   };
 
   if (isLoading) return <Loader />;
-  // if (isError) return <Error message={message} />;
+  if (isError) return <Error message={message} />;
 
   return (
     <PageLayout>

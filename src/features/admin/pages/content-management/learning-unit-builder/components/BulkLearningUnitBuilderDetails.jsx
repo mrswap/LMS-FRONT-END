@@ -49,6 +49,7 @@ import {
   FiLink as FiLinkIcon,
 } from "react-icons/fi";
 import CustomEditor from "../../../../common/CustomEditor";
+import Error from "../../../../common/Error";
 
 const BulkLearningUnitBuilderDetails = () => {
   const { t } = useTranslation();
@@ -57,9 +58,12 @@ const BulkLearningUnitBuilderDetails = () => {
   const navigate = useNavigate();
   const { hasPermission } = usePermission();
 
-  const { bulkContent: content, isLoading: loading } = useSelector(
-    (state) => state.content,
-  );
+  const {
+    bulkContent: content,
+    isLoading: loading,
+    isError,
+    message,
+  } = useSelector((state) => state.content);
 
   const { programs } = useSelector((state) => state.program);
   const { levels } = useSelector((state) => state.level);
@@ -433,6 +437,8 @@ const BulkLearningUnitBuilderDetails = () => {
   if (loading && !content) {
     return <Loader />;
   }
+
+  if (isError) return <Error message={message} />;
 
   if (!content && !loading) {
     return (

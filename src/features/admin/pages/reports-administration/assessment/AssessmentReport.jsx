@@ -131,10 +131,12 @@ const AssessmentReport = () => {
       render: (row) => (
         <div className="flex items-center gap-3">
           <div>
-            <p className="font-semibold text-gray-800">{row?.user_name}</p>
+            <p className="font-semibold text-gray-800">
+              <TruncateText text={row?.user_name} maxLength={25} />
+            </p>
             <p className="text-xs text-gray-500 flex items-center gap-1">
               <FaEnvelope size={10} />
-              {row?.email}
+              <TruncateText text={row?.email} maxLength={25} />
             </p>
           </div>
         </div>
@@ -144,8 +146,12 @@ const AssessmentReport = () => {
       header: t("assessmentReport.columns.assessment"),
       render: (row) => (
         <div>
-          <p className="font-medium text-gray-800">{row?.assessment_name}</p>
-          <p className="text-xs text-gray-500">{row?.related_name}</p>
+          <p className="font-medium text-gray-800">
+            <TruncateText text={row?.assessment_name} maxLength={25} />
+          </p>
+          <p className="text-xs text-gray-500">
+            <TruncateText text={row?.related_name} maxLength={25} />
+          </p>
         </div>
       ),
     },

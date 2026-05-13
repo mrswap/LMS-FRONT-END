@@ -24,13 +24,16 @@ import { showConfirm } from "../../../../../../../redux/slice/confirmSlice";
 import Breadcrumb from "../../../../../common/layout/Breadcrumb";
 import Loader from "../../../../../common/Loader";
 import usePermission from "../../../../../../../hooks/usePermission";
+import Error from "../../../../../common/Error";
 
 const ExamAssessmentDetails = () => {
   const [thumbnail, setThumbnail] = useState(null);
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
   const fileInputRef = useRef(null);
   const { hasPermission } = usePermission();
-  const { assessment, isLoading } = useSelector((state) => state.assessment);
+  const { assessment, isLoading, isError, message } = useSelector(
+    (state) => state.assessment,
+  );
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const toast = useToast();
@@ -217,6 +220,8 @@ const ExamAssessmentDetails = () => {
   if (isLoading || !isDataLoaded) {
     return <Loader />;
   }
+
+  if (isError) return <Error message={message} />;
 
   const initialFormValues = {
     programId: selectedProgram,

@@ -30,6 +30,7 @@ import { getAllUsers } from "../../../../../redux/slice/userSlice";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import usePermission from "../../../../../hooks/usePermission";
+import TruncateText from "../../../common/TruncateText";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -162,10 +163,12 @@ const CertificationReport = () => {
       render: (row) => (
         <div className="flex items-center gap-3">
           <div>
-            <p className="font-semibold text-gray-800">{row?.user_name}</p>
+            <p className="font-semibold text-gray-800">
+              <TruncateText text={row?.user_name} maxLength={25} />
+            </p>
             <p className="text-xs text-gray-500 flex items-center gap-1">
               <FaEnvelope size={10} />
-              {row?.email}
+              <TruncateText text={row?.email} maxLength={25} />
             </p>
           </div>
         </div>
@@ -197,11 +200,13 @@ const CertificationReport = () => {
         <div className="min-w-[180px]">
           <p className="font-medium text-gray-800 flex items-center gap-2">
             <FaCertificate className="text-blue-500" />
-            {row?.certificate_id || "-"}
+
+            <TruncateText text={row?.certificate_id || "-"} maxLength={25} />
           </p>
           <p className="text-xs text-gray-500 mt-1 flex items-center gap-1">
             <FaIdCard size={10} />
-            {t("certificationReport.id")}: {row?.certificate_id}
+            {t("certificationReport.id")}:
+            <TruncateText text={row?.certificate_id} maxLength={25} />
           </p>
         </div>
       ),

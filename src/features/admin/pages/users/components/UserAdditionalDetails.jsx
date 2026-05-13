@@ -49,7 +49,11 @@ const UserAdditionalDetails = ({ id }) => {
   const toast = useToast();
   const { hasPermission } = usePermission();
 
-  const { isLoading: userLoading } = useSelector((state) => state.user);
+  const {
+    isLoading: userLoading,
+    isError,
+    message,
+  } = useSelector((state) => state.user);
   const { auditLogs, loadingAuditLogs } = useSelector((state) => state.report);
   const { userProgress, loadingUserProgress } = useSelector(
     (state) => state.report,
@@ -182,7 +186,7 @@ const UserAdditionalDetails = ({ id }) => {
       header: t("userAdditionalDetails.audit.description"),
       render: (row) => (
         <p className="text-gray-700 text-sm">
-          <TruncateText text={row?.description || "-"} maxLength={50} />
+          <TruncateText text={row?.description || "-"} maxLength={25} />
         </p>
       ),
     },
@@ -232,7 +236,9 @@ const UserAdditionalDetails = ({ id }) => {
       header: t("userAdditionalDetails.progress.level"),
       render: (row) => (
         <div>
-          <p className="font-medium text-gray-800">{row?.level || "-"}</p>
+          <p className="font-medium text-gray-800">
+            <TruncateText text={row?.level || "-"} maxLength={25} />
+          </p>
         </div>
       ),
     },
@@ -240,7 +246,9 @@ const UserAdditionalDetails = ({ id }) => {
       header: t("userAdditionalDetails.progress.module"),
       render: (row) => (
         <div>
-          <p className="font-medium text-gray-800">{row?.module || "-"}</p>
+          <p className="font-medium text-gray-800">
+            <TruncateText text={row?.module || "-"} maxLength={25} />
+          </p>
         </div>
       ),
     },
@@ -248,14 +256,18 @@ const UserAdditionalDetails = ({ id }) => {
       header: t("userAdditionalDetails.progress.chapter"),
       render: (row) => (
         <div>
-          <p className="font-medium text-gray-800">{row?.chapter || "-"}</p>
+          <p className="font-medium text-gray-800">
+            <TruncateText text={row?.chapter || "-"} maxLength={25} />
+          </p>
         </div>
       ),
     },
     {
       header: t("userAdditionalDetails.progress.topic"),
       render: (row) => (
-        <p className="text-sm text-gray-700">{row?.topic || "-"}</p>
+        <p className="text-sm text-gray-700">
+          <TruncateText text={row?.topic || "-"} maxLength={25} />
+        </p>
       ),
     },
     {
@@ -323,8 +335,12 @@ const UserAdditionalDetails = ({ id }) => {
       header: t("userAdditionalDetails.assessment.assessment"),
       render: (row) => (
         <div>
-          <p className="font-medium text-gray-800">{row?.assessment_name}</p>
-          <p className="text-xs text-gray-500">{row?.related_name}</p>
+          <p className="font-medium text-gray-800">
+            <TruncateText text={row?.assessment_name} maxLength={25} />
+          </p>
+          <p className="text-xs text-gray-500">
+            <TruncateText text={row?.related_name} maxLength={25} />
+          </p>
         </div>
       ),
     },
@@ -609,6 +625,8 @@ const UserAdditionalDetails = ({ id }) => {
       </div>
     );
   }
+
+  if (isError) return <Error message={message} />;
 
   return (
     <>

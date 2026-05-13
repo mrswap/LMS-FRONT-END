@@ -851,7 +851,9 @@ const MediaLibraryDetails = () => {
   const { id } = useParams();
   const { hasPermission } = usePermission();
 
-  const { singleMedia, isLoading } = useSelector((state) => state.media);
+  const { singleMedia, isLoading, isError, message } = useSelector(
+    (state) => state.media,
+  );
 
   const videoInputOptions = [
     { label: t("mediaLibrary.videoInput.uploadFile"), value: "file" },
@@ -1215,7 +1217,8 @@ const MediaLibraryDetails = () => {
   };
 
   if (initialLoading || isLoading) return <Loader />;
-  if (!singleMedia) return <Error message={t("mediaLibrary.error.notFound")} />;
+  // if (!singleMedia) return <Error message={t("mediaLibrary.error.notFound")} />;
+  if (isError) return <Error message={message} />;
 
   return (
     <PageLayout>

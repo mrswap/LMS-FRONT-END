@@ -77,7 +77,7 @@ const Question = () => {
       header: t("question.columns.question"),
       render: (row) => (
         <p className="font-semibold text-gray-800">
-          <TruncateText text={row.question_text} maxLength={50} />
+          <TruncateText text={row.question_text} maxLength={25} />
         </p>
       ),
     },
@@ -97,19 +97,51 @@ const Question = () => {
         <p className="font-semibold text-gray-800">{row.marks}</p>
       ),
     },
+    // {
+    //   header: t("question.columns.options"),
+    //   render: (row) => {
+    //     const options = row.options;
+    //     if (!options || options.length === 0) return <div>-</div>;
+    //     return (
+    //       <div className="text-sm text-gray-700">
+    //         {options.slice(0, 2).map((opt, i) => (
+    //           <div key={opt.id}>
+    //             {String.fromCharCode(65 + i)}. {opt.option_text}{" "}
+    //             {opt.is_correct ? "✅" : ""}
+    //           </div>
+    //         ))}
+    //         {options.length > 2 && (
+    //           <div className="text-xs text-gray-400">
+    //             +{options.length - 2} more
+    //           </div>
+    //         )}
+    //       </div>
+    //     );
+    //   },
+    // },
     {
       header: t("question.columns.options"),
       render: (row) => {
         const options = row.options;
-        if (!options || options.length === 0) return <div>-</div>;
+
+        if (!options || options.length === 0) {
+          return <div>-</div>;
+        }
+
         return (
-          <div className="text-sm text-gray-700">
-            {options.slice(0, 2).map((opt, i) => (
-              <div key={opt.id}>
-                {String.fromCharCode(65 + i)}. {opt.option_text}{" "}
-                {opt.is_correct ? "✅" : ""}
+          <div className="text-sm text-gray-700 space-y-1">
+            {options.slice(0, 2).map((opt) => (
+              <div key={opt.id} className="max-w-[250px]">
+                <TruncateText
+                  text={opt.option_text}
+                  maxLength={25}
+                  className="inline"
+                />
+
+                {opt.is_correct ? " ✅" : ""}
               </div>
             ))}
+
             {options.length > 2 && (
               <div className="text-xs text-gray-400">
                 +{options.length - 2} more

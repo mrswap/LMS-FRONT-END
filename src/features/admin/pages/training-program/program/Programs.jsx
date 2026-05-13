@@ -96,7 +96,7 @@ const Programs = () => {
       header: t("program.list.columns.programName"),
       render: (row) => (
         <p className="font-semibold text-gray-800">
-          <TruncateText text={row.title} maxLength={55} />
+          <TruncateText text={row.title} maxLength={25} />
         </p>
       ),
     },
@@ -104,7 +104,7 @@ const Programs = () => {
       header: t("program.list.columns.description"),
       render: (row) => (
         <p className="font-semibold text-gray-800">
-          <TruncateText text={row.description} maxLength={55} />
+          <TruncateText text={row.description} maxLength={25} />
         </p>
       ),
     },
