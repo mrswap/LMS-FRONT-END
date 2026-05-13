@@ -396,7 +396,10 @@ const AdminSidebar = ({ isOpen, onClose }) => {
       label: t("sidebar.userManagement"),
       permission: "users.view",
       // path: "/assign-training",
-      children: [{ label: t("sidebar.users"), path: "/assign-training" }],
+      children: [
+        { label: t("sidebar.sales-trainee"), path: "/assign-training" },
+        { label: t("sidebar.staff"), path: "/staff" },
+      ],
     },
 
     {

@@ -83,7 +83,12 @@ const Option = () => {
       header: t("option.columns.question"),
       render: (row) => (
         <div className="font-semibold text-gray-800">
-          <p className="mb-1"> {options?.question?.question_text}</p>
+          <p className="mb-1">
+            <TruncateText
+              text={options?.question?.question_text}
+              maxLength={25}
+            />
+          </p>
         </div>
       ),
     },
@@ -91,7 +96,7 @@ const Option = () => {
       header: t("option.columns.option"),
       render: (row) => (
         <p className="font-semibold text-gray-800">
-          <TruncateText text={row.option_text} maxLength={50} />
+          <TruncateText text={row.option_text} maxLength={25} />
         </p>
       ),
     },

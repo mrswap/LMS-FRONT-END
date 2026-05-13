@@ -220,6 +220,8 @@
     "dashboard": "डैशबोर्ड",
     "userManagement": "उपयोगकर्ता प्रबंधन",
     "users": "उपयोगकर्ता",
+    "sales-trainee": "सेल्स ट्रेनी",
+    "staff": "स्टाफ",
     "assignTrainingProgram": "प्रशिक्षण कार्यक्रम असाइन करें",
     "trainingPrograms": "प्रशिक्षण कार्यक्रम",
     "programList": "कार्यक्रम सूची",
@@ -230,40 +232,40 @@
     "modules": "मॉड्यूल",
     "chapters": "अध्याय",
     "topics": "विषय",
-    "bulkImport": "बल्क इम्पोर्ट",
+    "bulkImport": "बल्क आयात",
     "contentManagement": "सामग्री प्रबंधन",
-    "learningUnitBuilder": "लर्निंग यूनिट बिल्डर",
+    "learningUnitBuilder": "शिक्षण इकाई निर्माता",
     "interactiveContent": "इंटरैक्टिव सामग्री",
     "mediaLibrary": "मीडिया लाइब्रेरी",
     "assessmentManagement": "मूल्यांकन प्रबंधन",
-    "quizForTopic": "विषय के लिए क्विज़",
-    "quizFeedback": "क्विज़ फ़ीडबैक",
+    "quizForTopic": "विषय के लिए प्रश्नोत्तरी",
+    "quizFeedback": "प्रश्नोत्तरी प्रतिक्रिया",
     "examForLevel": "स्तर के लिए परीक्षा",
-    "examFeedback": "परीक्षा फ़ीडबैक",
-    "faq": "अक्सर पूछे जाने वाले प्रश्न",
+    "examFeedback": "परीक्षा प्रतिक्रिया",
+    "faq": "सामान्य प्रश्न",
     "trainingCertification": "प्रशिक्षण और प्रमाणन",
     "trainingAssignment": "प्रशिक्षण असाइनमेंट",
     "progressTracker": "प्रगति ट्रैकर",
     "certification": "प्रमाणन",
     "reportsAdministration": "रिपोर्ट और प्रशासन",
-    "contactUs": "हमसे संपर्क करें",
+    "contactUs": "संपर्क करें",
     "auditLogsReport": "ऑडिट लॉग रिपोर्ट",
     "userProgressReport": "उपयोगकर्ता प्रगति रिपोर्ट",
     "assessmentReport": "मूल्यांकन रिपोर्ट",
     "contentStatusReport": "सामग्री स्थिति रिपोर्ट",
     "certificationReport": "प्रमाणन रिपोर्ट",
     "topResult": "शीर्ष परिणाम",
-    "reportsAnalytics": "रिपोर्ट और एनालिटिक्स",
-    "userAnalytics": "उपयोगकर्ता एनालिटिक्स",
-    "trainingAnalytics": "प्रशिक्षण एनालिटिक्स",
+    "reportsAnalytics": "रिपोर्ट और विश्लेषण",
+    "userAnalytics": "उपयोगकर्ता विश्लेषण",
+    "trainingAnalytics": "प्रशिक्षण विश्लेषण",
     "performanceReports": "प्रदर्शन रिपोर्ट",
     "completionReports": "पूर्णता रिपोर्ट",
-    "rolesPermission": "भूमिकाएं और अनुमतियां",
+    "rolesPermission": "भूमिकाएँ और अनुमतियाँ",
     "systemSettings": "सिस्टम सेटिंग्स",
     "settings": "सेटिंग्स",
     "designation": "पदनाम प्रबंधन",
-    "smtpSetting": "SMTP सेटिंग",
-    "multiLanguage": "बहु भाषा",
+    "smtpSetting": "एसएमटीपी सेटिंग",
+    "multiLanguage": "बहुभाषी",
     "certificationSetting": "प्रमाणन सेटिंग",
     "logout": "लॉगआउट"
   },
@@ -322,18 +324,19 @@
 
   "userManagement": {
     "list": {
-      "title": "उपयोगकर्ता प्रबंधन",
-      "subtitle": "सभी क्षेत्रों में चिकित्सा पेशेवरों के खातों का प्रबंधन, ऑडिट और समर्थन करें।",
-      "searchPlaceholder": "नाम, ईमेल या ID से खोजें...",
-      "clearAll": "सब हटाएं",
+      "salesTitle": "सेल्स ट्रेनी प्रबंधन",
+      "staffTitle": "स्टाफ प्रबंधन",
+      "subtitle": "सभी क्षेत्रों में चिकित्सा पेशेवर खातों का प्रबंधन, ऑडिट और समर्थन करें।",
+      "searchPlaceholder": "नाम, ईमेल या आईडी से खोजें...",
+      "clearAll": "सभी साफ़ करें",
       "columns": {
-        "userId": "उपयोगकर्ता ID",
+        "userId": "उपयोगकर्ता आईडी",
         "name": "नाम",
         "contact": "संपर्क",
         "region": "क्षेत्र",
         "programs": "कार्यक्रम",
         "status": "स्थिति",
-        "actions": "क्रियाएं"
+        "actions": "कार्रवाई"
       }
     },
     "details": {
@@ -345,8 +348,8 @@
       "emailPlaceholder": "ईमेल पता दर्ज करें",
       "phone": "फ़ोन नंबर",
       "phonePlaceholder": "फ़ोन नंबर दर्ज करें",
-      "employeeId": "कर्मचारी ID",
-      "employeeIdPlaceholder": "कर्मचारी ID दर्ज करें",
+      "employeeId": "कर्मचारी आईडी",
+      "employeeIdPlaceholder": "कर्मचारी आईडी दर्ज करें",
       "department": "विभाग",
       "departmentPlaceholder": "विभाग दर्ज करें",
       "designation": "पदनाम",
@@ -362,16 +365,16 @@
       "newPassword": "नया पासवर्ड",
       "newPasswordPlaceholder": "नया पासवर्ड दर्ज करें",
       "confirmPassword": "पासवर्ड की पुष्टि करें",
-      "confirmPasswordPlaceholder": "पासवर्ड दोबारा दर्ज करें",
+      "confirmPasswordPlaceholder": "पासवर्ड फिर से दर्ज करें",
       "profileImage": "प्रोफ़ाइल छवि",
       "profileImageAlt": "प्रोफ़ाइल तस्वीर",
       "uploadImage": "छवि अपलोड करें",
       "deleteText": "क्या आप वाकई इस उपयोगकर्ता को हटाना चाहते हैं?",
-      "id": "ID"
+      "id": "आईडी"
     },
     "create": {
       "title": "नया उपयोगकर्ता बनाएं",
-      "subtitle": "प्लेटफॉर्म पर नए चिकित्सा पेशेवर या स्टाफ सदस्य को जोड़ें।"
+      "subtitle": "प्लेटफ़ॉर्म पर एक नए चिकित्सा पेशेवर या स्टाफ सदस्य को शामिल करें।"
     },
     "actions": {
       "addNewUser": "+ नया उपयोगकर्ता जोड़ें",
@@ -380,11 +383,12 @@
       "createUser": "उपयोगकर्ता बनाएं",
       "creating": "बनाया जा रहा है...",
       "updateUser": "उपयोगकर्ता अपडेट करें",
-      "updating": "अपडेट हो रहा है..."
+      "updating": "अपडेट किया जा रहा है..."
     },
     "breadcrumb": {
-      "users": "उपयोगकर्ता",
-      "viewUserProfile": "उपयोगकर्ता प्रोफ़ाइल देखें"
+      "salesTrainee": "सेल्स ट्रेनी",
+      "staff": "स्टाफ",
+      "viewProfile": "प्रोफ़ाइल देखें"
     },
     "validation": {
       "nameRequired": "नाम आवश्यक है",
@@ -397,14 +401,14 @@
       "cityRequired": "शहर आवश्यक है",
       "mobileRequired": "मोबाइल नंबर आवश्यक है",
       "passwordRequired": "पासवर्ड आवश्यक है",
-      "passwordMin": "पासवर्ड कम से कम 6 अक्षरों का होना चाहिए",
+      "passwordMin": "पासवर्ड कम से कम 8 अक्षरों का होना चाहिए",
       "confirmPasswordRequired": "पासवर्ड की पुष्टि आवश्यक है",
       "passwordMatch": "पासवर्ड मेल खाना चाहिए"
     },
     "roles": {
       "sales": "सेल्स",
-      "admin": "एडमिन",
-      "manager": "मैनेजर"
+      "admin": "व्यवस्थापक",
+      "manager": "प्रबंधक"
     },
     "regions": {
       "india": "भारत 🇮🇳",
@@ -412,14 +416,14 @@
       "uk": "यूनाइटेड किंगडम 🇬🇧"
     },
     "filters": {
-      "allStatus": "सभी स्थितियां",
+      "allStatus": "सभी स्थितियाँ",
       "active": "सक्रिय",
       "inactive": "निष्क्रिय"
     },
     "success": {
       "create": "उपयोगकर्ता सफलतापूर्वक बनाया गया!",
-      "update": "उपयोगकर्ता सफलतापूर्वक अपडेट हुआ!",
-      "delete": "उपयोगकर्ता सफलतापूर्वक हटाया गया!"
+      "update": "उपयोगकर्ता सफलतापूर्वक अपडेट किया गया!",
+      "delete": "उपयोगकर्ता सफलतापूर्वक हटा दिया गया!"
     },
     "error": {
       "create": "उपयोगकर्ता बनाने में विफल। कृपया पुनः प्रयास करें।",

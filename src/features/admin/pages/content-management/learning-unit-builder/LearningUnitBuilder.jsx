@@ -47,10 +47,18 @@ const LearningUnitBuilder = () => {
     (state) => state.content,
   );
 
-  const { levels } = useSelector((state) => state.level);
-  const { modules } = useSelector((state) => state.module);
-  const { chapters } = useSelector((state) => state.chapter);
-  const { topics } = useSelector((state) => state.topic);
+  const { levels, isLoading: isLevelLoading } = useSelector(
+    (state) => state.level,
+  );
+  const { modules, isLoading: isModuleLoading } = useSelector(
+    (state) => state.module,
+  );
+  const { chapters, isLoading: isChapterLoading } = useSelector(
+    (state) => state.chapter,
+  );
+  const { topics, isLoading: isTopicLoading } = useSelector(
+    (state) => state.topic,
+  );
 
   const [isLevelsLoaded, setIsLevelsLoaded] = useState(false);
   const [isModulesLoaded, setIsModulesLoaded] = useState(false);
@@ -467,7 +475,8 @@ const LearningUnitBuilder = () => {
                 options={levelOption}
                 styles={customSelectStyles}
                 isSearchable={false}
-                isLoading={!isLevelsLoaded}
+                // isLoading={!isLevelsLoaded}
+                isLoading={isLevelLoading}
               />
             </div>
 
@@ -479,7 +488,8 @@ const LearningUnitBuilder = () => {
                 styles={customSelectStyles}
                 isSearchable={false}
                 isDisabled={isModuleDisabled}
-                isLoading={isModulesLoading}
+                // isLoading={isModulesLoading}
+                isLoading={isModuleLoading}
                 placeholder={
                   isModuleDisabled
                     ? t("learningUnitBuilder.filters.selectLevelFirst")
@@ -498,7 +508,8 @@ const LearningUnitBuilder = () => {
                 styles={customSelectStyles}
                 isSearchable={false}
                 isDisabled={isChapterDisabled}
-                isLoading={isChaptersLoading}
+                // isLoading={isChaptersLoading}
+                isLoading={isChapterLoading}
                 placeholder={
                   isChapterDisabled
                     ? t("learningUnitBuilder.filters.selectModuleFirst")
@@ -517,7 +528,8 @@ const LearningUnitBuilder = () => {
                 styles={customSelectStyles}
                 isSearchable={false}
                 isDisabled={isTopicDisabled}
-                isLoading={isTopicsLoading}
+                // isLoading={isTopicsLoading}
+                isLoading={isTopicLoading}
                 placeholder={
                   isTopicDisabled
                     ? t("learningUnitBuilder.filters.selectChapterFirst")

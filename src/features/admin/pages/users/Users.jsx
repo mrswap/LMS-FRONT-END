@@ -25,6 +25,7 @@ import Error from "../../common/Error";
 import StatusToggle from "../../common/StatusToggle";
 import { LuFilterX } from "react-icons/lu";
 import usePermission from "../../../../hooks/usePermission";
+import TruncateText from "../../common/TruncateText";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -51,6 +52,7 @@ const Users = () => {
     const params = {
       search: search || "",
       // status: status?.value === "all" ? "" : status?.value,
+      role: "sales",
       page: overridePage ?? page,
       limit: ITEMS_PER_PAGE,
     };
@@ -97,21 +99,24 @@ const Users = () => {
       header: t("userManagement.list.columns.userId"),
       render: (row) => (
         <p className="font-semibold text-gray-800 cursor-pointer">
-          {row.employee_id}
+          <TruncateText text={row.employee_id} />
         </p>
       ),
     },
     {
       header: t("userManagement.list.columns.name"),
       render: (row) => (
-        <p className="font-semibold text-gray-800 cursor-pointer">{row.name}</p>
+        <p className="font-semibold text-gray-800 cursor-pointer">
+          <TruncateText text={row.name} />
+        </p>
       ),
     },
     {
       header: t("userManagement.list.columns.contact"),
       render: (row) => (
         <div>
-          <p className="text-sm">{row.email}</p>
+          {/* <p className="text-sm">{row.email}</p> */}
+          <TruncateText text={row.email} />
           <p className="text-xs text-gray-400">{row.mobile}</p>
         </div>
       ),
@@ -157,7 +162,9 @@ const Users = () => {
             header: t("userManagement.list.columns.actions"),
             render: (row) => (
               <button
-                onClick={() => navigate(`user-details/${row.id}`)}
+                onClick={() =>
+                  navigate(`/assign-training/user-details/${row.id}`)
+                }
                 className="text-gray-800 text-lg cursor-pointer"
               >
                 <FaEye />
@@ -169,7 +176,7 @@ const Users = () => {
   ];
 
   if (isLoading && !users?.data?.length) return <Loader />;
-  if (isError) return <Error message={message} />;
+  // if (isError) return <Error message={message} />;
 
   if (!hasPermission("users.view")) {
     return null;
@@ -179,13 +186,13 @@ const Users = () => {
     <PageLayout>
       <PageHeader>
         <PageHeaderLeft>
-          <PageTitle>{t("userManagement.list.title")}</PageTitle>
+          <PageTitle>{t("userManagement.list.salesTitle")}</PageTitle>
           <PageSubtitle>{t("userManagement.list.subtitle")}</PageSubtitle>
         </PageHeaderLeft>
         <PageHeaderRight>
           {hasPermission("users.create") && (
             <Link
-              to="create-user"
+              to="/assign-training/create-user"
               className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap"
             >
               {t("userManagement.actions.addNewUser")}

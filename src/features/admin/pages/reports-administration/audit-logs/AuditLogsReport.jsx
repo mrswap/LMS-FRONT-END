@@ -140,10 +140,12 @@ const AuditLogsReport = () => {
       render: (row) => (
         <div className="flex items-center gap-3">
           <div>
-            <p className="font-semibold text-gray-800">{row?.user?.name}</p>
+            <p className="font-semibold text-gray-800">
+              <TruncateText text={row?.user?.name} maxLength={25} />
+            </p>
             <p className="text-xs text-gray-500 flex items-center gap-1">
               <FaEnvelope size={10} />
-              {row?.user?.email}
+              <TruncateText text={row?.user?.email} maxLength={25} />
             </p>
           </div>
         </div>
@@ -166,7 +168,7 @@ const AuditLogsReport = () => {
       render: (row) => (
         <div className="min-w-[200px]">
           <p className="text-gray-700">
-            <TruncateText text={row?.description || "-"} maxLength={50} />
+            <TruncateText text={row?.description || "-"} maxLength={25} />
           </p>
         </div>
       ),

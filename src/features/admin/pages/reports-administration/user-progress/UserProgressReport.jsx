@@ -24,6 +24,7 @@ import { getAllTopics } from "../../../../../redux/slice/topicSlice";
 import { getAllUsers } from "../../../../../redux/slice/userSlice";
 import { useTranslation } from "react-i18next";
 import usePermission from "../../../../../hooks/usePermission";
+import TruncateText from "../../../common/TruncateText";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -323,10 +324,12 @@ const UserProgressReport = () => {
       render: (row) => (
         <div className="flex items-center gap-3">
           <div>
-            <p className="font-semibold text-gray-800">{row?.user_name}</p>
+            <p className="font-semibold text-gray-800">
+              <TruncateText text={row?.user_name} maxLength={25} />
+            </p>
             <p className="text-xs text-gray-500 flex items-center gap-1">
               <FaEnvelope size={10} />
-              {row?.email}
+              <TruncateText text={row?.email} maxLength={25} />
             </p>
           </div>
         </div>
@@ -336,7 +339,9 @@ const UserProgressReport = () => {
       header: t("userProgressReport.columns.level"),
       render: (row) => (
         <div className="min-w-[100px]">
-          <p className="text-sm text-gray-700">{row?.level || "-"}</p>
+          <p className="text-sm text-gray-700">
+            <TruncateText text={row?.level || "-"} maxLength={25} />
+          </p>
         </div>
       ),
     },
@@ -344,7 +349,9 @@ const UserProgressReport = () => {
       header: t("userProgressReport.columns.module"),
       render: (row) => (
         <div className="min-w-[100px]">
-          <p className="text-sm text-gray-700">{row?.module || "-"}</p>
+          <p className="text-sm text-gray-700">
+            <TruncateText text={row?.module || "-"} maxLength={25} />
+          </p>
         </div>
       ),
     },
@@ -352,7 +359,9 @@ const UserProgressReport = () => {
       header: t("userProgressReport.columns.chapter"),
       render: (row) => (
         <div className="min-w-[100px]">
-          <p className="text-sm text-gray-700">{row?.chapter || "-"}</p>
+          <p className="text-sm text-gray-700">
+            <TruncateText text={row?.chapter || "-"} maxLength={25} />
+          </p>
         </div>
       ),
     },
@@ -360,7 +369,9 @@ const UserProgressReport = () => {
       header: t("userProgressReport.columns.topic"),
       render: (row) => (
         <div className="min-w-[100px]">
-          <p className="text-sm text-gray-700">{row?.topic || "-"}</p>
+          <p className="text-sm text-gray-700">
+            <TruncateText text={row?.topic || "-"} maxLength={25} />
+          </p>
         </div>
       ),
     },
@@ -496,7 +507,7 @@ const UserProgressReport = () => {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <div className="w-full sm:w-[48%] lg:w-[200px]">
+            <div className="w-full sm:w-[48%] lg:w-[210px]">
               <Select
                 value={selectedUser}
                 onChange={setSelectedUser}
@@ -507,7 +518,7 @@ const UserProgressReport = () => {
               />
             </div>
 
-            <div className="w-full sm:w-[48%] lg:w-[180px]">
+            <div className="w-full sm:w-[48%] lg:w-[210px]">
               <Select
                 value={selectedLevel}
                 onChange={setSelectedLevel}
@@ -519,7 +530,7 @@ const UserProgressReport = () => {
               />
             </div>
 
-            <div className="w-full sm:w-[48%] lg:w-[180px]">
+            <div className="w-full sm:w-[48%] lg:w-[210px]">
               <Select
                 value={selectedModule}
                 onChange={setSelectedModule}
@@ -540,7 +551,7 @@ const UserProgressReport = () => {
               />
             </div>
 
-            <div className="w-full sm:w-[48%] lg:w-[180px]">
+            <div className="w-full sm:w-[48%] lg:w-[210px]">
               <Select
                 value={selectedChapter}
                 onChange={setSelectedChapter}
@@ -561,7 +572,7 @@ const UserProgressReport = () => {
               />
             </div>
 
-            <div className="w-full sm:w-[48%] lg:w-[180px]">
+            <div className="w-full sm:w-[48%] lg:w-[210px]">
               <Select
                 value={selectedTopic}
                 onChange={setSelectedTopic}
@@ -580,7 +591,7 @@ const UserProgressReport = () => {
               />
             </div>
 
-            <div className="w-full sm:w-[48%] lg:w-[150px]">
+            <div className="w-full sm:w-[48%] lg:w-[210px]">
               <Select
                 value={selectedStatus}
                 onChange={setSelectedStatus}
@@ -591,7 +602,7 @@ const UserProgressReport = () => {
               />
             </div>
 
-            <div className="ml-auto flex items-center h-[40px]">
+            <div className=" flex items-center ">
               <div className="relative group">
                 <button
                   onClick={resetFilters}
@@ -612,7 +623,7 @@ const UserProgressReport = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2">
+          {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2">
             <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-3">
               <p className="text-xs text-blue-600 font-medium">
                 {t("userProgressReport.stats.totalRecords")}
@@ -657,7 +668,7 @@ const UserProgressReport = () => {
                 %
               </p>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="mt-4">

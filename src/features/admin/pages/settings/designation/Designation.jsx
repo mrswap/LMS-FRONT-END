@@ -24,6 +24,7 @@ import {
   updateSingleDesignationStatus,
 } from "../../../../../redux/slice/designationSlice";
 import usePermission from "../../../../../hooks/usePermission";
+import TruncateText from "../../../common/TruncateText";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -100,7 +101,9 @@ const Designation = () => {
     {
       header: t("designation.list.columns.name"),
       render: (row) => (
-        <p className="font-semibold text-gray-800 cursor-pointer">{row.name}</p>
+        <p className="font-semibold text-gray-800 cursor-pointer">
+          <TruncateText text={row.name} maxLength={25} />
+        </p>
       ),
     },
     ...(hasPermission("designations.status")

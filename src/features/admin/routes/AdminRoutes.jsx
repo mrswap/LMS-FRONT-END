@@ -2,6 +2,7 @@ import { Route, Navigate } from "react-router-dom";
 import { lazy } from "react";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminLayout from "../layout/AdminLayout";
+import Staff from "../pages/users/Staff";
 // import Certificate from "../pages/certificate/Certificate";
 // import Notification from "../common/noitification/Notification";
 // import NotificationDetail from "../common/noitification/NotificatinDetails";
@@ -259,6 +260,7 @@ const AdminRoutes = (
 
       {/* Users */}
       <Route path="assign-training" element={<Users />} />
+      <Route path="staff" element={<Staff />} />
       <Route path="assign-training/create-user" element={<CreateUser />} />
       <Route
         path="assign-training/user-details/:id"

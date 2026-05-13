@@ -31,10 +31,22 @@ const CreateLearningUnitBuilder = () => {
   const navigate = useNavigate();
 
   const { programs } = useSelector((state) => state.program);
-  const { levels } = useSelector((state) => state.level);
-  const { modules } = useSelector((state) => state.module);
-  const { chapters } = useSelector((state) => state.chapter);
-  const { topics } = useSelector((state) => state.topic);
+  // const { levels } = useSelector((state) => state.level);
+  // const { modules } = useSelector((state) => state.module);
+  // const { chapters } = useSelector((state) => state.chapter);
+  // const { topics } = useSelector((state) => state.topic);
+  const { levels, isLoading: isLevelLoading } = useSelector(
+    (state) => state.level,
+  );
+  const { modules, isLoading: isModuleLoading } = useSelector(
+    (state) => state.module,
+  );
+  const { chapters, isLoading: isChapterLoading } = useSelector(
+    (state) => state.chapter,
+  );
+  const { topics, isLoading: isTopicLoading } = useSelector(
+    (state) => state.topic,
+  );
 
   const [isProgramsLoaded, setIsProgramsLoaded] = useState(false);
   const [isLevelsLoaded, setIsLevelsLoaded] = useState(false);
@@ -349,6 +361,7 @@ const CreateLearningUnitBuilder = () => {
                             required={true}
                             options={levelOptions || []}
                             disabled={!values.programName}
+                            isLoading={isLevelLoading}
                             onChange={(option) => {
                               setFieldValue("levelName", option);
                               setFieldValue("moduleName", null);
@@ -378,6 +391,7 @@ const CreateLearningUnitBuilder = () => {
                             required={true}
                             options={moduleOptions || []}
                             disabled={!values.levelName}
+                            isLoading={isModuleLoading}
                             onChange={(option) => {
                               setFieldValue("moduleName", option);
                               setFieldValue("chapterName", null);
@@ -402,6 +416,7 @@ const CreateLearningUnitBuilder = () => {
                             required={true}
                             options={chapterOptions || []}
                             disabled={!values.moduleName}
+                            isLoading={isChapterLoading}
                             onChange={(option) => {
                               setFieldValue("chapterName", option);
                               setFieldValue("topicName", null);
@@ -423,6 +438,7 @@ const CreateLearningUnitBuilder = () => {
                             required={true}
                             options={topicOptions || []}
                             disabled={!values.chapterName}
+                            isLoading={isTopicLoading}
                             onChange={(option) => {
                               setFieldValue("topicName", option);
                             }}

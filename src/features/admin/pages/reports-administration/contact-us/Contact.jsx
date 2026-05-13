@@ -112,10 +112,12 @@ const Contact = () => {
       render: (row) => (
         <div className="flex items-center gap-3">
           <div>
-            <p className="font-semibold text-gray-800">{row?.name}</p>
+            <p className="font-semibold text-gray-800">
+              <TruncateText text={row?.name} maxLength={25} />
+            </p>
             <p className="text-xs text-gray-500 flex items-center gap-1">
               <FaEnvelope size={10} />
-              {row?.email}
+              <TruncateText text={row?.email} maxLength={25} />
             </p>
           </div>
         </div>
@@ -126,7 +128,7 @@ const Contact = () => {
       render: (row) => (
         <div className="min-w-[200px]">
           <p className="font-medium text-gray-800">
-            <TruncateText text={row?.subject || "-"} maxLength={40} />
+            <TruncateText text={row?.subject || "-"} maxLength={25} />
           </p>
         </div>
       ),

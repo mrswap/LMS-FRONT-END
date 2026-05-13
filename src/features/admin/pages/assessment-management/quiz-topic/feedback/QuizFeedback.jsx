@@ -166,9 +166,11 @@ const QuizFeedback = () => {
       render: (row) => (
         <div>
           <p className="font-semibold text-gray-800">
-            {row?.user?.name || t("quizFeedback.anonymous")}
+            <TruncateText text={row?.user?.name || "-"} maxLength={25} />
           </p>
-          <p className="text-xs text-gray-500">{row?.user?.email || ""}</p>
+          <p className="text-xs text-gray-500">
+            <TruncateText text={row?.user?.email || "-"} maxLength={25} />
+          </p>
         </div>
       ),
     },
@@ -177,7 +179,7 @@ const QuizFeedback = () => {
       render: (row) => (
         <div>
           <p className="font-medium text-gray-800">
-            <TruncateText text={row?.assessment?.title || "-"} maxLength={30} />
+            <TruncateText text={row?.assessment?.title || "-"} maxLength={25} />
           </p>
           <p className="text-xs text-gray-500 capitalize">
             {row?.assessment?.type || t("quizFeedback.quiz")}
