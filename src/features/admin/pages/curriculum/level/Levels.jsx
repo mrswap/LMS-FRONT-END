@@ -118,7 +118,7 @@ const Levels = () => {
       ),
     },
     {
-      header: t("levels.list.columns.parentProgram"),
+      header: t("levels.list.columns.programName"),
       render: (row) => (
         <div>
           <p className="font-semibold text-gray-800">

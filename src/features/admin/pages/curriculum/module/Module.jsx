@@ -132,7 +132,7 @@ const Module = () => {
       ),
     },
     {
-      header: t("module.list.columns.parentLevel"),
+      header: t("module.list.columns.levelName"),
       render: (row) => (
         <div>
           <p className="font-semibold text-gray-800">
@@ -157,14 +157,14 @@ const Module = () => {
     //     </span>
     //   ),
     // },
-    {
-      header: t("module.list.columns.duration"),
-      render: (row) => (
-        <span className="text-gray-600">
-          {row.duration || t("module.list.notSpecified")}
-        </span>
-      ),
-    },
+    // {
+    //   header: t("module.list.columns.duration"),
+    //   render: (row) => (
+    //     <span className="text-gray-600">
+    //       {row.duration || t("module.list.notSpecified")}
+    //     </span>
+    //   ),
+    // },
     ...(hasPermission("modules.status")
       ? [
           {
