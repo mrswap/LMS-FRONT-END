@@ -23,6 +23,8 @@ import certificateSettingReducer from "./slice/certificateSettingSlice"
 import dashboardReducer from "./slice/dashboardSlice"
 import commonReducer from "./slice/commonSlice"
 import notificationsReducer from "./slice/notificationSlicer"
+import supportReducer from "./slice/supportSlice";
+import bulkReducer from "./slice/bulkUploadSlicer"
 
 export const store = configureStore({
     reducer: {
@@ -49,6 +51,8 @@ export const store = configureStore({
         certificateSettings: certificateSettingReducer,
         dashboard: dashboardReducer,
         common: commonReducer,
-        notification: notificationsReducer
+        notification: notificationsReducer,
+        support: supportReducer,
+        bulk: bulkReducer
     },
 }); 

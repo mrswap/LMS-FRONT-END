@@ -439,6 +439,11 @@ const AdminSidebar = ({ isOpen, onClose }) => {
           path: "/topics",
           permission: "topics.view",
         },
+        {
+          label: "Bulk Upload",
+          path: "/bulk-upload",
+          // permission: "topics.view",
+        },
       ],
     },
 
@@ -578,6 +583,13 @@ const AdminSidebar = ({ isOpen, onClose }) => {
       label: t("sidebar.multiLanguage"),
       permission: "languages.view",
       path: "/language",
+    },
+
+    {
+      icon: FiGlobe,
+      label: "Chat-bot",
+      permission: "languages.view",
+      path: "/chat-bot",
     },
   ];
 
