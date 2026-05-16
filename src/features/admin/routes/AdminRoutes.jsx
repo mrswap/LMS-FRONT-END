@@ -3,10 +3,10 @@ import { lazy } from "react";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminLayout from "../layout/AdminLayout";
 import Staff from "../pages/users/Staff";
-// import Certificate from "../pages/certificate/Certificate";
-// import Notification from "../common/noitification/Notification";
-// import NotificationDetail from "../common/noitification/NotificatinDetails";
-// import SingleMediaPreview from "../pages/content-management/media-library/components/SingleMediaPreview";
+import AdminSupportPage from "../pages/AdminSupportPage";
+import BulkUpload from "../pages/curriculum/bulk-upload/BulkUpload";
+import CreateBulkUpload from "../pages/curriculum/bulk-upload/components/CreateBulkUpload";
+import BulkUploadDetails from "../pages/curriculum/bulk-upload/components/BulkUploadDetails";
 
 const Certificate = lazy(() => import("../pages/certificate/Certificate"));
 
@@ -291,6 +291,11 @@ const AdminRoutes = (
         element={<BulkLearningUnitBuilderDetails />}
       />
 
+      {/* Bulk upload */}
+      <Route path="bulk-upload" element={<BulkUpload />} />
+      <Route path="bulk-upload/create" element={<CreateBulkUpload />} />
+      <Route path="bulk-upload/:id" element={<BulkUploadDetails />} />
+
       {/* Learning Unit */}
       <Route path="learning-unit" element={<LearningUnitBuilder />} />
       <Route
@@ -400,6 +405,9 @@ const AdminRoutes = (
       <Route path="assessment-report" element={<AssessmentReport />} />
       <Route path="content-status-report" element={<ContentStatusReport />} />
       <Route path="certification-report" element={<CertificationReport />} />
+
+      {/* Reports */}
+      <Route path="chat-bot" element={<AdminSupportPage />} />
 
       {/* Fallback */}
       <Route path="*" element={<WorkInProgress />} />
