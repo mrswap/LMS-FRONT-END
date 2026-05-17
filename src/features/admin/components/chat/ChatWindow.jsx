@@ -21,6 +21,7 @@ import {
   addRealtimeMessage,
 } from "../../../../redux/slice/supportSlice";
 import useSupportSocket from "../../../../hooks/useSupportSocket";
+import Loader from "../../common/Loader";
 const ChatWindow = () => {
   const dispatch = useDispatch();
   const { selectedThread, messagesByThread, loading, actionLoading } =
@@ -81,14 +82,7 @@ const ChatWindow = () => {
   };
 
   if (loading) {
-    return (
-      <div className="flex-1 flex items-center justify-center">
-        <div className="text-center">
-          <FiLoader className="w-8 h-8 text-blue-500 animate-spin mx-auto mb-3" />
-          <p className="text-gray-500 text-sm">Loading conversation...</p>
-        </div>
-      </div>
-    );
+    return <Loader />;
   }
 
   if (!selectedThread) {

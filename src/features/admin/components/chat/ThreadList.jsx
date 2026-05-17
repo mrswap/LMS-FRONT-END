@@ -62,10 +62,9 @@ const ThreadList = () => {
   // Status options - empty string as default value
   const statusOptions = [
     { value: "", label: "All Status" },
-    { value: "open", label: "Open" },
-    { value: "in_progress", label: "In Progress" },
+    { value: "open", label: "Active" },
     { value: "resolved", label: "Resolved" },
-    { value: "closed", label: "Closed" },
+    { value: "reopened", label: "Reopened" },
   ];
 
   // Custom select styles
