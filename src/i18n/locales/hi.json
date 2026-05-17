@@ -2392,6 +2392,63 @@
     "confirm": "पुष्टि करें"
   },
 
+  "support": {
+    "title": "सपोर्ट सेंटर",
+    "subtitle": "सपोर्ट बातचीत",
+    "noConversations": "कोई बातचीत नहीं मिली",
+    "tryChangingFilters": "फ़िल्टर बदलकर देखें",
+    "allCaughtUp": "सभी बातचीत पूरी हो चुकी हैं!",
+    "status": {
+      "open": "खुला",
+      "resolved": "समाधान हो गया",
+      "reopened": "दोबारा खोला गया"
+    },
+    "filters": {
+      "allUsers": "सभी उपयोगकर्ता",
+      "allStatus": "सभी स्थिति",
+      "active": "सक्रिय",
+      "resolved": "समाधान हो गया",
+      "reopened": "दोबारा खोला गया",
+      "searchPlaceholder": "बातचीत खोजें...",
+      "filterByUser": "उपयोगकर्ता द्वारा फ़िल्टर करें...",
+      "filterByStatus": "स्थिति द्वारा फ़िल्टर करें...",
+      "clear": "साफ करें",
+      "noUsersFound": "कोई उपयोगकर्ता नहीं मिला"
+    },
+    "chat": {
+      "noConversationSelected": "कोई बातचीत चयनित नहीं है",
+      "selectThreadToStart": "चैट शुरू करने के लिए साइडबार से कोई थ्रेड चुनें",
+      "unknownUser": "अज्ञात उपयोगकर्ता",
+      "noEmail": "ईमेल उपलब्ध नहीं है",
+      "noMobile": "मोबाइल नंबर उपलब्ध नहीं है",
+      "resolve": "समाधान करें",
+      "reopen": "दोबारा खोलें",
+      "courseDetails": "कोर्स विवरण",
+      "hide": "छुपाएँ",
+      "show": "दिखाएँ",
+      "program": "प्रोग्राम",
+      "level": "लेवल",
+      "module": "मॉड्यूल",
+      "topic": "टॉपिक",
+      "na": "उपलब्ध नहीं",
+      "noMessages": "अभी तक कोई संदेश नहीं",
+      "sendReplyToStart": "बातचीत शुरू करने के लिए उत्तर भेजें",
+      "threadResolved": "इस बातचीत का समाधान हो चुका है।",
+      "reopenToContinue": "बातचीत जारी रखने के लिए दोबारा खोलें",
+      "typeReply": "अपना उत्तर लिखें...",
+      "sending": "भेजा जा रहा है",
+      "send": "भेजें",
+      "preview": "पूर्वावलोकन"
+    },
+    "message": {
+      "supportTeam": "सपोर्ट टीम",
+      "user": "उपयोगकर्ता",
+      "sending": "भेजा जा रहा है...",
+      "attachment": "अटैचमेंट",
+      "viewAttachment": "अटैचमेंट देखें"
+    }
+  },
+
   "loaderText": "कृपया प्रतीक्षा करें जब तक हम आपका अनुरोध प्रोसेस करते हैं",
 
   "sessionModal": {

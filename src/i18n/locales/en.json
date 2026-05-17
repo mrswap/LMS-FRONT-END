@@ -2417,6 +2417,63 @@
     "linkedin": "LinkedIn"
   },
 
+  "support": {
+    "title": "Support Center",
+    "subtitle": "support conversations",
+    "noConversations": "No conversations",
+    "tryChangingFilters": "Try changing your filters",
+    "allCaughtUp": "All caught up!",
+    "status": {
+      "open": "OPEN",
+      "resolved": "RESOLVED",
+      "reopened": "REOPENED"
+    },
+    "filters": {
+      "allUsers": "All Users",
+      "allStatus": "All Status",
+      "active": "Active",
+      "resolved": "Resolved",
+      "reopened": "Reopened",
+      "searchPlaceholder": "Search conversations...",
+      "filterByUser": "Filter by user...",
+      "filterByStatus": "Filter by status...",
+      "clear": "Clear",
+      "noUsersFound": "No users found"
+    },
+    "chat": {
+      "noConversationSelected": "No conversation selected",
+      "selectThreadToStart": "Choose a thread from the sidebar to start chatting",
+      "unknownUser": "Unknown User",
+      "noEmail": "No email",
+      "noMobile": "No mobile",
+      "resolve": "Resolve",
+      "reopen": "Reopen",
+      "courseDetails": "Course Details",
+      "hide": "Hide",
+      "show": "Show",
+      "program": "Program",
+      "level": "Level",
+      "module": "Module",
+      "topic": "Topic",
+      "na": "N/A",
+      "noMessages": "No messages yet",
+      "sendReplyToStart": "Send a reply to start the conversation",
+      "threadResolved": "This thread has been resolved.",
+      "reopenToContinue": "Reopen to continue conversation",
+      "typeReply": "Type your reply...",
+      "sending": "Sending",
+      "send": "Send",
+      "preview": "Preview"
+    },
+    "message": {
+      "supportTeam": "Support Team",
+      "user": "User",
+      "sending": "Sending...",
+      "attachment": "Attachment",
+      "viewAttachment": "View Attachment"
+    }
+  },
+
   "globalConfirmationModal": {
     "confirmDeletion": "Confirm Deletion",
     "cancle": "Cancle",

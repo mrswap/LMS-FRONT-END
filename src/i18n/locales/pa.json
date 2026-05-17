@@ -2419,6 +2419,63 @@
     "confirm": "ਪੁਸ਼ਟੀ ਕਰੋ"
   },
 
+  "support": {
+    "title": "ਸਹਾਇਤਾ ਕੇਂਦਰ",
+    "subtitle": "ਸਹਾਇਤਾ ਗੱਲਬਾਤਾਂ",
+    "noConversations": "ਕੋਈ ਗੱਲਬਾਤ ਨਹੀਂ ਮਿਲੀ",
+    "tryChangingFilters": "ਫਿਲਟਰ ਬਦਲ ਕੇ ਵੇਖੋ",
+    "allCaughtUp": "ਸਾਰੀਆਂ ਗੱਲਬਾਤਾਂ ਪੂਰੀਆਂ ਹੋ ਚੁੱਕੀਆਂ ਹਨ!",
+    "status": {
+      "open": "ਖੁੱਲ੍ਹਾ",
+      "resolved": "ਹੱਲ ਕੀਤਾ ਗਿਆ",
+      "reopened": "ਮੁੜ ਖੋਲ੍ਹਿਆ ਗਿਆ"
+    },
+    "filters": {
+      "allUsers": "ਸਾਰੇ ਯੂਜ਼ਰ",
+      "allStatus": "ਸਾਰੀਆਂ ਸਥਿਤੀਆਂ",
+      "active": "ਸਰਗਰਮ",
+      "resolved": "ਹੱਲ ਕੀਤਾ ਗਿਆ",
+      "reopened": "ਮੁੜ ਖੋਲ੍ਹਿਆ ਗਿਆ",
+      "searchPlaceholder": "ਗੱਲਬਾਤ ਖੋਜੋ...",
+      "filterByUser": "ਯੂਜ਼ਰ ਅਨੁਸਾਰ ਫਿਲਟਰ ਕਰੋ...",
+      "filterByStatus": "ਸਥਿਤੀ ਅਨੁਸਾਰ ਫਿਲਟਰ ਕਰੋ...",
+      "clear": "ਸਾਫ ਕਰੋ",
+      "noUsersFound": "ਕੋਈ ਯੂਜ਼ਰ ਨਹੀਂ ਮਿਲਿਆ"
+    },
+    "chat": {
+      "noConversationSelected": "ਕੋਈ ਗੱਲਬਾਤ ਚੁਣੀ ਨਹੀਂ ਗਈ",
+      "selectThreadToStart": "ਚੈਟ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਸਾਈਡਬਾਰ ਤੋਂ ਕੋਈ ਥ੍ਰੈਡ ਚੁਣੋ",
+      "unknownUser": "ਅਣਜਾਣ ਯੂਜ਼ਰ",
+      "noEmail": "ਈਮੇਲ ਉਪਲਬਧ ਨਹੀਂ",
+      "noMobile": "ਮੋਬਾਈਲ ਨੰਬਰ ਉਪਲਬਧ ਨਹੀਂ",
+      "resolve": "ਹੱਲ ਕਰੋ",
+      "reopen": "ਮੁੜ ਖੋਲ੍ਹੋ",
+      "courseDetails": "ਕੋਰਸ ਵੇਰਵਾ",
+      "hide": "ਲੁਕਾਓ",
+      "show": "ਦਿਖਾਓ",
+      "program": "ਪ੍ਰੋਗਰਾਮ",
+      "level": "ਲੈਵਲ",
+      "module": "ਮੋਡੀਊਲ",
+      "topic": "ਵਿਸ਼ਾ",
+      "na": "ਉਪਲਬਧ ਨਹੀਂ",
+      "noMessages": "ਹਾਲੇ ਕੋਈ ਸੁਨੇਹਾ ਨਹੀਂ",
+      "sendReplyToStart": "ਗੱਲਬਾਤ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਜਵਾਬ ਭੇਜੋ",
+      "threadResolved": "ਇਸ ਗੱਲਬਾਤ ਦਾ ਹੱਲ ਹੋ ਚੁੱਕਾ ਹੈ।",
+      "reopenToContinue": "ਗੱਲਬਾਤ ਜਾਰੀ ਰੱਖਣ ਲਈ ਮੁੜ ਖੋਲ੍ਹੋ",
+      "typeReply": "ਆਪਣਾ ਜਵਾਬ ਲਿਖੋ...",
+      "sending": "ਭੇਜਿਆ ਜਾ ਰਿਹਾ ਹੈ",
+      "send": "ਭੇਜੋ",
+      "preview": "ਝਲਕ"
+    },
+    "message": {
+      "supportTeam": "ਸਹਾਇਤਾ ਟੀਮ",
+      "user": "ਯੂਜ਼ਰ",
+      "sending": "ਭੇਜਿਆ ਜਾ ਰਿਹਾ ਹੈ...",
+      "attachment": "ਅਟੈਚਮੈਂਟ",
+      "viewAttachment": "ਅਟੈਚਮੈਂਟ ਵੇਖੋ"
+    }
+  },
+
   "loaderText": "ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕ ਕਰੋ ਜਦੋਂ ਤੱਕ ਅਸੀਂ ਤੁਹਾਡੀ ਬੇਨਤੀ ਪ੍ਰਕਿਰਿਆ ਕਰਦੇ ਹਾਂ",
 
   "sessionModal": {
