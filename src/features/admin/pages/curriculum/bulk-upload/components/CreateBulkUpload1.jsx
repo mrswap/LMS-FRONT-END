@@ -102,8 +102,10 @@ const CreateBulkUpload1 = () => {
       const payload = {
         program_id: values.programName.value,
         level_id: values.levelName.value,
-        html: JSON.stringify(htmlContent).slice(1, -1),
+        html: htmlContent,
       };
+
+      console.log("payload", payload);
 
       const res = await dispatch(createBulkUpload(payload)).unwrap();
 
