@@ -10,7 +10,7 @@ const ThreadCard = ({ thread }) => {
   return (
     <div
       onClick={() => dispatch(getSingleThread(thread.id))}
-      className={`
+      className={` 
         group relative px-4 py-3 cursor-pointer transition-all duration-200
         ${
           isActive

@@ -378,6 +378,7 @@ import {
 } from "react-icons/fi";
 import { IoSettingsOutline } from "react-icons/io5";
 import usePermission from "../../../hooks/usePermission";
+import { MdOutlineContactSupport } from "react-icons/md";
 
 const AdminSidebar = ({ isOpen, onClose }) => {
   const location = useLocation();
@@ -586,10 +587,10 @@ const AdminSidebar = ({ isOpen, onClose }) => {
     },
 
     {
-      icon: FiGlobe,
-      label: "Chat-bot",
+      icon: MdOutlineContactSupport,
+      label: "Support",
       permission: "languages.view",
-      path: "/chat-bot",
+      path: "/support",
     },
   ];
 
