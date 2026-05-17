@@ -37,7 +37,7 @@ const ThreadCard = ({ thread }) => {
           </div>
 
           <p className="text-xs text-gray-500 truncate mb-1">
-            {thread.topic.title}
+            {thread?.topic?.title}
           </p>
 
           <p className="text-xs text-gray-400 truncate">

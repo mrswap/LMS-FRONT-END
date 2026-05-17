@@ -30,7 +30,7 @@ const AdminSupportPage = () => {
                 Support Center
               </h1>
 
-              <p className="text-xs text-gray-500">Customer conversations</p>
+              <p className="text-xs text-gray-500">support conversations</p>
             </div>
           </div>
         </div>
