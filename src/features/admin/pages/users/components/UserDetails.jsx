@@ -81,11 +81,7 @@ const UserDetails = () => {
     email: user?.email || "",
     department: user?.department || "",
     employee_id: user?.employee_id || "",
-    // role: roleOptions.find((r) => r.id === user?.role_id) || null,
-    // designation:
-    //   designationOptions.find((r) => r.id === user?.designation_id) || null,
     role: roleOptions.find((r) => r.value === user?.role_id) || null,
-
     designation:
       designationOptions.find((d) => d.value === user?.designation_id) || null,
     region: regionOptions.find((r) => r.value === user?.region) || null,
@@ -176,7 +172,6 @@ const UserDetails = () => {
 
     await dispatch(deleteSingleUser(id));
     toast.success(t("userManagement.success.delete"));
-    // navigate("/assign-training");
     navigate(isSales ? "/assign-training" : "/staff");
   };
 
@@ -187,16 +182,11 @@ const UserDetails = () => {
     <PageLayout>
       <Breadcrumb
         items={[
-          // {
-          //   label: t("userManagement.breadcrumb.salesTrainee"),
-          //   path: "/assign-training",
-          // },
           {
             label:
               currentRole?.label?.toLowerCase() === "sales"
                 ? t("userManagement.breadcrumb.salesTrainee")
                 : t("userManagement.breadcrumb.staff"),
-            // path: "/assign-training",
             path:
               currentRole?.label?.toLowerCase() === "sales"
                 ? "/assign-training"
