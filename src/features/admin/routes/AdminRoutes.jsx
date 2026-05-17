@@ -7,9 +7,12 @@ import AdminSupportPage from "../pages/AdminSupportPage";
 import BulkUpload from "../pages/curriculum/bulk-upload/BulkUpload";
 import CreateBulkUpload from "../pages/curriculum/bulk-upload/components/CreateBulkUpload";
 import BulkUploadDetails from "../pages/curriculum/bulk-upload/components/BulkUploadDetails";
+import BulkUpload2 from "../pages/curriculum/bulk-upload/BulkUpload2";
+import BulkUpload1 from "../pages/curriculum/bulk-upload/BulkUpload1";
+import CreateBulkUpload1 from "../pages/curriculum/bulk-upload/components/CreateBulkUpload1";
+import CreateBulkUpload2 from "../pages/curriculum/bulk-upload/components/CreateBulkUpload2";
 
 const Certificate = lazy(() => import("../pages/certificate/Certificate"));
-
 const Notification = lazy(() => import("../common/noitification/Notification"));
 
 const NotificationDetail = lazy(
@@ -295,8 +298,14 @@ const AdminRoutes = (
 
       {/* Bulk upload */}
       <Route path="bulk-upload" element={<BulkUpload />} />
+      <Route path="bulk-upload1" element={<BulkUpload1 />} />
+      <Route path="bulk-upload2" element={<BulkUpload2 />} />
       <Route path="bulk-upload/create" element={<CreateBulkUpload />} />
+      <Route path="bulk-upload1/create" element={<CreateBulkUpload1 />} />
+      <Route path="bulk-upload2/create" element={<CreateBulkUpload2 />} />
       <Route path="bulk-upload/:id" element={<BulkUploadDetails />} />
+      <Route path="bulk-upload1/:id" element={<BulkUploadDetails />} />
+      <Route path="bulk-upload2/:id" element={<BulkUploadDetails />} />
 
       {/* Learning Unit */}
       <Route path="learning-unit" element={<LearningUnitBuilder />} />

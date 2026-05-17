@@ -11,6 +11,28 @@ export const createBulkUpload = createAsyncThunk(
     async (data, thunkAPI) => {
         try {
             const res = await axiosInstance.post(
+                // "/payload",
+                "/setting/imports/html",
+                data,
+                getAuthConfig()
+            );
+
+            return res.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(
+                error.response?.data || {
+                    message: "Create bulk upload failed",
+                }
+            );
+        }
+    }
+);
+
+export const createBulkUploadPayload = createAsyncThunk(
+    "bulkUpload/create",
+    async (data, thunkAPI) => {
+        try {
+            const res = await axiosInstance.post(
                 "/payload",
                 data,
                 getAuthConfig()
@@ -171,14 +193,6 @@ const bulkUploadSlice = createSlice({
                 state.isSuccess = true;
 
                 state.message = action.payload.message;
-
-                // const newBulkUpload = action.payload.data;
-
-                // if (!Array.isArray(state.bulkUploads)) {
-                //     state.bulkUploads = [];
-                // }
-
-                // state.bulkUploads.unshift(newBulkUpload);
             })
 
             .addCase(createBulkUpload.rejected, (state, action) => {
@@ -187,6 +201,26 @@ const bulkUploadSlice = createSlice({
 
                 state.message = action.payload?.message;
             });
+
+        // paylod
+        // builder
+        //     .addCase(createBulkUploadPayload.pending, (state) => {
+        //         state.isLoading = true;
+        //     })
+
+        //     .addCase(createBulkUploadPayload.fulfilled, (state, action) => {
+        //         state.isLoading = false;
+        //         state.isSuccess = true;
+
+        //         state.message = action.payload.message;
+        //     })
+
+        //     .addCase(createBulkUploadPayload.rejected, (state, action) => {
+        //         state.isLoading = false;
+        //         state.isError = true;
+
+        //         state.message = action.payload?.message;
+        //     });
 
         // ======================================================
         // GET ALL

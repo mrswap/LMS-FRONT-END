@@ -20,7 +20,7 @@ import { getAllLevels } from "../../../../../../redux/slice/levelSlice";
 import CustomEditor from "../../../../common/CustomEditor";
 import { createBulkUpload } from "../../../../../../redux/slice/bulkUploadSlicer";
 
-const CreateBulkUpload = () => {
+const CreateBulkUpload1 = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const toast = useToast();
@@ -99,29 +99,13 @@ const CreateBulkUpload = () => {
 
   const onSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
     try {
-      // const payload = {
-      //   program_id: values.programName.value,
-      //   level_id: values.levelName.value,
-      //   html: htmlContent,
-      // };
-
-      // console.log("Payload to submit:", payload);
-
       const payload = {
         program_id: values.programName.value,
         level_id: values.levelName.value,
-
-        // JSON encode
-        html: JSON.stringify(htmlContent),
+        html: JSON.stringify(htmlContent).slice(1, -1),
       };
 
-      console.log("Payload to submit:", payload);
-
-      const res = await dispatch(
-        createBulkUpload({
-          data: payload,
-        }),
-      ).unwrap();
+      const res = await dispatch(createBulkUpload(payload)).unwrap();
 
       toast.success(res.message || t("learningUnitBuilder.success.create"));
 
@@ -130,7 +114,7 @@ const CreateBulkUpload = () => {
       setFilteredLevels([]);
       setHtmlContent("");
       setIsLevelsLoaded(false);
-      navigate("/bulk-upload");
+      //   navigate("/bulk-upload");
     } catch (error) {
       setErrors({ submit: error.message });
       toast.error(error?.message || t("learningUnitBuilder.error.create"));
@@ -144,7 +128,7 @@ const CreateBulkUpload = () => {
       <div className="p-8 rounded-lg border border-gray-300">
         <PageHeader>
           <PageHeaderLeft>
-            <PageTitle>{t("learningUnitBuilder.create.title")}</PageTitle>
+            <PageTitle>Purana wala</PageTitle>
             <PageSubtitle>
               {t("learningUnitBuilder.create.subtitle")}
             </PageSubtitle>
@@ -255,4 +239,4 @@ const CreateBulkUpload = () => {
   );
 };
 
-export default CreateBulkUpload;
+export default CreateBulkUpload1;
