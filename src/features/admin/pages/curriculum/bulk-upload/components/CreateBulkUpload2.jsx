@@ -99,10 +99,16 @@ const CreateBulkUpload2 = () => {
 
   const onSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
     try {
+      // const payload = {
+      //   program_id: values.programName.value,
+      //   level_id: values.levelName.value,
+      //   html: JSON.stringify(htmlContent).slice(1, -1),
+      // };
+
       const payload = {
         program_id: values.programName.value,
         level_id: values.levelName.value,
-        html: JSON.stringify(htmlContent).slice(1, -1),
+        html: htmlContent,
       };
 
       const res = await dispatch(createBulkUploadPayload(payload));
