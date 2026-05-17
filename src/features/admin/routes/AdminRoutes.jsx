@@ -240,6 +240,8 @@ const ExamAssessmentDetails = lazy(
 
 const AdminRoutes = (
   <Route element={<ProtectedRoute />}>
+    {/* Support */}
+    {/* <Route path="chat-bot" element={<AdminSupportPage />} /> */}
     <Route path="/" element={<AdminLayout />}>
       {/* Default redirect */}
       <Route index element={<Navigate to="/dashboard" replace />} />
@@ -406,8 +408,7 @@ const AdminRoutes = (
       <Route path="content-status-report" element={<ContentStatusReport />} />
       <Route path="certification-report" element={<CertificationReport />} />
 
-      {/* Reports */}
-      <Route path="chat-bot" element={<AdminSupportPage />} />
+      <Route path="support" element={<AdminSupportPage />} />
 
       {/* Fallback */}
       <Route path="*" element={<WorkInProgress />} />

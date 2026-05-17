@@ -140,10 +140,10 @@ const ChatInput = ({ threadId }) => {
             onKeyPress={handleKeyPress}
             placeholder="Type your reply..."
             rows={1}
-            className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 pr-12 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all text-sm"
+            className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 pr-12 resize-none focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
             style={{ minHeight: "44px", maxHeight: "120px" }}
           />
-          <div className="absolute right-2 bottom-2">
+          <div className="absolute right-2 bottom-3">
             <input
               type="file"
               ref={fileInputRef}
@@ -159,7 +159,7 @@ const ChatInput = ({ threadId }) => {
             </label>
           </div>
         </div>
-
+        {/* 
         <button
           onClick={handleSend}
           disabled={(!text.trim() && !file) || isSending}
@@ -190,6 +190,46 @@ const ChatInput = ({ threadId }) => {
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
                 />
               </svg>
+              <span className="text-sm">Sending</span>
+            </>
+          ) : (
+            <>
+              <FiSend size={16} />
+              <span className="text-sm">Send</span>
+            </>
+          )}
+        </button> */}
+        <button
+          onClick={handleSend}
+          disabled={!text.trim() || isSending}
+          className={`
+    rounded-xl px-5 py-2.5 transition-all duration-200 flex items-center gap-2 h-[44px]
+    ${
+      !text.trim() || isSending
+        ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+        : "bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white shadow-md hover:shadow-lg"
+    }
+  `}
+        >
+          {isSending ? (
+            <>
+              <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                  fill="none"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                />
+              </svg>
+
               <span className="text-sm">Sending</span>
             </>
           ) : (
