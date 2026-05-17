@@ -11,8 +11,6 @@ const ThreadList = () => {
   const { threads, loading } = useSelector((state) => state.support);
   const { users } = useSelector((state) => state.user);
 
-  console.log("Threads in ThreadList:", threads);
-
   // Initially sab empty string
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);

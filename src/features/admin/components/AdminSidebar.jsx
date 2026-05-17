@@ -440,9 +440,19 @@ const AdminSidebar = ({ isOpen, onClose }) => {
           path: "/topics",
           permission: "topics.view",
         },
+        // {
+        //   label: "Bulk Upload",
+        //   path: "/bulk-upload",
+        //   // permission: "topics.view",
+        // },
         {
-          label: "Bulk Upload",
-          path: "/bulk-upload",
+          label: "Bulk Upload 1",
+          path: "/bulk-upload1",
+          // permission: "topics.view",
+        },
+        {
+          label: "Bulk Upload 2",
+          path: "/bulk-upload2",
           // permission: "topics.view",
         },
       ],
