@@ -1250,7 +1250,8 @@
       "currentServerFile": "Current file from server",
       "newFileToUpload": "New file to be uploaded",
       "currentVideoFile": "Current video file",
-      "videoAllowedFormats": "Allowed: MP4, MOV, AVI, MKV (Max 10MB)"
+      "videoAllowedFormats": "Allowed: MP4, MOV, AVI, MKV (Max 10MB)",
+      "documentAllowedFormats": "Allowed: PDF, DOC, DOCX, XLS, XLSX (Max 10MB)"
     },
     "create": {
       "title": "Create Media Library",
@@ -1278,6 +1279,10 @@
       "uploadFile": "Upload File",
       "externalUrl": "External URL"
     },
+    "documentInput": {
+      "uploadFile": "Upload File",
+      "externalUrl": "External URL"
+    },
     "validation": {
       "titleRequired": "Title is required",
       "titleMin": "Title must be at least 3 characters",
@@ -1289,7 +1294,9 @@
       "urlRequired": "Please provide an external URL",
       "invalidUrl": "Please enter a valid URL",
       "videoInputMethodRequired": "Please select either Upload File or External URL",
+      "documentInputMethodRequired": "Please select either Upload File or External URL",
       "invalidVideoFormat": "Invalid video format. Allowed: mp4, mov, avi, mkv",
+      "invalidDocumentFormat": "Invalid document format. Allowed: pdf, doc, docx, xls, xlsx",
       "invalidFileFormat": "Invalid {type} format. Allowed: {formats}",
       "fileSizeExceeded": "File size should be less than 10MB",
       "selectTypeFirst": "Please select media type first",
