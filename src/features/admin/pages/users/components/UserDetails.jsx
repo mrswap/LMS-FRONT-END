@@ -39,9 +39,14 @@ const UserDetails = () => {
   const { designations } = useSelector((state) => state.designation);
   const { hasPermission } = usePermission();
 
+  // useEffect(() => {
+  //   dispatch(getAllDesignation());
+  //   dispatch(getAllRoles());
+  // }, []);
+
   useEffect(() => {
-    dispatch(getAllDesignation());
-    dispatch(getAllRoles());
+    dispatch(getAllDesignation({ status: 1 }));
+    dispatch(getAllRoles({ status: 1 }));
   }, []);
 
   const { user, isLoading, isError, message } = useSelector(

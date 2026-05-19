@@ -362,6 +362,15 @@ const Assissment = () => {
           },
         ]
       : []),
+    {
+      header: t("quizAssessment.list.columns.createdBy"),
+
+      render: (row) => (
+        <span className="text-sm text-gray-700">
+          {row.creator?.name || "-"}
+        </span>
+      ),
+    },
     ...(hasPermission("assessments.edit")
       ? [
           {

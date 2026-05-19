@@ -370,6 +370,16 @@ const LearningUnitBuilder = () => {
       : []),
 
     {
+      header: t("learningUnitBuilder.list.columns.createdBy"),
+
+      render: (row) => (
+        <span className="text-sm text-gray-700">
+          {row.creator?.name || "-"}
+        </span>
+      ),
+    },
+
+    {
       header: t("publishedDropdown.status.title"),
       render: (row) => (
         <PublishedDropdown

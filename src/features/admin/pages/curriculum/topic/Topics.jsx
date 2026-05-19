@@ -332,6 +332,15 @@ const Topics = () => {
         />
       ),
     },
+    {
+      header: t("topic.list.columns.createdBy"),
+
+      render: (row) => (
+        <span className="text-sm text-gray-700">
+          {row.creator?.name || "-"}
+        </span>
+      ),
+    },
     ...(hasPermission("topics.edit") || hasPermission("content.view")
       ? [
           {

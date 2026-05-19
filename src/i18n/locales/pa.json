@@ -609,6 +609,7 @@
         "totalTopics": "ਕੁੱਲ ਵਿਸ਼ੇ",
         "totalModules": "ਕੁੱਲ ਮੋਡੀਊਲ",
         "status": "ਸਥਿਤੀ",
+        "createdBy": "ਵੱਲੋਂ ਬਣਾਇਆ ਗਿਆ",
         "actions": "ਕਾਰਵਾਈਆਂ"
       }
     },
@@ -704,6 +705,7 @@
         "totalTopics": "ਕੁੱਲ ਵਿਸ਼ੇ",
         "duration": "ਮਿਆਦ",
         "status": "ਸਥਿਤੀ",
+        "createdBy": "ਵੱਲੋਂ ਬਣਾਇਆ ਗਿਆ",
         "actions": "ਕਾਰਵਾਈਆਂ"
       }
     },
@@ -808,6 +810,7 @@
         "parentLevel": "ਪੱਧਰ ਦਾ ਨਾਮ",
         "totalTopics": "ਕੁੱਲ ਵਿਸ਼ੇ",
         "duration": "ਮਿਆਦ",
+        "createdBy": "ਵੱਲੋਂ ਬਣਾਇਆ ਗਿਆ",
         "status": "ਸਥਿਤੀ",
         "actions": "ਕਾਰਵਾਈਆਂ"
       }
@@ -914,6 +917,7 @@
         "parentLevel": "ਪੱਧਰ ਦਾ ਨਾਮ",
         "duration": "ਅਨੁਮਾਨਿਤ ਮਿਆਦ",
         "status": "ਸਥਿਤੀ",
+        "createdBy": "ਵੱਲੋਂ ਬਣਾਇਆ ਗਿਆ",
         "actions": "ਕਾਰਵਾਈਆਂ",
         "viewContent": "ਸਾਰੀ ਸਮੱਗਰੀ ਦੇਖੋ"
       }
@@ -1029,6 +1033,7 @@
         "parentModule": "ਮੋਡੀਊਲ ਦਾ ਨਾਮ",
         "parentLevel": "ਪੱਧਰ ਦਾ ਨਾਮ",
         "status": "ਸਥਿਤੀ",
+        "createdBy": "ਵੱਲੋਂ ਬਣਾਇਆ ਗਿਆ",
         "actions": "ਕਾਰਵਾਈਆਂ"
       }
     },
@@ -1140,6 +1145,65 @@
       "button": "ਵਾਪਸ ਜਾਓ"
     },
     "unsupported": "ਅਸਮਰਥਿਤ ਸਮੱਗਰੀ ਕਿਸਮ:"
+  },
+
+  "automatedImporter": {
+    "list": {
+      "title": "ਆਟੋਮੇਟਿਡ ਕੰਟੈਂਟ ਇੰਪੋਰਟਰ",
+      "subtitle": "ਆਟੋਮੇਟਿਡ ਇੰਪੋਰਟ ਲਾਗਜ਼ ਨੂੰ ਮੈਨੇਜ ਅਤੇ ਮਾਨੀਟਰ ਕਰੋ"
+    },
+    "create": {
+      "title": "LMS ਕੰਟੈਂਟ ਜਨਰੇਟਰ",
+      "subtitle": "ਬਲਕ ਇੰਪੋਰਟ ਲਈ ਸਟ੍ਰਕਚਰ-ਸੈਂਸਿਟਿਵ ਕੰਟੈਂਟ ਬਣਾਓ | ਘੱਟੋ-ਘੱਟ 100 ਸ਼ਬਦ ਲਾਜ਼ਮੀ ਹਨ",
+      "generalDetails": "ਸਧਾਰਣ ਵੇਰਵੇ",
+      "contentSection": "ਕੰਟੈਂਟ ਸੈਕਸ਼ਨ",
+      "parentProgram": "ਪੇਰੈਂਟ ਪ੍ਰੋਗਰਾਮ",
+      "parentLevel": "ਪੇਰੈਂਟ ਲੈਵਲ",
+      "selectProgram": "ਪ੍ਰੋਗਰਾਮ ਚੁਣੋ...",
+      "selectLevel": "ਲੈਵਲ ਚੁਣੋ...",
+      "clickForGuidelines": "ਗਾਈਡਲਾਈਨ ਲਈ ? ਤੇ ਕਲਿੱਕ ਕਰੋ",
+      "contentMeetsRequirement": "ਕੰਟੈਂਟ ਲੋੜਾਂ ਨੂੰ ਪੂਰਾ ਕਰਦਾ ਹੈ ({wordCount}/100 ਸ਼ਬਦ)",
+      "contentNeedsMoreWords": "{wordCount}/100 ਸ਼ਬਦ - ਹੋਰ {remaining} ਸ਼ਬਦਾਂ ਦੀ ਲੋੜ ਹੈ",
+      "viewGuidelines": "ਪੂਰੀ ਫਾਰਮੈਟਿੰਗ ਗਾਈਡਲਾਈਨ ਵੇਖੋ",
+      "editorPlaceholder": "ਉਦਾਹਰਨ:\nਮੋਡੀਊਲ 1: ਕਾਰਡਿਯਾਕ ਐਨਾਟਮੀ\n\nਚੈਪਟਰ 1.1: ਦਿਲ ਦੀ ਬਣਤਰ\n\nਟਾਪਿਕ 1.1.1: ਚਾਰ ਚੈਂਬਰ\n\n1.1.1.H1 ਲਰਨਿੰਗ ਉਦੇਸ਼\n1.1.1.C1 ਆਪਣਾ ਕੰਟੈਂਟ ਇੱਥੇ ਲਿਖੋ..."
+    },
+    "actions": {
+      "createImport": "ਇੰਪੋਰਟ ਬਣਾਓ",
+      "createContent": "ਕੰਟੈਂਟ ਬਣਾਓ",
+      "creating": "ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ..."
+    },
+    "searchPlaceholder": "ਇੰਪੋਰਟ ਖੋਜੋ...",
+    "filters": {
+      "allLevels": "ਸਾਰੇ ਲੈਵਲ",
+      "allStatus": "ਸਾਰੇ ਸਟੇਟਸ",
+      "completed": "ਪੂਰਾ",
+      "processing": "ਪ੍ਰੋਸੈਸਿੰਗ",
+      "failed": "ਅਸਫਲ"
+    },
+    "status": {
+      "completed": "ਪੂਰਾ",
+      "processing": "ਪ੍ਰੋਸੈਸਿੰਗ",
+      "failed": "ਅਸਫਲ"
+    },
+    "columns": {
+      "program": "ਪ੍ਰੋਗਰਾਮ",
+      "level": "ਲੈਵਲ",
+      "status": "ਸਟੇਟਸ",
+      "createdBy": "ਵੱਲੋਂ ਬਣਾਇਆ ਗਿਆ",
+      "createdAt": "ਬਣਾਉਣ ਦੀ ਤਾਰੀਖ"
+    },
+    "validation": {
+      "programRequired": "ਪ੍ਰੋਗਰਾਮ ਲਾਜ਼ਮੀ ਹੈ",
+      "levelRequired": "ਲੈਵਲ ਲਾਜ਼ਮੀ ਹੈ",
+      "contentRequired": "ਕੰਟੈਂਟ ਲਾਜ਼ਮੀ ਹੈ",
+      "minWords": "ਕੰਟੈਂਟ ਘੱਟੋ-ਘੱਟ 100 ਸ਼ਬਦਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ। ਫਾਰਮੈਟਿੰਗ ਗਾਈਡਲਾਈਨ ਵੇਖਣ ਲਈ (?) ਆਈਕਨ ਤੇ ਕਲਿੱਕ ਕਰੋ।"
+    },
+    "success": {
+      "create": "ਕੰਟੈਂਟ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਇਆ ਗਿਆ"
+    },
+    "error": {
+      "create": "ਕੰਟੈਂਟ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ"
+    }
   },
 
   "mediaLibrary": {
@@ -1278,6 +1342,7 @@
         "question": "ਸਵਾਲ",
         "type": "ਕਿਸਮ",
         "status": "ਸਥਿਤੀ",
+        "createdBy": "ਵੱਲੋਂ ਬਣਾਇਆ ਗਿਆ",
         "actions": "ਕਾਰਵਾਈਆਂ"
       }
     },
@@ -1390,6 +1455,7 @@
         "passingScore": "ਪਾਸਿੰਗ ਸਕੋਰ",
         "duration": "ਮਿਆਦ",
         "status": "ਸਥਿਤੀ",
+        "createdBy": "ਵੱਲੋਂ ਬਣਾਇਆ ਗਿਆ",
         "actions": "ਕਾਰਵਾਈਆਂ"
       }
     },
@@ -1495,6 +1561,7 @@
         "passingScore": "ਪਾਸਿੰਗ ਸਕੋਰ",
         "duration": "ਮਿਆਦ",
         "status": "ਸਥਿਤੀ",
+        "createdBy": "ਵੱਲੋਂ ਬਣਾਇਆ ਗਿਆ",
         "actions": "ਕਾਰਵਾਈਆਂ"
       }
     },

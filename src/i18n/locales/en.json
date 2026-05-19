@@ -613,7 +613,8 @@
         "totalTopics": "Total Topics",
         "totalModules": "Total Modules",
         "status": "Status",
-        "actions": "Actions"
+        "actions": "Actions",
+        "createdBy": "Created By"
       }
     },
     "details": {
@@ -708,6 +709,7 @@
         "totalTopics": "Total Topics",
         "duration": "Duration",
         "status": "Status",
+        "createdBy": "Created By",
         "actions": "Actions"
       }
     },
@@ -813,6 +815,7 @@
         "totalTopics": "Total Topics",
         "duration": "Duration",
         "status": "Status",
+        "createdBy": "Created By",
         "actions": "Actions"
       }
     },
@@ -918,6 +921,7 @@
         "parentLevel": "Level Name",
         "duration": "Estimated Duration",
         "status": "Status",
+        "createdBy": "Created By",
         "actions": "Actions",
         "viewContent": "View all contents"
       }
@@ -1033,6 +1037,7 @@
         "parentModule": "Module Name",
         "parentLevel": "Level Name",
         "status": "Status",
+        "createdBy": "Created By",
         "actions": "Actions"
       }
     },
@@ -1144,6 +1149,65 @@
       "button": "Go Back"
     },
     "unsupported": "Unsupported content type:"
+  },
+
+  "automatedImporter": {
+    "list": {
+      "title": "Automated Content Importer",
+      "subtitle": "Manage and monitor automated import logs"
+    },
+    "create": {
+      "title": "LMS Content Generator",
+      "subtitle": "Create structure-sensitive content for bulk import | Minimum 100 words required",
+      "generalDetails": "General Details",
+      "contentSection": "Content Section",
+      "parentProgram": "Parent Program",
+      "parentLevel": "Parent Level",
+      "selectProgram": "Select program...",
+      "selectLevel": "Select level...",
+      "clickForGuidelines": "Click ? for guidelines",
+      "contentMeetsRequirement": "Content meets requirement ({wordCount}/100 words)",
+      "contentNeedsMoreWords": "{wordCount}/100 words - Need {remaining} more words",
+      "viewGuidelines": "View Complete Formatting Guidelines",
+      "editorPlaceholder": "Example:\nModule 1: Cardiac Anatomy\n\nChapter 1.1: Heart Structure\n\nTopic 1.1.1: Four Chambers\n\n1.1.1.H1 Learning Objective\n1.1.1.C1 Your content here..."
+    },
+    "actions": {
+      "createImport": "Create Import",
+      "createContent": "Create Content",
+      "creating": "Creating..."
+    },
+    "searchPlaceholder": "Search imports...",
+    "filters": {
+      "allLevels": "All Levels",
+      "allStatus": "All Status",
+      "completed": "Completed",
+      "processing": "Processing",
+      "failed": "Failed"
+    },
+    "status": {
+      "completed": "Completed",
+      "processing": "Processing",
+      "failed": "Failed"
+    },
+    "columns": {
+      "program": "Program",
+      "level": "Level",
+      "status": "Status",
+      "createdBy": "Created By",
+      "createdAt": "Created At"
+    },
+    "validation": {
+      "programRequired": "Program is required",
+      "levelRequired": "Level is required",
+      "contentRequired": "Content is required",
+      "minWords": "Content must be at least 100 words. Click the (?) icon to view formatting guidelines."
+    },
+    "success": {
+      "create": "Content created successfully"
+    },
+    "error": {
+      "create": "Error creating content"
+    }
   },
 
   "mediaLibrary": {
@@ -1282,6 +1346,7 @@
         "question": "Question",
         "type": "Type",
         "status": "Status",
+        "createdBy": "Created By",
         "actions": "Actions"
       }
     },
@@ -1394,6 +1459,7 @@
         "passingScore": "Passing Score",
         "duration": "Duration",
         "status": "Status",
+        "createdBy": "Created By",
         "actions": "Actions"
       }
     },
@@ -1499,6 +1565,7 @@
         "passingScore": "Passing Score",
         "duration": "Duration",
         "status": "Status",
+        "createdBy": "Created By",
         "actions": "Actions"
       }
     },

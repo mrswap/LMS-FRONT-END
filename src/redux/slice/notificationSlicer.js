@@ -98,6 +98,7 @@ const notificationSlice = createSlice({
     initialState: {
         notifications: [],
         unreadCount: 0,
+        analytics: {},
         pagination: {
             current_page: 1,
             last_page: 1,
@@ -142,6 +143,11 @@ const notificationSlice = createSlice({
                 state.isLoading = false;
                 state.isSuccess = true;
                 state.notifications = action.payload.data || [];
+                state.analytics = action.payload.analytics || {
+                    total: 0,
+                    unread: 0,
+                    read: 0,
+                };
                 if (action.payload) {
                     state.pagination = {
                         current_page: action.payload.current_page || 1,

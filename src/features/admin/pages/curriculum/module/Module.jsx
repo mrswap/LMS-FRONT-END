@@ -202,6 +202,15 @@ const Module = () => {
         />
       ),
     },
+    {
+      header: t("module.list.columns.createdBy"),
+
+      render: (row) => (
+        <span className="text-sm text-gray-700">
+          {row.creator?.name || "-"}
+        </span>
+      ),
+    },
     ...(hasPermission("modules.edit")
       ? [
           {

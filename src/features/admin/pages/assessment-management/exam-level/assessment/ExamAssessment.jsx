@@ -194,6 +194,15 @@ const ExamAssessment = () => {
           },
         ]
       : []),
+    {
+      header: t("examAssessment.list.columns.createdBy"),
+
+      render: (row) => (
+        <span className="text-sm text-gray-700">
+          {row.creator?.name || "-"}
+        </span>
+      ),
+    },
     ...(hasPermission("assessments.status")
       ? [
           {
