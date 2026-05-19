@@ -613,6 +613,7 @@
         "totalTopics": "कुल विषय",
         "totalModules": "कुल मॉड्यूल",
         "status": "स्थिति",
+        "createdBy": "द्वारा बनाया गया",
         "actions": "कार्रवाई"
       }
     },
@@ -708,6 +709,7 @@
         "totalTopics": "कुल विषय",
         "duration": "अवधि",
         "status": "स्थिति",
+        "createdBy": "द्वारा बनाया गया",
         "actions": "कार्रवाई"
       }
     },
@@ -813,6 +815,7 @@
         "totalTopics": "कुल विषय",
         "duration": "अवधि",
         "status": "स्थिति",
+        "createdBy": "द्वारा बनाया गया",
         "actions": "कार्रवाई"
       }
     },
@@ -918,6 +921,7 @@
         "parentLevel": "स्तर का नाम",
         "duration": "अनुमानित अवधि",
         "status": "स्थिति",
+        "createdBy": "द्वारा बनाया गया",
         "actions": "कार्रवाई",
         "viewContent": "सभी सामग्री देखें"
       }
@@ -1033,6 +1037,7 @@
         "parentModule": "मॉड्यूल का नाम",
         "parentLevel": "स्तर का नाम",
         "status": "स्थिति",
+        "createdBy": "द्वारा बनाया गया",
         "actions": "कार्रवाई"
       }
     },
@@ -1144,6 +1149,65 @@
       "button": "वापस जाएं"
     },
     "unsupported": "असमर्थित सामग्री प्रकार:"
+  },
+
+  "automatedImporter": {
+    "list": {
+      "title": "स्वचालित कंटेंट इम्पोर्टर",
+      "subtitle": "स्वचालित इम्पोर्ट लॉग्स को प्रबंधित और मॉनिटर करें"
+    },
+    "create": {
+      "title": "LMS कंटेंट जनरेटर",
+      "subtitle": "बल्क इम्पोर्ट के लिए स्ट्रक्चर-सेंसिटिव कंटेंट बनाएं | कम से कम 100 शब्द आवश्यक",
+      "generalDetails": "सामान्य विवरण",
+      "contentSection": "कंटेंट सेक्शन",
+      "parentProgram": "पैरेंट प्रोग्राम",
+      "parentLevel": "पैरेंट लेवल",
+      "selectProgram": "प्रोग्राम चुनें...",
+      "selectLevel": "लेवल चुनें...",
+      "clickForGuidelines": "गाइडलाइन के लिए ? पर क्लिक करें",
+      "contentMeetsRequirement": "कंटेंट आवश्यकताओं को पूरा करता है ({wordCount}/100 शब्द)",
+      "contentNeedsMoreWords": "{wordCount}/100 शब्द - {remaining} और शब्दों की आवश्यकता है",
+      "viewGuidelines": "पूरी फॉर्मेटिंग गाइडलाइन देखें",
+      "editorPlaceholder": "उदाहरण:\nमॉड्यूल 1: कार्डियक एनाटॉमी\n\nअध्याय 1.1: हृदय संरचना\n\nविषय 1.1.1: चार चैम्बर\n\n1.1.1.H1 लर्निंग ऑब्जेक्टिव\n1.1.1.C1 अपना कंटेंट यहां लिखें..."
+    },
+    "actions": {
+      "createImport": "इम्पोर्ट बनाएं",
+      "createContent": "कंटेंट बनाएं",
+      "creating": "बनाया जा रहा है..."
+    },
+    "searchPlaceholder": "इम्पोर्ट खोजें...",
+    "filters": {
+      "allLevels": "सभी लेवल",
+      "allStatus": "सभी स्टेटस",
+      "completed": "पूर्ण",
+      "processing": "प्रोसेसिंग",
+      "failed": "असफल"
+    },
+    "status": {
+      "completed": "पूर्ण",
+      "processing": "प्रोसेसिंग",
+      "failed": "असफल"
+    },
+    "columns": {
+      "program": "प्रोग्राम",
+      "level": "लेवल",
+      "status": "स्टेटस",
+      "createdBy": "द्वारा बनाया गया",
+      "createdAt": "बनाने की तारीख"
+    },
+    "validation": {
+      "programRequired": "प्रोग्राम आवश्यक है",
+      "levelRequired": "लेवल आवश्यक है",
+      "contentRequired": "कंटेंट आवश्यक है",
+      "minWords": "कंटेंट कम से कम 100 शब्दों का होना चाहिए। फॉर्मेटिंग गाइडलाइन देखने के लिए (?) आइकन पर क्लिक करें।"
+    },
+    "success": {
+      "create": "कंटेंट सफलतापूर्वक बनाया गया"
+    },
+    "error": {
+      "create": "कंटेंट बनाने में त्रुटि"
+    }
   },
 
   "mediaLibrary": {
@@ -1282,6 +1346,7 @@
         "question": "प्रश्न",
         "type": "प्रकार",
         "status": "स्थिति",
+        "createdBy": "द्वारा बनाया गया",
         "actions": "क्रियाएं"
       }
     },
@@ -1394,6 +1459,7 @@
         "passingScore": "उत्तीर्णांक",
         "duration": "अवधि",
         "status": "स्थिति",
+        "createdBy": "द्वारा बनाया गया",
         "actions": "कार्रवाई"
       }
     },
@@ -1499,6 +1565,7 @@
         "passingScore": "उत्तीर्णांक",
         "duration": "अवधि",
         "status": "स्थिति",
+        "createdBy": "द्वारा बनाया गया",
         "actions": "कार्रवाई"
       }
     },

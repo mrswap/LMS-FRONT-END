@@ -445,16 +445,16 @@ const AdminSidebar = ({ isOpen, onClose }) => {
         //   path: "/bulk-upload",
         //   // permission: "topics.view",
         // },
-        {
-          label: "Bulk Upload 1",
-          path: "/bulk-upload1",
-          // permission: "topics.view",
-        },
-        {
-          label: "Bulk Upload 2",
-          path: "/bulk-upload2",
-          // permission: "topics.view",
-        },
+        // {
+        //   label: "Bulk Upload 1",
+        //   path: "/bulk-upload1",
+        //   // permission: "topics.view",
+        // },
+        // {
+        //   label: "Bulk Upload 2",
+        //   path: "/bulk-upload2",
+        //   // permission: "topics.view",
+        // },
       ],
     },
 
@@ -467,6 +467,11 @@ const AdminSidebar = ({ isOpen, onClose }) => {
           label: t("sidebar.learningUnitBuilder"),
           path: "/learning-unit",
           permission: "content.view",
+        },
+        {
+          label: "Automated Content Importer",
+          path: "/automated-content-importer",
+          // permission: "content.view",
         },
         {
           label: t("sidebar.mediaLibrary"),

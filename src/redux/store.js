@@ -25,6 +25,7 @@ import commonReducer from "./slice/commonSlice"
 import notificationsReducer from "./slice/notificationSlicer"
 import supportReducer from "./slice/supportSlice";
 import bulkReducer from "./slice/bulkUploadSlicer"
+import automatedReducer from "./slice/automatedContentSlicer"
 
 export const store = configureStore({
     reducer: {
@@ -53,6 +54,7 @@ export const store = configureStore({
         common: commonReducer,
         notification: notificationsReducer,
         support: supportReducer,
-        bulk: bulkReducer
+        bulk: bulkReducer,
+        automated: automatedReducer
     },
 }); 

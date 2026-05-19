@@ -146,7 +146,7 @@ const RoleDetails = () => {
 
       await dispatch(updateRoleById({ id, data: formData })).unwrap();
       toast.success(t("role.success.update"));
-      navigate("/roles-permission");
+      // navigate("/roles-permission");
     } catch (err) {
       toast.error(err?.message || t("role.error.update"));
     } finally {

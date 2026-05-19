@@ -187,6 +187,15 @@ const Levels = () => {
         />
       ),
     },
+    {
+      header: t("levels.list.columns.createdBy"),
+
+      render: (row) => (
+        <span className="text-sm text-gray-700">
+          {row.creator?.name || "-"}
+        </span>
+      ),
+    },
     ...(hasPermission("levels.edit")
       ? [
           {

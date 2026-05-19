@@ -36,8 +36,8 @@ const CreateUser = () => {
   const { designations } = useSelector((state) => state.designation);
 
   useEffect(() => {
-    dispatch(getAllDesignation());
-    dispatch(getAllRoles());
+    dispatch(getAllDesignation({ status: 1 }));
+    dispatch(getAllRoles({ status: 1 }));
   }, []);
 
   console.log("roles", roles);
