@@ -39,11 +39,6 @@ const UserDetails = () => {
   const { designations } = useSelector((state) => state.designation);
   const { hasPermission } = usePermission();
 
-  // useEffect(() => {
-  //   dispatch(getAllDesignation());
-  //   dispatch(getAllRoles());
-  // }, []);
-
   useEffect(() => {
     dispatch(getAllDesignation({ status: 1 }));
     dispatch(getAllRoles({ status: 1 }));
@@ -52,8 +47,6 @@ const UserDetails = () => {
   const { user, isLoading, isError, message } = useSelector(
     (state) => state.user,
   );
-
-  // console.log("user", user);
 
   const [preview, setPreview] = useState(null);
 
@@ -80,6 +73,8 @@ const UserDetails = () => {
   const regionOptions = countryOptions;
 
   const currentRole = roles?.find((role) => role.id === user?.role_id);
+
+  // console.log("roles", roles);
 
   const initialValues = {
     name: user?.name || "",
@@ -167,7 +162,7 @@ const UserDetails = () => {
     }
   };
 
-  const isSales = currentRole?.label?.toLowerCase() === "sales";
+  const isSales = currentRole?.name?.toLowerCase() === "sales";
 
   const handleDelete = async () => {
     const ok = await dispatch(
@@ -189,11 +184,11 @@ const UserDetails = () => {
         items={[
           {
             label:
-              currentRole?.label?.toLowerCase() === "sales"
+              currentRole?.name?.toLowerCase() === "sales"
                 ? t("userManagement.breadcrumb.salesTrainee")
                 : t("userManagement.breadcrumb.staff"),
             path:
-              currentRole?.label?.toLowerCase() === "sales"
+              currentRole?.name?.toLowerCase() === "sales"
                 ? "/assign-training"
                 : "/staff",
           },
@@ -422,7 +417,7 @@ const UserDetails = () => {
       </div>
 
       {/* user additional details */}
-      {currentRole?.label?.toLowerCase() === "sales" && (
+      {currentRole?.name?.toLowerCase() === "sales" && (
         <UserAdditionalDetails id={id} />
       )}
     </PageLayout>
