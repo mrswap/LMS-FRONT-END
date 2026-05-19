@@ -446,7 +446,7 @@ const AdminSidebar = ({ isOpen, onClose }) => {
     {
       icon: FiFileText,
       label: t("sidebar.contentManagement"),
-      permissions: ["content.view", "faqs.view", "media.view"],
+      permissions: ["content.view", "faqs.view", "media.view", "imports.logs"],
       children: [
         {
           label: t("sidebar.learningUnitBuilder"),
@@ -456,7 +456,7 @@ const AdminSidebar = ({ isOpen, onClose }) => {
         {
           label: "Automated Content Importer",
           path: "/automated-content-importer",
-          // permission: "content.view",
+          permission: "imports.logs",
         },
         {
           label: t("sidebar.mediaLibrary"),
@@ -589,7 +589,7 @@ const AdminSidebar = ({ isOpen, onClose }) => {
     {
       icon: MdOutlineContactSupport,
       label: "Support",
-      permission: "languages.view",
+      permission: "support.view",
       path: "/support",
     },
   ];

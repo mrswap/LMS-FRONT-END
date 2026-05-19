@@ -320,6 +320,7 @@ import {
 import useSupportSocket from "../../../../hooks/useSupportSocket";
 import Loader from "../../common/Loader";
 import { useTranslation } from "react-i18next";
+import usePermission from "../../../../hooks/usePermission";
 
 const ChatWindow = () => {
   const { t } = useTranslation();
@@ -327,6 +328,7 @@ const ChatWindow = () => {
   const { selectedThread, messagesByThread, loading, actionLoading } =
     useSelector((state) => state.support);
   const token = localStorage.getItem("token");
+  const { hasPermission } = usePermission();
 
   const [isMetadataOpen, setIsMetadataOpen] = useState(false);
   const [isActionLoading, setIsActionLoading] = useState(false);
@@ -433,8 +435,8 @@ const ChatWindow = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            {/* Action Buttons */}
-            {showResolveButton && (
+            {/* Resolve Button */}
+            {hasPermission("support.resolve") && showResolveButton && (
               <button
                 onClick={handleResolve}
                 disabled={isActionLoading || actionLoading}
@@ -449,7 +451,8 @@ const ChatWindow = () => {
               </button>
             )}
 
-            {showReopenButton && (
+            {/* Reopen Button */}
+            {hasPermission("support.reopen") && showReopenButton && (
               <button
                 onClick={handleReopen}
                 disabled={isActionLoading || actionLoading}
@@ -587,18 +590,29 @@ const ChatWindow = () => {
 
       {/* Disable Chat Input for Resolved Threads */}
       {status === "resolved" ? (
-        <div className="border-t border-gray-200 bg-gray-50 p-4 text-center">
-          <p className="text-sm text-gray-500">
-            {t("support.chat.threadResolved")}
-            <button
-              onClick={handleReopen}
-              disabled={isActionLoading}
-              className="ml-2 text-orange-600 hover:text-orange-700 font-medium disabled:opacity-50"
-            >
-              {t("support.chat.reopenToContinue")}
-            </button>
-          </p>
-        </div>
+        hasPermission("support.reopen") ? (
+          <div className="border-t border-gray-200 bg-gray-50 p-4 text-center">
+            <p className="text-sm text-gray-500">
+              {t("support.chat.threadResolved")}
+
+              <button
+                onClick={handleReopen}
+                disabled={isActionLoading}
+                className="ml-2 text-orange-600 hover:text-orange-700 font-medium disabled:opacity-50"
+              >
+                {isActionLoading
+                  ? t("common.loading")
+                  : t("support.chat.reopenToContinue")}
+              </button>
+            </p>
+          </div>
+        ) : (
+          <div className="border-t border-gray-200 bg-gray-50 p-4 text-center">
+            <p className="text-sm text-gray-500">
+              {t("support.chat.threadResolved")}
+            </p>
+          </div>
+        )
       ) : (
         <ChatInput threadId={selectedThread.id} />
       )}

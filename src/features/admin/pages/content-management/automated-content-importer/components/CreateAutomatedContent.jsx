@@ -388,12 +388,14 @@ import CustomEditor from "../../../../common/CustomEditor";
 import { createAutomatedImport } from "../../../../../../redux/slice/automatedContentSlicer";
 import Guidline from "./Guidline";
 import { useTranslation } from "react-i18next";
+import usePermission from "../../../../../../hooks/usePermission";
 
 const CreateAutomatedContent = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const toast = useToast();
   const navigate = useNavigate();
+  const { hasPermission } = usePermission();
 
   const { programs } = useSelector((state) => state.program);
   const { levels, isLoading: isLevelLoading } = useSelector(
@@ -690,24 +692,26 @@ const CreateAutomatedContent = () => {
                       </div>
                     </div>
 
-                    <div className="flex justify-end items-center pt-4">
-                      <div className="flex gap-3">
-                        <button
-                          type="submit"
-                          disabled={
-                            isSubmitting ||
-                            !values.levelName ||
-                            !values.htmlContent ||
-                            wordCount < 100
-                          }
-                          className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
-                        >
-                          {isSubmitting
-                            ? t("automatedImporter.actions.creating")
-                            : t("automatedImporter.actions.createContent")}
-                        </button>
+                    {hasPermission("imports.create") && (
+                      <div className="flex justify-end items-center pt-4">
+                        <div className="flex gap-3">
+                          <button
+                            type="submit"
+                            disabled={
+                              isSubmitting ||
+                              !values.levelName ||
+                              !values.htmlContent ||
+                              wordCount < 100
+                            }
+                            className="px-4 py-2 rounded-md text-sm text-white bg-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
+                          >
+                            {isSubmitting
+                              ? t("automatedImporter.actions.creating")
+                              : t("automatedImporter.actions.createContent")}
+                          </button>
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </Form>
                 );
               }}
