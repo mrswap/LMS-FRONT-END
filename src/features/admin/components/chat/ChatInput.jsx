@@ -256,6 +256,7 @@ import {
 } from "../../../../redux/slice/supportSlice";
 import { FiSend, FiPaperclip, FiX, FiImage } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
+import usePermission from "../../../../hooks/usePermission";
 
 const ChatInput = ({ threadId }) => {
   const { t } = useTranslation();
@@ -265,6 +266,7 @@ const ChatInput = ({ threadId }) => {
   const [text, setText] = useState("");
   const [file, setFile] = useState(null);
   const [isSending, setIsSending] = useState(false);
+  const { hasPermission } = usePermission();
 
   const handleSend = async () => {
     if ((!text.trim() && !file) || isSending) return;
@@ -380,39 +382,40 @@ const ChatInput = ({ threadId }) => {
         </div>
       )}
 
-      <div className="flex items-center gap-2">
-        <div className="flex-1 relative">
-          <textarea
-            ref={textareaRef}
-            value={text}
-            onChange={handleTextChange}
-            onKeyPress={handleKeyPress}
-            placeholder={t("support.chat.typeReply")}
-            rows={1}
-            className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 pr-12 resize-none focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
-            style={{ minHeight: "44px", maxHeight: "120px" }}
-          />
-          <div className="absolute right-2 bottom-3">
-            <input
-              type="file"
-              ref={fileInputRef}
-              onChange={(e) => setFile(e.target.files[0])}
-              className="hidden"
-              id="file-upload"
+      {hasPermission("support.reply") && (
+        <div className="flex items-center gap-2">
+          <div className="flex-1 relative">
+            <textarea
+              ref={textareaRef}
+              value={text}
+              onChange={handleTextChange}
+              onKeyPress={handleKeyPress}
+              placeholder={t("support.chat.typeReply")}
+              rows={1}
+              className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 pr-12 resize-none focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
+              style={{ minHeight: "44px", maxHeight: "120px" }}
             />
-            <label
-              htmlFor="file-upload"
-              className="cursor-pointer text-gray-400 hover:text-gray-600 transition p-1 block"
-            >
-              <FiPaperclip size={18} />
-            </label>
+            <div className="absolute right-2 bottom-3">
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={(e) => setFile(e.target.files[0])}
+                className="hidden"
+                id="file-upload"
+              />
+              <label
+                htmlFor="file-upload"
+                className="cursor-pointer text-gray-400 hover:text-gray-600 transition p-1 block"
+              >
+                <FiPaperclip size={18} />
+              </label>
+            </div>
           </div>
-        </div>
 
-        <button
-          onClick={handleSend}
-          disabled={!text.trim() || isSending}
-          className={`
+          <button
+            onClick={handleSend}
+            disabled={!text.trim() || isSending}
+            className={`
             rounded-xl px-5 py-2.5 transition-all duration-200 flex items-center gap-2 h-[44px]
             ${
               !text.trim() || isSending
@@ -420,35 +423,36 @@ const ChatInput = ({ threadId }) => {
                 : "bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white shadow-md hover:shadow-lg"
             }
           `}
-        >
-          {isSending ? (
-            <>
-              <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                  fill="none"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-                />
-              </svg>
-              <span className="text-sm">{t("support.chat.sending")}</span>
-            </>
-          ) : (
-            <>
-              <FiSend size={16} />
-              <span className="text-sm">{t("support.chat.send")}</span>
-            </>
-          )}
-        </button>
-      </div>
+          >
+            {isSending ? (
+              <>
+                <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                    fill="none"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                  />
+                </svg>
+                <span className="text-sm">{t("support.chat.sending")}</span>
+              </>
+            ) : (
+              <>
+                <FiSend size={16} />
+                <span className="text-sm">{t("support.chat.send")}</span>
+              </>
+            )}
+          </button>
+        </div>
+      )}
     </div>
   );
 };

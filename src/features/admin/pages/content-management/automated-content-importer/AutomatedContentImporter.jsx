@@ -279,6 +279,7 @@ import Error from "../../../common/Error";
 import { getAllLevels } from "../../../../../redux/slice/levelSlice";
 import { getAllImportLogs } from "../../../../../redux/slice/automatedContentSlicer";
 import { useTranslation } from "react-i18next";
+import usePermission from "../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -290,6 +291,7 @@ const AutomatedContentImporter = () => {
   );
   const { levels } = useSelector((state) => state.level);
   const [isLevelsLoaded, setIsLevelsLoaded] = useState(false);
+  const { hasPermission } = usePermission();
 
   const levelOptions = [
     { value: "all", label: t("automatedImporter.filters.allLevels") },
@@ -450,12 +452,14 @@ const AutomatedContentImporter = () => {
         </PageHeaderLeft>
 
         <PageHeaderRight>
-          <Link
-            to="create"
-            className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold"
-          >
-            {t("automatedImporter.actions.createImport")}
-          </Link>
+          {hasPermission("imports.create") && (
+            <Link
+              to="create"
+              className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold"
+            >
+              {t("automatedImporter.actions.createImport")}
+            </Link>
+          )}
         </PageHeaderRight>
       </PageHeader>
 

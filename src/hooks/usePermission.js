@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 
 const usePermission = () => {
     const { profile } = useSelector((state) => state.auth);
-    // console.log("permission", profile?.permissions)
+    console.log("permission", profile?.permissions)
 
     const hasPermission = (permissionName) => {
         // Super Admin
