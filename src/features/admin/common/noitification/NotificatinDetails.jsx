@@ -400,7 +400,7 @@ const NotificationDetail = () => {
                   </p>
                 </div>
 
-                {notification.data &&
+                {/* {notification.data &&
                   Object.keys(notification.data).length > 0 && (
                     <div className="mt-6 rounded-lg border border-gray-200 overflow-hidden">
                       <div className="px-4 py-3 bg-gray-50 border-b border-gray-200">
@@ -436,7 +436,7 @@ const NotificationDetail = () => {
                         )}
                       </div>
                     </div>
-                  )}
+                  )} */}
               </div>
             </div>
           </div>
