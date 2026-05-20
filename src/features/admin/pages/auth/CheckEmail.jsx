@@ -3,19 +3,33 @@ import logo from "../../../../assets/admin/AvanteMedicalLogoBlue.png";
 import success from "../../../../assets/admin/success-right.png";
 import { useTranslation } from "react-i18next";
 import { useLocation, Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getSiteSettingsCommon } from "../../../../redux/slice/commonSlice";
+import Loader from "../../common/Loader";
 
 const CheckEmail = () => {
   const { t } = useTranslation();
   const location = useLocation();
+  const dispatch = useDispatch();
+  const { siteSettings, isLoading: siteSettingsLoading } = useSelector(
+    (state) => state.common,
+  );
+
+  useEffect(() => {
+    dispatch(getSiteSettingsCommon());
+  }, [dispatch]);
 
   const userEmail = location.state?.email || "user@example.com";
+
+  if (siteSettingsLoading) return <Loader />;
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#EEF2F6] px-4">
       {/* Logo */}
       <div className="text-center mb-6">
         <img
-          src={logo}
+          src={siteSettings?.company_logo || ""}
           alt="Avante Medical"
           className="w-[190px] h-[110px] object-contain"
         />
@@ -65,8 +79,8 @@ const CheckEmail = () => {
       </div>
 
       {/* Footer */}
-      <p className="text-xs text-gray-400 my-4">
-        © 2025 Avante Medical LMS · v2.1.0
+      <p className="text-xs text-gray-400 my-6">
+        {siteSettings?.footer_text || ""}
       </p>
     </div>
   );

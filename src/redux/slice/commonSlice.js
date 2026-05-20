@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../app/axios";
+import axiosCommonInstance from "../../app/axiosCommon";
 import { getAuthConfig } from "../../utils/authConfig";
 
 /* ===========================
@@ -24,6 +25,26 @@ export const updatePublishStatus = createAsyncThunk(
 );
 
 /* ===========================
+   GET SITE SETTINGS
+=========================== */
+export const getSiteSettingsCommon = createAsyncThunk(
+    "common/getSiteSettings",
+    async (_, thunkAPI) => {
+        try {
+            const res = await axiosCommonInstance.get(
+                "/common/site/settings",
+                // getAuthConfig()
+            );
+            return res.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(
+                error.response?.data || { message: "Something went wrong" }
+            );
+        }
+    }
+);
+
+/* ===========================
    COMMON SLICE
 =========================== */
 const commonSlice = createSlice({
@@ -32,6 +53,7 @@ const commonSlice = createSlice({
         isLoading: false,
         isError: false,
         isSuccess: false,
+        siteSettings: null,
         message: "",
         updatedPost: null,
     },
@@ -66,7 +88,22 @@ const commonSlice = createSlice({
                 state.isLoading = false;
                 state.isError = true;
                 state.message = action.payload?.message;
-            });
+            })
+
+            /* ===== SITE SETTINGS - GET ===== */
+            .addCase(getSiteSettingsCommon.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(getSiteSettingsCommon.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.siteSettings = action.payload?.data;
+                state.isError = false;
+            })
+            .addCase(getSiteSettingsCommon.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload?.message;
+            })
     },
 });
 

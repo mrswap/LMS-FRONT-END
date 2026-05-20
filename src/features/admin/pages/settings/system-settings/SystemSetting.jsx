@@ -123,6 +123,7 @@ const SystemSetting = () => {
   const { settings, isLoading, isError, message } = useSelector(
     (state) => state.systemSetting,
   );
+
   const { hasPermission } = usePermission();
 
   useEffect(() => {
