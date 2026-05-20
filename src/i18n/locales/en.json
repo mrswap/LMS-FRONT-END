@@ -185,7 +185,6 @@
     "willAppear": "New notifications will appear here",
     "showing": "Showing",
     "to": "to",
-    "of": "of",
     "notifications": "notifications",
     "previous": "Previous",
     "next": "Next",
@@ -1137,23 +1136,30 @@
   },
 
   "singlePreviewContent": {
+    "back": "Back",
+    "exitFullscreen": "Exit Fullscreen",
+    "fullscreen": "Fullscreen",
+    "noContent": "No content available",
+    "videoNotAvailable": "Video preview not available",
+    "audioNotSupported": "Your browser does not support the audio element.",
     "types": {
-      "text": "Text",
-      "video": "Video",
-      "pdf": "PDF",
-      "audio": "Audio",
-      "image": "Image"
+      "text": "Text Content",
+      "video": "Video Content",
+      "pdf": "PDF Document",
+      "audio": "Audio Content",
+      "image": "Image Content"
     },
     "pdf": {
-      "title": "PDF Document",
-      "download": "Download"
+      "title": "PDF Document"
+    },
+    "h5p": {
+      "interactive": "Interactive H5P Content"
     },
     "notFound": {
       "title": "Content Not Found",
       "description": "The content you're looking for doesn't exist or has been removed.",
       "button": "Go Back"
-    },
-    "unsupported": "Unsupported content type:"
+    }
   },
 
   "automatedImporter": {
@@ -1218,7 +1224,7 @@
   "mediaLibrary": {
     "list": {
       "title": "Media Library",
-      "subtitle": "Manage surgical videos, clinical diagrams, and course documentation for your medical students.",
+      "subtitle": "Manage surgical videos, clinical diagrams, course documentation, and interactive H5P content for your medical students.",
       "searchPlaceholder": "Search files by name, tags, or metadata...",
       "noDataFound": "No Data Found",
       "unknownCreator": "Unknown",
@@ -1227,7 +1233,8 @@
         "videos": "Videos",
         "images": "Images",
         "documents": "Documents",
-        "audio": "Audio"
+        "audio": "Audio",
+        "h5p": "H5P"
       }
     },
     "details": {
@@ -1240,6 +1247,9 @@
       "descriptionPlaceholder": "Write media description...",
       "externalUrl": "External URL",
       "externalUrlPlaceholder": "https://example.com/file",
+      "h5pUrl": "H5P External URL",
+      "h5pUrlPlaceholder": "https://example.com/h5p-content",
+      "h5pHelpText": "Enter the URL of your H5P content (file upload not supported)",
       "uploadFile": "Upload File",
       "uploadText": "Click to upload file",
       "uploadSubText": "PNG, JPG, JPEG, MP4, PDF up to 10MB",
@@ -1260,7 +1270,7 @@
     },
     "create": {
       "title": "Create Media Library",
-      "subtitle": "Manage surgical videos, clinical diagrams, and course documentation for your medical students."
+      "subtitle": "Manage surgical videos, clinical diagrams, course documentation, and interactive H5P content for your medical students."
     },
     "actions": {
       "uploadMedia": "Upload Media",
@@ -1278,7 +1288,8 @@
       "image": "Image",
       "video": "Video",
       "audio": "Audio",
-      "document": "Document"
+      "document": "Document",
+      "h5p": "H5P"
     },
     "videoInput": {
       "uploadFile": "Upload File",
@@ -1305,7 +1316,8 @@
       "invalidFileFormat": "Invalid {type} format. Allowed: {formats}",
       "fileSizeExceeded": "File size should be less than 10MB",
       "selectTypeFirst": "Please select media type first",
-      "selectUploadMethodFirst": "Please select Upload File or External URL first"
+      "selectUploadMethodFirst": "Please select Upload File or External URL first",
+      "h5pNoFileUpload": "File upload is not supported for H5P content. Please provide an external URL."
     },
     "breadcrumb": {
       "contentManagement": "Content Management",
@@ -1334,12 +1346,22 @@
       "copyShortcode": "Copy Shortcode",
       "type": "Type",
       "backToLibrary": "Back to Media Library",
+      "exitFullscreen": "Exit Fullscreen",
+      "fullscreen": "Fullscreen",
+      "interactiveH5pContent": "Interactive H5P Content",
+      "videoPreview": "Video Preview",
+      "imagePreview": "Image Preview",
+      "audioPreview": "Audio Preview",
+      "pdfPreview": "PDF Preview",
+      "downloadDocument": "Download Document",
       "videoNotSupported": "Your browser does not support the video tag.",
       "videoPreviewNotAvailable": "Video preview not available",
       "audioNotSupported": "Your browser does not support the audio element.",
       "documentPreviewNotAvailable": "Preview not available for this document",
+      "h5pPreviewNotAvailable": "H5P content preview will open in a new window",
       "filePreviewNotAvailable": "Preview not available for this file type",
       "imageNotFoundPlaceholder": "https://placehold.co/600x400?text=Image+Not+Found",
+      "openH5PContent": "Open H5P Content",
       "notFound": {
         "title": "Media not found",
         "description": "The media you're looking for doesn't exist or has been removed."

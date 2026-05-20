@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { FiMail, FiArrowLeft } from "react-icons/fi";
@@ -7,15 +7,24 @@ import FormButton from "../../common/form/FormButton";
 import logo from "../../../../assets/admin/AvanteMedicalLogoBlue.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useToast } from "../../common/toast/ToastContext";
 import { forgotPassword } from "../../../../redux/slice/authSlice";
+import { getSiteSettingsCommon } from "../../../../redux/slice/commonSlice";
+import Loader from "../../common/Loader";
 
 const ForgotPassword = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toast = useToast();
+  const { siteSettings, isLoading: siteSettingsLoading } = useSelector(
+    (state) => state.common,
+  );
+
+  useEffect(() => {
+    dispatch(getSiteSettingsCommon());
+  }, [dispatch]);
 
   const initialValues = {
     email: "",
@@ -39,12 +48,14 @@ const ForgotPassword = () => {
     }
   };
 
+  if (siteSettingsLoading) return <Loader />;
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#EEF2F6] px-4">
       {/* Logo */}
       <div className="text-center mb-6">
         <img
-          src={logo}
+          src={siteSettings?.company_logo || ""}
           alt="Avante Medical"
           className="w-[190px] h-[110px] object-contain"
         />
@@ -148,8 +159,8 @@ const ForgotPassword = () => {
       </div>
 
       {/* Footer */}
-      <p className="text-xs text-gray-400 my-4">
-        © 2025 Avante Medical LMS · v2.1.0
+      <p className="text-xs text-gray-400 my-6">
+        {siteSettings?.footer_text || ""}
       </p>
     </div>
   );

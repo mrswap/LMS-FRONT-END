@@ -32,12 +32,11 @@
 
 //   const notification = location.state?.notification;
 
-//   React.useEffect(() => {
-//     // If notification is not read, mark it as read
-//     if (notification && !notification.is_read) {
-//       dispatch(markNotificationAsRead(notification.id));
-//     }
-//   }, [notification, dispatch]);
+//   // React.useEffect(() => {
+//   //   if (notification && !notification.is_read) {
+//   //     dispatch(markNotificationAsRead(notification.id));
+//   //   }
+//   // }, [notification, dispatch]);
 
 //   const getIcon = (type) => {
 //     const icons = {
@@ -143,7 +142,6 @@
 //       <PageBody>
 //         <div className="max-w-4xl mx-auto">
 //           <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-//             {/* Status Bar - Matching dropdown style */}
 //             <div className="px-6 py-4 bg-gradient-to-r from-gray-50 to-white border-b border-gray-200 flex items-center justify-between">
 //               <div className="flex items-center gap-2">
 //                 <div className="bg-indigo-50 rounded-full p-1.5">
@@ -155,7 +153,6 @@
 //               </div>
 //             </div>
 
-//             {/* Content */}
 //             <div className="p-8">
 //               <div className="prose max-w-none">
 //                 <div className="mb-6 pb-6 border-b border-gray-100">
@@ -176,8 +173,7 @@
 //                   </p>
 //                 </div>
 
-//                 {/* Additional Data if any */}
-//                 {notification.data &&
+//                 {/* {notification.data &&
 //                   Object.keys(notification.data).length > 0 && (
 //                     <div className="mt-6 rounded-lg border border-gray-200 overflow-hidden">
 //                       <div className="px-4 py-3 bg-gray-50 border-b border-gray-200">
@@ -213,7 +209,7 @@
 //                         )}
 //                       </div>
 //                     </div>
-//                   )}
+//                   )} */}
 //               </div>
 //             </div>
 //           </div>
@@ -258,12 +254,6 @@ const NotificationDetail = () => {
   const { t } = useTranslation();
 
   const notification = location.state?.notification;
-
-  React.useEffect(() => {
-    if (notification && !notification.is_read) {
-      dispatch(markNotificationAsRead(notification.id));
-    }
-  }, [notification, dispatch]);
 
   const getIcon = (type) => {
     const icons = {
@@ -399,44 +389,6 @@ const NotificationDetail = () => {
                     {notification.message}
                   </p>
                 </div>
-
-                {notification.data &&
-                  Object.keys(notification.data).length > 0 && (
-                    <div className="mt-6 rounded-lg border border-gray-200 overflow-hidden">
-                      <div className="px-4 py-3 bg-gray-50 border-b border-gray-200">
-                        <h3 className="font-semibold text-gray-700 text-sm uppercase tracking-wider">
-                          {t("notification.additionalInfo")}
-                        </h3>
-                      </div>
-                      <div className="p-4 space-y-3">
-                        {notification.data.screen && (
-                          <div className="flex items-start gap-2 text-sm">
-                            <span className="font-medium text-gray-600 min-w-[80px]">
-                              {t("notification.screen")}:
-                            </span>
-                            <span className="text-gray-700">
-                              {notification.data.screen}
-                            </span>
-                          </div>
-                        )}
-                        {notification.data.link && (
-                          <div className="flex items-start gap-2 text-sm">
-                            <span className="font-medium text-gray-600 min-w-[80px]">
-                              {t("notification.link")}:
-                            </span>
-                            <a
-                              href={notification.data.link}
-                              className="text-indigo-600 hover:text-indigo-700 hover:underline break-all"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {notification.data.link}
-                            </a>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
               </div>
             </div>
           </div>

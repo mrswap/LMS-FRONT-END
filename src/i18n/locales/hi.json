@@ -157,19 +157,19 @@
   "notification": {
     "notifications": "सूचनाएं",
     "stayUpdated": "अपनी नवीनतम गतिविधियों से अपडेट रहें",
-    "markAllAsRead": "सभी को पढ़ा हुआ चिह्नित करें",
+    "markAllAsRead": "सभी को पढ़ा हुआ मार्क करें",
     "readMore": "और पढ़ें",
     "noNotifications": "कोई सूचना नहीं",
     "quietCenter": "आपका शांत सूचना केंद्र",
     "viewAll": "सभी सूचनाएं देखें",
-    "page": "पेज",
+    "page": "पृष्ठ",
     "of": "में से",
-    "justNow": "अभी अभी",
+    "justNow": "अभी-अभी",
     "minAgo": "मिनट पहले",
     "hourAgo": "घंटा पहले",
     "yesterday": "कल",
     "daysAgo": "दिन पहले",
-    "weeksAgo": "हफ्ते पहले",
+    "weeksAgo": "सप्ताह पहले",
     "monthsAgo": "महीने पहले",
     "yearsAgo": "साल पहले",
     "stats": {
@@ -185,7 +185,6 @@
     "willAppear": "नई सूचनाएं यहां दिखाई देंगी",
     "showing": "दिखाया जा रहा है",
     "to": "से",
-    "of": "में से",
     "notifications": "सूचनाएं",
     "previous": "पिछला",
     "next": "अगला",
@@ -196,7 +195,7 @@
     "link": "लिंक",
     "new": "नया",
     "notFound": "सूचना नहीं मिली",
-    "notFoundDescription": "जिस सूचना को आप खोज रहे हैं वह मौजूद नहीं है या हटा दी गई है।",
+    "notFoundDescription": "जिस सूचना को आप ढूंढ रहे हैं वह मौजूद नहीं है या हटा दी गई है।",
     "goBack": "सूचनाओं पर वापस जाएं"
   },
 
@@ -1137,23 +1136,30 @@
   },
 
   "singlePreviewContent": {
+    "back": "वापस",
+    "exitFullscreen": "फुलस्क्रीन बंद करें",
+    "fullscreen": "फुलस्क्रीन",
+    "noContent": "कोई सामग्री उपलब्ध नहीं है",
+    "videoNotAvailable": "वीडियो पूर्वावलोकन उपलब्ध नहीं है",
+    "audioNotSupported": "आपका ब्राउज़र ऑडियो एलिमेंट को समर्थन नहीं करता।",
     "types": {
-      "text": "टेक्स्ट",
-      "video": "वीडियो",
-      "pdf": "पीडीएफ",
-      "audio": "ऑडियो",
-      "image": "छवि"
+      "text": "टेक्स्ट सामग्री",
+      "video": "वीडियो सामग्री",
+      "pdf": "PDF दस्तावेज़",
+      "audio": "ऑडियो सामग्री",
+      "image": "चित्र सामग्री"
     },
     "pdf": {
-      "title": "पीडीएफ दस्तावेज़",
-      "download": "डाउनलोड करें"
+      "title": "PDF दस्तावेज़"
+    },
+    "h5p": {
+      "interactive": "इंटरैक्टिव H5P सामग्री"
     },
     "notFound": {
       "title": "सामग्री नहीं मिली",
-      "description": "आप जिस सामग्री को खोज रहे हैं वह मौजूद नहीं है या हटा दी गई है।",
+      "description": "जिस सामग्री को आप खोज रहे हैं वह मौजूद नहीं है या हटा दी गई है।",
       "button": "वापस जाएं"
-    },
-    "unsupported": "असमर्थित सामग्री प्रकार:"
+    }
   },
 
   "automatedImporter": {
@@ -1218,16 +1224,17 @@
   "mediaLibrary": {
     "list": {
       "title": "मीडिया लाइब्रेरी",
-      "subtitle": "अपने मेडिकल छात्रों के लिए सर्जिकल वीडियो, क्लिनिकल डायग्राम और कोर्स डॉक्यूमेंटेशन मैनेज करें।",
-      "searchPlaceholder": "फ़ाइल का नाम, टैग या मेटाडेटा से खोजें...",
+      "subtitle": "अपने मेडिकल छात्रों के लिए सर्जिकल वीडियो, क्लिनिकल डायग्राम, कोर्स डॉक्यूमेंटेशन और इंटरैक्टिव H5P कंटेंट को प्रबंधित करें।",
+      "searchPlaceholder": "फ़ाइलों को नाम, टैग या मेटाडेटा द्वारा खोजें...",
       "noDataFound": "कोई डेटा नहीं मिला",
       "unknownCreator": "अज्ञात",
       "tabs": {
         "all": "सभी फ़ाइलें",
         "videos": "वीडियो",
-        "images": "इमेज",
+        "images": "चित्र",
         "documents": "दस्तावेज़",
-        "audio": "ऑडियो"
+        "audio": "ऑडियो",
+        "h5p": "H5P"
       }
     },
     "details": {
@@ -1240,27 +1247,30 @@
       "descriptionPlaceholder": "मीडिया का विवरण लिखें...",
       "externalUrl": "बाहरी URL",
       "externalUrlPlaceholder": "https://example.com/file",
+      "h5pUrl": "H5P बाहरी URL",
+      "h5pUrlPlaceholder": "https://example.com/h5p-content",
+      "h5pHelpText": "अपने H5P कंटेंट का URL दर्ज करें (फ़ाइल अपलोड समर्थित नहीं है)",
       "uploadFile": "फ़ाइल अपलोड करें",
       "uploadText": "फ़ाइल अपलोड करने के लिए क्लिक करें",
       "uploadSubText": "PNG, JPG, JPEG, MP4, PDF अधिकतम 10MB तक",
-      "changeImage": "इमेज बदलें",
+      "changeImage": "चित्र बदलें",
       "deleteText": "क्या आप वाकई इस मीडिया को हटाना चाहते हैं?",
-      "previewAlt": "मीडिया प्रीव्यू",
-      "selectInputMethod": "इनपुट तरीका चुनें",
+      "previewAlt": "मीडिया पूर्वावलोकन",
+      "selectInputMethod": "इनपुट विधि चुनें",
       "uploadMethod": "जोड़ने का तरीका चुनें",
-      "uploadMethodPlaceholder": "अपलोड तरीका चुनें",
+      "uploadMethodPlaceholder": "अपलोड विधि चुनें",
       "allowedFormats": "अनुमत: {formats} (अधिकतम 10MB)",
       "fileType": "प्रकार",
       "currentFile": "वर्तमान फ़ाइल",
       "currentServerFile": "सर्वर से वर्तमान फ़ाइल",
-      "newFileToUpload": "नई फ़ाइल अपलोड की जाएगी",
+      "newFileToUpload": "अपलोड की जाने वाली नई फ़ाइल",
       "currentVideoFile": "वर्तमान वीडियो फ़ाइल",
       "videoAllowedFormats": "अनुमत: MP4, MOV, AVI, MKV (अधिकतम 10MB)",
       "documentAllowedFormats": "अनुमत: PDF, DOC, DOCX, XLS, XLSX (अधिकतम 10MB)"
     },
     "create": {
       "title": "मीडिया लाइब्रेरी बनाएं",
-      "subtitle": "अपने मेडिकल छात्रों के लिए सर्जिकल वीडियो, क्लिनिकल डायग्राम और कोर्स डॉक्यूमेंटेशन मैनेज करें।"
+      "subtitle": "अपने मेडिकल छात्रों के लिए सर्जिकल वीडियो, क्लिनिकल डायग्राम, कोर्स डॉक्यूमेंटेशन और इंटरैक्टिव H5P कंटेंट को प्रबंधित करें।"
     },
     "actions": {
       "uploadMedia": "मीडिया अपलोड करें",
@@ -1270,15 +1280,16 @@
       "updateMedia": "मीडिया अपडेट करें",
       "deleteMedia": "मीडिया हटाएं",
       "cancel": "रद्द करें",
-      "preview": "प्रीव्यू",
+      "preview": "पूर्वावलोकन",
       "viewDetails": "विवरण देखें",
       "copyShortcode": "शॉर्टकोड कॉपी करें"
     },
     "types": {
-      "image": "इमेज",
+      "image": "चित्र",
       "video": "वीडियो",
       "audio": "ऑडियो",
-      "document": "दस्तावेज़"
+      "document": "दस्तावेज़",
+      "h5p": "H5P"
     },
     "videoInput": {
       "uploadFile": "फ़ाइल अपलोड करें",
@@ -1305,17 +1316,18 @@
       "invalidFileFormat": "अमान्य {type} फ़ॉर्मेट। अनुमत: {formats}",
       "fileSizeExceeded": "फ़ाइल का आकार 10MB से कम होना चाहिए",
       "selectTypeFirst": "कृपया पहले मीडिया प्रकार चुनें",
-      "selectUploadMethodFirst": "कृपया पहले फ़ाइल अपलोड या बाहरी URL चुनें"
+      "selectUploadMethodFirst": "कृपया पहले फ़ाइल अपलोड या बाहरी URL चुनें",
+      "h5pNoFileUpload": "H5P कंटेंट के लिए फ़ाइल अपलोड समर्थित नहीं है। कृपया बाहरी URL प्रदान करें।"
     },
     "breadcrumb": {
-      "contentManagement": "कंटेंट मैनेजमेंट",
+      "contentManagement": "कंटेंट प्रबंधन",
       "view-media": "मीडिया देखें"
     },
     "pagination": {
       "previous": "पिछला",
       "next": "अगला",
-      "page": "पेज",
-      "of": "में से"
+      "page": "पृष्ठ",
+      "of": "का"
     },
     "success": {
       "create": "मीडिया सफलतापूर्वक बनाया गया!",
@@ -1334,12 +1346,22 @@
       "copyShortcode": "शॉर्टकोड कॉपी करें",
       "type": "प्रकार",
       "backToLibrary": "मीडिया लाइब्रेरी पर वापस जाएं",
-      "videoNotSupported": "आपका ब्राउज़र वीडियो टैग को सपोर्ट नहीं करता।",
-      "videoPreviewNotAvailable": "वीडियो प्रीव्यू उपलब्ध नहीं है",
-      "audioNotSupported": "आपका ब्राउज़र ऑडियो एलिमेंट को सपोर्ट नहीं करता।",
-      "documentPreviewNotAvailable": "इस दस्तावेज़ के लिए प्रीव्यू उपलब्ध नहीं है",
-      "filePreviewNotAvailable": "इस फ़ाइल प्रकार के लिए प्रीव्यू उपलब्ध नहीं है",
+      "exitFullscreen": "फुलस्क्रीन बंद करें",
+      "fullscreen": "फुलस्क्रीन",
+      "interactiveH5pContent": "इंटरैक्टिव H5P कंटेंट",
+      "videoPreview": "वीडियो पूर्वावलोकन",
+      "imagePreview": "चित्र पूर्वावलोकन",
+      "audioPreview": "ऑडियो पूर्वावलोकन",
+      "pdfPreview": "PDF पूर्वावलोकन",
+      "downloadDocument": "दस्तावेज़ डाउनलोड करें",
+      "videoNotSupported": "आपका ब्राउज़र वीडियो टैग को समर्थन नहीं करता।",
+      "videoPreviewNotAvailable": "वीडियो पूर्वावलोकन उपलब्ध नहीं है",
+      "audioNotSupported": "आपका ब्राउज़र ऑडियो एलिमेंट को समर्थन नहीं करता।",
+      "documentPreviewNotAvailable": "इस दस्तावेज़ के लिए पूर्वावलोकन उपलब्ध नहीं है",
+      "h5pPreviewNotAvailable": "H5P कंटेंट का पूर्वावलोकन नई विंडो में खुलेगा",
+      "filePreviewNotAvailable": "इस फ़ाइल प्रकार के लिए पूर्वावलोकन उपलब्ध नहीं है",
       "imageNotFoundPlaceholder": "https://placehold.co/600x400?text=Image+Not+Found",
+      "openH5PContent": "H5P कंटेंट खोलें",
       "notFound": {
         "title": "मीडिया नहीं मिला",
         "description": "जिस मीडिया को आप खोज रहे हैं वह मौजूद नहीं है या हटा दिया गया है।"

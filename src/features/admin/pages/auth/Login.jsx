@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../../../redux/slice/authSlice";
 import { useTranslation } from "react-i18next";
 import { useToast } from "../../common/toast/ToastContext";
+import Loader from "../../common/Loader";
+import { getSiteSettingsCommon } from "../../../../redux/slice/commonSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -20,6 +22,13 @@ const Login = () => {
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
+  const { siteSettings, isLoading: siteSettingsLoading } = useSelector(
+    (state) => state.common,
+  );
+
+  useEffect(() => {
+    dispatch(getSiteSettingsCommon());
+  }, [dispatch]);
 
   const { isLoading } = useSelector((state) => state.auth);
 
@@ -47,11 +56,17 @@ const Login = () => {
     }
   };
 
+  if (siteSettingsLoading) return <Loader />;
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#EEF2F6] px-4">
       {/* Logo */}
       <div className="text-center mb-4">
-        <img src={logo} alt="logo" className="w-[190px] h-[110px]" />
+        <img
+          src={siteSettings?.company_logo || ""}
+          alt="logo"
+          className="w-[190px] h-[110px]"
+        />
       </div>
 
       {/* Card */}
@@ -144,8 +159,8 @@ const Login = () => {
       </div>
 
       {/* Bottom */}
-      <p className="text-xs text-gray-400 my-4">
-        © 2025 Avante Medical LMS - v2.1.0
+      <p className="text-xs text-gray-400 my-6">
+        {siteSettings?.footer_text || ""}
       </p>
     </div>
   );

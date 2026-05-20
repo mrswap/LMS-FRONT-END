@@ -152,11 +152,11 @@
 
   "notification": {
     "notifications": "ਨੋਟੀਫਿਕੇਸ਼ਨ",
-    "stayUpdated": "ਆਪਣੀਆਂ ਨਵੀਆਂ ਗਤੀਵਿਧੀਆਂ ਨਾਲ ਅੱਪਡੇਟ ਰਹੋ",
-    "markAllAsRead": "ਸਭ ਨੂੰ ਪੜ੍ਹਿਆ ਹੋਇਆ ਚਿੰਨ੍ਹਿਤ ਕਰੋ",
+    "stayUpdated": "ਆਪਣੀਆਂ ਨਵੀਆਂ ਗਤੀਵਿਧੀਆਂ ਨਾਲ ਅਪਡੇਟ ਰਹੋ",
+    "markAllAsRead": "ਸਭ ਨੂੰ ਪੜ੍ਹਿਆ ਹੋਇਆ ਮਾਰਕ ਕਰੋ",
     "readMore": "ਹੋਰ ਪੜ੍ਹੋ",
     "noNotifications": "ਕੋਈ ਨੋਟੀਫਿਕੇਸ਼ਨ ਨਹੀਂ",
-    "quietCenter": "ਤੁਹਾਡਾ ਸ਼ਾਂਤ ਨੋਟੀਫਿਕੇਸ਼ਨ ਸੈਂਟਰ",
+    "quietCenter": "ਤੁਹਾਡਾ ਸ਼ਾਂਤ ਨੋਟੀਫਿਕੇਸ਼ਨ ਕੇਂਦਰ",
     "viewAll": "ਸਾਰੇ ਨੋਟੀਫਿਕੇਸ਼ਨ ਵੇਖੋ",
     "page": "ਪੰਨਾ",
     "of": "ਵਿੱਚੋਂ",
@@ -175,13 +175,12 @@
     },
     "allNotifications": "ਸਾਰੇ ਨੋਟੀਫਿਕੇਸ਼ਨ",
     "unread": "ਨਾ ਪੜ੍ਹੇ",
-    "allCaughtUp": "ਸਭ ਕੁਝ ਅੱਪਡੇਟ ਹੈ!",
+    "allCaughtUp": "ਸਭ ਕੁਝ ਅਪਡੇਟ ਹੈ!",
     "noNotificationsYet": "ਹਾਲੇ ਤੱਕ ਕੋਈ ਨੋਟੀਫਿਕੇਸ਼ਨ ਨਹੀਂ",
     "allRead": "ਤੁਸੀਂ ਆਪਣੇ ਸਾਰੇ ਨੋਟੀਫਿਕੇਸ਼ਨ ਪੜ੍ਹ ਲਏ ਹਨ",
     "willAppear": "ਨਵੇਂ ਨੋਟੀਫਿਕੇਸ਼ਨ ਇੱਥੇ ਦਿਖਾਈ ਦੇਣਗੇ",
     "showing": "ਦਿਖਾਇਆ ਜਾ ਰਿਹਾ ਹੈ",
     "to": "ਤੋਂ",
-    "of": "ਵਿੱਚੋਂ",
     "notifications": "ਨੋਟੀਫਿਕੇਸ਼ਨ",
     "previous": "ਪਿਛਲਾ",
     "next": "ਅਗਲਾ",
@@ -192,8 +191,8 @@
     "link": "ਲਿੰਕ",
     "new": "ਨਵਾਂ",
     "notFound": "ਨੋਟੀਫਿਕੇਸ਼ਨ ਨਹੀਂ ਮਿਲਿਆ",
-    "notFoundDescription": "ਜੋ ਨੋਟੀਫਿਕੇਸ਼ਨ ਤੁਸੀਂ ਲੱਭ ਰਹੇ ਹੋ ਉਹ ਮੌਜੂਦ ਨਹੀਂ ਹੈ ਜਾਂ ਹਟਾਇਆ ਜਾ ਚੁੱਕਿਆ ਹੈ।",
-    "goBack": "ਨੋਟੀਫਿਕੇਸ਼ਨਾਂ ਵੱਲ ਵਾਪਸ ਜਾਓ"
+    "notFoundDescription": "ਜਿਸ ਨੋਟੀਫਿਕੇਸ਼ਨ ਨੂੰ ਤੁਸੀਂ ਲੱਭ ਰਹੇ ਹੋ ਉਹ ਮੌਜੂਦ ਨਹੀਂ ਹੈ ਜਾਂ ਹਟਾ ਦਿੱਤਾ ਗਿਆ ਹੈ।",
+    "goBack": "ਨੋਟੀਫਿਕੇਸ਼ਨ ਵੱਲ ਵਾਪਸ ਜਾਓ"
   },
 
   "breadcrumb": {
@@ -1133,23 +1132,30 @@
   },
 
   "singlePreviewContent": {
+    "back": "ਵਾਪਸ",
+    "exitFullscreen": "ਫੁੱਲ ਸਕ੍ਰੀਨ ਬੰਦ ਕਰੋ",
+    "fullscreen": "ਫੁੱਲ ਸਕ੍ਰੀਨ",
+    "noContent": "ਕੋਈ ਸਮੱਗਰੀ ਉਪਲਬਧ ਨਹੀਂ ਹੈ",
+    "videoNotAvailable": "ਵੀਡੀਓ ਪ੍ਰੀਵਿਊ ਉਪਲਬਧ ਨਹੀਂ ਹੈ",
+    "audioNotSupported": "ਤੁਹਾਡਾ ਬ੍ਰਾਊਜ਼ਰ ਆਡੀਓ ਐਲੀਮੈਂਟ ਨੂੰ ਸਮਰਥਨ ਨਹੀਂ ਕਰਦਾ।",
     "types": {
-      "text": "ਟੈਕਸਟ",
-      "video": "ਵੀਡੀਓ",
-      "pdf": "PDF",
-      "audio": "ਆਡੀਓ",
-      "image": "ਤਸਵੀਰ"
+      "text": "ਟੈਕਸਟ ਸਮੱਗਰੀ",
+      "video": "ਵੀਡੀਓ ਸਮੱਗਰੀ",
+      "pdf": "PDF ਦਸਤਾਵੇਜ਼",
+      "audio": "ਆਡੀਓ ਸਮੱਗਰੀ",
+      "image": "ਤਸਵੀਰ ਸਮੱਗਰੀ"
     },
     "pdf": {
-      "title": "PDF ਦਸਤਾਵੇਜ਼",
-      "download": "ਡਾਊਨਲੋਡ ਕਰੋ"
+      "title": "PDF ਦਸਤਾਵੇਜ਼"
+    },
+    "h5p": {
+      "interactive": "ਇੰਟਰਐਕਟਿਵ H5P ਸਮੱਗਰੀ"
     },
     "notFound": {
       "title": "ਸਮੱਗਰੀ ਨਹੀਂ ਮਿਲੀ",
-      "description": "ਤੁਸੀਂ ਜਿਸ ਸਮੱਗਰੀ ਨੂੰ ਲੱਭ ਰਹੇ ਹੋ ਉਹ ਮੌਜੂਦ ਨਹੀਂ ਹੈ ਜਾਂ ਹਟਾ ਦਿੱਤੀ ਗਈ ਹੈ।",
+      "description": "ਜੋ ਸਮੱਗਰੀ ਤੁਸੀਂ ਲੱਭ ਰਹੇ ਹੋ ਉਹ ਮੌਜੂਦ ਨਹੀਂ ਹੈ ਜਾਂ ਹਟਾਈ ਜਾ ਚੁੱਕੀ ਹੈ।",
       "button": "ਵਾਪਸ ਜਾਓ"
-    },
-    "unsupported": "ਅਸਮਰਥਿਤ ਸਮੱਗਰੀ ਕਿਸਮ:"
+    }
   },
 
   "automatedImporter": {
@@ -1214,8 +1220,8 @@
   "mediaLibrary": {
     "list": {
       "title": "ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ",
-      "subtitle": "ਆਪਣੇ ਮੈਡੀਕਲ ਵਿਦਿਆਰਥੀਆਂ ਲਈ ਸਰਜੀਕਲ ਵੀਡੀਓ, ਕਲੀਨਿਕਲ ਡਾਇਗ੍ਰਾਮ ਅਤੇ ਕੋਰਸ ਡਾਕੂਮੈਂਟੇਸ਼ਨ ਮੈਨੇਜ ਕਰੋ।",
-      "searchPlaceholder": "ਫਾਈਲ ਨਾਮ, ਟੈਗ ਜਾਂ ਮੈਟਾਡੇਟਾ ਨਾਲ ਖੋਜੋ...",
+      "subtitle": "ਆਪਣੇ ਮੈਡੀਕਲ ਵਿਦਿਆਰਥੀਆਂ ਲਈ ਸਰਜੀਕਲ ਵੀਡੀਓ, ਕਲੀਨਿਕਲ ਡਾਇਗ੍ਰਾਮ, ਕੋਰਸ ਡੌਕਯੂਮੈਂਟੇਸ਼ਨ ਅਤੇ ਇੰਟਰਐਕਟਿਵ H5P ਸਮੱਗਰੀ ਨੂੰ ਪ੍ਰਬੰਧਿਤ ਕਰੋ।",
+      "searchPlaceholder": "ਨਾਂ, ਟੈਗ ਜਾਂ ਮੈਟਾਡੇਟਾ ਰਾਹੀਂ ਫਾਈਲਾਂ ਖੋਜੋ...",
       "noDataFound": "ਕੋਈ ਡਾਟਾ ਨਹੀਂ ਮਿਲਿਆ",
       "unknownCreator": "ਅਣਜਾਣ",
       "tabs": {
@@ -1223,7 +1229,8 @@
         "videos": "ਵੀਡੀਓ",
         "images": "ਤਸਵੀਰਾਂ",
         "documents": "ਦਸਤਾਵੇਜ਼",
-        "audio": "ਆਡੀਓ"
+        "audio": "ਆਡੀਓ",
+        "h5p": "H5P"
       }
     },
     "details": {
@@ -1236,30 +1243,33 @@
       "descriptionPlaceholder": "ਮੀਡੀਆ ਦਾ ਵੇਰਵਾ ਲਿਖੋ...",
       "externalUrl": "ਬਾਹਰੀ URL",
       "externalUrlPlaceholder": "https://example.com/file",
-      "uploadFile": "ਫਾਈਲ ਅੱਪਲੋਡ ਕਰੋ",
-      "uploadText": "ਫਾਈਲ ਅੱਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+      "h5pUrl": "H5P ਬਾਹਰੀ URL",
+      "h5pUrlPlaceholder": "https://example.com/h5p-content",
+      "h5pHelpText": "ਆਪਣੀ H5P ਸਮੱਗਰੀ ਦਾ URL ਦਰਜ ਕਰੋ (ਫਾਈਲ ਅਪਲੋਡ ਸਮਰਥਿਤ ਨਹੀਂ ਹੈ)",
+      "uploadFile": "ਫਾਈਲ ਅਪਲੋਡ ਕਰੋ",
+      "uploadText": "ਫਾਈਲ ਅਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
       "uploadSubText": "PNG, JPG, JPEG, MP4, PDF ਵੱਧ ਤੋਂ ਵੱਧ 10MB ਤੱਕ",
       "changeImage": "ਤਸਵੀਰ ਬਦਲੋ",
-      "deleteText": "ਕੀ ਤੁਸੀਂ ਯਕੀਨਨ ਇਸ ਮੀਡੀਆ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
+      "deleteText": "ਕੀ ਤੁਸੀਂ ਯਕੀਨੀ ਤੌਰ 'ਤੇ ਇਸ ਮੀਡੀਆ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
       "previewAlt": "ਮੀਡੀਆ ਪ੍ਰੀਵਿਊ",
       "selectInputMethod": "ਇਨਪੁੱਟ ਤਰੀਕਾ ਚੁਣੋ",
-      "uploadMethod": "ਜੋੜਨ ਦਾ ਤਰੀਕਾ ਚੁਣੋ",
-      "uploadMethodPlaceholder": "ਅੱਪਲੋਡ ਤਰੀਕਾ ਚੁਣੋ",
-      "allowedFormats": "ਮਨਜ਼ੂਰਸ਼ੁਦਾ: {formats} (ਵੱਧ ਤੋਂ ਵੱਧ 10MB)",
+      "uploadMethod": "ਸ਼ਾਮਲ ਕਰਨ ਦਾ ਤਰੀਕਾ ਚੁਣੋ",
+      "uploadMethodPlaceholder": "ਅਪਲੋਡ ਤਰੀਕਾ ਚੁਣੋ",
+      "allowedFormats": "ਇਜਾਜ਼ਤਸ਼ੁਦਾ: {formats} (ਵੱਧ ਤੋਂ ਵੱਧ 10MB)",
       "fileType": "ਕਿਸਮ",
       "currentFile": "ਮੌਜੂਦਾ ਫਾਈਲ",
       "currentServerFile": "ਸਰਵਰ ਤੋਂ ਮੌਜੂਦਾ ਫਾਈਲ",
-      "newFileToUpload": "ਨਵੀਂ ਫਾਈਲ ਅੱਪਲੋਡ ਕੀਤੀ ਜਾਵੇਗੀ",
+      "newFileToUpload": "ਅਪਲੋਡ ਕਰਨ ਲਈ ਨਵੀਂ ਫਾਈਲ",
       "currentVideoFile": "ਮੌਜੂਦਾ ਵੀਡੀਓ ਫਾਈਲ",
-      "videoAllowedFormats": "ਮਨਜ਼ੂਰਸ਼ੁਦਾ: MP4, MOV, AVI, MKV (ਵੱਧ ਤੋਂ ਵੱਧ 10MB)",
-      "documentAllowedFormats": "ਮਨਜ਼ੂਰਸ਼ੁਦਾ: PDF, DOC, DOCX, XLS, XLSX (ਵੱਧ ਤੋਂ ਵੱਧ 10MB)"
+      "videoAllowedFormats": "ਇਜਾਜ਼ਤਸ਼ੁਦਾ: MP4, MOV, AVI, MKV (ਵੱਧ ਤੋਂ ਵੱਧ 10MB)",
+      "documentAllowedFormats": "ਇਜਾਜ਼ਤਸ਼ੁਦਾ: PDF, DOC, DOCX, XLS, XLSX (ਵੱਧ ਤੋਂ ਵੱਧ 10MB)"
     },
     "create": {
       "title": "ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ ਬਣਾਓ",
-      "subtitle": "ਆਪਣੇ ਮੈਡੀਕਲ ਵਿਦਿਆਰਥੀਆਂ ਲਈ ਸਰਜੀਕਲ ਵੀਡੀਓ, ਕਲੀਨਿਕਲ ਡਾਇਗ੍ਰਾਮ ਅਤੇ ਕੋਰਸ ਡਾਕੂਮੈਂਟੇਸ਼ਨ ਮੈਨੇਜ ਕਰੋ।"
+      "subtitle": "ਆਪਣੇ ਮੈਡੀਕਲ ਵਿਦਿਆਰਥੀਆਂ ਲਈ ਸਰਜੀਕਲ ਵੀਡੀਓ, ਕਲੀਨਿਕਲ ਡਾਇਗ੍ਰਾਮ, ਕੋਰਸ ਡੌਕਯੂਮੈਂਟੇਸ਼ਨ ਅਤੇ ਇੰਟਰਐਕਟਿਵ H5P ਸਮੱਗਰੀ ਨੂੰ ਪ੍ਰਬੰਧਿਤ ਕਰੋ।"
     },
     "actions": {
-      "uploadMedia": "ਮੀਡੀਆ ਅੱਪਲੋਡ ਕਰੋ",
+      "uploadMedia": "ਮੀਡੀਆ ਅਪਲੋਡ ਕਰੋ",
       "creating": "ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...",
       "createMedia": "ਮੀਡੀਆ ਬਣਾਓ",
       "updating": "ਅੱਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
@@ -1274,14 +1284,15 @@
       "image": "ਤਸਵੀਰ",
       "video": "ਵੀਡੀਓ",
       "audio": "ਆਡੀਓ",
-      "document": "ਦਸਤਾਵੇਜ਼"
+      "document": "ਦਸਤਾਵੇਜ਼",
+      "h5p": "H5P"
     },
     "videoInput": {
-      "uploadFile": "ਫਾਈਲ ਅੱਪਲੋਡ ਕਰੋ",
+      "uploadFile": "ਫਾਈਲ ਅਪਲੋਡ ਕਰੋ",
       "externalUrl": "ਬਾਹਰੀ URL"
     },
     "documentInput": {
-      "uploadFile": "ਫਾਈਲ ਅੱਪਲੋਡ ਕਰੋ",
+      "uploadFile": "ਫਾਈਲ ਅਪਲੋਡ ਕਰੋ",
       "externalUrl": "ਬਾਹਰੀ URL"
     },
     "validation": {
@@ -1291,20 +1302,21 @@
       "typeRequired": "ਕਿਸਮ ਲਾਜ਼ਮੀ ਹੈ",
       "descriptionRequired": "ਵੇਰਵਾ ਲਾਜ਼ਮੀ ਹੈ",
       "descriptionMin": "ਵੇਰਵਾ ਘੱਟੋ-ਘੱਟ 10 ਅੱਖਰਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
-      "fileRequired": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਫਾਈਲ ਅੱਪਲੋਡ ਕਰੋ",
-      "urlRequired": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਬਾਹਰੀ URL ਦਿਓ",
+      "fileRequired": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਫਾਈਲ ਅਪਲੋਡ ਕਰੋ",
+      "urlRequired": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਬਾਹਰੀ URL ਪ੍ਰਦਾਨ ਕਰੋ",
       "invalidUrl": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਵੈਧ URL ਦਰਜ ਕਰੋ",
-      "videoInputMethodRequired": "ਕਿਰਪਾ ਕਰਕੇ ਫਾਈਲ ਅੱਪਲੋਡ ਜਾਂ ਬਾਹਰੀ URL ਵਿੱਚੋਂ ਇੱਕ ਚੁਣੋ",
-      "documentInputMethodRequired": "ਕਿਰਪਾ ਕਰਕੇ ਫਾਈਲ ਅੱਪਲੋਡ ਜਾਂ ਬਾਹਰੀ URL ਵਿੱਚੋਂ ਇੱਕ ਚੁਣੋ",
-      "invalidVideoFormat": "ਅਵੈਧ ਵੀਡੀਓ ਫਾਰਮੈਟ। ਮਨਜ਼ੂਰਸ਼ੁਦਾ: mp4, mov, avi, mkv",
-      "invalidDocumentFormat": "ਅਵੈਧ ਦਸਤਾਵੇਜ਼ ਫਾਰਮੈਟ। ਮਨਜ਼ੂਰਸ਼ੁਦਾ: pdf, doc, docx, xls, xlsx",
-      "invalidFileFormat": "ਅਵੈਧ {type} ਫਾਰਮੈਟ। ਮਨਜ਼ੂਰਸ਼ੁਦਾ: {formats}",
+      "videoInputMethodRequired": "ਕਿਰਪਾ ਕਰਕੇ ਫਾਈਲ ਅਪਲੋਡ ਜਾਂ ਬਾਹਰੀ URL ਵਿੱਚੋਂ ਇੱਕ ਚੁਣੋ",
+      "documentInputMethodRequired": "ਕਿਰਪਾ ਕਰਕੇ ਫਾਈਲ ਅਪਲੋਡ ਜਾਂ ਬਾਹਰੀ URL ਵਿੱਚੋਂ ਇੱਕ ਚੁਣੋ",
+      "invalidVideoFormat": "ਅਵੈਧ ਵੀਡੀਓ ਫਾਰਮੈਟ। ਇਜਾਜ਼ਤਸ਼ੁਦਾ: mp4, mov, avi, mkv",
+      "invalidDocumentFormat": "ਅਵੈਧ ਦਸਤਾਵੇਜ਼ ਫਾਰਮੈਟ। ਇਜਾਜ਼ਤਸ਼ੁਦਾ: pdf, doc, docx, xls, xlsx",
+      "invalidFileFormat": "ਅਵੈਧ {type} ਫਾਰਮੈਟ। ਇਜਾਜ਼ਤਸ਼ੁਦਾ: {formats}",
       "fileSizeExceeded": "ਫਾਈਲ ਦਾ ਆਕਾਰ 10MB ਤੋਂ ਘੱਟ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
       "selectTypeFirst": "ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਮੀਡੀਆ ਕਿਸਮ ਚੁਣੋ",
-      "selectUploadMethodFirst": "ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਫਾਈਲ ਅੱਪਲੋਡ ਜਾਂ ਬਾਹਰੀ URL ਚੁਣੋ"
+      "selectUploadMethodFirst": "ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਫਾਈਲ ਅਪਲੋਡ ਜਾਂ ਬਾਹਰੀ URL ਚੁਣੋ",
+      "h5pNoFileUpload": "H5P ਸਮੱਗਰੀ ਲਈ ਫਾਈਲ ਅਪਲੋਡ ਸਮਰਥਿਤ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਬਾਹਰੀ URL ਪ੍ਰਦਾਨ ਕਰੋ।"
     },
     "breadcrumb": {
-      "contentManagement": "ਕੰਟੈਂਟ ਮੈਨੇਜਮੈਂਟ",
+      "contentManagement": "ਸਮੱਗਰੀ ਪ੍ਰਬੰਧਨ",
       "view-media": "ਮੀਡੀਆ ਵੇਖੋ"
     },
     "pagination": {
@@ -1330,15 +1342,25 @@
       "copyShortcode": "ਸ਼ਾਰਟਕੋਡ ਕਾਪੀ ਕਰੋ",
       "type": "ਕਿਸਮ",
       "backToLibrary": "ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ ਵੱਲ ਵਾਪਸ ਜਾਓ",
+      "exitFullscreen": "ਫੁੱਲ ਸਕ੍ਰੀਨ ਬੰਦ ਕਰੋ",
+      "fullscreen": "ਫੁੱਲ ਸਕ੍ਰੀਨ",
+      "interactiveH5pContent": "ਇੰਟਰਐਕਟਿਵ H5P ਸਮੱਗਰੀ",
+      "videoPreview": "ਵੀਡੀਓ ਪ੍ਰੀਵਿਊ",
+      "imagePreview": "ਤਸਵੀਰ ਪ੍ਰੀਵਿਊ",
+      "audioPreview": "ਆਡੀਓ ਪ੍ਰੀਵਿਊ",
+      "pdfPreview": "PDF ਪ੍ਰੀਵਿਊ",
+      "downloadDocument": "ਦਸਤਾਵੇਜ਼ ਡਾਊਨਲੋਡ ਕਰੋ",
       "videoNotSupported": "ਤੁਹਾਡਾ ਬ੍ਰਾਊਜ਼ਰ ਵੀਡੀਓ ਟੈਗ ਨੂੰ ਸਮਰਥਨ ਨਹੀਂ ਕਰਦਾ।",
       "videoPreviewNotAvailable": "ਵੀਡੀਓ ਪ੍ਰੀਵਿਊ ਉਪਲਬਧ ਨਹੀਂ ਹੈ",
       "audioNotSupported": "ਤੁਹਾਡਾ ਬ੍ਰਾਊਜ਼ਰ ਆਡੀਓ ਐਲੀਮੈਂਟ ਨੂੰ ਸਮਰਥਨ ਨਹੀਂ ਕਰਦਾ।",
       "documentPreviewNotAvailable": "ਇਸ ਦਸਤਾਵੇਜ਼ ਲਈ ਪ੍ਰੀਵਿਊ ਉਪਲਬਧ ਨਹੀਂ ਹੈ",
+      "h5pPreviewNotAvailable": "H5P ਸਮੱਗਰੀ ਦਾ ਪ੍ਰੀਵਿਊ ਨਵੀਂ ਵਿੰਡੋ ਵਿੱਚ ਖੁਲੇਗਾ",
       "filePreviewNotAvailable": "ਇਸ ਫਾਈਲ ਕਿਸਮ ਲਈ ਪ੍ਰੀਵਿਊ ਉਪਲਬਧ ਨਹੀਂ ਹੈ",
       "imageNotFoundPlaceholder": "https://placehold.co/600x400?text=Image+Not+Found",
+      "openH5PContent": "H5P ਸਮੱਗਰੀ ਖੋਲ੍ਹੋ",
       "notFound": {
         "title": "ਮੀਡੀਆ ਨਹੀਂ ਮਿਲਿਆ",
-        "description": "ਜੋ ਮੀਡੀਆ ਤੁਸੀਂ ਲੱਭ ਰਹੇ ਹੋ ਉਹ ਮੌਜੂਦ ਨਹੀਂ ਹੈ ਜਾਂ ਹਟਾਇਆ ਜਾ ਚੁੱਕਿਆ ਹੈ।"
+        "description": "ਜੋ ਮੀਡੀਆ ਤੁਸੀਂ ਲੱਭ ਰਹੇ ਹੋ ਉਹ ਮੌਜੂਦ ਨਹੀਂ ਹੈ ਜਾਂ ਹਟਾਇਆ ਜਾ ਚੁੱਕਾ ਹੈ।"
       }
     }
   },

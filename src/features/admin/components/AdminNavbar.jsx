@@ -26,6 +26,7 @@ import Loader from "../common/Loader";
 import Error from "../common/Error";
 import NotificationDropdown from "../common/noitification/NotificationDropdown";
 import { getUnreadCount } from "../../../redux/slice/notificationSlicer";
+import { getSiteSettings } from "../../../redux/slice/systemSettingSlice";
 
 const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
   const { t } = useTranslation();
@@ -39,6 +40,14 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
   const { profile, isLoading, isError, message } = useSelector(
     (state) => state.auth,
   );
+
+  const { settings, isLoading: settingsLoading } = useSelector(
+    (state) => state.systemSetting,
+  );
+
+  useEffect(() => {
+    dispatch(getSiteSettings());
+  }, [dispatch]);
 
   const { unreadCount } = useSelector((state) => state.notification);
 
@@ -78,6 +87,8 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
   // if (isLoading) return <Loader />;
   // if (isError) return <Error message={message} />;
 
+  if (settingsLoading) return <Loader />;
+
   return (
     <div className="h-14 sm:h-16 bg-gradient-to-r from-[#2563EB] to-[#1E3A8A] flex items-center justify-between px-3 sm:px-6 shadow-lg border-b border-[#1d3d8a] z-50 relative">
       {/* LEFT SIDE */}
@@ -92,7 +103,11 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
 
         {/* Logo */}
         <div className="flex items-center gap-2 text-white font-semibold text-base sm:text-lg">
-          <img src={logo} alt="Logo" className="h-7 sm:h-8" />
+          <img
+            src={settings?.company_logo || ""}
+            alt="Logo"
+            className="h-7 sm:h-8"
+          />
         </div>
 
         {/* Search Desktop */}

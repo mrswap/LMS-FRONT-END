@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { FiLock, FiEye, FiEyeOff } from "react-icons/fi";
@@ -8,9 +8,11 @@ import TextInput from "../../common/form/TextInput";
 import FormButton from "../../common/form/FormButton";
 import logo from "../../../../assets/admin/AvanteMedicalLogoBlue.png";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useToast } from "../../common/toast/ToastContext";
 import { resetPassword } from "../../../../redux/slice/authSlice";
+import { getSiteSettingsCommon } from "../../../../redux/slice/commonSlice";
+import Loader from "../../common/Loader";
 
 const ResetPassword = () => {
   const { t } = useTranslation();
@@ -20,6 +22,13 @@ const ResetPassword = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const { siteSettings, isLoading: siteSettingsLoading } = useSelector(
+    (state) => state.common,
+  );
+
+  useEffect(() => {
+    dispatch(getSiteSettingsCommon());
+  }, [dispatch]);
 
   // Get token from URL
   const location = useLocation();
@@ -63,11 +72,17 @@ const ResetPassword = () => {
     }
   };
 
+  if (siteSettingsLoading) return <Loader />;
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#EEF2F6] px-4">
       {/* Logo */}
       <div className="mb-6">
-        <img src={logo} alt="logo" className="w-[200px]" />
+        <img
+          src={siteSettings?.company_logo || ""}
+          alt="logo"
+          className="w-[200px]"
+        />
       </div>
 
       {/* Card */}
@@ -155,8 +170,8 @@ const ResetPassword = () => {
       </div>
 
       {/* Footer */}
-      <p className="text-xs text-gray-400 my-4">
-        © 2025 Avante Medical LMS · v2.1.0
+      <p className="text-xs text-gray-400 my-6">
+        {siteSettings?.footer_text || ""}
       </p>
     </div>
   );
