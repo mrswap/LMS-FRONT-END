@@ -90,7 +90,7 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
   if (settingsLoading) return <Loader />;
 
   return (
-    <div className="h-14 sm:h-16 bg-gradient-to-r from-[#2563EB] to-[#1E3A8A] flex items-center justify-between px-3 sm:px-6 shadow-lg border-b border-[#1d3d8a] z-50 relative">
+    <div className="h-16 bg-gradient-to-r from-[#2563EB] to-[#1E3A8A] flex items-center justify-between px-3 sm:px-6 shadow-lg border-b border-[#1d3d8a] z-50 relative">
       {/* LEFT SIDE */}
       <div className="flex items-center gap-2 sm:gap-4">
         {/* Hamburger */}
@@ -102,13 +102,24 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
         </button>
 
         {/* Logo */}
-        <div className="flex items-center gap-2 text-white font-semibold text-base sm:text-lg">
+        {/* <div className="flex items-center gap-2 text-white font-semibold text-base sm:text-lg">
           <img
             src={settings?.company_logo || ""}
             alt="Logo"
             className="h-7 sm:h-8"
           />
+        </div> */}
+
+        {/* Logo Section */}
+        {/* <div className=" min-[1544px]:px-4"> */}
+        <div className="flex-shrink-0 ">
+          <img
+            src={settings?.company_logo || ""}
+            alt="Logo"
+            className="w-[130px] sm:w-[130px] h-[64px] object-cover "
+          />
         </div>
+        {/* </div> */}
 
         {/* Search Desktop */}
         <div className="hidden md:flex items-center bg-white rounded-md px-3 py-1.5 w-56 lg:w-[300px] xl:w-[350px] shadow-inner">
