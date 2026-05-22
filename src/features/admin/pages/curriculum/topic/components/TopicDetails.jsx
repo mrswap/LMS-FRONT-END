@@ -119,16 +119,36 @@ const TopicDetails = () => {
     }
   }, [topic]);
 
+  // const initialValues = {
+  //   topicName: topic?.title || "",
+  //   chapterName:
+  //     chaptersOptions?.find((opt) => opt.value === topic?.chapter_id) || null,
+  //   moduleName:
+  //     modulesOptions?.find((opt) => opt.value === topic?.module_id) || null,
+  //   levelName:
+  //     levelOptions?.find((opt) => opt.value === topic?.level_id) || null,
+  //   programName:
+  //     programOptions?.find((opt) => opt.value === topic?.program_id) || null,
+  //   description: topic?.description || "",
+  //   thumbnail: topic?.thumbnail || null,
+  //   duration: topic?.estimated_duration || "",
+  // };
+
   const initialValues = {
     topicName: topic?.title || "",
+
     chapterName:
-      chaptersOptions?.find((opt) => opt.value === topic?.chapter_id) || null,
+      chaptersOptions?.find((opt) => opt.value === topic?.chapter?.id) || null,
+
     moduleName:
-      modulesOptions?.find((opt) => opt.value === topic?.module_id) || null,
+      modulesOptions?.find((opt) => opt.value === topic?.module?.id) || null,
+
     levelName:
-      levelOptions?.find((opt) => opt.value === topic?.level_id) || null,
+      levelOptions?.find((opt) => opt.value === topic?.level?.id) || null,
+
     programName:
-      programOptions?.find((opt) => opt.value === topic?.program_id) || null,
+      programOptions?.find((opt) => opt.value === topic?.program?.id) || null,
+
     description: topic?.description || "",
     thumbnail: topic?.thumbnail || null,
     duration: topic?.estimated_duration || "",

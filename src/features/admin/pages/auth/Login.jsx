@@ -65,7 +65,7 @@ const Login = () => {
         <img
           src={siteSettings?.company_logo || ""}
           alt="logo"
-          className="w-[190px] h-[110px]"
+          className="w-[160px] sm:w-[160px] h-[100px]"
         />
       </div>
 

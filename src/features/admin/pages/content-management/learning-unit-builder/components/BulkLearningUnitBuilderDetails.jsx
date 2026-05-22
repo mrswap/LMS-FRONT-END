@@ -398,6 +398,10 @@ const BulkLearningUnitBuilderDetails = () => {
           title: section.title,
           content:
             section.type === "text" ? section.content : section.content || "",
+          // content:
+          //   section.type === "text"
+          //     ? btoa(unescape(encodeURIComponent(section.content || "")))
+          //     : section.content || "",
           order: index + 1,
         };
 

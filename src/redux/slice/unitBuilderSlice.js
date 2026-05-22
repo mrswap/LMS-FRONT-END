@@ -44,7 +44,7 @@ export const updateBulkContent = createAsyncThunk(
     "content/updateBulk",
     async ({ topicId, data }, thunkAPI) => {
         try {
-            const res = await axiosInstance.patch(
+            const res = await axiosInstance.post(
                 `/content-topics/${topicId}/contents/update-bulk`,
                 data,
                 getAuthConfig()
