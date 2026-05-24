@@ -149,14 +149,14 @@ const Section = ({
         <>
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              {t("learningUnitBuilder.details.content.mediaShortcut")}
+              {t("learningUnitBuilder.details.content.mediaShortcode")}
             </label>
             <input
               type="text"
               value={localMediaShortcut}
               onChange={handleMediaShortcutChange}
               placeholder={t(
-                "learningUnitBuilder.details.content.mediaShortcutPlaceholder",
+                "learningUnitBuilder.details.content.mediaShortcodePlaceholder",
               )}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent"
               maxLength={250}
