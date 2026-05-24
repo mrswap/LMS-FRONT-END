@@ -398,10 +398,6 @@ const BulkLearningUnitBuilderDetails = () => {
           title: section.title,
           content:
             section.type === "text" ? section.content : section.content || "",
-          // content:
-          //   section.type === "text"
-          //     ? btoa(unescape(encodeURIComponent(section.content || "")))
-          //     : section.content || "",
           order: index + 1,
         };
 
@@ -413,6 +409,36 @@ const BulkLearningUnitBuilderDetails = () => {
 
         return apiSection;
       });
+
+      // const apiSections = localContents.map((section, index) => {
+      //   // HTML clean function
+      //   const cleanContent =
+      //     typeof section.content === "string"
+      //       ? section.content
+      //           // remove inline styles
+      //           .replace(/style="[^"]*"/gi, "")
+      //           // remove class attributes
+      //           .replace(/class="[^"]*"/gi, "")
+      //           // remove empty spans
+      //           .replace(/<\/?span[^>]*>/gi, "")
+      //       : "";
+
+      //   const apiSection = {
+      //     id: section.id,
+      //     type: section.type,
+      //     title: section.title,
+      //     content: section.type === "text" ? cleanContent : cleanContent || "",
+      //     order: index + 1,
+      //   };
+
+      //   if (section.type === "media" && section.media_shortcut) {
+      //     apiSection.meta = {
+      //       shortcode: section.media_shortcut,
+      //     };
+      //   }
+
+      //   return apiSection;
+      // });
 
       const payload = {
         topic_id: values.topicName.value,
@@ -442,7 +468,7 @@ const BulkLearningUnitBuilderDetails = () => {
     return <Loader />;
   }
 
-  if (isError) return <Error message={message} />;
+  // if (isError) return <Error message={message} />;
 
   if (!content && !loading) {
     return (
@@ -777,7 +803,7 @@ const BulkLearningUnitBuilderDetails = () => {
                             <div className="mb-4">
                               <label className="block text-sm font-medium text-gray-700 mb-2">
                                 {t(
-                                  "learningUnitBuilder.details.content.mediaShortcut",
+                                  "learningUnitBuilder.details.content.mediaShortcode",
                                 )}
                               </label>
                               <input
@@ -792,7 +818,7 @@ const BulkLearningUnitBuilderDetails = () => {
                                   )
                                 }
                                 placeholder={t(
-                                  "learningUnitBuilder.details.content.mediaShortcutPlaceholder",
+                                  "learningUnitBuilder.details.content.mediaShortcodePlaceholder",
                                 )}
                                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
                               />
