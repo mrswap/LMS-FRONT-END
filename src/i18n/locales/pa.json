@@ -216,7 +216,7 @@
 
   "sidebar": {
     "dashboard": "ਡੈਸ਼ਬੋਰਡ",
-    "userManagement": "ਯੂਜ਼ਰ ਮੈਨੇਜਮੈਂਟ",
+    "userManagement": "ਯੂਜ਼ਰ ਪ੍ਰਬੰਧਨ",
     "users": "ਯੂਜ਼ਰ",
     "sales-trainee": "ਸੇਲਜ਼ ਟ੍ਰੇਨੀ",
     "staff": "ਸਟਾਫ",
@@ -228,44 +228,46 @@
     "curriculumManagement": "ਪਾਠਕ੍ਰਮ ਪ੍ਰਬੰਧਨ",
     "levels": "ਲੇਵਲ",
     "modules": "ਮੋਡੀਊਲ",
-    "chapters": "ਚੈਪਟਰ",
-    "topics": "ਟਾਪਿਕ",
+    "chapters": "ਅਧਿਆਇ",
+    "topics": "ਟਾਪਿਕਸ",
     "bulkImport": "ਬਲਕ ਇੰਪੋਰਟ",
-    "contentManagement": "ਕੰਟੈਂਟ ਮੈਨੇਜਮੈਂਟ",
+    "contentManagement": "ਕੰਟੈਂਟ ਪ੍ਰਬੰਧਨ",
     "learningUnitBuilder": "ਲਰਨਿੰਗ ਯੂਨਿਟ ਬਿਲਡਰ",
     "interactiveContent": "ਇੰਟਰਐਕਟਿਵ ਕੰਟੈਂਟ",
     "mediaLibrary": "ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ",
-    "assessmentManagement": "ਅਸੈਸਮੈਂਟ ਮੈਨੇਜਮੈਂਟ",
+    "assessmentManagement": "ਮੁਲਾਂਕਣ ਪ੍ਰਬੰਧਨ",
     "quizForTopic": "ਟਾਪਿਕ ਲਈ ਕਵਿਜ਼",
     "quizFeedback": "ਕਵਿਜ਼ ਫੀਡਬੈਕ",
-    "examForLevel": "ਲੇਵਲ ਲਈ ਇਮਤਿਹਾਨ",
-    "examFeedback": "ਇਮਤਿਹਾਨ ਫੀਡਬੈਕ",
-    "faq": "ਐਫਏਕਿਊ",
+    "examForLevel": "ਲੇਵਲ ਲਈ ਪ੍ਰੀਖਿਆ",
+    "examFeedback": "ਪ੍ਰੀਖਿਆ ਫੀਡਬੈਕ",
+    "moduleExamAssessment": "ਮੋਡੀਊਲ ਲਈ ਪ੍ਰੀਖਿਆ",
+    "moduleExamFeedback": "ਮੋਡੀਊਲ ਪ੍ਰੀਖਿਆ ਫੀਡਬੈਕ",
+    "faq": "ਆਮ ਪ੍ਰਸ਼ਨ",
     "trainingCertification": "ਟ੍ਰੇਨਿੰਗ ਅਤੇ ਸਰਟੀਫਿਕੇਸ਼ਨ",
     "trainingAssignment": "ਟ੍ਰੇਨਿੰਗ ਅਸਾਈਨਮੈਂਟ",
-    "progressTracker": "ਪ੍ਰੋਗਰੈੱਸ ਟ੍ਰੈਕਰ",
+    "progressTracker": "ਪ੍ਰੋਗਰੈਸ ਟ੍ਰੈਕਰ",
     "certification": "ਸਰਟੀਫਿਕੇਸ਼ਨ",
-    "reportsAdministration": "ਰਿਪੋਰਟਸ ਅਤੇ ਐਡਮਿਨਿਸਟ੍ਰੇਸ਼ਨ",
-    "contactUs": "ਸਾਡੇ ਨਾਲ ਸੰਪਰਕ ਕਰੋ",
+    "reportsAdministration": "ਰਿਪੋਰਟਾਂ ਅਤੇ ਪ੍ਰਸ਼ਾਸਨ",
+    "contactUs": "ਸੰਪਰਕ ਕਰੋ",
     "auditLogsReport": "ਆਡਿਟ ਲਾਗ ਰਿਪੋਰਟ",
-    "userProgressReport": "ਯੂਜ਼ਰ ਪ੍ਰੋਗਰੈੱਸ ਰਿਪੋਰਟ",
-    "assessmentReport": "ਅਸੈਸਮੈਂਟ ਰਿਪੋਰਟ",
-    "contentStatusReport": "ਕੰਟੈਂਟ ਸਟੇਟਸ ਰਿਪੋਰਟ",
+    "userProgressReport": "ਯੂਜ਼ਰ ਪ੍ਰੋਗਰੈਸ ਰਿਪੋਰਟ",
+    "assessmentReport": "ਮੁਲਾਂਕਣ ਰਿਪੋਰਟ",
+    "contentStatusReport": "ਕੰਟੈਂਟ ਸਥਿਤੀ ਰਿਪੋਰਟ",
     "certificationReport": "ਸਰਟੀਫਿਕੇਸ਼ਨ ਰਿਪੋਰਟ",
     "topResult": "ਟਾਪ ਨਤੀਜਾ",
-    "reportsAnalytics": "ਰਿਪੋਰਟਸ ਅਤੇ ਐਨਾਲਿਟਿਕਸ",
+    "reportsAnalytics": "ਰਿਪੋਰਟਾਂ ਅਤੇ ਐਨਾਲਿਟਿਕਸ",
     "userAnalytics": "ਯੂਜ਼ਰ ਐਨਾਲਿਟਿਕਸ",
     "trainingAnalytics": "ਟ੍ਰੇਨਿੰਗ ਐਨਾਲਿਟਿਕਸ",
-    "performanceReports": "ਪਰਫਾਰਮੈਂਸ ਰਿਪੋਰਟਸ",
-    "completionReports": "ਕੰਪਲੀਸ਼ਨ ਰਿਪੋਰਟਸ",
+    "performanceReports": "ਪਰਫਾਰਮੈਂਸ ਰਿਪੋਰਟਾਂ",
+    "completionReports": "ਪੂਰਨਤਾ ਰਿਪੋਰਟਾਂ",
     "rolesPermission": "ਰੋਲ ਅਤੇ ਪਰਮਿਸ਼ਨ",
     "systemSettings": "ਸਿਸਟਮ ਸੈਟਿੰਗਾਂ",
     "settings": "ਸੈਟਿੰਗਾਂ",
-    "designation": "ਡਿਜ਼ਾਇਨੇਸ਼ਨ ਮੈਨੇਜਮੈਂਟ",
+    "designation": "ਡਿਜ਼ਿਗਨੇਸ਼ਨ ਪ੍ਰਬੰਧਨ",
     "smtpSetting": "SMTP ਸੈਟਿੰਗ",
     "multiLanguage": "ਮਲਟੀ ਲੈਂਗਵੇਜ",
     "certificationSetting": "ਸਰਟੀਫਿਕੇਸ਼ਨ ਸੈਟਿੰਗ",
-    "logout": "ਲਾਗਆਉਟ",
+    "logout": "ਲੌਗਆਉਟ",
     "support": "ਸਪੋਰਟ",
     "automatedContentImporter": "ਆਟੋਮੇਟਡ ਕੰਟੈਂਟ ਇੰਪੋਰਟਰ"
   },
@@ -1672,6 +1674,106 @@
     }
   },
 
+  "moduleExamAssessment": {
+    "list": {
+      "examTitle": "ਮੋਡੀਊਲ ਪ੍ਰੀਖਿਆ ਮੁਲਾਂਕਣ",
+      "examSubtitle": "ਮੋਡੀਊਲ ਪ੍ਰੀਖਿਆਵਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਅਤੇ ਬਣਾਉ",
+      "searchPlaceholder": "ਪ੍ਰੀਖਿਆ ਸਿਰਲੇਖ ਨਾਲ ਖੋਜੋ...",
+      "clearAll": "ਸਾਰੇ ਫਿਲਟਰ ਸਾਫ ਕਰੋ",
+      "columns": {
+        "title": "ਸਿਰਲੇਖ",
+        "type": "ਕਿਸਮ",
+        "level": "ਲੇਵਲ",
+        "module": "ਮੋਡੀਊਲ",
+        "questionCount": "ਪ੍ਰਸ਼ਨ",
+        "totalMark": "ਕੁੱਲ ਅੰਕ",
+        "passingScore": "ਪਾਸਿੰਗ ਸਕੋਰ",
+        "duration": "ਅਵਧੀ",
+        "status": "ਸਥਿਤੀ",
+        "createdBy": "ਦੁਆਰਾ ਬਣਾਇਆ ਗਿਆ",
+        "actions": "ਕਾਰਵਾਈਆਂ"
+      }
+    },
+    "create": {
+      "examTitle": "ਮੋਡੀਊਲ ਪ੍ਰੀਖਿਆ ਬਣਾਉ",
+      "examSubtitle": "ਮੋਡੀਊਲ ਲਈ ਨਵੀਂ ਪ੍ਰੀਖਿਆ ਬਣਾਉ"
+    },
+    "details": {
+      "moduleDetails": "ਮੋਡੀਊਲ ਚੋਣ",
+      "assessmentDetails": "ਮੁਲਾਂਕਣ ਵੇਰਵੇ",
+      "parentProgram": "ਪ੍ਰੋਗਰਾਮ ਨਾਮ",
+      "parentProgramPlaceholder": "ਪ੍ਰੋਗਰਾਮ ਚੁਣੋ",
+      "parentLevel": "ਲੇਵਲ ਨਾਮ",
+      "parentLevelPlaceholder": "ਲੇਵਲ ਚੁਣੋ",
+      "selectModule": "ਮੋਡੀਊਲ ਚੁਣੋ",
+      "selectModulePlaceholder": "ਮੋਡੀਊਲ ਚੁਣੋ",
+      "title": "ਪ੍ਰੀਖਿਆ ਸਿਰਲੇਖ",
+      "titlePlaceholder": "ਪ੍ਰੀਖਿਆ ਸਿਰਲੇਖ ਦਰਜ ਕਰੋ",
+      "duration": "ਅਵਧੀ (ਮਿੰਟ)",
+      "durationPlaceholder": "ਮਿੰਟਾਂ ਵਿੱਚ ਅਵਧੀ ਦਰਜ ਕਰੋ",
+      "totalMarks": "ਕੁੱਲ ਅੰਕ",
+      "totalMarksPlaceholder": "ਕੁੱਲ ਅੰਕ ਦਰਜ ਕਰੋ",
+      "passingScore": "ਪਾਸਿੰਗ ਸਕੋਰ",
+      "passingScorePlaceholder": "ਪਾਸਿੰਗ ਸਕੋਰ ਦਰਜ ਕਰੋ",
+      "description": "ਵੇਰਵਾ",
+      "descriptionPlaceholder": "ਪ੍ਰੀਖਿਆ ਦਾ ਵੇਰਵਾ ਦਰਜ ਕਰੋ",
+      "thumbnail": "ਪ੍ਰੀਖਿਆ ਥੰਬਨੇਲ",
+      "uploadText": "ਥੰਬਨੇਲ ਅਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+      "uploadSubText": "PNG, JPG, JPEG ਵੱਧ ਤੋਂ ਵੱਧ 5MB ਤੱਕ",
+      "changeImage": "ਤਸਵੀਰ ਬਦਲੋ",
+      "currentThumbnail": "ਮੌਜੂਦਾ ਥੰਬਨੇਲ",
+      "deleteTextExam": "ਕੀ ਤੁਸੀਂ ਯਕੀਨੀ ਤੌਰ 'ਤੇ ਇਸ ਪ੍ਰੀਖਿਆ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ? ਇਸ ਪ੍ਰੀਖਿਆ ਨੂੰ ਮਿਟਾਉਣ ਨਾਲ ਇਸ ਨਾਲ ਸੰਬੰਧਿਤ ਸਾਰੇ FAQs ਅਤੇ ਹੋਰ ਪ੍ਰੀਖਿਆ ਡਾਟਾ ਸਦਾ ਲਈ ਮਿਟ ਜਾਵੇਗਾ। ਇਸ ਕਾਰਵਾਈ ਨੂੰ ਵਾਪਸ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ।"
+    },
+    "actions": {
+      "addNewExam": "+ ਨਵੀਂ ਪ੍ਰੀਖਿਆ ਸ਼ਾਮਲ ਕਰੋ",
+      "createExam": "ਪ੍ਰੀਖਿਆ ਬਣਾਉ",
+      "creating": "ਬਣਾਈ ਜਾ ਰਹੀ ਹੈ...",
+      "updateExam": "ਪ੍ਰੀਖਿਆ ਅਪਡੇਟ ਕਰੋ",
+      "updating": "ਅਪਡੇਟ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ...",
+      "deleteExam": "ਪ੍ਰੀਖਿਆ ਮਿਟਾਓ"
+    },
+    "breadcrumb": {
+      "examManagement": "ਪ੍ਰੀਖਿਆ ਪ੍ਰਬੰਧਨ",
+      "view-exam": "ਪ੍ਰੀਖਿਆ ਵੇਖੋ"
+    },
+    "questions": "ਪ੍ਰਸ਼ਨ",
+    "filters": {
+      "allLevels": "ਸਾਰੇ ਲੇਵਲ",
+      "allModules": "ਸਾਰੇ ਮੋਡੀਊਲ",
+      "allStatus": "ਸਾਰੀਆਂ ਸਥਿਤੀਆਂ",
+      "active": "ਸਰਗਰਮ",
+      "inactive": "ਗੈਰ-ਸਰਗਰਮ",
+      "selectLevelFirst": "ਪਹਿਲਾਂ ਲੇਵਲ ਚੁਣੋ",
+      "selectModule": "ਮੋਡੀਊਲ ਚੁਣੋ",
+      "selectModuleFirst": "ਪਹਿਲਾਂ ਮੋਡੀਊਲ ਚੁਣੋ"
+    },
+    "validation": {
+      "program_required": "ਪ੍ਰੋਗਰਾਮ ਲਾਜ਼ਮੀ ਹੈ",
+      "level_required": "ਲੇਵਲ ਲਾਜ਼ਮੀ ਹੈ",
+      "module_required": "ਮੋਡੀਊਲ ਲਾਜ਼ਮੀ ਹੈ",
+      "title_required": "ਸਿਰਲੇਖ ਲਾਜ਼ਮੀ ਹੈ",
+      "description_required": "ਵੇਰਵਾ ਲਾਜ਼ਮੀ ਹੈ",
+      "passing_score_required": "ਪਾਸਿੰਗ ਸਕੋਰ ਲਾਜ਼ਮੀ ਹੈ",
+      "passing_score_positive": "ਪਾਸਿੰਗ ਸਕੋਰ ਸਕਾਰਾਤਮਕ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "total_marks_required": "ਕੁੱਲ ਅੰਕ ਲਾਜ਼ਮੀ ਹਨ",
+      "total_marks_positive": "ਕੁੱਲ ਅੰਕ ਸਕਾਰਾਤਮਕ ਹੋਣੇ ਚਾਹੀਦੇ ਹਨ",
+      "duration_required": "ਅਵਧੀ ਲਾਜ਼ਮੀ ਹੈ",
+      "duration_positive": "ਅਵਧੀ ਸਕਾਰਾਤਮਕ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ",
+      "invalidImage": "ਕੇਵਲ ਇਮੇਜ ਫਾਈਲਾਂ ਦੀ ਆਗਿਆ ਹੈ (JPG, PNG ਆਦਿ)",
+      "fileSizeExceeded": "ਇਮੇਜ ਦਾ ਆਕਾਰ 5 MB ਤੋਂ ਘੱਟ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ"
+    },
+    "success": {
+      "create": "ਪ੍ਰੀਖਿਆ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਈ ਗਈ!",
+      "update": "ਪ੍ਰੀਖਿਆ ਸਫਲਤਾਪੂਰਵਕ ਅਪਡੇਟ ਕੀਤੀ ਗਈ!",
+      "delete": "ਪ੍ਰੀਖਿਆ ਸਫਲਤਾਪੂਰਵਕ ਮਿਟਾਈ ਗਈ!"
+    },
+    "error": {
+      "create": "ਪ੍ਰੀਖਿਆ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "update": "ਪ੍ਰੀਖਿਆ ਅਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "delete": "ਪ੍ਰੀਖਿਆ ਮਿਟਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+    }
+  },
+
   "quizFeedback": {
     "title": "ਕੁਇਜ਼ ਫੀਡਬੈਕ",
     "subtitle": "ਸਭ ਕੁਇਜ਼ ਫੀਡਬੈਕ ਦਾ ਪ੍ਰਬੰਧਨ ਅਤੇ ਦ੍ਰਿਸ਼ਟੀਕੋਣ",
@@ -1792,39 +1894,48 @@
 
   "question": {
     "title": "ਸਵਾਲ ਪ੍ਰਬੰਧਨ",
-    "subtitle": "ਤੁਹਾਡੇ ਸਭ ਮੁਲਾਂਕਣ ਸਵਾਲਾਂ ਦੇ ਪ੍ਰਬੰਧਨ ਲਈ ਕੇਂਦਰੀਕ੍ਰਿਤ ਸਥਾਨ।",
+    "subtitle": "ਤੁਹਾਡੇ ਸਾਰੇ ਅਸੈਸਮੈਂਟ ਸਵਾਲਾਂ ਨੂੰ ਪ੍ਰਬੰਧਿਤ ਕਰਨ ਲਈ ਕੇਂਦਰੀਕ੍ਰਿਤ ਥਾਂ।",
     "options": "ਵਿਕਲਪ",
     "columns": {
-      "id": "ਸਵਾਲ ID",
+      "id": "ਸਵਾਲ ਆਈਡੀ",
       "question": "ਸਵਾਲ",
+      "case": "ਕੇਸ",
       "type": "ਕਿਸਮ",
       "marks": "ਅੰਕ",
       "negativeMarks": "ਨਕਾਰਾਤਮਕ ਅੰਕ",
       "options": "ਵਿਕਲਪ",
       "status": "ਸਥਿਤੀ",
-      "actions": "ਕਾਰਵਾਈਆਂ"
+      "actions": "ਕਾਰਵਾਈਆਂ",
+      "caseAvailable": "ਉਪਲਬਧ",
+      "caseNa": "ਲਾਗੂ ਨਹੀਂ"
     },
     "details": {
-      "questionDetails": "ਸਵਾਲ ਵੇਰਵੇ",
-      "questionText": "ਸਵਾਲ ਟੈਕਸਟ",
-      "questionTextPlaceholder": "ਸਵਾਲ ਟੈਕਸਟ ਦਿਓ",
+      "questionDetails": "ਸਵਾਲ ਵੇਰਵਾ",
+      "questionText": "ਸਵਾਲ ਪਾਠ",
+      "questionTextPlaceholder": "ਸਵਾਲ ਪਾਠ ਦਰਜ ਕਰੋ",
       "marks": "ਅੰਕ",
-      "marksPlaceholder": "ਇਸ ਸਵਾਲ ਲਈ ਅੰਕ ਦਿਓ",
+      "marksPlaceholder": "ਇਸ ਸਵਾਲ ਲਈ ਅੰਕ ਦਰਜ ਕਰੋ",
       "order": "ਕ੍ਰਮ",
-      "orderPlaceholder": "ਕ੍ਰਮ ਨੰਬਰ ਦਿਓ",
+      "orderPlaceholder": "ਕ੍ਰਮ ਨੰਬਰ ਦਰਜ ਕਰੋ",
       "thumbnail": "ਸਵਾਲ ਫਾਈਲ",
       "uploadText": "ਫਾਈਲ ਅੱਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
-      "uploadSubText": "PNG, JPG, JPEG 5MB ਤੱਕ",
+      "uploadSubText": "PNG, JPG, JPEG ਵੱਧ ਤੋਂ ਵੱਧ 5MB ਤੱਕ",
       "changeImage": "ਤਸਵੀਰ ਬਦਲੋ",
-      "deleteText": "ਕੀ ਤੁਸੀਂ ਇਸ ਸਵਾਲ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+      "deleteText": "ਕੀ ਤੁਸੀਂ ਯਕੀਨਨ ਇਸ ਸਵਾਲ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
+      "caseConfig": "ਕੇਸ ਕਨਫਿਗਰੇਸ਼ਨ",
+      "enableCase": "ਕੇਸ ਸਟਡੀ ਐਨੇਬਲ ਕਰੋ",
+      "caseTitle": "ਕੇਸ ਸਿਰਲੇਖ",
+      "caseTitlePlaceholder": "ਕੇਸ ਸਿਰਲੇਖ ਦਰਜ ਕਰੋ",
+      "caseText": "ਕੇਸ ਪਾਠ",
+      "caseTextPlaceholder": "ਕੇਸ ਵੇਰਵਾ ਦਰਜ ਕਰੋ..."
     },
     "breadcrumb": {
-      "assessmentQuestion": "ਮੁਲਾਂਕਣ ਸਵਾਲ",
-      "viewQuestion": "ਸਵਾਲ ਦੇਖੋ"
+      "assessmentQuestion": "ਅਸੈਸਮੈਂਟ ਸਵਾਲ",
+      "viewQuestion": "ਸਵਾਲ ਵੇਖੋ"
     },
     "create": {
       "title": "ਸਵਾਲ ਬਣਾਓ",
-      "subtitle": "ਆਪਣੇ ਮੁਲਾਂਕਣ ਲਈ ਸਵਾਲ ਸ਼ਾਮਲ ਅਤੇ ਪ੍ਰਬੰਧਿਤ ਕਰੋ।"
+      "subtitle": "ਆਪਣੇ ਅਸੈਸਮੈਂਟ ਲਈ ਸਵਾਲ ਸ਼ਾਮਲ ਕਰੋ ਅਤੇ ਪ੍ਰਬੰਧਿਤ ਕਰੋ।"
     },
     "list": {
       "searchPlaceholder": "ਸਵਾਲ ਦੁਆਰਾ ਖੋਜੋ..."
@@ -1838,20 +1949,22 @@
       "deleteQuestion": "ਸਵਾਲ ਮਿਟਾਓ"
     },
     "validation": {
-      "questionTextRequired": "ਸਵਾਲ ਟੈਕਸਟ ਲੋੜੀਂਦਾ ਹੈ",
-      "marksRequired": "ਅੰਕ ਲੋੜੀਂਦਾ ਹੈ",
+      "questionTextRequired": "ਸਵਾਲ ਪਾਠ ਲਾਜ਼ਮੀ ਹੈ",
+      "marksRequired": "ਅੰਕ ਲਾਜ਼ਮੀ ਹਨ",
       "marksPositive": "ਅੰਕ ਸਕਾਰਾਤਮਕ ਹੋਣੇ ਚਾਹੀਦੇ ਹਨ",
-      "marksInteger": "ਅੰਕ ਇੱਕ ਪੂਰਨ ਸੰਖਿਆ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
-      "orderRequired": "ਕ੍ਰਮ ਲੋੜੀਂਦਾ ਹੈ",
+      "marksInteger": "ਅੰਕ ਪੂਰਨ ਅੰਕ ਹੋਣੇ ਚਾਹੀਦੇ ਹਨ",
+      "orderRequired": "ਕ੍ਰਮ ਲਾਜ਼ਮੀ ਹੈ",
       "orderPositive": "ਕ੍ਰਮ ਸਕਾਰਾਤਮਕ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
-      "orderInteger": "ਕ੍ਰਮ ਇੱਕ ਪੂਰਨ ਸੰਖਿਆ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
-      "invalidImage": "ਸਿਰਫ ਤਸਵੀਰਾਂ ਦੀ ਇਜਾਜ਼ਤ ਹੈ (JPG, PNG, ਆਦਿ)",
-      "fileSizeExceeded": "ਤਸਵੀਰ ਦਾ ਆਕਾਰ 5 MB ਤੋਂ ਘੱਟ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ"
+      "orderInteger": "ਕ੍ਰਮ ਪੂਰਨ ਅੰਕ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "invalidImage": "ਕੇਵਲ ਚਿੱਤਰ ਫਾਈਲਾਂ ਦੀ ਆਗਿਆ ਹੈ (JPG, PNG ਆਦਿ)",
+      "fileSizeExceeded": "ਚਿੱਤਰ ਦਾ ਆਕਾਰ 5 MB ਤੋਂ ਘੱਟ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
+      "caseTitleRequired": "ਕੇਸ ਸਿਰਲੇਖ ਲਾਜ਼ਮੀ ਹੈ",
+      "caseTextRequired": "ਕੇਸ ਪਾਠ ਲਾਜ਼ਮੀ ਹੈ"
     },
     "success": {
-      "create": "ਸਵਾਲ ਸਫਲਤਾਪੂਰਵਕ ਬਣ ਗਿਆ!",
-      "update": "ਸਵਾਲ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਹੋ ਗਿਆ!",
-      "delete": "ਸਵਾਲ ਸਫਲਤਾਪੂਰਵਕ ਮਿਟ ਗਿਆ!"
+      "create": "ਸਵਾਲ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਇਆ ਗਿਆ!",
+      "update": "ਸਵਾਲ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ!",
+      "delete": "ਸਵਾਲ ਸਫਲਤਾਪੂਰਵਕ ਮਿਟਾਇਆ ਗਿਆ!"
     },
     "error": {
       "create": "ਸਵਾਲ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",

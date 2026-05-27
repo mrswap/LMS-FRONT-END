@@ -49,7 +49,7 @@ const Programs = () => {
   const fetchPrograms = (overridePage) => {
     const params = {
       search: search || "",
-      status: status?.value === "all" ? "" : status?.value,
+      status: status?.value === "all" ? "all" : status?.value,
       page: overridePage ?? page,
       limit: ITEMS_PER_PAGE,
     };

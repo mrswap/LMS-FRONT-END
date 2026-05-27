@@ -15,7 +15,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useToast } from "../../../../../common/toast/ToastContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import Breadcrumb from "../../../../../common/layout/Breadcrumb";
 import {
   deleteOption,
@@ -31,6 +31,8 @@ const OptionDetails = () => {
   const [thumbnail, setThumbnail] = useState(null);
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
   const fileInputRef = useRef(null);
+  const [searchParams] = useSearchParams();
+  const type = searchParams.get("type");
 
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -117,7 +119,9 @@ const OptionDetails = () => {
 
       resetForm();
       removeThumbnail();
-      navigate(`/assessment-question-option/${assessmentId}/${questionId}`);
+      navigate(
+        `/assessment-question-option/${assessmentId}/${questionId}?type=${type}`,
+      );
     } catch (error) {
       toast.error(error?.message || t("option.error.update"));
     } finally {
@@ -136,7 +140,9 @@ const OptionDetails = () => {
       await dispatch(deleteOption(optionId)).unwrap();
       toast.success(t("option.success.delete"));
       setTimeout(() => {
-        navigate(`/assessment-question-option/${assessmentId}/${questionId}`);
+        navigate(
+          `/assessment-question-option/${assessmentId}/${questionId}?type=${type}`,
+        );
       }, 1000);
     } catch (error) {
       toast.error(error?.message || t("option.error.delete"));
@@ -153,7 +159,7 @@ const OptionDetails = () => {
           items={[
             {
               label: t("option.breadcrumb.questionOption"),
-              path: `/assessment-question-option/${assessmentId}/${questionId}`,
+              path: `/assessment-question-option/${assessmentId}/${questionId}?type=${type}`,
             },
             {
               label: t("option.breadcrumb.view-option"),

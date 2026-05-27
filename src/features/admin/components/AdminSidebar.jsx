@@ -482,14 +482,24 @@ const AdminSidebar = ({ isOpen, onClose }) => {
           path: "/assessment-feedback",
           permission: "feedbacks.view",
         },
+        // {
+        //   label: t("sidebar.examForLevel"),
+        //   path: "/exam-level",
+        //   permission: "assessments.view",
+        // },
+        // {
+        //   label: t("sidebar.examFeedback"),
+        //   path: "/exam-feedback",
+        //   permission: "feedbacks.view",
+        // },
         {
-          label: t("sidebar.examForLevel"),
-          path: "/exam-level",
+          label: t("sidebar.moduleExamAssessment"),
+          path: "/exam-module",
           permission: "assessments.view",
         },
         {
-          label: t("sidebar.examFeedback"),
-          path: "/exam-feedback",
+          label: t("sidebar.moduleExamFeedback"),
+          path: "/exam-module-feedback",
           permission: "feedbacks.view",
         },
       ],

@@ -244,6 +244,8 @@
     "quizFeedback": "Quiz Feedback",
     "examForLevel": "Exam for Level",
     "examFeedback": "Exam Feedback",
+    "moduleExamAssessment": "Exam for Module",
+    "moduleExamFeedback": "Exam Module Feedback",
     "faq": "FAQ",
     "trainingCertification": "Training & Certification",
     "trainingAssignment": "Training Assignment",
@@ -1676,6 +1678,106 @@
     }
   },
 
+  "moduleExamAssessment": {
+    "list": {
+      "examTitle": "Module Exam Assessment",
+      "examSubtitle": "Manage and create module exams",
+      "searchPlaceholder": "Search by exam title...",
+      "clearAll": "Clear all filters",
+      "columns": {
+        "title": "Title",
+        "type": "Type",
+        "level": "Level",
+        "module": "Module",
+        "questionCount": "Questions",
+        "totalMark": "Total Marks",
+        "passingScore": "Passing Score",
+        "duration": "Duration",
+        "status": "Status",
+        "createdBy": "Created By",
+        "actions": "Actions"
+      }
+    },
+    "create": {
+      "examTitle": "Create Module Exam",
+      "examSubtitle": "Create a new exam for a module"
+    },
+    "details": {
+      "moduleDetails": "Module Selection",
+      "assessmentDetails": "Assessment Details",
+      "parentProgram": "Program Name",
+      "parentProgramPlaceholder": "Select program",
+      "parentLevel": "Level Name",
+      "parentLevelPlaceholder": "Select level",
+      "selectModule": "Select Module",
+      "selectModulePlaceholder": "Select module",
+      "title": "Exam Title",
+      "titlePlaceholder": "Enter exam title",
+      "duration": "Duration (minutes)",
+      "durationPlaceholder": "Enter duration in minutes",
+      "totalMarks": "Total Marks",
+      "totalMarksPlaceholder": "Enter total marks",
+      "passingScore": "Passing Score",
+      "passingScorePlaceholder": "Enter passing score",
+      "description": "Description",
+      "descriptionPlaceholder": "Enter exam description",
+      "thumbnail": "Exam Thumbnail",
+      "uploadText": "Click to upload thumbnail",
+      "uploadSubText": "PNG, JPG, JPEG up to 5MB",
+      "changeImage": "Change Image",
+      "currentThumbnail": "Current thumbnail",
+      "deleteTextExam": "Are you sure you want to delete this exam? Deleting this exam will also permanently delete all associated FAQs and related exam data. This action cannot be undone."
+    },
+    "actions": {
+      "addNewExam": "+ Add New Exam",
+      "createExam": "Create Exam",
+      "creating": "Creating...",
+      "updateExam": "Update Exam",
+      "updating": "Updating...",
+      "deleteExam": "Delete Exam"
+    },
+    "breadcrumb": {
+      "examManagement": "Exam Management",
+      "view-exam": "View Exam"
+    },
+    "questions": "Questions",
+    "filters": {
+      "allLevels": "All Levels",
+      "allModules": "All Modules",
+      "allStatus": "All Status",
+      "active": "Active",
+      "inactive": "Inactive",
+      "selectLevelFirst": "Select level first",
+      "selectModule": "Select module",
+      "selectModuleFirst": "Select module first"
+    },
+    "validation": {
+      "program_required": "Program is required",
+      "level_required": "Level is required",
+      "module_required": "Module is required",
+      "title_required": "Title is required",
+      "description_required": "Description is required",
+      "passing_score_required": "Passing score is required",
+      "passing_score_positive": "Passing score must be positive",
+      "total_marks_required": "Total marks is required",
+      "total_marks_positive": "Total marks must be positive",
+      "duration_required": "Duration is required",
+      "duration_positive": "Duration must be positive",
+      "invalidImage": "Only image files are allowed (JPG, PNG, etc.)",
+      "fileSizeExceeded": "Image size must be less than 5 MB"
+    },
+    "success": {
+      "create": "Exam created successfully!",
+      "update": "Exam updated successfully!",
+      "delete": "Exam deleted successfully!"
+    },
+    "error": {
+      "create": "Failed to create exam. Please try again.",
+      "update": "Failed to update exam. Please try again.",
+      "delete": "Failed to delete exam. Please try again."
+    }
+  },
+
   "quizFeedback": {
     "title": "Quiz Feedbacks",
     "subtitle": "Manage and view all quiz feedbacks",
@@ -1801,12 +1903,15 @@
     "columns": {
       "id": "Question Id",
       "question": "Question",
+      "case": "Case",
       "type": "Type",
       "marks": "Marks",
       "negativeMarks": "Negative Marks",
       "options": "Options",
       "status": "Status",
-      "actions": "Actions"
+      "actions": "Actions",
+      "caseAvailable": "Available",
+      "caseNa": "NA"
     },
     "details": {
       "questionDetails": "Question Details",
@@ -1820,7 +1925,13 @@
       "uploadText": "Click to upload file",
       "uploadSubText": "PNG, JPG, JPEG up to 5MB",
       "changeImage": "Change Image",
-      "deleteText": "Are you sure you want to delete this question?"
+      "deleteText": "Are you sure you want to delete this question?",
+      "caseConfig": "Case Configuration",
+      "enableCase": "Enable Case Study",
+      "caseTitle": "Case Title",
+      "caseTitlePlaceholder": "Enter case title ",
+      "caseText": "Case Text",
+      "caseTextPlaceholder": "Enter case description..."
     },
     "breadcrumb": {
       "assessmentQuestion": "Assessment Questions",
@@ -1850,7 +1961,9 @@
       "orderPositive": "Order must be positive",
       "orderInteger": "Order must be an integer",
       "invalidImage": "Only image files are allowed (JPG, PNG, etc.)",
-      "fileSizeExceeded": "Image size must be less than 5 MB"
+      "fileSizeExceeded": "Image size must be less than 5 MB",
+      "caseTitleRequired": "Case title is required",
+      "caseTextRequired": "Case text is required"
     },
     "success": {
       "create": "Question created successfully!",
