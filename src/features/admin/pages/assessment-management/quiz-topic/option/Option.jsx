@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import CustomeTable from "../../../../common/table/CustomeTable";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { FaEye, FaPlus } from "react-icons/fa";
 import {
   PageLayout,
@@ -28,6 +33,8 @@ const Option = () => {
   const navigate = useNavigate();
   const { assessmentId, questionId } = useParams();
   const { hasPermission } = usePermission();
+  const [searchParams] = useSearchParams();
+  const type = searchParams.get("type");
 
   const { options, isLoading, isError, message } = useSelector(
     (state) => state.option,
@@ -123,7 +130,7 @@ const Option = () => {
                 <button
                   onClick={() =>
                     navigate(
-                      `/assessment-question-option/${assessmentId}/${questionId}/option-details/${row.id}`,
+                      `/assessment-question-option/${assessmentId}/${questionId}/option-details/${row.id}?type=${type}`,
                     )
                   }
                   className="text-gray-800 text-lg cursor-pointer hover:text-[#184994]"
@@ -150,14 +157,14 @@ const Option = () => {
         items={[
           {
             label:
-              options?.type === "level"
+              options?.type === "module"
                 ? t("examAssessment.list.examTitle")
                 : t("quizAssessment.list.quizTitle"),
-            path: options?.type === "level" ? "/exam-level" : "/assessment",
+            path: options?.type === "module" ? "/exam-module" : "/assessment",
           },
           {
             label: t("question.columns.question"),
-            path: `/assessment-question/${assessmentId}`,
+            path: `/assessment-question/${assessmentId}?type=${type}`,
           },
           ,
           {
@@ -173,7 +180,7 @@ const Option = () => {
         <PageHeaderRight>
           {hasPermission("options.create") && (
             <Link
-              to={`create`}
+              to={`create?type=${type}`}
               className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2"
             >
               <FaPlus size={14} />

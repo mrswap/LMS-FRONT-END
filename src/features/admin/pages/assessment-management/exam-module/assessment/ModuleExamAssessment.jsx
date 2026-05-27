@@ -14,15 +14,10 @@ import {
 } from "../../../../common/layout";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllTopics,
-  updateSingleTopicStatus,
-} from "../../../../../../redux/slice/topicSlice";
 import { FiSearch } from "react-icons/fi";
 import Loader from "../../../../common/Loader";
 import Error from "../../../../common/Error";
 import TruncateText from "../../../../common/TruncateText";
-import { getAllChapters } from "../../../../../../redux/slice/chapterSlice";
 import { getAllModules } from "../../../../../../redux/slice/moduleSlice";
 import { getAllLevels } from "../../../../../../redux/slice/levelSlice";
 import StatusToggle from "../../../../common/StatusToggle";
@@ -35,7 +30,7 @@ import usePermission from "../../../../../../hooks/usePermission";
 
 const ITEMS_PER_PAGE = 10;
 
-const Assissment = () => {
+const ModuleExamAssessment = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -44,19 +39,15 @@ const Assissment = () => {
     (state) => state.assessment,
   );
 
-  const { chapters } = useSelector((state) => state.chapter);
   const { modules } = useSelector((state) => state.module);
   const { levels } = useSelector((state) => state.level);
-  const { topics } = useSelector((state) => state.topic);
 
   // States for sequential loading
   const [isLevelsLoaded, setIsLevelsLoaded] = useState(false);
   const [isModulesLoaded, setIsModulesLoaded] = useState(false);
-  const [isChaptersLoaded, setIsChaptersLoaded] = useState(false);
-  const [isTopicsLoaded, setIsTopicsLoaded] = useState(false);
 
   const levelOption = [
-    { value: "All", label: t("quizAssessment.filters.allLevels") },
+    { value: "All", label: t("moduleExamAssessment.filters.allLevels") },
     ...(levels?.data?.map((item) => ({
       value: item.id,
       label: item.title,
@@ -64,15 +55,13 @@ const Assissment = () => {
   ];
 
   const statusOptions = [
-    { value: "all", label: t("quizAssessment.filters.allStatus") },
-    { value: "1", label: t("quizAssessment.filters.active") },
-    { value: "0", label: t("quizAssessment.filters.inactive") },
+    { value: "all", label: t("moduleExamAssessment.filters.allStatus") },
+    { value: "1", label: t("moduleExamAssessment.filters.active") },
+    { value: "0", label: t("moduleExamAssessment.filters.inactive") },
   ];
 
   const [level, setLevel] = useState(levelOption[0]);
   const [module, setModule] = useState(null);
-  const [chapter, setChapter] = useState(null);
-  const [topic, setTopic] = useState(null);
   const [status, setStatus] = useState(statusOptions[0]);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
@@ -90,51 +79,13 @@ const Assissment = () => {
     }));
   };
 
-  const getChapterOptions = () => {
-    if (!module || module?.value === "All" || !module?.value) {
-      return [];
-    }
-    const filteredChapters =
-      chapters?.data?.filter((item) => item.module?.id === module?.value) || [];
-    return filteredChapters.map((item) => ({
-      value: item.id,
-      label: item.title,
-    }));
-  };
-
-  const getTopicOptions = () => {
-    if (!chapter || chapter?.value === "All" || !chapter?.value) {
-      return [];
-    }
-    const filteredTopics =
-      topics?.data?.filter((item) => item.chapter?.id === chapter?.value) || [];
-    return filteredTopics.map((item) => ({
-      value: item.id,
-      label: item.title,
-    }));
-  };
-
+  // Reset module when level changes
   useEffect(() => {
     setModule(null);
-    setChapter(null);
-    setTopic(null);
     setIsModulesLoaded(false);
-    setIsChaptersLoaded(false);
-    setIsTopicsLoaded(false);
   }, [level]);
 
-  useEffect(() => {
-    setChapter(null);
-    setTopic(null);
-    setIsChaptersLoaded(false);
-    setIsTopicsLoaded(false);
-  }, [module]);
-
-  useEffect(() => {
-    setTopic(null);
-    setIsTopicsLoaded(false);
-  }, [chapter]);
-
+  // Load levels on mount
   useEffect(() => {
     const loadLevels = async () => {
       await dispatch(getAllLevels());
@@ -143,6 +94,7 @@ const Assissment = () => {
     loadLevels();
   }, [dispatch]);
 
+  // Load modules when level is selected and not "All"
   useEffect(() => {
     if (isLevelsLoaded && level?.value !== "All" && level?.value) {
       const loadModules = async () => {
@@ -153,35 +105,13 @@ const Assissment = () => {
     }
   }, [level, isLevelsLoaded, dispatch]);
 
-  useEffect(() => {
-    if (isModulesLoaded && module?.value) {
-      const loadChapters = async () => {
-        await dispatch(getAllChapters());
-        setIsChaptersLoaded(true);
-      };
-      loadChapters();
-    }
-  }, [module, isModulesLoaded, dispatch]);
-
-  useEffect(() => {
-    if (isChaptersLoaded && chapter?.value) {
-      const loadTopics = async () => {
-        await dispatch(getAllTopics());
-        setIsTopicsLoaded(true);
-      };
-      loadTopics();
-    }
-  }, [chapter, isChaptersLoaded, dispatch]);
-
-  const fetchAssissments = (overridePage) => {
+  const fetchAssessments = (overridePage) => {
     const params = {
       search: search || "",
       level_id: level?.value !== "All" ? level?.value : "",
-      chapter_id: chapter?.value || "",
-      topic_id: topic?.value || "",
       module_id: module?.value || "",
       status: status?.value !== "All" ? status?.value : "",
-      type: "topic",
+      type: "module",
       page: overridePage ?? page,
       limit: ITEMS_PER_PAGE,
     };
@@ -192,14 +122,14 @@ const Assissment = () => {
     if (!isLevelsLoaded) return;
     const delay = setTimeout(() => {
       setPage(1);
-      fetchAssissments(1);
+      fetchAssessments(1);
     }, 500);
     return () => clearTimeout(delay);
-  }, [search, level, module, chapter, topic, status, isLevelsLoaded]);
+  }, [search, level, module, status, isLevelsLoaded]);
 
   useEffect(() => {
     if (isLevelsLoaded) {
-      fetchAssissments(page);
+      fetchAssessments(page);
     }
   }, [page, isLevelsLoaded]);
 
@@ -210,14 +140,10 @@ const Assissment = () => {
   const resetFilters = () => {
     setLevel(levelOption[0]);
     setModule(null);
-    setChapter(null);
-    setTopic(null);
     setStatus(statusOptions[0]);
     setSearch("");
     setPage(1);
     setIsModulesLoaded(false);
-    setIsChaptersLoaded(false);
-    setIsTopicsLoaded(false);
   };
 
   const customSelectStyles = {
@@ -236,7 +162,7 @@ const Assissment = () => {
 
   const columns = [
     {
-      header: t("quizAssessment.list.columns.title"),
+      header: t("moduleExamAssessment.list.columns.title"),
       render: (row) => (
         <div>
           <p className="font-semibold text-gray-800">
@@ -246,7 +172,7 @@ const Assissment = () => {
       ),
     },
     {
-      header: t("quizAssessment.list.columns.type"),
+      header: t("moduleExamAssessment.list.columns.type"),
       render: (row) => (
         <div>
           <p className="font-semibold text-gray-800">
@@ -256,7 +182,7 @@ const Assissment = () => {
       ),
     },
     {
-      header: t("quizAssessment.list.columns.level"),
+      header: t("moduleExamAssessment.list.columns.level"),
       render: (row) => (
         <p className="text-gray-800 text-sm">
           <TruncateText
@@ -267,7 +193,7 @@ const Assissment = () => {
       ),
     },
     {
-      header: t("quizAssessment.list.columns.module"),
+      header: t("moduleExamAssessment.list.columns.module"),
       render: (row) => (
         <p className="text-gray-800 text-sm">
           <TruncateText
@@ -278,29 +204,7 @@ const Assissment = () => {
       ),
     },
     {
-      header: t("quizAssessment.list.columns.chapter"),
-      render: (row) => (
-        <p className="text-gray-800 text-sm">
-          <TruncateText
-            text={row?.hierarchy?.chapter?.title || "-"}
-            maxLength={25}
-          />
-        </p>
-      ),
-    },
-    {
-      header: t("quizAssessment.list.columns.topic"),
-      render: (row) => (
-        <p className="text-gray-800 text-sm">
-          <TruncateText
-            text={row?.hierarchy?.topic?.title || "-"}
-            maxLength={25}
-          />
-        </p>
-      ),
-    },
-    {
-      header: t("quizAssessment.list.columns.questionCount"),
+      header: t("moduleExamAssessment.list.columns.questionCount"),
       render: (row) => (
         <div>
           <p className="font-semibold text-gray-800">
@@ -310,7 +214,7 @@ const Assissment = () => {
       ),
     },
     {
-      header: t("quizAssessment.list.columns.totalMark"),
+      header: t("moduleExamAssessment.list.columns.totalMark"),
       render: (row) => (
         <div>
           <p className="font-semibold text-gray-800">
@@ -320,7 +224,7 @@ const Assissment = () => {
       ),
     },
     {
-      header: t("quizAssessment.list.columns.passingScore"),
+      header: t("moduleExamAssessment.list.columns.passingScore"),
       render: (row) => (
         <div>
           <p className="font-semibold text-gray-800">
@@ -330,7 +234,7 @@ const Assissment = () => {
       ),
     },
     {
-      header: t("quizAssessment.list.columns.duration"),
+      header: t("moduleExamAssessment.list.columns.duration"),
       render: (row) => (
         <span className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-semibold">
           {row.duration ?? 0} mins
@@ -340,7 +244,7 @@ const Assissment = () => {
     ...(hasPermission("assessments.status")
       ? [
           {
-            header: t("quizAssessment.list.columns.status"),
+            header: t("moduleExamAssessment.list.columns.status"),
             render: (row) => (
               <StatusToggle
                 value={row.status}
@@ -352,7 +256,7 @@ const Assissment = () => {
                         status: newStatus,
                       }),
                     ).unwrap();
-                    await fetchAssissments(1);
+                    await fetchAssessments(1);
                   } catch (err) {
                     console.error("Toggle failed:", err);
                   }
@@ -363,8 +267,7 @@ const Assissment = () => {
         ]
       : []),
     {
-      header: t("quizAssessment.list.columns.createdBy"),
-
+      header: t("moduleExamAssessment.list.columns.createdBy"),
       render: (row) => (
         <span className="text-sm text-gray-700">
           {row.creator?.name || "-"}
@@ -374,22 +277,22 @@ const Assissment = () => {
     ...(hasPermission("assessments.edit")
       ? [
           {
-            header: t("quizAssessment.list.columns.actions"),
+            header: t("moduleExamAssessment.list.columns.actions"),
             render: (row) => (
               <div className="flex gap-4">
                 <button
-                  onClick={() => navigate(`${row.id}`)}
+                  onClick={() => navigate(`details/${row.id}`)}
                   className="text-gray-800 text-lg cursor-pointer hover:text-[#184994] transition-colors"
                 >
                   <FaEye />
                 </button>
                 <button
                   onClick={() =>
-                    navigate(`/assessment-question/${row.id}?type=topic`)
+                    navigate(`/assessment-question/${row.id}?type=module`)
                   }
                   className="text-sm text-blue-500 hover:text-blue-600 hover:underline cursor-pointer"
                 >
-                  {t("quizAssessment.questions")}
+                  {t("moduleExamAssessment.questions")}
                 </button>
               </div>
             ),
@@ -399,11 +302,7 @@ const Assissment = () => {
   ];
 
   const isModuleDisabled = !level || level?.value === "All";
-  const isChapterDisabled = !module || !module?.value;
-  const isTopicDisabled = !chapter || !chapter?.value;
   const moduleOptions = getModuleOptions();
-  const chapterOptions = getChapterOptions();
-  const topicOptions = getTopicOptions();
 
   if (isLoading && !assessments?.data?.length) return <Loader />;
   if (isError) return <Error message={message} />;
@@ -416,16 +315,18 @@ const Assissment = () => {
     <PageLayout>
       <PageHeader>
         <PageHeaderLeft>
-          <PageTitle>{t("quizAssessment.list.quizTitle")}</PageTitle>
-          <PageSubtitle>{t("quizAssessment.list.quizSubtitle")}</PageSubtitle>
+          <PageTitle>{t("moduleExamAssessment.list.examTitle")}</PageTitle>
+          <PageSubtitle>
+            {t("moduleExamAssessment.list.examSubtitle")}
+          </PageSubtitle>
         </PageHeaderLeft>
         <PageHeaderRight>
           {hasPermission("assessments.create") && (
             <Link
-              to="create"
+              to="create-module-exam"
               className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap"
             >
-              {t("quizAssessment.actions.addNewQuiz")}
+              {t("moduleExamAssessment.actions.addNewExam")}
             </Link>
           )}
         </PageHeaderRight>
@@ -443,7 +344,7 @@ const Assissment = () => {
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder={t("quizAssessment.list.searchPlaceholder")}
+                placeholder={t("moduleExamAssessment.list.searchPlaceholder")}
                 className="bg-transparent outline-none px-3 text-sm w-full placeholder:text-gray-400"
               />
               {search && (
@@ -484,46 +385,8 @@ const Assissment = () => {
                 }
                 placeholder={
                   isModuleDisabled
-                    ? t("quizAssessment.filters.selectLevelFirst")
-                    : t("quizAssessment.filters.selectModule")
-                }
-              />
-            </div>
-
-            <div className="w-full sm:w-[48%] lg:w-[210px]">
-              <Select
-                value={chapter}
-                onChange={setChapter}
-                options={chapterOptions}
-                styles={customSelectStyles}
-                isSearchable={false}
-                isDisabled={isChapterDisabled}
-                isLoading={
-                  !isChapterDisabled && !isChaptersLoaded && module?.value
-                }
-                placeholder={
-                  isChapterDisabled
-                    ? t("quizAssessment.filters.selectModuleFirst")
-                    : t("quizAssessment.filters.selectChapter")
-                }
-              />
-            </div>
-
-            <div className="w-full sm:w-[48%] lg:w-[210px]">
-              <Select
-                value={topic}
-                onChange={setTopic}
-                options={topicOptions}
-                styles={customSelectStyles}
-                isSearchable={false}
-                isDisabled={isTopicDisabled}
-                isLoading={
-                  !isTopicDisabled && !isTopicsLoaded && chapter?.value
-                }
-                placeholder={
-                  isTopicDisabled
-                    ? t("quizAssessment.filters.selectChapterFirst")
-                    : t("quizAssessment.filters.selectTopic")
+                    ? t("moduleExamAssessment.filters.selectLevelFirst")
+                    : t("moduleExamAssessment.filters.selectModule")
                 }
               />
             </div>
@@ -553,7 +416,7 @@ const Assissment = () => {
                   opacity-0 group-hover:opacity-100 transition-all duration-200
                   whitespace-nowrap pointer-events-none"
                 >
-                  {t("quizAssessment.list.clearAll")}
+                  {t("moduleExamAssessment.list.clearAll")}
                 </div>
               </div>
             </div>
@@ -577,4 +440,4 @@ const Assissment = () => {
   );
 };
 
-export default Assissment;
+export default ModuleExamAssessment;

@@ -6,8 +6,48 @@ import Staff from "../pages/users/Staff";
 import AdminSupportPage from "../pages/AdminSupportPage";
 import BulkUpload2 from "../pages/curriculum/bulk-upload/BulkUpload2";
 import CreateBulkUpload2 from "../pages/curriculum/bulk-upload/components/CreateBulkUpload2";
-import AutomatedContentImporter from "../pages/content-management/automated-content-importer/AutomatedContentImporter";
-import CreateAutomatedContent from "../pages/content-management/automated-content-importer/components/CreateAutomatedContent";
+// import AutomatedContentImporter from "../pages/content-management/automated-content-importer/AutomatedContentImporter";
+// import CreateAutomatedContent from "../pages/content-management/automated-content-importer/components/CreateAutomatedContent";
+// import ModuleExamAssessment from "../pages/assessment-management/exam-module/assessment/ModuleExamAssessment";
+// import ModuleExamFeedback from "../pages/assessment-management/exam-module/feedback/ModuleExamFeedback";
+// import ModuleExamFeedbackDetails from "../pages/assessment-management/exam-module/feedback/components/ModuleExamFeedbackDetails";
+// import CreateModuleExamAssessment from "../pages/assessment-management/exam-module/assessment/components/CreateModuleExamAssessment";
+// import ModuleExamAssessmentDetails from "../pages/assessment-management/exam-module/assessment/components/ModuleExamAssessmentDetails";
+
+const AutomatedContentImporter = lazy(
+  () =>
+    import("../pages/content-management/automated-content-importer/AutomatedContentImporter"),
+);
+
+const CreateAutomatedContent = lazy(
+  () =>
+    import("../pages/content-management/automated-content-importer/components/CreateAutomatedContent"),
+);
+
+const ModuleExamAssessment = lazy(
+  () =>
+    import("../pages/assessment-management/exam-module/assessment/ModuleExamAssessment"),
+);
+
+const ModuleExamFeedback = lazy(
+  () =>
+    import("../pages/assessment-management/exam-module/feedback/ModuleExamFeedback"),
+);
+
+const ModuleExamFeedbackDetails = lazy(
+  () =>
+    import("../pages/assessment-management/exam-module/feedback/components/ModuleExamFeedbackDetails"),
+);
+
+const CreateModuleExamAssessment = lazy(
+  () =>
+    import("../pages/assessment-management/exam-module/assessment/components/CreateModuleExamAssessment"),
+);
+
+const ModuleExamAssessmentDetails = lazy(
+  () =>
+    import("../pages/assessment-management/exam-module/assessment/components/ModuleExamAssessmentDetails"),
+);
 
 const Certificate = lazy(() => import("../pages/certificate/Certificate"));
 const Notification = lazy(() => import("../common/noitification/Notification"));
@@ -163,10 +203,11 @@ const QuizFeedback = lazy(
   () =>
     import("../pages/assessment-management/quiz-topic/feedback/QuizFeedback"),
 );
-const ExamFeedback = lazy(
+const FeedbackDetails = lazy(
   () =>
-    import("../pages/assessment-management/exam-level/feedback/ExamFeedback"),
+    import("../pages/assessment-management/quiz-topic/feedback/components/FeedbackDetails"),
 );
+
 const Contact = lazy(
   () => import("../pages/reports-administration/contact-us/Contact"),
 );
@@ -191,14 +232,6 @@ const ContentStatusReport = lazy(
 const CertificationReport = lazy(
   () =>
     import("../pages/reports-administration/certification/CertificationReport"),
-);
-const FeedbackDetails = lazy(
-  () =>
-    import("../pages/assessment-management/quiz-topic/feedback/components/FeedbackDetails"),
-);
-const ExamFeedbackDetails = lazy(
-  () =>
-    import("../pages/assessment-management/exam-level/feedback/components/ExamFeedbackDetails"),
 );
 
 const Question = lazy(
@@ -225,18 +258,28 @@ const OptionDetails = lazy(
     import("../pages/assessment-management/quiz-topic/option/components/OptionDetails"),
 );
 
-const ExamAssessment = lazy(
-  () =>
-    import("../pages/assessment-management/exam-level/assessment/ExamAssessment"),
-);
-const CreateExamAssessment = lazy(
-  () =>
-    import("../pages/assessment-management/exam-level/assessment/components/CreateExamAssessment"),
-);
-const ExamAssessmentDetails = lazy(
-  () =>
-    import("../pages/assessment-management/exam-level/assessment/components/ExamAssessmentDetails"),
-);
+// const ExamAssessment = lazy(
+//   () =>
+//     import("../pages/assessment-management/exam-level/assessment/ExamAssessment"),
+// );
+// const CreateExamAssessment = lazy(
+//   () =>
+//     import("../pages/assessment-management/exam-level/assessment/components/CreateExamAssessment"),
+// );
+// const ExamAssessmentDetails = lazy(
+//   () =>
+//     import("../pages/assessment-management/exam-level/assessment/components/ExamAssessmentDetails"),
+// );
+
+// const ExamFeedback = lazy(
+//   () =>
+//     import("../pages/assessment-management/exam-level/feedback/ExamFeedback"),
+// );
+
+// const ExamFeedbackDetails = lazy(
+//   () =>
+//     import("../pages/assessment-management/exam-level/feedback/components/ExamFeedbackDetails"),
+// );
 
 const AdminRoutes = (
   <Route element={<ProtectedRoute />}>
@@ -342,22 +385,38 @@ const AdminRoutes = (
       <Route path="faq/create" element={<CreateFaq />} />
       <Route path="faq/:id" element={<FaqDetails />} />
 
-      {/* Exam Level */}
-      <Route path="exam-level" element={<ExamAssessment />} />
-      <Route path="exam-feedback" element={<ExamFeedback />} />
-      <Route path="exam-feedback/:id" element={<ExamFeedbackDetails />} />
-      <Route path="exam-level/create-exam" element={<CreateExamAssessment />} />
-      <Route
-        path="exam-level/exam-details/:assessmentId"
-        element={<ExamAssessmentDetails />}
-      />
-
       {/* Assessment */}
       <Route path="assessment" element={<Assissment />} />
       <Route path="assessment-feedback" element={<QuizFeedback />} />
       <Route path="assessment-feedback/:id" element={<FeedbackDetails />} />
       <Route path="assessment/create" element={<CreateAssessment />} />
       <Route path="assessment/:assessmentId" element={<AssissmentDetails />} />
+
+      {/* Exam Level */}
+      {/* <Route path="exam-level" element={<ExamAssessment />} />
+      <Route path="exam-feedback" element={<ExamFeedback />} />
+      <Route path="exam-feedback/:id" element={<ExamFeedbackDetails />} />
+      <Route path="exam-level/create-exam" element={<CreateExamAssessment />} />
+      <Route
+        path="exam-level/exam-details/:assessmentId"
+        element={<ExamAssessmentDetails />}
+      /> */}
+
+      {/* Exam Module */}
+      <Route path="exam-module" element={<ModuleExamAssessment />} />
+      <Route path="exam-module-feedback" element={<ModuleExamFeedback />} />
+      <Route
+        path="exam-moduel-feedback/:id"
+        element={<ModuleExamFeedbackDetails />}
+      />
+      <Route
+        path="exam-module/create-module-exam"
+        element={<CreateModuleExamAssessment />}
+      />
+      <Route
+        path="exam-module/details/:assessmentId"
+        element={<ModuleExamAssessmentDetails />}
+      />
 
       {/* Questions */}
       <Route path="assessment-question/:assessmentId" element={<Question />} />
@@ -366,7 +425,7 @@ const AdminRoutes = (
         element={<CreateQuestion />}
       />
       <Route
-        path="assessment-question/:assessmentId/create/:questionId"
+        path="assessment-question/:assessmentId/:questionId"
         element={<QuestionDetails />}
       />
 

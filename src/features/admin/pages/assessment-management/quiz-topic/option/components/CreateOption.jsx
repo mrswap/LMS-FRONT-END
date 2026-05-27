@@ -15,13 +15,15 @@ import {
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useToast } from "../../../../../common/toast/ToastContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { createOption } from "../../../../../../../redux/slice/assessmentOptionSlice";
 
 const CreateOption = () => {
   const [thumbnail, setThumbnail] = useState(null);
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
   const fileInputRef = useRef(null);
+  const [searchParams] = useSearchParams();
+  const type = searchParams.get("type");
 
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -88,7 +90,9 @@ const CreateOption = () => {
 
       resetForm();
       removeThumbnail();
-      navigate(`/assessment-question-option/${assessmentId}/${questionId}`);
+      navigate(
+        `/assessment-question-option/${assessmentId}/${questionId}?type=${type}`,
+      );
     } catch (error) {
       toast.error(error?.message || t("option.error.create"));
     } finally {

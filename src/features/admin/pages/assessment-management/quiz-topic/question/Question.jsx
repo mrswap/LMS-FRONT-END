@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import CustomeTable from "../../../../common/table/CustomeTable";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { FaEye, FaPlus } from "react-icons/fa";
 import {
   PageLayout,
@@ -30,12 +35,12 @@ const Question = () => {
   const navigate = useNavigate();
   const { assessmentId } = useParams();
   const { hasPermission } = usePermission();
+  const [searchParams] = useSearchParams();
+  const type = searchParams.get("type");
 
   const { questions, isLoading, isError, message } = useSelector(
     (state) => state.question,
   );
-
-  // console.log("questions", questions);
 
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
@@ -68,7 +73,23 @@ const Question = () => {
     return "bg-gray-100 text-gray-700";
   };
 
-  const columns = [
+  const getCaseStatus = (isCase) => {
+    if (isCase) {
+      return (
+        <span className="px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
+          {t("question.columns.caseAvailable")}
+        </span>
+      );
+    }
+    return (
+      <span className="px-2 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-600">
+        {t("question.columns.caseNa")}
+      </span>
+    );
+  };
+
+  // Base columns
+  const baseColumns = [
     {
       header: t("question.columns.id"),
       render: (row) => <p className="font-semibold text-gray-800">{row?.id}</p>,
@@ -81,6 +102,18 @@ const Question = () => {
         </p>
       ),
     },
+  ];
+
+  // Add Case column only if type is module
+  if (type === "module") {
+    baseColumns.push({
+      header: "Case",
+      render: (row) => getCaseStatus(row.is_case),
+    });
+  }
+
+  // Add remaining columns
+  baseColumns.push(
     {
       header: t("question.columns.type"),
       render: (row) => (
@@ -97,28 +130,6 @@ const Question = () => {
         <p className="font-semibold text-gray-800">{row.marks}</p>
       ),
     },
-    // {
-    //   header: t("question.columns.options"),
-    //   render: (row) => {
-    //     const options = row.options;
-    //     if (!options || options.length === 0) return <div>-</div>;
-    //     return (
-    //       <div className="text-sm text-gray-700">
-    //         {options.slice(0, 2).map((opt, i) => (
-    //           <div key={opt.id}>
-    //             {String.fromCharCode(65 + i)}. {opt.option_text}{" "}
-    //             {opt.is_correct ? "✅" : ""}
-    //           </div>
-    //         ))}
-    //         {options.length > 2 && (
-    //           <div className="text-xs text-gray-400">
-    //             +{options.length - 2} more
-    //           </div>
-    //         )}
-    //       </div>
-    //     );
-    //   },
-    // },
     {
       header: t("question.columns.options"),
       render: (row) => {
@@ -151,39 +162,41 @@ const Question = () => {
         );
       },
     },
-    ...(hasPermission("questions.edit") || hasPermission("options.view")
-      ? [
-          {
-            header: t("question.columns.actions"),
-            render: (row) => (
-              <div className="flex gap-4">
-                {hasPermission("questions.edit") && (
-                  <button
-                    onClick={() => navigate(`create/${row.id}`)}
-                    className="text-gray-800 text-lg cursor-pointer hover:text-[#184994]"
-                  >
-                    <FaEye />
-                  </button>
-                )}
+  );
 
-                {hasPermission("options.view") && (
-                  <button
-                    onClick={() =>
-                      navigate(
-                        `/assessment-question-option/${assessmentId}/${row.id}`,
-                      )
-                    }
-                    className="text-sm text-blue-500 hover:text-blue-600 hover:underline cursor-pointer"
-                  >
-                    {t("question.options")}
-                  </button>
-                )}
-              </div>
-            ),
-          },
-        ]
-      : []),
-  ];
+  // Add Actions column if user has permissions
+  if (hasPermission("questions.edit") || hasPermission("options.view")) {
+    baseColumns.push({
+      header: t("question.columns.actions"),
+      render: (row) => (
+        <div className="flex gap-4">
+          {hasPermission("questions.edit") && (
+            <button
+              onClick={() => navigate(`${row.id}?type=${type}`)}
+              className="text-gray-800 text-lg cursor-pointer hover:text-[#184994]"
+            >
+              <FaEye />
+            </button>
+          )}
+
+          {hasPermission("options.view") && (
+            <buttona
+              onClick={() =>
+                navigate(
+                  `/assessment-question-option/${assessmentId}/${row.id}?type=${type}`,
+                )
+              }
+              className="text-sm text-blue-500 hover:text-blue-600 hover:underline cursor-pointer"
+            >
+              {t("question.options")}
+            </buttona>
+          )}
+        </div>
+      ),
+    });
+  }
+
+  const columns = baseColumns;
 
   if (isLoading && !questions?.questions?.length) return <Loader />;
   if (isError & message) return <Error message={message} />;
@@ -194,27 +207,16 @@ const Question = () => {
 
   return (
     <PageLayout>
-      {/* <Breadcrumb
-        items={[
-          {
-            label: "Assessment",
-            path: "/assessment",
-          },
-          {
-            label: "Question",
-          },
-        ]}
-      /> */}
       <Breadcrumb
         items={[
           {
             label:
-              questions?.assessment_type === "level"
+              questions?.assessment_type === "module"
                 ? t("examAssessment.list.examTitle")
                 : t("quizAssessment.list.quizTitle"),
             path:
-              questions?.assessment_type === "level"
-                ? "/exam-level"
+              questions?.assessment_type === "module"
+                ? "/exam-module"
                 : "/assessment",
           },
           {
@@ -230,7 +232,7 @@ const Question = () => {
         <PageHeaderRight>
           {hasPermission("questions.create") && (
             <Link
-              to="create"
+              to={`create?type=${type}`}
               className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap flex items-center gap-2"
             >
               <FaPlus size={14} />
