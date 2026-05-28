@@ -1,343 +1,3 @@
-// import React, { useEffect, useRef } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { useParams, useNavigate } from "react-router-dom";
-// import {
-//   FaFileAlt,
-//   FaVideo,
-//   FaImage,
-//   FaHeadphones,
-//   FaBookOpen,
-// } from "react-icons/fa";
-// import { MdArrowBack, MdPictureAsPdf } from "react-icons/md";
-// import Loader from "../../../../common/Loader";
-// import { PageLayout, PageBody } from "../../../../common/layout";
-// import { getSingleContent } from "../../../../../../redux/slice/unitBuilderSlice";
-// import { useTranslation } from "react-i18next";
-// import Error from "../../../../common/Error";
-
-// // Common component for HTML content with styles
-// const RichTextContent = ({ htmlContent }) => {
-//   if (!htmlContent) return null;
-
-//   return (
-//     <>
-//       <div
-//         className="custom-content"
-//         dangerouslySetInnerHTML={{ __html: htmlContent }}
-//       />
-//       <style>{`
-//         .custom-content p {
-//           margin: 0 0 16px;
-//           line-height: 1.8;
-//         }
-//         .custom-content h1,
-//         .custom-content h2,
-//         .custom-content h3,
-//         .custom-content h4,
-//         .custom-content h5,
-//         .custom-content h6 {
-//           margin: 24px 0 16px;
-//           font-weight: 700;
-//           line-height: 1.4;
-//         }
-//         .custom-content ul,
-//         .custom-content ol {
-//           margin: 0 0 16px;
-//           padding-left: 24px;
-//         }
-//         .custom-content li {
-//           margin-bottom: 8px;
-//         }
-//         .custom-content hr {
-//           margin: 24px 0;
-//           border: none;
-//           border-top: 1px solid #d1d5db;
-//         }
-//         .custom-content table {
-//           width: 100%;
-//           border-collapse: collapse;
-//           margin: 20px 0;
-//           border: 1px solid #d1d5db;
-//         }
-//         .custom-content td,
-//         .custom-content th {
-//           border: 1px solid #d1d5db;
-//           padding: 12px;
-//           vertical-align: top;
-//         }
-//         .custom-content th {
-//           background-color: #f3f4f6;
-//           font-weight: 600;
-//         }
-//         .custom-content img {
-//           max-width: 100%;
-//           height: auto;
-//           border-radius: 8px;
-//         }
-//       `}</style>
-//     </>
-//   );
-// };
-
-// // Common Content Wrapper - same layout for all content types
-// const ContentWrapper = ({ children }) => (
-//   <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-//     <div className="p-6">{children}</div>
-//   </div>
-// );
-
-// const SingleContentPreview = () => {
-//   const dispatch = useDispatch();
-//   const navigate = useNavigate();
-//   const { t } = useTranslation();
-//   const { topicId, contentId } = useParams();
-//   const hasMarkedRead = useRef(false);
-
-//   const { currentContent, isLoading, isError, message } = useSelector(
-//     (state) => state.content,
-//   );
-
-//   const content = currentContent?.current;
-
-//   const getEmbedUrl = (url) => {
-//     if (!url) return null;
-
-//     // YouTube
-//     if (url.includes("youtube.com/watch") || url.includes("youtu.be")) {
-//       let videoId = "";
-
-//       if (url.includes("youtube.com/watch")) {
-//         videoId = new URL(url).searchParams.get("v");
-//       } else {
-//         videoId = url.split("/").pop();
-//       }
-
-//       return `https://www.youtube.com/embed/${videoId}`;
-//     }
-
-//     // Vimeo
-//     if (url.includes("vimeo.com")) {
-//       const videoId = url.split("/").pop();
-//       return `https://player.vimeo.com/video/${videoId}`;
-//     }
-
-//     return null;
-//   };
-
-//   useEffect(() => {
-//     if (topicId && contentId) {
-//       dispatch(getSingleContent({ topicId, contentId }));
-//       hasMarkedRead.current = false;
-//     }
-//   }, [topicId, contentId, dispatch]);
-
-//   const renderTextContent = () => (
-//     <ContentWrapper>
-//       <RichTextContent htmlContent={content?.body || content?.content} />
-//     </ContentWrapper>
-//   );
-
-//   const renderVideoContent = () => {
-//     const videoUrl = content?.meta?.full_url || content?.media?.full_url;
-
-//     const embedUrl = getEmbedUrl(videoUrl);
-
-//     const isDirectVideo = videoUrl?.match(/\.(mp4|webm|ogg)$/i);
-
-//     return (
-//       <ContentWrapper>
-//         {/* Direct Video */}
-//         {isDirectVideo ? (
-//           <video controls className="w-full rounded-lg">
-//             <source src={videoUrl} type="video/mp4" />
-//           </video>
-//         ) : embedUrl ? (
-//           /* YouTube / Vimeo */
-//           <iframe
-//             src={embedUrl}
-//             title={content?.title}
-//             className="w-full h-[500px] rounded-lg"
-//             allowFullScreen
-//           />
-//         ) : (
-//           /* Fallback */
-//           <iframe
-//             src={videoUrl}
-//             title={content?.title}
-//             className="w-full h-[500px] rounded-lg border"
-//           />
-//         )}
-
-//         {content?.content && (
-//           <div className="mt-6">
-//             <RichTextContent htmlContent={content?.body || content?.content} />
-//           </div>
-//         )}
-//       </ContentWrapper>
-//     );
-//   };
-
-//   const renderPDFContent = () => {
-//     const pdfUrl =
-//       content?.meta?.full_url ||
-//       content?.media?.full_url ||
-//       content?.pdf_url ||
-//       content?.content;
-
-//     return (
-//       <ContentWrapper>
-//         <div className="relative overflow-hidden rounded-2xl bg-white border border-gray-200 h-[650px]">
-//           <iframe
-//             src={`${pdfUrl}#toolbar=0&navpanes=0&scrollbar=0`}
-//             title={content?.title}
-//             className="absolute top-[-2px] left-[-2px] w-[calc(100%+4px)] h-[calc(100%+4px)] border-0"
-//             style={{
-//               border: "none",
-//               overflow: "hidden",
-//             }}
-//           />
-//         </div>
-
-//         {content?.content && (
-//           <div className="mt-6">
-//             <RichTextContent htmlContent={content?.body || content?.content} />
-//           </div>
-//         )}
-//       </ContentWrapper>
-//     );
-//   };
-
-//   const renderAudioContent = () => {
-//     const audioUrl =
-//       content?.meta?.full_url ||
-//       content?.media?.full_url ||
-//       content?.audio_url ||
-//       content?.content;
-
-//     return (
-//       <ContentWrapper>
-//         <div className="max-w-md mx-auto text-center">
-//           <div className="w-24 h-24 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center mx-auto mb-6">
-//             <FaHeadphones className="text-4xl text-green-600" />
-//           </div>
-
-//           <audio controls className="w-full mb-4">
-//             <source src={audioUrl} type="audio/mpeg" />
-//             Your browser does not support the audio element.
-//           </audio>
-//         </div>
-//         {content?.content && (
-//           <div className="mt-6 text-left">
-//             <RichTextContent htmlContent={content?.body || content?.content} />
-//           </div>
-//         )}
-//       </ContentWrapper>
-//     );
-//   };
-
-//   const renderImageContent = () => {
-//     const imageUrl =
-//       content?.meta?.full_url ||
-//       content?.media?.full_url ||
-//       content?.image_url ||
-//       content?.content;
-
-//     return (
-//       <ContentWrapper>
-//         <div className="flex justify-center bg-gray-100 rounded-lg p-4">
-//           <img
-//             src={imageUrl}
-//             alt={content?.title}
-//             className="max-w-full h-auto object-contain max-h-[600px] rounded-lg shadow"
-//             onError={(e) => {
-//               e.target.src =
-//                 "https://placehold.co/600x400?text=Image+Not+Found";
-//             }}
-//           />
-//         </div>
-
-//         {content?.content && (
-//           <div className="mt-6">
-//             <RichTextContent htmlContent={content?.body || content?.content} />
-//           </div>
-//         )}
-//       </ContentWrapper>
-//     );
-//   };
-
-//   const renderContent = () => {
-//     if (!content) return null;
-
-//     switch (content?.type) {
-//       case "image":
-//         return renderImageContent();
-
-//       case "media":
-//         if (content?.meta?.type === "video") return renderVideoContent();
-//         if (content?.meta?.type === "audio") return renderAudioContent();
-//         if (content?.meta?.type === "image") return renderImageContent();
-//         if (content?.meta?.type === "document") return renderPDFContent();
-//         return renderTextContent();
-
-//       default:
-//         if (content?.type === "text") return renderTextContent();
-//         if (content?.type === "video") return renderVideoContent();
-//         if (content?.type === "pdf") return renderPDFContent();
-//         if (content?.type === "audio") return renderAudioContent();
-//         return renderTextContent();
-//     }
-//   };
-
-//   if (isLoading) {
-//     return <Loader />;
-//   }
-
-//   if (isError) return <Error message={message} />;
-
-//   if (!content) {
-//     return (
-//       <div className="flex flex-col items-center justify-center h-[80vh] max-w-md mx-auto text-center">
-//         <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-6">
-//           <FaFileAlt className="text-3xl text-gray-400" />
-//         </div>
-//         <h3 className="text-xl font-semibold text-gray-700 mb-2">
-//           {t("singlePreviewContent.notFound.title")}
-//         </h3>
-//         <p className="text-gray-500 mb-6">
-//           {t("singlePreviewContent.notFound.description")}
-//         </p>
-//         <button
-//           onClick={() => navigate(-1)}
-//           className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition shadow-sm"
-//         >
-//           {t("singlePreviewContent.notFound.button")}
-//         </button>
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <PageLayout>
-//       <div className="p-8 rounded-lg border border-gray-300">
-//         <button
-//           onClick={() => navigate(-1)}
-//           className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-black transition-colors cursor-pointer"
-//         >
-//           <MdArrowBack size={18} />
-//           Back
-//         </button>
-
-//         <PageBody className="mt-4">
-//           <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-8"></div>
-//           <div className="mb-10">{renderContent()}</div>
-//         </PageBody>
-//       </div>
-//     </PageLayout>
-//   );
-// };
-
-// export default SingleContentPreview;
-
 // import React, { useEffect, useRef, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { useParams, useNavigate } from "react-router-dom";
@@ -521,7 +181,10 @@
 //                   className="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-2"
 //                 >
 //                   <FaCompress size={14} />
-//                   <span>Exit Fullscreen</span>
+//                   <span>
+//                     {t("singlePreviewContent.exitFullscreen") ||
+//                       "Exit Fullscreen"}
+//                   </span>
 //                 </button>
 //                 <div className="h-5 w-px bg-gray-300"></div>
 //                 <span className="text-sm font-medium text-gray-700">
@@ -544,7 +207,8 @@
 //                     <div className="border-b border-gray-200 bg-gray-50 px-4 py-2 rounded-t-lg">
 //                       <span className="text-xs font-medium text-gray-700 flex items-center gap-2">
 //                         <FaCode className="text-blue-600" />
-//                         Interactive H5P Content
+//                         {t("singlePreviewContent.h5p.interactive") ||
+//                           "Interactive H5P Content"}
 //                       </span>
 //                     </div>
 //                     <div
@@ -585,16 +249,19 @@
 //           <div className="flex items-center gap-2">
 //             <FaCode className="text-blue-600 text-sm" />
 //             <span className="text-xs font-medium text-gray-700">
-//               Interactive H5P Content
+//               {t("singlePreviewContent.h5p.interactive") ||
+//                 "Interactive H5P Content"}
 //             </span>
 //           </div>
 //           <button
 //             onClick={toggleFullscreen}
 //             className="text-gray-500 hover:text-gray-700 transition-colors flex items-center gap-1"
-//             title="Fullscreen"
+//             title={t("singlePreviewContent.fullscreen") || "Fullscreen"}
 //           >
 //             <FaExpand size={14} />
-//             <span className="text-xs">Fullscreen</span>
+//             <span className="text-xs">
+//               {t("singlePreviewContent.fullscreen") || "Fullscreen"}
+//             </span>
 //           </button>
 //         </div>
 //         <div className="h-[550px]">
@@ -626,7 +293,7 @@
 //         <div className="border-b border-gray-200 bg-gray-50 px-4 py-2 rounded-t-lg">
 //           <span className="text-xs font-medium text-gray-700 flex items-center gap-2">
 //             <FaFilePdf className="text-red-500" />
-//             PDF Document
+//             {t("singlePreviewContent.pdf.title") || "PDF Document"}
 //           </span>
 //         </div>
 //         <div className="h-[calc(100vh-200px)] min-h-[550px]">
@@ -655,7 +322,7 @@
 //         <div className="border-b border-gray-200 bg-gray-50 px-4 py-2 rounded-t-lg">
 //           <span className="text-xs font-medium text-gray-700 flex items-center gap-2">
 //             <FaVideo className="text-blue-500" />
-//             Video Content
+//             {t("singlePreviewContent.types.video") || "Video Content"}
 //           </span>
 //         </div>
 //         <div className="h-[550px]">
@@ -674,7 +341,8 @@
 //             <div className="text-center py-12 bg-gray-50 rounded">
 //               <FaVideo className="text-5xl text-gray-400 mx-auto mb-3" />
 //               <p className="text-gray-500 text-sm">
-//                 Video preview not available
+//                 {t("singlePreviewContent.videoNotAvailable") ||
+//                   "Video preview not available"}
 //               </p>
 //             </div>
 //           )}
@@ -696,7 +364,7 @@
 //         <div className="border-b border-gray-200 bg-gray-50 px-4 py-2 rounded-t-lg">
 //           <span className="text-xs font-medium text-gray-700 flex items-center gap-2">
 //             <FaImage className="text-green-500" />
-//             Image Content
+//             {t("singlePreviewContent.types.image") || "Image Content"}
 //           </span>
 //         </div>
 //         <div className="h-[550px] overflow-auto p-4">
@@ -729,7 +397,7 @@
 //         <div className="border-b border-gray-200 bg-gray-50 px-4 py-2 rounded-t-lg">
 //           <span className="text-xs font-medium text-gray-700 flex items-center gap-2">
 //             <FaHeadphones className="text-purple-500" />
-//             Audio Content
+//             {t("singlePreviewContent.types.audio") || "Audio Content"}
 //           </span>
 //         </div>
 //         <div className="p-6">
@@ -739,7 +407,8 @@
 //             </div>
 //             <audio controls className="w-full">
 //               <source src={audioUrl} type="audio/mpeg" />
-//               Your browser does not support the audio element.
+//               {t("singlePreviewContent.audioNotSupported") ||
+//                 "Your browser does not support the audio element."}
 //             </audio>
 //           </div>
 //         </div>
@@ -758,7 +427,7 @@
 //         <div className="border-b border-gray-200 bg-gray-50 px-4 py-2 rounded-t-lg">
 //           <span className="text-xs font-medium text-gray-700 flex items-center gap-2">
 //             <FaFileAlt className="text-gray-500" />
-//             Text Content
+//             {t("singlePreviewContent.types.text") || "Text Content"}
 //           </span>
 //         </div>
 //         <div className="p-6">
@@ -773,9 +442,6 @@
 
 //     // Get media type from media object or direct type
 //     const mediaType = content?.media?.type || content?.type;
-
-//     console.log("Media Type:", mediaType);
-//     console.log("Content Data:", content);
 
 //     switch (mediaType) {
 //       case "h5p":
@@ -799,7 +465,9 @@
 //         return (
 //           <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-8 text-center">
 //             <FaFileAlt className="text-5xl text-gray-400 mx-auto mb-3" />
-//             <p className="text-gray-500">No content available</p>
+//             <p className="text-gray-500">
+//               {t("singlePreviewContent.noContent") || "No content available"}
+//             </p>
 //           </div>
 //         );
 //     }
@@ -823,17 +491,16 @@
 //             <FaFileAlt className="text-2xl text-gray-400" />
 //           </div>
 //           <h3 className="text-lg font-semibold text-gray-700 mb-2">
-//             Content Not Found
+//             {t("singlePreviewContent.notFound.title")}
 //           </h3>
 //           <p className="text-gray-500 text-sm mb-5">
-//             {message ||
-//               "The content you're looking for doesn't exist or has been removed."}
+//             {message || t("singlePreviewContent.notFound.description")}
 //           </p>
 //           <button
 //             onClick={() => navigate(-1)}
 //             className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition text-sm"
 //           >
-//             Go Back
+//             {t("singlePreviewContent.notFound.button")}
 //           </button>
 //         </div>
 //       </PageLayout>
@@ -850,7 +517,9 @@
 //           className="flex items-center gap-2 text-blue-500 hover:text-blue-600 cursor-pointer transition-colors mb-4 w-fit"
 //         >
 //           <FaArrowLeft size={16} />
-//           <span className="text-sm font-medium">Back</span>
+//           <span className="text-sm font-medium">
+//             {t("singlePreviewContent.back") || "Back"}
+//           </span>
 //         </button>
 
 //         {/* Content Section - Yahan sirf content show hoga */}
@@ -885,6 +554,11 @@ import { PageLayout } from "../../../../common/layout";
 import { getSingleContent } from "../../../../../../redux/slice/unitBuilderSlice";
 import { useTranslation } from "react-i18next";
 import Error from "../../../../common/Error";
+// Pehle ye imports add kar (top par)
+import { HiSpeakerWave } from "react-icons/hi2";
+import { FaPause, FaPlay } from "react-icons/fa";
+import { PiVinylRecordFill } from "react-icons/pi";
+import { GiSoundWaves } from "react-icons/gi";
 
 // Common component for HTML content with styles
 const RichTextContent = ({ htmlContent }) => {
@@ -958,6 +632,7 @@ const SingleContentPreview = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const iframeRef = useRef(null);
   const fullscreenContainerRef = useRef(null);
+  const [showAudioPlayer, setShowAudioPlayer] = useState(false);
 
   const { currentContent, isLoading, isError, message } = useSelector(
     (state) => state.content,
@@ -1376,21 +1051,64 @@ const SingleContentPreview = () => {
   }
 
   // Main Layout - No Header Title/Subtitle, Sirf Back Button aur Content
+  // return (
+  //   <PageLayout>
+  //     <div className="h-full flex flex-col">
+  //       <button
+  //         onClick={() => navigate(-1)}
+  //         className="flex items-center gap-2 text-blue-500 hover:text-blue-600 cursor-pointer transition-colors mb-4 w-fit"
+  //       >
+  //         <FaArrowLeft size={16} />
+  //         <span className="text-sm font-medium">
+  //           {t("singlePreviewContent.back") || "Back"}
+  //         </span>
+  //       </button>
+
+  //       <div className="flex-1 overflow-y-auto">
+  //         <div className="pb-6">
+  //           <div className="max-w-6xl mx-auto">{renderContent()}</div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   </PageLayout>
+  // );
+
   return (
     <PageLayout>
       <div className="h-full flex flex-col">
-        {/* Sirf Back Button - No Title/Subtitle */}
-        <button
-          onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-blue-500 hover:text-blue-600 cursor-pointer transition-colors mb-4 w-fit"
-        >
-          <FaArrowLeft size={16} />
-          <span className="text-sm font-medium">
-            {t("singlePreviewContent.back") || "Back"}
-          </span>
-        </button>
+        {/* Header with Back button and Speaker button together */}
+        <div className="flex items-center justify-between mb-4">
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center gap-2 text-blue-500 hover:text-blue-600 cursor-pointer transition-colors w-fit"
+          >
+            <FaArrowLeft size={16} />
+            <span className="text-sm font-medium">
+              {t("singlePreviewContent.back") || "Back"}
+            </span>
+          </button>
 
-        {/* Content Section - Yahan sirf content show hoga */}
+          {/* Speaker button - bilkul TopicContent jaisa */}
+          {content?.audio_url && (
+            <button
+              onClick={() => setShowAudioPlayer(!showAudioPlayer)}
+              className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 bg-gray-50 hover:bg-gray-100 transition shadow-sm"
+            >
+              <HiSpeakerWave className="text-xl text-gray-600" />
+            </button>
+          )}
+        </div>
+
+        {/* Audio Player - bilkul TopicContent jaisa */}
+        {showAudioPlayer && content?.audio_url && (
+          <div className="mb-6">
+            <ClassicAudioPlayer
+              audioUrl={content?.audio_url}
+              title={content?.title || "Audio Lesson"}
+            />
+          </div>
+        )}
+
         <div className="flex-1 overflow-y-auto">
           <div className="pb-6">
             <div className="max-w-6xl mx-auto">{renderContent()}</div>

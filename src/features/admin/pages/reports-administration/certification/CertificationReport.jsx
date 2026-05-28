@@ -183,13 +183,13 @@ const CertificationReport = () => {
       ),
     },
     {
-      header: t("certificationReport.columns.levelTopic"),
+      header: t("certificationReport.columns.topicModule"),
       render: (row) => (
         <p className="font-medium text-gray-800">
           {row?.type === "topic"
             ? row?.topic
-            : row?.type === "level"
-              ? row?.level
+            : row?.type === "module"
+              ? row?.module
               : "-"}
         </p>
       ),

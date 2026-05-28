@@ -109,7 +109,7 @@ const UserAdditionalDetails = ({ id }) => {
       const response = await dispatch(
         getAllAssessmentReports({
           user_id: id,
-          type: "level",
+          type: "module",
         }),
       ).unwrap();
       setExamAssessments(response?.data?.data || []);
@@ -484,13 +484,13 @@ const UserAdditionalDetails = ({ id }) => {
       ),
     },
     {
-      header: t("userAdditionalDetails.certification.topicLevel"),
+      header: t("userAdditionalDetails.certification.topicModule"),
       render: (row) => (
         <p className="font-medium text-gray-800">
           {row?.type === "topic"
             ? row?.topic
-            : row?.type === "level"
-              ? row?.level
+            : row?.type === "module"
+              ? row?.module
               : "-"}
         </p>
       ),

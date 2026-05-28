@@ -406,7 +406,7 @@ const AdminRoutes = (
       <Route path="exam-module" element={<ModuleExamAssessment />} />
       <Route path="exam-module-feedback" element={<ModuleExamFeedback />} />
       <Route
-        path="exam-moduel-feedback/:id"
+        path="exam-module-feedback/:id"
         element={<ModuleExamFeedbackDetails />}
       />
       <Route

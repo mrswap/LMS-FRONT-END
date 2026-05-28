@@ -480,7 +480,7 @@
       "certificateId": "Certificate ID",
       "id": "ID",
       "type": "Type",
-      "topicLevel": "Topic/Level",
+      "topicModule": "Topic/Module",
       "percentage": "Percentage",
       "issueDate": "Issue Date",
       "status": "Status"
@@ -1778,6 +1778,64 @@
     }
   },
 
+  "moduleExamFeedback": {
+    "title": "Module Exam Feedback",
+    "subtitle": "View and manage module exam feedback",
+    "searchPlaceholder": "Search by user or assessment...",
+    "clearAll": "Clear All Filters",
+    "exam": "Exam",
+    "score": "Score",
+    "percentage": "Percentage",
+    "noReview": "No review provided",
+    "columns": {
+      "user": "User",
+      "assessment": "Assessment",
+      "scorePercentage": "Score & Percentage",
+      "rating": "Rating",
+      "date": "Date",
+      "actions": "Actions"
+    },
+    "filters": {
+      "allUsers": "All Users",
+      "allModules": "All Modules",
+      "allAssessments": "All Assessments",
+      "allRatings": "All Ratings",
+      "fiveStars": "5 Stars",
+      "fourStars": "4 Stars",
+      "threeStars": "3 Stars",
+      "twoStars": "2 Stars",
+      "oneStar": "1 Star",
+      "filterByUser": "Filter by User",
+      "filterByAssessment": "Filter by Assessment",
+      "filterByRating": "Filter by Rating",
+      "filterByModule": "Filter by Module"
+    },
+    "actions": {
+      "viewDetails": "View Details"
+    },
+    "breadcrumb": {
+      "list": "Module Exam Feedback",
+      "details": "Feedback Details"
+    },
+    "details": {
+      "feedbackDetails": "Feedback Details",
+      "assessmentType": "Assessment Type",
+      "userInformation": "User Information",
+      "name": "Name",
+      "email": "Email",
+      "assessmentDetails": "Assessment Details",
+      "assessmentId": "Assessment ID",
+      "status": "Status",
+      "score": "Score",
+      "review": "Review / Feedback"
+    },
+    "status": {
+      "passed": "PASSED",
+      "failed": "FAILED",
+      "na": "N/A"
+    }
+  },
+
   "quizFeedback": {
     "title": "Quiz Feedbacks",
     "subtitle": "Manage and view all quiz feedbacks",
@@ -2578,7 +2636,7 @@
     "columns": {
       "userDetails": "User Details",
       "type": "Type",
-      "levelTopic": "Level / Topic Name",
+      "topicModule": "Topic/Module",
       "certificateDetails": "Certificate Details",
       "percentage": "Percentage",
       "issueDate": "Issue Date",
