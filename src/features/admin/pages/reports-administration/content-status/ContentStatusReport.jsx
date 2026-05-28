@@ -367,17 +367,17 @@ const ContentStatusReport = () => {
         </div>
       ),
     },
-    {
-      header: t("contentStatusReport.columns.languages"),
-      render: (row) => (
-        <div>
-          <p className="text-sm text-gray-600 flex items-center gap-1">
-            <FaGlobe size={12} />
-            {getLanguageDisplay(row?.languages)}
-          </p>
-        </div>
-      ),
-    },
+    // {
+    //   header: t("contentStatusReport.columns.languages"),
+    //   render: (row) => (
+    //     <div>
+    //       <p className="text-sm text-gray-600 flex items-center gap-1">
+    //         <FaGlobe size={12} />
+    //         {getLanguageDisplay(row?.languages)}
+    //       </p>
+    //     </div>
+    //   ),
+    // },
     {
       header: t("contentStatusReport.columns.status"),
       render: (row) => (
