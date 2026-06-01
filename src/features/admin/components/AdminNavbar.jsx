@@ -95,7 +95,7 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
       <div className="flex items-center gap-2 sm:gap-4">
         {/* Hamburger */}
         <button
-          className="flex lg:hidden items-center justify-center w-9 h-9 rounded-lg text-white hover:bg-white/10 transition"
+          className="flex md:hidden cursor-pointer items-center justify-center w-9 h-9 rounded-lg text-white hover:bg-white/10 transition"
           onClick={onMenuToggle}
         >
           {isSidebarOpen ? <FiX size={20} /> : <FiMenu size={20} />}
@@ -112,7 +112,7 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
 
         {/* Logo Section */}
         {/* <div className=" min-[1544px]:px-4"> */}
-        <div className="flex-shrink-0 ">
+        <div className="flex-shrink-0 hidden lg:flex ">
           <img
             src={settings?.company_logo || ""}
             alt="Logo"
@@ -122,21 +122,21 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
         {/* </div> */}
 
         {/* Search Desktop */}
-        <div className="hidden md:flex items-center bg-white rounded-md px-3 py-1.5 w-56 lg:w-[300px] xl:w-[350px] shadow-inner">
+        {/* <div className="hidden md:flex items-center bg-white rounded-md px-3 py-1.5 w-56 lg:w-[300px] xl:w-[350px] shadow-inner">
           <FiSearch className="text-gray-400 shrink-0" />
           <input
             type="text"
             placeholder={t("navbar.searchPlaceholder")}
             className="outline-none px-2 py-0.5 w-full text-sm text-gray-700 bg-transparent"
           />
-        </div>
+        </div> */}
       </div>
 
       {/* RIGHT SIDE */}
       <div className="flex items-center gap-3 sm:gap-5 text-white">
         {/* Mobile Search */}
         <button
-          className="flex md:hidden items-center justify-center w-8 h-8 rounded-lg hover:bg-white/10 transition"
+          className="flex lg:hidden items-center justify-center w-8 h-8 rounded-lg hover:bg-white/10 transition"
           onClick={() => setSearchOpen((p) => !p)}
         >
           <FiSearch size={18} />
@@ -241,7 +241,7 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
 
       {/* Mobile Search Dropdown */}
       {searchOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg px-4 py-3 z-50">
+        <div className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-lg px-4 py-3 z-50">
           <div className="flex items-center gap-2 border border-gray-200 rounded-lg px-3 py-2">
             <FiSearch className="text-gray-400" />
             <input
