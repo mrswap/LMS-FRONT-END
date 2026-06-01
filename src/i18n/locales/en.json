@@ -237,6 +237,7 @@
     "bulkImport": "Bulk Import",
     "contentManagement": "Content Management",
     "learningUnitBuilder": "Learning Unit Builder",
+    "automatedContentImporter": "Automated Content Importer",
     "interactiveContent": "Interactive Content",
     "mediaLibrary": "Media Library",
     "assessmentManagement": "Assessment Management",
@@ -272,8 +273,7 @@
     "multiLanguage": "Multi Language",
     "certificationSetting": "Certification Setting",
     "logout": "Logout",
-    "support": "Support",
-    "automatedContentImporter": "Automated Content Importer"
+    "support": "Support"
   },
 
   "dashboard": {

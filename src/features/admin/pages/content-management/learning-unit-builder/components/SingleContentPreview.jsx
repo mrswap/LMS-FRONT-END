@@ -561,64 +561,257 @@ import { PiVinylRecordFill } from "react-icons/pi";
 import { GiSoundWaves } from "react-icons/gi";
 
 // Common component for HTML content with styles
+// const RichTextContent = ({ htmlContent }) => {
+//   if (!htmlContent) return null;
+
+//   return (
+//     <>
+//       <div
+//         className="custom-content"
+//         dangerouslySetInnerHTML={{ __html: htmlContent }}
+//       />
+//       <style>{`
+//         .custom-content p {
+//           margin: 0 0 16px;
+//           line-height: 1.8;
+//         }
+//         .custom-content h1,
+//         .custom-content h2,
+//         .custom-content h3,
+//         .custom-content h4,
+//         .custom-content h5,
+//         .custom-content h6 {
+//           margin: 24px 0 16px;
+//           font-weight: 700;
+//           line-height: 1.4;
+//         }
+//         .custom-content ul,
+//         .custom-content ol {
+//           margin: 0 0 16px;
+//           padding-left: 24px;
+//         }
+//         .custom-content li {
+//           margin-bottom: 8px;
+//         }
+//         .custom-content hr {
+//           margin: 24px 0;
+//           border: none;
+//           border-top: 1px solid #d1d5db;
+//         }
+//         .custom-content table {
+//           width: 100%;
+//           border-collapse: collapse;
+//           margin: 20px 0;
+//           border: 1px solid #d1d5db;
+//         }
+//         .custom-content td,
+//         .custom-content th {
+//           border: 1px solid #d1d5db;
+//           padding: 12px;
+//           vertical-align: top;
+//         }
+//         .custom-content th {
+//           background-color: #f3f4f6;
+//           font-weight: 600;
+//         }
+//         .custom-content img {
+//           max-width: 100%;
+//           height: auto;
+//           border-radius: 8px;
+//         }
+//       `}</style>
+//     </>
+//   );
+// };
+
 const RichTextContent = ({ htmlContent }) => {
+  if (!htmlContent) return null;
+  const contentRef = useRef(null);
+  const [displayHTML, setDisplayHTML] = useState(htmlContent || "");
+  const [isTranslating, setIsTranslating] = useState(false);
+  const isCancelledRef = useRef(false);
+  const docRef = useRef(null);
+  const blockElsRef = useRef([]);
+  const translatedSetRef = useRef(new Set());
+  const observerRef = useRef(null);
+
+  const translateText = async (text, targetLang) => {
+    try {
+      const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`;
+      const res = await fetch(url);
+      if (!res.ok) return text;
+      const data = await res.json();
+      return data[0]
+        .map((item) => item[0])
+        .filter(Boolean)
+        .join("");
+    } catch {
+      return text;
+    }
+  };
+
+  const translateElement = async (docEl, targetLang) => {
+    if (isCancelledRef.current) return;
+
+    const textNodes = [];
+    const walk = document.createTreeWalker(docEl, NodeFilter.SHOW_TEXT, null);
+    let node;
+    while ((node = walk.nextNode())) {
+      if (node.textContent.trim()) textNodes.push(node);
+    }
+
+    for (const n of textNodes) {
+      if (isCancelledRef.current) return;
+      if (!n.textContent.trim()) continue;
+      const translated = await translateText(n.textContent.trim(), targetLang);
+      if (isCancelledRef.current) return;
+      n.textContent = translated;
+    }
+
+    if (!isCancelledRef.current) {
+      setDisplayHTML(docRef.current.body.innerHTML);
+    }
+  };
+
+  // Step 1: htmlContent change hone pe doc prepare karo
+  useEffect(() => {
+    const lang = localStorage.getItem("appLanguage") || "en";
+    if (!htmlContent) return;
+
+    isCancelledRef.current = false;
+    translatedSetRef.current = new Set();
+    blockElsRef.current = [];
+
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+      observerRef.current = null;
+    }
+
+    if (lang === "en") {
+      setDisplayHTML(htmlContent);
+      return;
+    }
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlContent, "text/html");
+    docRef.current = doc;
+
+    const blockEls = Array.from(
+      doc.body.querySelectorAll("p, h1, h2, h3, h4, h5, h6, li, td, th"),
+    ).filter((el) => el.textContent.trim());
+
+    if (blockEls.length === 0) {
+      // Koi block nahi — poora body translate karo
+      setIsTranslating(true);
+      translateElement(doc.body, lang).finally(() => {
+        if (!isCancelledRef.current) setIsTranslating(false);
+      });
+      return;
+    }
+
+    // data-tid lagao
+    blockEls.forEach((el, idx) => el.setAttribute("data-tid", String(idx)));
+    blockElsRef.current = blockEls;
+
+    // data-tid wala HTML render karo
+    setDisplayHTML(doc.body.innerHTML);
+
+    return () => {
+      isCancelledRef.current = true;
+      if (observerRef.current) observerRef.current.disconnect();
+      setIsTranslating(false);
+    };
+  }, [htmlContent]);
+
+  // Step 2: displayHTML render hone ke baad observer lagao
+  useEffect(() => {
+    const lang = localStorage.getItem("appLanguage") || "en";
+    if (lang === "en") return;
+    if (!contentRef.current) return;
+    if (blockElsRef.current.length === 0) return;
+    if (isCancelledRef.current) return;
+
+    // Purana observer disconnect karo
+    if (observerRef.current) observerRef.current.disconnect();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          const tid = entry.target.getAttribute("data-tid");
+          if (tid === null) return;
+          if (translatedSetRef.current.has(tid)) return;
+
+          translatedSetRef.current.add(tid);
+          observer.unobserve(entry.target);
+
+          const docEl = blockElsRef.current[Number(tid)];
+          if (!docEl) return;
+
+          setIsTranslating(true);
+          translateElement(docEl, lang).finally(() => {
+            if (isCancelledRef.current) return;
+            if (translatedSetRef.current.size >= blockElsRef.current.length) {
+              setIsTranslating(false);
+            }
+          });
+        });
+      },
+      {
+        root: null,
+        rootMargin: "400px 0px",
+        threshold: 0,
+      },
+    );
+
+    observerRef.current = observer;
+
+    // Saare data-tid elements observe karo
+    const realEls = contentRef.current.querySelectorAll("[data-tid]");
+    realEls.forEach((el) => {
+      const tid = el.getAttribute("data-tid");
+      // Already translated nahi hai toh observe karo
+      if (!translatedSetRef.current.has(tid)) {
+        observer.observe(el);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [displayHTML]); // displayHTML change hone pe dobara observe lagao
+
   if (!htmlContent) return null;
 
   return (
     <>
       <div
+        ref={contentRef}
         className="custom-content"
-        dangerouslySetInnerHTML={{ __html: htmlContent }}
+        dangerouslySetInnerHTML={{ __html: displayHTML }}
       />
+
+      {isTranslating && (
+        <div className="flex items-center gap-2 mt-4 text-sm text-gray-400">
+          <div className="w-3 h-3 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
+          <span>Translating...</span>
+        </div>
+      )}
+
       <style>{`
-        .custom-content p {
-          margin: 0 0 16px;
-          line-height: 1.8;
+        .custom-content p { margin: 0 0 16px; line-height: 1.8; }
+        .custom-content h1, .custom-content h2, .custom-content h3,
+        .custom-content h4, .custom-content h5, .custom-content h6 {
+          margin: 24px 0 16px; font-weight: 700; line-height: 1.4;
         }
-        .custom-content h1,
-        .custom-content h2,
-        .custom-content h3,
-        .custom-content h4,
-        .custom-content h5,
-        .custom-content h6 {
-          margin: 24px 0 16px;
-          font-weight: 700;
-          line-height: 1.4;
-        }
-        .custom-content ul,
-        .custom-content ol {
-          margin: 0 0 16px;
-          padding-left: 24px;
-        }
-        .custom-content li {
-          margin-bottom: 8px;
-        }
-        .custom-content hr {
-          margin: 24px 0;
-          border: none;
-          border-top: 1px solid #d1d5db;
-        }
-        .custom-content table {
-          width: 100%;
-          border-collapse: collapse;
-          margin: 20px 0;
-          border: 1px solid #d1d5db;
-        }
-        .custom-content td,
-        .custom-content th {
-          border: 1px solid #d1d5db;
-          padding: 12px;
-          vertical-align: top;
-        }
-        .custom-content th {
-          background-color: #f3f4f6;
-          font-weight: 600;
-        }
-        .custom-content img {
-          max-width: 100%;
-          height: auto;
-          border-radius: 8px;
-        }
+        .custom-content ul, .custom-content ol { margin: 0 0 16px; padding-left: 24px; }
+        .custom-content li { margin-bottom: 8px; }
+        .custom-content hr { margin: 24px 0; border: none; border-top: 1px solid #d1d5db; }
+        .custom-content table { width: 100%; border-collapse: collapse; margin: 20px 0; border: 1px solid #d1d5db; }
+        .custom-content td, .custom-content th { border: 1px solid #d1d5db; padding: 12px; vertical-align: top; }
+        .custom-content th { background-color: #f3f4f6; font-weight: 600; }
+        .custom-content img { max-width: 100%; height: auto; border-radius: 8px; }
       `}</style>
     </>
   );

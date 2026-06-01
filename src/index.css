@@ -180,3 +180,42 @@
   color: #3b82f6;
   text-decoration: underline;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* Yeh CRITICAL hai */
+body {
+  top: 0 !important;
+  position: static !important;
+}
+
+/* Google ka banner/iframe jo layout shift karta hai */
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+.skiptranslate iframe {
+  display: none !important;
+  height: 0 !important;
+}
+
+.goog-text-highlight {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Yeh Google Translate bar ka space occupy karta hai */
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-tooltip {
+  display: none !important;
+}
