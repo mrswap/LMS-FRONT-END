@@ -5,6 +5,8 @@ export const getAuthConfig = () => {
         headers: {
             Authorization: `Bearer ${token}`,
             "Accept-Language": "en",
+            "Content-Type": "application/json",
+            Accept: "application/json",
         },
     };
 };

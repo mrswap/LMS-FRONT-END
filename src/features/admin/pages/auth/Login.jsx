@@ -49,6 +49,7 @@ const Login = () => {
       const res = await dispatch(loginUser(values)).unwrap();
       toast.success(res?.message || t("login.success"));
       navigate("/");
+      window.location.reload();
     } catch (err) {
       toast.error(err?.message || t("login.error"));
     } finally {
