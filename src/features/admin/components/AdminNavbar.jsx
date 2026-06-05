@@ -95,7 +95,7 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
       <div className="flex items-center gap-2 sm:gap-4">
         {/* Hamburger */}
         <button
-          className="flex md:hidden cursor-pointer items-center justify-center w-9 h-9 rounded-lg text-white hover:bg-white/10 transition"
+          className="flex lg:hidden cursor-pointer items-center justify-center w-9 h-9 rounded-lg text-white hover:bg-white/10 transition"
           onClick={onMenuToggle}
         >
           {isSidebarOpen ? <FiX size={20} /> : <FiMenu size={20} />}
