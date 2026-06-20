@@ -491,6 +491,7 @@ const CreateAutomatedContent = () => {
         program_id: values.programName.value,
         level_id: values.levelName.value,
         html: values.htmlContent,
+        type: "content",
       };
 
       const res = await dispatch(createAutomatedImport(payload)).unwrap();

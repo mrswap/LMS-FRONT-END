@@ -6,6 +6,7 @@ import Staff from "../pages/users/Staff";
 import AdminSupportPage from "../pages/AdminSupportPage";
 import BulkUpload2 from "../pages/curriculum/bulk-upload/BulkUpload2";
 import CreateBulkUpload2 from "../pages/curriculum/bulk-upload/components/CreateBulkUpload2";
+
 // import AutomatedContentImporter from "../pages/content-management/automated-content-importer/AutomatedContentImporter";
 // import CreateAutomatedContent from "../pages/content-management/automated-content-importer/components/CreateAutomatedContent";
 // import ModuleExamAssessment from "../pages/assessment-management/exam-module/assessment/ModuleExamAssessment";
@@ -208,6 +209,16 @@ const FeedbackDetails = lazy(
     import("../pages/assessment-management/quiz-topic/feedback/components/FeedbackDetails"),
 );
 
+const AutomatedAssessmentImporter = lazy(
+  () =>
+    import("../pages/assessment-management/automated-assessment-importer/AutomatedAssessmentImporter"),
+);
+
+const CreateAutomatedAssessment = lazy(
+  () =>
+    import("../pages/assessment-management/automated-assessment-importer/components/CreateAutomatedAssessment"),
+);
+
 const Contact = lazy(
   () => import("../pages/reports-administration/contact-us/Contact"),
 );
@@ -391,6 +402,14 @@ const AdminRoutes = (
       <Route path="assessment-feedback/:id" element={<FeedbackDetails />} />
       <Route path="assessment/create" element={<CreateAssessment />} />
       <Route path="assessment/:assessmentId" element={<AssissmentDetails />} />
+      <Route
+        path="automated-assessment-importer"
+        element={<AutomatedAssessmentImporter />}
+      />
+      <Route
+        path="automated-assessment-importer/create"
+        element={<CreateAutomatedAssessment />}
+      />
 
       {/* Exam Level */}
       {/* <Route path="exam-level" element={<ExamAssessment />} />
