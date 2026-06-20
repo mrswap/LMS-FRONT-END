@@ -113,11 +113,18 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
         {/* Logo Section */}
         {/* <div className=" min-[1544px]:px-4"> */}
         <div className="flex-shrink-0 hidden lg:flex ">
-          <img
+          {/* <img
             src={settings?.company_logo || ""}
             alt="Logo"
             className="w-[130px] sm:w-[130px] h-[64px] object-cover "
-          />
+          /> */}
+          {settings?.company_logo && (
+            <img
+              src={settings.company_logo}
+              alt="Logo"
+              className="w-[130px] sm:w-[130px] h-[64px] object-cover "
+            />
+          )}
         </div>
         {/* </div> */}
 

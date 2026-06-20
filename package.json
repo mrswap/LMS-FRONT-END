@@ -43,6 +43,7 @@
     "jspdf": "^4.2.1",
     "laravel-echo": "^2.3.4",
     "lowlight": "^3.3.0",
+    "marked": "^18.0.5",
     "pdfjs-dist": "^5.7.284",
     "pusher-js": "^8.5.0",
     "quill": "^2.0.0-dev.3",

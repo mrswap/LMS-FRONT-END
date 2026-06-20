@@ -18,42 +18,77 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../../common/Loader";
 import Error from "../../../common/Error";
 import { getAllLevels } from "../../../../../redux/slice/levelSlice";
-import { getAllImportLogs } from "../../../../../redux/slice/automatedContentSlicer";
-import { useTranslation } from "react-i18next";
+import { getAllModules } from "../../../../../redux/slice/moduleSlice";
 import usePermission from "../../../../../hooks/usePermission";
+import { getAllImportLogs } from "../../../../../redux/slice/automatedAssessmentSlicer";
 
 const ITEMS_PER_PAGE = 10;
 
-const AutomatedContentImporter = () => {
-  const { t } = useTranslation();
+const AutomatedAssessmentImporter = () => {
   const dispatch = useDispatch();
   const { importLogs, isLoading, isError, message } = useSelector(
-    (state) => state.automated,
+    (state) => state.automatedAssessment,
   );
   const { levels } = useSelector((state) => state.level);
+  const { modules } = useSelector((state) => state.module);
   const [isLevelsLoaded, setIsLevelsLoaded] = useState(false);
   const { hasPermission } = usePermission();
 
   const levelOptions = [
-    { value: "all", label: t("automatedImporter.filters.allLevels") },
+    { value: "all", label: "All Levels" },
     ...(levels?.data?.map((item) => ({
       value: item.id,
       label: item.title,
     })) || []),
   ];
 
+  // Function to get filtered modules based on selected level
+  const getFilteredModuleOptions = () => {
+    if (level?.value === "all") {
+      return [
+        { value: "all", label: "All Modules" },
+        ...(modules?.data?.map((item) => ({
+          value: item.id,
+          label: item.title,
+        })) || []),
+      ];
+    }
+
+    // Filter modules by selected level
+    const filteredModules =
+      modules?.data?.filter((item) => item.level?.id === level?.value) || [];
+
+    return [
+      { value: "all", label: "All Modules" },
+      ...filteredModules.map((item) => ({
+        value: item.id,
+        label: item.title,
+      })),
+    ];
+  };
+
   const statusOptions = [
-    { value: "all", label: t("automatedImporter.filters.allStatus") },
-    { value: "completed", label: t("automatedImporter.filters.completed") },
-    { value: "processing", label: t("automatedImporter.filters.processing") },
-    { value: "failed", label: t("automatedImporter.filters.failed") },
+    { value: "all", label: "All Status" },
+    { value: "completed", label: "Completed" },
+    { value: "processing", label: "Processing" },
+    { value: "failed", label: "Failed" },
   ];
 
   const [level, setLevel] = useState(levelOptions[0]);
+  const [moduleFilter, setModuleFilter] = useState({
+    value: "all",
+    label: "All Modules",
+  });
   const [status, setStatus] = useState(statusOptions[0]);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
 
+  // Reset module filter when level changes
+  useEffect(() => {
+    setModuleFilter({ value: "all", label: "All Modules" });
+  }, [level]);
+
+  // Load levels on component mount
   useEffect(() => {
     const loadLevels = async () => {
       await dispatch(getAllLevels());
@@ -62,19 +97,28 @@ const AutomatedContentImporter = () => {
     loadLevels();
   }, [dispatch]);
 
+  // Load modules only when level is selected (not "all")
+  useEffect(() => {
+    if (isLevelsLoaded && level?.value !== "all") {
+      dispatch(getAllModules());
+    }
+  }, [level, isLevelsLoaded, dispatch]);
+
   const fetchImportLogs = (overridePage) => {
     const params = {
       search: search || "",
       level_id: level?.value !== "all" ? level?.value : "",
+      module_id: moduleFilter?.value !== "all" ? moduleFilter?.value : "",
       status: status?.value !== "all" ? status?.value : "",
       page: overridePage ?? page,
       limit: ITEMS_PER_PAGE,
-      type: "content",
+      type: "both",
     };
 
     dispatch(getAllImportLogs(params));
   };
 
+  // Fetch import logs when filters change
   useEffect(() => {
     if (!isLevelsLoaded) return;
     const delay = setTimeout(() => {
@@ -82,8 +126,9 @@ const AutomatedContentImporter = () => {
       fetchImportLogs(1);
     }, 500);
     return () => clearTimeout(delay);
-  }, [search, level, status, isLevelsLoaded]);
+  }, [search, level, moduleFilter, status, isLevelsLoaded]);
 
+  // Fetch import logs on page change
   useEffect(() => {
     if (isLevelsLoaded) {
       fetchImportLogs(page);
@@ -97,21 +142,27 @@ const AutomatedContentImporter = () => {
   const resetFilters = () => {
     setSearch("");
     setLevel(levelOptions[0]);
+    setModuleFilter({ value: "all", label: "All Modules" });
     setStatus(statusOptions[0]);
     setPage(1);
   };
 
   const customSelectStyles = {
-    control: (base) => ({
+    control: (base, state) => ({
       ...base,
       borderRadius: "8px",
       borderColor: "#E5E7EB",
       minHeight: "38px",
       boxShadow: "none",
-      backgroundColor: "#F8FAFC",
+      cursor: state.isDisabled ? "not-allowed" : "pointer",
       fontSize: "14px",
+      backgroundColor: state.isDisabled ? "#F1F5F9" : "#F8FAFC",
+      opacity: state.isDisabled ? 0.6 : 1,
     }),
   };
+
+  // Check if module dropdown should be disabled
+  const isModuleDisabled = level?.value === "all";
 
   const getStatusBadgeClass = (statusValue) => {
     if (statusValue === "completed") {
@@ -125,32 +176,38 @@ const AutomatedContentImporter = () => {
 
   const getStatusLabel = (statusValue) => {
     if (statusValue === "completed") {
-      return t("automatedImporter.status.completed");
+      return "Completed";
     }
     if (statusValue === "failed") {
-      return t("automatedImporter.status.failed");
+      return "Failed";
     }
     if (statusValue === "processing") {
-      return t("automatedImporter.status.processing");
+      return "Processing";
     }
     return statusValue;
   };
 
   const columns = [
     {
-      header: t("automatedImporter.columns.program"),
+      header: "Program",
       render: (row) => (
         <p className="font-medium text-gray-800">{row.program?.title || "-"}</p>
       ),
     },
     {
-      header: t("automatedImporter.columns.level"),
+      header: "Level",
       render: (row) => (
         <p className="text-gray-700">{row.level?.title || "-"}</p>
       ),
     },
     {
-      header: t("automatedImporter.columns.status"),
+      header: "Module",
+      render: (row) => (
+        <p className="text-gray-700">{row.module?.title || "-"}</p>
+      ),
+    },
+    {
+      header: "Status",
       render: (row) => (
         <span
           className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusBadgeClass(row.status)}`}
@@ -160,7 +217,7 @@ const AutomatedContentImporter = () => {
       ),
     },
     {
-      header: t("automatedImporter.columns.createdBy"),
+      header: "Created By",
       render: (row) => (
         <span className="text-sm text-gray-700">
           {row.created_by?.name || "-"}
@@ -168,7 +225,7 @@ const AutomatedContentImporter = () => {
       ),
     },
     {
-      header: t("automatedImporter.columns.createdAt"),
+      header: "Created At",
       render: (row) => (
         <span className="text-sm text-gray-600">
           {new Date(row.created_at).toLocaleString()}
@@ -189,17 +246,19 @@ const AutomatedContentImporter = () => {
     <PageLayout>
       <PageHeader>
         <PageHeaderLeft>
-          <PageTitle>{t("automatedImporter.list.title")}</PageTitle>
-          <PageSubtitle>{t("automatedImporter.list.subtitle")}</PageSubtitle>
+          <PageTitle>Automated Assessment Importer</PageTitle>
+          <PageSubtitle>
+            View and manage automated assessment imports
+          </PageSubtitle>
         </PageHeaderLeft>
 
         <PageHeaderRight>
-          {hasPermission("imports.create") && (
+          {hasPermission("assessments.create") && (
             <Link
               to="create"
               className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold"
             >
-              {t("automatedImporter.actions.createImport")}
+              Create New Import
             </Link>
           )}
         </PageHeaderRight>
@@ -213,13 +272,14 @@ const AutomatedContentImporter = () => {
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder={t("automatedImporter.searchPlaceholder")}
+                placeholder="Search imports..."
                 className="bg-transparent outline-none px-3 text-sm w-full"
               />
             </div>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
+            {/* Level Filter */}
             <div className="w-full sm:w-[48%] lg:w-[210px]">
               <Select
                 value={level}
@@ -231,6 +291,25 @@ const AutomatedContentImporter = () => {
               />
             </div>
 
+            {/* Module Filter - Disabled until level is selected */}
+            <div className="w-full sm:w-[48%] lg:w-[210px]">
+              <Select
+                value={moduleFilter}
+                onChange={setModuleFilter}
+                options={getFilteredModuleOptions()}
+                styles={customSelectStyles}
+                isSearchable={false}
+                isDisabled={isModuleDisabled}
+                isLoading={
+                  !isModuleDisabled && !modules?.data && level?.value !== "all"
+                }
+                placeholder={
+                  isModuleDisabled ? "Select level first" : "Select module"
+                }
+              />
+            </div>
+
+            {/* Status Filter */}
             <div className="w-full sm:w-[48%] lg:w-[210px]">
               <Select
                 value={status}
@@ -241,6 +320,7 @@ const AutomatedContentImporter = () => {
               />
             </div>
 
+            {/* Reset Button */}
             <div className="ml-auto">
               <button
                 onClick={resetFilters}
@@ -270,4 +350,4 @@ const AutomatedContentImporter = () => {
   );
 };
 
-export default AutomatedContentImporter;
+export default AutomatedAssessmentImporter;
