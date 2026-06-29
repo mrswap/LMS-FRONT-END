@@ -14,6 +14,50 @@ import { TableRow } from "@tiptap/extension-table-row";
 import { TableCell } from "@tiptap/extension-table-cell";
 import { TableHeader } from "@tiptap/extension-table-header";
 
+// ADD: Custom Table Cell/Header with style-preserving attributes
+// Default TableCell/TableHeader only keep colspan/rowspan/colwidth —
+// background-color / style on <td>/<th> gets silently dropped on paste
+// unless we explicitly declare it as an attribute.
+const CustomTableCell = TableCell.extend({
+  addAttributes() {
+    return {
+      ...this.parent?.(),
+      backgroundColor: {
+        default: null,
+        parseHTML: (element) => {
+          const style = element.getAttribute("style") || "";
+          const match = style.match(/background(?:-color)?\s*:\s*([^;]+)/i);
+          return match ? match[1].trim() : null;
+        },
+        renderHTML: (attributes) => {
+          if (!attributes.backgroundColor) return {};
+          return { style: `background-color: ${attributes.backgroundColor}` };
+        },
+      },
+    };
+  },
+});
+
+const CustomTableHeader = TableHeader.extend({
+  addAttributes() {
+    return {
+      ...this.parent?.(),
+      backgroundColor: {
+        default: null,
+        parseHTML: (element) => {
+          const style = element.getAttribute("style") || "";
+          const match = style.match(/background(?:-color)?\s*:\s*([^;]+)/i);
+          return match ? match[1].trim() : null;
+        },
+        renderHTML: (attributes) => {
+          if (!attributes.backgroundColor) return {};
+          return { style: `background-color: ${attributes.backgroundColor}` };
+        },
+      },
+    };
+  },
+});
+
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -208,6 +252,163 @@ const HIGHLIGHT_COLORS = [
 function cleanPastedHTML(html) {
   const doc = new DOMParser().parseFromString(html, "text/html");
 
+  // ============================================
+  // FIX: Extract ALL Word styles and their colors
+  // ============================================
+  const wordStyles = {};
+  const styleTags = doc.querySelectorAll("style");
+
+  styleTags.forEach((styleTag) => {
+    const styleText = styleTag.textContent || "";
+
+    // Parse all CSS rules
+    const ruleRegex = /([\w.]+)\s*{([^}]*)}/g;
+    let match;
+
+    while ((match = ruleRegex.exec(styleText)) !== null) {
+      const selector = match[1].trim();
+      const styles = match[2].trim();
+
+      // Extract color
+      const colorMatch = styles.match(/color\s*:\s*([^;]+)/i);
+      if (colorMatch) {
+        const color = colorMatch[1].trim();
+
+        // Store with multiple selector patterns
+        // Example: div.LMSTopicH2 -> store as LMSTopicH2, div.LMSTopicH2, .LMSTopicH2
+        const selectors = [];
+
+        // Original selector
+        selectors.push(selector);
+
+        // Remove tag prefix (div.LMSTopicH2 -> LMSTopicH2)
+        const withoutTag = selector.replace(/^[a-z]+\./, "");
+        selectors.push(withoutTag);
+
+        // Add dot prefix (.LMSTopicH2)
+        if (!selector.startsWith(".")) {
+          selectors.push("." + withoutTag);
+        }
+
+        // Add p. prefix if not already
+        if (!selector.startsWith("p.")) {
+          selectors.push("p." + withoutTag);
+        }
+
+        // Store all variations
+        selectors.forEach((sel) => {
+          wordStyles[sel] = color;
+        });
+      }
+    }
+  });
+
+  console.log("📚 Word styles extracted:", wordStyles);
+
+  // ============================================
+  // FIX: Convert heading paragraphs to proper heading tags
+  // ============================================
+  doc.querySelectorAll("p").forEach((p) => {
+    const rawText = p.textContent;
+    const text = rawText.replace(/\s+/g, " ").trim();
+
+    const classAttr = p.getAttribute("class") || "";
+    const isWordHeading = /LMSTopicH[1-6]|Heading|Title/i.test(classAttr);
+    const isNumberedHeading = /^\d+(\.\d+)*(\.H\d+)?\s+[A-Z]/.test(text);
+    const style = p.getAttribute("style") || "";
+    const fontSizeMatch = style.match(/font-size\s*:\s*([^;]+)/i);
+    const isLargeFont = fontSizeMatch && parseFloat(fontSizeMatch[1]) > 16;
+    const hasHPattern = /H\d/.test(text);
+
+    if (isWordHeading || isNumberedHeading || (isLargeFont && hasHPattern)) {
+      let level = 1;
+      const hMatch = text.match(/H(\d)/);
+      if (hMatch) {
+        level = parseInt(hMatch[1]);
+      } else if (/^\d+\.\d+\.\d+\.\d+/.test(text)) level = 4;
+      else if (/^\d+\.\d+\.\d+/.test(text)) level = 3;
+      else if (/^\d+\.\d+/.test(text)) level = 2;
+
+      const heading = doc.createElement(`h${level}`);
+
+      Array.from(p.attributes).forEach((attr) => {
+        heading.setAttribute(attr.name, attr.value);
+      });
+
+      // ============================================
+      // FIX: Get color from Word styles with multiple patterns
+      // ============================================
+      let colorValue = null;
+
+      // Try all possible selector patterns
+      const possibleSelectors = [
+        classAttr, // LMSTopicH2
+        `.${classAttr}`, // .LMSTopicH2
+        `p.${classAttr}`, // p.LMSTopicH2
+        `div.${classAttr}`, // div.LMSTopicH2
+        classAttr.toLowerCase(), // lmstopicH2
+        `.${classAttr.toLowerCase()}`, // .lmstopicH2
+      ];
+
+      for (const selector of possibleSelectors) {
+        if (wordStyles[selector]) {
+          colorValue = wordStyles[selector];
+          console.log(
+            `🎨 Found color from selector "${selector}": ${colorValue}`,
+          );
+          break;
+        }
+      }
+
+      // If still no color, try to get from style tag directly
+      if (!colorValue) {
+        // Check all style tags again for this class
+        styleTags.forEach((styleTag) => {
+          const styleText = styleTag.textContent || "";
+          // Look for pattern: .LMSTopicH2 { ... color: #xxx; }
+          const regex = new RegExp(`[.#]${classAttr}\\s*{([^}]*)}`, "i");
+          const match = styleText.match(regex);
+          if (match) {
+            const colorMatch = match[1].match(/color\s*:\s*([^;]+)/i);
+            if (colorMatch) {
+              colorValue = colorMatch[1].trim();
+              console.log(`🎨 Found color from direct regex: ${colorValue}`);
+            }
+          }
+        });
+      }
+
+      // Copy all children to heading
+      while (p.firstChild) {
+        heading.appendChild(p.firstChild);
+      }
+
+      // Apply color to heading
+      const headingStyle = heading.getAttribute("style") || "";
+      let newStyle = headingStyle;
+
+      // Remove any existing color from heading style
+      newStyle = newStyle.replace(/color\s*:[^;]+;?/gi, "");
+
+      // Add new color
+      newStyle = newStyle.trim();
+      if (newStyle && !newStyle.endsWith(";")) {
+        newStyle += ";";
+      }
+      if (colorValue) {
+        newStyle += ` color: ${colorValue};`;
+        console.log(`✅ Applied color ${colorValue} to h${level}`);
+      } else {
+        console.log(`⚠️ No color found for ${classAttr}, using default`);
+        newStyle += ` color: #1A3C6E;`;
+      }
+
+      heading.setAttribute("style", newStyle);
+
+      p.parentNode.replaceChild(heading, p);
+    }
+  });
+
   doc.querySelectorAll("*").forEach((el) => {
     const style = el.getAttribute("style") || "";
 
@@ -277,6 +478,39 @@ function cleanPastedHTML(html) {
       }
       node = node.parentElement;
     }
+  });
+
+  // 0c) NEW: Push inherited color / font-weight / font-size down from ANY
+  //     ancestor onto block-level elements (p / h1-h6) the same way 0b
+  //     does for text-align. Needed when a heading/paragraph's color or
+  //     bold-ness lives on a wrapping <div>/<span> instead of the leaf
+  //     element itself — otherwise it gets lost once that wrapper is
+  //     unwrapped/dropped during cleanup.
+  doc.querySelectorAll("p, h1, h2, h3, h4, h5, h6").forEach((block) => {
+    const ownStyle = block.getAttribute("style") || "";
+    const props = [
+      { name: "color", re: /color\s*:\s*([^;]+)/i },
+      { name: "font-weight", re: /font-weight\s*:\s*([^;]+)/i },
+      { name: "font-size", re: /font-size\s*:\s*([^;]+)/i },
+    ];
+
+    props.forEach(({ name, re }) => {
+      if (re.test(ownStyle)) return; // already has its own, don't override
+
+      let node = block.parentElement;
+      while (node && node !== doc.body) {
+        const style = node.getAttribute("style") || "";
+        const match = style.match(re);
+        if (match) {
+          const value = match[1].trim();
+          const current = block.getAttribute("style") || "";
+          const sep = current && !current.trim().endsWith(";") ? "; " : "";
+          block.setAttribute("style", `${current}${sep}${name}: ${value};`);
+          break;
+        }
+        node = node.parentElement;
+      }
+    });
   });
 
   // 1) Repeatedly unwrap tables whose cells have no real tabular data
@@ -504,6 +738,11 @@ function cleanPastedHTML(html) {
     const fontSizeMatch = style.match(/font-size\s*:\s*([^;]+)/i);
     if (fontSizeMatch) {
       preserved.push(`font-size: ${fontSizeMatch[1].trim()}`);
+    }
+
+    const fontWeightMatch = style.match(/font-weight\s*:\s*([^;]+)/i);
+    if (fontWeightMatch) {
+      preserved.push(`font-weight: ${fontWeightMatch[1].trim()}`);
     }
 
     if (preserved.length) {
@@ -781,8 +1020,10 @@ const CustomEditor = memo(
         }),
         Table.configure({ resizable: true }),
         TableRow,
-        TableCell,
-        TableHeader,
+        // TableCell,
+        // TableHeader,
+        CustomTableCell,
+        CustomTableHeader,
         HorizontalRule,
         CodeBlockLowlight.configure({ lowlight }),
       ],
@@ -799,6 +1040,15 @@ const CustomEditor = memo(
         },
         transformPastedHTML(html) {
           console.log("===== RAW HTML =====");
+
+          console.log(html);
+
+          const index = html.indexOf("6.1.1.H1C7");
+
+          if (index !== -1) {
+            console.log("======= HEADING RAW SNIPPET =======");
+            console.log(html.substring(index - 800, index + 1500));
+          }
 
           console.log("RAW border-bottom:", html.includes("border-bottom"));
 
@@ -1565,22 +1815,42 @@ const CustomEditor = memo(
           color: #1d4ed8 !important;
         }
 
-        .editor-wrapper table {
-          border-collapse: collapse;
-          width: 100%;
-          margin: 1rem 0;
-          table-layout: fixed;
-        }
-        .editor-wrapper td,
-        .editor-wrapper th {
-          border: 1px solid #d1d5db;
-          padding: 8px 12px;
-          position: relative;
-        }
-        .editor-wrapper th {
-          background-color: #f3f4f6;
-          font-weight: 600;
-        }
+       
+      .editor-wrapper table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+  table-layout: fixed;
+  border: 1px solid #7F8C8D;
+}
+.editor-wrapper td,
+.editor-wrapper th {
+  border: 1px solid #7F8C8D;
+  padding: 8px 12px;
+  position: relative;
+  vertical-align: top;
+} 
+
+/* Default header row styling — dark blue bg, white bold text */
+.editor-wrapper table tr:first-child th,
+.editor-wrapper table tr:first-child td {
+  background-color: #25567B;
+  color: #ffffff;
+  font-weight: 700;
+}
+.editor-wrapper table tr:first-child th p,
+.editor-wrapper table tr:first-child td p {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Zebra striping on body rows (skip header = first row) */
+.editor-wrapper table tr:nth-child(even) td {
+  background-color: #F4F7F9;
+}
+.editor-wrapper table tr:nth-child(odd):not(:first-child) td {
+  background-color: #ffffff;
+}
         .editor-wrapper .selectedCell::after {
           content: "";
           position: absolute;
