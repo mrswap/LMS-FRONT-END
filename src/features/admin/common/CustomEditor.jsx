@@ -162,13 +162,18 @@ const ColorPickerBtn = ({
 
 // ---------- main component ----------
 
-const CustomEditor = ({ initialContent = "" }) => {
+const CustomEditor = ({
+  value = "",
+  onChange = () => {},
+  placeholder = "Start typing here...",
+}) => {
   const editorRef = useRef(null);
   const fileInputRef = useRef(null);
   const savedSelectionRef = useRef(null);
   const pasteInProgressRef = useRef(false);
 
-  const historyRef = useRef([initialContent]);
+  // const historyRef = useRef([initialContent]);
+  const historyRef = useRef([value || ""]);
   const historyIndexRef = useRef(0);
   const skipNextHistoryRef = useRef(false);
   const debounceRef = useRef(null);
@@ -188,12 +193,18 @@ const CustomEditor = ({ initialContent = "" }) => {
   const highlightColorInputRef = useRef(null);
 
   // init content once - never re-render via dangerouslySetInnerHTML afterwards
+  // useEffect(() => {
+  //   if (editorRef.current) {
+  //     editorRef.current.innerHTML = initialContent;
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+
   useEffect(() => {
-    if (editorRef.current) {
-      editorRef.current.innerHTML = initialContent;
+    if (editorRef.current && editorRef.current.innerHTML !== value) {
+      editorRef.current.innerHTML = value || "";
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [value]);
 
   const flashToast = (msg) => {
     setToast(msg);
@@ -830,10 +841,18 @@ const CustomEditor = ({ initialContent = "" }) => {
     updateActiveFormats();
   };
 
+  // const handleInput = () => {
+  //   saveSelection();
+  //   scheduleHistory();
+  //   updateActiveFormats();
+  // };
+
   const handleInput = () => {
     saveSelection();
     scheduleHistory();
     updateActiveFormats();
+
+    onChange(editorRef.current.innerHTML);
   };
 
   useEffect(() => {
@@ -1258,7 +1277,7 @@ const CustomEditor = ({ initialContent = "" }) => {
           onClick={handleEditorClick}
           onKeyUp={handleEditorKeyUp}
           onMouseUp={handleEditorClick}
-          data-placeholder="Start typing here…"
+          data-placeholder={placeholder}
           style={{
             fontFamily: "Arial, sans-serif",
             lineHeight: 1.6,
