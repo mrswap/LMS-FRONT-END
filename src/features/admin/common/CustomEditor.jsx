@@ -192,14 +192,6 @@ const CustomEditor = ({
   const textColorInputRef = useRef(null);
   const highlightColorInputRef = useRef(null);
 
-  // init content once - never re-render via dangerouslySetInnerHTML afterwards
-  // useEffect(() => {
-  //   if (editorRef.current) {
-  //     editorRef.current.innerHTML = initialContent;
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
   useEffect(() => {
     if (editorRef.current && editorRef.current.innerHTML !== value) {
       editorRef.current.innerHTML = value || "";
@@ -291,9 +283,26 @@ const CustomEditor = ({
     debounceRef.current = window.setTimeout(pushHistory, 400);
   }, [pushHistory]);
 
+  // ---- FIX: single place that both schedules history AND notifies the
+  // parent (Formik) of the new content. Any code path that mutates
+  // editorRef.current's DOM *without* going through a native "input" event
+  // (e.g. direct appendChild/insertBefore during paste) MUST call this,
+  // otherwise React/Formik never learns the value changed and dependent
+  // UI (like a submit/create button gated on values.htmlContent) stays
+  // stuck in its previous (often empty/disabled) state.
+  const notifyContentChanged = useCallback(() => {
+    scheduleHistory();
+    if (editorRef.current) {
+      onChange(editorRef.current.innerHTML);
+    }
+  }, [scheduleHistory, onChange]);
+
   const applyHTMLSnapshot = (html) => {
     skipNextHistoryRef.current = true;
     editorRef.current.innerHTML = html;
+    // undo/redo also bypasses the normal input event, so the parent needs
+    // to be told directly too.
+    onChange(editorRef.current.innerHTML);
   };
 
   const undo = () => {
@@ -315,7 +324,7 @@ const CustomEditor = ({
     editorRef.current.focus();
     restoreSelection();
     document.execCommand(command, false, value);
-    scheduleHistory();
+    notifyContentChanged();
     updateActiveFormats();
   };
 
@@ -323,7 +332,7 @@ const CustomEditor = ({
     restoreSelection();
     editorRef.current.focus();
     document.execCommand("insertHTML", false, html);
-    scheduleHistory();
+    notifyContentChanged();
   };
 
   // ---- clear / deselect everything ----
@@ -339,7 +348,7 @@ const CustomEditor = ({
     savedSelectionRef.current = null;
     setActiveFormats({});
     editorRef.current.focus();
-    scheduleHistory();
+    notifyContentChanged();
   };
 
   // ---- image ----
@@ -594,7 +603,12 @@ const CustomEditor = ({
             restoreSelection();
             editorRef.current.focus();
             document.execCommand("insertHTML", false, sanitized);
-            scheduleHistory();
+
+            // FIX: execCommand usually fires a native "input" event which
+            // would normally trigger handleInput() -> onChange(), but we
+            // don't want to rely on that timing during an async paste flow.
+            // Notify explicitly so Formik's value is guaranteed to update.
+            notifyContentChanged();
 
             setPasteProgress({ phase: "complete", done: 100, total: 100 });
           } else {
@@ -635,7 +649,18 @@ const CustomEditor = ({
 
             // Force browser recalculation
             await new Promise((r) => setTimeout(r, 10));
-            scheduleHistory();
+
+            // FIX: this is the main bug. moveNodesTimeBudgeted() inserts
+            // nodes via raw appendChild/insertBefore, which is plain DOM
+            // manipulation — it does NOT fire a native "input" event on the
+            // contentEditable div. That means React's onInput={handleInput}
+            // never runs, onChange() is never called, and the parent form
+            // (Formik) never learns htmlContent changed. Net effect: the
+            // Create/Submit button (gated on values.htmlContent) stays
+            // disabled after a paste, until the user types something manually
+            // and triggers a real input event. Calling notifyContentChanged()
+            // here fixes it by updating Formik's state directly.
+            notifyContentChanged();
 
             setPasteProgress({ phase: "complete", done: 100, total: 100 });
           }
@@ -649,7 +674,10 @@ const CustomEditor = ({
             editorRef.current.focus();
             const sanitized = sanitizeOnly(html);
             document.execCommand("insertHTML", false, sanitized);
-            scheduleHistory();
+
+            // FIX: same reasoning as above — make sure the parent form gets
+            // the updated content even on the error-recovery path.
+            notifyContentChanged();
           } catch (e2) {
             console.error("Fallback paste failed:", e2);
             flashToast("Paste failed — try pasting as plain text");
@@ -671,7 +699,7 @@ const CustomEditor = ({
     if (text) {
       e.preventDefault();
       document.execCommand("insertText", false, text);
-      scheduleHistory();
+      notifyContentChanged();
     }
   };
 
@@ -710,7 +738,7 @@ const CustomEditor = ({
       `[${TABLE_ID_ATTR}="${activeTableId}"]`,
     );
     if (table) fn(table);
-    scheduleHistory();
+    notifyContentChanged();
   };
 
   const getCurrentCell = () => {
@@ -736,7 +764,7 @@ const CustomEditor = ({
     } else {
       row.parentNode.insertBefore(newRow, row);
     }
-    scheduleHistory();
+    notifyContentChanged();
   };
 
   const deleteRow = () => {
@@ -751,7 +779,7 @@ const CustomEditor = ({
     }
     if (!confirm("Delete this row?")) return;
     row.remove();
-    scheduleHistory();
+    notifyContentChanged();
   };
 
   const addColumn = (position) => {
@@ -771,7 +799,7 @@ const CustomEditor = ({
           : row.children[colIndex];
       row.insertBefore(newCell, ref || null);
     });
-    scheduleHistory();
+    notifyContentChanged();
   };
 
   const deleteColumn = () => {
@@ -788,7 +816,7 @@ const CustomEditor = ({
     rows.forEach((row) => {
       if (row.children[colIndex]) row.children[colIndex].remove();
     });
-    scheduleHistory();
+    notifyContentChanged();
   };
 
   const deleteTable = () => {
@@ -840,12 +868,6 @@ const CustomEditor = ({
     updateTableContext();
     updateActiveFormats();
   };
-
-  // const handleInput = () => {
-  //   saveSelection();
-  //   scheduleHistory();
-  //   updateActiveFormats();
-  // };
 
   const handleInput = () => {
     saveSelection();
