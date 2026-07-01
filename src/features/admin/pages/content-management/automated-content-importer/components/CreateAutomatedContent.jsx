@@ -133,6 +133,8 @@ const CreateAutomatedContent = () => {
         type: "content",
       };
 
+      console.log("payload", payload);
+
       const res = await dispatch(createAutomatedImport(payload)).unwrap();
 
       toast.success(res.message || t("automatedImporter.success.create"));
