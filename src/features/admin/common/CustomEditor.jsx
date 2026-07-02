@@ -106,17 +106,26 @@ const FRAME_BUDGET_MS = 8;
 
 // ---------- toolbar pieces ----------
 
-const ToolBtn = ({ onMouseDown, title, active, children, danger }) => (
+const ToolBtn = ({
+  onMouseDown,
+  title,
+  active,
+  children,
+  danger,
+  disabled,
+}) => (
   <button
     type="button"
     title={title}
+    disabled={disabled}
     onMouseDown={(e) => {
       e.preventDefault(); // keep selection alive
       onMouseDown(e);
     }}
     className={`inline-flex items-center justify-center h-8 min-w-8 px-1.5 rounded-md text-sm transition-colors border
       ${danger ? "text-red-600 hover:bg-red-50 border-transparent" : "text-gray-700 hover:bg-gray-200 border-transparent"}
-      ${active ? "bg-indigo-100 text-indigo-700 border-indigo-300" : ""}`}
+      ${active ? "bg-indigo-100 text-indigo-700 border-indigo-300" : ""}
+      ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
   >
     {children}
   </button>
@@ -172,7 +181,6 @@ const CustomEditor = ({
   const savedSelectionRef = useRef(null);
   const pasteInProgressRef = useRef(false);
 
-  // const historyRef = useRef([initialContent]);
   const historyRef = useRef([value || ""]);
   const historyIndexRef = useRef(0);
   const skipNextHistoryRef = useRef(false);
@@ -283,13 +291,11 @@ const CustomEditor = ({
     debounceRef.current = window.setTimeout(pushHistory, 400);
   }, [pushHistory]);
 
-  // ---- FIX: single place that both schedules history AND notifies the
-  // parent (Formik) of the new content. Any code path that mutates
+  // Single place that both schedules history AND notifies the parent
+  // (Formik) of the new content. Any code path that mutates
   // editorRef.current's DOM *without* going through a native "input" event
   // (e.g. direct appendChild/insertBefore during paste) MUST call this,
-  // otherwise React/Formik never learns the value changed and dependent
-  // UI (like a submit/create button gated on values.htmlContent) stays
-  // stuck in its previous (often empty/disabled) state.
+  // otherwise React/Formik never learns the value changed.
   const notifyContentChanged = useCallback(() => {
     scheduleHistory();
     if (editorRef.current) {
@@ -300,8 +306,6 @@ const CustomEditor = ({
   const applyHTMLSnapshot = (html) => {
     skipNextHistoryRef.current = true;
     editorRef.current.innerHTML = html;
-    // undo/redo also bypasses the normal input event, so the parent needs
-    // to be told directly too.
     onChange(editorRef.current.innerHTML);
   };
 
@@ -351,7 +355,7 @@ const CustomEditor = ({
     notifyContentChanged();
   };
 
-  // ---- image ----
+  // ---- image (toolbar upload) ----
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -391,19 +395,16 @@ const CustomEditor = ({
             continue;
           rule.selectorText.split(",").forEach((rawSel) => {
             const sel = rawSel.trim();
-            // simple class selector: .Foo
             const classMatch = sel.match(/^\.([\w-]+)$/);
             if (classMatch) {
               addTo(classMap, classMatch[1], rule.style.cssText);
               return;
             }
-            // simple tag selector: h1, p, span
             const tagMatch = sel.match(/^([a-zA-Z][\w-]*)$/);
             if (tagMatch) {
               addTo(tagMap, tagMatch[1].toUpperCase(), rule.style.cssText);
               return;
             }
-            // compound tag.class selector: h1.MsoTitle
             const compoundMatch = sel.match(/^([a-zA-Z][\w-]*)\.([\w-]+)$/);
             if (compoundMatch) {
               addTo(classMap, compoundMatch[2], rule.style.cssText);
@@ -418,6 +419,170 @@ const CustomEditor = ({
     return { classMap, tagMap };
   };
 
+  // ---- Word image recovery ----
+  //
+  // Word's HTML clipboard points images at a local temp file
+  // (file:///C:/Users/.../clip_image001.png) that the browser can never
+  // load — and that file gets overwritten every time Word copies something
+  // new, so pasting a 2nd/3rd image in the same session silently breaks.
+  //
+  // The actual image bytes ARE present in the RTF clipboard flavor, as
+  // hex-encoded \pict blocks. We pull them out here and use them to patch
+  // the broken file:// references before the HTML ever touches the editor.
+
+  const extractImagesFromRtf = (rtf) => {
+    if (!rtf) return [];
+    const images = [];
+    let searchFrom = 0;
+
+    while (true) {
+      const start = rtf.indexOf("{\\pict", searchFrom);
+      if (start === -1) break;
+
+      // brace-matching to find the true end of this \pict group. A naive
+      // non-greedy regex would stop at the first "}", which is usually the
+      // closing brace of a nested \picprop group, not the real end.
+      let depth = 0;
+      let end = -1;
+      for (let i = start; i < rtf.length; i++) {
+        if (rtf[i] === "{") depth++;
+        else if (rtf[i] === "}") {
+          depth--;
+          if (depth === 0) {
+            end = i;
+            break;
+          }
+        }
+      }
+      if (end === -1) break;
+
+      const block = rtf.slice(start, end + 1);
+      searchFrom = end + 1;
+
+      const kwMatch = block.match(/\\(pngblip|jpegblip)\b/);
+      if (!kwMatch) {
+        // \wmetafile8 / \emfblip are vector formats browsers can't render
+        // directly. Record a placeholder so index alignment with the
+        // matching <img>/<v:imagedata> tags in the HTML is preserved.
+        images.push(null);
+        continue;
+      }
+      const mime = kwMatch[1] === "pngblip" ? "image/png" : "image/jpeg";
+
+      // Walk forward past the keyword, consuming ONLY genuine
+      // backslash-prefixed control-word tokens (e.g. \picw26565, \bin1234),
+      // stopping the instant we hit something that isn't a control word.
+      // This is deliberately more careful than a blind "strip every
+      // \word+digits pattern" regex: if a control word is directly
+      // followed by hex data with NO delimiting space (which Word does
+      // sometimes), a blind regex would misread the leading hex digits as
+      // the control word's numeric parameter and delete them - shifting
+      // every subsequent byte by a nibble and corrupting the whole image.
+      // Walking explicitly from "\" to "\" avoids that ambiguity entirely.
+      let pos = kwMatch.index + kwMatch[0].length;
+      while (pos < block.length) {
+        while (pos < block.length && /\s/.test(block[pos])) pos++;
+        if (block[pos] === "\\") {
+          const m = /^\\[a-zA-Z]+-?\d*/.exec(block.slice(pos));
+          if (m && m[0].length > 1) {
+            pos += m[0].length;
+            continue;
+          }
+          pos++; // unrecognized escape - skip just the backslash
+          continue;
+        }
+        break; // reached the real start of the hex data
+      }
+
+      const hex = block
+        .slice(pos)
+        .replace(/\{[^{}]*\}/g, "") // strip any trailing nested groups
+        .replace(/[^0-9a-fA-F]/g, ""); // keep hex digits only
+
+      if (hex.length < 40) {
+        images.push(null);
+        continue;
+      }
+
+      try {
+        const byteLen = hex.length >> 1;
+        const bytes = new Uint8Array(byteLen);
+        for (let i = 0; i < byteLen; i++) {
+          bytes[i] = parseInt(hex.substr(i * 2, 2), 16);
+        }
+        let binary = "";
+        for (let i = 0; i < bytes.length; i++)
+          binary += String.fromCharCode(bytes[i]);
+        images.push(`data:${mime};base64,${btoa(binary)}`);
+      } catch {
+        images.push(null);
+      }
+    }
+
+    return images;
+  };
+
+  // Replaces broken file:// image srcs (both plain <img> and Word's VML
+  // <v:imagedata> wrapper) with real image data pulled from RTF, matched
+  // in document order. Any <img> that already has a usable src (http(s)://
+  // or data:) is left untouched.
+  const fixWordImageSrcs = (doc, rtfImages) => {
+    let rtfIdx = 0;
+    const nextRtfImage = () => {
+      while (rtfIdx < rtfImages.length) {
+        const img = rtfImages[rtfIdx];
+        rtfIdx++;
+        if (img) return img;
+        // null = this slot was a vector image we couldn't decode; skip it
+        // but don't stop looking for the next usable one
+      }
+      return null;
+    };
+
+    // plain <img> tags with a local file:// src
+    doc.querySelectorAll("img").forEach((img) => {
+      const src = img.getAttribute("src") || "";
+      if (/^file:\/\//i.test(src)) {
+        const dataUrl = nextRtfImage();
+        if (dataUrl) {
+          img.setAttribute("src", dataUrl);
+        } else {
+          img.remove(); // no usable data (e.g. WMF) - drop the broken img
+        }
+      }
+    });
+
+    // Word's VML wrapper: <v:shape><v:imagedata src="file://..."/></v:shape>
+    // HTML parsing keeps the colon as a literal part of the tag name.
+    doc.querySelectorAll("imagedata, v\\:imagedata").forEach((vImg) => {
+      const src = vImg.getAttribute("src") || vImg.getAttribute("o:href") || "";
+      if (!/^file:\/\//i.test(src)) return;
+
+      const dataUrl = nextRtfImage();
+      const shape = vImg.closest("shape, v\\:shape");
+      const target = shape || vImg;
+
+      if (!dataUrl) {
+        target.remove();
+        return;
+      }
+
+      const newImg = doc.createElement("img");
+      newImg.setAttribute("src", dataUrl);
+      newImg.setAttribute("style", "max-width:100%;");
+
+      if (shape) {
+        const styleAttr = shape.getAttribute("style") || "";
+        const w = styleAttr.match(/width:\s*([\d.]+[a-z%]*)/i);
+        const h = styleAttr.match(/height:\s*([\d.]+[a-z%]*)/i);
+        if (w) newImg.style.width = w[1];
+        if (h) newImg.style.height = h[1];
+      }
+
+      target.parentNode.replaceChild(newImg, target);
+    });
+  };
+
   const processNodesTimeBudgeted = async (allEls, styleMaps, onProgress) => {
     const { classMap, tagMap } = styleMaps;
     const total = allEls.length;
@@ -429,11 +594,9 @@ const CustomEditor = ({
         if (!SKIP_STYLE_TAGS.has(el.tagName)) {
           const pieces = [];
 
-          // tag-selector rules apply first (lowest cascade priority)
           const tagCss = tagMap.get(el.tagName);
           if (tagCss) pieces.push(tagCss);
 
-          // class-selector rules override tag rules
           const cls = el.getAttribute("class");
           if (cls && classMap.size) {
             cls.split(/\s+/).forEach((c) => {
@@ -443,9 +606,6 @@ const CustomEditor = ({
           }
 
           if (pieces.length) {
-            // existing inline style (set directly on the element by Word,
-            // e.g. mso-prefixed run-level styling) goes LAST so it always
-            // wins over tag/class rules, matching normal CSS cascade
             const existing = el.getAttribute("style") || "";
             const combined = existing
               ? `${pieces.join(";")};${existing}`
@@ -497,7 +657,7 @@ const CustomEditor = ({
       .replace(/<o:p>/gi, "")
       .replace(/<\/o:p>/gi, "");
 
-  const cleanPastedHTML = async (rawHtml, onProgress) => {
+  const cleanPastedHTML = async (rawHtml, rawRtf, onProgress) => {
     if (rawHtml.length > MAX_PASTE_HTML_LENGTH) {
       return null; // signal caller to use the regex-only fallback
     }
@@ -512,12 +672,17 @@ const CustomEditor = ({
         return null; // parsing produced nothing usable - let caller fall back
       }
 
+      // fix broken file:// image references using RTF's embedded image data
+      const rtfImages = extractImagesFromRtf(rawRtf);
+      if (rtfImages.length) {
+        fixWordImageSrcs(doc, rtfImages);
+      }
+
       const styleMaps = buildStyleMaps(doc);
 
       const container = document.createElement("div");
       container.style.cssText =
         "position:fixed;left:-9999px;top:0;width:800px;";
-      // move (not clone) body children into the off-screen container
       while (doc.body.firstChild) container.appendChild(doc.body.firstChild);
       document.body.appendChild(container);
 
@@ -529,7 +694,6 @@ const CustomEditor = ({
           onProgress && onProgress({ phase: "cleaning", done, total }),
       );
 
-      // Clean up container from DOM before returning it
       document.body.removeChild(container);
 
       return container;
@@ -539,12 +703,17 @@ const CustomEditor = ({
     }
   };
 
-  const sanitizeOnly = (html) => {
+  const sanitizeOnly = (html, rtf) => {
     let bodyHtml = html;
     try {
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, "text/html");
-      if (doc && doc.body) bodyHtml = doc.body.innerHTML;
+      if (doc && doc.body) {
+        // still try to recover images even on the pathological-size fallback
+        const rtfImages = extractImagesFromRtf(rtf);
+        if (rtfImages.length) fixWordImageSrcs(doc, rtfImages);
+        bodyHtml = doc.body.innerHTML;
+      }
     } catch {
       // fall back to the raw string
     }
@@ -567,6 +736,21 @@ const CustomEditor = ({
     }
 
     const html = e.clipboardData.getData("text/html");
+    const rtf = e.clipboardData.getData("text/rtf");
+
+    console.log(
+      "[paste] html length:",
+      html.length,
+      "rtf length:",
+      rtf ? rtf.length : 0,
+    );
+    console.log(
+      "[paste] rtf present?",
+      !!rtf,
+      "rtf sample:",
+      rtf ? rtf.slice(0, 100) : "NONE",
+    );
+
     if (html) {
       e.preventDefault();
 
@@ -574,19 +758,16 @@ const CustomEditor = ({
       setIsPasteLoading(true);
       setPasteProgress({ phase: "preparing", done: 0, total: 100 });
 
-      // capture selection now
       saveSelection();
 
-      // Use microtask queue for more reliable async handling
       Promise.resolve().then(async () => {
         try {
-          // Add small delay to allow UI to update
           await new Promise((r) => setTimeout(r, 50));
 
           setPasteProgress({ phase: "parsing", done: 0, total: 100 });
           await new Promise((r) => setTimeout(r, 10));
 
-          const cleanedContainer = await cleanPastedHTML(html, (p) => {
+          const cleanedContainer = await cleanPastedHTML(html, rtf, (p) => {
             setPasteProgress(p);
           });
 
@@ -595,7 +776,7 @@ const CustomEditor = ({
             setPasteProgress({ phase: "sanitizing", done: 50, total: 100 });
             await new Promise((r) => setTimeout(r, 20));
 
-            const sanitized = sanitizeOnly(html);
+            const sanitized = sanitizeOnly(html, rtf);
 
             setPasteProgress({ phase: "inserting", done: 75, total: 100 });
             await new Promise((r) => setTimeout(r, 10));
@@ -604,10 +785,6 @@ const CustomEditor = ({
             editorRef.current.focus();
             document.execCommand("insertHTML", false, sanitized);
 
-            // FIX: execCommand usually fires a native "input" event which
-            // would normally trigger handleInput() -> onChange(), but we
-            // don't want to rely on that timing during an async paste flow.
-            // Notify explicitly so Formik's value is guaranteed to update.
             notifyContentChanged();
 
             setPasteProgress({ phase: "complete", done: 100, total: 100 });
@@ -647,19 +824,8 @@ const CustomEditor = ({
               },
             );
 
-            // Force browser recalculation
             await new Promise((r) => setTimeout(r, 10));
 
-            // FIX: this is the main bug. moveNodesTimeBudgeted() inserts
-            // nodes via raw appendChild/insertBefore, which is plain DOM
-            // manipulation — it does NOT fire a native "input" event on the
-            // contentEditable div. That means React's onInput={handleInput}
-            // never runs, onChange() is never called, and the parent form
-            // (Formik) never learns htmlContent changed. Net effect: the
-            // Create/Submit button (gated on values.htmlContent) stays
-            // disabled after a paste, until the user types something manually
-            // and triggers a real input event. Calling notifyContentChanged()
-            // here fixes it by updating Formik's state directly.
             notifyContentChanged();
 
             setPasteProgress({ phase: "complete", done: 100, total: 100 });
@@ -672,18 +838,15 @@ const CustomEditor = ({
 
             restoreSelection();
             editorRef.current.focus();
-            const sanitized = sanitizeOnly(html);
+            const sanitized = sanitizeOnly(html, rtf);
             document.execCommand("insertHTML", false, sanitized);
 
-            // FIX: same reasoning as above — make sure the parent form gets
-            // the updated content even on the error-recovery path.
             notifyContentChanged();
           } catch (e2) {
             console.error("Fallback paste failed:", e2);
             flashToast("Paste failed — try pasting as plain text");
           }
         } finally {
-          // Wait a bit before clearing loading state for smooth UX
           await new Promise((r) => setTimeout(r, 200));
           setIsPasteLoading(false);
           setPasteProgress(null);
@@ -694,7 +857,36 @@ const CustomEditor = ({
       return;
     }
 
-    // fallback: plain text paste (no HTML available on clipboard)
+    // No HTML on clipboard — check for a directly-copied image (Files),
+    // e.g. right-click "Copy image" or copying a single image from an app.
+    const items = e.clipboardData.items
+      ? Array.from(e.clipboardData.items)
+      : [];
+    const imageItem = items.find(
+      (item) => item.type && item.type.startsWith("image/"),
+    );
+    if (imageItem) {
+      e.preventDefault();
+      const file = imageItem.getAsFile();
+      if (file) {
+        setIsImageLoading(true);
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          insertHTMLAtCursor(
+            `<img src="${event.target.result}" alt="Pasted image" style="max-width:100%;border-radius:4px;" />`,
+          );
+          setIsImageLoading(false);
+        };
+        reader.onerror = () => {
+          setIsImageLoading(false);
+          flashToast("Couldn't load that image — try again");
+        };
+        reader.readAsDataURL(file);
+      }
+      return;
+    }
+
+    // fallback: plain text paste (no HTML/image available on clipboard)
     const text = e.clipboardData.getData("text/plain");
     if (text) {
       e.preventDefault();
