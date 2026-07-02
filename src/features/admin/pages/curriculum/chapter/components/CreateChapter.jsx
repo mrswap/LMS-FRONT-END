@@ -243,7 +243,7 @@ const CreateChapter = () => {
                           required={true}
                           options={levelOptions}
                           isLoading={levelsLoading}
-                          disabled={!values.moduleName}
+                          disabled={!!values.moduleName}
                         />
                       </div>
                       <SelectField
@@ -255,7 +255,7 @@ const CreateChapter = () => {
                         required={true}
                         options={programOptions}
                         isLoading={programsLoading}
-                        disabled={!values.moduleName}
+                        disabled={!!values.moduleName}
                       />
                     </div>
 
