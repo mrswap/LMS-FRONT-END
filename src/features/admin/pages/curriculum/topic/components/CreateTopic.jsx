@@ -270,7 +270,7 @@ const CreateTopic = () => {
                           required={true}
                           options={moduleOptions}
                           isLoading={modulesLoading}
-                          disabled={!values.chapterName}
+                          disabled={!!values.chapterName}
                         />
                       </div>
                       <div>
@@ -283,7 +283,7 @@ const CreateTopic = () => {
                           required={true}
                           options={levelOptions}
                           isLoading={levelsLoading}
-                          disabled={!values.chapterName}
+                          disabled={!!values.chapterName}
                         />
                       </div>
                     </div>
@@ -298,7 +298,7 @@ const CreateTopic = () => {
                         required={true}
                         options={programOptions}
                         isLoading={programsLoading}
-                        disabled={!values.chapterName}
+                        disabled={!!values.chapterName}
                       />
                       <div>
                         <TextInput

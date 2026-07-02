@@ -354,7 +354,7 @@ const TopicDetails = () => {
                           required={true}
                           options={modulesOptions}
                           isLoading={modulesLoading}
-                          disabled={!values.chapterName}
+                          disabled={!!values.chapterName}
                         />
                       </div>
                       <div>
@@ -367,7 +367,7 @@ const TopicDetails = () => {
                           required={true}
                           options={levelOptions}
                           isLoading={levelsLoading}
-                          disabled={!values.chapterName}
+                          disabled={!!values.chapterName}
                         />
                       </div>
                     </div>
@@ -382,7 +382,7 @@ const TopicDetails = () => {
                         required={true}
                         options={programOptions}
                         isLoading={programsLoading}
-                        disabled={!values.chapterName}
+                        disabled={!!values.chapterName}
                       />
                       <div>
                         <TextInput

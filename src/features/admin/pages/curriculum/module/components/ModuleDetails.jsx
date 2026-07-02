@@ -287,7 +287,7 @@ const ModuleDetails = () => {
                         required={true}
                         options={programOptions}
                         isLoading={programsLoading}
-                        disabled={!values.levelName}
+                        disabled={!!values.levelName}
                       />
                     </div>
 

@@ -318,7 +318,7 @@ const ChapterDetails = () => {
                           required={true}
                           options={levelOptions}
                           isLoading={levelsLoading}
-                          disabled={!values.moduleName}
+                          disabled={!!values.moduleName}
                         />
                       </div>
                       <SelectField
@@ -330,7 +330,7 @@ const ChapterDetails = () => {
                         required={true}
                         options={programOptions}
                         isLoading={programsLoading}
-                        disabled={!values.moduleName}
+                        disabled={!!values.moduleName}
                       />
                     </div>
 

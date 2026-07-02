@@ -224,7 +224,7 @@ const CreateModule = () => {
                         required={true}
                         options={programOptions}
                         isLoading={programsLoading}
-                        disabled={!values.levelName}
+                        disabled={!!values.levelName}
                       />
                       {/* ========== COMMENTED CODE - FUTURE FIELDS ==========
                       <TextInput
