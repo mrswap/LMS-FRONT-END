@@ -106,7 +106,7 @@ const CreateFaq = () => {
     topics?.data?.map((i) => ({ value: i.id, label: i.title })) || [];
 
   const typeOptions = [
-    { value: "all", label: t("faq.types.all") },
+    // { value: "all", label: t("faq.types.all") },
     { value: "level", label: t("faq.types.level") },
     { value: "module", label: t("faq.types.module") },
     { value: "chapter", label: t("faq.types.chapter") },
