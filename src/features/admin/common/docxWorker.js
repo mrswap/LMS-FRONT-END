@@ -1,3 +1,94 @@
+// // docxWorker.js
+// //
+// // Runs mammoth.js's .docx -> HTML conversion completely off the main
+// // thread. This is the piece that fixes the tab freeze/hang on large
+// // (100MB+) .docx uploads: unzip + XML walk is CPU-heavy and synchronous,
+// // so if it runs on the main thread it blocks paint/input for however long
+// // it takes. Moving it here means the UI stays responsive no matter how
+// // big the file is.
+// //
+// // Needs: npm install mammoth
+
+// self.onerror = (message, source, lineno, colno, error) => {
+//   console.error("[docxWorker] uncaught error:", message, error);
+//   return false;
+// };
+
+// let mammothPromise = null;
+// async function getMammoth() {
+//   if (!mammothPromise) {
+//     mammothPromise = import("mammoth/mammoth.browser.min.js")
+//       .then((m) => m.default || m)
+//       .catch((err) => {
+//         mammothPromise = null;
+//         throw err;
+//       });
+//   }
+//   return mammothPromise;
+// }
+
+// self.onmessage = async (e) => {
+//   const { id, arrayBuffer } = e.data || {};
+//   try {
+//     const mammoth = await getMammoth();
+//     // const result = await mammoth.convertToHtml(
+//     //   { arrayBuffer },
+//     //   {
+//     //     convertImage: mammoth.images.imgElement((image) =>
+//     //       image.read("base64").then((base64) => ({
+//     //         src: `data:${image.contentType};base64,${base64}`,
+//     //       })),
+//     //     ),
+//     //   },
+//     // );
+
+//     const result = await mammoth.convertToHtml(
+//       { arrayBuffer },
+//       {
+//         convertImage: mammoth.images.imgElement((image) =>
+//           image.read("base64").then((base64) => ({
+//             src: `data:${image.contentType};base64,${base64}`,
+//           })),
+//         ),
+//       },
+//     );
+
+//     self.postMessage({
+//       id,
+//       ok: true,
+//       html: result.value,
+//       messages: (result.messages || []).map((m) => m.message),
+//     });
+//   } catch (err) {
+//     console.error("[docxWorker] conversion failed:", err);
+//     self.postMessage({
+//       id,
+//       ok: false,
+//       error: err && err.message ? err.message : String(err),
+//     });
+//   }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import {
   FiBold,
@@ -24,6 +115,7 @@ import {
   FiArrowDown,
   FiArrowLeft,
   FiArrowRight,
+  FiUpload,
 } from "react-icons/fi";
 
 // ---------- helpers ----------
@@ -95,7 +187,6 @@ const SKIP_STYLE_TAGS = new Set([
   "COL",
   "COLGROUP",
   "BR",
-  "HR",
 ]);
 
 // Time budget per chunk of work, in ms. Frames are ~16ms; leaving this much
@@ -173,7 +264,7 @@ const ColorPickerBtn = ({
 
 const CustomEditor = ({
   value = "",
-  onChange = () => {},
+  onChange = () => { },
   placeholder = "Start typing here...",
 }) => {
   const editorRef = useRef(null);
@@ -200,11 +291,52 @@ const CustomEditor = ({
   const textColorInputRef = useRef(null);
   const highlightColorInputRef = useRef(null);
 
+  // ---- Word (.docx) file upload: state + refs ----
+  const docxFileInputRef = useRef(null);
+  const docxWorkerRef = useRef(null);
+  const docxRequestIdRef = useRef(0);
+  const [isDocxLoading, setIsDocxLoading] = useState(false);
+  const [docxProgress, setDocxProgress] = useState(null); // { phase, done, total } | null
+
   useEffect(() => {
     if (editorRef.current && editorRef.current.innerHTML !== value) {
       editorRef.current.innerHTML = value || "";
     }
   }, [value]);
+
+  // Creates a fresh worker and wires up a crash handler. If the worker dies
+  // mid-conversion, onerror fires and we replace it immediately so the
+  // NEXT upload attempt isn't stuck using a dead worker.
+  const spawnDocxWorker = useCallback(() => {
+    const worker = new Worker(new URL("./docxWorker.js", import.meta.url), {
+      type: "module",
+    });
+
+    worker.onerror = (err) => {
+      console.error("docx worker crashed:", err?.message || err);
+      flashToast("Word upload failed — please try again");
+      setIsDocxLoading(false);
+      setDocxProgress(null);
+      docxWorkerRef.current = spawnDocxWorker();
+    };
+
+    worker.onmessageerror = (err) => {
+      console.error("docx worker message error:", err);
+      flashToast("Word upload failed — please try again");
+      setIsDocxLoading(false);
+      setDocxProgress(null);
+    };
+
+    return worker;
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    docxWorkerRef.current = spawnDocxWorker();
+    return () => {
+      docxWorkerRef.current?.terminate();
+      docxWorkerRef.current = null;
+    };
+  }, [spawnDocxWorker]);
 
   const flashToast = (msg) => {
     setToast(msg);
@@ -409,6 +541,13 @@ const CustomEditor = ({
             if (compoundMatch) {
               addTo(classMap, compoundMatch[2], rule.style.cssText);
             }
+            const multiClassMatch = sel.match(/\.([\w-]+)/g);
+
+            if (multiClassMatch) {
+              multiClassMatch.forEach((m) => {
+                addTo(classMap, m.substring(1), rule.style.cssText);
+              });
+            }
           });
         }
       } catch {
@@ -583,6 +722,147 @@ const CustomEditor = ({
     });
   };
 
+  const propagateCellBackgrounds = (doc) => {
+    doc.querySelectorAll("td, th").forEach((cell) => {
+      const cellStyle = cell.getAttribute("style") || "";
+      const bgMatch = cellStyle.match(/background(?:-color)?\s*:\s*([^;]+)/i);
+      // Word often uses the legacy bgcolor="#rrggbb" attribute for cell
+      // shading INSTEAD of a CSS style — check both.
+      const bgColor = bgMatch
+        ? bgMatch[1].trim()
+        : cell.getAttribute("bgcolor")
+          ? cell.getAttribute("bgcolor").trim()
+          : null;
+      if (!bgColor) return;
+
+      if (!bgMatch) {
+        const sep = cellStyle && !cellStyle.trim().endsWith(";") ? "; " : "";
+        cell.setAttribute(
+          "style",
+          `${cellStyle}${sep}background-color:${bgColor};`,
+        );
+      }
+
+      Array.from(cell.children).forEach((child) => {
+        const existing = child.getAttribute("style") || "";
+        if (/background(?:-color)?\s*:/i.test(existing)) return;
+        const sep = existing && !existing.trim().endsWith(";") ? "; " : "";
+        child.setAttribute(
+          "style",
+          `${existing}${sep}background-color:${bgColor};`,
+        );
+      });
+    });
+  };
+
+  // ---- Diagnostic: tells us definitively whether the clipboard HTML even
+  // contains a colored table/heading BEFORE any processing happens. If this
+  // logs "white-text=true" but everything else is "false", the colored
+  // heading banner was simply never included in what got copied — no
+  // client-side code can recover data that was never part of the copy.
+  const diagnoseClipboard = (rawHtml) => {
+    const hasTable = /<table/i.test(rawHtml);
+    const hasBgStyle = /background(?:-color)?\s*:/i.test(rawHtml);
+    const hasBgColorAttr = /bgcolor\s*=/i.test(rawHtml);
+    const hasWhiteColor = /color:\s*(white|#fff\b|#ffffff)/i.test(rawHtml);
+    console.log(
+      `%c[CLIPBOARD DIAGNOSTIC] table=${hasTable} bg-style=${hasBgStyle} bgcolor-attr=${hasBgColorAttr} white-text=${hasWhiteColor}`,
+      "color:#d97706;font-weight:bold;",
+    );
+    if (hasWhiteColor && !hasTable && !hasBgStyle && !hasBgColorAttr) {
+      console.warn(
+        "[CLIPBOARD DIAGNOSTIC] White text found but NO table/background anywhere in copied HTML. " +
+        "The colored heading banner was NOT included in what got copied from Word — " +
+        "re-select from the very left edge of the heading bar and copy again.",
+      );
+    }
+  };
+
+  const moveNodesTimeBudgeted = async (
+    sourceContainer,
+    targetParent,
+    refNode,
+    onProgress,
+  ) => {
+    const total = sourceContainer.childNodes.length;
+    let done = 0;
+    while (sourceContainer.firstChild) {
+      const start = performance.now();
+      const frag = document.createDocumentFragment();
+      while (
+        sourceContainer.firstChild &&
+        performance.now() - start < FRAME_BUDGET_MS
+      ) {
+        frag.appendChild(sourceContainer.firstChild);
+        done++;
+      }
+      targetParent.insertBefore(frag, refNode);
+      onProgress && onProgress(done, total);
+      await yieldToBrowser();
+    }
+  };
+
+  // ---- (dependency #1) strip Word's junk markup, including invisible
+  // vglayout tab-stop tables that otherwise create phantom extra spacing ----
+  const stripWordCruft = (html) =>
+    html
+      .replace(/<!--\[if[\s\S]*?<!\[endif\]-->/gi, "")
+      .replace(/<xml>[\s\S]*?<\/xml>/gi, "")
+      .replace(/<o:p>\s*<\/o:p>/gi, "")
+      .replace(/<o:p>/gi, "")
+      .replace(/<\/o:p>/gi, "")
+      // Word's hidden vglayout spans (empty tables used only for internal
+      // tab-stop positioning) - these render as real empty tables/width in
+      // the browser and cause the extra blank spacing you're seeing
+      .replace(/<span[^>]*mso-ignore:vglayout[^>]*>[\s\S]*?<\/span>/gi, "")
+      .replace(/<br[^>]*mso-ignore:vglayout[^>]*>/gi, "");
+
+  // Word exports two visually-similar-but-semantically-different patterns using
+  // the same margin-left + negative text-indent combo:
+  //  a) real bulleted/numbered list items (has "mso-list:" in style, or a
+  //     child span with mso-list:Ignore holding the literal bullet char)
+  //  b) a "fake center" hack for shape/textbox headings (big margin-left +
+  //     equally big negative text-indent, no bullet involved) — only works
+  //     inside the original fixed-width textbox, breaks in a fluid editor.
+  // Blindly capping margin-left while leaving text-indent untouched (the old
+  // code) desyncs the pair and collapses both patterns to ~0 net indent.
+  // This normalizes each pattern to something that actually renders correctly
+  // at any width.
+  function normalizeWordIndent(el) {
+    const style = el.getAttribute("style") || "";
+    const mlMatch = style.match(/margin-left\s*:\s*([\d.]+)pt/i);
+    const tiMatch = style.match(/text-indent\s*:\s*(-?[\d.]+)pt/i);
+    if (!mlMatch && !tiMatch) return;
+
+    const isListItem =
+      /mso-list\s*:/i.test(style) ||
+      (el.querySelector &&
+        el.querySelector("span[style*='mso-list:Ignore' i]"));
+
+    let newStyle = style
+      .replace(/margin-left\s*:\s*[\d.]+pt;?/gi, "")
+      .replace(/text-indent\s*:\s*-?[\d.]+pt;?/gi, "");
+
+    if (isListItem) {
+      // Real bullet/number paragraph: keep a small, consistent hanging indent
+      // so the bullet glyph + wrapped text line up, regardless of Word's
+      // original (often huge, inconsistent) pt values.
+      newStyle += "margin-left:28px;text-indent:-18px;";
+    } else if (tiMatch && parseFloat(tiMatch[1]) < 0 && mlMatch) {
+      // Fake-center hack (big margin-left + big negative text-indent, no
+      // bullet). Recover the actual intent instead of the broken math.
+      if (!/text-align\s*:/i.test(newStyle)) {
+        newStyle += "text-align:center;";
+      }
+    } else if (mlMatch) {
+      // Plain indent, no hanging trick - just cap it sensibly.
+      const px = Math.min(parseFloat(mlMatch[1]) * 1.333, 32);
+      newStyle += `margin-left:${px}px;`;
+    }
+
+    el.setAttribute("style", newStyle);
+  }
+
   const processNodesTimeBudgeted = async (allEls, styleMaps, onProgress) => {
     const { classMap, tagMap } = styleMaps;
     const total = allEls.length;
@@ -612,8 +892,25 @@ const CustomEditor = ({
               : pieces.join(";");
             el.setAttribute("style", combined);
           }
+
+          const finalStyle = el.getAttribute("style") || "";
+          if (
+            /color:\s*(white|#fff\b|#ffffff)/i.test(finalStyle) &&
+            !/background(?:-color)?\s*:/i.test(finalStyle)
+          ) {
+            el.setAttribute(
+              "style",
+              `${finalStyle};background-color:#1d4e6f;padding:4px 8px;`,
+            );
+          }
+
+          // FIXED: replaces the old margin-left-only cap. That version left
+          // text-indent untouched, which desynced Word's margin-left +
+          // negative text-indent pairs (used both for bullet hanging indents
+          // and for shape-heading "fake centering") and collapsed them to a
+          // near-zero net indent. This handles both patterns correctly.
+          normalizeWordIndent(el);
         }
-        el.removeAttribute("class");
         el.removeAttribute("lang");
         el.removeAttribute("align");
         el.removeAttribute("xmlns:v");
@@ -625,38 +922,8 @@ const CustomEditor = ({
     }
   };
 
-  const moveNodesTimeBudgeted = async (
-    sourceContainer,
-    targetParent,
-    refNode,
-    onProgress,
-  ) => {
-    const total = sourceContainer.childNodes.length;
-    let done = 0;
-    while (sourceContainer.firstChild) {
-      const start = performance.now();
-      const frag = document.createDocumentFragment();
-      while (
-        sourceContainer.firstChild &&
-        performance.now() - start < FRAME_BUDGET_MS
-      ) {
-        frag.appendChild(sourceContainer.firstChild);
-        done++;
-      }
-      targetParent.insertBefore(frag, refNode);
-      onProgress && onProgress(done, total);
-      await yieldToBrowser();
-    }
-  };
-
-  const stripWordCruft = (html) =>
-    html
-      .replace(/<!--\[if[\s\S]*?<!\[endif\]-->/gi, "")
-      .replace(/<xml>[\s\S]*?<\/xml>/gi, "")
-      .replace(/<o:p>\s*<\/o:p>/gi, "")
-      .replace(/<o:p>/gi, "")
-      .replace(/<\/o:p>/gi, "");
-
+  // ---- main: cleanPastedHTML (with border-color extraction for shape
+  // headings, and the two fixes above already wired in via its dependencies) ----
   const cleanPastedHTML = async (rawHtml, rawRtf, onProgress) => {
     if (rawHtml.length > MAX_PASTE_HTML_LENGTH) {
       return null; // signal caller to use the regex-only fallback
@@ -664,6 +931,8 @@ const CustomEditor = ({
 
     try {
       const html = stripWordCruft(rawHtml);
+
+      diagnoseClipboard(rawHtml);
 
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, "text/html");
@@ -676,6 +945,468 @@ const CustomEditor = ({
       const rtfImages = extractImagesFromRtf(rawRtf);
       if (rtfImages.length) {
         fixWordImageSrcs(doc, rtfImages);
+      }
+
+      propagateCellBackgrounds(doc);
+
+      // ---- Parse RTF color table once (\colortbl;\red..\green..\blue..;...)
+      // so we can resolve \cfN (character color) indices used inside shapes.
+      const rtfColorTable = [null]; // index 0 = "auto" / no explicit color
+      if (rawRtf) {
+        const ctMatch = rawRtf.match(/\{\\colortbl;([\s\S]*?)\}/);
+        if (ctMatch) {
+          const entries = ctMatch[1].split(";");
+          entries.forEach((entry) => {
+            const r = entry.match(/\\red(\d+)/);
+            const g = entry.match(/\\green(\d+)/);
+            const b = entry.match(/\\blue(\d+)/);
+            if (r && g && b) {
+              const hex = `#${[r[1], g[1], b[1]]
+                .map((n) => parseInt(n, 10).toString(16).padStart(2, "0"))
+                .join("")}`;
+              rtfColorTable.push(hex);
+            } else if (entry.trim() === "") {
+              rtfColorTable.push(null); // auto/black entry
+            }
+          });
+        }
+      }
+
+      // ---- Walk the raw RTF main stream and, for every {\shp ...} group,
+      // record how many "\par" paragraph breaks occurred BEFORE it in the
+      // main document flow. Shape groups are anchored inline at their
+      // paragraph position in RTF, so this paragraph count gives us a
+      // stable, purely positional index for where each shape belongs - no
+      // fragile text-snippet matching required. \par tokens that occur
+      // *inside* a shape group (used only for wrapping the shape's own
+      // caption text) are deliberately skipped so they don't pollute the
+      // main-flow count.
+      const shapeParagraphIndex = new Map(); // shpStart -> paragraphIndexBefore
+      if (rawRtf) {
+        let pos = 0;
+        let paraCount = 0;
+        const n = rawRtf.length;
+        while (pos < n) {
+          if (rawRtf.startsWith("{\\shp", pos)) {
+            let depth = 0;
+            let j = pos;
+            let shpEnd = -1;
+            for (; j < n; j++) {
+              if (rawRtf[j] === "{") depth++;
+              else if (rawRtf[j] === "}") {
+                depth--;
+                if (depth === 0) {
+                  shpEnd = j;
+                  break;
+                }
+              }
+            }
+            if (shpEnd === -1) break;
+            shapeParagraphIndex.set(pos, paraCount);
+            pos = shpEnd + 1;
+            continue;
+          }
+          if (
+            rawRtf.startsWith("\\par", pos) &&
+            !/[a-zA-Z]/.test(rawRtf[pos + 4] || "")
+          ) {
+            paraCount++;
+            pos += 4;
+            continue;
+          }
+          pos++;
+        }
+      }
+
+      // ---- Extract floating shape/textbox headings from RTF, each with
+      // its own fill color, border(line) color, text color, font size,
+      // alignment, and its main-flow paragraph index (from the map above) ----
+      const shapeTexts = []; // { text, bgColor, textColor, borderColor, fontSizePx, align, paragraphIndex, rtfOrder }
+      // Word often draws a heading as TWO separate floating shapes anchored
+      // at the same spot: a thin line-only shape (no \shptxt at all - this
+      // IS the divider rule) and a second textbox shape with the actual
+      // heading background+text. The old code silently `continue`d past
+      // any shape with no \shptxt, so the divider was extracted from the
+      // source but then thrown away. We now keep a record of it instead,
+      // so it can be re-inserted right before the heading it belongs to -
+      // this is recovering real source data, not synthesizing a new one.
+      const dividerMarkers = []; // { paragraphIndex, rtfOrder, used }
+      if (rawRtf) {
+        let searchFrom = 0;
+        let rtfOrder = 0;
+        while (true) {
+          const shpStart = rawRtf.indexOf("{\\shp", searchFrom);
+          if (shpStart === -1) break;
+
+          let depth = 0;
+          let shpEnd = -1;
+          for (let i = shpStart; i < rawRtf.length; i++) {
+            if (rawRtf[i] === "{") depth++;
+            else if (rawRtf[i] === "}") {
+              depth--;
+              if (depth === 0) {
+                shpEnd = i;
+                break;
+              }
+            }
+          }
+          if (shpEnd === -1) break;
+          const shapeGroup = rawRtf.slice(shpStart, shpEnd + 1);
+          searchFrom = shpEnd + 1;
+
+          // fill color: Windows COLORREF integer 0x00BBGGRR
+          let bgColor = null;
+          const fillMatch = shapeGroup.match(
+            /\{\\sp\{\\sn fillColor\}\{\\sv (\d+)\}\}/,
+          );
+          if (fillMatch) {
+            const val = parseInt(fillMatch[1], 10);
+            const r = val & 0xff;
+            const g = (val >> 8) & 0xff;
+            const b = (val >> 16) & 0xff;
+            bgColor = `#${[r, g, b]
+              .map((x) => x.toString(16).padStart(2, "0"))
+              .join("")}`;
+          }
+
+          // border/line color of the shape - draws the vertical accent bar
+          let borderColor = null;
+          const lineColorMatch = shapeGroup.match(
+            /\{\\sp\{\\sn lineColor\}\{\\sv (\d+)\}\}/,
+          );
+          const fLineMatch = shapeGroup.match(
+            /\{\\sp\{\\sn fLine\}\{\\sv (\d+)\}\}/,
+          );
+          const lineIsOn = !fLineMatch || fLineMatch[1] !== "0";
+          if (lineColorMatch && lineIsOn) {
+            const val = parseInt(lineColorMatch[1], 10);
+            const r = val & 0xff;
+            const g = (val >> 8) & 0xff;
+            const b = (val >> 16) & 0xff;
+            borderColor = `#${[r, g, b]
+              .map((x) => x.toString(16).padStart(2, "0"))
+              .join("")}`;
+          }
+
+          const txtStart = shapeGroup.indexOf("{\\shptxt");
+          if (txtStart === -1) {
+            // Check if this shape actually has a fill (background) — if it does,
+            // it's a decorative rectangle belonging to some heading's group, NOT
+            // a standalone divider line.
+            const fFilledMatch = shapeGroup.match(
+              /\{\\sp\{\\sn fFilled\}\{\\sv (\d+)\}\}/,
+            );
+            const hasFillProp = /\{\\sp\{\\sn fillColor\}/.test(shapeGroup);
+            const isActuallyFilled = fFilledMatch
+              ? fFilledMatch[1] !== "0"
+              : hasFillProp;
+
+            if (!isActuallyFilled) {
+              dividerMarkers.push({
+                paragraphIndex: shapeParagraphIndex.has(shpStart)
+                  ? shapeParagraphIndex.get(shpStart)
+                  : rtfOrder,
+                rtfOrder: rtfOrder++,
+                used: false,
+              });
+            }
+            continue;
+          }
+
+          let tdepth = 0;
+          let txtEnd = -1;
+          for (let i = txtStart; i < shapeGroup.length; i++) {
+            if (shapeGroup[i] === "{") tdepth++;
+            else if (shapeGroup[i] === "}") {
+              tdepth--;
+              if (tdepth === 0) {
+                txtEnd = i;
+                break;
+              }
+            }
+          }
+          if (txtEnd === -1) continue;
+
+          const block = shapeGroup.slice(txtStart, txtEnd + 1);
+
+          // ---- FIX #1: skip Word field-code shapes (e.g. page numbers).
+          // Word writes "Page \* PAGE 10" style footers using a
+          // \field{\*\fldinst PAGE}{\fldrslt N} construct inside the
+          // shape text. This is never real heading content — it's a
+          // footer page-number field that gets duplicated once per page
+          // when a multi-page selection is copied. Drop it entirely
+          // before any text extraction happens.
+          const looksLikePageField =
+            /\\\*\s*PAGE\b/i.test(block) ||
+            /\\fldinst[^}]*\bPAGE\b/i.test(block) ||
+            /\\fldinst[^}]*\bNUMPAGES\b/i.test(block);
+          if (looksLikePageField) {
+            continue;
+          }
+
+          // text color: first \cfN found inside the text block
+          let textColor = null;
+          const cfMatch = block.match(/\\cf(\d+)/);
+          if (cfMatch) {
+            const idx = parseInt(cfMatch[1], 10);
+            textColor = rtfColorTable[idx] || null;
+          }
+
+          // font size: \fsN is in half-points -> convert to px (~1.333 ratio)
+          let fontSizePx = 16;
+          const fsMatch = block.match(/\\fs(\d+)/);
+          if (fsMatch) {
+            const pt = parseInt(fsMatch[1], 10) / 2;
+            fontSizePx = Math.round(pt * 1.333);
+          }
+
+          // alignment
+          let align = "left";
+          if (/\\qc\b/.test(block)) align = "center";
+          else if (/\\qr\b/.test(block)) align = "right";
+          else {
+            // Word often "fake-centers" shape text using a large left indent (\li)
+            // paired with an equally large NEGATIVE first-line indent (\fi), instead
+            // of a real \qc control word — same trick normalizeWordIndent() already
+            // detects for plain HTML paragraphs. Catch it here too so shape headings
+            // recovered purely from RTF don't silently default to left.
+            const liMatch = block.match(/\\li(-?\d+)/);
+            const fiMatch = block.match(/\\fi(-?\d+)/);
+            if (liMatch && fiMatch) {
+              const li = parseInt(liMatch[1], 10);
+              const fi = parseInt(fiMatch[1], 10);
+              if (li > 0 && fi < 0 && Math.abs(fi) > li * 0.3) {
+                align = "center";
+              }
+            }
+          }
+          // NOTE: \par / \line are replaced with a plain space (not <br>),
+          // because in RTF they mark where Word happened to wrap the line
+          // at the shape's ORIGINAL width — forcing those as hard <br>
+          // breaks makes every word land on its own line once rendered at
+          // a different width. Using a space lets the browser wrap the
+          // text naturally, exactly like Word did visually.
+          const text = block
+            .replace(/\\par\b/g, " ")
+            .replace(/\\line\b/g, " ")
+            .replace(/\\'([0-9a-fA-F]{2})/g, (_, hex) =>
+              String.fromCharCode(parseInt(hex, 16)),
+            )
+            .replace(/\{\\pict[\s\S]*?\}/g, "")
+            .replace(/\\[a-zA-Z]+-?\d*\s?/g, "")
+            .replace(/[{}]/g, "")
+            .replace(/\s+/g, " ")
+            .trim();
+
+          if (text.length > 0) {
+            shapeTexts.push({
+              text,
+              bgColor,
+              textColor,
+              borderColor,
+              fontSizePx,
+              align,
+              paragraphIndex: shapeParagraphIndex.has(shpStart)
+                ? shapeParagraphIndex.get(shpStart)
+                : rtfOrder, // fallback if map lookup somehow misses
+              rtfOrder: rtfOrder++,
+            });
+          }
+        }
+      }
+
+      // ---- FIX #2: drop repeated-verbatim shapes (header/footer boilerplate).
+      // A real heading appears once per document. If the exact same shape
+      // text shows up more than once, it's Word repeating a page header or
+      // footer once per page in the copied range — every instance of that
+      // text should be dropped, not just the duplicates.
+      const shapeTextFreq = new Map();
+      shapeTexts.forEach((s) => {
+        const key = s.text.trim().toLowerCase();
+        shapeTextFreq.set(key, (shapeTextFreq.get(key) || 0) + 1);
+      });
+      const dedupedShapeTexts = shapeTexts.filter((s) => {
+        const key = s.text.trim().toLowerCase();
+        return shapeTextFreq.get(key) === 1;
+      });
+
+      if (dedupedShapeTexts.length) {
+        const existingPlainText = (doc.body.textContent || "")
+          .replace(/\s+/g, " ")
+          .trim();
+
+        const buildHeadingEl = ({
+          text,
+          bgColor,
+          textColor,
+          borderColor,
+          fontSizePx,
+          align,
+        }) => {
+          const heading = doc.createElement("p");
+          const bg = bgColor || "transparent";
+
+          let finalTextColor = textColor;
+          if (!finalTextColor) {
+            if (bgColor) {
+              const r = parseInt(bgColor.slice(1, 3), 16);
+              const g = parseInt(bgColor.slice(3, 5), 16);
+              const b = parseInt(bgColor.slice(5, 7), 16);
+              const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+              finalTextColor = luminance < 0.5 ? "#ffffff" : "#1a1a1a";
+            } else {
+              finalTextColor = "#1a1a1a";
+            }
+          }
+
+          // FIX: use borderColor from RTF if we actually found one, otherwise
+          // fall back to the TEXT color (always contrasts with bg) instead of
+          // bgColor itself (which made the border invisible - same color as bg).
+          const accentColor = borderColor || finalTextColor || null;
+
+          heading.setAttribute(
+            "style",
+            `background-color:${bg};color:${finalTextColor};font-weight:700;` +
+            `font-size:${fontSizePx}px;padding:10px 16px;margin:0 0 8px 0;` +
+            `text-align:${align};border-radius:2px;` +
+            (accentColor ? `border-left:4px solid ${accentColor};` : "") +
+            `white-space:normal;word-wrap:break-word;line-height:1.4;`,
+          );
+          heading.textContent = text;
+          return heading;
+        };
+
+        // Detect Word's real divider paragraphs: empty of text, but carrying
+        // a border-top/border-bottom (or a literal <hr>). We NEVER
+        // synthesize one — we only recognize it if the source doc actually
+        // had it, so it either stays exactly where Word put it or doesn't
+        // appear at all.
+        const isDividerElement = (el) => {
+          if (el.tagName === "HR") return true;
+          const style = el.getAttribute("style") || "";
+          const hasText = (el.textContent || "").trim().length > 0;
+          if (hasText) return false;
+          if (/border-(top|bottom)\s*:\s*[^;]*\d/i.test(style)) return true;
+          // Word sometimes puts the border on a child span/div instead of
+          // directly on the paragraph itself
+          return Array.from(el.children || []).some((child) => {
+            const cs = child.getAttribute("style") || "";
+            return /border-(top|bottom)\s*:\s*[^;]*\d/i.test(cs);
+          });
+        };
+
+        const queue = dedupedShapeTexts
+          .map((s) => ({ ...s, text: s.text.replace(/\s+/g, " ").trim() }))
+          .filter(
+            (s) => s.text.length > 0 && !existingPlainText.includes(s.text),
+          )
+          // keep RTF stream order - paragraphIndex values are inherently
+          // increasing in this order for correctly-anchored shapes
+          .sort((a, b) => a.rtfOrder - b.rtfOrder);
+
+        // ---- Candidate block-level "paragraph units" in the HTML doc, in
+        // document order. This is what paragraphIndex is mapped against.
+        //
+        // IMPORTANT: do NOT filter out empty paragraphs here. Word's RTF \par
+        // count includes every paragraph mark, including the ones that only
+        // exist to anchor an invisible floating shape (empty <p> in the HTML
+        // clipboard) or a divider line. If we skip those empty paragraphs
+        // while RTF still counts them, the index mapping drifts further off
+        // with every empty paragraph encountered.
+        const candidates = Array.from(
+          doc.body.querySelectorAll(
+            "p, li, td, th, div, h1, h2, h3, h4, h5, h6, hr",
+          ),
+        );
+
+        // ---- Insert each heading directly before the candidate at its
+        // computed paragraph index. If that candidate is an EMPTY
+        // paragraph (Word commonly anchors a floating shape's paragraph
+        // mark to an empty "spacer" paragraph that visually belongs
+        // BEFORE the heading, not after it), skip forward past any
+        // consecutive empty candidates and insert before the first
+        // non-empty one instead.
+        //
+        // FIX: if one of those empty candidates is actually a real divider
+        // line copied from Word (isDividerElement), we stop skipping right
+        // there and place the heading immediately AFTER the divider instead
+        // of jumping past it — this preserves the original
+        // "divider -> heading" layout instead of losing the divider or
+        // stranding it in the wrong spot.
+        // Sort dividers by rtfOrder so we always consume them in source
+        // order when matching them up against headings below.
+        const sortedDividers = dividerMarkers
+          .slice()
+          .sort((a, b) => a.rtfOrder - b.rtfOrder);
+
+        const findDividerFor = (shape) => {
+          // A divider belongs to a heading if it appears at or just before
+          // the heading's own paragraph position and hasn't been claimed by
+          // an earlier heading yet. We take the closest unused one at or
+          // before this shape's paragraphIndex.
+          let best = null;
+          for (const d of sortedDividers) {
+            if (d.used) continue;
+            if (d.paragraphIndex > shape.paragraphIndex) break;
+            best = d; // keep the latest (closest) match found so far
+          }
+          if (best) best.used = true;
+          return best;
+        };
+
+        queue.forEach((shape) => {
+          let idx = Math.max(
+            0,
+            Math.min(shape.paragraphIndex, candidates.length),
+          );
+
+          while (
+            idx < candidates.length &&
+            (candidates[idx].textContent || "").trim().length === 0 &&
+            !isDividerElement(candidates[idx])
+          ) {
+            idx++;
+          }
+
+          // if we stopped ON a real divider that was already present as an
+          // HTML element, the heading goes right after it
+          if (idx < candidates.length && isDividerElement(candidates[idx])) {
+            idx++;
+          }
+
+          const heading = buildHeadingEl(shape);
+
+          // Recover the actual divider line Word drew for this heading (a
+          // separate line-only floating shape in the RTF), rather than
+          // inventing one - only add it if the source really had it.
+          const divider = findDividerFor(shape)
+            ? doc.createElement("hr")
+            : null;
+
+          // NEW: agar target ek table cell hai, to poore table ke pehle insert karo,
+          // row ke andar nahi — warna heading <tr> ke andar ghus jaati hai
+          let insertionTarget = candidates[idx];
+          if (
+            insertionTarget &&
+            (insertionTarget.tagName === "TD" ||
+              insertionTarget.tagName === "TH")
+          ) {
+            const tbl = insertionTarget.closest("table");
+            if (tbl && tbl.parentNode) {
+              insertionTarget = tbl;
+            }
+          }
+
+          if (insertionTarget && insertionTarget.parentNode) {
+            if (divider) {
+              insertionTarget.parentNode.insertBefore(divider, insertionTarget);
+            }
+            insertionTarget.parentNode.insertBefore(heading, insertionTarget);
+          } else {
+            if (divider) doc.body.appendChild(divider);
+            doc.body.appendChild(heading);
+          }
+        });
       }
 
       const styleMaps = buildStyleMaps(doc);
@@ -737,19 +1468,6 @@ const CustomEditor = ({
 
     const html = e.clipboardData.getData("text/html");
     const rtf = e.clipboardData.getData("text/rtf");
-
-    console.log(
-      "[paste] html length:",
-      html.length,
-      "rtf length:",
-      rtf ? rtf.length : 0,
-    );
-    console.log(
-      "[paste] rtf present?",
-      !!rtf,
-      "rtf sample:",
-      rtf ? rtf.slice(0, 100) : "NONE",
-    );
 
     if (html) {
       e.preventDefault();
@@ -893,6 +1611,355 @@ const CustomEditor = ({
       document.execCommand("insertText", false, text);
       notifyContentChanged();
     }
+  };
+
+  // ---------- Word (.docx) file upload pipeline ----------
+  //
+  // Big-picture: mammoth.js (running in docxWorker.js, off the main thread)
+  // does the actual .docx -> HTML conversion, so parsing a 100MB+ file never
+  // freezes the tab. The output HTML is semantic (headings, bold/italic,
+  // lists, tables, alignment, and images as embedded base64) but is NOT a
+  // pixel-perfect re-implementation of Word's rendering engine - no browser
+  // library gives you that. Once we have the HTML, we reuse the SAME
+  // time-budgeted DOM-normalize + time-budgeted DOM-insert pipeline already
+  // built for pasting, so even a huge converted document is inserted in
+  // small chunks across animation frames instead of one giant blocking call.
+
+  // ---- Reapply the editor's own design system to mammoth's plain output.
+  // Mammoth only preserves STRUCTURE (this was a heading / table / image),
+  // not your custom colors/backgrounds — these three functions re-skin
+  // that structure using the exact same styles the editor already uses
+  // for typed content and pasted Word content, so uploaded .docx content
+  // ends up visually identical to a direct copy-paste.
+
+  // ---- Detects heading level from the document's numbering scheme, since
+  // this template's headings use manual bold formatting instead of Word's
+  // named "Heading 1/2/3" styles (which is why styleMap-based detection
+  // doesn't catch them). The numbering itself tells us the level:
+  //   "3.0"           -> 2 segments, second is "0"        -> H1 (module title)
+  //   "3.1"            -> 2 segments, second isn't "0"      -> H2 (chapter)
+  //   "3.1.1"          -> 3 segments                        -> H3 (topic)
+  //   "3.1.1.H1C1"     -> 4+ segments                       -> H4 (section)
+  const HEADING_NUMBER_RE = /^(\d+(?:\.(?:\d+|[A-Za-z]+\d*))*)\s+\S/;
+
+  const detectHeadingLevel = (numberStr) => {
+    const segments = numberStr.split(".");
+    if (segments.length === 2 && segments[1] === "0") return 1;
+    if (segments.length === 2) return 2;
+    if (segments.length === 3) return 3;
+    if (segments.length >= 4) return 4;
+    return null;
+  };
+
+  // Mammoth turns manually-bold paragraphs into <p><strong>...</strong></p>
+  // rather than <h1>-<h4>, so there's no heading structure to skin at all.
+  // This finds paragraphs that are ENTIRELY bold (the whole line, not just
+  // a bold word inside it) and, if their text starts with this document's
+  // numbering pattern, promotes them to the matching real heading tag so
+  // applyDocxHeadingDesign can then color them correctly.
+  const promoteNumberedHeadings = (container) => {
+    const paras = Array.from(container.querySelectorAll("p"));
+    paras.forEach((p) => {
+      const text = (p.textContent || "").trim();
+      if (!text) return;
+
+      const onlyChild =
+        p.children.length === 1 && /^(STRONG|B)$/.test(p.children[0].tagName)
+          ? p.children[0]
+          : null;
+      const isFullyBold =
+        onlyChild && (onlyChild.textContent || "").trim() === text;
+      if (!isFullyBold) return;
+
+      const match = text.match(HEADING_NUMBER_RE);
+      if (!match) return;
+
+      const level = detectHeadingLevel(match[1]);
+      if (!level) return;
+
+      const heading = document.createElement(`h${level}`);
+      heading.textContent = text;
+      p.replaceWith(heading);
+    });
+  };
+
+  // Mammoth trusts Word's internal style NAME (e.g. "Heading 1") to decide
+  // h1-h6 — but that name can be misapplied in the source .docx (e.g. a
+  // sub-item like "Heart Rate" accidentally styled as Heading 1 in Word).
+  // To make the design 100% driven by what's actually VISIBLE in the
+  // document (the numbering scheme), we flatten every heading mammoth
+  // produced back into a plain bold paragraph first — wiping out any
+  // trust in Word's style name — and then let promoteNumberedHeadings
+  // rebuild h1-h4 ONLY where the real numbering pattern (3.0 / 3.1 /
+  // 3.1.1 / 3.1.1.H5C5) is actually present in the text. This guarantees
+  // "Heart Rate", "1. Rhythm" etc. (which don't match that pattern) stay
+  // as plain bold text, never becoming a colored box.
+  const flattenHeadingsToParagraphs = (container) => {
+    container.querySelectorAll("h1,h2,h3,h4,h5,h6").forEach((h) => {
+      const p = document.createElement("p");
+      const strong = document.createElement("strong");
+      strong.innerHTML = h.innerHTML;
+      p.appendChild(strong);
+      h.replaceWith(p);
+    });
+  };
+
+  const applyDocxHeadingDesign = (container) => {
+    const styleFor = {
+      H1: "background-color:#1d4e6f;color:#ffffff;padding:14px 20px;text-align:center;border-radius:6px;font-size:1.7em;font-weight:700;margin:0 0 16px 0;line-height:1.3;",
+      H2: "background-color:#e7eff5;color:#1d4e6f;padding:10px 16px;border-left:4px solid #1d4e6f;font-size:1.3em;font-weight:700;margin:16px 0 8px 0;line-height:1.3;",
+      H3: "background-color:#e3f6f4;color:#0f766e;padding:8px 16px;border-left:4px solid #0f766e;font-size:1.1em;font-weight:700;margin:12px 0 8px 0;line-height:1.3;",
+      H4: "background-color:#f3f4f6;color:#1d4e6f;padding:6px 14px;border-left:3px solid #9aa5b1;font-size:1em;font-weight:700;margin:10px 0 6px 0;line-height:1.3;",
+    };
+    Object.entries(styleFor).forEach(([tag, cssText]) => {
+      container.querySelectorAll(tag).forEach((el) => {
+        const existing = el.getAttribute("style") || "";
+        el.setAttribute("style", `${existing};${cssText}`);
+      });
+    });
+  };
+
+  // Re-skins every <table> mammoth produced so it matches the editor's own
+  // "Insert table" design exactly: striped rows, navy header row, the same
+  // borders/padding, the custom-table class, and a TABLE_ID_ATTR id so the
+  // contextual "Table tools" toolbar (add/delete row/column) works on it
+  // too — same as a table you built with the toolbar or pasted from Word.
+  const applyDocxTableDesign = (container) => {
+    container.querySelectorAll("table").forEach((table) => {
+      table.classList.add("custom-table");
+      table.setAttribute(TABLE_ID_ATTR, nextTableId());
+      table.setAttribute(
+        "style",
+        "border-collapse:collapse;border:1px solid #9aa5b1;width:100%;margin:14px 0;font-family:Arial, sans-serif;font-size:14px;",
+      );
+
+      const rows = Array.from(table.querySelectorAll("tr"));
+      rows.forEach((row, rIdx) => {
+        const cells = Array.from(row.children);
+        cells.forEach((cell) => {
+          const isHeaderRow = rIdx === 0;
+          if (isHeaderRow) {
+            // normalize to <th> so it matches buildTableHTML's own output
+            if (cell.tagName !== "TH") {
+              const th = document.createElement("th");
+              th.innerHTML = cell.innerHTML;
+              cell.replaceWith(th);
+              th.setAttribute("style", headStyle);
+            } else {
+              cell.setAttribute("style", headStyle);
+            }
+          } else {
+            cell.setAttribute(
+              "style",
+              rIdx % 2 === 0 ? cellStyleEven : cellStyleOdd,
+            );
+          }
+        });
+      });
+    });
+  };
+
+  // Mammoth's embedded base64 images come through as plain <img> with no
+  // sizing/rounding — apply the same styling used everywhere else images
+  // are inserted (toolbar upload, paste, drag-drop).
+  const applyDocxImageDesign = (container) => {
+    container.querySelectorAll("img").forEach((img) => {
+      const existing = img.getAttribute("style") || "";
+      if (!/max-width/i.test(existing)) {
+        img.setAttribute(
+          "style",
+          `${existing};max-width:100%;border-radius:4px;`,
+        );
+      }
+    });
+  };
+
+  const cleanMammothHTML = async (html, onProgress) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+    if (!doc.body || !doc.body.firstChild) return null;
+
+    // mammoth's output rarely includes <style> blocks, so this is mostly a
+    // no-op here - kept for consistency with the paste pipeline and in case
+    // a custom style map is added later.
+    const styleMaps = buildStyleMaps(doc);
+
+    const container = document.createElement("div");
+    container.style.cssText = "position:fixed;left:-9999px;top:0;width:800px;";
+    while (doc.body.firstChild) container.appendChild(doc.body.firstChild);
+    document.body.appendChild(container);
+
+    // const allEls = container.querySelectorAll("*");
+    // await processNodesTimeBudgeted(
+    //   allEls,
+    //   styleMaps,
+    //   (done, total) =>
+    //     onProgress && onProgress({ phase: "cleaning", done, total }),
+    // );
+
+    // document.body.removeChild(container);
+    // return container;
+
+    const allEls = container.querySelectorAll("*");
+    await processNodesTimeBudgeted(
+      allEls,
+      styleMaps,
+      (done, total) =>
+        onProgress && onProgress({ phase: "cleaning", done, total }),
+    );
+    // Ignore whatever heading level Word's (possibly mislabeled) style
+    // name produced — flatten everything back to plain bold paragraphs
+    // first, so ONLY the real, visible numbering pattern in the text
+    // decides the final heading level.
+    flattenHeadingsToParagraphs(container);
+
+    // Manual-bold / flattened paragraphs become real h1-h4 tags based on
+    // the document's own numbering scheme (3.0 / 3.1 / 3.1.1 / 3.1.1.H5C5).
+    // Anything that doesn't match this pattern — like "Heart Rate",
+    // "1. Rhythm" — is deliberately left as plain bold text.
+    promoteNumberedHeadings(container);
+
+    // Word doesn't carry your editor's design system — reapply it here so
+    // uploaded .docx content (headings, tables, images) renders exactly
+    // like content that was typed or pasted directly into the editor.
+    applyDocxHeadingDesign(container);
+    applyDocxTableDesign(container);
+    applyDocxImageDesign(container);
+
+    document.body.removeChild(container);
+    return container;
+  };
+
+  const handleDocxFile = (e) => {
+    const file = e.target.files[0];
+    e.target.value = "";
+    if (!file) return;
+
+    const isDocx =
+      file.name.toLowerCase().endsWith(".docx") ||
+      file.type ===
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+    if (!isDocx) {
+      flashToast("Please choose a .docx file");
+      return;
+    }
+    if (pasteInProgressRef.current || isDocxLoading) {
+      flashToast("Already processing content — please wait");
+      return;
+    }
+    if (!docxWorkerRef.current) {
+      flashToast("Upload isn't ready yet — try again in a second");
+      return;
+    }
+
+    saveSelection();
+    setIsDocxLoading(true);
+    setDocxProgress({ phase: "reading", done: 5, total: 100 });
+
+    const requestId = ++docxRequestIdRef.current;
+    const worker = docxWorkerRef.current;
+
+    const reader = new FileReader();
+    reader.onerror = () => {
+      setIsDocxLoading(false);
+      setDocxProgress(null);
+      flashToast("Couldn't read that file — try again");
+    };
+
+    reader.onload = () => {
+      setDocxProgress({ phase: "converting", done: 15, total: 100 });
+
+      let settled = false;
+      const timeoutId = window.setTimeout(() => {
+        if (settled) return;
+        settled = true;
+        worker.removeEventListener("message", onMessage);
+        setIsDocxLoading(false);
+        setDocxProgress(null);
+        flashToast("That took too long — try a smaller file or try again");
+      }, 120000);
+
+      const onMessage = async (ev) => {
+        if (ev.data.id !== requestId) return;
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(timeoutId);
+        worker.removeEventListener("message", onMessage);
+
+        if (!ev.data.ok) {
+          console.error("docx conversion error:", ev.data.error);
+          setIsDocxLoading(false);
+          setDocxProgress(null);
+          flashToast("Couldn't convert that Word file");
+          return;
+        }
+
+        try {
+          setDocxProgress({ phase: "cleaning", done: 35, total: 100 });
+          await new Promise((r) => setTimeout(r, 10));
+
+          const cleanedContainer = await cleanMammothHTML(ev.data.html, (p) => {
+            const pct = p.total ? Math.round(35 + (p.done / p.total) * 35) : 35;
+            setDocxProgress({ phase: "cleaning", done: pct, total: 100 });
+          });
+
+          if (!cleanedContainer) {
+            setIsDocxLoading(false);
+            setDocxProgress(null);
+            flashToast("That document appears to be empty");
+            return;
+          }
+
+          setDocxProgress({ phase: "positioning", done: 72, total: 100 });
+          await new Promise((r) => setTimeout(r, 10));
+
+          const range = restoreSelectionRange();
+          let targetParent = editorRef.current;
+          let refNode = null;
+
+          if (range) {
+            range.deleteContents();
+            if (range.startContainer.nodeType === Node.TEXT_NODE) {
+              const textNode = range.startContainer;
+              const after = textNode.splitText(range.startOffset);
+              targetParent = textNode.parentNode;
+              refNode = after;
+            } else {
+              targetParent = range.startContainer;
+              refNode =
+                range.startContainer.childNodes[range.startOffset] || null;
+            }
+          }
+
+          await moveNodesTimeBudgeted(
+            cleanedContainer,
+            targetParent,
+            refNode,
+            (done, total) => {
+              const pct = Math.round(75 + (done / total) * 25);
+              setDocxProgress({ phase: "inserting", done: pct, total: 100 });
+            },
+          );
+
+          notifyContentChanged();
+          setDocxProgress({ phase: "complete", done: 100, total: 100 });
+        } catch (err) {
+          console.error("docx insert error:", err);
+          flashToast("Something went wrong inserting the document");
+        } finally {
+          await new Promise((r) => setTimeout(r, 200));
+          setIsDocxLoading(false);
+          setDocxProgress(null);
+        }
+      };
+
+      worker.addEventListener("message", onMessage);
+      worker.postMessage({ id: requestId, arrayBuffer: reader.result }, [
+        reader.result,
+      ]);
+    };
+
+    reader.readAsArrayBuffer(file);
   };
 
   // ---- table creation ----
@@ -1091,7 +2158,7 @@ const CustomEditor = ({
 
   const insideTable = !!activeTableId;
   const anyFormatActive = Object.values(activeFormats).some(Boolean);
-  const isLoading = isImageLoading || isPasteLoading;
+  const isLoading = isImageLoading || isPasteLoading || isDocxLoading;
 
   const pasteStatusLabel = (() => {
     if (!pasteProgress) return "Pasting content…";
@@ -1123,6 +2190,32 @@ const CustomEditor = ({
     return `${phaseLabel} content… ${pct}%`;
   })();
 
+  const docxStatusLabel = (() => {
+    if (!docxProgress) return "Processing Word file…";
+    const pct = docxProgress.total
+      ? Math.round((docxProgress.done / docxProgress.total) * 100)
+      : 0;
+    const phaseLabel = (() => {
+      switch (docxProgress.phase) {
+        case "reading":
+          return "Reading file";
+        case "converting":
+          return "Converting document";
+        case "cleaning":
+          return "Cleaning formatting";
+        case "positioning":
+          return "Positioning";
+        case "inserting":
+          return "Inserting";
+        case "complete":
+          return "Complete";
+        default:
+          return "Processing";
+      }
+    })();
+    return `${phaseLabel}… ${pct}%`;
+  })();
+
   return (
     <div className="w-full bg-white border border-gray-300 rounded-lg overflow-hidden shadow-sm">
       <style>{`
@@ -1131,7 +2224,11 @@ const CustomEditor = ({
         .editor-content table.custom-table { border-color: #e2e2e7; }
         .editor-content img { border-radius: 4px; }
         .editor-content:empty:before { content: attr(data-placeholder); color: #9ca3af; }
-
+         .editor-content hr {
+          border: none;
+          border-top: 2px solid #d5dae1;
+          margin: 16px 0;
+          }
         .editor-content h1 { font-size: 2em; font-weight: 700; margin: 0.67em 0; line-height: 1.3; }
         .editor-content h2 { font-size: 1.5em; font-weight: 700; margin: 0.75em 0; line-height: 1.3; }
         .editor-content h3 { font-size: 1.25em; font-weight: 600; margin: 0.83em 0; line-height: 1.3; }
@@ -1399,21 +2496,42 @@ const CustomEditor = ({
               saveSelection();
               createCustomTable();
             }}
-            disabled={isPasteLoading}
+            disabled={isPasteLoading || isDocxLoading}
             className="inline-flex items-center gap-1.5 h-8 px-3 rounded-md text-sm font-medium bg-indigo-50 text-indigo-700 hover:bg-indigo-100 transition-colors disabled:opacity-50"
           >
             <FiGrid size={15} />
             Insert table
           </button>
+
+          <button
+            type="button"
+            onMouseDown={(e) => {
+              e.preventDefault();
+              saveSelection();
+              docxFileInputRef.current.click();
+            }}
+            disabled={isPasteLoading || isDocxLoading}
+            title="Upload a .docx file — parsing runs in a background worker so large files won't freeze the editor"
+            className="inline-flex items-center gap-1.5 h-8 px-3 rounded-md text-sm font-medium bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition-colors disabled:opacity-50"
+          >
+            <FiUpload size={15} />
+            Upload Word file
+          </button>
+          <input
+            type="file"
+            ref={docxFileInputRef}
+            onChange={handleDocxFile}
+            accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            className="hidden"
+          />
         </div>
 
         {/* Contextual table toolbar */}
         <div
-          className={`grid transition-all duration-200 ease-out ${
-            insideTable
+          className={`grid transition-all duration-200 ease-out ${insideTable
               ? "grid-rows-[1fr] opacity-100 mt-2"
               : "grid-rows-[0fr] opacity-0"
-          }`}
+            }`}
         >
           <div className="overflow-hidden">
             <div className="flex flex-wrap items-center gap-1 bg-indigo-50 border border-indigo-200 rounded-md px-2 py-1.5">
@@ -1474,7 +2592,11 @@ const CustomEditor = ({
           <div className="absolute inset-0 bg-black/10 flex items-center justify-center z-10">
             <div className="bg-white px-4 py-3 rounded-lg shadow-lg flex items-center gap-2 text-sm">
               <div className="animate-spin rounded-full h-4 w-4 border-2 border-indigo-500 border-t-transparent" />
-              {isPasteLoading ? pasteStatusLabel : "Uploading image…"}
+              {isPasteLoading
+                ? pasteStatusLabel
+                : isDocxLoading
+                  ? docxStatusLabel
+                  : "Uploading image…"}
             </div>
           </div>
         )}
@@ -1483,9 +2605,10 @@ const CustomEditor = ({
           ref={editorRef}
           contentEditable
           suppressContentEditableWarning
-          className={`editor-content min-h-[480px] max-h-[70vh] overflow-y-auto p-5 focus:outline-none ${
-            isPasteLoading ? "opacity-70 pointer-events-none" : ""
-          }`}
+          className={`editor-content min-h-[480px] max-h-[70vh] overflow-y-auto p-5 focus:outline-none ${isPasteLoading || isDocxLoading
+              ? "opacity-70 pointer-events-none"
+              : ""
+            }`}
           onPaste={handlePaste}
           onInput={handleInput}
           onClick={handleEditorClick}

@@ -28,6 +28,7 @@ import { createAutomatedImport } from "../../../../../../redux/slice/automatedCo
 import Guidline from "./Guidline";
 import { useTranslation } from "react-i18next";
 import usePermission from "../../../../../../hooks/usePermission";
+import { tagTopicSectionHeading } from "../../../../common/tagTopicSectionHeading";
 
 const CreateAutomatedContent = () => {
   const { t } = useTranslation();
@@ -101,21 +102,22 @@ const CreateAutomatedContent = () => {
     levelName: Yup.object()
       .nullable()
       .required(t("automatedImporter.validation.levelRequired")),
-    htmlContent: Yup.string()
-      .required(t("automatedImporter.validation.contentRequired"))
-      .test(
-        "min-words",
-        t("automatedImporter.validation.minWords"),
-        (value) => {
-          if (!value) return false;
-          const textWithoutHtml = value.replace(/<[^>]*>/g, "");
-          const words = textWithoutHtml
-            .trim()
-            .split(/\s+/)
-            .filter((word) => word.length > 0);
-          return words.length >= 100;
-        },
-      ),
+    htmlContent: Yup.string().required(
+      t("automatedImporter.validation.contentRequired"),
+    ),
+    // .test(
+    //   "min-words",
+    //   t("automatedImporter.validation.minWords"),
+    //   (value) => {
+    //     if (!value) return false;
+    //     const textWithoutHtml = value.replace(/<[^>]*>/g, "");
+    //     const words = textWithoutHtml
+    //       .trim()
+    //       .split(/\s+/)
+    //       .filter((word) => word.length > 0);
+    //     return words.length >= 100;
+    //   },
+    // ),
   });
 
   const initialValues = {
@@ -126,14 +128,67 @@ const CreateAutomatedContent = () => {
 
   const onSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
     try {
+      // const payload = {
+      //   program_id: values.programName.value,
+      //   level_id: values.levelName.value,
+      //   html: values.htmlContent,
+      //   type: "content",
+      // };
+
+      // console.log("payload", payload);
+
+      const taggedHtml = tagTopicSectionHeading(values.htmlContent);
+
       const payload = {
         program_id: values.programName.value,
         level_id: values.levelName.value,
-        html: values.htmlContent,
+        html: taggedHtml,
         type: "content",
       };
 
-      console.log("payload", payload);
+      // / ---- clear console preview before actual submit ----
+      console.group(
+        "%c📤 Automated Content Payload",
+        "color:#4f46e5;font-weight:bold;font-size:13px;",
+      );
+      console.log(
+        "Program:",
+        values.programName?.label,
+        `(id: ${payload.program_id})`,
+      );
+      console.log(
+        "Level:",
+        values.levelName?.label,
+        `(id: ${payload.level_id})`,
+      );
+      console.log("HTML length:", taggedHtml.length, "chars");
+
+      // dhoondh ke dikhao ki heading kis tag pe tag hui, aur kya text hai
+      const parsedPreview = new DOMParser().parseFromString(
+        taggedHtml,
+        "text/html",
+      );
+      const headingEls = parsedPreview.querySelectorAll(
+        '[id^="topic-section-heading"]',
+      );
+      if (headingEls.length) {
+        console.log(
+          "Tagged heading(s):",
+          Array.from(headingEls).map((el) => ({
+            tag: el.tagName.toLowerCase(),
+            id: el.id,
+            text: el.getAttribute("data-topic-heading"),
+          })),
+        );
+      } else {
+        console.warn("No topic-section-heading found/tagged!");
+      }
+
+      console.log("Full payload object:", payload);
+      console.log("%cFull HTML:", "color:#6b7280;");
+      console.log(taggedHtml);
+      console.groupEnd();
+      // ------------------------------------------------------
 
       const res = await dispatch(createAutomatedImport(payload)).unwrap();
 
