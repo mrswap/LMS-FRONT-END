@@ -598,10 +598,19 @@ const CustomEditor = ({
         );
         if (ignoreSpan) {
           let wrapper = ignoreSpan;
-          while (wrapper.parentNode && wrapper.parentNode !== cur) {
+          // Sirf tab tak upar jao jab tak wrapper apne parent ka EKLAUTA
+          // (only) child ho — matlab parent ke andar aur koi real content
+          // (jaise actual text) nahi hai. Jaise hi koi wrapper mile jiske
+          // sibling mein real text ho (jaise bookmark span jisme text bhi
+          // hai), wahin ruk jao — taaki wo text delete na ho.
+          while (
+            wrapper.parentNode &&
+            wrapper.parentNode !== cur &&
+            wrapper.parentNode.children.length === 1
+          ) {
             wrapper = wrapper.parentNode;
           }
-          if (wrapper && wrapper.parentNode === cur) wrapper.remove();
+          if (wrapper && wrapper.parentNode) wrapper.remove();
         }
 
         const li = doc.createElement("li");
@@ -757,12 +766,15 @@ const CustomEditor = ({
     const mlMatch = style.match(/margin-left\s*:\s*(-?[\d.]+)pt/i);
     const tiMatch = style.match(/text-indent\s*:\s*(-?[\d.]+)pt/i);
     if (!mlMatch && !tiMatch) return;
-
     const PT_TO_PX = 96 / 72; // = 1.3333...
-
     let newStyle = style
       .replace(/margin-left\s*:\s*-?[\d.]+pt;?/gi, "")
       .replace(/text-indent\s*:\s*-?[\d.]+pt;?/gi, "");
+
+    // 👇 yehi fix hai — trailing semicolon ensure karo
+    if (newStyle && !newStyle.trim().endsWith(";")) {
+      newStyle += ";";
+    }
 
     if (mlMatch) {
       const px = parseFloat(mlMatch[1]) * PT_TO_PX;
@@ -772,7 +784,6 @@ const CustomEditor = ({
       const px = parseFloat(tiMatch[1]) * PT_TO_PX;
       newStyle += `text-indent:${px.toFixed(2)}px;`;
     }
-
     el.setAttribute("style", newStyle);
   }
 
@@ -1997,7 +2008,7 @@ const CustomEditor = ({
           ref={editorRef}
           contentEditable
           suppressContentEditableWarning
-          className={`editor-content min-h-[480px] max-h-[70vh] overflow-y-auto p-5 focus:outline-none ${
+          className={`editor-content min-h-[480px] max-h-[70vh] overflow-y-auto p-5 mx-5 focus:outline-none ${
             isPasteLoading ? "opacity-70 pointer-events-none" : ""
           }`}
           onPaste={handlePaste}
