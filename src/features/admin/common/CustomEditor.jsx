@@ -527,6 +527,108 @@ const CustomEditor = ({
     });
   };
 
+  const convertWordListsToHtmlLists = (doc) => {
+    const isWordBulletPara = (p) => {
+      const style = p.getAttribute("style") || "";
+      return (
+        /mso-list\s*:/i.test(style) &&
+        p.querySelector("span[style*='mso-list:Ignore' i]")
+      );
+    };
+
+    // Sirf ye elements ek list-group ko genuinely todte hain (heading, hr,
+    // table). Beech mein koi bhi wrapper <div>/<span> (jaise Word ke
+    // border-box continuation divs) aaye to unhe ignore karo — chahe
+    // paragraphs literal DOM siblings na ho, sirf actual "content break"
+    // maayne rakhta hai. Ye document-order based check hai, isliye kisi
+    // bhi tarah ki nesting me reliably kaam karta hai.
+    const breakerEls = Array.from(
+      doc.body.querySelectorAll("h1, h2, h3, h4, h5, h6, hr, table"),
+    );
+
+    const isBetween = (a, b, node) => {
+      const afterA =
+        a.compareDocumentPosition(node) & Node.DOCUMENT_POSITION_FOLLOWING;
+      const beforeB =
+        node.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING;
+      return !!afterA && !!beforeB;
+    };
+
+    const hasBreakBetween = (prevPara, nextPara) =>
+      breakerEls.some((el) => isBetween(prevPara, nextPara, el));
+
+    const paragraphs = Array.from(doc.body.querySelectorAll("p"));
+    let i = 0;
+    while (i < paragraphs.length) {
+      const p = paragraphs[i];
+      if (!p.isConnected || !isWordBulletPara(p)) {
+        i++;
+        continue;
+      }
+
+      const markerSpan = p.querySelector("span[style*='mso-list:Ignore' i]");
+      const markerText = (markerSpan.textContent || "").trim();
+      const isOrdered = /^\d+[.)]/.test(markerText);
+      const listEl = doc.createElement(isOrdered ? "ol" : "ul");
+
+      const firstStyle = p.getAttribute("style") || "";
+      const ulBgMatch = firstStyle.match(/background(?:-color)?\s*:\s*[^;]+/i);
+      const mlMatch = firstStyle.match(/margin-left\s*:\s*(-?[\d.]+)pt/i);
+      const indentPx = mlMatch
+        ? Math.max(0, (parseFloat(mlMatch[1]) * 96) / 72)
+        : 24;
+
+      let ulStyle = `padding-left:${indentPx.toFixed(1)}px;margin:0.5em 0;`;
+      if (ulBgMatch) {
+        ulStyle += `${ulBgMatch[0]};padding-top:6px;padding-bottom:6px;`;
+      }
+      listEl.setAttribute("style", ulStyle);
+
+      let j = i;
+      let anchorForInsert = p;
+      while (j < paragraphs.length && isWordBulletPara(paragraphs[j])) {
+        if (j > i && hasBreakBetween(paragraphs[j - 1], paragraphs[j])) {
+          break;
+        }
+
+        const cur = paragraphs[j];
+
+        const ignoreSpan = cur.querySelector(
+          "span[style*='mso-list:Ignore' i]",
+        );
+        if (ignoreSpan) {
+          let wrapper = ignoreSpan;
+          // Sirf tab tak upar jao jab tak wrapper apne parent ka EKLAUTA
+          // (only) child ho — matlab parent ke andar aur koi real content
+          // (jaise actual text) nahi hai. Jaise hi koi wrapper mile jiske
+          // sibling mein real text ho (jaise bookmark span jisme text bhi
+          // hai), wahin ruk jao — taaki wo text delete na ho.
+          while (
+            wrapper.parentNode &&
+            wrapper.parentNode !== cur &&
+            wrapper.parentNode.children.length === 1
+          ) {
+            wrapper = wrapper.parentNode;
+          }
+          if (wrapper && wrapper.parentNode) wrapper.remove();
+        }
+
+        const li = doc.createElement("li");
+        if (ulBgMatch) li.setAttribute("style", "margin:2px 0;");
+        while (cur.firstChild) li.appendChild(cur.firstChild);
+        listEl.appendChild(li);
+
+        j++;
+      }
+
+      anchorForInsert.parentNode.insertBefore(listEl, anchorForInsert);
+      for (let k = i; k < j; k++) {
+        if (paragraphs[k].parentNode) paragraphs[k].remove();
+      }
+      i = j;
+    }
+  };
+
   const propagateCellBackgrounds = (doc) => {
     doc.querySelectorAll("td, th").forEach((cell) => {
       const cellStyle = cell.getAttribute("style") || "";
@@ -555,6 +657,53 @@ const CustomEditor = ({
           `${existing}${sep}background-color:${bgColor};`,
         );
       });
+    });
+  };
+
+  // Word ke "callout box" jaisa div (background-color + border) jiska
+  // apna left-padding bahut kam hota hai (jaise 2pt) — usse thoda zyada
+  // insetdo, taaki text/bullets left border se chipke na dikhein.
+  const toPxUnit = (val, unit) => {
+    if (unit === "px") return val;
+    if (unit === "pt") return (val * 96) / 72;
+    if (unit === "cm") return (val * 96) / 2.54;
+    return val;
+  };
+
+  const ensureCalloutBoxIndent = (doc) => {
+    const MIN_PAD_LEFT_PX = 16;
+
+    doc.querySelectorAll("div").forEach((div) => {
+      const style = div.getAttribute("style") || "";
+      const hasBg = /background(?:-color)?\s*:\s*(?!transparent\b)[^;]+/i.test(
+        style,
+      );
+      const hasBorder = /\bborder(?:-left)?\s*:\s*[^;]*\d/i.test(style);
+      if (!hasBg || !hasBorder) return;
+
+      let currentPx = 0;
+      const longhand = style.match(/padding-left\s*:\s*([\d.]+)(pt|px|cm)/i);
+      if (longhand) {
+        currentPx = toPxUnit(parseFloat(longhand[1]), longhand[2]);
+      } else {
+        const shorthand = style.match(/(?:^|;)\s*padding\s*:\s*([^;]+)/i);
+        if (shorthand) {
+          const parts = shorthand[1].trim().split(/\s+/);
+          const leftPart =
+            parts.length >= 4 ? parts[3] : parts[parts.length - 1];
+          const m = leftPart.match(/([\d.]+)(pt|px|cm)/i);
+          if (m) currentPx = toPxUnit(parseFloat(m[1]), m[2]);
+        }
+      }
+
+      if (currentPx < MIN_PAD_LEFT_PX) {
+        const cleaned = style.replace(/padding-left\s*:\s*[^;]+;?/i, "");
+        const sep = cleaned && !cleaned.trim().endsWith(";") ? "; " : "";
+        div.setAttribute(
+          "style",
+          `${cleaned}${sep}padding-left:${MIN_PAD_LEFT_PX}px;`,
+        );
+      }
     });
   };
 
@@ -614,28 +763,26 @@ const CustomEditor = ({
 
   function normalizeWordIndent(el) {
     const style = el.getAttribute("style") || "";
-    const mlMatch = style.match(/margin-left\s*:\s*([\d.]+)pt/i);
+    const mlMatch = style.match(/margin-left\s*:\s*(-?[\d.]+)pt/i);
     const tiMatch = style.match(/text-indent\s*:\s*(-?[\d.]+)pt/i);
     if (!mlMatch && !tiMatch) return;
-
-    const isListItem =
-      /mso-list\s*:/i.test(style) ||
-      (el.querySelector &&
-        el.querySelector("span[style*='mso-list:Ignore' i]"));
-
+    const PT_TO_PX = 96 / 72; // = 1.3333...
     let newStyle = style
-      .replace(/margin-left\s*:\s*[\d.]+pt;?/gi, "")
+      .replace(/margin-left\s*:\s*-?[\d.]+pt;?/gi, "")
       .replace(/text-indent\s*:\s*-?[\d.]+pt;?/gi, "");
 
-    if (isListItem) {
-      newStyle += "margin-left:28px;text-indent:-18px;";
-    } else if (tiMatch && parseFloat(tiMatch[1]) < 0 && mlMatch) {
-      if (!/text-align\s*:/i.test(newStyle)) {
-        newStyle += "text-align:center;";
-      }
-    } else if (mlMatch) {
-      const px = Math.min(parseFloat(mlMatch[1]) * 1.333, 32);
-      newStyle += `margin-left:${px}px;`;
+    // 👇 yehi fix hai — trailing semicolon ensure karo
+    if (newStyle && !newStyle.trim().endsWith(";")) {
+      newStyle += ";";
+    }
+
+    if (mlMatch) {
+      const px = parseFloat(mlMatch[1]) * PT_TO_PX;
+      newStyle += `margin-left:${px.toFixed(2)}px;`;
+    }
+    if (tiMatch) {
+      const px = parseFloat(tiMatch[1]) * PT_TO_PX;
+      newStyle += `text-indent:${px.toFixed(2)}px;`;
     }
     el.setAttribute("style", newStyle);
   }
@@ -715,7 +862,9 @@ const CustomEditor = ({
 
       removeVmlGroupFallbackImages(doc);
       removeEmptyVmlShapes(doc);
+      convertWordListsToHtmlLists(doc);
       propagateCellBackgrounds(doc);
+      ensureCalloutBoxIndent(doc);
 
       const rtfColorTable = [null]; // index 0 = "auto" / no explicit color
       if (rawRtf) {
@@ -1134,7 +1283,7 @@ const CustomEditor = ({
     const html = e.clipboardData.getData("text/html");
     const rtf = e.clipboardData.getData("text/rtf");
 
-    // console.log(html);
+    console.log(html);
 
     if (html) {
       e.preventDefault();
@@ -1520,6 +1669,7 @@ const CustomEditor = ({
         .editor-content li { display: list-item; margin: 0.25em 0; }
 
         .editor-content a { color: #2563eb; text-decoration: underline; cursor: pointer; }
+        
       `}</style>
 
       {/* Toolbar */}
@@ -1858,7 +2008,7 @@ const CustomEditor = ({
           ref={editorRef}
           contentEditable
           suppressContentEditableWarning
-          className={`editor-content min-h-[480px] max-h-[70vh] overflow-y-auto p-5 focus:outline-none ${
+          className={`editor-content min-h-[480px] max-h-[70vh] overflow-y-auto p-5 mx-5 focus:outline-none ${
             isPasteLoading ? "opacity-70 pointer-events-none" : ""
           }`}
           onPaste={handlePaste}
