@@ -7,14 +7,6 @@ import AdminSupportPage from "../pages/AdminSupportPage";
 import BulkUpload2 from "../pages/curriculum/bulk-upload/BulkUpload2";
 import CreateBulkUpload2 from "../pages/curriculum/bulk-upload/components/CreateBulkUpload2";
 
-// import AutomatedContentImporter from "../pages/content-management/automated-content-importer/AutomatedContentImporter";
-// import CreateAutomatedContent from "../pages/content-management/automated-content-importer/components/CreateAutomatedContent";
-// import ModuleExamAssessment from "../pages/assessment-management/exam-module/assessment/ModuleExamAssessment";
-// import ModuleExamFeedback from "../pages/assessment-management/exam-module/feedback/ModuleExamFeedback";
-// import ModuleExamFeedbackDetails from "../pages/assessment-management/exam-module/feedback/components/ModuleExamFeedbackDetails";
-// import CreateModuleExamAssessment from "../pages/assessment-management/exam-module/assessment/components/CreateModuleExamAssessment";
-// import ModuleExamAssessmentDetails from "../pages/assessment-management/exam-module/assessment/components/ModuleExamAssessmentDetails";
-
 const AutomatedContentImporter = lazy(
   () =>
     import("../pages/content-management/automated-content-importer/AutomatedContentImporter"),

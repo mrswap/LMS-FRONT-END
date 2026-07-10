@@ -267,7 +267,7 @@ const FaqDetails = () => {
   });
 
   const handleSubmit = async (values, { setSubmitting }) => {
-    console.log("values", values);
+    // console.log("values", values);
     try {
       const formData = new FormData();
 
@@ -290,7 +290,7 @@ const FaqDetails = () => {
       toast.success(res?.message || t("faq.success.update"));
       navigate("/faq");
     } catch (err) {
-      console.error("Error ❌", err);
+      // console.error("Error ❌", err);
       toast.error(err?.message || t("faq.error.update"));
     } finally {
       setSubmitting(false);

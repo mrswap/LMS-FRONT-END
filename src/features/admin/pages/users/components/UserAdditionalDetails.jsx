@@ -96,7 +96,7 @@ const UserAdditionalDetails = ({ id }) => {
       ).unwrap();
       setQuizAssessments(response?.data?.data || []);
     } catch (error) {
-      console.error("Error fetching quiz assessments:", error);
+      // console.error("Error fetching quiz assessments:", error);
       setQuizAssessments([]);
     } finally {
       setLoadingQuiz(false);
@@ -142,7 +142,7 @@ const UserAdditionalDetails = ({ id }) => {
       dispatch(getAllAuditLogs({ user_id: id, per_page: 50 }));
     } catch (error) {
       toast.error(error.message || t("userAdditionalDetails.resetFailed"));
-      console.error("Reset device error:", error);
+      // console.error("Reset device error:", error);
     } finally {
       setIsResetting(false);
     }

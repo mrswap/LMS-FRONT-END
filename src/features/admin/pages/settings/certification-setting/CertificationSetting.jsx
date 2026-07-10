@@ -194,10 +194,10 @@ const CertificationSetting = () => {
       }
 
       // Log FormData contents for debugging
-      console.log("FormData entries:");
-      for (let pair of formData.entries()) {
-        console.log(pair[0], pair[1]);
-      }
+      // console.log("FormData entries:");
+      // for (let pair of formData.entries()) {
+      //   console.log(pair[0], pair[1]);
+      // }
 
       // Send FormData instead of JSON
       await dispatch(postCertificateSettings(formData)).unwrap();

@@ -1,4 +1,3 @@
-// components/common/VideoPlayerModal.jsx
 import { useEffect, useRef } from "react";
 import { FiX } from "react-icons/fi";
 

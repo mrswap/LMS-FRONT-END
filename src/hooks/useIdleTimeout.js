@@ -7,10 +7,8 @@ const useIdleTimeout = (onLogout, idleTime = 15 * 60 * 1000) => {
     const warningTimerRef = useRef(null);
     const showModalRef = useRef(false);
 
-    // const WARNING_TIME = idleTime - 60 * 1000; // 1 min before logout
     const WARNING_TIME = Math.max(idleTime - 5 * 1000, 0);
 
-    // sync ref with state
     useEffect(() => {
         showModalRef.current = showModal;
     }, [showModal]);
