@@ -78,7 +78,7 @@ const ModuleDetails = () => {
 
           setIsDataLoaded(true);
         } catch (error) {
-          console.error("Error fetching data:", error);
+          // console.error("Error fetching data:", error);
           toast.error(t("module.error.fetchData"));
         }
       }

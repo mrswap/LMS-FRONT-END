@@ -58,12 +58,10 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
 
   const dropdownRef = useRef();
 
-  // Handle notification click
   const handleNotificationClick = () => {
     navigate("/notification");
   };
 
-  // In the component, add this state
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
 
   const handleLogout = () => {
@@ -72,7 +70,6 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
     navigate("/login");
   };
 
-  // Outside click close
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -101,23 +98,9 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
           {isSidebarOpen ? <FiX size={20} /> : <FiMenu size={20} />}
         </button>
 
-        {/* Logo */}
-        {/* <div className="flex items-center gap-2 text-white font-semibold text-base sm:text-lg">
-          <img
-            src={settings?.company_logo || ""}
-            alt="Logo"
-            className="h-7 sm:h-8"
-          />
-        </div> */}
-
         {/* Logo Section */}
         {/* <div className=" min-[1544px]:px-4"> */}
         <div className="flex-shrink-0 hidden lg:flex ">
-          {/* <img
-            src={settings?.company_logo || ""}
-            alt="Logo"
-            className="w-[130px] sm:w-[130px] h-[64px] object-cover "
-          /> */}
           {settings?.company_logo && (
             <img
               src={settings.company_logo}
@@ -126,17 +109,6 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
             />
           )}
         </div>
-        {/* </div> */}
-
-        {/* Search Desktop */}
-        {/* <div className="hidden md:flex items-center bg-white rounded-md px-3 py-1.5 w-56 lg:w-[300px] xl:w-[350px] shadow-inner">
-          <FiSearch className="text-gray-400 shrink-0" />
-          <input
-            type="text"
-            placeholder={t("navbar.searchPlaceholder")}
-            className="outline-none px-2 py-0.5 w-full text-sm text-gray-700 bg-transparent"
-          />
-        </div> */}
       </div>
 
       {/* RIGHT SIDE */}
@@ -150,12 +122,6 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
         </button>
 
         {/* Notifications */}
-        {/* <div className="relative cursor-pointer hover:scale-105 transition">
-          <FiBell size={18} />
-          <span className="absolute -top-1 -right-1 bg-red-500 text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
-            1
-          </span>
-        </div> */}
         <button
           onClick={() => setIsNotificationOpen(!isNotificationOpen)}
           className="relative bg-white/10 backdrop-blur-sm rounded-full p-2 border border-white/20 hover:bg-white/20 transition-all duration-200 cursor-pointer"

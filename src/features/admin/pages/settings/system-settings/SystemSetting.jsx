@@ -247,7 +247,7 @@ const SystemSetting = () => {
       toast.success(res?.message || t("systemSettings.success.update"));
       await dispatch(getSiteSettings());
     } catch (error) {
-      console.error("Error updating settings:", error);
+      // console.error("Error updating settings:", error);
       toast.error(error?.message || t("systemSettings.error.update"));
     } finally {
       setSubmitting(false);
