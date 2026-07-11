@@ -911,6 +911,14 @@
       "create": "Failed to create chapter. Please try again.",
       "update": "Failed to update chapter. Please try again.",
       "delete": "Failed to delete chapter. Please try again."
+    },
+    "publishedDropdown": {
+      "status": {
+        "title": "Visibility",
+        "published": "Published",
+        "unpublished": "Unpublished",
+        "draft": "Draft"
+      }
     }
   },
 
@@ -993,6 +1001,7 @@
     "filters": {
       "allStatus": "All Status",
       "allLevels": "All Levels",
+      "allModules": "All Modules",
       "active": "Active",
       "inactive": "Inactive",
       "selectLevelFirst": "Select level first",
@@ -1002,7 +1011,9 @@
       "allVisibility": "All Visibility",
       "published": "Published",
       "unpublished": "Unpublished",
-      "draft": "Draft"
+      "draft": "Draft",
+      "loadingModules": "Loading modules...",
+      "loadingChapters": "Loading chapters..."
     },
     "stats": {
       "totalTopics": {
@@ -1098,6 +1109,7 @@
     },
     "filters": {
       "allLevels": "All Levels",
+      "allModules": "All Modules",
       "allStatus": "All Status",
       "allTypes": "All Types",
       "active": "Active",
