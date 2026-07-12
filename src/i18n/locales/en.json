@@ -329,6 +329,78 @@
     "completionRate": "Completion Rate"
   },
 
+  "contentHealth": {
+    "title": "Content Health",
+    "subtitle": "Monitor content quality and identify issues",
+    "refresh": "Refresh",
+    "loading": "Analyzing content health...",
+    "loadingSubtext": "Please wait while we check everything",
+    "noData": "No data available",
+    "viewDetails": "View Details",
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "error": {
+      "title": "Oops! Something went wrong",
+      "message": "Unable to load content health data",
+      "tryAgain": "Try Again"
+    },
+    "summary": {
+      "topicsWithoutContent": "Topics Without Content",
+      "topicQuizMissing": "Topic Quiz Missing",
+      "quizWithoutQuestions": "Quiz Without Questions",
+      "moduleExamMissing": "Module Exam Missing"
+    },
+    "overview": {
+      "healthy": "🎉 All Systems Healthy",
+      "healthySubtext": "Your content is in perfect condition",
+      "issuesDetected": "⚠️ Issues Detected",
+      "topicsOverview": "Topics Overview",
+      "modulesOverview": "Modules Overview",
+      "withoutContent": "Without Content",
+      "quizMissing": "Quiz Missing",
+      "quizWithoutQuestions": "Quiz Without Questions",
+      "questionsWithoutOptions": "Questions Without Options",
+      "examMissing": "Exam Missing",
+      "examWithoutQuestions": "Exam Without Questions",
+      "moduleQuestionsWithoutOptions": "Questions Without Options"
+    },
+    "topics": {
+      "withoutContent": "Topics Without Content",
+      "quizMissing": "Topics with Missing Quiz",
+      "quizWithoutQuestions": "Quizzes Without Questions",
+      "questionsWithoutOptions": "Questions Without Options",
+      "healthy": "🎉 All Topics are Healthy!",
+      "healthySubtext": "No issues found in any topic section"
+    },
+    "modules": {
+      "examMissing": "Modules Without Exam",
+      "examWithoutQuestions": "Module Exams Without Questions",
+      "questionsWithoutOptions": "Module Questions Without Options",
+      "healthy": "🎉 All Modules are Healthy!",
+      "healthySubtext": "No issues found in any module section"
+    },
+    "tabs": {
+      "overview": "Overview",
+      "topics": "Topics",
+      "modules": "Modules"
+    },
+    "columns": {
+      "topicId": "Topic ID",
+      "topicTitle": "Topic Title",
+      "assessmentId": "Assessment ID",
+      "assessmentTitle": "Assessment Title",
+      "questionId": "Question ID",
+      "question": "Question",
+      "assessment": "Assessment",
+      "topic": "Topic",
+      "moduleId": "Module ID",
+      "moduleTitle": "Module Title",
+      "module": "Module"
+    }
+  },
+
   "userManagement": {
     "list": {
       "salesTitle": "Sales Trainee Management",

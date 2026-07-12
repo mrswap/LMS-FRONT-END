@@ -325,6 +325,78 @@
     "completionRate": "ਪੂਰਤੀ ਦਰ"
   },
 
+  "contentHealth": {
+    "title": "ਸਮੱਗਰੀ ਸਿਹਤ",
+    "subtitle": "ਸਮੱਗਰੀ ਦੀ ਗੁਣਵੱਤਾ ਦੀ ਨਿਗਰਾਨੀ ਕਰੋ ਅਤੇ ਸਮੱਸਿਆਵਾਂ ਦੀ ਪਛਾਣ ਕਰੋ",
+    "refresh": "ਰਿਫ੍ਰੈਸ਼ ਕਰੋ",
+    "loading": "ਸਮੱਗਰੀ ਸਿਹਤ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+    "loadingSubtext": "ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕ ਕਰੋ ਜਦੋਂ ਤੱਕ ਅਸੀਂ ਸਭ ਕੁਝ ਚੈੱਕ ਕਰਦੇ ਹਾਂ",
+    "noData": "ਕੋਈ ਡਾਟਾ ਉਪਲਬਧ ਨਹੀਂ ਹੈ",
+    "viewDetails": "ਵੇਰਵਾ ਵੇਖੋ",
+    "status": {
+      "active": "ਸਰਗਰਮ",
+      "inactive": "ਅਕਿਰਿਆਸ਼ੀਲ"
+    },
+    "error": {
+      "title": "ਓਹ! ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ",
+      "message": "ਸਮੱਗਰੀ ਸਿਹਤ ਡਾਟਾ ਲੋਡ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ",
+      "tryAgain": "ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ"
+    },
+    "summary": {
+      "topicsWithoutContent": "ਸਮੱਗਰੀ ਰਹਿਤ ਵਿਸ਼ੇ",
+      "topicQuizMissing": "ਵਿਸ਼ਾ ਕੁਇਜ਼ ਗੁੰਮ ਹੈ",
+      "quizWithoutQuestions": "ਪ੍ਰਸ਼ਨ ਰਹਿਤ ਕੁਇਜ਼",
+      "moduleExamMissing": "ਮੋਡਿਊਲ ਪ੍ਰੀਖਿਆ ਗੁੰਮ ਹੈ"
+    },
+    "overview": {
+      "healthy": "🎉 ਸਾਰੇ ਸਿਸਟਮ ਸਿਹਤਮੰਦ ਹਨ",
+      "healthySubtext": "ਤੁਹਾਡੀ ਸਮੱਗਰੀ ਸੰਪੂਰਨ ਸਥਿਤੀ ਵਿੱਚ ਹੈ",
+      "issuesDetected": "⚠️ ਸਮੱਸਿਆਵਾਂ ਮਿਲੀਆਂ",
+      "topicsOverview": "ਵਿਸ਼ੇ ਦੀ ਸੰਖੇਪ ਝਲਕ",
+      "modulesOverview": "ਮੋਡਿਊਲ ਦੀ ਸੰਖੇਪ ਝਲਕ",
+      "withoutContent": "ਸਮੱਗਰੀ ਰਹਿਤ",
+      "quizMissing": "ਕੁਇਜ਼ ਗੁੰਮ ਹੈ",
+      "quizWithoutQuestions": "ਪ੍ਰਸ਼ਨ ਰਹਿਤ ਕੁਇਜ਼",
+      "questionsWithoutOptions": "ਵਿਕਲਪ ਰਹਿਤ ਪ੍ਰਸ਼ਨ",
+      "examMissing": "ਪ੍ਰੀਖਿਆ ਗੁੰਮ ਹੈ",
+      "examWithoutQuestions": "ਪ੍ਰਸ਼ਨ ਰਹਿਤ ਪ੍ਰੀਖਿਆ",
+      "moduleQuestionsWithoutOptions": "ਵਿਕਲਪ ਰਹਿਤ ਪ੍ਰਸ਼ਨ"
+    },
+    "topics": {
+      "withoutContent": "ਸਮੱਗਰੀ ਰਹਿਤ ਵਿਸ਼ੇ",
+      "quizMissing": "ਕੁਇਜ਼ ਗੁੰਮ ਵਿਸ਼ੇ",
+      "quizWithoutQuestions": "ਪ੍ਰਸ਼ਨ ਰਹਿਤ ਕੁਇਜ਼",
+      "questionsWithoutOptions": "ਵਿਕਲਪ ਰਹਿਤ ਪ੍ਰਸ਼ਨ",
+      "healthy": "🎉 ਸਾਰੇ ਵਿਸ਼ੇ ਸਿਹਤਮੰਦ ਹਨ!",
+      "healthySubtext": "ਕਿਸੇ ਵੀ ਵਿਸ਼ਾ ਭਾਗ ਵਿੱਚ ਕੋਈ ਸਮੱਸਿਆ ਨਹੀਂ ਮਿਲੀ"
+    },
+    "modules": {
+      "examMissing": "ਪ੍ਰੀਖਿਆ ਰਹਿਤ ਮੋਡਿਊਲ",
+      "examWithoutQuestions": "ਪ੍ਰਸ਼ਨ ਰਹਿਤ ਮੋਡਿਊਲ ਪ੍ਰੀਖਿਆਵਾਂ",
+      "questionsWithoutOptions": "ਵਿਕਲਪ ਰਹਿਤ ਮੋਡਿਊਲ ਪ੍ਰਸ਼ਨ",
+      "healthy": "🎉 ਸਾਰੇ ਮੋਡਿਊਲ ਸਿਹਤਮੰਦ ਹਨ!",
+      "healthySubtext": "ਕਿਸੇ ਵੀ ਮੋਡਿਊਲ ਭਾਗ ਵਿੱਚ ਕੋਈ ਸਮੱਸਿਆ ਨਹੀਂ ਮਿਲੀ"
+    },
+    "tabs": {
+      "overview": "ਸੰਖੇਪ ਝਲਕ",
+      "topics": "ਵਿਸ਼ੇ",
+      "modules": "ਮੋਡਿਊਲ"
+    },
+    "columns": {
+      "topicId": "ਵਿਸ਼ਾ ਆਈਡੀ",
+      "topicTitle": "ਵਿਸ਼ਾ ਟਾਈਟਲ",
+      "assessmentId": "ਮੁਲਾਂਕਣ ਆਈਡੀ",
+      "assessmentTitle": "ਮੁਲਾਂਕਣ ਟਾਈਟਲ",
+      "questionId": "ਪ੍ਰਸ਼ਨ ਆਈਡੀ",
+      "question": "ਪ੍ਰਸ਼ਨ",
+      "assessment": "ਮੁਲਾਂਕਣ",
+      "topic": "ਵਿਸ਼ਾ",
+      "moduleId": "ਮੋਡਿਊਲ ਆਈਡੀ",
+      "moduleTitle": "ਮੋਡਿਊਲ ਟਾਈਟਲ",
+      "module": "ਮੋਡਿਊਲ"
+    }
+  },
+
   "userManagement": {
     "list": {
       "salesTitle": "ਸੇਲਜ਼ ਟ੍ਰੇਨੀ ਪ੍ਰਬੰਧਨ",

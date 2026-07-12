@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import {
   getContentHealthData,
   clearContentHealth,
@@ -19,15 +18,10 @@ import {
   FiList,
   FiServer,
   FiActivity,
-  FiExternalLink,
-  FiEye,
 } from "react-icons/fi";
-import { useTranslation } from "react-i18next";
 
 const ContentHealth = () => {
-  const { t } = useTranslation();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
   const [expandedSections, setExpandedSections] = useState({
     withoutContent: true,
@@ -64,38 +58,6 @@ const ContentHealth = () => {
     dispatch(getContentHealthData());
   };
 
-  const handleNavigate = (sectionKey, item) => {
-    switch (sectionKey) {
-      case "withoutContent":
-        navigate(`/learning-unit/bulk/${item.id}`);
-        break;
-      case "quizMissing":
-        navigate(`/assessment`);
-        break;
-      case "quizWithoutQuestions":
-        navigate(`/assessment-question/${item.assessment_id}?type=topic`);
-        break;
-      case "questionsWithoutOptions":
-        navigate(
-          `/assessment-question-option/${item.assessment_id}/${item.question_id}?type=topic`,
-        );
-        break;
-      case "examMissing":
-        navigate(`/exam-module`);
-        break;
-      case "examWithoutQuestions":
-        navigate(`/assessment-question/${item.assessment_id}?type=module`);
-        break;
-      case "moduleQuestionsWithoutOptions":
-        navigate(
-          `/assessment-question-option/${item.assessment_id}/${item.question_id}?type=module`,
-        );
-        break;
-      default:
-        break;
-    }
-  };
-
   if (contentHealthLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[500px] bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl">
@@ -106,10 +68,10 @@ const ContentHealth = () => {
           </div>
         </div>
         <p className="mt-6 text-gray-600 font-medium">
-          {t("contentHealth.loading")}
+          Analyzing content health...
         </p>
         <p className="text-sm text-gray-400 mt-1">
-          {t("contentHealth.loadingSubtext")}
+          Please wait while we check everything
         </p>
       </div>
     );
@@ -122,17 +84,17 @@ const ContentHealth = () => {
           <FiXCircle className="text-5xl text-red-500" />
         </div>
         <h3 className="text-2xl font-bold text-red-700 mb-2">
-          {t("contentHealth.error.title")}
+          Oops! Something went wrong
         </h3>
         <p className="text-red-600 mb-6 max-w-md mx-auto">
-          {contentHealthMessage || t("contentHealth.error.message")}
+          {contentHealthMessage || "Unable to load content health data"}
         </p>
         <button
           onClick={handleRefresh}
           className="bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-3 rounded-xl hover:shadow-lg transition-all duration-300 flex items-center gap-2 mx-auto"
         >
           <FiRefreshCw className="text-lg" />
-          {t("contentHealth.error.tryAgain")}
+          Try Again
         </button>
       </div>
     );
@@ -149,10 +111,11 @@ const ContentHealth = () => {
 
   const isHealthy = totalIssues === 0;
 
+  // Summary Cards
   const renderSummaryCards = () => {
     const cards = [
       {
-        title: t("contentHealth.summary.topicsWithoutContent"),
+        title: "Topics Without Content",
         value: summary?.topics_without_content || 0,
         icon: FiFileText,
         color: "red",
@@ -161,7 +124,7 @@ const ContentHealth = () => {
         border: "border-red-200",
       },
       {
-        title: t("contentHealth.summary.topicQuizMissing"),
+        title: "Topic Quiz Missing",
         value: summary?.topic_quiz_missing || 0,
         icon: FiClipboard,
         color: "orange",
@@ -170,7 +133,7 @@ const ContentHealth = () => {
         border: "border-orange-200",
       },
       {
-        title: t("contentHealth.summary.quizWithoutQuestions"),
+        title: "Quiz Without Questions",
         value: summary?.topic_quiz_without_questions || 0,
         icon: FiAlertCircle,
         color: "yellow",
@@ -179,7 +142,7 @@ const ContentHealth = () => {
         border: "border-yellow-200",
       },
       {
-        title: t("contentHealth.summary.moduleExamMissing"),
+        title: "Module Exam Missing",
         value: summary?.module_exam_missing || 0,
         icon: FiBookOpen,
         color: "purple",
@@ -217,6 +180,7 @@ const ContentHealth = () => {
     );
   };
 
+  // Section Header Component
   const SectionHeader = ({
     icon: Icon,
     title,
@@ -247,18 +211,15 @@ const ContentHealth = () => {
     </div>
   );
 
-  const DataTable = ({ columns, data, dataKeys, sectionKey }) => {
+  // Table Component with fixed data mapping
+  const DataTable = ({ columns, data, dataKeys }) => {
+    // If no data or empty array, show nothing
     if (!data || data.length === 0) {
       return (
         <div className="px-6 py-8 text-center text-gray-500">
-          {t("contentHealth.noData")}
+          No data available
         </div>
       );
-    }
-
-    const tableColumns = [...columns];
-    if (!tableColumns.includes("Action")) {
-      tableColumns.push("Action");
     }
 
     return (
@@ -266,7 +227,7 @@ const ContentHealth = () => {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              {tableColumns.map((col, idx) => (
+              {columns.map((col, idx) => (
                 <th
                   key={idx}
                   className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
@@ -280,9 +241,9 @@ const ContentHealth = () => {
             {data.map((item, index) => (
               <tr
                 key={item.id || item.assessment_id || item.question_id || index}
-                className="hover:bg-gray-50 transition-colors duration-150 group"
+                className="hover:bg-gray-50 transition-colors duration-150"
               >
-                {tableColumns.map((col, idx) => {
+                {columns.map((col, idx) => {
                   if (col === "#") {
                     return (
                       <td
@@ -294,29 +255,16 @@ const ContentHealth = () => {
                     );
                   }
 
-                  if (col === "Action") {
-                    return (
-                      <td
-                        key={idx}
-                        className="px-6 py-4 whitespace-nowrap text-sm"
-                      >
-                        <button
-                          onClick={() => handleNavigate(sectionKey, item)}
-                          className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-blue-50 text-blue-700 text-xs font-semibold rounded-lg hover:bg-blue-100 hover:text-blue-800 transition-all duration-200 border border-blue-200 hover:border-blue-300 group-hover:shadow-sm"
-                        >
-                          <FiEye className="text-sm" />
-                          <span>{t("contentHealth.viewDetails")}</span>
-                        </button>
-                      </td>
-                    );
-                  }
-
+                  // Get the corresponding key for this column
                   const key =
                     dataKeys?.[col] || col.toLowerCase().replace(/ /g, "_");
 
+                  // Get the value from the item
                   let value = item[key];
 
+                  // If value is undefined or null, try to find it with different keys
                   if (value === undefined || value === null) {
+                    // Try to find by matching column name with item keys
                     const itemKeys = Object.keys(item);
                     const matchingKey = itemKeys.find(
                       (k) =>
@@ -333,6 +281,7 @@ const ContentHealth = () => {
                     }
                   }
 
+                  // If still undefined, show dash
                   if (value === undefined || value === null) {
                     value = "-";
                   }
@@ -354,11 +303,12 @@ const ContentHealth = () => {
     );
   };
 
+  // Topics Section
   const renderTopics = () => {
     const sections = [
       {
         key: "withoutContent",
-        title: t("contentHealth.topics.withoutContent"),
+        title: "Topics Without Content",
         data: topics?.without_content || [],
         color: "from-red-500 to-red-600",
         textColor: "red",
@@ -371,7 +321,7 @@ const ContentHealth = () => {
       },
       {
         key: "quizMissing",
-        title: t("contentHealth.topics.quizMissing"),
+        title: "Topics with Missing Quiz",
         data: topics?.quiz_missing || [],
         color: "from-orange-500 to-orange-600",
         textColor: "orange",
@@ -384,7 +334,7 @@ const ContentHealth = () => {
       },
       {
         key: "quizWithoutQuestions",
-        title: t("contentHealth.topics.quizWithoutQuestions"),
+        title: "Quizzes Without Questions",
         data: topics?.quiz_without_questions || [],
         color: "from-yellow-500 to-yellow-600",
         textColor: "yellow",
@@ -405,7 +355,7 @@ const ContentHealth = () => {
       },
       {
         key: "questionsWithoutOptions",
-        title: t("contentHealth.topics.questionsWithoutOptions"),
+        title: "Questions Without Options",
         data: topics?.questions_without_options || [],
         color: "from-purple-500 to-purple-600",
         textColor: "purple",
@@ -431,11 +381,9 @@ const ContentHealth = () => {
             <FiCheckCircle className="text-5xl text-green-500" />
           </div>
           <h3 className="text-2xl font-bold text-green-700 mb-2">
-            {t("contentHealth.topics.healthy")}
+            All Topics are Healthy!
           </h3>
-          <p className="text-green-600">
-            {t("contentHealth.topics.healthySubtext")}
-          </p>
+          <p className="text-green-600">No issues found in any topic section</p>
         </div>
       );
     }
@@ -462,7 +410,6 @@ const ContentHealth = () => {
                   columns={section.columns}
                   data={section.data}
                   dataKeys={section.dataKeys}
-                  sectionKey={section.key}
                 />
               )}
             </div>
@@ -472,11 +419,12 @@ const ContentHealth = () => {
     );
   };
 
+  // Modules Section
   const renderModules = () => {
     const sections = [
       {
         key: "examMissing",
-        title: t("contentHealth.modules.examMissing"),
+        title: "Modules Without Exam",
         data: modules?.exam_missing || [],
         color: "from-red-500 to-red-600",
         textColor: "red",
@@ -489,7 +437,7 @@ const ContentHealth = () => {
       },
       {
         key: "examWithoutQuestions",
-        title: t("contentHealth.modules.examWithoutQuestions"),
+        title: "Module Exams Without Questions",
         data: modules?.exam_without_questions || [],
         color: "from-yellow-500 to-yellow-600",
         textColor: "yellow",
@@ -510,7 +458,7 @@ const ContentHealth = () => {
       },
       {
         key: "moduleQuestionsWithoutOptions",
-        title: t("contentHealth.modules.questionsWithoutOptions"),
+        title: "Module Questions Without Options",
         data: modules?.questions_without_options || [],
         color: "from-purple-500 to-purple-600",
         textColor: "purple",
@@ -536,10 +484,10 @@ const ContentHealth = () => {
             <FiCheckCircle className="text-5xl text-green-500" />
           </div>
           <h3 className="text-2xl font-bold text-green-700 mb-2">
-            {t("contentHealth.modules.healthy")}
+            All Modules are Healthy!
           </h3>
           <p className="text-green-600">
-            {t("contentHealth.modules.healthySubtext")}
+            No issues found in any module section
           </p>
         </div>
       );
@@ -567,7 +515,6 @@ const ContentHealth = () => {
                   columns={section.columns}
                   data={section.data}
                   dataKeys={section.dataKeys}
-                  sectionKey={section.key}
                 />
               )}
             </div>
@@ -577,8 +524,10 @@ const ContentHealth = () => {
     );
   };
 
+  // Overview Tab
   const renderOverview = () => (
     <div className="space-y-8">
+      {/* Health Status Banner */}
       <div
         className={`rounded-2xl p-6 border-2 ${isHealthy ? "bg-gradient-to-r from-green-50 to-emerald-50 border-green-200" : "bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200"}`}
       >
@@ -597,16 +546,14 @@ const ContentHealth = () => {
               <h3
                 className={`text-xl font-bold ${isHealthy ? "text-green-700" : "text-amber-700"}`}
               >
-                {isHealthy
-                  ? t("contentHealth.overview.healthy")
-                  : t("contentHealth.overview.issuesDetected")}
+                {isHealthy ? "🎉 All Systems Healthy" : "⚠️ Issues Detected"}
               </h3>
               <p
                 className={`text-sm ${isHealthy ? "text-green-600" : "text-amber-600"}`}
               >
                 {isHealthy
-                  ? t("contentHealth.overview.healthySubtext")
-                  : `${totalIssues} ${totalIssues === 1 ? "issue" : "issues"} found that need attention`}
+                  ? "Your content is in perfect condition"
+                  : `${totalIssues} issue${totalIssues > 1 ? "s" : ""} found that need attention`}
               </p>
             </div>
           </div>
@@ -615,7 +562,7 @@ const ContentHealth = () => {
             className="flex items-center gap-2 px-4 py-2 bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200 text-gray-700 font-medium"
           >
             <FiRefreshCw className="text-lg" />
-            {t("contentHealth.refresh")}
+            Refresh
           </button>
         </div>
       </div>
@@ -623,34 +570,33 @@ const ContentHealth = () => {
       {renderSummaryCards()}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Topics Summary */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 transition-all duration-300 hover:shadow-md">
           <div className="flex items-center gap-2 mb-5">
             <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg p-2 text-white">
               <FiFileText className="text-lg" />
             </div>
-            <h3 className="text-lg font-bold text-gray-800">
-              {t("contentHealth.overview.topicsOverview")}
-            </h3>
+            <h3 className="text-lg font-bold text-gray-800">Topics Overview</h3>
           </div>
           <div className="space-y-3">
             {[
               {
-                label: t("contentHealth.overview.withoutContent"),
+                label: "Without Content",
                 value: summary?.topics_without_content || 0,
                 color: "red",
               },
               {
-                label: t("contentHealth.overview.quizMissing"),
+                label: "Quiz Missing",
                 value: summary?.topic_quiz_missing || 0,
                 color: "orange",
               },
               {
-                label: t("contentHealth.overview.quizWithoutQuestions"),
+                label: "Quiz Without Questions",
                 value: summary?.topic_quiz_without_questions || 0,
                 color: "yellow",
               },
               {
-                label: t("contentHealth.overview.questionsWithoutOptions"),
+                label: "Questions Without Options",
                 value: summary?.topic_questions_without_options || 0,
                 color: "purple",
               },
@@ -670,31 +616,30 @@ const ContentHealth = () => {
           </div>
         </div>
 
+        {/* Modules Summary */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 transition-all duration-300 hover:shadow-md">
           <div className="flex items-center gap-2 mb-5">
             <div className="bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg p-2 text-white">
               <FiServer className="text-lg" />
             </div>
             <h3 className="text-lg font-bold text-gray-800">
-              {t("contentHealth.overview.modulesOverview")}
+              Modules Overview
             </h3>
           </div>
           <div className="space-y-3">
             {[
               {
-                label: t("contentHealth.overview.examMissing"),
+                label: "Exam Missing",
                 value: summary?.module_exam_missing || 0,
                 color: "red",
               },
               {
-                label: t("contentHealth.overview.examWithoutQuestions"),
+                label: "Exam Without Questions",
                 value: summary?.module_exam_without_questions || 0,
                 color: "yellow",
               },
               {
-                label: t(
-                  "contentHealth.overview.moduleQuestionsWithoutOptions",
-                ),
+                label: "Questions Without Options",
                 value: summary?.module_questions_without_options || 0,
                 color: "purple",
               },
@@ -719,6 +664,7 @@ const ContentHealth = () => {
 
   return (
     <div className="min-h-screen border border-gray-200 p-4 rounded-xl shadow-md">
+      {/* Header */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6 transition-all duration-300 hover:shadow-md">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
@@ -728,10 +674,10 @@ const ContentHealth = () => {
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-800">
-                  {t("contentHealth.title")}
+                  Content Health
                 </h1>
                 <p className="text-gray-500 text-sm mt-0.5">
-                  {t("contentHealth.subtitle")}
+                  Monitor content quality and identify issues
                 </p>
               </div>
             </div>
@@ -743,26 +689,21 @@ const ContentHealth = () => {
               <span
                 className={`h-2 w-2 rounded-full ${contentHealthData?.status ? "bg-green-500 animate-pulse" : "bg-red-500"}`}
               ></span>
-              {contentHealthData?.status
-                ? t("contentHealth.status.active")
-                : t("contentHealth.status.inactive")}
+              {contentHealthData?.status ? "Active" : "Inactive"}
             </div>
           </div>
         </div>
       </div>
 
+      {/* Tabs */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 mb-6 overflow-hidden">
         <div className="border-b border-gray-100">
           <nav className="flex px-4" role="tablist">
             {[
-              {
-                id: "overview",
-                label: t("contentHealth.tabs.overview"),
-                icon: FiGrid,
-              },
+              { id: "overview", label: "Overview", icon: FiGrid },
               {
                 id: "topics",
-                label: t("contentHealth.tabs.topics"),
+                label: "Topics",
                 icon: FiList,
                 badge:
                   (topics?.without_content?.length || 0) +
@@ -771,7 +712,7 @@ const ContentHealth = () => {
               },
               {
                 id: "modules",
-                label: t("contentHealth.tabs.modules"),
+                label: "Modules",
                 icon: FiServer,
                 badge:
                   (modules?.exam_missing?.length || 0) +
@@ -803,6 +744,7 @@ const ContentHealth = () => {
         </div>
       </div>
 
+      {/* Content */}
       <div>
         {activeTab === "overview" && renderOverview()}
         {activeTab === "topics" && renderTopics()}
