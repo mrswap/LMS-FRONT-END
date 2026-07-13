@@ -1247,60 +1247,62 @@
 
   "automatedImporter": {
     "list": {
-      "title": "ਆਟੋਮੇਟਿਡ ਕੰਟੈਂਟ ਇੰਪੋਰਟਰ",
-      "subtitle": "ਆਟੋਮੇਟਿਡ ਇੰਪੋਰਟ ਲਾਗਜ਼ ਨੂੰ ਮੈਨੇਜ ਅਤੇ ਮਾਨੀਟਰ ਕਰੋ"
+      "title": "ਆਟੋਮੇਟਿਡ ਸਮੱਗਰੀ ਇੰਪੋਰਟਰ",
+      "subtitle": "ਆਟੋਮੇਟਿਡ ਇੰਪੋਰਟ ਲੌਗ ਪ੍ਰਬੰਧਿਤ ਅਤੇ ਮਾਨੀਟਰ ਕਰੋ"
     },
     "create": {
-      "title": "LMS ਕੰਟੈਂਟ ਜਨਰੇਟਰ",
-      "subtitle": "ਬਲਕ ਇੰਪੋਰਟ ਲਈ ਸਟ੍ਰਕਚਰ-ਸੈਂਸਿਟਿਵ ਕੰਟੈਂਟ ਬਣਾਓ | ਘੱਟੋ-ਘੱਟ 100 ਸ਼ਬਦ ਲਾਜ਼ਮੀ ਹਨ",
-      "generalDetails": "ਸਧਾਰਣ ਵੇਰਵੇ",
-      "contentSection": "ਕੰਟੈਂਟ ਸੈਕਸ਼ਨ",
-      "parentProgram": "ਪੇਰੈਂਟ ਪ੍ਰੋਗਰਾਮ",
-      "parentLevel": "ਪੇਰੈਂਟ ਲੈਵਲ",
+      "title": "ਐਲ.ਐਮ.ਐਸ ਸਮੱਗਰੀ ਜਨਰੇਟਰ",
+      "subtitle": "ਬਲਕ ਇੰਪੋਰਟ ਲਈ ਬਣਤਰ-ਸੰਵੇਦਨਸ਼ੀਲ ਸਮੱਗਰੀ ਬਣਾਓ | ਘੱਟੋ-ਘੱਟ 100 ਸ਼ਬਦ ਲੋੜੀਂਦੇ",
+      "generalDetails": "ਆਮ ਵੇਰਵੇ",
+      "contentSection": "ਸਮੱਗਰੀ ਭਾਗ",
+      "parentProgram": "ਮੂਲ ਪ੍ਰੋਗਰਾਮ",
+      "parentLevel": "ਮੂਲ ਲੈਵਲ",
       "selectProgram": "ਪ੍ਰੋਗਰਾਮ ਚੁਣੋ...",
       "selectLevel": "ਲੈਵਲ ਚੁਣੋ...",
-      "clickForGuidelines": "ਗਾਈਡਲਾਈਨ ਲਈ ? ਤੇ ਕਲਿੱਕ ਕਰੋ",
-      "contentMeetsRequirement": "ਕੰਟੈਂਟ ਲੋੜਾਂ ਨੂੰ ਪੂਰਾ ਕਰਦਾ ਹੈ ({wordCount}/100 ਸ਼ਬਦ)",
-      "contentNeedsMoreWords": "{wordCount}/100 ਸ਼ਬਦ - ਹੋਰ {remaining} ਸ਼ਬਦਾਂ ਦੀ ਲੋੜ ਹੈ",
-      "viewGuidelines": "ਪੂਰੀ ਫਾਰਮੈਟਿੰਗ ਗਾਈਡਲਾਈਨ ਵੇਖੋ",
-      "editorPlaceholder": "ਉਦਾਹਰਨ:\nਮੋਡੀਊਲ 1: ਕਾਰਡਿਯਾਕ ਐਨਾਟਮੀ\n\nਚੈਪਟਰ 1.1: ਦਿਲ ਦੀ ਬਣਤਰ\n\nਟਾਪਿਕ 1.1.1: ਚਾਰ ਚੈਂਬਰ\n\n1.1.1.H1 ਲਰਨਿੰਗ ਉਦੇਸ਼\n1.1.1.C1 ਆਪਣਾ ਕੰਟੈਂਟ ਇੱਥੇ ਲਿਖੋ..."
+      "clickForGuidelines": "ਦਿਸ਼ਾ-ਨਿਰਦੇਸ਼ਾਂ ਲਈ ? ਕਲਿੱਕ ਕਰੋ",
+      "contentMeetsRequirement": "ਸਮੱਗਰੀ ਲੋੜ ਪੂਰੀ ਕਰਦੀ ਹੈ ({wordCount}/100 ਸ਼ਬਦ)",
+      "contentNeedsMoreWords": "{wordCount}/100 ਸ਼ਬਦ - {remaining} ਹੋਰ ਸ਼ਬਦ ਚਾਹੀਦੇ",
+      "viewGuidelines": "ਸੰਪੂਰਨ ਫਾਰਮੈਟਿੰਗ ਦਿਸ਼ਾ-ਨਿਰਦੇਸ਼ ਵੇਖੋ",
+      "editorPlaceholder": "ਉਦਾਹਰਣ:\nਮੋਡਿਊਲ 1: ਕਾਰਡੀਅਕ ਐਨਾਟੋਮੀ\n\nਅਧਿਆਇ 1.1: ਦਿਲ ਦੀ ਬਣਤਰ\n\nਵਿਸ਼ਾ 1.1.1: ਚਾਰ ਚੈਂਬਰ\n\n1.1.1.H1 ਸਿੱਖਣ ਦਾ ਉਦੇਸ਼\n1.1.1.C1 ਤੁਹਾਡੀ ਸਮੱਗਰੀ ਇੱਥੇ..."
     },
     "actions": {
       "createImport": "ਇੰਪੋਰਟ ਬਣਾਓ",
-      "createContent": "ਕੰਟੈਂਟ ਬਣਾਓ",
+      "createContent": "ਸਮੱਗਰੀ ਬਣਾਓ",
       "creating": "ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ..."
     },
     "searchPlaceholder": "ਇੰਪੋਰਟ ਖੋਜੋ...",
+    "noErrors": "ਕੋਈ ਗਲਤੀ ਨਹੀਂ ਮਿਲੀ",
     "filters": {
       "allLevels": "ਸਾਰੇ ਲੈਵਲ",
-      "allStatus": "ਸਾਰੇ ਸਟੇਟਸ",
-      "completed": "ਪੂਰਾ",
+      "allStatus": "ਸਾਰੀ ਸਥਿਤੀ",
+      "completed": "ਮੁਕੰਮਲ",
       "processing": "ਪ੍ਰੋਸੈਸਿੰਗ",
       "failed": "ਅਸਫਲ"
     },
     "status": {
-      "completed": "ਪੂਰਾ",
+      "completed": "ਮੁਕੰਮਲ",
       "processing": "ਪ੍ਰੋਸੈਸਿੰਗ",
       "failed": "ਅਸਫਲ"
     },
     "columns": {
       "program": "ਪ੍ਰੋਗਰਾਮ",
       "level": "ਲੈਵਲ",
-      "status": "ਸਟੇਟਸ",
-      "createdBy": "ਵੱਲੋਂ ਬਣਾਇਆ ਗਿਆ",
-      "createdAt": "ਬਣਾਉਣ ਦੀ ਤਾਰੀਖ"
+      "status": "ਸਥਿਤੀ",
+      "createdBy": "ਬਣਾਉਣ ਵਾਲਾ",
+      "createdAt": "ਬਣਾਉਣ ਦੀ ਮਿਤੀ",
+      "error": "ਗਲਤੀ"
     },
     "validation": {
-      "programRequired": "ਪ੍ਰੋਗਰਾਮ ਲਾਜ਼ਮੀ ਹੈ",
-      "levelRequired": "ਲੈਵਲ ਲਾਜ਼ਮੀ ਹੈ",
-      "contentRequired": "ਕੰਟੈਂਟ ਲਾਜ਼ਮੀ ਹੈ",
-      "minWords": "ਕੰਟੈਂਟ ਘੱਟੋ-ਘੱਟ 100 ਸ਼ਬਦਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ। ਫਾਰਮੈਟਿੰਗ ਗਾਈਡਲਾਈਨ ਵੇਖਣ ਲਈ (?) ਆਈਕਨ ਤੇ ਕਲਿੱਕ ਕਰੋ।"
+      "programRequired": "ਪ੍ਰੋਗਰਾਮ ਲੋੜੀਂਦਾ ਹੈ",
+      "levelRequired": "ਲੈਵਲ ਲੋੜੀਂਦਾ ਹੈ",
+      "contentRequired": "ਸਮੱਗਰੀ ਲੋੜੀਂਦੀ ਹੈ",
+      "minWords": "ਸਮੱਗਰੀ ਘੱਟੋ-ਘੱਟ 100 ਸ਼ਬਦਾਂ ਦੀ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ। ਫਾਰਮੈਟਿੰਗ ਦਿਸ਼ਾ-ਨਿਰਦੇਸ਼ ਵੇਖਣ ਲਈ (?) ਆਈਕਨ 'ਤੇ ਕਲਿੱਕ ਕਰੋ।"
     },
     "success": {
-      "create": "ਕੰਟੈਂਟ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਇਆ ਗਿਆ"
+      "create": "ਸਮੱਗਰੀ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਈ ਗਈ"
     },
     "error": {
-      "create": "ਕੰਟੈਂਟ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ"
+      "create": "ਸਮੱਗਰੀ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ"
     }
   },
 

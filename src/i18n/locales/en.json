@@ -1275,6 +1275,7 @@
       "creating": "Creating..."
     },
     "searchPlaceholder": "Search imports...",
+    "noErrors": "No Errors Detected",
     "filters": {
       "allLevels": "All Levels",
       "allStatus": "All Status",
@@ -1292,7 +1293,8 @@
       "level": "Level",
       "status": "Status",
       "createdBy": "Created By",
-      "createdAt": "Created At"
+      "createdAt": "Created At",
+      "error": "Error"
     },
     "validation": {
       "programRequired": "Program is required",
