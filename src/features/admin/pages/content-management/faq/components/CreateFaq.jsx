@@ -217,7 +217,7 @@ const CreateFaq = () => {
       setSelectedOption(null);
       navigate("/faq");
     } catch (err) {
-      console.error("Error ❌", err);
+      // console.error("Error ❌", err);
       toast.error(err?.message || t("faq.error.create"));
     } finally {
       setSubmitting(false);

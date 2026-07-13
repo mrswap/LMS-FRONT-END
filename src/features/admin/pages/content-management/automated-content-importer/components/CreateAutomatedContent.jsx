@@ -128,66 +128,67 @@ const CreateAutomatedContent = () => {
 
   const onSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
     try {
-      // const payload = {
-      //   program_id: values.programName.value,
-      //   level_id: values.levelName.value,
-      //   html: values.htmlContent,
-      //   type: "content",
-      // };
-
-      // console.log("payload", payload);
-
-      const taggedHtml = tagTopicSectionHeading(values.htmlContent);
-
       const payload = {
         program_id: values.programName.value,
         level_id: values.levelName.value,
-        html: taggedHtml,
+        html: values.htmlContent,
         type: "content",
       };
 
+      // console.log("payload", payload);
+
+      // const taggedHtml = tagTopicSectionHeading(values.htmlContent);
+
+      // const payload = {
+      //   program_id: values.programName.value,
+      //   level_id: values.levelName.value,
+      //   html: taggedHtml,
+      //   type: "content",
+      // };
+
       // / ---- clear console preview before actual submit ----
-      console.group(
-        "%c📤 Automated Content Payload",
-        "color:#4f46e5;font-weight:bold;font-size:13px;",
-      );
-      console.log(
-        "Program:",
-        values.programName?.label,
-        `(id: ${payload.program_id})`,
-      );
-      console.log(
-        "Level:",
-        values.levelName?.label,
-        `(id: ${payload.level_id})`,
-      );
-      console.log("HTML length:", taggedHtml.length, "chars");
+      // console.group(
+      //   "%c📤 Automated Content Payload",
+      //   "color:#4f46e5;font-weight:bold;font-size:13px;",
+      // );
+      // console.log(
+      //   "Program:",
+      //   values.programName?.label,
+      //   `(id: ${payload.program_id})`,
+      // );
+      // console.log(
+      //   "Level:",
+      //   values.levelName?.label,
+      //   `(id: ${payload.level_id})`,
+      // );
+      // console.log("HTML length:", taggedHtml.length, "chars");
 
-      // dhoondh ke dikhao ki heading kis tag pe tag hui, aur kya text hai
-      const parsedPreview = new DOMParser().parseFromString(
-        taggedHtml,
-        "text/html",
-      );
-      const headingEls = parsedPreview.querySelectorAll(
-        '[id^="topic-section-heading"]',
-      );
-      if (headingEls.length) {
-        console.log(
-          "Tagged heading(s):",
-          Array.from(headingEls).map((el) => ({
-            tag: el.tagName.toLowerCase(),
-            id: el.id,
-            text: el.getAttribute("data-topic-heading"),
-          })),
-        );
-      } else {
-        console.warn("No topic-section-heading found/tagged!");
-      }
+      // // dhoondh ke dikhao ki heading kis tag pe tag hui, aur kya text hai
+      // const parsedPreview = new DOMParser().parseFromString(
+      //   taggedHtml,
+      //   "text/html",
+      // );
+      // const headingEls = parsedPreview.querySelectorAll(
+      //   '[id^="topic-section-heading"]',
+      // );
+      // if (headingEls.length) {
+      //
+      // .log(
+      //     "Tagged heading(s):",
+      //     Array.from(headingEls).map((el) => ({
+      //       tag: el.tagName.toLowerCase(),
+      //       id: el.id,
+      //       text: el.getAttribute("data-topic-heading"),
+      //     })),
+      //   );
+      // } else {
+      //   console.warn("No topic-section-heading found/tagged!");
+      // }
 
-      console.log("Full payload object:", payload);
-      console.log("%cFull HTML:", "color:#6b7280;");
-      console.log(taggedHtml);
-      console.groupEnd();
+      // console.log("Full payload object:", payload);
+      // console.log("%cFull HTML:", "color:#6b7280;");
+      // console.log(taggedHtml);
+      // console.groupEnd();
       // ------------------------------------------------------
 
       const res = await dispatch(createAutomatedImport(payload)).unwrap();

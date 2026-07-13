@@ -7,9 +7,6 @@ import PublicRoute from "./features/admin/routes/PublicRoute";
 
 // 🔥 Lazy auth pages
 const Login = lazy(() => import("./features/admin/pages/auth/Login"));
-const LoginTest = lazy(
-  () => import("./features/admin/pages/auth/TestAllField"),
-);
 const ForgotPassword = lazy(
   () => import("./features/admin/pages/auth/ForgotPassword"),
 );
@@ -31,7 +28,6 @@ const App = () => {
       >
         <Routes>
           <Route element={<PublicRoute />}>
-            <Route path="/test" element={<LoginTest />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/check-email" element={<CheckEmail />} />

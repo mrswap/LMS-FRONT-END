@@ -325,6 +325,78 @@
     "completionRate": "ਪੂਰਤੀ ਦਰ"
   },
 
+  "contentHealth": {
+    "title": "ਸਮੱਗਰੀ ਸਿਹਤ",
+    "subtitle": "ਸਮੱਗਰੀ ਦੀ ਗੁਣਵੱਤਾ ਦੀ ਨਿਗਰਾਨੀ ਕਰੋ ਅਤੇ ਸਮੱਸਿਆਵਾਂ ਦੀ ਪਛਾਣ ਕਰੋ",
+    "refresh": "ਰਿਫ੍ਰੈਸ਼ ਕਰੋ",
+    "loading": "ਸਮੱਗਰੀ ਸਿਹਤ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
+    "loadingSubtext": "ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕ ਕਰੋ ਜਦੋਂ ਤੱਕ ਅਸੀਂ ਸਭ ਕੁਝ ਚੈੱਕ ਕਰਦੇ ਹਾਂ",
+    "noData": "ਕੋਈ ਡਾਟਾ ਉਪਲਬਧ ਨਹੀਂ ਹੈ",
+    "viewDetails": "ਵੇਰਵਾ ਵੇਖੋ",
+    "status": {
+      "active": "ਸਰਗਰਮ",
+      "inactive": "ਅਕਿਰਿਆਸ਼ੀਲ"
+    },
+    "error": {
+      "title": "ਓਹ! ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ",
+      "message": "ਸਮੱਗਰੀ ਸਿਹਤ ਡਾਟਾ ਲੋਡ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ",
+      "tryAgain": "ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ"
+    },
+    "summary": {
+      "topicsWithoutContent": "ਸਮੱਗਰੀ ਰਹਿਤ ਵਿਸ਼ੇ",
+      "topicQuizMissing": "ਵਿਸ਼ਾ ਕੁਇਜ਼ ਗੁੰਮ ਹੈ",
+      "quizWithoutQuestions": "ਪ੍ਰਸ਼ਨ ਰਹਿਤ ਕੁਇਜ਼",
+      "moduleExamMissing": "ਮੋਡਿਊਲ ਪ੍ਰੀਖਿਆ ਗੁੰਮ ਹੈ"
+    },
+    "overview": {
+      "healthy": "🎉 ਸਾਰੇ ਸਿਸਟਮ ਸਿਹਤਮੰਦ ਹਨ",
+      "healthySubtext": "ਤੁਹਾਡੀ ਸਮੱਗਰੀ ਸੰਪੂਰਨ ਸਥਿਤੀ ਵਿੱਚ ਹੈ",
+      "issuesDetected": "⚠️ ਸਮੱਸਿਆਵਾਂ ਮਿਲੀਆਂ",
+      "topicsOverview": "ਵਿਸ਼ੇ ਦੀ ਸੰਖੇਪ ਝਲਕ",
+      "modulesOverview": "ਮੋਡਿਊਲ ਦੀ ਸੰਖੇਪ ਝਲਕ",
+      "withoutContent": "ਸਮੱਗਰੀ ਰਹਿਤ",
+      "quizMissing": "ਕੁਇਜ਼ ਗੁੰਮ ਹੈ",
+      "quizWithoutQuestions": "ਪ੍ਰਸ਼ਨ ਰਹਿਤ ਕੁਇਜ਼",
+      "questionsWithoutOptions": "ਵਿਕਲਪ ਰਹਿਤ ਪ੍ਰਸ਼ਨ",
+      "examMissing": "ਪ੍ਰੀਖਿਆ ਗੁੰਮ ਹੈ",
+      "examWithoutQuestions": "ਪ੍ਰਸ਼ਨ ਰਹਿਤ ਪ੍ਰੀਖਿਆ",
+      "moduleQuestionsWithoutOptions": "ਵਿਕਲਪ ਰਹਿਤ ਪ੍ਰਸ਼ਨ"
+    },
+    "topics": {
+      "withoutContent": "ਸਮੱਗਰੀ ਰਹਿਤ ਵਿਸ਼ੇ",
+      "quizMissing": "ਕੁਇਜ਼ ਗੁੰਮ ਵਿਸ਼ੇ",
+      "quizWithoutQuestions": "ਪ੍ਰਸ਼ਨ ਰਹਿਤ ਕੁਇਜ਼",
+      "questionsWithoutOptions": "ਵਿਕਲਪ ਰਹਿਤ ਪ੍ਰਸ਼ਨ",
+      "healthy": "🎉 ਸਾਰੇ ਵਿਸ਼ੇ ਸਿਹਤਮੰਦ ਹਨ!",
+      "healthySubtext": "ਕਿਸੇ ਵੀ ਵਿਸ਼ਾ ਭਾਗ ਵਿੱਚ ਕੋਈ ਸਮੱਸਿਆ ਨਹੀਂ ਮਿਲੀ"
+    },
+    "modules": {
+      "examMissing": "ਪ੍ਰੀਖਿਆ ਰਹਿਤ ਮੋਡਿਊਲ",
+      "examWithoutQuestions": "ਪ੍ਰਸ਼ਨ ਰਹਿਤ ਮੋਡਿਊਲ ਪ੍ਰੀਖਿਆਵਾਂ",
+      "questionsWithoutOptions": "ਵਿਕਲਪ ਰਹਿਤ ਮੋਡਿਊਲ ਪ੍ਰਸ਼ਨ",
+      "healthy": "🎉 ਸਾਰੇ ਮੋਡਿਊਲ ਸਿਹਤਮੰਦ ਹਨ!",
+      "healthySubtext": "ਕਿਸੇ ਵੀ ਮੋਡਿਊਲ ਭਾਗ ਵਿੱਚ ਕੋਈ ਸਮੱਸਿਆ ਨਹੀਂ ਮਿਲੀ"
+    },
+    "tabs": {
+      "overview": "ਸੰਖੇਪ ਝਲਕ",
+      "topics": "ਵਿਸ਼ੇ",
+      "modules": "ਮੋਡਿਊਲ"
+    },
+    "columns": {
+      "topicId": "ਵਿਸ਼ਾ ਆਈਡੀ",
+      "topicTitle": "ਵਿਸ਼ਾ ਟਾਈਟਲ",
+      "assessmentId": "ਮੁਲਾਂਕਣ ਆਈਡੀ",
+      "assessmentTitle": "ਮੁਲਾਂਕਣ ਟਾਈਟਲ",
+      "questionId": "ਪ੍ਰਸ਼ਨ ਆਈਡੀ",
+      "question": "ਪ੍ਰਸ਼ਨ",
+      "assessment": "ਮੁਲਾਂਕਣ",
+      "topic": "ਵਿਸ਼ਾ",
+      "moduleId": "ਮੋਡਿਊਲ ਆਈਡੀ",
+      "moduleTitle": "ਮੋਡਿਊਲ ਟਾਈਟਲ",
+      "module": "ਮੋਡਿਊਲ"
+    }
+  },
+
   "userManagement": {
     "list": {
       "salesTitle": "ਸੇਲਜ਼ ਟ੍ਰੇਨੀ ਪ੍ਰਬੰਧਨ",
@@ -806,204 +878,215 @@
 
   "chapter": {
     "list": {
-      "title": "ਅਧਿਆਏ ਪ੍ਰਬੰਧਨ",
-      "subtitle": "ਅਧਿਆਏ ਸਮੱਗਰੀ ਨੂੰ ਪਰਿਭਾਸ਼ਿਤ ਅਤੇ ਢਾਂਚਾਗਤ ਕਰੋ ਤਾਂ ਜੋ ਮੋਡੀਊਲ ਨੂੰ ਕੇਂਦ੍ਰਿਤ, ਆਸਾਨੀ ਨਾਲ ਸਮਝ ਆਉਣ ਵਾਲੇ ਸਿਖਲਾਈ ਭਾਗਾਂ ਵਿੱਚ ਵੰਡਿਆ ਜਾ ਸਕੇ।",
-      "searchPlaceholder": "ਅਧਿਆਏ ਦੇ ਨਾਮ ਨਾਲ ਖੋਜੋ...",
-      "clearAll": "ਸਭ ਸਾਫ਼ ਕਰੋ",
+      "title": "ਅਧਿਆਇ ਪ੍ਰਬੰਧਨ",
+      "subtitle": "ਮੋਡਿਊਲਾਂ ਨੂੰ ਕੇਂਦ੍ਰਿਤ ਅਤੇ ਆਸਾਨੀ ਨਾਲ ਸਮਝਣ ਵਾਲੇ ਸਿਖਲਾਈ ਭਾਗਾਂ ਵਿੱਚ ਵੰਡਣ ਲਈ ਅਧਿਆਇ ਸਮੱਗਰੀ ਨੂੰ ਪਰਿਭਾਸ਼ਿਤ ਅਤੇ ਬਣਤਰ ਦਿਓ।",
+      "searchPlaceholder": "ਅਧਿਆਇ ਦੇ ਨਾਮ ਨਾਲ ਖੋਜੋ...",
+      "clearAll": "ਸਭ ਹਟਾਓ",
       "notSpecified": "ਨਿਰਧਾਰਤ ਨਹੀਂ",
       "columns": {
-        "chapterName": "ਅਧਿਆਏ ਦਾ ਨਾਮ",
-        "parentModule": "ਮੋਡੀਊਲ ਦਾ ਨਾਮ",
+        "chapterName": "ਅਧਿਆਇ ਦਾ ਨਾਮ",
+        "parentModule": "ਮੋਡਿਊਲ ਦਾ ਨਾਮ",
         "parentLevel": "ਪੱਧਰ ਦਾ ਨਾਮ",
         "totalTopics": "ਕੁੱਲ ਵਿਸ਼ੇ",
         "duration": "ਮਿਆਦ",
-        "createdBy": "ਵੱਲੋਂ ਬਣਾਇਆ ਗਿਆ",
         "status": "ਸਥਿਤੀ",
+        "createdBy": "ਕਿਸ ਦੁਆਰਾ ਬਣਾਇਆ",
         "actions": "ਕਾਰਵਾਈਆਂ"
       }
     },
     "details": {
       "generalDetails": "ਆਮ ਵੇਰਵੇ",
-      "chapterName": "ਅਧਿਆਏ ਦਾ ਨਾਮ",
-      "chapterNamePlaceholder": "ਅਧਿਆਏ ਦਾ ਨਾਮ ਦਰਜ ਕਰੋ",
-      "parentModule": "ਮੋਡੀਊਲ ਦਾ ਨਾਮ",
-      "parentModulePlaceholder": "ਇੱਕ ਮੋਡੀਊਲ ਚੁਣੋ",
+      "chapterName": "ਅਧਿਆਇ ਦਾ ਨਾਮ",
+      "chapterNamePlaceholder": "ਅਧਿਆਇ ਦਾ ਨਾਮ ਦਾਖਲ ਕਰੋ",
+      "parentModule": "ਮੋਡਿਊਲ ਦਾ ਨਾਮ",
+      "parentModulePlaceholder": "ਇੱਕ ਮੋਡਿਊਲ ਚੁਣੋ",
       "parentLevel": "ਪੱਧਰ ਦਾ ਨਾਮ",
       "parentLevelPlaceholder": "ਇੱਕ ਪੱਧਰ ਚੁਣੋ",
       "parentProgram": "ਪ੍ਰੋਗਰਾਮ ਦਾ ਨਾਮ",
       "perentProgramPlaceholder": "ਇੱਕ ਪ੍ਰੋਗਰਾਮ ਚੁਣੋ",
       "description": "ਵੇਰਵਾ",
-      "descriptionPlaceholder": "ਅਧਿਆਏ ਦਾ ਵੇਰਵਾ ਲਿਖੋ...",
-      "thumbnail": "ਅਧਿਆਏ ਥੰਬਨੇਲ",
-      "uploadText": "ਥੰਬਨੇਲ ਅੱਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+      "descriptionPlaceholder": "ਅਧਿਆਇ ਦਾ ਵੇਰਵਾ ਲਿਖੋ...",
+      "thumbnail": "ਅਧਿਆਇ ਥੰਬਨੇਲ",
+      "uploadText": "ਥੰਬਨੇਲ ਅੱਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿਕ ਕਰੋ",
       "uploadSubText": "PNG, JPG, JPEG 5MB ਤੱਕ",
       "changeImage": "ਤਸਵੀਰ ਬਦਲੋ",
-      "thumbnailAlt": "ਅਧਿਆਏ ਥੰਬਨੇਲ ਪੂਰਵਦਰਸ਼ਨ",
-      "deleteText": "ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਇਸ ਅਧਿਆਏ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ? ਇਸ ਅਧਿਆਏ ਨੂੰ ਹਟਾਉਣ ਨਾਲ ਇਸਦੇ ਅਧੀਨ ਸਾਰੇ ਸਬੰਧਤ ਵਿਸ਼ੇ, ਕੁਇਜ਼ਾਂ ਅਤੇ ਹੋਰ ਸਬੰਧਤ ਸਮੱਗਰੀ ਸਥਾਈ ਤੌਰ 'ਤੇ ਹਟ ਜਾਵੇਗੀ। ਇਹ ਕਿਰਿਆ ਵਾਪਸ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ।",
+      "thumbnailAlt": "ਅਧਿਆਇ ਥੰਬਨੇਲ ਪੂਰਵਦਰਸ਼ਨ",
+      "deleteText": "ਕੀ ਤੁਸੀਂ ਯਕੀਨੀ ਤੌਰ 'ਤੇ ਇਸ ਅਧਿਆਇ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ? ਇਸ ਅਧਿਆਇ ਨੂੰ ਮਿਟਾਉਣ ਨਾਲ ਇਸਦੇ ਅਧੀਨ ਸਾਰੇ ਸੰਬੰਧਿਤ ਵਿਸ਼ੇ, ਕਵਿਜ਼, ਅਤੇ ਹੋਰ ਸੰਬੰਧਿਤ ਸਮੱਗਰੀ ਸਥਾਈ ਤੌਰ 'ਤੇ ਹਟਾ ਦਿੱਤੀ ਜਾਵੇਗੀ। ਇਹ ਕਾਰਵਾਈ ਵਾਪਸ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ।",
       "duration": "ਮਿਆਦ",
-      "durationPlaceholder": "ਅਧਿਆਏ ਦੀ ਮਿਆਦ ਦਰਜ ਕਰੋ (ਜਿਵੇਂ, 30 ਮਿੰਟ)",
-      "order": "ਡਿਸਪਲੇ ਕ੍ਰਮ",
-      "orderPlaceholder": "ਡਿਸਪਲੇ ਕ੍ਰਮ ਦਰਜ ਕਰੋ"
+      "durationPlaceholder": "ਅਧਿਆਇ ਦੀ ਮਿਆਦ ਦਾਖਲ ਕਰੋ (ਜਿਵੇਂ, 30 ਮਿੰਟ)",
+      "order": "ਪ੍ਰਦਰਸ਼ਨ ਕ੍ਰਮ",
+      "orderPlaceholder": "ਪ੍ਰਦਰਸ਼ਨ ਕ੍ਰਮ ਦਾਖਲ ਕਰੋ"
     },
     "create": {
-      "title": "ਨਵਾਂ ਅਧਿਆਏ ਬਣਾਓ",
-      "subtitle": "ਅਧਿਆਏ ਸਮੱਗਰੀ ਨੂੰ ਪਰਿਭਾਸ਼ਿਤ ਅਤੇ ਢਾਂਚਾਗਤ ਕਰੋ ਤਾਂ ਜੋ ਮੋਡੀਊਲ ਨੂੰ ਕੇਂਦ੍ਰਿਤ, ਆਸਾਨੀ ਨਾਲ ਸਮਝ ਆਉਣ ਵਾਲੇ ਸਿਖਲਾਈ ਭਾਗਾਂ ਵਿੱਚ ਵੰਡਿਆ ਜਾ ਸਕੇ।"
+      "title": "ਨਵਾਂ ਅਧਿਆਇ ਬਣਾਓ",
+      "subtitle": "ਮੋਡਿਊਲਾਂ ਨੂੰ ਕੇਂਦ੍ਰਿਤ ਅਤੇ ਆਸਾਨੀ ਨਾਲ ਸਮਝਣ ਵਾਲੇ ਸਿਖਲਾਈ ਭਾਗਾਂ ਵਿੱਚ ਵੰਡਣ ਲਈ ਅਧਿਆਇ ਸਮੱਗਰੀ ਨੂੰ ਪਰਿਭਾਸ਼ਿਤ ਅਤੇ ਬਣਤਰ ਦਿਓ।"
     },
     "actions": {
-      "addNewChapter": "+ ਨਵਾਂ ਅਧਿਆਏ ਜੋੜੋ",
-      "createChapter": "ਅਧਿਆਏ ਬਣਾਓ",
+      "addNewChapter": "+ ਨਵਾਂ ਅਧਿਆਇ ਸ਼ਾਮਲ ਕਰੋ",
+      "createChapter": "ਅਧਿਆਇ ਬਣਾਓ",
       "creating": "ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...",
-      "deleteChapter": "ਅਧਿਆਏ ਹਟਾਓ",
-      "updateChapter": "ਅਧਿਆਏ ਅੱਪਡੇਟ ਕਰੋ",
+      "deleteChapter": "ਅਧਿਆਇ ਮਿਟਾਓ",
+      "updateChapter": "ਅਧਿਆਇ ਅੱਪਡੇਟ ਕਰੋ",
       "updating": "ਅੱਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
       "cancel": "ਰੱਦ ਕਰੋ"
     },
     "breadcrumb": {
       "curriculum": "ਪਾਠਕ੍ਰਮ",
-      "view-chapter": "ਅਧਿਆਏ ਦੇਖੋ"
+      "view-chapter": "ਅਧਿਆਇ ਵੇਖੋ"
     },
     "validation": {
-      "chapterNameRequired": "ਅਧਿਆਏ ਦਾ ਨਾਮ ਲੋੜੀਂਦਾ ਹੈ",
-      "moduleRequired": "ਮੂਲ ਮੋਡੀਊਲ ਲੋੜੀਂਦਾ ਹੈ",
+      "chapterNameRequired": "ਅਧਿਆਇ ਦਾ ਨਾਮ ਲੋੜੀਂਦਾ ਹੈ",
+      "moduleRequired": "ਮੂਲ ਮੋਡਿਊਲ ਲੋੜੀਂਦਾ ਹੈ",
       "levelRequired": "ਮੂਲ ਪੱਧਰ ਲੋੜੀਂਦਾ ਹੈ",
       "programRequired": "ਮੂਲ ਪ੍ਰੋਗਰਾਮ ਲੋੜੀਂਦਾ ਹੈ",
       "descriptionRequired": "ਵੇਰਵਾ ਲੋੜੀਂਦਾ ਹੈ",
-      "imageRequired": "ਕ੍ਰਿਪਾ ਕਰਕੇ ਇੱਕ ਤਸਵੀਰ ਫਾਈਲ ਅੱਪਲੋਡ ਕਰੋ",
+      "imageRequired": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਤਸਵੀਰ ਫਾਈਲ ਅੱਪਲੋਡ ਕਰੋ",
       "fileSize": "ਫਾਈਲ ਦਾ ਆਕਾਰ 5MB ਤੋਂ ਘੱਟ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ"
     },
     "filters": {
-      "allStatus": "ਸਾਰੀਆਂ ਸਥਿਤੀਆਂ",
-      "allLevels": "ਸਾਰੇ ਪੱਧਰ",
-      "allModules": "ਸਾਰੇ ਮੋਡੀਊਲ",
+      "allStatus": "ਸਭ ਸਥਿਤੀਆਂ",
+      "allLevels": "ਸਭ ਪੱਧਰ",
+      "allModules": "ਸਭ ਮੋਡਿਊਲ",
       "active": "ਸਰਗਰਮ",
-      "inactive": "ਨਿਸ਼ਕ੍ਰਿਯ",
+      "inactive": "ਨਿਸ਼ਕਿਰਿਆ",
       "selectLevelFirst": "ਪਹਿਲਾਂ ਪੱਧਰ ਚੁਣੋ",
-      "selectModule": "ਮੋਡੀਊਲ ਚੁਣੋ",
-      "allVisibility": "ਸਾਰੀ ਦਿੱਖ",
+      "selectModule": "ਮੋਡਿਊਲ ਚੁਣੋ",
+      "allVisibility": "ਸਭ ਦਿੱਖ",
       "published": "ਪ੍ਰਕਾਸ਼ਿਤ",
       "unpublished": "ਅਪ੍ਰਕਾਸ਼ਿਤ",
       "draft": "ਡਰਾਫਟ"
     },
     "stats": {
       "totalChapters": {
-        "title": "ਕੁੱਲ ਅਧਿਆਏ",
-        "subtext": "ਕੁੱਲ ਅਧਿਆਏ ਬਣਾਏ ਗਏ"
+        "title": "ਕੁੱਲ ਅਧਿਆਇ",
+        "subtext": "ਕੁੱਲ ਬਣਾਏ ਗਏ ਅਧਿਆਇ"
       },
       "activeChapters": {
-        "title": "ਸਰਗਰਮ ਅਧਿਆਏ",
-        "subtext": "ਵਰਤਮਾਨ ਵਿੱਚ ਸਰਗਰਮ ਅਧਿਆਏ"
+        "title": "ਸਰਗਰਮ ਅਧਿਆਇ",
+        "subtext": "ਵਰਤਮਾਨ ਵਿੱਚ ਸਰਗਰਮ ਅਧਿਆਇ"
       },
       "totalTopics": {
         "title": "ਕੁੱਲ ਵਿਸ਼ੇ",
-        "subtext": "ਸਾਰੇ ਅਧਿਆਇਆਂ ਵਿੱਚ"
+        "subtext": "ਸਭ ਅਧਿਆਇਆਂ ਵਿੱਚ"
       }
     },
     "success": {
-      "create": "ਅਧਿਆਏ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਇਆ ਗਿਆ!",
-      "update": "ਅਧਿਆਏ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ!",
-      "delete": "ਅਧਿਆਏ ਸਫਲਤਾਪੂਰਵਕ ਹਟਾ ਦਿੱਤਾ ਗਿਆ!"
+      "create": "ਅਧਿਆਇ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਇਆ ਗਿਆ!",
+      "update": "ਅਧਿਆਇ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ!",
+      "delete": "ਅਧਿਆਇ ਸਫਲਤਾਪੂਰਵਕ ਮਿਟਾਇਆ ਗਿਆ!"
     },
     "error": {
-      "create": "ਅਧਿਆਏ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕ੍ਰਿਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
-      "update": "ਅਧਿਆਏ ਅੱਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕ੍ਰਿਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
-      "delete": "ਅਧਿਆਏ ਹਟਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕ੍ਰਿਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+      "create": "ਅਧਿਆਇ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "update": "ਅਧਿਆਇ ਅੱਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "delete": "ਅਧਿਆਇ ਮਿਟਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+    },
+    "publishedDropdown": {
+      "status": {
+        "title": "ਦਿੱਖ",
+        "published": "ਪ੍ਰਕਾਸ਼ਿਤ",
+        "unpublished": "ਅਪ੍ਰਕਾਸ਼ਿਤ",
+        "draft": "ਡਰਾਫਟ"
+      }
     }
   },
 
   "topic": {
     "list": {
       "title": "ਵਿਸ਼ਾ ਪ੍ਰਬੰਧਨ",
-      "subtitle": "ਵਿਸ਼ੇਸ਼ ਮੈਡੀਕਲ ਵਿਭਾਗਾਂ ਵਿੱਚ ਵਿਦਿਆਰਥੀ ਪ੍ਰਗਤੀ ਅਤੇ ਸਮੱਗਰੀ ਵੰਡ ਨੂੰ ਟਰੈਕ ਕਰਦੇ ਹੋਏ ਵਿਸਤ੍ਰਿਤ ਸਿਖਲਾਈ ਉਦੇਸ਼ਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ।",
+      "subtitle": "ਵਿਸ਼ੇਸ਼ ਮੈਡੀਕਲ ਵਿਭਾਗਾਂ ਵਿੱਚ ਵਿਦਿਆਰਥੀਆਂ ਦੀ ਪ੍ਰਗਤੀ ਅਤੇ ਸਮੱਗਰੀ ਡਿਲੀਵਰੀ ਨੂੰ ਟਰੈਕ ਕਰਦੇ ਹੋਏ, ਵਿਸਤ੍ਰਿਤ ਸਿਖਲਾਈ ਉਦੇਸ਼ਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ।",
       "searchPlaceholder": "ਵਿਸ਼ੇ ਦੇ ਨਾਮ ਨਾਲ ਖੋਜੋ...",
-      "clearAll": "ਸਭ ਸਾਫ਼ ਕਰੋ",
+      "clearAll": "ਸਭ ਹਟਾਓ",
       "minutes": "ਮਿੰਟ",
       "columns": {
-        "topicName": "ਵਿਸ਼ਾ ਦਾ ਨਾਮ",
-        "parentChapter": "ਅਧਿਆਏ ਦਾ ਨਾਮ",
-        "parentModule": "ਮੋਡੀਊਲ ਦਾ ਨਾਮ",
+        "topicName": "ਵਿਸ਼ੇ ਦਾ ਨਾਮ",
+        "parentChapter": "ਅਧਿਆਇ ਦਾ ਨਾਮ",
+        "parentModule": "ਮੋਡਿਊਲ ਦਾ ਨਾਮ",
         "parentLevel": "ਪੱਧਰ ਦਾ ਨਾਮ",
         "duration": "ਅਨੁਮਾਨਿਤ ਮਿਆਦ",
         "status": "ਸਥਿਤੀ",
-        "createdBy": "ਵੱਲੋਂ ਬਣਾਇਆ ਗਿਆ",
+        "createdBy": "ਕਿਸ ਦੁਆਰਾ ਬਣਾਇਆ",
         "actions": "ਕਾਰਵਾਈਆਂ",
-        "viewContent": "ਸਾਰੀ ਸਮੱਗਰੀ ਦੇਖੋ"
+        "viewContent": "ਸਭ ਸਮੱਗਰੀ ਵੇਖੋ"
       }
     },
     "details": {
       "generalDetails": "ਆਮ ਵੇਰਵੇ",
-      "topicName": "ਵਿਸ਼ਾ ਦਾ ਨਾਮ",
-      "topicNamePlaceholder": "ਵਿਸ਼ਾ ਦਾ ਨਾਮ ਦਰਜ ਕਰੋ",
-      "parentChapter": "ਅਧਿਆਏ ਦਾ ਨਾਮ",
-      "parentChapterPlaceholder": "ਇੱਕ ਅਧਿਆਏ ਚੁਣੋ",
-      "parentModule": "ਮੋਡੀਊਲ ਦਾ ਨਾਮ",
-      "parentModulePlaceholder": "ਇੱਕ ਮੋਡੀਊਲ ਚੁਣੋ",
+      "topicName": "ਵਿਸ਼ੇ ਦਾ ਨਾਮ",
+      "topicNamePlaceholder": "ਵਿਸ਼ੇ ਦਾ ਨਾਮ ਦਾਖਲ ਕਰੋ",
+      "parentChapter": "ਅਧਿਆਇ ਦਾ ਨਾਮ",
+      "parentChapterPlaceholder": "ਇੱਕ ਅਧਿਆਇ ਚੁਣੋ",
+      "parentModule": "ਮੋਡਿਊਲ ਦਾ ਨਾਮ",
+      "parentModulePlaceholder": "ਇੱਕ ਮੋਡਿਊਲ ਚੁਣੋ",
       "parentLevel": "ਪੱਧਰ ਦਾ ਨਾਮ",
       "parentLevelPlaceholder": "ਇੱਕ ਪੱਧਰ ਚੁਣੋ",
       "parentProgram": "ਪ੍ਰੋਗਰਾਮ ਦਾ ਨਾਮ",
       "perentProgramPlaceholder": "ਇੱਕ ਪ੍ਰੋਗਰਾਮ ਚੁਣੋ",
       "duration": "ਅਨੁਮਾਨਿਤ ਮਿਆਦ (ਮਿੰਟਾਂ ਵਿੱਚ)",
-      "durationPlaceholder": "ਮਿੰਟਾਂ ਵਿੱਚ ਮਿਆਦ ਦਰਜ ਕਰੋ",
+      "durationPlaceholder": "ਮਿੰਟਾਂ ਵਿੱਚ ਮਿਆਦ ਦਾਖਲ ਕਰੋ",
       "description": "ਵੇਰਵਾ",
-      "descriptionPlaceholder": "ਵਿਸ਼ਾ ਦਾ ਵੇਰਵਾ ਲਿਖੋ...",
-      "thumbnail": "ਵਿਸ਼ਾ ਥੰਬਨੇਲ",
-      "uploadText": "ਥੰਬਨੇਲ ਅੱਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+      "descriptionPlaceholder": "ਵਿਸ਼ੇ ਦਾ ਵੇਰਵਾ ਲਿਖੋ...",
+      "thumbnail": "ਵਿਸ਼ੇ ਦਾ ਥੰਬਨੇਲ",
+      "uploadText": "ਥੰਬਨੇਲ ਅੱਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿਕ ਕਰੋ",
       "uploadSubText": "PNG, JPG, JPEG 5MB ਤੱਕ",
       "changeImage": "ਤਸਵੀਰ ਬਦਲੋ",
-      "thumbnailAlt": "ਵਿਸ਼ਾ ਥੰਬਨੇਲ ਪੂਰਵਦਰਸ਼ਨ",
-      "deleteText": "ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਇਸ ਵਿਸ਼ੇ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ? ਇਸ ਵਿਸ਼ੇ ਨੂੰ ਹਟਾਉਣ ਨਾਲ ਇਸਦੇ ਅਧੀਨ ਸਾਰੀ ਸਬੰਧਤ ਸਮੱਗਰੀ, ਕੁਇਜ਼ਾਂ ਅਤੇ ਹੋਰ ਸਬੰਧਤ ਡਾਟਾ ਸਥਾਈ ਤੌਰ 'ਤੇ ਹਟ ਜਾਵੇਗਾ। ਇਹ ਕਿਰਿਆ ਵਾਪਸ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ।",
+      "thumbnailAlt": "ਵਿਸ਼ੇ ਦਾ ਥੰਬਨੇਲ ਪੂਰਵਦਰਸ਼ਨ",
+      "deleteText": "ਕੀ ਤੁਸੀਂ ਯਕੀਨੀ ਤੌਰ 'ਤੇ ਇਸ ਵਿਸ਼ੇ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ? ਇਸ ਵਿਸ਼ੇ ਨੂੰ ਮਿਟਾਉਣ ਨਾਲ ਇਸਦੇ ਅਧੀਨ ਸਾਰੀ ਸੰਬੰਧਿਤ ਸਮੱਗਰੀ, ਕਵਿਜ਼, ਅਤੇ ਹੋਰ ਸੰਬੰਧਿਤ ਡੇਟਾ ਸਥਾਈ ਤੌਰ 'ਤੇ ਹਟਾ ਦਿੱਤਾ ਜਾਵੇਗਾ। ਇਹ ਕਾਰਵਾਈ ਵਾਪਸ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ।",
       "videoUrl": "ਵੀਡੀਓ URL",
-      "videoUrlPlaceholder": "ਵੀਡੀਓ URL ਦਰਜ ਕਰੋ (YouTube, Vimeo, ਆਦਿ)",
+      "videoUrlPlaceholder": "ਵੀਡੀਓ URL ਦਾਖਲ ਕਰੋ (YouTube, Vimeo, ਆਦਿ)",
       "attachment": "ਅਟੈਚਮੈਂਟ",
       "attachmentPlaceholder": "ਵਾਧੂ ਸਮੱਗਰੀ ਅੱਪਲੋਡ ਕਰੋ"
     },
     "create": {
       "title": "ਨਵਾਂ ਵਿਸ਼ਾ ਬਣਾਓ",
-      "subtitle": "ਵਿਸ਼ੇਸ਼ ਮੈਡੀਕਲ ਵਿਭਾਗਾਂ ਵਿੱਚ ਵਿਦਿਆਰਥੀ ਪ੍ਰਗਤੀ ਅਤੇ ਸਮੱਗਰੀ ਵੰਡ ਨੂੰ ਟਰੈਕ ਕਰਦੇ ਹੋਏ ਵਿਸਤ੍ਰਿਤ ਸਿਖਲਾਈ ਉਦੇਸ਼ਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ।"
+      "subtitle": "ਵਿਸ਼ੇਸ਼ ਮੈਡੀਕਲ ਵਿਭਾਗਾਂ ਵਿੱਚ ਵਿਦਿਆਰਥੀਆਂ ਦੀ ਪ੍ਰਗਤੀ ਅਤੇ ਸਮੱਗਰੀ ਡਿਲੀਵਰੀ ਨੂੰ ਟਰੈਕ ਕਰਦੇ ਹੋਏ, ਵਿਸਤ੍ਰਿਤ ਸਿਖਲਾਈ ਉਦੇਸ਼ਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ।"
     },
     "actions": {
-      "addNewTopic": "+ ਨਵਾਂ ਵਿਸ਼ਾ ਜੋੜੋ",
+      "addNewTopic": "+ ਨਵਾਂ ਵਿਸ਼ਾ ਸ਼ਾਮਲ ਕਰੋ",
       "createTopic": "ਵਿਸ਼ਾ ਬਣਾਓ",
       "creating": "ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...",
-      "deleteTopic": "ਵਿਸ਼ਾ ਹਟਾਓ",
+      "deleteTopic": "ਵਿਸ਼ਾ ਮਿਟਾਓ",
       "updateTopic": "ਵਿਸ਼ਾ ਅੱਪਡੇਟ ਕਰੋ",
       "updating": "ਅੱਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
       "cancel": "ਰੱਦ ਕਰੋ"
     },
     "breadcrumb": {
       "curriculum": "ਪਾਠਕ੍ਰਮ",
-      "view-topic": "ਵਿਸ਼ਾ ਦੇਖੋ"
+      "view-topic": "ਵਿਸ਼ਾ ਵੇਖੋ"
     },
     "validation": {
-      "topicNameRequired": "ਵਿਸ਼ਾ ਦਾ ਨਾਮ ਲੋੜੀਂਦਾ ਹੈ",
+      "topicNameRequired": "ਵਿਸ਼ੇ ਦਾ ਨਾਮ ਲੋੜੀਂਦਾ ਹੈ",
       "durationRequired": "ਮਿਆਦ ਲੋੜੀਂਦੀ ਹੈ",
-      "durationNumber": "ਮਿਆਦ ਇੱਕ ਸੰਖਿਆ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ",
+      "durationNumber": "ਮਿਆਦ ਇੱਕ ਅੰਕ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ",
       "durationPositive": "ਮਿਆਦ 0 ਤੋਂ ਵੱਧ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ",
-      "chapterRequired": "ਮੂਲ ਅਧਿਆਏ ਲੋੜੀਂਦਾ ਹੈ",
-      "moduleRequired": "ਮੂਲ ਮੋਡੀਊਲ ਲੋੜੀਂਦਾ ਹੈ",
+      "chapterRequired": "ਮੂਲ ਅਧਿਆਇ ਲੋੜੀਂਦਾ ਹੈ",
+      "moduleRequired": "ਮੂਲ ਮੋਡਿਊਲ ਲੋੜੀਂਦਾ ਹੈ",
       "levelRequired": "ਮੂਲ ਪੱਧਰ ਲੋੜੀਂਦਾ ਹੈ",
       "programRequired": "ਮੂਲ ਪ੍ਰੋਗਰਾਮ ਲੋੜੀਂਦਾ ਹੈ",
       "descriptionRequired": "ਵੇਰਵਾ ਲੋੜੀਂਦਾ ਹੈ",
-      "imageRequired": "ਕ੍ਰਿਪਾ ਕਰਕੇ ਇੱਕ ਤਸਵੀਰ ਫਾਈਲ ਅੱਪਲੋਡ ਕਰੋ",
+      "imageRequired": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਤਸਵੀਰ ਫਾਈਲ ਅੱਪਲੋਡ ਕਰੋ",
       "fileSize": "ਫਾਈਲ ਦਾ ਆਕਾਰ 5MB ਤੋਂ ਘੱਟ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ"
     },
     "filters": {
-      "allStatus": "ਸਾਰੀਆਂ ਸਥਿਤੀਆਂ",
-      "allLevels": "ਸਾਰੇ ਪੱਧਰ",
+      "allStatus": "ਸਭ ਸਥਿਤੀਆਂ",
+      "allLevels": "ਸਭ ਪੱਧਰ",
+      "allModules": "ਸਭ ਮੋਡਿਊਲ",
       "active": "ਸਰਗਰਮ",
-      "inactive": "ਨਿਸ਼ਕ੍ਰਿਯ",
+      "inactive": "ਨਿਸ਼ਕਿਰਿਆ",
       "selectLevelFirst": "ਪਹਿਲਾਂ ਪੱਧਰ ਚੁਣੋ",
-      "selectModule": "ਮੋਡੀਊਲ ਚੁਣੋ",
-      "selectModuleFirst": "ਪਹਿਲਾਂ ਮੋਡੀਊਲ ਚੁਣੋ",
-      "selectChapter": "ਅਧਿਆਏ ਚੁਣੋ",
-      "allVisibility": "ਸਾਰੀ ਦਿੱਖ",
+      "selectModule": "ਮੋਡਿਊਲ ਚੁਣੋ",
+      "selectModuleFirst": "ਪਹਿਲਾਂ ਮੋਡਿਊਲ ਚੁਣੋ",
+      "selectChapter": "ਅਧਿਆਇ ਚੁਣੋ",
+      "allVisibility": "ਸਭ ਦਿੱਖ",
       "published": "ਪ੍ਰਕਾਸ਼ਿਤ",
       "unpublished": "ਅਪ੍ਰਕਾਸ਼ਿਤ",
-      "draft": "ਡਰਾਫਟ"
+      "draft": "ਡਰਾਫਟ",
+      "loadingModules": "ਮੋਡਿਊਲ ਲੋਡ ਹੋ ਰਹੇ ਹਨ...",
+      "loadingChapters": "ਅਧਿਆਇ ਲੋਡ ਹੋ ਰਹੇ ਹਨ..."
     },
     "stats": {
       "totalTopics": {
         "title": "ਕੁੱਲ ਵਿਸ਼ੇ",
-        "subtext": "ਕੁੱਲ ਵਿਸ਼ੇ ਬਣਾਏ ਗਏ"
+        "subtext": "ਕੁੱਲ ਬਣਾਏ ਗਏ ਵਿਸ਼ੇ"
       },
       "activeTopics": {
         "title": "ਸਰਗਰਮ ਵਿਸ਼ੇ",
@@ -1017,36 +1100,36 @@
     "success": {
       "create": "ਵਿਸ਼ਾ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਇਆ ਗਿਆ!",
       "update": "ਵਿਸ਼ਾ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ!",
-      "delete": "ਵਿਸ਼ਾ ਸਫਲਤਾਪੂਰਵਕ ਹਟਾ ਦਿੱਤਾ ਗਿਆ!"
+      "delete": "ਵਿਸ਼ਾ ਸਫਲਤਾਪੂਰਵਕ ਮਿਟਾਇਆ ਗਿਆ!"
     },
     "error": {
-      "create": "ਵਿਸ਼ਾ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕ੍ਰਿਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
-      "update": "ਵਿਸ਼ਾ ਅੱਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕ੍ਰਿਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
-      "delete": "ਵਿਸ਼ਾ ਹਟਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕ੍ਰਿਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+      "create": "ਵਿਸ਼ਾ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "update": "ਵਿਸ਼ਾ ਅੱਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "delete": "ਵਿਸ਼ਾ ਮਿਟਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
     }
   },
 
   "learningUnitBuilder": {
     "list": {
-      "title": "ਲਰਨਿੰਗ ਯੂਨਿਟ ਬਿਲਡਰ",
-      "subtitle": "ਵਿਸ਼ਿਆਂ ਲਈ ਸਿਖਲਾਈ ਸਮੱਗਰੀ ਪ੍ਰਬੰਧਿਤ ਅਤੇ ਬਣਾਓ",
-      "searchPlaceholder": "ਸਮੱਗਰੀ ਸਿਰਲੇਖ ਨਾਲ ਖੋਜੋ...",
-      "clearAll": "ਸਾਰੇ ਫਿਲਟਰ ਸਾਫ਼ ਕਰੋ",
+      "title": "ਸਿਖਲਾਈ ਯੂਨਿਟ ਬਿਲਡਰ",
+      "subtitle": "ਵਿਸ਼ਿਆਂ ਲਈ ਸਿਖਲਾਈ ਸਮੱਗਰੀ ਦਾ ਪ੍ਰਬੰਧਨ ਅਤੇ ਨਿਰਮਾਣ ਕਰੋ",
+      "searchPlaceholder": "ਸਮੱਗਰੀ ਦੇ ਸਿਰਲੇਖ ਨਾਲ ਖੋਜੋ...",
+      "clearAll": "ਸਭ ਫਿਲਟਰ ਸਾਫ਼ ਕਰੋ",
       "columns": {
         "title": "ਸਿਰਲੇਖ",
         "type": "ਕਿਸਮ",
-        "parentTopic": "ਵਿਸ਼ਾ ਦਾ ਨਾਮ",
-        "parentChapter": "ਅਧਿਆਏ ਦਾ ਨਾਮ",
-        "parentModule": "ਮੋਡੀਊਲ ਦਾ ਨਾਮ",
+        "parentTopic": "ਵਿਸ਼ੇ ਦਾ ਨਾਮ",
+        "parentChapter": "ਅਧਿਆਇ ਦਾ ਨਾਮ",
+        "parentModule": "ਮੋਡਿਊਲ ਦਾ ਨਾਮ",
         "parentLevel": "ਪੱਧਰ ਦਾ ਨਾਮ",
         "status": "ਸਥਿਤੀ",
-        "createdBy": "ਵੱਲੋਂ ਬਣਾਇਆ ਗਿਆ",
+        "createdBy": "ਕਿਸ ਦੁਆਰਾ ਬਣਾਇਆ",
         "actions": "ਕਾਰਵਾਈਆਂ"
       }
     },
     "create": {
       "title": "ਸਿਖਲਾਈ ਸਮੱਗਰੀ ਬਣਾਓ",
-      "subtitle": "ਇੱਕ ਵਿਸ਼ੇ ਲਈ ਨਵੀਂ ਸਿਖਲਾਈ ਸਮੱਗਰੀ ਬਣਾਓ"
+      "subtitle": "ਕਿਸੇ ਵਿਸ਼ੇ ਲਈ ਨਵੀਂ ਸਿਖਲਾਈ ਸਮੱਗਰੀ ਬਣਾਓ"
     },
     "details": {
       "generalDetails": "ਆਮ ਵੇਰਵੇ",
@@ -1054,62 +1137,63 @@
       "parentProgramPlaceholder": "ਪ੍ਰੋਗਰਾਮ ਚੁਣੋ",
       "parentLevel": "ਪੱਧਰ ਦਾ ਨਾਮ",
       "parentLevelPlaceholder": "ਪੱਧਰ ਚੁਣੋ",
-      "parentModule": "ਮੋਡੀਊਲ ਦਾ ਨਾਮ",
-      "parentModulePlaceholder": "ਮੋਡੀਊਲ ਚੁਣੋ",
-      "parentChapter": "ਅਧਿਆਏ ਦਾ ਨਾਮ",
-      "parentChapterPlaceholder": "ਅਧਿਆਏ ਚੁਣੋ",
-      "parentTopic": "ਵਿਸ਼ਾ ਦਾ ਨਾਮ",
+      "parentModule": "ਮੋਡਿਊਲ ਦਾ ਨਾਮ",
+      "parentModulePlaceholder": "ਮੋਡਿਊਲ ਚੁਣੋ",
+      "parentChapter": "ਅਧਿਆਇ ਦਾ ਨਾਮ",
+      "parentChapterPlaceholder": "ਅਧਿਆਇ ਚੁਣੋ",
+      "parentTopic": "ਵਿਸ਼ੇ ਦਾ ਨਾਮ",
       "parentTopicPlaceholder": "ਵਿਸ਼ਾ ਚੁਣੋ",
-      "deleteText": "ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਇਸ ਸਮੱਗਰੀ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
+      "deleteText": "ਕੀ ਤੁਸੀਂ ਯਕੀਨੀ ਤੌਰ 'ਤੇ ਇਸ ਸਮੱਗਰੀ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
       "content": {
         "contentSection": "ਸਮੱਗਰੀ ਭਾਗ",
-        "contentTitle": "ਸਮੱਗਰੀ ਸਿਰਲੇਖ",
+        "contentTitle": "ਸਮੱਗਰੀ ਦਾ ਸਿਰਲੇਖ",
         "content": "ਸਮੱਗਰੀ",
-        "type": "ਸਮੱਗਰੀ ਕਿਸਮ",
-        "text": "ਪਾਠ",
+        "type": "ਸਮੱਗਰੀ ਦੀ ਕਿਸਮ",
+        "text": "ਲਿਖਤ",
         "media": "ਮੀਡੀਆ",
-        "sectionTitle": "ਭਾਗ ਸਿਰਲੇਖ",
-        "sectionTitlePlaceholder": "ਭਾਗ ਸਿਰਲੇਖ ਦਰਜ ਕਰੋ",
+        "sectionTitle": "ਭਾਗ ਦਾ ਸਿਰਲੇਖ",
+        "sectionTitlePlaceholder": "ਭਾਗ ਦਾ ਸਿਰਲੇਖ ਦਾਖਲ ਕਰੋ",
         "mediaShortcode": "ਮੀਡੀਆ ਸ਼ਾਰਟਕੋਡ",
-        "mediaShortcodePlaceholder": "ਉਦਾਹਰਨ: [media_123456789]",
+        "mediaShortcodePlaceholder": "ਜਿਵੇਂ, [media_123456789]",
         "description": "ਵੇਰਵਾ",
         "order": "ਕ੍ਰਮ",
         "preview": "ਪੂਰਵਦਰਸ਼ਨ",
-        "addButtonSection": "ਨਵਾਂ ਭਾਗ ਜੋੜੋ",
+        "addButtonSection": "ਨਵਾਂ ਭਾਗ ਸ਼ਾਮਲ ਕਰੋ",
         "removeSection": "ਭਾਗ ਹਟਾਓ",
         "editorPlaceholder": "ਆਪਣੀ ਸਮੱਗਰੀ ਇੱਥੇ ਲਿਖੋ..."
       }
     },
     "actions": {
-      "addNewContent": "+ ਨਵੀਂ ਸਮੱਗਰੀ ਜੋੜੋ",
+      "addNewContent": "+ ਨਵੀਂ ਸਮੱਗਰੀ ਸ਼ਾਮਲ ਕਰੋ",
       "createContent": "ਸਮੱਗਰੀ ਬਣਾਓ",
       "creating": "ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...",
       "updateContent": "ਸਮੱਗਰੀ ਅੱਪਡੇਟ ਕਰੋ",
       "updating": "ਅੱਪਡੇਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
-      "deleteContent": "ਸਮੱਗਰੀ ਹਟਾਓ"
+      "deleteContent": "ਸਮੱਗਰੀ ਮਿਟਾਓ"
     },
     "breadcrumb": {
       "contentManagement": "ਸਮੱਗਰੀ ਪ੍ਰਬੰਧਨ",
       "editContent": "ਸਮੱਗਰੀ ਸੰਪਾਦਿਤ ਕਰੋ"
     },
     "filters": {
-      "allLevels": "ਸਾਰੇ ਪੱਧਰ",
-      "allStatus": "ਸਾਰੀਆਂ ਸਥਿਤੀਆਂ",
-      "allTypes": "ਸਾਰੀਆਂ ਕਿਸਮਾਂ",
+      "allLevels": "ਸਭ ਪੱਧਰ",
+      "allModules": "ਸਭ ਮੋਡਿਊਲ",
+      "allStatus": "ਸਭ ਸਥਿਤੀਆਂ",
+      "allTypes": "ਸਭ ਕਿਸਮਾਂ",
       "active": "ਸਰਗਰਮ",
-      "inactive": "ਨਿਸ਼ਕ੍ਰਿਯ",
-      "text": "ਪਾਠ",
+      "inactive": "ਨਿਸ਼ਕਿਰਿਆ",
+      "text": "ਲਿਖਤ",
       "media": "ਮੀਡੀਆ",
       "selectLevelFirst": "ਪਹਿਲਾਂ ਪੱਧਰ ਚੁਣੋ",
-      "selectModule": "ਮੋਡੀਊਲ ਚੁਣੋ",
-      "selectModuleFirst": "ਪਹਿਲਾਂ ਮੋਡੀਊਲ ਚੁਣੋ",
-      "selectChapter": "ਅਧਿਆਏ ਚੁਣੋ",
-      "selectChapterFirst": "ਪਹਿਲਾਂ ਅਧਿਆਏ ਚੁਣੋ",
+      "selectModule": "ਮੋਡਿਊਲ ਚੁਣੋ",
+      "selectModuleFirst": "ਪਹਿਲਾਂ ਮੋਡਿਊਲ ਚੁਣੋ",
+      "selectChapter": "ਅਧਿਆਇ ਚੁਣੋ",
+      "selectChapterFirst": "ਪਹਿਲਾਂ ਅਧਿਆਇ ਚੁਣੋ",
       "selectTopic": "ਵਿਸ਼ਾ ਚੁਣੋ",
-      "loadingModules": "ਮੋਡੀਊਲ ਲੋਡ ਹੋ ਰਹੇ ਹਨ...",
-      "loadingChapters": "ਅਧਿਆਏ ਲੋਡ ਹੋ ਰਹੇ ਹਨ...",
+      "loadingModules": "ਮੋਡਿਊਲ ਲੋਡ ਹੋ ਰਹੇ ਹਨ...",
+      "loadingChapters": "ਅਧਿਆਇ ਲੋਡ ਹੋ ਰਹੇ ਹਨ...",
       "loadingTopics": "ਵਿਸ਼ੇ ਲੋਡ ਹੋ ਰਹੇ ਹਨ...",
-      "allVisibility": "ਸਾਰੀ ਦਿੱਖ",
+      "allVisibility": "ਸਭ ਦਿੱਖ",
       "published": "ਪ੍ਰਕਾਸ਼ਿਤ",
       "unpublished": "ਅਪ੍ਰਕਾਸ਼ਿਤ",
       "draft": "ਡਰਾਫਟ"
@@ -1117,19 +1201,19 @@
     "validation": {
       "programRequired": "ਪ੍ਰੋਗਰਾਮ ਲੋੜੀਂਦਾ ਹੈ",
       "levelRequired": "ਪੱਧਰ ਲੋੜੀਂਦਾ ਹੈ",
-      "moduleRequired": "ਮੋਡੀਊਲ ਲੋੜੀਂਦਾ ਹੈ",
-      "chapterRequired": "ਅਧਿਆਏ ਲੋੜੀਂਦਾ ਹੈ",
+      "moduleRequired": "ਮੋਡਿਊਲ ਲੋੜੀਂਦਾ ਹੈ",
+      "chapterRequired": "ਅਧਿਆਇ ਲੋੜੀਂਦਾ ਹੈ",
       "topicRequired": "ਵਿਸ਼ਾ ਲੋੜੀਂਦਾ ਹੈ"
     },
     "success": {
       "create": "ਸਿਖਲਾਈ ਸਮੱਗਰੀ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਈ ਗਈ!",
       "update": "ਸਿਖਲਾਈ ਸਮੱਗਰੀ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਕੀਤੀ ਗਈ!",
-      "delete": "ਸਿਖਲਾਈ ਸਮੱਗਰੀ ਸਫਲਤਾਪੂਰਵਕ ਹਟਾ ਦਿੱਤੀ ਗਈ!"
+      "delete": "ਸਿਖਲਾਈ ਸਮੱਗਰੀ ਸਫਲਤਾਪੂਰਵਕ ਮਿਟਾਈ ਗਈ!"
     },
     "error": {
-      "create": "ਸਿਖਲਾਈ ਸਮੱਗਰੀ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕ੍ਰਿਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
-      "update": "ਸਿਖਲਾਈ ਸਮੱਗਰੀ ਅੱਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕ੍ਰਿਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
-      "delete": "ਸਿਖਲਾਈ ਸਮੱਗਰੀ ਹਟਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕ੍ਰਿਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+      "create": "ਸਿਖਲਾਈ ਸਮੱਗਰੀ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "update": "ਸਿਖਲਾਈ ਸਮੱਗਰੀ ਅੱਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "delete": "ਸਿਖਲਾਈ ਸਮੱਗਰੀ ਮਿਟਾਉਣ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
     },
     "noContentFound": "ਕੋਈ ਸਮੱਗਰੀ ਨਹੀਂ ਮਿਲੀ"
   },
@@ -1163,60 +1247,62 @@
 
   "automatedImporter": {
     "list": {
-      "title": "ਆਟੋਮੇਟਿਡ ਕੰਟੈਂਟ ਇੰਪੋਰਟਰ",
-      "subtitle": "ਆਟੋਮੇਟਿਡ ਇੰਪੋਰਟ ਲਾਗਜ਼ ਨੂੰ ਮੈਨੇਜ ਅਤੇ ਮਾਨੀਟਰ ਕਰੋ"
+      "title": "ਆਟੋਮੇਟਿਡ ਸਮੱਗਰੀ ਇੰਪੋਰਟਰ",
+      "subtitle": "ਆਟੋਮੇਟਿਡ ਇੰਪੋਰਟ ਲੌਗ ਪ੍ਰਬੰਧਿਤ ਅਤੇ ਮਾਨੀਟਰ ਕਰੋ"
     },
     "create": {
-      "title": "LMS ਕੰਟੈਂਟ ਜਨਰੇਟਰ",
-      "subtitle": "ਬਲਕ ਇੰਪੋਰਟ ਲਈ ਸਟ੍ਰਕਚਰ-ਸੈਂਸਿਟਿਵ ਕੰਟੈਂਟ ਬਣਾਓ | ਘੱਟੋ-ਘੱਟ 100 ਸ਼ਬਦ ਲਾਜ਼ਮੀ ਹਨ",
-      "generalDetails": "ਸਧਾਰਣ ਵੇਰਵੇ",
-      "contentSection": "ਕੰਟੈਂਟ ਸੈਕਸ਼ਨ",
-      "parentProgram": "ਪੇਰੈਂਟ ਪ੍ਰੋਗਰਾਮ",
-      "parentLevel": "ਪੇਰੈਂਟ ਲੈਵਲ",
+      "title": "ਐਲ.ਐਮ.ਐਸ ਸਮੱਗਰੀ ਜਨਰੇਟਰ",
+      "subtitle": "ਬਲਕ ਇੰਪੋਰਟ ਲਈ ਬਣਤਰ-ਸੰਵੇਦਨਸ਼ੀਲ ਸਮੱਗਰੀ ਬਣਾਓ | ਘੱਟੋ-ਘੱਟ 100 ਸ਼ਬਦ ਲੋੜੀਂਦੇ",
+      "generalDetails": "ਆਮ ਵੇਰਵੇ",
+      "contentSection": "ਸਮੱਗਰੀ ਭਾਗ",
+      "parentProgram": "ਮੂਲ ਪ੍ਰੋਗਰਾਮ",
+      "parentLevel": "ਮੂਲ ਲੈਵਲ",
       "selectProgram": "ਪ੍ਰੋਗਰਾਮ ਚੁਣੋ...",
       "selectLevel": "ਲੈਵਲ ਚੁਣੋ...",
-      "clickForGuidelines": "ਗਾਈਡਲਾਈਨ ਲਈ ? ਤੇ ਕਲਿੱਕ ਕਰੋ",
-      "contentMeetsRequirement": "ਕੰਟੈਂਟ ਲੋੜਾਂ ਨੂੰ ਪੂਰਾ ਕਰਦਾ ਹੈ ({wordCount}/100 ਸ਼ਬਦ)",
-      "contentNeedsMoreWords": "{wordCount}/100 ਸ਼ਬਦ - ਹੋਰ {remaining} ਸ਼ਬਦਾਂ ਦੀ ਲੋੜ ਹੈ",
-      "viewGuidelines": "ਪੂਰੀ ਫਾਰਮੈਟਿੰਗ ਗਾਈਡਲਾਈਨ ਵੇਖੋ",
-      "editorPlaceholder": "ਉਦਾਹਰਨ:\nਮੋਡੀਊਲ 1: ਕਾਰਡਿਯਾਕ ਐਨਾਟਮੀ\n\nਚੈਪਟਰ 1.1: ਦਿਲ ਦੀ ਬਣਤਰ\n\nਟਾਪਿਕ 1.1.1: ਚਾਰ ਚੈਂਬਰ\n\n1.1.1.H1 ਲਰਨਿੰਗ ਉਦੇਸ਼\n1.1.1.C1 ਆਪਣਾ ਕੰਟੈਂਟ ਇੱਥੇ ਲਿਖੋ..."
+      "clickForGuidelines": "ਦਿਸ਼ਾ-ਨਿਰਦੇਸ਼ਾਂ ਲਈ ? ਕਲਿੱਕ ਕਰੋ",
+      "contentMeetsRequirement": "ਸਮੱਗਰੀ ਲੋੜ ਪੂਰੀ ਕਰਦੀ ਹੈ ({wordCount}/100 ਸ਼ਬਦ)",
+      "contentNeedsMoreWords": "{wordCount}/100 ਸ਼ਬਦ - {remaining} ਹੋਰ ਸ਼ਬਦ ਚਾਹੀਦੇ",
+      "viewGuidelines": "ਸੰਪੂਰਨ ਫਾਰਮੈਟਿੰਗ ਦਿਸ਼ਾ-ਨਿਰਦੇਸ਼ ਵੇਖੋ",
+      "editorPlaceholder": "ਉਦਾਹਰਣ:\nਮੋਡਿਊਲ 1: ਕਾਰਡੀਅਕ ਐਨਾਟੋਮੀ\n\nਅਧਿਆਇ 1.1: ਦਿਲ ਦੀ ਬਣਤਰ\n\nਵਿਸ਼ਾ 1.1.1: ਚਾਰ ਚੈਂਬਰ\n\n1.1.1.H1 ਸਿੱਖਣ ਦਾ ਉਦੇਸ਼\n1.1.1.C1 ਤੁਹਾਡੀ ਸਮੱਗਰੀ ਇੱਥੇ..."
     },
     "actions": {
       "createImport": "ਇੰਪੋਰਟ ਬਣਾਓ",
-      "createContent": "ਕੰਟੈਂਟ ਬਣਾਓ",
+      "createContent": "ਸਮੱਗਰੀ ਬਣਾਓ",
       "creating": "ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ..."
     },
     "searchPlaceholder": "ਇੰਪੋਰਟ ਖੋਜੋ...",
+    "noErrors": "ਕੋਈ ਗਲਤੀ ਨਹੀਂ ਮਿਲੀ",
     "filters": {
       "allLevels": "ਸਾਰੇ ਲੈਵਲ",
-      "allStatus": "ਸਾਰੇ ਸਟੇਟਸ",
-      "completed": "ਪੂਰਾ",
+      "allStatus": "ਸਾਰੀ ਸਥਿਤੀ",
+      "completed": "ਮੁਕੰਮਲ",
       "processing": "ਪ੍ਰੋਸੈਸਿੰਗ",
       "failed": "ਅਸਫਲ"
     },
     "status": {
-      "completed": "ਪੂਰਾ",
+      "completed": "ਮੁਕੰਮਲ",
       "processing": "ਪ੍ਰੋਸੈਸਿੰਗ",
       "failed": "ਅਸਫਲ"
     },
     "columns": {
       "program": "ਪ੍ਰੋਗਰਾਮ",
       "level": "ਲੈਵਲ",
-      "status": "ਸਟੇਟਸ",
-      "createdBy": "ਵੱਲੋਂ ਬਣਾਇਆ ਗਿਆ",
-      "createdAt": "ਬਣਾਉਣ ਦੀ ਤਾਰੀਖ"
+      "status": "ਸਥਿਤੀ",
+      "createdBy": "ਬਣਾਉਣ ਵਾਲਾ",
+      "createdAt": "ਬਣਾਉਣ ਦੀ ਮਿਤੀ",
+      "error": "ਗਲਤੀ"
     },
     "validation": {
-      "programRequired": "ਪ੍ਰੋਗਰਾਮ ਲਾਜ਼ਮੀ ਹੈ",
-      "levelRequired": "ਲੈਵਲ ਲਾਜ਼ਮੀ ਹੈ",
-      "contentRequired": "ਕੰਟੈਂਟ ਲਾਜ਼ਮੀ ਹੈ",
-      "minWords": "ਕੰਟੈਂਟ ਘੱਟੋ-ਘੱਟ 100 ਸ਼ਬਦਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ। ਫਾਰਮੈਟਿੰਗ ਗਾਈਡਲਾਈਨ ਵੇਖਣ ਲਈ (?) ਆਈਕਨ ਤੇ ਕਲਿੱਕ ਕਰੋ।"
+      "programRequired": "ਪ੍ਰੋਗਰਾਮ ਲੋੜੀਂਦਾ ਹੈ",
+      "levelRequired": "ਲੈਵਲ ਲੋੜੀਂਦਾ ਹੈ",
+      "contentRequired": "ਸਮੱਗਰੀ ਲੋੜੀਂਦੀ ਹੈ",
+      "minWords": "ਸਮੱਗਰੀ ਘੱਟੋ-ਘੱਟ 100 ਸ਼ਬਦਾਂ ਦੀ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ। ਫਾਰਮੈਟਿੰਗ ਦਿਸ਼ਾ-ਨਿਰਦੇਸ਼ ਵੇਖਣ ਲਈ (?) ਆਈਕਨ 'ਤੇ ਕਲਿੱਕ ਕਰੋ।"
     },
     "success": {
-      "create": "ਕੰਟੈਂਟ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਇਆ ਗਿਆ"
+      "create": "ਸਮੱਗਰੀ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਈ ਗਈ"
     },
     "error": {
-      "create": "ਕੰਟੈਂਟ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ"
+      "create": "ਸਮੱਗਰੀ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ"
     }
   },
 

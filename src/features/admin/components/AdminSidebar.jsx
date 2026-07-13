@@ -16,19 +16,30 @@ import {
 import { IoSettingsOutline } from "react-icons/io5";
 import usePermission from "../../../hooks/usePermission";
 import { MdOutlineContactSupport } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../redux/slice/authSlice";
+import { useToast } from "../common/toast/ToastContext";
 
 const AdminSidebar = ({ isOpen, onClose }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const { hasPermission } = usePermission();
+  const toast = useToast();
+
   const { settings, isLoading: settingsLoading } = useSelector(
     (state) => state.systemSetting,
   );
 
   const [openParent, setOpenParent] = useState(null);
   const [openSubMenus, setOpenSubMenus] = useState({});
+
+  const handleLogout = () => {
+    dispatch(logout());
+    toast.success(t("navbar.logoutSuccess"));
+    navigate("/login");
+  };
 
   const navItems = [
     { icon: FiGrid, label: t("sidebar.dashboard"), path: "/dashboard" },
@@ -467,25 +478,14 @@ const AdminSidebar = ({ isOpen, onClose }) => {
         </nav>
 
         <div className="border-t border-gray-200 p-4">
-          <button className="flex items-center gap-3 px-4 py-2 w-full text-sm text-gray-600 hover:bg-red-50 hover:text-red-600 rounded-lg">
+          <button
+            onClick={() => handleLogout()}
+            className="flex items-center gap-3 px-4 py-2 w-full text-sm text-gray-600 hover:bg-red-50 hover:text-red-600 rounded-lg"
+          >
             <FiLogOut size={18} />
             {t("sidebar.logout")}
           </button>
         </div>
-
-        {/* <style jsx>{`
-          .hide-scrollbar::-webkit-scrollbar {
-            width: 4px;
-          }
-
-          .hide-scrollbar-track {
-            background: #e2e8f0;
-          }
-
-          .hide-scrollbar-thumb {
-            background: #cbd5e1;
-          }
-        `}</style> */}
         <style>{`
   .hide-scrollbar::-webkit-scrollbar {
     width: 4px;

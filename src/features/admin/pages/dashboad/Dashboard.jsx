@@ -37,6 +37,7 @@ import {
 import Loader from "../../common/Loader";
 import Error from "../../common/Error";
 import { useTranslation } from "react-i18next";
+import ContenetHealth from "./ContenetHealth";
 
 const Dashboard = () => {
   const { t } = useTranslation();
@@ -653,6 +654,10 @@ const Dashboard = () => {
             </div>
           </div>
         )}
+
+        <div className="mt-4">
+          <ContenetHealth />
+        </div>
       </PageBody>
     </PageLayout>
   );

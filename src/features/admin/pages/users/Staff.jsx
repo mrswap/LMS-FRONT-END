@@ -144,7 +144,6 @@ const Staff = () => {
           {
             header: t("userManagement.list.columns.status"),
             render: (row) => (
-              // console.log("row", row),
               <StatusToggle
                 value={row.status}
                 onToggle={async (newStatus) => {

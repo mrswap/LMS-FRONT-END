@@ -6,324 +6,11 @@ import {
   AiOutlineInfoCircle,
   AiOutlineDown,
   AiOutlineRight,
-  AiOutlineStar,
-  AiOutlineCheck,
-  AiOutlineCloseCircle,
-  AiOutlineAlert,
 } from "react-icons/ai";
 
 const sections = [
   {
     id: 1,
-    title: "CRITICAL FORMAT RULES (MUST READ FIRST!)",
-    color: "red",
-    isCritical: true,
-    content: (
-      <div className="p-4 sm:p-6">
-        <div className="bg-gradient-to-r from-red-600 to-red-700 text-white p-4 sm:p-5 rounded-xl mb-5 shadow-lg">
-          <div className="flex items-center gap-3 mb-2">
-            <AiOutlineStar className="text-yellow-300 text-2xl" />
-            <h3 className="font-bold text-lg sm:text-xl">
-              CRITICAL RULES - READ CAREFULLY!
-            </h3>
-          </div>
-          <p className="text-red-100 text-sm sm:text-base">
-            These are the MOST IMPORTANT rules. Everything else depends on
-            these!
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 gap-4">
-          <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-4 sm:p-5 rounded-xl border-l-4 border-blue-600 shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex items-start gap-3">
-              <div className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mt-0.5 flex-shrink-0">
-                1
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="font-bold text-blue-800 text-sm sm:text-base">
-                  EXACT HIERARCHY FORMAT
-                </p>
-                <div className="bg-gray-900 text-green-400 p-3 rounded-md font-mono text-xs sm:text-sm mt-2 overflow-x-auto">
-                  <pre className="whitespace-pre-wrap">{`LEVEL 1
-MODULE 1: Cardiac Anatomy and Physiology
-Chapter 1.1: Heart Structure
-Topic 1.1.1: Four Chambers of the Heart`}</pre>
-                </div>
-                <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  <div className="bg-white/60 p-2 rounded border border-blue-200">
-                    <p className="font-semibold text-blue-700 text-xs flex items-center gap-1">
-                      <AiOutlineCheck className="text-green-600" /> Correct
-                      Format
-                    </p>
-                    <code className="block text-blue-600 text-xs mt-1">
-                      LEVEL 1
-                    </code>
-                    <code className="block text-blue-600 text-xs">
-                      Module 1: Title
-                    </code>
-                    <code className="block text-blue-600 text-xs">
-                      Chapter 1.1: Title
-                    </code>
-                    <code className="block text-blue-600 text-xs">
-                      Topic 1.1.1: Title
-                    </code>
-                  </div>
-                  <div className="bg-red-50 p-2 rounded border border-red-200">
-                    <p className="font-semibold text-red-700 text-xs flex items-center gap-1">
-                      <AiOutlineCloseCircle className="text-red-600" /> Wrong
-                      Format
-                    </p>
-                    <code className="block text-red-600 text-xs mt-1 line-through">
-                      LEVEL1
-                    </code>
-                    <code className="block text-red-600 text-xs line-through">
-                      Module1: Title
-                    </code>
-                    <code className="block text-red-600 text-xs line-through">
-                      Chapter1.1: Title
-                    </code>
-                    <code className="block text-red-600 text-xs line-through">
-                      Topic1.1.1: Title
-                    </code>
-                  </div>
-                </div>
-                <ul className="list-disc list-inside text-blue-700 text-xs sm:text-sm mt-3 space-y-1">
-                  <li>LEVEL must come first</li>
-                  <li>
-                    EXACT spacing:{" "}
-                    <code className="bg-blue-200 px-1.5 py-0.5 rounded text-xs font-bold">
-                      xyz 1: abc
-                    </code>
-                  </li>
-                  <li>Maintain proper numbering sequence</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-gradient-to-r from-purple-50 to-purple-100 p-4 sm:p-5 rounded-xl border-l-4 border-purple-600 shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex items-start gap-3">
-              <div className="bg-purple-600 text-white text-sm font-bold px-3 py-1 rounded-full mt-0.5 flex-shrink-0">
-                2
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="font-bold text-purple-800 text-sm sm:text-base">
-                  CONTENT BELONGS TO HEADING ONLY
-                </p>
-                <div className="bg-gray-900 text-green-400 p-3 rounded-md font-mono text-xs sm:text-sm mt-2 overflow-x-auto">
-                  <pre className="whitespace-pre-wrap">{`CORRECT:
-1.1.1.H1 Definition
-1.1.1.C1
-The heart is a muscular organ...
-
-WRONG (Extra content will be REMOVED):
-1.1.1.H1 Definition
-This extra text will be DELETED by automation!
-1.1.1.C1
-The heart is a muscular organ...`}</pre>
-                </div>
-                <div className="mt-3 bg-red-100 p-3 rounded-lg border-2 border-red-300">
-                  <p className="font-bold text-red-700 text-xs sm:text-sm flex items-center gap-2">
-                    <AiOutlineWarning className="text-red-600" />
-                    CRITICAL WARNING:
-                  </p>
-                  <ul className="list-disc list-inside text-red-700 text-xs sm:text-sm ml-3 mt-1 space-y-1">
-                    <li>
-                      Content code (C1, C2, C3...) must come IMMEDIATELY after
-                      heading
-                    </li>
-                    <li>
-                      If ANY other content comes between, automation will DELETE
-                      it
-                    </li>
-                    <li>
-                      Each heading gets its own sequential content (H1-&gt;C1,
-                      H2-&gt;C2, H3-&gt;C3...)
-                    </li>
-                    <li>
-                      No extra text, no bullet points, no formatting between
-                      heading and content code
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-gradient-to-r from-green-50 to-green-100 p-4 sm:p-5 rounded-xl border-l-4 border-green-600 shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex items-start gap-3">
-              <div className="bg-green-600 text-white text-sm font-bold px-3 py-1 rounded-full mt-0.5 flex-shrink-0">
-                3
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="font-bold text-green-800 text-sm sm:text-base">
-                  NO EXTRA CONTENT ANYWHERE!
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
-                  <div className="bg-white/60 p-3 rounded border border-green-200">
-                    <p className="font-bold text-green-700 text-xs flex items-center gap-1">
-                      <AiOutlineCheck className="text-green-600" /> CLEAN FLOW
-                    </p>
-                    <code className="block text-green-600 text-xs mt-1">
-                      Topic 1.1.1: Title
-                    </code>
-                    <code className="block text-green-600 text-xs">
-                      1.1.1.D Description
-                    </code>
-                    <code className="block text-green-600 text-xs">
-                      1.1.1.H1 Heading
-                    </code>
-                    <code className="block text-green-600 text-xs">
-                      1.1.1.C1 Content
-                    </code>
-                    <code className="block text-green-600 text-xs">
-                      1.1.1.H2 Heading
-                    </code>
-                    <code className="block text-green-600 text-xs">
-                      1.1.1.C2 Content
-                    </code>
-                  </div>
-                  <div className="bg-red-50 p-3 rounded border border-red-200">
-                    <p className="font-bold text-red-700 text-xs flex items-center gap-1">
-                      <AiOutlineCloseCircle className="text-red-600" /> BROKEN
-                      FLOW
-                    </p>
-                    <code className="block text-red-600 text-xs mt-1">
-                      Topic 1.1.1: Title
-                    </code>
-                    <code className="block text-red-600 text-xs">
-                      1.1.1.D Description
-                    </code>
-                    <code className="block text-red-600 text-xs line-through">
-                      Extra text here!
-                    </code>
-                    <code className="block text-red-600 text-xs">
-                      1.1.1.H1 Heading
-                    </code>
-                    <code className="block text-red-600 text-xs line-through">
-                      More extra text!
-                    </code>
-                    <code className="block text-red-600 text-xs">
-                      1.1.1.C1 Content
-                    </code>
-                  </div>
-                </div>
-                <ul className="list-disc list-inside text-green-700 text-xs sm:text-sm mt-3 space-y-1">
-                  <li>
-                    Between Module and Chapter -&gt; Automation will remove
-                  </li>
-                  <li>
-                    Between Chapter and Topic -&gt; Automation will remove
-                  </li>
-                  <li>
-                    Between Topic and Heading -&gt; Automation will remove
-                  </li>
-                  <li>
-                    Between Heading and Content Code -&gt; Automation will
-                    remove
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-4 sm:p-5 rounded-xl border-l-4 border-orange-600 shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex items-start gap-3">
-              <div className="bg-orange-600 text-white text-sm font-bold px-3 py-1 rounded-full mt-0.5 flex-shrink-0">
-                4
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="font-bold text-orange-800 text-sm sm:text-base">
-                  SPACING & FORMAT MUST BE EXACT
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
-                  <div>
-                    <p className="font-semibold text-green-700 text-xs flex items-center gap-1">
-                      <AiOutlineCheck className="text-green-600" /> Correct
-                    </p>
-                    <code className="block bg-white p-1.5 rounded text-xs mt-1 border border-green-200">
-                      Module 1: Title
-                    </code>
-                    <code className="block bg-white p-1.5 rounded text-xs mt-1 border border-green-200">
-                      Chapter 1.1: Title
-                    </code>
-                    <code className="block bg-white p-1.5 rounded text-xs mt-1 border border-green-200">
-                      Topic 1.1.1: Title
-                    </code>
-                    <code className="block bg-white p-1.5 rounded text-xs mt-1 border border-green-200">
-                      LEVEL 1
-                    </code>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-red-700 text-xs flex items-center gap-1">
-                      <AiOutlineCloseCircle className="text-red-600" /> Wrong
-                    </p>
-                    <code className="block bg-red-50 p-1.5 rounded text-xs mt-1 border border-red-200 line-through">
-                      Module1: Title
-                    </code>
-                    <code className="block bg-red-50 p-1.5 rounded text-xs mt-1 border border-red-200 line-through">
-                      Chapter1.1: Title
-                    </code>
-                    <code className="block bg-red-50 p-1.5 rounded text-xs mt-1 border border-red-200 line-through">
-                      Topic1.1.1: Title
-                    </code>
-                    <code className="block bg-red-50 p-1.5 rounded text-xs mt-1 border border-red-200 line-through">
-                      LEVEL1
-                    </code>
-                  </div>
-                </div>
-                <div className="mt-3 bg-red-100 p-3 rounded-lg border-2 border-red-300">
-                  <p className="font-bold text-red-700 text-xs sm:text-sm flex items-center gap-2">
-                    <AiOutlineAlert className="text-red-600" />
-                    CRITICAL WARNING:
-                  </p>
-                  <p className="text-red-700 text-xs sm:text-sm mt-1">
-                    If ANY of these rules are broken, the ENTIRE import will
-                    FAIL or CONTENT will be DELETED automatically!
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-5 bg-gradient-to-r from-gray-800 to-gray-900 text-white p-4 rounded-xl">
-          <div className="flex items-center gap-2 mb-2">
-            <AiOutlineInfoCircle className="text-yellow-400" />
-            <p className="font-bold text-sm sm:text-base">
-              Quick Reference Card
-            </p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-            <div className="bg-gray-700/50 p-2 rounded">
-              <span className="text-yellow-400 font-bold">LEVEL</span>
-              <code className="block text-green-300 mt-0.5">LEVEL 1</code>
-            </div>
-            <div className="bg-gray-700/50 p-2 rounded">
-              <span className="text-yellow-400 font-bold">Module</span>
-              <code className="block text-green-300 mt-0.5">
-                Module 1: Title
-              </code>
-            </div>
-            <div className="bg-gray-700/50 p-2 rounded">
-              <span className="text-yellow-400 font-bold">Chapter</span>
-              <code className="block text-green-300 mt-0.5">
-                Chapter 1.1: Title
-              </code>
-            </div>
-            <div className="bg-gray-700/50 p-2 rounded">
-              <span className="text-yellow-400 font-bold">Topic</span>
-              <code className="block text-green-300 mt-0.5">
-                Topic 1.1.1: Title
-              </code>
-            </div>
-          </div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 2,
     title: "1. MODULE FORMAT",
     color: "blue",
     content: (
@@ -362,7 +49,7 @@ The heart is a muscular organ...`}</pre>
     ),
   },
   {
-    id: 3,
+    id: 2,
     title: "2. MODULE DESCRIPTION FORMAT",
     color: "indigo",
     content: (
@@ -391,7 +78,7 @@ The heart is a muscular organ...`}</pre>
     ),
   },
   {
-    id: 4,
+    id: 3,
     title: "3. CHAPTER FORMAT",
     color: "green",
     content: (
@@ -428,7 +115,7 @@ The heart is a muscular organ...`}</pre>
     ),
   },
   {
-    id: 5,
+    id: 4,
     title: "4. CHAPTER DESCRIPTION FORMAT",
     color: "teal",
     content: (
@@ -457,7 +144,7 @@ The heart is a muscular organ...`}</pre>
     ),
   },
   {
-    id: 6,
+    id: 5,
     title: "5. TOPIC FORMAT",
     color: "purple",
     content: (
@@ -497,7 +184,7 @@ The heart is a muscular organ...`}</pre>
     ),
   },
   {
-    id: 7,
+    id: 6,
     title: "6. TOPIC DESCRIPTION FORMAT",
     color: "pink",
     content: (
@@ -526,7 +213,7 @@ The heart is a muscular organ...`}</pre>
     ),
   },
   {
-    id: 8,
+    id: 7,
     title: "7. HEADING FORMAT",
     color: "orange",
     content: (
@@ -566,14 +253,14 @@ The heart is a muscular organ...`}</pre>
         </ul>
         <div className="bg-green-50 p-2 sm:p-3 rounded border-l-4 border-green-500 text-xs sm:text-sm">
           <p className="font-semibold text-green-800">Correct vs Wrong:</p>
-          <p className="mt-1 flex items-center gap-1">
-            <AiOutlineCheck className="text-green-600" />
+          <p className="mt-1">
+            ✓{" "}
             <code className="bg-green-100 px-1 rounded text-xs">
               1.1.1.H1 Definition
             </code>
           </p>
-          <p className="text-red-600 mt-0.5 flex items-center gap-1">
-            <AiOutlineCloseCircle className="text-red-600" />
+          <p className="text-red-600 mt-0.5">
+            ✗{" "}
             <code className="bg-red-100 px-1 rounded text-xs">
               1.1.2.H1 Definition
             </code>{" "}
@@ -584,7 +271,7 @@ The heart is a muscular organ...`}</pre>
     ),
   },
   {
-    id: 9,
+    id: 8,
     title: "8. CONTENT FORMAT",
     color: "yellow",
     content: (
@@ -602,31 +289,11 @@ The heart is a muscular organ...`}</pre>
         <div className="bg-gray-900 text-green-400 p-3 rounded-md font-mono text-xs overflow-x-auto">
           <pre className="whitespace-pre-wrap">{`1.1.1.H1 Definition\n1.1.1.C1\nThe heart is a muscular organ responsible for pumping blood.`}</pre>
         </div>
-        <div className="mt-3 bg-red-50 p-2 sm:p-3 rounded border-l-4 border-red-500 text-xs sm:text-sm">
-          <p className="font-semibold text-red-800 flex items-center gap-1">
-            <AiOutlineWarning className="text-red-600" /> CRITICAL RULES:
-          </p>
-          <ul className="list-disc list-inside text-red-700 ml-3 mt-1 space-y-0.5">
-            <li>Content codes must be sequential (C1, C2, C3...)</li>
-            <li>Content belongs to the most recent heading only</li>
-            <li>
-              <strong className="text-red-900">
-                If ANY extra content comes between heading and content code,
-                automation will REMOVE it!
-              </strong>
-            </li>
-            <li>Each heading should have its own content block</li>
-            <li>
-              No text, spaces, or formatting between heading and its content
-              code
-            </li>
-          </ul>
-        </div>
       </div>
     ),
   },
   {
-    id: 10,
+    id: 9,
     title: "9. TOPIC QUIZ / ASSESSMENT FORMAT",
     color: "purple",
     content: (
@@ -644,7 +311,7 @@ The heart is a muscular organ...`}</pre>
           </p>
           <ul className="list-disc list-inside text-purple-700 ml-3 mt-1 space-y-0.5">
             <li>
-              <code>Correct Answer: B</code> Recommended
+              <code>Correct Answer: B</code> ← Recommended
             </li>
             <li>
               <code>Answer: B</code>
@@ -658,7 +325,7 @@ The heart is a muscular organ...`}</pre>
           </p>
           <ul className="list-disc list-inside text-purple-700 ml-3 mt-1 space-y-0.5">
             <li>
-              <code>A. Option</code> Recommended
+              <code>A. Option</code> ← Recommended
             </li>
             <li>
               <code>A) Option</code>
@@ -669,7 +336,7 @@ The heart is a muscular organ...`}</pre>
     ),
   },
   {
-    id: 11,
+    id: 10,
     title: "10. DYNAMIC EXAM FORMAT",
     color: "cyan",
     content: (
@@ -702,13 +369,13 @@ The heart is a muscular organ...`}</pre>
           <p className="font-semibold text-cyan-800">Assessment Targets:</p>
           <ul className="list-disc list-inside text-cyan-700 ml-3 mt-1 space-y-0.5">
             <li>
-              Module -&gt; Target: <code>1</code>
+              Module → Target: <code>1</code>
             </li>
             <li>
-              Chapter -&gt; Target: <code>1.2</code>
+              Chapter → Target: <code>1.2</code>
             </li>
             <li>
-              Level -&gt; Target: <code>L1</code>
+              Level → Target: <code>L1</code>
             </li>
           </ul>
         </div>
@@ -716,7 +383,7 @@ The heart is a muscular organ...`}</pre>
     ),
   },
   {
-    id: 12,
+    id: 11,
     title: "11. MODULE MCQ FORMAT",
     color: "blue",
     content: (
@@ -731,7 +398,7 @@ The heart is a muscular organ...`}</pre>
     ),
   },
   {
-    id: 13,
+    id: 12,
     title: "12. CHAPTER MCQ FORMAT",
     color: "green",
     content: (
@@ -746,7 +413,7 @@ The heart is a muscular organ...`}</pre>
     ),
   },
   {
-    id: 14,
+    id: 13,
     title: "13. LEVEL MCQ FORMAT",
     color: "amber",
     content: (
@@ -761,7 +428,7 @@ The heart is a muscular organ...`}</pre>
     ),
   },
   {
-    id: 15,
+    id: 14,
     title: "14. CASE-BASED EXAM FORMAT",
     color: "red",
     content: (
@@ -773,19 +440,19 @@ The heart is a muscular organ...`}</pre>
           <p className="font-semibold text-red-800">Format Codes:</p>
           <ul className="list-disc list-inside text-red-700 ml-3 mt-1 space-y-0.5">
             <li>
-              <code>1.CT1</code> -&gt; Case Title
+              <code>1.CT1</code> → Case Title
             </li>
             <li>
-              <code>1.CD1</code> -&gt; Case Description
+              <code>1.CD1</code> → Case Description
             </li>
             <li>
-              <code>1.CMQ1</code> -&gt; Case MCQ
+              <code>1.CMQ1</code> → Case MCQ
             </li>
             <li>
-              <code>1.CMQ1.O1</code> -&gt; Option
+              <code>1.CMQ1.O1</code> → Option
             </li>
             <li>
-              <code>1.CMQ1.A</code> -&gt; Answer
+              <code>1.CMQ1.A</code> → Answer
             </li>
           </ul>
         </div>
@@ -793,7 +460,7 @@ The heart is a muscular organ...`}</pre>
     ),
   },
   {
-    id: 16,
+    id: 15,
     title: "15. HTML SUPPORT",
     color: "gray",
     content: (
@@ -836,7 +503,7 @@ The heart is a muscular organ...`}</pre>
     ),
   },
   {
-    id: 17,
+    id: 16,
     title: "16. RECOMMENDED CONTENT FLOW",
     color: "green",
     content: (
@@ -845,12 +512,11 @@ The heart is a muscular organ...`}</pre>
           <p className="font-semibold text-blue-800">Full Hierarchy Flow:</p>
           <div className="mt-2 text-xs space-y-0.5 font-mono">
             {[
-              "LEVEL 1",
-              "Module 1: Cardiac Anatomy and Physiology",
+              "Module",
               "  1.D Module Description",
-              "  Chapter 1.1: Heart Structure",
+              "  Chapter",
               "    1.1.D Chapter Description",
-              "    Topic 1.1.1: Four Chambers of the Heart",
+              "    Topic",
               "      1.1.1.D Topic Description",
               "      1.1.1.H1 Learning Objective",
               "      1.1.1.C1 Content",
@@ -862,7 +528,7 @@ The heart is a muscular organ...`}</pre>
               "      1.1.1.C4 Content",
               "      1.1.1.H5 Summary",
               "      1.1.1.C5 Content",
-              "      Topic Assessment (Q1-Q5)",
+              "      Topic Assessment (Q1–Q5)",
             ].map((line, i) => (
               <code key={i} className="block text-gray-700">
                 {line}
@@ -870,35 +536,17 @@ The heart is a muscular organ...`}</pre>
             ))}
           </div>
         </div>
-        <div className="bg-red-50 p-2 sm:p-3 rounded border-l-4 border-red-500 text-xs sm:text-sm">
-          <p className="font-semibold text-red-800 flex items-center gap-1">
-            <AiOutlineWarning className="text-red-600" /> CRITICAL REMINDER:
-          </p>
-          <ul className="list-disc list-inside text-red-700 ml-3 mt-1 space-y-0.5">
-            <li>Content codes must be sequential (C1, C2, C3...)</li>
-            <li>
-              Do NOT place ANY content between heading and its content code
-            </li>
-            <li>If you place extra content, automation will REMOVE it</li>
-            <li>
-              Each heading (H1, H2, H3, etc.) should have its own content block
-              (C1, C2, C3, etc.)
-            </li>
-            <li>No extra spaces, text, or formatting between elements</li>
-          </ul>
-        </div>
       </div>
     ),
   },
   {
-    id: 18,
+    id: 17,
     title: "17. COMPLETE TOPIC EXAMPLE",
     color: "gray",
     content: (
       <div className="p-3 sm:p-4">
         <div className="bg-gray-900 text-green-400 p-3 sm:p-4 rounded-md font-mono text-[10px] sm:text-xs overflow-x-auto">
-          <pre className="whitespace-pre-wrap">{`LEVEL 1
-Module 1: Cardiac Anatomy and Physiology
+          <pre className="whitespace-pre-wrap">{`Module 1: Cardiac Anatomy and Physiology
 1.D Introduction to cardiac anatomy and physiology.
 
 Chapter 1.1: Heart Structure
@@ -948,7 +596,7 @@ The heart's four chambers work together to maintain dual circulation.
     ),
   },
   {
-    id: 19,
+    id: 18,
     title: "18. DO NOT USE",
     color: "red",
     content: (
@@ -970,9 +618,6 @@ The heart's four chambers work together to maintain dual circulation.
             "Use duplicate question codes",
             "Mix chapter/topic structures",
             "Put plain MCQs without identifiers",
-            "Put extra content between heading and its content code",
-            "Skip content numbering",
-            "Add extra spaces or formatting between elements",
           ].map((item) => (
             <li key={item}>{item}</li>
           ))}
@@ -981,15 +626,14 @@ The heart's four chambers work together to maintain dual circulation.
     ),
   },
   {
-    id: 20,
+    id: 19,
     title: "19. FINAL IMPORTANT NOTES",
     color: "red",
     content: (
       <div className="p-3 sm:p-4">
         <div className="bg-red-50 p-3 sm:p-4 rounded border-2 border-red-300 mb-4">
-          <p className="font-bold text-red-800 text-sm sm:text-base mb-2 flex items-center gap-2">
-            <AiOutlineWarning className="text-red-600" />
-            The LMS bulk import system is STRUCTURE-SENSITIVE!
+          <p className="font-bold text-red-800 text-sm sm:text-base mb-2">
+            ⚠️ The LMS bulk import system is STRUCTURE-SENSITIVE!
           </p>
           <p className="text-xs sm:text-sm text-red-700">
             Even small formatting mistakes can:
@@ -1011,8 +655,8 @@ The heart's four chambers work together to maintain dual circulation.
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div className="bg-green-50 p-2 sm:p-3 rounded border-l-4 border-green-500">
-            <p className="font-semibold text-green-800 text-xs sm:text-sm flex items-center gap-1">
-              <AiOutlineCheck className="text-green-600" /> ALWAYS:
+            <p className="font-semibold text-green-800 text-xs sm:text-sm">
+              ALWAYS:
             </p>
             <ul className="list-disc list-inside text-xs sm:text-sm text-green-700 ml-3 mt-1 space-y-0.5">
               {[
@@ -1022,17 +666,14 @@ The heart's four chambers work together to maintain dual circulation.
                 "Keep assessments structured",
                 "Keep heading/content linked properly",
                 "Verify topic codes before submission",
-                "Place content directly under its heading",
-                "Use LEVEL before MODULE",
-                "Use exact spacing: xyz 1: abc",
               ].map((e) => (
                 <li key={e}>{e}</li>
               ))}
             </ul>
           </div>
           <div className="bg-red-50 p-2 sm:p-3 rounded border-l-4 border-red-500">
-            <p className="font-semibold text-red-800 text-xs sm:text-sm flex items-center gap-1">
-              <AiOutlineCloseCircle className="text-red-600" /> NEVER:
+            <p className="font-semibold text-red-800 text-xs sm:text-sm">
+              NEVER:
             </p>
             <ul className="list-disc list-inside text-xs sm:text-sm text-red-700 ml-3 mt-1 space-y-0.5">
               {[
@@ -1041,9 +682,6 @@ The heart's four chambers work together to maintain dual circulation.
                 "Use random formatting",
                 "Mix chapter/topic structures",
                 "Put plain MCQs without identifiers",
-                "Put extra content between heading and its content code",
-                "Skip LEVEL",
-                "Use wrong spacing format",
               ].map((e) => (
                 <li key={e}>{e}</li>
               ))}
@@ -1054,14 +692,13 @@ The heart's four chambers work together to maintain dual circulation.
     ),
   },
   {
-    id: 21,
+    id: 20,
     title: "20. PRE-SUBMISSION CHECKLIST",
     color: "green",
     content: (
       <div className="p-3 sm:p-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-2">
           {[
-            "LEVEL verified",
             "Module numbering verified",
             "Module description verified",
             "Chapter numbering verified",
@@ -1069,9 +706,7 @@ The heart's four chambers work together to maintain dual circulation.
             "Topic numbering verified",
             "Topic description verified",
             "Heading codes verified",
-            "Content codes verified (sequential C1, C2, C3...)",
-            "Content placed directly under its heading",
-            "No extra content between heading and content code",
+            "Content codes verified",
             "Assessment type verified",
             "Assessment target verified",
             "All answers present",
@@ -1079,7 +714,6 @@ The heart's four chambers work together to maintain dual circulation.
             "No duplicate question IDs",
             "HTML formatting clean",
             "Images properly placed",
-            "Exact spacing format used",
             "Final proofreading completed",
           ].map((item) => (
             <div
@@ -1097,7 +731,6 @@ The heart's four chambers work together to maintain dual circulation.
 ];
 
 const colorMap = {
-  red: "bg-red-100 text-red-800",
   blue: "bg-blue-100 text-blue-800",
   indigo: "bg-indigo-100 text-indigo-800",
   green: "bg-green-100 text-green-800",
@@ -1108,11 +741,12 @@ const colorMap = {
   yellow: "bg-yellow-100 text-yellow-800",
   cyan: "bg-cyan-100 text-cyan-800",
   amber: "bg-amber-100 text-amber-800",
+  red: "bg-red-100 text-red-800",
   gray: "bg-gray-100 text-gray-800",
 };
 
 const Guideline = ({ open, onClose }) => {
-  const [openSections, setOpenSections] = useState({ 1: true });
+  const [openSections, setOpenSections] = useState({});
 
   const toggleSection = (id) => {
     setOpenSections((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -1142,6 +776,7 @@ const Guideline = ({ open, onClose }) => {
           style={{ animation: "slideUp 0.3s ease-out" }}
           onClick={(e) => e.stopPropagation()}
         >
+          {/* Header */}
           <div className="bg-gray-800 px-3 sm:px-6 py-3 sm:py-4 flex justify-between items-center rounded-t-lg sticky top-0 z-10 flex-shrink-0">
             <div className="flex items-center gap-2 sm:gap-3">
               <AiOutlineInfoCircle className="text-blue-400 text-lg sm:text-xl" />
@@ -1162,7 +797,9 @@ const Guideline = ({ open, onClose }) => {
             </button>
           </div>
 
+          {/* Body */}
           <div className="flex-1 overflow-y-auto p-3 sm:p-4 md:p-6 bg-gray-50">
+            {/* Warning Banner */}
             <div className="bg-yellow-50 border-l-4 border-yellow-500 p-3 sm:p-4 mb-4 sm:mb-6 rounded-r">
               <div className="flex flex-col sm:flex-row sm:items-start gap-2">
                 <AiOutlineWarning className="text-yellow-600 text-lg sm:text-xl flex-shrink-0" />
@@ -1181,6 +818,7 @@ const Guideline = ({ open, onClose }) => {
               </div>
             </div>
 
+            {/* Quick Format Reference */}
             <div className="bg-white rounded-lg border border-gray-200 overflow-hidden mb-4">
               <div className="bg-gray-800 px-3 sm:px-4 py-2">
                 <h3 className="font-bold text-white text-sm sm:text-base">
@@ -1204,7 +842,6 @@ const Guideline = ({ open, onClose }) => {
                   </thead>
                   <tbody>
                     {[
-                      ["LEVEL", "LEVEL N", "LEVEL 1"],
                       [
                         "Module",
                         "Module N: Title",
@@ -1271,57 +908,40 @@ const Guideline = ({ open, onClose }) => {
               </div>
             </div>
 
+            {/* Expand/Collapse Controls */}
             <div className="flex gap-2 mb-3">
               <button
                 onClick={expandAll}
-                className="text-xs px-3 py-1.5 bg-gray-200 hover:bg-gray-300 rounded-md text-gray-700 transition-colors flex items-center gap-1"
+                className="text-xs px-3 py-1.5 bg-gray-200 hover:bg-gray-300 rounded-md text-gray-700 transition-colors"
               >
-                <AiOutlineDown className="text-xs" /> Expand All
+                Expand All
               </button>
               <button
                 onClick={collapseAll}
-                className="text-xs px-3 py-1.5 bg-gray-200 hover:bg-gray-300 rounded-md text-gray-700 transition-colors flex items-center gap-1"
+                className="text-xs px-3 py-1.5 bg-gray-200 hover:bg-gray-300 rounded-md text-gray-700 transition-colors"
               >
-                <AiOutlineRight className="text-xs" /> Collapse All
+                Collapse All
               </button>
             </div>
 
+            {/* Accordion Sections */}
             <div className="space-y-2">
               {sections.map((section) => (
                 <div
                   key={section.id}
-                  className={`bg-white rounded-lg border overflow-hidden ${
-                    section.isCritical
-                      ? "border-red-500 border-2"
-                      : "border-gray-200"
-                  }`}
+                  className="bg-white rounded-lg border border-gray-200 overflow-hidden"
                 >
                   <button
-                    className={`w-full px-3 sm:px-4 py-2.5 border-b flex justify-between items-center hover:bg-gray-150 transition-colors text-left ${
-                      section.isCritical ? "bg-red-50" : "bg-gray-100"
-                    }`}
+                    className="w-full bg-gray-100 px-3 sm:px-4 py-2.5 border-b border-gray-200 flex justify-between items-center hover:bg-gray-150 transition-colors text-left"
                     onClick={() => toggleSection(section.id)}
                   >
                     <div className="flex items-center gap-2">
                       <span
-                        className={`text-xs px-2 py-0.5 rounded-full font-semibold ${
-                          section.isCritical
-                            ? "bg-red-600 text-white"
-                            : colorMap[section.color] ||
-                              "bg-gray-100 text-gray-800"
-                        }`}
+                        className={`text-xs px-2 py-0.5 rounded-full font-semibold ${colorMap[section.color] || "bg-gray-100 text-gray-800"}`}
                       >
-                        {section.isCritical ? (
-                          <AiOutlineStar className="text-yellow-300" />
-                        ) : (
-                          `#${section.id}`
-                        )}
+                        #{section.id}
                       </span>
-                      <h3
-                        className={`font-bold text-sm sm:text-base ${
-                          section.isCritical ? "text-red-700" : "text-gray-800"
-                        }`}
-                      >
+                      <h3 className="font-bold text-gray-800 text-sm sm:text-base">
                         {section.title}
                       </h3>
                     </div>
@@ -1337,16 +957,14 @@ const Guideline = ({ open, onClose }) => {
             </div>
           </div>
 
+          {/* Footer */}
           <div className="bg-white px-3 sm:px-6 py-3 border-t border-gray-200 flex justify-between items-center rounded-b-lg sticky bottom-0 flex-shrink-0">
-            <div className="flex items-center gap-2 text-xs text-gray-500">
-              <AiOutlineInfoCircle className="text-gray-400" />
-              <span>Version 1.0</span>
-            </div>
+            <div></div>
             <button
               onClick={onClose}
-              className="px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 transition-colors text-xs sm:text-sm flex items-center gap-1"
+              className="px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 transition-colors text-xs sm:text-sm"
             >
-              <AiOutlineClose className="text-sm" /> Close
+              Close
             </button>
           </div>
         </div>

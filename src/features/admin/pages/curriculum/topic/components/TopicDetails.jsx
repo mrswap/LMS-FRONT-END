@@ -104,7 +104,7 @@ const TopicDetails = () => {
 
           setIsDataLoaded(true);
         } catch (error) {
-          console.error("Error fetching data:", error);
+          // console.error("Error fetching data:", error);
           toast.error(t("topic.error.fetchData"));
         }
       }
@@ -118,21 +118,6 @@ const TopicDetails = () => {
       setThumbnailPreview(topic.thumbnail);
     }
   }, [topic]);
-
-  // const initialValues = {
-  //   topicName: topic?.title || "",
-  //   chapterName:
-  //     chaptersOptions?.find((opt) => opt.value === topic?.chapter_id) || null,
-  //   moduleName:
-  //     modulesOptions?.find((opt) => opt.value === topic?.module_id) || null,
-  //   levelName:
-  //     levelOptions?.find((opt) => opt.value === topic?.level_id) || null,
-  //   programName:
-  //     programOptions?.find((opt) => opt.value === topic?.program_id) || null,
-  //   description: topic?.description || "",
-  //   thumbnail: topic?.thumbnail || null,
-  //   duration: topic?.estimated_duration || "",
-  // };
 
   const initialValues = {
     topicName: topic?.title || "",

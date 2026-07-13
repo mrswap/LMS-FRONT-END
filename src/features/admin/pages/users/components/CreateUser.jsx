@@ -40,9 +40,6 @@ const CreateUser = () => {
     dispatch(getAllRoles({ status: 1 }));
   }, []);
 
-  console.log("roles", roles);
-  console.log("designation", designations);
-
   const roleOptions = roles?.map((role) => ({
     label: role.label,
     value: role.id,
@@ -106,7 +103,6 @@ const CreateUser = () => {
   };
 
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
-    // console.log("values", values);
     const selectedRole = roles?.find((role) => role.id === values.role?.value);
 
     const redirectPath =
