@@ -1251,60 +1251,62 @@
 
   "automatedImporter": {
     "list": {
-      "title": "स्वचालित कंटेंट इम्पोर्टर",
-      "subtitle": "स्वचालित इम्पोर्ट लॉग्स को प्रबंधित और मॉनिटर करें"
+      "title": "स्वचालित सामग्री आयातक",
+      "subtitle": "स्वचालित आयात लॉग प्रबंधित और मॉनिटर करें"
     },
     "create": {
-      "title": "LMS कंटेंट जनरेटर",
-      "subtitle": "बल्क इम्पोर्ट के लिए स्ट्रक्चर-सेंसिटिव कंटेंट बनाएं | कम से कम 100 शब्द आवश्यक",
+      "title": "एलएमएस सामग्री जनरेटर",
+      "subtitle": "बल्क आयात के लिए संरचना-संवेदनशील सामग्री बनाएं | न्यूनतम 100 शब्द आवश्यक",
       "generalDetails": "सामान्य विवरण",
-      "contentSection": "कंटेंट सेक्शन",
-      "parentProgram": "पैरेंट प्रोग्राम",
-      "parentLevel": "पैरेंट लेवल",
-      "selectProgram": "प्रोग्राम चुनें...",
-      "selectLevel": "लेवल चुनें...",
-      "clickForGuidelines": "गाइडलाइन के लिए ? पर क्लिक करें",
-      "contentMeetsRequirement": "कंटेंट आवश्यकताओं को पूरा करता है ({wordCount}/100 शब्द)",
-      "contentNeedsMoreWords": "{wordCount}/100 शब्द - {remaining} और शब्दों की आवश्यकता है",
-      "viewGuidelines": "पूरी फॉर्मेटिंग गाइडलाइन देखें",
-      "editorPlaceholder": "उदाहरण:\nमॉड्यूल 1: कार्डियक एनाटॉमी\n\nअध्याय 1.1: हृदय संरचना\n\nविषय 1.1.1: चार चैम्बर\n\n1.1.1.H1 लर्निंग ऑब्जेक्टिव\n1.1.1.C1 अपना कंटेंट यहां लिखें..."
+      "contentSection": "सामग्री अनुभाग",
+      "parentProgram": "मूल कार्यक्रम",
+      "parentLevel": "मूल स्तर",
+      "selectProgram": "कार्यक्रम चुनें...",
+      "selectLevel": "स्तर चुनें...",
+      "clickForGuidelines": "दिशानिर्देशों के लिए ? क्लिक करें",
+      "contentMeetsRequirement": "सामग्री आवश्यकता को पूरा करती है ({wordCount}/100 शब्द)",
+      "contentNeedsMoreWords": "{wordCount}/100 शब्द - {remaining} और शब्द चाहिए",
+      "viewGuidelines": "संपूर्ण स्वरूपण दिशानिर्देश देखें",
+      "editorPlaceholder": "उदाहरण:\nमॉड्यूल 1: कार्डियक एनाटॉमी\n\nअध्याय 1.1: हृदय संरचना\n\nविषय 1.1.1: चार कक्ष\n\n1.1.1.H1 सीखने का उद्देश्य\n1.1.1.C1 आपकी सामग्री यहाँ..."
     },
     "actions": {
-      "createImport": "इम्पोर्ट बनाएं",
-      "createContent": "कंटेंट बनाएं",
+      "createImport": "आयात बनाएं",
+      "createContent": "सामग्री बनाएं",
       "creating": "बनाया जा रहा है..."
     },
-    "searchPlaceholder": "इम्पोर्ट खोजें...",
+    "searchPlaceholder": "आयात खोजें...",
+    "noErrors": "कोई त्रुटि नहीं मिली",
     "filters": {
-      "allLevels": "सभी लेवल",
-      "allStatus": "सभी स्टेटस",
+      "allLevels": "सभी स्तर",
+      "allStatus": "सभी स्थितियाँ",
       "completed": "पूर्ण",
-      "processing": "प्रोसेसिंग",
-      "failed": "असफल"
+      "processing": "प्रक्रियाधीन",
+      "failed": "विफल"
     },
     "status": {
       "completed": "पूर्ण",
-      "processing": "प्रोसेसिंग",
-      "failed": "असफल"
+      "processing": "प्रक्रियाधीन",
+      "failed": "विफल"
     },
     "columns": {
-      "program": "प्रोग्राम",
-      "level": "लेवल",
-      "status": "स्टेटस",
-      "createdBy": "द्वारा बनाया गया",
-      "createdAt": "बनाने की तारीख"
+      "program": "कार्यक्रम",
+      "level": "स्तर",
+      "status": "स्थिति",
+      "createdBy": "निर्माता",
+      "createdAt": "निर्माण तिथि",
+      "error": "त्रुटि"
     },
     "validation": {
-      "programRequired": "प्रोग्राम आवश्यक है",
-      "levelRequired": "लेवल आवश्यक है",
-      "contentRequired": "कंटेंट आवश्यक है",
-      "minWords": "कंटेंट कम से कम 100 शब्दों का होना चाहिए। फॉर्मेटिंग गाइडलाइन देखने के लिए (?) आइकन पर क्लिक करें।"
+      "programRequired": "कार्यक्रम आवश्यक है",
+      "levelRequired": "स्तर आवश्यक है",
+      "contentRequired": "सामग्री आवश्यक है",
+      "minWords": "सामग्री कम से कम 100 शब्दों की होनी चाहिए। स्वरूपण दिशानिर्देश देखने के लिए (?) आइकन पर क्लिक करें।"
     },
     "success": {
-      "create": "कंटेंट सफलतापूर्वक बनाया गया"
+      "create": "सामग्री सफलतापूर्वक बनाई गई"
     },
     "error": {
-      "create": "कंटेंट बनाने में त्रुटि"
+      "create": "सामग्री बनाने में त्रुटि"
     }
   },
 
