@@ -136,15 +136,66 @@ const AutomatedContentImporter = () => {
     return statusValue;
   };
 
+  // const columns = [
+  //   {
+  //     header: t("automatedImporter.columns.level"),
+  //     render: (row) => (
+  //       <p className="text-gray-700">{row.level?.title || "-"}</p>
+  //     ),
+  //   },
+  //   {
+  //     header: t("automatedImporter.columns.status"),
+  //     render: (row) => (
+  //       <span
+  //         className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusBadgeClass(
+  //           row.status,
+  //         )}`}
+  //       >
+  //         {getStatusLabel(row.status)}
+  //       </span>
+  //     ),
+  //   },
+  //   {
+  //     header: t("automatedImporter.columns.createdBy"),
+  //     render: (row) => (
+  //       <div className="flex flex-col">
+  //         <span className="text-sm font-medium text-gray-700">
+  //           {row.created_by?.name || "-"}
+  //         </span>
+  //         <span className="text-xs text-gray-500">
+  //           {row.created_at ? new Date(row.created_at).toLocaleString() : "-"}
+  //         </span>
+  //       </div>
+  //     ),
+  //   },
+  //   {
+  //     header: t("automatedImporter.columns.error"),
+  //     render: (row) => (
+  //       <span
+  //         className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium ${
+  //           row.error
+  //             ? "bg-red-100 text-red-700"
+  //             : "bg-green-100 text-green-700"
+  //         }`}
+  //         title={row.error || ""}
+  //       >
+  //         {row.error || t("automatedImporter.noErrors")}
+  //       </span>
+  //     ),
+  //   },
+  // ];
+
   const columns = [
     {
       header: t("automatedImporter.columns.level"),
+      width: "15%",
       render: (row) => (
         <p className="text-gray-700">{row.level?.title || "-"}</p>
       ),
     },
     {
       header: t("automatedImporter.columns.status"),
+      width: "15%",
       render: (row) => (
         <span
           className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusBadgeClass(
@@ -157,6 +208,7 @@ const AutomatedContentImporter = () => {
     },
     {
       header: t("automatedImporter.columns.createdBy"),
+      width: "15%",
       render: (row) => (
         <div className="flex flex-col">
           <span className="text-sm font-medium text-gray-700">
@@ -170,21 +222,20 @@ const AutomatedContentImporter = () => {
     },
     {
       header: t("automatedImporter.columns.error"),
+      width: "55%",
       render: (row) => (
-        <span
-          className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium ${
+        <div
+          className={`inline-block max-w-full rounded-lg px-4 py-3 text-xs font-medium whitespace-normal break-all leading-6 ${
             row.error
               ? "bg-red-100 text-red-700"
               : "bg-green-100 text-green-700"
           }`}
-          title={row.error || ""}
         >
           {row.error || t("automatedImporter.noErrors")}
-        </span>
+        </div>
       ),
     },
   ];
-
   if (isLoading && !importLogs?.data?.length) {
     return <Loader />;
   }
