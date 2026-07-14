@@ -1310,6 +1310,70 @@
     }
   },
 
+  "automatedAssessmentImporter": {
+    "list": {
+      "title": "Automated Assessment Importer",
+      "subtitle": "View and manage automated assessment imports"
+    },
+    "create": {
+      "title": "Create Automated Assessment",
+      "subtitle": "Create content for automated assessment import",
+      "generalDetails": "General Details",
+      "contentSection": "Content Section",
+      "parentProgram": "Parent Program",
+      "parentLevel": "Parent Level",
+      "parentModule": "Parent Module",
+      "selectProgram": "Select Program",
+      "selectLevel": "Select Level",
+      "selectModule": "Select Module",
+      "clickForGuidelines": "Click for guidelines",
+      "contentReady": "Content is ready",
+      "viewGuidelines": "View Guidelines",
+      "editorPlaceholder": "Write your content here..."
+    },
+    "actions": {
+      "createImport": "Create New Import",
+      "createContent": "Create Content",
+      "creating": "Creating..."
+    },
+    "searchPlaceholder": "Search imports...",
+    "noErrors": "No Errors Detected",
+    "filters": {
+      "allLevels": "All Levels",
+      "allModules": "All Modules",
+      "allStatus": "All Status",
+      "completed": "Completed",
+      "processing": "Processing",
+      "failed": "Failed",
+      "selectLevelFirst": "Select level first",
+      "selectModule": "Select module"
+    },
+    "status": {
+      "completed": "Completed",
+      "processing": "Processing",
+      "failed": "Failed"
+    },
+    "columns": {
+      "level": "Level",
+      "module": "Module",
+      "status": "Status",
+      "createdBy": "Created By",
+      "error": "Error"
+    },
+    "validation": {
+      "programRequired": "Program is required",
+      "levelRequired": "Level is required",
+      "moduleRequired": "Module is required",
+      "contentRequired": "Content is required"
+    },
+    "success": {
+      "create": "Import created successfully"
+    },
+    "error": {
+      "create": "Failed to create import"
+    }
+  },
+
   "mediaLibrary": {
     "list": {
       "title": "Media Library",

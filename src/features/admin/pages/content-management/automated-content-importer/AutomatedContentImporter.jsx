@@ -236,6 +236,7 @@ const AutomatedContentImporter = () => {
       ),
     },
   ];
+
   if (isLoading && !importLogs?.data?.length) {
     return <Loader />;
   }
