@@ -1306,6 +1306,70 @@
     }
   },
 
+  "automatedAssessmentImporter": {
+    "list": {
+      "title": "ਆਟੋਮੇਟਿਡ ਅਸੈਸਮੈਂਟ ਇੰਪੋਰਟਰ",
+      "subtitle": "ਆਟੋਮੇਟਿਡ ਅਸੈਸਮੈਂਟ ਇੰਪੋਰਟ ਦੇਖੋ ਅਤੇ ਪ੍ਰਬੰਧਿਤ ਕਰੋ"
+    },
+    "create": {
+      "title": "ਆਟੋਮੇਟਿਡ ਅਸੈਸਮੈਂਟ ਬਣਾਓ",
+      "subtitle": "ਆਟੋਮੇਟਿਡ ਅਸੈਸਮੈਂਟ ਇੰਪੋਰਟ ਲਈ ਸਮੱਗਰੀ ਬਣਾਓ",
+      "generalDetails": "ਆਮ ਵੇਰਵੇ",
+      "contentSection": "ਸਮੱਗਰੀ ਭਾਗ",
+      "parentProgram": "ਮੁੱਖ ਪ੍ਰੋਗਰਾਮ",
+      "parentLevel": "ਮੁੱਖ ਪੱਧਰ",
+      "parentModule": "ਮੁੱਖ ਮੋਡੀਊਲ",
+      "selectProgram": "ਪ੍ਰੋਗਰਾਮ ਚੁਣੋ",
+      "selectLevel": "ਪੱਧਰ ਚੁਣੋ",
+      "selectModule": "ਮੋਡੀਊਲ ਚੁਣੋ",
+      "clickForGuidelines": "ਦਿਸ਼ਾ-ਨਿਰਦੇਸ਼ਾਂ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+      "contentReady": "ਸਮੱਗਰੀ ਤਿਆਰ ਹੈ",
+      "viewGuidelines": "ਦਿਸ਼ਾ-ਨਿਰਦੇਸ਼ ਦੇਖੋ",
+      "editorPlaceholder": "ਆਪਣੀ ਸਮੱਗਰੀ ਇੱਥੇ ਲਿਖੋ..."
+    },
+    "actions": {
+      "createImport": "ਨਵਾਂ ਇੰਪੋਰਟ ਬਣਾਓ",
+      "createContent": "ਸਮੱਗਰੀ ਬਣਾਓ",
+      "creating": "ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ..."
+    },
+    "searchPlaceholder": "ਇੰਪੋਰਟ ਖੋਜੋ...",
+    "noErrors": "ਕੋਈ ਗਲਤੀ ਨਹੀਂ ਮਿਲੀ",
+    "filters": {
+      "allLevels": "ਸਾਰੇ ਪੱਧਰ",
+      "allModules": "ਸਾਰੇ ਮੋਡੀਊਲ",
+      "allStatus": "ਸਾਰੀਆਂ ਸਥਿਤੀਆਂ",
+      "completed": "ਮੁਕੰਮਲ",
+      "processing": "ਪ੍ਰਕਿਰਿਆ ਵਿੱਚ",
+      "failed": "ਅਸਫਲ",
+      "selectLevelFirst": "ਪਹਿਲਾਂ ਪੱਧਰ ਚੁਣੋ",
+      "selectModule": "ਮੋਡੀਊਲ ਚੁਣੋ"
+    },
+    "status": {
+      "completed": "ਮੁਕੰਮਲ",
+      "processing": "ਪ੍ਰਕਿਰਿਆ ਵਿੱਚ",
+      "failed": "ਅਸਫਲ"
+    },
+    "columns": {
+      "level": "ਪੱਧਰ",
+      "module": "ਮੋਡੀਊਲ",
+      "status": "ਸਥਿਤੀ",
+      "createdBy": "ਬਣਾਉਣ ਵਾਲਾ",
+      "error": "ਗਲਤੀ"
+    },
+    "validation": {
+      "programRequired": "ਪ੍ਰੋਗਰਾਮ ਦੀ ਲੋੜ ਹੈ",
+      "levelRequired": "ਪੱਧਰ ਦੀ ਲੋੜ ਹੈ",
+      "moduleRequired": "ਮੋਡੀਊਲ ਦੀ ਲੋੜ ਹੈ",
+      "contentRequired": "ਸਮੱਗਰੀ ਦੀ ਲੋੜ ਹੈ"
+    },
+    "success": {
+      "create": "ਇੰਪੋਰਟ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਇਆ ਗਿਆ"
+    },
+    "error": {
+      "create": "ਇੰਪੋਰਟ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ"
+    }
+  },
+
   "mediaLibrary": {
     "list": {
       "title": "ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ",

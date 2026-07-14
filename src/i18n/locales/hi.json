@@ -1310,6 +1310,70 @@
     }
   },
 
+  "automatedAssessmentImporter": {
+    "list": {
+      "title": "स्वचालित मूल्यांकन आयातक",
+      "subtitle": "स्वचालित मूल्यांकन आयात देखें और प्रबंधित करें"
+    },
+    "create": {
+      "title": "स्वचालित मूल्यांकन बनाएं",
+      "subtitle": "स्वचालित मूल्यांकन आयात के लिए सामग्री बनाएं",
+      "generalDetails": "सामान्य विवरण",
+      "contentSection": "सामग्री अनुभाग",
+      "parentProgram": "मुख्य कार्यक्रम",
+      "parentLevel": "मुख्य स्तर",
+      "parentModule": "मुख्य मॉड्यूल",
+      "selectProgram": "कार्यक्रम चुनें",
+      "selectLevel": "स्तर चुनें",
+      "selectModule": "मॉड्यूल चुनें",
+      "clickForGuidelines": "दिशानिर्देशों के लिए क्लिक करें",
+      "contentReady": "सामग्री तैयार है",
+      "viewGuidelines": "दिशानिर्देश देखें",
+      "editorPlaceholder": "अपनी सामग्री यहाँ लिखें..."
+    },
+    "actions": {
+      "createImport": "नया आयात बनाएं",
+      "createContent": "सामग्री बनाएं",
+      "creating": "बनाया जा रहा है..."
+    },
+    "searchPlaceholder": "आयात खोजें...",
+    "noErrors": "कोई त्रुटि नहीं मिली",
+    "filters": {
+      "allLevels": "सभी स्तर",
+      "allModules": "सभी मॉड्यूल",
+      "allStatus": "सभी स्थितियाँ",
+      "completed": "पूर्ण",
+      "processing": "प्रक्रियाधीन",
+      "failed": "विफल",
+      "selectLevelFirst": "पहले स्तर चुनें",
+      "selectModule": "मॉड्यूल चुनें"
+    },
+    "status": {
+      "completed": "पूर्ण",
+      "processing": "प्रक्रियाधीन",
+      "failed": "विफल"
+    },
+    "columns": {
+      "level": "स्तर",
+      "module": "मॉड्यूल",
+      "status": "स्थिति",
+      "createdBy": "निर्माता",
+      "error": "त्रुटि"
+    },
+    "validation": {
+      "programRequired": "कार्यक्रम आवश्यक है",
+      "levelRequired": "स्तर आवश्यक है",
+      "moduleRequired": "मॉड्यूल आवश्यक है",
+      "contentRequired": "सामग्री आवश्यक है"
+    },
+    "success": {
+      "create": "आयात सफलतापूर्वक बनाया गया"
+    },
+    "error": {
+      "create": "आयात बनाने में विफल"
+    }
+  },
+
   "mediaLibrary": {
     "list": {
       "title": "मीडिया लाइब्रेरी",
