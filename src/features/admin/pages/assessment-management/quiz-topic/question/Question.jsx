@@ -45,8 +45,20 @@ const Question = () => {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
 
-  const fetchQuestions = (overridePage) => {
-    dispatch(getAllQuestions({ assessmentId }));
+  // const fetchQuestions = (overridePage) => {
+  //   dispatch(getAllQuestions({ assessmentId }));
+  // };
+
+  const fetchQuestions = (currentPage = 1) => {
+    dispatch(
+      getAllQuestions({
+        assessmentId,
+        params: {
+          page: currentPage,
+          search,
+        },
+      }),
+    );
   };
 
   useEffect(() => {
@@ -243,7 +255,7 @@ const Question = () => {
       </PageHeader>
 
       <PageBody>
-        <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm mb-4">
+        {/* <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm mb-4">
           <div className="w-full">
             <div className="flex items-center bg-gray-50 border border-gray-200 hover:border-blue-500 rounded-xl px-4 py-2.5">
               <FiSearch className="text-gray-400 text-base" />
@@ -266,7 +278,7 @@ const Question = () => {
               )}
             </div>
           </div>
-        </div>
+        </div> */}
 
         <CustomeTable
           columns={columns}
