@@ -33,8 +33,8 @@ const Login = () => {
   const { isLoading } = useSelector((state) => state.auth);
 
   const initialValues = {
-    email: "swapnil@netswaptech.com",
-    password: "12345678",
+    email: "",
+    password: "",
   };
 
   const validationSchema = Yup.object({
