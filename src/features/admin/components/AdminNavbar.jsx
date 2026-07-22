@@ -64,8 +64,8 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
 
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
 
-  const handleLogout = () => {
-    dispatch(logout());
+  const handleLogout = async () => {
+    await dispatch(logout());
     toast.success(t("navbar.logoutSuccess"));
     navigate("/login");
   };

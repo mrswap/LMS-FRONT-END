@@ -35,8 +35,8 @@ const AdminSidebar = ({ isOpen, onClose }) => {
   const [openParent, setOpenParent] = useState(null);
   const [openSubMenus, setOpenSubMenus] = useState({});
 
-  const handleLogout = () => {
-    dispatch(logout());
+  const handleLogout = async () => {
+    await dispatch(logout());
     toast.success(t("navbar.logoutSuccess"));
     navigate("/login");
   };

@@ -38,8 +38,8 @@ const Error = ({
     navigate("/");
   };
 
-  const handleLogout = () => {
-    dispatch(logout());
+  const handleLogout = async () => {
+    await dispatch(logout());
     navigate("/login");
     window.location.reload();
   };
