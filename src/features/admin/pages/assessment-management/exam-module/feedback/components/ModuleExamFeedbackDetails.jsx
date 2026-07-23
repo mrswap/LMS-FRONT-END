@@ -171,8 +171,9 @@ const ModuleExamFeedbackDetails = () => {
                         {t("moduleExamFeedback.details.score")}
                       </p>
                       <p className="text-sm text-gray-800 font-medium">
-                        {feedbackData.attempt?.score} /{" "}
-                        {feedbackData.attempt?.total_score || 100}
+                        {feedbackData.attempt?.score}
+                        {/* /{" "}
+                        {feedbackData.attempt?.total_score || 100} */}
                       </p>
                     </div>
                   </div>
