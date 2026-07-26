@@ -41,12 +41,24 @@
 
   --color-teal-50: #f0fdfa;
   --color-teal-100: #ccfbf1;
+  --color-teal-400: #2dd4bf;
+  /* <-- YEH LINE NAYI ADD KI HAI */
   --color-teal-500: #14b8a6;
   --color-teal-600: #0d9488;
+  --color-teal-700: #0f766e;
+  /* <-- yeh bhi add ki, cert box me use hoti hai */
+  --color-teal-800: #115e59;
+  /* <-- safety ke liye */
+  --color-teal-900: #134e4a;
+  /* <-- safety ke liye */
 
   --color-green-600: #16a34a;
   --color-green-700: #15803d;
 
+  --color-blue-500: #3b82f6;
+  /* <-- add ki, cert box me use hoti hai */
+  --color-blue-600: #2563eb;
+  /* <-- add ki */
   --color-blue-700: #1d4ed8;
   --color-blue-800: #1e40af;
   --color-blue-900: #1e3a8a;

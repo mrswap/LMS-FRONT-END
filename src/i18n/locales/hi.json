@@ -2809,6 +2809,79 @@
     }
   },
 
+  "certificate": {
+    "breadcrumb": {
+      "certification": "प्रमाणन",
+      "view": "प्रमाणपत्र देखें"
+    },
+    "banner": {
+      "congratulations": "बधाई हो,",
+      "recipient": "प्राप्तकर्ता",
+      "examPassed": "आपने सफलतापूर्वक परीक्षा उत्तीर्ण की है",
+      "quizMastered": "आपने सफलतापूर्वक क्विज़ पूरी कर ली है",
+      "topic": "इस विषय पर"
+    },
+    "buttons": {
+      "shareLinkedin": "LinkedIn पर साझा करें",
+      "downloadPdf": "PDF डाउनलोड करें",
+      "certificateId": "प्रमाणपत्र:"
+    },
+    "types": {
+      "moduleExam": "मॉड्यूल परीक्षा प्रमाणपत्र",
+      "quiz": "क्विज़ प्रमाणपत्र",
+      "exam": "परीक्षा"
+    },
+    "certificate": {
+      "examPassedText": "मॉड्यूल परीक्षा सफलतापूर्वक उत्तीर्ण करने के लिए",
+      "quizCompletedText": "विषय क्विज़ सफलतापूर्वक पूर्ण करने के लिए",
+      "presentedTo": "प्रस्तुत किया गया",
+      "recipientName": "प्राप्तकर्ता का नाम",
+      "forModule": "मॉड्यूल के लिए",
+      "forTopic": "विषय के लिए",
+      "id": "आईडी",
+      "signature": "हस्ताक्षर",
+      "authorizedSignatory": "अधिकृत हस्ताक्षरकर्ता",
+      "dateOfIssue": "जारी करने की तिथि",
+      "digitallyVerified": "डिजिटल रूप से सत्यापित"
+    },
+    "metrics": {
+      "score": "अंक",
+      "status": "स्थिति",
+      "time": "समय",
+      "passed": "उत्तीर्ण",
+      "completed": "पूर्ण"
+    },
+    "details": {
+      "recipient": "प्राप्तकर्ता",
+      "name": "नाम",
+      "employeeId": "कर्मचारी आईडी",
+      "email": "ईमेल",
+      "result": "परिणाम",
+      "score": "अंक",
+      "percentage": "प्रतिशत",
+      "passing": "उत्तीर्ण अंक",
+      "status": "स्थिति",
+      "passed": "उत्तीर्ण",
+      "questions": "प्रश्न",
+      "total": "कुल",
+      "attempted": "प्रयास किए गए",
+      "correct": "सही",
+      "incorrect": "गलत",
+      "skipped": "छोड़े गए",
+      "timeAndAttempt": "समय और प्रयास",
+      "started": "शुरू किया",
+      "submitted": "जमा किया",
+      "timeTaken": "लिया गया समय",
+      "attemptNumber": "प्रयास #",
+      "courseContext": "पाठ्यक्रम संदर्भ",
+      "program": "कार्यक्रम",
+      "level": "स्तर",
+      "module": "मॉड्यूल",
+      "chapter": "अध्याय",
+      "topic": "विषय"
+    }
+  },
+
   "globalConfirmationModal": {
     "confirmDeletion": "हटाने की पुष्टि करें",
     "cancle": "रद्द करें",

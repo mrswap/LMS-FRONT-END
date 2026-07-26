@@ -2806,34 +2806,76 @@
   },
 
   "certificate": {
-    "pageTitle": "ਪ੍ਰਾਪਤੀ ਸਰਟੀਫਿਕੇਟ",
-    "downloadButton": "ਸਰਟੀਫਿਕੇਟ ਡਾਊਨਲੋਡ ਕਰੋ",
-    "ofAchievement": "ਪ੍ਰਾਪਤੀ ਦਾ",
-    "presentedTo": "ਇਹ ਸਰਟੀਫਿਕੇਟ ਮਾਣ ਨਾਲ ਪੇਸ਼ ਕੀਤਾ ਜਾਂਦਾ ਹੈ",
-    "recipientName": "ਪ੍ਰਾਪਤਕਰਤਾ ਦਾ ਨਾਮ",
-    "employeeId": "ਕਰਮਚਾਰੀ ID",
-    "achievementScore": "ਪ੍ਰਾਪਤੀ ਸਕੋਰ",
-    "questions": "ਸਵਾਲ",
-    "passed": "ਪਾਸ",
-    "completed": "ਪੂਰਾ ਕੀਤਾ",
-    "finalStatus": "ਅੰਤਿਮ ਸਥਿਤੀ",
-    "passingScore": "ਪਾਸਿੰਗ ਸਕੋਰ",
-    "timeTaken": "ਲੱਗਿਆ ਸਮਾਂ",
-    "attempt": "ਕੋਸ਼ਿਸ਼",
-    "assessmentDetails": "ਮੁਲਾਂਕਣ ਵੇਰਵੇ",
-    "assessmentDate": "ਮੁਲਾਂਕਣ ਮਿਤੀ",
-    "questionsAttempted": "ਕੀਤੇ ਗਏ ਸਵਾਲ",
-    "correctAnswers": "ਸਹੀ ਜਵਾਬ",
-    "correct": "ਸਹੀ",
-    "courseType": "ਕੋਰਸ ਦੀ ਕਿਸਮ",
-    "signature": "ਦਸਤਖਤ",
-    "authorizedSignatory": "ਅਧਿਕਾਰਤ ਦਸਤਖਤਕਾਰ",
-    "dateOfIssue": "ਜਾਰੀ ਕਰਨ ਦੀ ਮਿਤੀ",
-    "certificateId": "ਸਰਟੀਫਿਕੇਟ ID",
-    "digitallyVerified": "ਡਿਜੀਟਲੀ ਪ੍ਰਮਾਣਿਤ ਸਰਟੀਫਿਕੇਟ",
-    "whatsapp": "ਵਟਸਐਪ",
-    "facebook": "ਫੇਸਬੁੱਕ",
-    "linkedin": "ਲਿੰਕਡਇਨ"
+    "breadcrumb": {
+      "certification": "ਸਰਟੀਫਿਕੇਸ਼ਨ",
+      "view": "ਸਰਟੀਫਿਕੇਟ ਵੇਖੋ"
+    },
+    "banner": {
+      "congratulations": "ਮੁਬਾਰਕਾਂ,",
+      "recipient": "ਪ੍ਰਾਪਤਕਰਤਾ",
+      "examPassed": "ਤੁਸੀਂ ਸਫਲਤਾਪੂਰਵਕ ਪਰੀਖਿਆ ਪਾਸ ਕਰ ਲਈ ਹੈ",
+      "quizMastered": "ਤੁਸੀਂ ਸਫਲਤਾਪੂਰਵਕ ਕੁਇਜ਼ ਪੂਰੀ ਕਰ ਲਈ ਹੈ",
+      "topic": "ਇਸ ਵਿਸ਼ੇ ਲਈ"
+    },
+    "buttons": {
+      "shareLinkedin": "LinkedIn 'ਤੇ ਸਾਂਝਾ ਕਰੋ",
+      "downloadPdf": "PDF ਡਾਊਨਲੋਡ ਕਰੋ",
+      "certificateId": "ਸਰਟੀਫਿਕੇਟ:"
+    },
+    "types": {
+      "moduleExam": "ਮੋਡੀਊਲ ਪਰੀਖਿਆ ਸਰਟੀਫਿਕੇਟ",
+      "quiz": "ਕੁਇਜ਼ ਸਰਟੀਫਿਕੇਟ",
+      "exam": "ਪਰੀਖਿਆ"
+    },
+    "certificate": {
+      "examPassedText": "ਮੋਡੀਊਲ ਪਰੀਖਿਆ ਸਫਲਤਾਪੂਰਵਕ ਪਾਸ ਕਰਨ ਲਈ",
+      "quizCompletedText": "ਵਿਸ਼ਾ ਕੁਇਜ਼ ਸਫਲਤਾਪੂਰਵਕ ਪੂਰੀ ਕਰਨ ਲਈ",
+      "presentedTo": "ਪੇਸ਼ ਕੀਤਾ ਗਿਆ",
+      "recipientName": "ਪ੍ਰਾਪਤਕਰਤਾ ਦਾ ਨਾਮ",
+      "forModule": "ਮੋਡੀਊਲ ਲਈ",
+      "forTopic": "ਵਿਸ਼ੇ ਲਈ",
+      "id": "ਆਈਡੀ",
+      "signature": "ਦਸਤਖਤ",
+      "authorizedSignatory": "ਅਧਿਕ੍ਰਿਤ ਦਸਤਖਤਕਰਤਾ",
+      "dateOfIssue": "ਜਾਰੀ ਕਰਨ ਦੀ ਤਾਰੀਖ",
+      "digitallyVerified": "ਡਿਜ਼ਿਟਲ ਤੌਰ 'ਤੇ ਪ੍ਰਮਾਣਿਤ"
+    },
+    "metrics": {
+      "score": "ਅੰਕ",
+      "status": "ਸਥਿਤੀ",
+      "time": "ਸਮਾਂ",
+      "passed": "ਪਾਸ",
+      "completed": "ਪੂਰਾ"
+    },
+    "details": {
+      "recipient": "ਪ੍ਰਾਪਤਕਰਤਾ",
+      "name": "ਨਾਮ",
+      "employeeId": "ਕਰਮਚਾਰੀ ਆਈਡੀ",
+      "email": "ਈਮੇਲ",
+      "result": "ਨਤੀਜਾ",
+      "score": "ਅੰਕ",
+      "percentage": "ਪ੍ਰਤੀਸ਼ਤ",
+      "passing": "ਪਾਸ ਅੰਕ",
+      "status": "ਸਥਿਤੀ",
+      "passed": "ਪਾਸ",
+      "questions": "ਪ੍ਰਸ਼ਨ",
+      "total": "ਕੁੱਲ",
+      "attempted": "ਕੋਸ਼ਿਸ਼ ਕੀਤੇ",
+      "correct": "ਸਹੀ",
+      "incorrect": "ਗਲਤ",
+      "skipped": "ਛੱਡੇ ਗਏ",
+      "timeAndAttempt": "ਸਮਾਂ ਅਤੇ ਕੋਸ਼ਿਸ਼",
+      "started": "ਸ਼ੁਰੂ ਕੀਤਾ",
+      "submitted": "ਜਮ੍ਹਾਂ ਕੀਤਾ",
+      "timeTaken": "ਲੱਗਿਆ ਸਮਾਂ",
+      "attemptNumber": "ਕੋਸ਼ਿਸ਼ #",
+      "courseContext": "ਕੋਰਸ ਸੰਦਰਭ",
+      "program": "ਪ੍ਰੋਗਰਾਮ",
+      "level": "ਪੱਧਰ",
+      "module": "ਮੋਡੀਊਲ",
+      "chapter": "ਅਧਿਆਇ",
+      "topic": "ਵਿਸ਼ਾ"
+    }
   },
 
   "globalConfirmationModal": {
