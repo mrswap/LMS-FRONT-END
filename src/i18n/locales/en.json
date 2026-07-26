@@ -185,7 +185,6 @@
     "willAppear": "New notifications will appear here",
     "showing": "Showing",
     "to": "to",
-    "notifications": "notifications",
     "previous": "Previous",
     "next": "Next",
     "showingUnread": "Showing {count} unread notifications",
@@ -2810,34 +2809,76 @@
   },
 
   "certificate": {
-    "pageTitle": "Certificate of Achievement",
-    "downloadButton": "Download Certificate",
-    "ofAchievement": "OF ACHIEVEMENT",
-    "presentedTo": "This certificate is proudly presented to",
-    "recipientName": "Recipient Name",
-    "employeeId": "Employee ID",
-    "achievementScore": "Achievement Score",
-    "questions": "Questions",
-    "passed": "Passed",
-    "completed": "Completed",
-    "finalStatus": "Final Status",
-    "passingScore": "Passing Score",
-    "timeTaken": "Time Taken",
-    "attempt": "Attempt",
-    "assessmentDetails": "Assessment Details",
-    "assessmentDate": "Assessment Date",
-    "questionsAttempted": "Questions Attempted",
-    "correctAnswers": "Correct Answers",
-    "correct": "correct",
-    "courseType": "Course Type",
-    "signature": "Signature",
-    "authorizedSignatory": "Authorized Signatory",
-    "dateOfIssue": "Date of Issue",
-    "certificateId": "Certificate ID",
-    "digitallyVerified": "Digitally Verified Certificate",
-    "whatsapp": "WhatsApp",
-    "facebook": "Facebook",
-    "linkedin": "LinkedIn"
+    "breadcrumb": {
+      "certification": "Certification",
+      "view": "View Certificate"
+    },
+    "banner": {
+      "congratulations": "Congratulations,",
+      "recipient": "Recipient",
+      "examPassed": "You've successfully passed the exam for",
+      "quizMastered": "You've successfully mastered the quiz on",
+      "topic": "this topic"
+    },
+    "buttons": {
+      "shareLinkedin": "Share to LinkedIn",
+      "downloadPdf": "Download PDF",
+      "certificateId": "Certificate:"
+    },
+    "types": {
+      "moduleExam": "Module Exam Certificate",
+      "quiz": "Quiz Certificate",
+      "exam": "Exam"
+    },
+    "certificate": {
+      "examPassedText": "for successfully passing the module exam",
+      "quizCompletedText": "for successfully completing the topic quiz",
+      "presentedTo": "Presented To",
+      "recipientName": "Recipient Name",
+      "forModule": "for the module",
+      "forTopic": "for the topic",
+      "id": "ID",
+      "signature": "Signature",
+      "authorizedSignatory": "Authorized Signatory",
+      "dateOfIssue": "Date of Issue",
+      "digitallyVerified": "Digitally Verified"
+    },
+    "metrics": {
+      "score": "Score",
+      "status": "Status",
+      "time": "Time",
+      "passed": "Passed",
+      "completed": "Completed"
+    },
+    "details": {
+      "recipient": "Recipient",
+      "name": "Name",
+      "employeeId": "Employee ID",
+      "email": "Email",
+      "result": "Result",
+      "score": "Score",
+      "percentage": "Percentage",
+      "passing": "Passing",
+      "status": "Status",
+      "passed": "Passed",
+      "questions": "Questions",
+      "total": "Total",
+      "attempted": "Attempted",
+      "correct": "Correct",
+      "incorrect": "Incorrect",
+      "skipped": "Skipped",
+      "timeAndAttempt": "Time & Attempt",
+      "started": "Started",
+      "submitted": "Submitted",
+      "timeTaken": "Time Taken",
+      "attemptNumber": "Attempt #",
+      "courseContext": "Course Context",
+      "program": "Program",
+      "level": "Level",
+      "module": "Module",
+      "chapter": "Chapter",
+      "topic": "Topic"
+    }
   },
 
   "support": {

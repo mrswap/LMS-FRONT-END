@@ -77,19 +77,34 @@ const Contact = () => {
     setPage(1);
   };
 
+  // const getStatusBadge = (isSeen) => {
+  //   if (isSeen === 1 || isSeen === true) {
+  //     return (
+  //       <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+  //         <FaCheckCircle size={12} />
+  //         {t("contact.status.seen")}
+  //       </span>
+  //     );
+  //   }
+  //   return (
+  //     <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700">
+  //       <FaRegCircle size={12} />
+  //       {t("contact.status.unseen")}
+  //     </span>
+  //   );
+  // };
+
   const getStatusBadge = (isSeen) => {
-    if (isSeen === 1 || isSeen === true) {
-      return (
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
-          <FaCheckCircle size={12} />
-          {t("contact.status.seen")}
-        </span>
-      );
-    }
+    const seen = isSeen === 1 || isSeen === true;
+
     return (
-      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700">
-        <FaRegCircle size={12} />
-        {t("contact.status.unseen")}
+      <span
+        className={`inline-flex w-fit self-start items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${
+          seen ? "bg-green-100 text-green-700" : "bg-yellow-100 text-yellow-700"
+        }`}
+      >
+        {seen ? <FaCheckCircle size={12} /> : <FaRegCircle size={12} />}
+        {seen ? t("contact.status.seen") : t("contact.status.unseen")}
       </span>
     );
   };
