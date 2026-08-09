@@ -193,7 +193,7 @@ const Staff = () => {
         <PageHeaderRight>
           {hasPermission("users.create") && (
             <Link
-              to="/assign-training/create-user"
+              to="/assign-training/create-staff"
               className="bg-accent text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap"
             >
               {t("userManagement.actions.addNewUser")}

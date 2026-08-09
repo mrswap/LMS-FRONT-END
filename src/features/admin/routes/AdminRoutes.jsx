@@ -6,6 +6,7 @@ import Staff from "../pages/users/Staff";
 import AdminSupportPage from "../pages/AdminSupportPage";
 import BulkUpload2 from "../pages/curriculum/bulk-upload/BulkUpload2";
 import CreateBulkUpload2 from "../pages/curriculum/bulk-upload/components/CreateBulkUpload2";
+import CreateStaff from "../pages/users/components/CreateStaff";
 
 const AutomatedContentImporter = lazy(
   () =>
@@ -310,6 +311,7 @@ const AdminRoutes = (
       <Route path="assign-training" element={<Users />} />
       <Route path="staff" element={<Staff />} />
       <Route path="assign-training/create-user" element={<CreateUser />} />
+      <Route path="assign-training/create-staff" element={<CreateStaff />} />
       <Route
         path="assign-training/user-details/:id"
         element={<UserDetails />}

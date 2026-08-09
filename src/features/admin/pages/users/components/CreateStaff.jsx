@@ -26,7 +26,7 @@ import countryOptions from "../../../../../utils/countries.json";
 import { getAllRoles } from "../../../../../redux/slice/rolesSlice";
 import { getAllDesignation } from "../../../../../redux/slice/designationSlice";
 
-const CreateUser = () => {
+const CreateStaff = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const toast = useToast();
@@ -40,13 +40,13 @@ const CreateUser = () => {
     dispatch(getAllRoles({ status: 1 }));
   }, []);
 
-  // const roleOptions = roles?.map((role) => ({
-  //   label: role.label,
-  //   value: role.id,
-  // }));
+  //   const roleOptions = roles?.map((role) => ({
+  //     label: role.label,
+  //     value: role.id,
+  //   }));
 
   const roleOptions = roles
-    ?.filter((role) => role.name === "sales")
+    ?.filter((role) => role.name !== "sales")
     .map((role) => ({
       label: role.label,
       value: role.id,
@@ -64,7 +64,7 @@ const CreateUser = () => {
     email: "",
     employee_id: "",
     department: "",
-    role: roleOptions?.[0] || null,
+    role: null,
     designation: null,
     region: null,
     city: "",
@@ -162,7 +162,6 @@ const CreateUser = () => {
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
-            enableReinitialize
           >
             {({ isSubmitting, setFieldValue, handleSubmit }) => (
               <Form onSubmit={handleSubmit} className="space-y-8">
@@ -226,23 +225,13 @@ const CreateUser = () => {
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-4">
-                    {/* <SelectField
-                      name="role"
-                      label={t("userManagement.details.role")}
-                      placeholder={t("userManagement.details.rolePlaceholder")}
-                      options={roleOptions}
-                      required
-                    /> */}
-
                     <SelectField
                       name="role"
                       label={t("userManagement.details.role")}
                       placeholder={t("userManagement.details.rolePlaceholder")}
                       options={roleOptions}
                       required
-                      disabled
                     />
-
                     <SelectField
                       name="designation"
                       label={t("userManagement.details.designation")}
@@ -366,4 +355,4 @@ const CreateUser = () => {
   );
 };
 
-export default CreateUser;
+export default CreateStaff;
