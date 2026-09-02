@@ -23,8 +23,8 @@ class SocketService {
         }
 
         pusher = new Pusher(PUSHER_CONFIG.key, {
-            authEndpoint: "https://lms-backend.netswaptech.com/api/broadcasting/auth",
-            // authEndpoint: "https://backend.avantemedical.co.in/api/broadcasting/auth",
+            // authEndpoint: "https://lms-backend.netswaptech.com/api/broadcasting/auth",
+            authEndpoint: "https://backend.avantemedical.co.in/api/broadcasting/auth",
             cluster: PUSHER_CONFIG.cluster,
             forceTLS: true,
             auth: {
