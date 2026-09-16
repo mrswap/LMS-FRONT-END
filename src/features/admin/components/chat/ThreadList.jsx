@@ -49,7 +49,7 @@ const ThreadList = () => {
     { value: "", label: t("support.filters.allUsers") },
     ...(users?.data?.map((user) => ({
       value: user.id,
-      label: user.name,
+      label: user?.name,
       email: user.email,
     })) || []),
   ];
