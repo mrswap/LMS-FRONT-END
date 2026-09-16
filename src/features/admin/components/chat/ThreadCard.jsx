@@ -27,7 +27,7 @@ const ThreadCard = ({ thread }) => {
                 isActive ? "text-gray-900" : "text-gray-700"
               }`}
             >
-              {thread.user.name}
+              {thread?.user?.name}
             </h3>
             {thread.unread_messages_count > 0 && (
               <span className="bg-blue-500 text-white text-xs font-medium px-2 py-0.5 rounded-full shadow-sm">
