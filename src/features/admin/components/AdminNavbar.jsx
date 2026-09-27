@@ -105,7 +105,7 @@ const AdminNavbar = ({ onMenuToggle, isSidebarOpen }) => {
             <img
               src={settings.company_logo}
               alt="Logo"
-              className="w-[130px] sm:w-[130px] h-[64px] object-cover "
+              className="w-[130px] sm:w-[180px] h-[64px] object-contain "
             />
           )}
         </div>

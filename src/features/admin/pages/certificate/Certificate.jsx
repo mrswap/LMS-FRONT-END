@@ -384,13 +384,13 @@ const Certificate = () => {
                       {t("certificate.certificate.id")}:{" "}
                       {user?.employee_id || "-"}
                     </IconLabel>
-                    <IconLabel
+                    {/* <IconLabel
                       icon={FaEnvelope}
                       iconClassName="text-blue-600"
                       size={12}
                     >
                       {user?.email || "-"}
-                    </IconLabel>
+                    </IconLabel> */}
                   </div>
                 </div>
 
@@ -404,7 +404,7 @@ const Certificate = () => {
                 )}
 
                 {/* Compact Metrics */}
-                <div className="my-4 border-t border-b border-blue-200 py-3">
+                {/* <div className="my-4 border-t border-b border-blue-200 py-3">
                   <div className="grid grid-cols-3 gap-2 text-center">
                     <div>
                       <div className="text-2xl font-serif font-bold text-blue-800">
@@ -436,6 +436,36 @@ const Certificate = () => {
                       </div>
                     </div>
                   </div>
+                </div> */}
+
+                <div className="my-4 border-t border-b border-blue-200 py-3">
+                  <div className="grid grid-cols-3 items-center text-center">
+                    {/* Left */}
+                    <div className="flex items-center justify-center h-full">
+                      <div className="w-16 h-16 rounded-full border-2 border-blue-200 bg-blue-50 flex items-center justify-center">
+                        <GiLaurelCrown className="text-4xl text-blue-600" />
+                      </div>
+                    </div>
+
+                    {/* Center */}
+                    <div className="border-x border-blue-200 px-4">
+                      <div className="text-2xl font-serif font-bold text-blue-800 capitalize">
+                        {result?.status === "passed"
+                          ? t("certificate.metrics.passed")
+                          : t("certificate.metrics.completed")}
+                      </div>
+                      <div className="text-[9px] text-gray-500 uppercase tracking-wider">
+                        {t("certificate.metrics.status")}
+                      </div>
+                    </div>
+
+                    {/* Right */}
+                    <div className="flex items-center justify-center h-full">
+                      <div className="w-16 h-16 rounded-full border-2 border-blue-200 bg-blue-50 flex items-center justify-center">
+                        <GiLaurelCrown className="text-4xl text-blue-600" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Signature & Date */}
@@ -459,7 +489,7 @@ const Certificate = () => {
                     </p>
                   </div>
                   <div className="text-center flex flex-col justify-end">
-                    <div className="border-b-2 border-blue-600 w-32 mx-auto"></div>
+                    <div className=" w-32 mx-auto"></div>
                     <p className="text-sm font-serif font-semibold text-gray-800 mt-2">
                       {issued_at
                         ? new Date(issued_at).toLocaleDateString("en-US", {

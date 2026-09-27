@@ -2285,19 +2285,21 @@
       "footerSettings": "फूटर सेटिंग्स"
     },
     "fields": {
-      "companyLogo": "कंपनी का लोगो",
+      "companyLogo": "कंपनी लोगो",
       "signature": "अधिकृत हस्ताक्षर",
       "certificateHeading": "प्रमाणपत्र शीर्षक",
+      "tagline": "टैगलाइन",
       "companyName": "संगठन का नाम",
       "signerName": "अधिकृत हस्ताक्षरकर्ता",
       "signerDesignation": "हस्ताक्षरकर्ता का पद",
-      "footerText": "फूटर टेक्स्ट"
+      "footerText": "फुटर टेक्स्ट"
     },
     "placeholders": {
-      "certificateHeading": "जैसे, उत्कृष्टता का प्रमाण पत्र",
+      "certificateHeading": "उदा., उत्कृष्टता प्रमाणपत्र",
       "companyName": "आपकी कंपनी का नाम",
+      "tagline": "टैगलाइन दर्ज करें",
       "signerName": "हस्ताक्षरकर्ता का पूरा नाम",
-      "signerDesignation": "जैसे, सीईओ, निदेशक",
+      "signerDesignation": "उदा., CEO, निदेशक",
       "footerText": "प्रमाणपत्र की वैधता, जारी करने की तिथि, या अतिरिक्त जानकारी"
     },
     "buttons": {
