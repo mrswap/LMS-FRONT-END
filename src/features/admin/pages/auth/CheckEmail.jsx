@@ -31,7 +31,7 @@ const CheckEmail = () => {
         <img
           src={siteSettings?.company_logo || ""}
           alt="Avante Medical"
-          className="w-[160px] sm:w-[160px] h-[100px] object-contain"
+          className="w-[100px] sm:w-[100px] h-[100px] object-contain"
         />
       </div>
 
