@@ -2287,6 +2287,7 @@
       "companyLogo": "Company Logo",
       "signature": "Authorized Signature",
       "certificateHeading": "Certificate Heading",
+      "tagline": "Tagline",
       "companyName": "Organization Name",
       "signerName": "Authorized Signatory",
       "signerDesignation": "Signatory Title",
@@ -2295,6 +2296,7 @@
     "placeholders": {
       "certificateHeading": "e.g., Certificate of Excellence",
       "companyName": "Your company name",
+      "tagline": "Enter tagline",
       "signerName": "Full name of signer",
       "signerDesignation": "e.g., CEO, Director",
       "footerText": "Certificate validity, issue date, or additional information"

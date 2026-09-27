@@ -173,6 +173,7 @@ const CertificationSetting = () => {
 
       // Append text fields
       formData.append("company_name", values.company_name || "");
+      formData.append("tagline", values.tagline || "");
       formData.append("certificate_heading", values.certificate_heading || "");
       formData.append("signer_name", values.signer_name || "");
       formData.append("signer_designation", values.signer_designation || "");
@@ -218,6 +219,7 @@ const CertificationSetting = () => {
     certificate_heading: Yup.string().max(200),
     signer_name: Yup.string().max(100),
     signer_designation: Yup.string().max(100),
+    tagline: Yup.string().max(200),
     footer_text: Yup.string().max(500),
     content: Yup.string(),
   });
@@ -240,6 +242,7 @@ const CertificationSetting = () => {
         <Formik
           initialValues={{
             company_name: settingsData.company_name || "",
+            tagline: settingsData.tagline || "",
             certificate_heading:
               settingsData.certificate_heading ||
               t("certificateSetting.defaultHeading"),
@@ -537,6 +540,17 @@ const CertificationSetting = () => {
                           className="rounded-md"
                           required
                           maxLength={255}
+                        />
+
+                        <TextInput
+                          name="tagline"
+                          label={t("certificateSetting.fields.tagline")}
+                          placeholder={t(
+                            "certificateSetting.placeholders.tagline",
+                          )}
+                          className="rounded-md"
+                          maxLength={255}
+                          required
                         />
                       </div>
                     </div>

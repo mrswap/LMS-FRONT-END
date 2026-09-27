@@ -2282,19 +2282,21 @@
     },
     "fields": {
       "companyLogo": "ਕੰਪਨੀ ਲੋਗੋ",
-      "signature": "ਅਧਿਕਾਰਤ ਦਸਤਖਤ",
+      "signature": "ਅਧਿਕਾਰਤ ਦਸਤਖ਼ਤ",
       "certificateHeading": "ਸਰਟੀਫਿਕੇਟ ਸਿਰਲੇਖ",
-      "companyName": "ਸੰਸਥਾ ਦਾ ਨਾਂ",
-      "signerName": "ਅਧਿਕਾਰਤ ਹਸਤਾਖਰਕਰਤਾ",
-      "signerDesignation": "ਹਸਤਾਖਰਕਰਤਾ ਦਾ ਅਹੁਦਾ",
+      "tagline": "ਟੈਗਲਾਈਨ",
+      "companyName": "ਸੰਸਥਾ ਦਾ ਨਾਮ",
+      "signerName": "ਅਧਿਕਾਰਤ ਦਸਤਖ਼ਤਕਰਤਾ",
+      "signerDesignation": "ਦਸਤਖ਼ਤਕਰਤਾ ਦਾ ਅਹੁਦਾ",
       "footerText": "ਫੁੱਟਰ ਟੈਕਸਟ"
     },
     "placeholders": {
-      "certificateHeading": "ਜਿਵੇਂ, ਯੋਗਤਾ ਦਾ ਸਰਟੀਫਿਕੇਟ",
-      "companyName": "ਤੁਹਾਡੀ ਕੰਪਨੀ ਦਾ ਨਾਂ",
-      "signerName": "ਹਸਤਾਖਰਕਰਤਾ ਦਾ ਪੂਰਾ ਨਾਂ",
-      "signerDesignation": "ਜਿਵੇਂ, CEO, ਡਾਇਰੈਕਟਰ",
-      "footerText": "ਸਰਟੀਫਿਕੇਟ ਵੈਧਤਾ, ਜਾਰੀ ਕਰਨ ਦੀ ਤਾਰੀਖ, ਜਾਂ ਵਾਧੂ ਜਾਣਕਾਰੀ"
+      "certificateHeading": "ਉਦਾ., ਉੱਤਮਤਾ ਦਾ ਸਰਟੀਫਿਕੇਟ",
+      "companyName": "ਤੁਹਾਡੀ ਕੰਪਨੀ ਦਾ ਨਾਮ",
+      "tagline": "ਟੈਗਲਾਈਨ ਦਰਜ ਕਰੋ",
+      "signerName": "ਦਸਤਖ਼ਤਕਰਤਾ ਦਾ ਪੂਰਾ ਨਾਮ",
+      "signerDesignation": "ਉਦਾ., CEO, ਡਾਇਰੈਕਟਰ",
+      "footerText": "ਸਰਟੀਫਿਕੇਟ ਦੀ ਵੈਧਤਾ, ਜਾਰੀ ਕਰਨ ਦੀ ਮਿਤੀ, ਜਾਂ ਵਾਧੂ ਜਾਣਕਾਰੀ"
     },
     "buttons": {
       "changeLogo": "ਲੋਗੋ ਬਦਲੋ",
