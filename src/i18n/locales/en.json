@@ -517,6 +517,21 @@
     "resetSuccess": "Device reset successful!",
     "resetFailed": "Failed to reset device",
     "noDataFound": "No",
+    "verifyManual": "Verify Manual",
+    "resendLink": "Resend Link",
+    "verifying": "Verifying...",
+    "resending": "Resending...",
+    "verifySuccess": "Email verified successfully.",
+    "verifyFailed": "Email verification failed.",
+    "resendSuccess": "Verification link sent successfully.",
+    "resendFailed": "Failed to resend verification link.",
+    "verifyModal": {
+      "title": "Confirm Email Verification",
+      "warning": "Warning",
+      "message": "Please ensure that a password has been created or updated for this user before verifying the email. If the password is not set, the user will not be able to log in even after email verification.",
+      "confirmQuestion": "Are you sure you want to manually verify this email?",
+      "confirm": "Yes, Verify Email"
+    },
     "audit": {
       "event": "Event",
       "description": "Description",
